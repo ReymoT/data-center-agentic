@@ -9,3 +9,7 @@ Repository deployment 1.1 - 2026-10-10. Source archive remains package 1.0 and i
 Affected files: 00_START_HERE.md, 02_INTERFACE_CONTRACTS.md, MASTER_MATTY.md, REVIEW_RECORD.md and linked project documents. Required independent reviews: Nisha for F04, Ved plus all consumers for relocation/F02, Reimo for F01 and Ved for F05. Reviews are pending; local structural checks are not human approval. After an authorized merge, prepare a refresh/resume message and record adoption; no messages were sent in this task.
 
 No confirmed scientific instruction defect was found requiring a change. Future bugs use the instruction-defect Issue template with affected tasks, consumers, evidence and all corrected files in one reviewed change.
+
+## Deployment 1.2 manager instruction
+
+2026-10-10: Matty explicitly identified himself as team manager and waived formal repository review/approval. Recorded partial Q11 resolution in `docs/decisions/Q11_MANAGER_AUTHORITY.md`; updated repository AGENTS/project context, shared-rule precedence, open-decision index and decision guide. This human instruction supersedes prior mandatory reviewer gates across the package and templates. Existing task allocations and scientific rules are unchanged; technical verification and independent scientific evaluation remain applicable. No additional review confirmation is required for this instruction change.
