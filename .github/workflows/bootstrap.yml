@@ -1,0 +1,37 @@
+name: Bootstrap offline checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap-offline:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate repository instructions and configuration
+        run: python scripts/validate_setup.py
+      - name: Install hashed candidate Windows dependencies
+        run: python -m pip install --require-hashes -r requirements/requirements-windows-py312.lock.txt
+      - name: Check installed dependency consistency
+        run: python -m pip check
+      - name: Exercise dependencies offline
+        env:
+          LANGSMITH_TRACING: 'false'
+        run: python scripts/smoke_dependencies.py
+      - name: Lint scaffold scripts
+        run: python -m ruff check dc_sustainability scripts
+      - name: Check formatting
+        run: python -m ruff format --check dc_sustainability scripts
+      - name: Compile scaffold scripts
+        run: python -m compileall -q dc_sustainability scripts
+
+# Add production unit/contract tests when the respective modules are implemented.
+# No provider secrets, paid calls, production fixtures or scientific runs here.

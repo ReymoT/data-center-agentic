@@ -1,0 +1,18 @@
+[project]
+name = "dc-sustainability"
+version = "0.0.0"
+description = "Repository scaffold for a simulated carbon-aware scheduling study"
+requires-python = ">=3.12,<3.13"
+# Python target is a package proposal pending Q13, not portable-lock certification.
+# No provider dependency, production entry point or code license selected yet.
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

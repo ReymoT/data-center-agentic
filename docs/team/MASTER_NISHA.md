@@ -1,0 +1,73 @@
+# Master instructions — Nisha
+
+Version: 1.4 — 2026-10-10. Repository: https://github.com/ReymoT/data-center-agentic
+
+**Start here:** Read [shared rules](01_SHARED_RULES.md), [interfaces](02_INTERFACE_CONTRACTS.md), [responsibility checklist](03_RESPONSIBILITY_CHECKLIST.md), [open decisions](04_OPEN_DECISIONS.md), and your assigned Issue before coding. If shared files are missing, obtain the package or repository copies; do not invent their contracts. Your human teammate is Nisha; you are their assistant, not an autonomous coordinator for other teammates.
+
+This file is an implementation assignment, not permission to modify GitHub now. During implementation, use only actions already authorized by your teammate. Verify the current repository and required upstream commits before changes. Proposed paths below must be reconciled with existing code. Follow the final proposal; broader earlier diagrams do not expand scope.
+
+## Your task inventory
+
+| Done | ID | Primary owner | Technical contact | Required responsibility | Dependencies | Acceptance evidence |
+|---|---|---|---|---|---|---|
+| [ ] | L01 | Nisha | Matty | Implement plain-LLM comparison using common provider and flat facts | A01, K02 | One call; original output retained; no feedback, repair or fallback |
+| [ ] | L02 | Nisha | Matty | Implement evidence-based explanation contracts, prompts and classical templates | F02, P01, A03 | Agent explanation uses approved plan; plain output unchanged; no fabricated checks |
+| [ ] | E01 | Nisha | Ved | Implement independent reference validator and numerical claim scoring | F02, D03 | Separate logic from production checker; hand-truth and disagreement tests |
+| [ ] | E02 | Nisha | Matty | Implement experiment registry, resumable runner and comparable six-system execution | S02, K02, P02, P05, A02, A04, L01, L02 | Stable run IDs; no silent reruns/dropped failures; 300-run matrix supported |
+| [ ] | E03 | Nisha | Edison | Implement and test accuracy, safety, completion, impact, cost and statistical analysis | E01, E02, O03, P06 | Development truth tests; explicit denominators and paired episode-resampling code |
+| [ ] | E04 | Nisha | Ved | Prepare faithfulness rubric, blinded sample, first annotation pass and adjudication format | L02, E02 | Frozen rubric; at least ten paired development cases; first original ratings retained |
+| [ ] | I02 | Nisha | Matty | Assemble freeze manifest and execute held-out experiment runs | D04, O02, P04, A02, L01, E03, E04, E05, I01 | Frozen protocol; all planned run outputs/accounted failures; no test-set tuning |
+| [ ] | E06 | Nisha | Edison | Produce final held-out scores, statistics, figures and failure analysis | I02, O04, P07, E03 | Reproducible final tables with counts, paired intervals and limitations |
+| [ ] | E07 | Nisha | Ved | Execute frozen held-out faithfulness review with Matty as independent second rater | I02, E04, E05 | Approved Q10 sample; both original ratings, adjudication, coverage and claim scores |
+| [ ] | R05 | Nisha | Matty | Write evaluation/results section and assemble final report and presentation | E06, E07, R01, R02, R03, R04 | All authors review; claims match saved evidence; final deliverables indexed |
+
+## Your assignment and boundaries
+
+You assist Nisha Mahadev Kolekar. Lead the plain-LLM comparison, evidence-based explanations, independent evaluation, experiment orchestration/statistics, faithfulness protocol and final report/presentation assembly. Matty owns LangGraph/provider/production checker/runtime and final E2E; you independently validate results. Your evaluator must not call his checker as its ground truth. All members write their own technical sections.
+
+## Required inputs and decisions
+
+Use Ved's schemas, equivalent contexts and certified references; Reimo's immutable development/held-out fixture loaders; Edison's impacts/policies/model manifests; Matty's common provider, runtime and trace interfaces. Q01–Q04 define validity; Q07–Q10 define metrics/protocol; Q12 confirms runner/report lead allocation; Q13 defines actual submission needs. Publish evaluation requirements early so producers log the fields you need. Never wait until the final week to discover missing trace evidence.
+
+## Coding checklist in implementation order
+
+1. **Plain comparison (L01).** Use the same provider adapter, exact model/version/settings and equivalent visible flat facts/constraints/IDs as the agent. One call per decision returns original schedule and explanation in agreed fields. No tools, corrective feedback, repair or A fallback. Preserve malformed/unsafe raw responses for scoring; runtime blocks invalid starts and still advances time/running jobs. Do not rewrite outputs into valid plans for scoring. Keep tokens, cost, timing and provider failures.
+2. **Explanation layer (L02).** Own output/claim schemas, prompt text and deterministic templates. Agent explanations use approved plans, actual check/calculation records and evidence IDs; Matty integrates the explanation call within his 3-call budget. Plain explanations remain the model's one-call output, including errors. Classical policies use fixed templates with no LLM call. State starts or abstention, reasons, impacts, units/timestamps/assumptions and limitations. Only actually performed checks may be claimed. Distinguish forecast impact from realized simulated outcomes. Savings require named comparison schedule/horizon/inputs and matching work. Deterministic error/fallback explanations are labeled and may not fabricate citations.
+3. **Independent validator (E01).** Independently implement schedule validation and claim-reference calculations from the specification and raw fixtures. Sharing schemas and authoritative facts is allowed; importing the production checker or using its approval as truth is not. Use direct hand checks/independent arithmetic rather than simply comparing Edison's function to itself. Cover nonflexible behavior, running load, deadlines, omissions/deferrals, unavailable evidence and Q01 completion rules. Investigate disagreements instead of making your evaluator agree with the agent automatically.
+4. **Runner and CLI (E02).** Register all six policies under one episode protocol; own command routing to teammates' modules. Use stable run/episode/trial/slot IDs, frozen config/input hashes, durable manifests, atomic result writes and resume states. Coordinate with Matty so the simulator advances exactly once per slot and completed requests are not repeated on resume. An uncertain already-sent API request cannot be guaranteed “exactly once”; mark unknown and require reconciliation rather than blind paid retry. Retain partial/error runs; do not replace bad outcomes selectively. Private actual carbon/reference data must remain evaluator-only.
+5. **Scoring and analysis (E03).** Decision accuracy=valid recommendations/all recommendations using Q03's failure/abstention rules. Credit abstention only for verified infeasibility or unavailable required evidence. Numeric claims use≤0.05 kWh/kg or≤0.05 percentage points with minimal floating-point slack; false savings from incomplete work fail. Report unsafe/all proposals separately for initial, repaired, final and executed stages, violation types, repairs/fallbacks/abstentions and stage-specific denominators. Unused repair stages are not safe outputs. Report energy/carbon with completed jobs/work, misses and unfinished work, latency/tokens/cost. Exact gaps require certified references and matching work; identify hindsight information advantage and exclude unknown cases.
+6. **Faithfulness protocol (E04).** Freeze supported/contradicted/unsupported labels for checkable claims. Faithfulness=supported/checkable claims; coverage=claims with supporting citations/checkable claims; precision=supporting claim-citation pairs/all cited pairs. Existing IDs alone do not establish support. Completeness includes decision/abstention, reason, evidence and limitations. Empty explanations have 0 completeness/coverage; zero-denominator faithfulness/precision stay undefined. Invented checks/facts/citations are unsupported. Prepare at least 10 paired pre-evaluation explanations; blind labels, collect your and Matty's independent original ratings, then adjudicate with evidence. Confirm held-out sample/census and sample size with Q10; preserve sampling map separately from blinded annotation material. Report claim counts and review coverage; do not extrapolate a small sample as a census.
+7. **Freeze and experiments (I02).** Assemble a manifest by Nov 13 covering code, locks, fixtures, ontology, models/features, prompts/provider, seeds, references and scoring/rubric. Run 30 episodes:24 core (6 dates×4 scenarios) plus 6 missing forecasts. Run 90 agent/90 plain and 30 each A/B/C/D=300. Maximum 6,480 agent/2,160 plain calls excludes development; obtain the accepted budget before execution. Any reduction must be matched and frozen in advance. Do not tune on held-out results. Record changed protocols and rerun all affected systems after genuine defects.
+8. **Final scoring, annotation and reporting (E06/E07/R05).** E03/E04 implement and validate the metrics/protocol before freeze; after I02, O04 and P07, apply them to final outputs (E06). Conduct held-out blinded claim review (E07) with Matty's independent second ratings under Q10's frozen sample rule. Give scenario mean/std/min/max for all six systems, explicit counts/denominators/missingness and paired differences with CIs resampled by episode, keeping three LLM trials together. Consider date-cluster sensitivity and small-date limitations under Q10. Include Edison's candidate precision/recall/F1/class support and training times as supplements, not scheduling success replacements. Report template faithfulness separately. Analyze adverse examples: false savings, bad citations, capacity/deadline failures, unnecessary abstention and fallback reliance. Assemble each member's validated report section, results figures, presentation and submission checklist; coordinate rehearsal and required course format. No promised positive result or isolated ontology causal claim.
+
+## Proposed repository files
+
+Own `dc_sustainability/llm/plain.py`, `dc_sustainability/explanations/`, `prompts/`, `dc_sustainability/evaluation/`, `dc_sustainability/experiments/`, `dc_sustainability/cli.py`, matching tests, result/annotation manifests, `docs/evaluation/`, `docs/experiments/`, assembled report/presentation sources. Matty maintains master instructions and architecture; give him corrections instead of keeping a conflicting copy.
+
+## Required tests
+
+- Plain versus agent provider-setting/fact equivalence, original-output preservation, one-call limit and no feedback/repair/fallback.
+- Independent hand-truth validator cases, checker disagreement detection, numeric rounding/percentage tolerances and matching-work safeguards.
+- Claim evidence existence/support, invented checks, misleading savings, unsupported abstention, missing/empty explanations and undefined denominators.
+- Runner ID uniqueness, deterministic fixtures, resume without replaying completed decisions, partial/unknown failures retained, one simulator advancement/slot and no model calls in completion slots.
+- Correct run matrix/trial grouping, no hidden-data leakage, no tuning path to held-out data, stage-specific rates and confidence-interval grouping.
+- Saved traces regenerate scores/tables/figures; another member can reproduce without new paid calls.
+
+## Outputs, dependencies and completion
+
+Give explanation interfaces/prompts and scoring requirements to Matty early; give private fixture/reference needs to Reimo/Ved; give model metric format to Edison. Provide CLI hooks/specification for each module owner. Return independent E2E verification to Matty and reproduction commands to Ved. Publish frozen protocol, runner/config manifest, raw outputs, scored tables, annotation originals/adjudication, figures, limitations and report/presentation.
+
+Done means the plain system is a fair uncorrected comparator, independent truth tests pass, all planned runs or documented failures are accounted for, metrics and blinded reviews follow the frozen protocol, figures reproduce from saved outputs, all authors review the report and Matty's final E2E findings are addressed. LLM paths target Oct 30, tests/freeze Nov 13, analysis Nov 23, rehearsal Dec 2, delivery Dec 4 subject to course requirements.
+
+
+## Coordination instructions for your assistant
+
+- One assigned Issue, one human owner and one active assistant session per task. Use a short-lived task branch from current `main`, preserve local work, fetch and deliberately integrate required upstream commits; fetching alone does not update files.
+- Verify dependencies through merged code, artifact hashes/schema versions and consumer tests. Use agreed mocks only for development, never as evidence of final integration.
+- Check updates at start/resume, dependency use, task change, PR/integration and handoff. An idle assistant resumes only when a human restarts it or a separately configured service does so. This file creates no monitoring service.
+- Update the Issue through authorized access or give your human an exact draft update. Do not concurrently edit the shared coordination summary; its chosen publisher maintains it. A stale status does not let you claim someone else's work.
+- If blocked by an open decision or missing handoff, record the precise unblock condition and continue unaffected assigned work. Do not invent assumptions, hide failures, tune on held-out data or bypass shared verification to finish faster.
+- Request contract changes from Ved and master-file corrections from Matty with affected consumers identified. Cross-owner edits require coordination and applicable consumer checks. Production checker and independent evaluation validator stay intentionally separate.
+- Finish with published and validated code, passing current-base checks, documented artifacts and receiving-member acceptance. Mark Done only after verification. Include task ID, commit/PR, commands, hashes, tests actually run, limitations and next handoff in your completion message.
+
+The shared rules define publication, state-transition and handoff procedures. The checklist assigns a separate technical contact for each task. Formal code/document review and reviewer approval are not required. Technical validation, interface coordination and independent scientific evaluation remain required.

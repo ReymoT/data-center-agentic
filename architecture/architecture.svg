@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="1080pt" viewBox="0 0 1152 1080" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Planned final scheduling study architecture</title>
+ <desc>Six scheduling systems share visible inputs and an execution gate; private data and offline references stay outside policy inputs.</desc>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1080
+L 1152 1080
+L 1152 0
+L 0 0
+z
+" style="fill: #f6f8fc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 43.5744 216.81
+L 287.6256 216.81
+Q 295.2864 216.81 295.2864 210.280909
+L 295.2864 151.519091
+Q 295.2864 144.99 287.6256 144.99
+L 43.5744 144.99
+Q 35.9136 144.99 35.9136 151.519091
+L 35.9136 210.280909
+Q 35.9136 216.81 43.5744 216.81
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5f3ef; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 317.1744 216.81
+L 561.2256 216.81
+Q 568.8864 216.81 568.8864 210.280909
+L 568.8864 151.519091
+Q 568.8864 144.99 561.2256 144.99
+L 317.1744 144.99
+Q 309.5136 144.99 309.5136 151.519091
+L 309.5136 210.280909
+Q 309.5136 216.81 317.1744 216.81
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #eee9f8; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 590.7744 216.81
+L 834.8256 216.81
+Q 842.4864 216.81 842.4864 210.280909
+L 842.4864 151.519091
+Q 842.4864 144.99 834.8256 144.99
+L 590.7744 144.99
+Q 583.1136 144.99 583.1136 151.519091
+L 583.1136 210.280909
+Q 583.1136 216.81 590.7744 216.81
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #fff0df; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 864.3744 216.81
+L 1108.4256 216.81
+Q 1116.0864 216.81 1116.0864 210.280909
+L 1116.0864 151.519091
+Q 1116.0864 144.99 1108.4256 144.99
+L 864.3744 144.99
+Q 856.7136 144.99 856.7136 151.519091
+L 856.7136 210.280909
+Q 856.7136 216.81 864.3744 216.81
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5effb; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 43.5744 338.064545
+L 287.6256 338.064545
+Q 295.2864 338.064545 295.2864 331.535455
+L 295.2864 263.446364
+Q 295.2864 256.917273 287.6256 256.917273
+L 43.5744 256.917273
+Q 35.9136 256.917273 35.9136 263.446364
+L 35.9136 331.535455
+Q 35.9136 338.064545 43.5744 338.064545
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #ffffff; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 317.1744 338.064545
+L 561.2256 338.064545
+Q 568.8864 338.064545 568.8864 331.535455
+L 568.8864 263.446364
+Q 568.8864 256.917273 561.2256 256.917273
+L 317.1744 256.917273
+Q 309.5136 256.917273 309.5136 263.446364
+L 309.5136 331.535455
+Q 309.5136 338.064545 317.1744 338.064545
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #ffffff; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 590.7744 338.064545
+L 834.8256 338.064545
+Q 842.4864 338.064545 842.4864 331.535455
+L 842.4864 263.446364
+Q 842.4864 256.917273 834.8256 256.917273
+L 590.7744 256.917273
+Q 583.1136 256.917273 583.1136 263.446364
+L 583.1136 331.535455
+Q 583.1136 338.064545 590.7744 338.064545
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #ffffff; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 864.3744 338.064545
+L 1108.4256 338.064545
+Q 1116.0864 338.064545 1116.0864 331.535455
+L 1116.0864 263.446364
+Q 1116.0864 256.917273 1108.4256 256.917273
+L 864.3744 256.917273
+Q 856.7136 256.917273 856.7136 263.446364
+L 856.7136 331.535455
+Q 856.7136 338.064545 864.3744 338.064545
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #ffffff; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 576 341.465038
+Q 576 349.722904 576 356.303719
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 579 350.303719
+L 576 356.303719
+L 573 350.303719
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 43.5744 449.991818
+L 1108.4256 449.991818
+Q 1116.0864 449.991818 1116.0864 443.462727
+L 1116.0864 366.046364
+Q 1116.0864 359.517273 1108.4256 359.517273
+L 43.5744 359.517273
+Q 35.9136 359.517273 35.9136 366.046364
+L 35.9136 443.462727
+Q 35.9136 449.991818 43.5744 449.991818
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5f3ef; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 258.624 453.39231
+Q 258.624 461.650177 258.624 468.230992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 261.624 462.230992
+L 258.624 468.230992
+L 255.624 462.230992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 630.72 453.39231
+Q 630.72 461.650177 630.72 468.230992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 633.72 462.230992
+L 630.72 468.230992
+L 627.72 462.230992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 959.04 453.39231
+Q 959.04 461.650177 959.04 468.230992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 962.04 462.230992
+L 959.04 468.230992
+L 956.04 462.230992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 43.5744 655.191818
+L 462.7296 655.191818
+Q 470.3904 655.191818 470.3904 648.662727
+L 470.3904 477.973636
+Q 470.3904 471.444545 462.7296 471.444545
+L 43.5744 471.444545
+Q 35.9136 471.444545 35.9136 477.973636
+L 35.9136 648.662727
+Q 35.9136 655.191818 43.5744 655.191818
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5f3ef; stroke: #2a9480; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 492.2784 655.191818
+L 769.1616 655.191818
+Q 776.8224 655.191818 776.8224 648.662727
+L 776.8224 477.973636
+Q 776.8224 471.444545 769.1616 471.444545
+L 492.2784 471.444545
+Q 484.6176 471.444545 484.6176 477.973636
+L 484.6176 648.662727
+Q 484.6176 655.191818 492.2784 655.191818
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5effb; stroke: #478ac9; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 798.7104 655.191818
+L 1108.4256 655.191818
+Q 1116.0864 655.191818 1116.0864 648.662727
+L 1116.0864 477.973636
+Q 1116.0864 471.444545 1108.4256 471.444545
+L 798.7104 471.444545
+Q 791.0496 471.444545 791.0496 477.973636
+L 791.0496 648.662727
+Q 791.0496 655.191818 798.7104 655.191818
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #eee9f8; stroke: #9374bc; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 258.624 658.59231
+Q 258.624 666.850177 258.624 673.430992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 261.624 667.430992
+L 258.624 673.430992
+L 255.624 667.430992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 630.72 658.59231
+Q 630.72 666.850177 630.72 673.430992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 633.72 667.430992
+L 630.72 673.430992
+L 627.72 667.430992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 959.04 658.59231
+Q 959.04 666.850177 959.04 673.430992
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 962.04 667.430992
+L 959.04 673.430992
+L 956.04 667.430992
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 43.5744 767.119091
+L 1108.4256 767.119091
+Q 1116.0864 767.119091 1116.0864 760.59
+L 1116.0864 683.173636
+Q 1116.0864 676.644545 1108.4256 676.644545
+L 43.5744 676.644545
+Q 35.9136 676.644545 35.9136 683.173636
+L 35.9136 760.59
+Q 35.9136 767.119091 43.5744 767.119091
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #fff0df; stroke: #cc8b39; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 576 770.519583
+Q 576 778.777449 576 785.358265
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 579 779.358265
+L 576 785.358265
+L 573 779.358265
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #63829e; stroke: #63829e; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 43.5744 907.028182
+L 539.3376 907.028182
+Q 546.9984 907.028182 546.9984 900.499091
+L 546.9984 795.100909
+Q 546.9984 788.571818 539.3376 788.571818
+L 43.5744 788.571818
+Q 35.9136 788.571818 35.9136 795.100909
+L 35.9136 900.499091
+Q 35.9136 907.028182 43.5744 907.028182
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #ffffff; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 552.826027 847.8
+Q 565.055041 847.8 576.166022 847.8
+" clip-path="url(#p12bcb6a482)" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+    <path d="M 570.166022 844.8
+L 576.166022 847.8
+L 570.166022 850.8
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #1f77b4; stroke: #000000; stroke-linecap: round"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 590.7744 907.028182
+L 1108.4256 907.028182
+Q 1116.0864 907.028182 1116.0864 900.499091
+L 1116.0864 795.100909
+Q 1116.0864 788.571818 1108.4256 788.571818
+L 590.7744 788.571818
+Q 583.1136 788.571818 583.1136 795.100909
+L 583.1136 900.499091
+Q 583.1136 907.028182 590.7744 907.028182
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #e5effb; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 43.5744 1018.955455
+L 1108.4256 1018.955455
+Q 1116.0864 1018.955455 1116.0864 1012.426364
+L 1116.0864 935.01
+Q 1116.0864 928.480909 1108.4256 928.480909
+L 43.5744 928.480909
+Q 35.9136 928.480909 35.9136 935.01
+L 35.9136 1012.426364
+Q 35.9136 1018.955455 43.5744 1018.955455
+z
+" clip-path="url(#p12bcb6a482)" style="fill: #f0f2f5; stroke: #aac0d5; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="55.323366" transform="rotate(-0 39.744 55.323366)">Data Center Sustainability Agent</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="79.67179" transform="rotate(-0 39.744 79.67179)">Final scheduling study | Planned architecture | 10 October 2026</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="106.832514" transform="rotate(-0 39.744 106.832514)">One simulated site; hourly slots; fixed power, cooling and battery behavior.</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="138.718125" transform="rotate(-0 39.744 138.718125)">DESIGN INSPIRATIONS — related systems, not implemented integrations</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="167.459787" transform="rotate(-0 50.688 167.459787)">AssetOps KG / Bench</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="188.878359" transform="rotate(-0 50.688 188.878359)">Typed facts and exact retrieval</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="324.288" y="167.458771" transform="rotate(-0 324.288 167.458771)">LC-Opt</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="324.288" y="188.878359" transform="rotate(-0 324.288 188.878359)">Test decisions in simulation</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="597.888" y="167.459787" transform="rotate(-0 597.888 167.459787)">DeepMind cooling</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="597.888" y="188.878359" transform="rotate(-0 597.888 188.878359)">Checks and checked fallback</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="871.488" y="167.459787" transform="rotate(-0 871.488 167.459787)">Resource Advisor</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="871.488" y="188.878359" transform="rotate(-0 871.488 188.878359)">Evidence-linked explanations</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="245.980824" transform="rotate(-0 39.744 245.980824)">1  SHARED VISIBLE INPUTS</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="279.38706" transform="rotate(-0 50.688 279.38706)">Arrived jobs</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 302.286628)">Waiting/running work</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 315.489636)">No future arrivals</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="324.288" y="279.38706" transform="rotate(-0 324.288 279.38706)">Carbon forecasts</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(324.288 302.286628)">Up to 24 visible slots</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(324.288 315.489636)">Issue time, units, source IDs</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="597.888" y="279.38706" transform="rotate(-0 597.888 279.38706)">Site constraints</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 302.286628)">100 kW IT, 40 kW background</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 315.489636)">PUE 1.2 is an assumption</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="871.488" y="279.38706" transform="rotate(-0 871.488 279.38706)">Evidence records</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(871.488 302.286628)">Versions and checksums</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(871.488 315.489636)">Provenance and fact IDs</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="381.986044" transform="rotate(-0 50.688 381.986044)">2  VISIBLE STATE AND EQUIVALENT CONTEXT</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 405.74657)">Simulator exposes arrived jobs and occupancy; one authoritative constraint snapshot feeds all systems.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 420.149851)">RDF + SHACL + controlled SPARQL provide typed facts and IDs; flat context carries equivalent information.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 434.553132)">Nisha's common runner asks policies for proposals; policies cannot mutate the simulator.</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="493.914332" transform="rotate(-0 50.688 493.914332)">3A  agent — LangGraph workflow</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 517.243872)">Read state → retrieve → propose</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 531.047016)">Verify using the production checker</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 544.850161)">At most one repair → verify again</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 558.653305)">If needed: checked greedy-A fallback</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 572.45645)">Then gate execution or abstain/escalate</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 586.259594)">Evidence-based explanation cannot alter action</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 600.062739)">Max 3 model calls, including explanation/retries</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="499.392" y="493.914332" transform="rotate(-0 499.392 493.914332)">3B  plain_llm</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 517.243872)">Equivalent flat facts</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 531.047016)">Same provider and settings</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 544.850161)">One model call</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 558.653305)">No tools or corrective feedback</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 572.45645)">No repair or fallback</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 586.259594)">Original output retained for scoring</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 600.062739)">Unsafe starts can still be blocked</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="805.824" y="493.914332" transform="rotate(-0 805.824 493.914332)">3C  Classical comparisons</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 517.243872)">greedy_a: earliest feasible starts</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 531.047016)">greedy_b: lower forecast emissions</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 544.850161)">decision_tree_c: trained classifier</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 558.653305)">random_forest_d: trained classifier</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 572.45645)">All use the same visible inputs</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 586.259594)">Templates; no model calls</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(805.824 600.062739)">No online exact solver</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="699.113317" transform="rotate(-0 50.688 699.113317)">4  SHARED VERIFICATION AND EXECUTION</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 722.873842)">Production checker → latest-state gate → controller-only execute_step → simulator advances once per slot.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 737.277124)">Check IDs, capacity, deadlines, evidence, plan hash and state version; execute eligible current starts only.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 751.680405)">Rejection starts no new jobs; running work continues. Future plan entries remain intentions.</text>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="811.040589" transform="rotate(-0 50.688 811.040589)">5  SAVED OUTPUTS AND TRACES</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 834.801115)">Record original, repaired, fallback and final outputs;</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 849.204396)">record gate verdict and actually executed actions.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 863.607678)">Keep source IDs, calculations, units, assumptions,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 878.010959)">call counts, costs and failures for audit/scoring.</text>
+   </g>
+   <g id="text_34">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="597.888" y="811.040589" transform="rotate(-0 597.888 811.040589)">6  INDEPENDENT OFFLINE EVALUATION</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 834.801115)">Nisha's validator uses separate implementation.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 849.204396)">Accuracy, faithfulness, safety; energy, carbon,</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 863.607678)">completed work, missed deadlines and cost.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(597.888 878.010959)">40 development episodes; 30 held-out; 300 runs.</text>
+   </g>
+   <g id="text_36">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="50.688" y="950.950696" transform="rotate(-0 50.688 950.950696)">OFFLINE ONLY — no policy access to private data or oracle answers</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 974.710206)">Certified visible-state MILP labels train C/D on development data; inference never calls the solver.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 989.113487)">Private realized carbon and full-episode hindsight bounds support scoring after decisions.</text>
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(50.688 1003.516768)">Freeze before held-out runs. Independent blinded Matty/Nisha annotation remains required.</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1039.64393)">24 decision + 6 completion slots; no completion-slot model calls. Q01–Q13 stay open where unresolved.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1052.246801)">Earlier “Model D” names the agent; random_forest_d is a separate system. Components are not yet implemented.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p12bcb6a482">
+   <rect x="28.8" y="27" width="1094.4" height="1026"/>
+  </clipPath>
+ </defs>
+</svg>

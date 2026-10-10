@@ -1,0 +1,37 @@
+{
+  "status": "template_only_not_runnable",
+  "proposal_constants": {
+    "it_capacity_kw": 100,
+    "background_it_kw": 40,
+    "pue": 1.2,
+    "slot_hours": 1,
+    "decision_slots": 24,
+    "completion_slots": 6,
+    "agent_model_calls_per_decision": 3,
+    "plain_model_calls_per_decision": 1,
+    "agent_repairs_per_decision": 1
+  },
+  "systems": [
+    "agent",
+    "plain_llm",
+    "greedy_a",
+    "greedy_b",
+    "decision_tree_c",
+    "random_forest_d"
+  ],
+  "unresolved_decisions": {
+    "Q01": null,
+    "Q02": null,
+    "Q03": null,
+    "Q04": null,
+    "Q05": null,
+    "Q06": null,
+    "Q07": null,
+    "Q08": null,
+    "Q09": null,
+    "Q10": null,
+    "Q11": null,
+    "Q12": null,
+    "Q13": null
+  }
+}
