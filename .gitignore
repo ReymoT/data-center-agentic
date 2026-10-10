@@ -1,1 +1,37 @@
 .DS_Store
+
+# Local Python environments, caches and editor state
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+.idea/
+.vscode/
+Thumbs.db
+
+# Secrets; only the placeholder example belongs in Git
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+
+# Restricted or generated artifacts; track reviewed manifests instead
+data/raw/
+data/private/
+data/processed/
+models/artifacts/
+results/runs/
+results/private/
+*.joblib
+*.pkl
+*.parquet
+tmp/
