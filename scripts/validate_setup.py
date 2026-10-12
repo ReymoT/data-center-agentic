@@ -90,8 +90,23 @@ require(
     (TEAM / "02_INTERFACE_CONTRACTS.md").stat().st_size < 1000,
     "Package contract must remain a pointer, not a duplicate specification",
 )
+merge_rule = (
+    "A pull request can be merged once its checks pass. "
+    "A teammate review is welcome but not required. "
+    "Changes to shared data formats or settings still need the affected teammates to agree first."
+)
+policy_paths = [ROOT / "AGENTS.md", ROOT / "PROJECT_MASTER.md"] + [
+    TEAM / f"MASTER_{owner}.md" for owner in ("MATTY", "NISHA", "REIMO", "VED", "EDISON")
+]
+for path in policy_paths:
+    require(path.is_file(), f"Missing shared-policy file: {path.relative_to(ROOT)}")
+    if path.is_file():
+        require(
+            merge_rule in path.read_text(encoding="utf-8"),
+            f"Fixed merge rule differs or is missing: {path.relative_to(ROOT)}",
+        )
 if errors:
     print("Bootstrap validation failed:\n" + "\n".join(errors), file=sys.stderr)
     raise SystemExit(1)
 print("PASS: 50 task records, role inventories, acyclic dependencies, local Markdown links,")
-print("      config placeholders, dependency inputs, environment example and README preferences.")
+print("      config placeholders, dependency inputs, README preferences and seven-file merge rule.")

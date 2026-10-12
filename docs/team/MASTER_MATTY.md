@@ -1,6 +1,10 @@
 # Master instructions — Matty
 
-Version: 1.4 — 2026-10-10. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.5 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+
+## Merge rule
+
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
 **Start here:** Read [shared rules](01_SHARED_RULES.md), [interfaces](02_INTERFACE_CONTRACTS.md), [responsibility checklist](03_RESPONSIBILITY_CHECKLIST.md), [open decisions](04_OPEN_DECISIONS.md), and your assigned Issue before coding. If shared files are missing, obtain the package or repository copies; do not invent their contracts. Your human teammate is Matty; you are their assistant, not an autonomous coordinator for other teammates.
 
@@ -66,7 +70,7 @@ F01/F03/F05 require a validated repository foundation and runnable documentation
 - Request contract changes from Ved and master-file corrections from Matty with affected consumers identified. Cross-owner edits require coordination and applicable consumer checks. Production checker and independent evaluation validator stay intentionally separate.
 - Finish with published and validated code, passing current-base checks, documented artifacts and receiving-member acceptance. Mark Done only after verification. Include task ID, commit/PR, commands, hashes, tests actually run, limitations and next handoff in your completion message.
 
-The shared rules define publication, state-transition and handoff procedures. The checklist assigns a separate technical contact for each task. Formal code/document review and reviewer approval are not required. Technical validation, interface coordination and independent scientific evaluation remain required.
+The shared rules define publication, state-transition and handoff procedures. The checklist assigns a separate technical contact for each task. Technical validation and independent scientific evaluation remain required. Shared-format and settings changes require agreement from the affected teammates before implementation; record that agreement in the Issue or decision record.
 
 ## Bootstrap repository adaptation
 

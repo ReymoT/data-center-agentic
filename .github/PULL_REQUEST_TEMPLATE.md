@@ -19,4 +19,6 @@ Receiving owner / handoff / consumer verification:
 - [ ] Documentation and package changelog updated as needed
 - [ ] After merge, record merge SHA and receiving acceptance in the Issue
 
-PRs are optional under the project manager's policy. Authorized document publication does not require a PR or formal reviewer approval.
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+For shared-format or settings changes, link the affected teammates' recorded agreement here. Matty's separately authorized direct document publication remains available.

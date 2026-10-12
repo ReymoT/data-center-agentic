@@ -1,6 +1,10 @@
 # Repository workflow settings
 
-Matty is the project manager. Formal document/code review and reviewer approval are not required under [his recorded instruction](decisions/Q11_MANAGER_AUTHORITY.md). He explicitly authorizes publishing these documents to main. PRs are optional; they must not replace an authorized publication with a review request.
+Matty is the project manager. [His recorded instruction](decisions/Q11_MANAGER_AUTHORITY.md) fixes the rule:
+
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. This documents merge eligibility; it does not change repository permissions or protection settings. Matty's earlier authorization to publish project documents directly to main still applies.
 
 Technical checks remain applicable. The `bootstrap-offline` job validates package consistency, installs the hashed Windows candidate and runs dependency smoke, offline provider-mock tests, lint, format and compilation checks. Scientific safety and independent evaluation requirements remain in the final proposal.
 

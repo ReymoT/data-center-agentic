@@ -55,7 +55,7 @@ Live equipment control, cooling or water savings, reinforcement learning, Modeli
 
 ## Start with the instructions
 
-Read [shared rules](docs/team/01_SHARED_RULES.md), your `MASTER_<NAME>.md` in [the complete package](docs/team/00_START_HERE.md), [interfaces](docs/INTERFACES.md), [open decisions](docs/team/04_OPEN_DECISIONS.md), your assigned Issue and upstream handoffs. Ved and consumers will define and validate the shared schemas and CLI names during implementation. The current interface document describes the planned boundaries.
+Read [PROJECT_MASTER.md](PROJECT_MASTER.md), [shared rules](docs/team/01_SHARED_RULES.md), your `MASTER_<NAME>.md` in [the complete package](docs/team/00_START_HERE.md), [interfaces](docs/INTERFACES.md), [open decisions](docs/team/04_OPEN_DECISIONS.md), your assigned Issue and upstream handoffs. Ved and consumers will define and validate the shared schemas and CLI names during implementation. The current interface document describes the planned boundaries.
 
 See [the setup handoff](docs/handoffs/F01.md) for checks and implementation dependencies, and [the publication audit](docs/team/REVIEW_RECORD.md) for the current documentation status. These documents are published under the project manager's instruction; formal document review is not required.
 
@@ -90,6 +90,8 @@ The [offline provider mocks](tests/llm/README.md) have 13 helper tests for scrip
 
 Copy `.env.example` to a local `.env` only when Q09 is approved. All provider/account/settings placeholders are blank; no paid call is enabled. [The configuration template](configs/project.example.json) records known proposal constants and keeps open decisions null. It is not a production loader or an execution permission.
 
+Matty requires an open-source LLM and recommends Ollama as the serving runtime. [The Q09 discussion](https://github.com/ReymoT/data-center-agentic/issues/2) requests Nisha's recommendation. The model/version/license, hardware, settings and budget remain unselected.
+
 ## Data, experiments and outputs
 
 Reimo will acquire the pinned SustainDC Arizona carbon file, verify units and UTC alignment, and calibrate synthetic job distributions from Frontier job records. EPA eGRID supplies an annual plausibility check. Forecast replay is perfect foresight and must be labeled. [Data instructions](data/README.md) record the required acquisition evidence; source access and redistribution are not certified here.
@@ -102,6 +104,8 @@ Nisha will define the CLI during F02/E02 implementation with the module owners. 
 
 ## Workflow and remaining work
 
-Matty is the project manager. His instruction authorizes publication of these documents to `main` without a review request or reviewer approval. Development can use short task branches, with applicable checks before publication. [Module ownership](docs/OWNERSHIP.md) supports technical coordination, and [repository settings](docs/REPOSITORY_SETTINGS.md) record the current workflow. Matty's GitHub account for this project is [MattyAnd](https://github.com/MattyAnd).
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. Matty is the project manager and has also authorized direct publication of these documents to `main`. Development can use short task branches, with applicable checks before publication. [Module ownership](docs/OWNERSHIP.md) supports technical coordination, and [repository settings](docs/REPOSITORY_SETTINGS.md) record the current workflow. Matty's GitHub account for this project is [MattyAnd](https://github.com/MattyAnd).
 
 The [project plan](docs/PROJECT_PLAN.md) links the authoritative checklist and timeline. The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices and records the manager's workflow instruction under Q11. Shared contracts, source evidence, model/budget, remaining team permissions, detailed allocations and target platforms still need to be established. Tests of a skeleton are not integrated acceptance. Final end-to-end acceptance belongs to Matty, independent verification to Nisha, and second-machine reproduction to Ved.

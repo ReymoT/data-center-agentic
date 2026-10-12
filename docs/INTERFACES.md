@@ -1,6 +1,6 @@
 # Shared interface and handoff blueprint
 
-Version 1.0 — 2026-10-10. Contract owner: Ved. Producers and consumers coordinate and validate interfaces during implementation; formal review approval is not required. These are proposed API names and paths, not existing code. This is the sole maintained draft contract. Adoption and schema versioning await F02 implementation and validation by Ved and consumers. Open decisions remain explicit configuration/validation barriers, not undocumented defaults.
+Version 1.0 — 2026-10-10. Contract owner: Ved. Producers and consumers coordinate and validate interfaces during implementation. Shared data-format or settings changes require the affected teammates' agreement first, recorded in the Issue or decision record; teammate PR review is optional. These are proposed API names and paths, not existing code. This is the sole maintained draft contract. Adoption and schema versioning await F02 implementation and validation by Ved and consumers. Open decisions remain explicit configuration/validation barriers, not undocumented defaults.
 
 ## Proposed repository locations and owners
 

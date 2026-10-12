@@ -1,12 +1,16 @@
 # Team master instruction package
 
-Version: 1.4 - October 10, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.5 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
 The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. The repository is a scaffold, not an implemented research system.
 
-Matty is the project manager and authorizes direct publication without formal code/document review or reviewer approval. [Q11](../decisions/Q11_MANAGER_AUTHORITY.md) records this instruction. Technical checks, producer/consumer coordination and independent scientific evaluation remain required. Technical contacts in the checklist are not approval gates.
+Matty is the project manager. Start with [PROJECT_MASTER.md](../../PROJECT_MASTER.md). [Q11](../decisions/Q11_MANAGER_AUTHORITY.md) records the fixed merge rule.
+
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+Technical checks and independent scientific evaluation remain required. Formal review is optional; agreement on shared formats and settings is required before those changes.
 
 The proposal pairs Matty/Nisha on E4-E6 and Reimo/Ved on E1/E3; Edison owns E2. The masters describe detailed module leads. Those allocations refine the proposal and remain subject to Q12. Matty's manager role is confirmed; backup, summary publisher and remaining permission choices stay in Q11.
 

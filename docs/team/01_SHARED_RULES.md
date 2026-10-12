@@ -1,10 +1,14 @@
 # Shared rules for all five assistants
 
-Version: 1.4 — 2026-10-10. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.5 — 2026-10-12. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 
-Matty Anderson (`MattyAnd`) is the team manager. His explicit instruction on 2026-10-10 waives formal repository code/document review and reviewer approval and authorizes publishing these documents to main. This supersedes review gates elsewhere in masters, checklists, templates and earlier records. Technical contacts do not impose an approval barrier. Do not open a review request in place of authorized publication. Read [the accepted manager instruction](../decisions/Q11_MANAGER_AUTHORITY.md). Continue applicable tests, interface coordination and the final proposal's independent scientific evaluation.
+Matty Anderson (`MattyAnd`) is the team manager. His explicit 2026-10-12 instruction fixes the merge rule across [PROJECT_MASTER.md](../../PROJECT_MASTER.md), AGENTS and all five role files, superseding contrary package rules.
+
+A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+Read [the accepted manager instruction](../decisions/Q11_MANAGER_AUTHORITY.md). Continue applicable tests and the final proposal's independent scientific evaluation.
 
 ## Scope and precedence
 
@@ -55,11 +59,11 @@ When blocked, state the missing dependency/decision, responsible person, exact e
 
 Use one shared repository with separate local clones/worktrees and short task branches where useful. Do not create permanent teammate integration branches. Keep unrelated work separate. Publish these documents to main under Matty's instruction after applicable technical checks. PRs are optional. Preserve existing work and change shared history only under an explicit human cleanup instruction, with a recoverable backup and protected remote updates.
 
-The current manager policy does not require PRs or reviewer approvals. Technical CI remains applicable. Matty prepares settings consistent with the accepted workflow; an authorized administrator enables settings when requested. CODEOWNERS is optional routing and does not grant permissions or prevent edits.
+For a PR, passing its applicable checks makes it eligible to merge without a required teammate review. Changes to shared data formats or settings also need the affected teammates' agreement first, recorded in the Issue or decision record. Matty prepares settings consistent with the accepted workflow; an authorized administrator enables settings when requested. CODEOWNERS is optional routing and does not grant permissions.
 
 Matty's explicit instruction authorizes this document publication to main without a review request. Other actions follow the human's requests and session authorization. This file does not authorize paid calls, account-access changes or messages to teammates. Do not ask again for an action already authorized.
 
-Each module has one primary owner. Cross-owner changes require an Issue naming the change and affected technical contacts, not silent parallel edits. Shared schema changes go through Ved; environment/CI through Matty; data semantics through Reimo; formulas/models through Edison; scoring protocol through Nisha. Owners coordinate; they do not have a unilateral veto over human-approved requirements. Breaking changes include migration notes, new schema/version identifiers and changed consumer tests. Do not keep duplicate validators for production; the **evaluation** validator is deliberately independent and must not call the production checker to establish truth.
+Each module has one primary owner. Cross-owner changes require an Issue naming the change and affected technical contacts. Obtain the affected teammates' agreement before changing shared data formats or settings, and record it in the Issue or decision record. Shared schema changes go through Ved; environment/CI through Matty; data semantics through Reimo; formulas/models through Edison; scoring protocol through Nisha. Breaking changes include migration notes, new schema/version identifiers and changed consumer tests. Do not keep duplicate validators for production; the **evaluation** validator is deliberately independent and must not call the production checker to establish truth.
 
 Agree Python 3.12, formatting/lint rules, typed boundaries, meaningful tests and configuration-driven constants during repository setup. Use the supplied dependency inputs as a starting point, validate runtime imports and regenerate locks after changes. Windows wheel hashes are not portable locks. Ordinary CI uses small permitted fixtures and mocked providers; live-model calls are separate, explicit and budgeted. Keep secrets, virtual environments, raw/private/large data and paid-response content with sensitive information out of Git; use access-controlled artifacts where necessary and track their manifest. Licensing/redistribution decisions belong in data documentation.
 
