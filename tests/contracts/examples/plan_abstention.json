@@ -1,0 +1,22 @@
+{
+  "abstentions": [
+    {
+      "constraint_ids": [
+        "CON-DL-J3"
+      ],
+      "detail": null,
+      "evidence_ids": [],
+      "job_id": "J3",
+      "reason": "infeasible_deadline"
+    }
+  ],
+  "deferrals": [],
+  "episode_id": "EP-HAND1",
+  "evidence_ids": [],
+  "record_type": "Plan",
+  "schema_version": "1.0.0",
+  "slot": 4,
+  "starts": [],
+  "state_version": 4,
+  "status": "proposed"
+}

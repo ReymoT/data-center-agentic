@@ -1,0 +1,62 @@
+{
+  "check_id": "CHK-DEC-HAND1-00-1",
+  "episode_id": "EP-HAND1",
+  "errors": [],
+  "evidence": [
+    {
+      "ids": [
+        "CON-CAP-01"
+      ],
+      "kind": "capacity",
+      "status": "available"
+    },
+    {
+      "ids": [],
+      "kind": "carbon",
+      "status": "available"
+    }
+  ],
+  "impact_claim_support": "supported",
+  "performed": [
+    {
+      "constraint_ids": [],
+      "name": "schema",
+      "outcome": "pass"
+    },
+    {
+      "constraint_ids": [],
+      "name": "ids",
+      "outcome": "pass"
+    },
+    {
+      "constraint_ids": [],
+      "name": "timing",
+      "outcome": "pass"
+    },
+    {
+      "constraint_ids": [],
+      "name": "deadline",
+      "outcome": "pass"
+    },
+    {
+      "constraint_ids": [],
+      "name": "nonflexible",
+      "outcome": "pass"
+    },
+    {
+      "constraint_ids": [
+        "CON-CAP-01"
+      ],
+      "name": "capacity",
+      "outcome": "pass"
+    }
+  ],
+  "plan_hash": "efa92b4047cf1613e77070a5366996712b822f32a511f00751c9947fab597090",
+  "record_type": "CheckResult",
+  "schema_version": "1.0.0",
+  "skipped": [],
+  "slot": 0,
+  "state_version": 0,
+  "status": "pass",
+  "violations": []
+}

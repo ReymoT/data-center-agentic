@@ -1,0 +1,78 @@
+{
+  "constraints": [
+    {
+      "applies_to_jobs": [],
+      "applies_to_site": "SITE1",
+      "constraint_id": "CON-CAP-01",
+      "constraint_type": "capacity",
+      "limit_value": 100.0,
+      "record_type": "Constraint",
+      "schema_version": "1.0.0",
+      "source_id": "SRC-HAND",
+      "source_version": null,
+      "unit": "kW"
+    },
+    {
+      "applies_to_jobs": [],
+      "applies_to_site": "SITE1",
+      "constraint_id": "CON-FRESH-01",
+      "constraint_type": "freshness",
+      "limit_value": 2.0,
+      "record_type": "Constraint",
+      "schema_version": "1.0.0",
+      "source_id": "SRC-HAND",
+      "source_version": null,
+      "unit": "slot"
+    },
+    {
+      "applies_to_jobs": [
+        "J1"
+      ],
+      "applies_to_site": null,
+      "constraint_id": "CON-DL-J1",
+      "constraint_type": "deadline",
+      "limit_value": 6.0,
+      "record_type": "Constraint",
+      "schema_version": "1.0.0",
+      "source_id": "SRC-HAND",
+      "source_version": null,
+      "unit": "slot"
+    },
+    {
+      "applies_to_jobs": [
+        "J3"
+      ],
+      "applies_to_site": null,
+      "constraint_id": "CON-DL-J3",
+      "constraint_type": "deadline",
+      "limit_value": 6.0,
+      "record_type": "Constraint",
+      "schema_version": "1.0.0",
+      "source_id": "SRC-HAND",
+      "source_version": null,
+      "unit": "slot"
+    }
+  ],
+  "record_type": "ConstraintSnapshot",
+  "schema_version": "1.0.0",
+  "site": {
+    "background_kw": 40.0,
+    "pue": 1.0,
+    "record_type": "SiteConfig",
+    "schema_version": "1.0.0",
+    "site_id": "SITE1",
+    "slot_hours": 1.0
+  },
+  "snapshot_id": "SNAP1",
+  "sources": [
+    {
+      "commit": null,
+      "path": "tests/contracts/fixtures.py",
+      "record_type": "SourceRef",
+      "redistribution_status": "permitted",
+      "schema_version": "1.0.0",
+      "sha256": null,
+      "source_id": "SRC-HAND"
+    }
+  ]
+}

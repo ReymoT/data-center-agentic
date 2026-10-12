@@ -1,0 +1,10 @@
+{
+  "arrival_slot": 0,
+  "deadline_slot": 6,
+  "duration_slots": 2,
+  "flexible": true,
+  "job_id": "J1",
+  "power_kw": 40.0,
+  "record_type": "Job",
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,188 @@
+{
+  "completion_tokens": null,
+  "config_hash": null,
+  "cost_usd": null,
+  "decision_id": "DEC-HAND1-00",
+  "episode_id": "EP-HAND1",
+  "errors": [],
+  "evidence_ids": [
+    "CON-CAP-01"
+  ],
+  "executed_starts": [
+    {
+      "job_id": "J1",
+      "start_slot": 0
+    }
+  ],
+  "execution_check": {
+    "check_id": "CHK-DEC-HAND1-00-1",
+    "episode_id": "EP-HAND1",
+    "errors": [],
+    "evidence": [
+      {
+        "ids": [
+          "CON-CAP-01"
+        ],
+        "kind": "capacity",
+        "status": "available"
+      },
+      {
+        "ids": [],
+        "kind": "carbon",
+        "status": "available"
+      }
+    ],
+    "impact_claim_support": "supported",
+    "performed": [
+      {
+        "constraint_ids": [],
+        "name": "schema",
+        "outcome": "pass"
+      },
+      {
+        "constraint_ids": [],
+        "name": "ids",
+        "outcome": "pass"
+      },
+      {
+        "constraint_ids": [],
+        "name": "timing",
+        "outcome": "pass"
+      },
+      {
+        "constraint_ids": [],
+        "name": "deadline",
+        "outcome": "pass"
+      },
+      {
+        "constraint_ids": [],
+        "name": "nonflexible",
+        "outcome": "pass"
+      },
+      {
+        "constraint_ids": [
+          "CON-CAP-01"
+        ],
+        "name": "capacity",
+        "outcome": "pass"
+      }
+    ],
+    "plan_hash": "efa92b4047cf1613e77070a5366996712b822f32a511f00751c9947fab597090",
+    "record_type": "CheckResult",
+    "schema_version": "1.0.0",
+    "skipped": [],
+    "slot": 0,
+    "state_version": 0,
+    "status": "pass",
+    "violations": []
+  },
+  "explanation": null,
+  "fallback": null,
+  "final_status": "executed",
+  "initial": {
+    "check": {
+      "check_id": "CHK-DEC-HAND1-00-1",
+      "episode_id": "EP-HAND1",
+      "errors": [],
+      "evidence": [
+        {
+          "ids": [
+            "CON-CAP-01"
+          ],
+          "kind": "capacity",
+          "status": "available"
+        },
+        {
+          "ids": [],
+          "kind": "carbon",
+          "status": "available"
+        }
+      ],
+      "impact_claim_support": "supported",
+      "performed": [
+        {
+          "constraint_ids": [],
+          "name": "schema",
+          "outcome": "pass"
+        },
+        {
+          "constraint_ids": [],
+          "name": "ids",
+          "outcome": "pass"
+        },
+        {
+          "constraint_ids": [],
+          "name": "timing",
+          "outcome": "pass"
+        },
+        {
+          "constraint_ids": [],
+          "name": "deadline",
+          "outcome": "pass"
+        },
+        {
+          "constraint_ids": [],
+          "name": "nonflexible",
+          "outcome": "pass"
+        },
+        {
+          "constraint_ids": [
+            "CON-CAP-01"
+          ],
+          "name": "capacity",
+          "outcome": "pass"
+        }
+      ],
+      "plan_hash": "efa92b4047cf1613e77070a5366996712b822f32a511f00751c9947fab597090",
+      "record_type": "CheckResult",
+      "schema_version": "1.0.0",
+      "skipped": [],
+      "slot": 0,
+      "state_version": 0,
+      "status": "pass",
+      "violations": []
+    },
+    "plan": {
+      "abstentions": [],
+      "deferrals": [],
+      "episode_id": "EP-HAND1",
+      "evidence_ids": [
+        "CON-CAP-01",
+        "FACT-JOB-J1",
+        "FACT-JOB-J2"
+      ],
+      "record_type": "Plan",
+      "schema_version": "1.0.0",
+      "slot": 0,
+      "starts": [
+        {
+          "job_id": "J1",
+          "start_slot": 0
+        },
+        {
+          "job_id": "J2",
+          "start_slot": 2
+        }
+      ],
+      "state_version": 0,
+      "status": "proposed"
+    }
+  },
+  "input_hash": null,
+  "latency_ms": null,
+  "model_call_count": 0,
+  "not_applicable_stages": [
+    "repaired",
+    "fallback"
+  ],
+  "prompt_tokens": null,
+  "raw_response": null,
+  "record_type": "DecisionRecord",
+  "repair_count": 0,
+  "repaired": null,
+  "run_id": "RUN-HAND",
+  "schema_version": "1.0.0",
+  "slot": 0,
+  "system": "greedy_a",
+  "trial": null
+}
