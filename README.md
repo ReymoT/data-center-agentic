@@ -70,11 +70,14 @@ To validate the proposed full Windows environment:
 .venv\Scripts\python.exe -m pip install --require-hashes -r requirements/requirements-windows-py312.lock.txt
 .venv\Scripts\python.exe -m pip check
 .venv\Scripts\python.exe scripts/smoke_dependencies.py
-.venv\Scripts\python.exe -m ruff check dc_sustainability scripts
-.venv\Scripts\python.exe -m ruff format --check dc_sustainability scripts
+.venv\Scripts\python.exe -m pytest tests/llm/test_provider_mocks.py -q
+.venv\Scripts\python.exe -m ruff check dc_sustainability scripts tests
+.venv\Scripts\python.exe -m ruff format --check dc_sustainability scripts tests
 ```
 
 Installation needs package-index access. Smoke checks run imports, SHACL/SPARQL, a tiny MILP, classifier fit/save/load and a LangGraph route without an LLM. See [environment instructions](requirements/README.md) for status and troubleshooting. The supplied lock is a candidate, not a final provider-inclusive environment. Do not use its Windows wheel hashes on other platforms.
+
+The [offline provider mocks](tests/llm/README.md) have 13 helper tests for scripted responses, failures and call evidence. They need no model account or provider SDK. Scheduling algorithms and the production provider adapter remain unimplemented; these helper tests do not establish their acceptance.
 
 Copy `.env.example` to a local `.env` only when Q09 is approved. All provider/account/settings placeholders are blank; no paid call is enabled. [The configuration template](configs/project.example.json) records known proposal constants and keeps open decisions null. It is not a production loader or an execution permission.
 
