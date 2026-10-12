@@ -9,7 +9,11 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
-FSE 598, Arizona State University. We are building a research prototype that recommends when computing jobs should run at one simulated data center. Our question is whether an ontology-grounded agent with executable checks improves accuracy, faithfulness and safety compared with a plain LLM given equivalent information.
+FSE 598, Arizona State University.
+
+Our research question: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
+
+We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
 This repository contains the project documentation and implementation scaffold. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable commands below check the repository foundation and candidate dependencies. They do not run experiments or establish research results.
 
@@ -25,16 +29,21 @@ The [source review record](docs/SOURCE_REVIEW.md) identifies the supplied docume
 
 ![Planned architecture for the final scheduling study](architecture/architecture.png)
 
-## Scope and six systems
+## Main comparison and scheduling references
 
-Every system will use the same arrived jobs, visible forecasts and authoritative constraints:
+The main research comparison uses two systems with the same arrived jobs, visible forecasts and authoritative constraints:
 
 - `agent`: the ontology-grounded LangGraph agent, with one repair and checked greedy-A fallback.
 - `plain_llm`: one model call with equivalent flat facts; no tools, repair or fallback.
+
+Four additional policies use the same visible inputs to put scheduling performance in context:
+
 - `greedy_a`: start jobs as soon as feasible.
 - `greedy_b`: choose feasible starts with the lowest forecast emissions.
 - `decision_tree_c`: a trained scheduling classifier.
 - `random_forest_d`: a trained scheduling classifier.
+
+These six systems do not represent six separate research questions. The study evaluates the complete agent against the plain LLM; it does not separately prove the benefit of ontology grounding or tool verification alone.
 
 The earlier name "Model D" means the agent. Policy `random_forest_d` is a different system. Both learned policies are required; greedy policies and offline optimization are not substitutes for classical ML.
 

@@ -1,10 +1,16 @@
 # Architecture for the final scheduling study
 
-Status: project architecture documentation for the planned implementation, 2026-10-10. Published under the project manager's instruction without a formal document-review gate. The repository currently contains a scaffold; no scheduling component is implemented yet. Read [interfaces](INTERFACES.md) for planned records and ownership, and [open decisions](team/04_OPEN_DECISIONS.md) for rules still requiring a decision.
+Status: project architecture documentation for the planned implementation, updated 2026-10-12. Published under the project manager's instruction without a formal document-review gate. The repository currently contains a scaffold; no scheduling component is implemented yet. Read [interfaces](INTERFACES.md) for planned records and ownership, and [open decisions](team/04_OPEN_DECISIONS.md) for rules still requiring a decision.
+
+## Research question
+
+Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
+
+The main comparison is `agent` versus `plain_llm`, using equivalent visible information. Workload scheduling at one simulated data center is the experimental setting for this question. Greedy A/B and trained decision tree C/random forest D are four additional scheduling references, not four additional research questions. Conclusions apply to the evaluated scenarios.
 
 ## What the system does
 
-The system recommends start times for jobs at one simulated data center. It compares six scheduling systems using equivalent visible information. The main comparison asks whether the complete agent improves accuracy, evidence support and safety compared with the plain LLM. It does not establish the separate effect of any one component.
+The system recommends start times for jobs at one simulated data center. The six systems share the same arrived jobs, visible forecasts and authoritative constraints. Accuracy measures correctness, faithfulness measures whether claims are supported by evidence, and safety measures unsafe advice, constraint violations and appropriate abstention. The study compares the complete agent with the plain LLM; it does not establish the separate effect of any one component.
 
 We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the criteria documented in [the README](../README.md) and [source review](SOURCE_REVIEW.md). Connected facts, simulation, checks/fallback and evidence-linked explanations fit our research question. This is a reasoned design choice, not a measured ranking of architectures. The final proposal narrows those inspirations to workload scheduling. The [updated diagram](../architecture/architecture.svg) replaces the obsolete repository image and describes this final scope. Its [PNG version](../architecture/architecture.png) is shown in the README. Facility twins, water/cooling control and enterprise telemetry remain outside the required study.
 

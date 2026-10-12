@@ -2,6 +2,8 @@
 
 The current diagram replaces the obsolete engineering image. It describes the planned final-proposal scheduling study; it does not claim that components have been implemented.
 
+The diagram starts with the exact research question. The main comparison is the ontology-grounded, tool-verified agent versus the plain LLM. Four additional policies provide scheduling reference results. Workload scheduling is the experimental setting, and conclusions remain limited to the evaluated scenarios.
+
 Read the [plain-language architecture](../docs/ARCHITECTURE.md) for workflow, visibility boundaries, policy differences, offline learning/evaluation and unresolved decisions. [Source review](../docs/SOURCE_REVIEW.md) explains the four related systems and design rationale. The supplied broad Model D image remains a reference outside Git and does not expand the final scope.
 
 Files: [SVG](architecture.svg) for scalable viewing and [PNG](architecture.png) for README display. Both are generated from [render_architecture.py](../scripts/render_architecture.py), with Matplotlib from the candidate environment:

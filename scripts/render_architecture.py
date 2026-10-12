@@ -12,10 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     with rc_context({"font.family": "DejaVu Sans", "svg.fonttype": "none", "svg.hashsalt": "dc"}):
-        fig = Figure(figsize=(16, 15), facecolor="#f6f8fc")
+        fig = Figure(figsize=(16, 17), facecolor="#f6f8fc")
         FigureCanvasAgg(fig)
         ax = fig.add_axes((0.025, 0.025, 0.95, 0.95))
-        ax.set(xlim=(0, 100), ylim=(0, 110))
+        ax.set(xlim=(0, 100), ylim=(0, 124))
         ax.axis("off")
 
         def text(x, y, value, size=12, weight="normal", color="#203449"):
@@ -48,11 +48,25 @@ def main():
                 )
             )
 
-        text(1, 109, "Data Center Sustainability Agent", 25, "bold")
-        text(1, 105.5, "Final scheduling study | Planned architecture | 10 October 2026", 14)
+        text(1, 123, "Data Center Sustainability Agent", 25, "bold")
+        text(1, 119.5, "Final scheduling study | Planned architecture | 12 October 2026", 14)
+        text(1, 116.5, "RESEARCH QUESTION", 12, "bold")
         text(
             1,
-            102.5,
+            114,
+            "Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety\n"
+            "of data-center sustainability recommendations compared with a plain LLM?",
+            13,
+        )
+        text(
+            1,
+            108.5,
+            "Main comparison: agent versus plain_llm. Four additional policies provide scheduling references.",
+            12,
+        )
+        text(
+            1,
+            105.5,
             "One simulated site; hourly slots; fixed power, cooling and battery behavior.",
             13,
         )
@@ -129,7 +143,7 @@ def main():
             43,
             29,
             19,
-            "3C  Classical comparisons",
+            "3C  Additional references",
             "greedy_a: earliest feasible starts\n"
             "greedy_b: lower forecast emissions\n"
             "decision_tree_c: trained classifier\n"
@@ -209,8 +223,9 @@ def main():
         svg = svg_path.read_text(encoding="utf-8")
         svg = svg.replace(
             " <metadata>",
-            " <title>Planned final scheduling study architecture</title>\n"
-            " <desc>Six scheduling systems share visible inputs and an execution gate; "
+            " <title>Ontology-grounded, tool-verified agent versus plain LLM: planned architecture</title>\n"
+            " <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. "
+            "Four additional scheduling references share visible inputs and an execution gate; "
             "private data and offline references stay outside policy inputs.</desc>\n <metadata>",
             1,
         )
