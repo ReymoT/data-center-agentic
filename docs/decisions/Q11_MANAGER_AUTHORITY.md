@@ -5,6 +5,16 @@ Status: accepted explicit human instruction.
 Authority: Matty Anderson, GitHub `MattyAnd`.
 Date: 2026-10-10; merge rule clarified 2026-10-12.
 
+Instruction authority added by Matty's explicit request on 2026-10-12:
+
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+This covers AGENTS.md, PROJECT_MASTER.md, all five masters, numbered files 00-04 and shared instruction/policy records. Teammates can propose corrections in Issues. Matty's authorization must identify the specific change and be recorded in the Issue, decision or authorized session/handoff before editing or publishing. His authorized assistant may apply it. No local copy, uploaded package, newer timestamp, higher version number or AI-generated document supersedes main. Passing PR checks does not grant instruction-change permission.
+
+Consumers fetch and read the published main commit/version while preserving unpublished code. Report conflicts or suspected unauthorized changes to Matty rather than overwriting files. Authorized instruction updates become active on publication to main. Historical records retain their original versions for reference.
+
+The earlier general merge rule below remains intact. Instruction authority governs who may make these particular changes; shared-format/settings agreement and scientific acceptance remain required where applicable. The instruction rule does not transfer another teammate's implementation task to Matty.
+
 Matty stated: "No need for review. I am the team manager for this project."
 
 Matty is the team manager. On 2026-10-12 he explicitly fixed this rule across AGENTS.md, PROJECT_MASTER.md and all five role files:
@@ -19,4 +29,4 @@ The instruction concerns repository workflow. Tests, reproducibility, safety che
 
 This record does not claim a merge occurred, assign a backup or summary publisher, grant new account access or authorize paid runs. Matty separately authorized the Q09 recommendation request to Nisha in [issue #2](https://github.com/ReymoT/data-center-agentic/issues/2); this is not general permission to message teammates. Follow the human's action requests and existing session authorization. Remaining Q11 choices stay in the open index. GitHub access/protection settings were not changed.
 
-Affected consumers: PROJECT_MASTER.md, AGENTS.md, all five role masters, numbered files 00-04, repository context/settings, README, interface coordination text and the PR template. Earlier statements are historical, not active review barriers. Effective instruction deployment: 1.5. Setup validation checks that the seven requested files contain the identical merge rule.
+Affected consumers: PROJECT_MASTER.md, AGENTS.md, all five role masters, numbered files 00-04, repository context/settings, README and the PR template. Earlier statements are historical, not active review barriers. Effective instruction deployment: 1.6. Setup validation checks that the seven requested files contain the identical merge and instruction-authority rules. That consistency check does not authenticate authorization or restrict GitHub writes. MattyAnd currently has write access and lacks admin access; repository-owner action is needed for GitHub enforcement. No access/protection settings were changed.

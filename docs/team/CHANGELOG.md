@@ -1,6 +1,15 @@
 # Instruction deployment changelog
 
-Current deployment: 1.5 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. The proposed interface contract remains version 1.0 until F02 defines and validates schemas. Instruction versions do not imply schema adoption.
+Current deployment: 1.6 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. The proposed interface contract remains version 1.0 until F02 defines and validates schemas. Instruction versions do not imply schema adoption.
+
+## Deployment 1.6 - 2026-10-12
+
+- Made main's published masters/shared instructions authoritative. Only MattyAnd may authorize specific changes; teammates and their AI assistants cannot unilaterally edit, overwrite, replace, delete or publish instruction versions. Corrections may be proposed in Issues.
+- Applied identical authority text to AGENTS, PROJECT_MASTER and all five role masters; aligned numbered files, manager decision, context, README, workflow records and PR template. Local packages, timestamps, higher version numbers and generated replacements cannot supersede main.
+- Preserved the exact 1.5 merge rule, affected-teammate agreement for shared formats/settings, all 50 task allocations/dependencies and independent scientific evaluation. Historical handoffs and synced source files remain untouched.
+- Extended setup validation to check authority consistency. This is an instruction rule and consistency check, not GitHub access enforcement. MattyAnd lacks admin access; owner action would be needed for access restrictions. No permission or protection settings changed.
+
+See [the 1.6 handoff](../handoffs/INSTRUCTION_AUTHORITY_1_6.md) for verification and limits.
 
 ## Deployment 1.5 - 2026-10-12
 

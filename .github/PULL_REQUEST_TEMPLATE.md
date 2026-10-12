@@ -22,3 +22,5 @@ Receiving owner / handoff / consumer verification:
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
 For shared-format or settings changes, link the affected teammates' recorded agreement here. Matty's separately authorized direct document publication remains available.
+
+Instruction changes: link Matty's explicit authorization for the specific change. Main masters/shared instructions are authoritative; teammates and their AI assistants must not edit, replace, delete or publish new versions without that authorization. Passing checks alone does not authorize such changes.

@@ -98,6 +98,12 @@ merge_rule = (
 policy_paths = [ROOT / "AGENTS.md", ROOT / "PROJECT_MASTER.md"] + [
     TEAM / f"MASTER_{owner}.md" for owner in ("MATTY", "NISHA", "REIMO", "VED", "EDISON")
 ]
+instruction_authority = (
+    "The masters and shared instructions published on GitHub's main branch "
+    "are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. "
+    "Other teammates and their AI assistants must not edit, overwrite, replace, delete "
+    "or publish new versions without Matty's explicit authorization."
+)
 for path in policy_paths:
     require(path.is_file(), f"Missing shared-policy file: {path.relative_to(ROOT)}")
     if path.is_file():
@@ -105,8 +111,14 @@ for path in policy_paths:
             merge_rule in path.read_text(encoding="utf-8"),
             f"Fixed merge rule differs or is missing: {path.relative_to(ROOT)}",
         )
+        require(
+            instruction_authority in path.read_text(encoding="utf-8"),
+            f"Instruction authority differs or is missing: {path.relative_to(ROOT)}",
+        )
 if errors:
     print("Bootstrap validation failed:\n" + "\n".join(errors), file=sys.stderr)
     raise SystemExit(1)
 print("PASS: 50 task records, role inventories, acyclic dependencies, local Markdown links,")
-print("      config placeholders, dependency inputs, README preferences and seven-file merge rule.")
+print(
+    "      config placeholders, dependency inputs, README preferences and seven-file policy rules."
+)

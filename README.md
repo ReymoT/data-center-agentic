@@ -104,6 +104,8 @@ Nisha will define the CLI during F02/E02 implementation with the module owners. 
 
 ## Workflow and remaining work
 
+The masters and shared instructions on GitHub's `main` branch are authoritative. Only Matty Anderson (`MattyAnd`) may authorize changing them. Teammates and their AI assistants must not overwrite, replace or publish new versions without his explicit authorization. Propose corrections in an Issue. Local copies and higher version numbers do not supersede main; preserve unpublished code when synchronizing instructions. This project rule is documented in [PROJECT_MASTER.md](PROJECT_MASTER.md); GitHub-enforced access restrictions require repository-owner action.
+
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
 Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. Matty is the project manager and has also authorized direct publication of these documents to `main`. Development can use short task branches, with applicable checks before publication. [Module ownership](docs/OWNERSHIP.md) supports technical coordination, and [repository settings](docs/REPOSITORY_SETTINGS.md) record the current workflow. Matty's GitHub account for this project is [MattyAnd](https://github.com/MattyAnd).

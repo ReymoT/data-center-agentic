@@ -12,6 +12,10 @@ Recorded from Matty's explicit request on 2026-10-10 for this FSE 598 project.
 - README and architecture must be clear and use plain text explanations. Simple Markdown headings and commands are acceptable; understanding must not depend on an image.
 - Describe architecture selection as design rationale. Do not claim experiments proved a best architecture before results exist.
 
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+Record Matty's authorization for the specific change before editing instructions. Teammates may propose corrections in Issues. Fetch/read the current main instruction commit/version while preserving local code; local packages, timestamps and AI-generated files cannot supersede it. The ordinary merge rule below remains applicable.
+
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
 Record affected teammates' agreement before changing shared formats or settings. These preferences and the explicit manager instruction take precedence over older team-package workflow requirements. Technical verification and the final proposal's independent evaluation remain part of project acceptance. Provider/budget, scientific semantics, remaining account permissions, backup/publisher assignments and source licensing remain as recorded in the decision index. This repository file is persistent project context, read through root AGENTS.md; no global account memory was modified.

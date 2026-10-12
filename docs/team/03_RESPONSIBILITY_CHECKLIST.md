@@ -1,6 +1,8 @@
 # Shared responsibility and coverage checklist
 
-Version: 1.5 — 2026-10-12. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
+Version: 1.6 — 2026-10-12. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
+
+Use the published main checklist. Teammates and their AI assistants must not change or replace this shared instruction file without Matty's explicit authorization; propose corrections in an Issue.
 
 Dependencies are artifact prerequisites; development may use agreed fixtures/contracts first. The matrix has no task dependency cycles. O03/P06/E03 implement and test reference/metric pipelines on development data before freeze. I01 is pre-freeze integration; I02 produces frozen held-out run outputs; O04/P07/E06/E07 then produce final references, metrics and annotations. I04 is Matty's separate final E2E acceptance after reproduction. F04 and F05 continue throughout the project after their initial deliverables.
 

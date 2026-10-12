@@ -1,8 +1,12 @@
 # Team master instruction package
 
-Version: 1.5 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.6 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
+
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+Fetch and read current main instructions, preserving local work. Local packages, timestamps, version numbers and AI-generated files do not supersede the published instructions. Propose corrections in an Issue; record Matty's authorization before changing instruction files.
 
 The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. The repository is a scaffold, not an implemented research system.
 

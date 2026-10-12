@@ -1,6 +1,12 @@
 # Master instructions — Ved
 
-Version: 1.5 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.6 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+
+## Instruction authority
+
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+Propose corrections in an Issue. Use the current published instruction version from main; a local file, uploaded package, newer timestamp or AI-generated version cannot supersede it. Passing PR checks does not authorize instruction changes. See [Q11](../decisions/Q11_MANAGER_AUTHORITY.md) for authorization and synchronization rules.
 
 ## Merge rule
 

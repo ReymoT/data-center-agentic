@@ -1,5 +1,11 @@
 # Repository instructions
 
+## Instruction authority
+
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+Proposals belong in Issues until Matty explicitly authorizes the specific change. A local copy, uploaded package, newer timestamp, version number or AI-generated replacement cannot supersede main. Passing PR checks does not grant permission to modify instructions. Fetch and read current main instructions before work, record their commit/version, and preserve local code. Report conflicts or suspected unauthorized instruction changes to Matty; do not silently resolve them by replacing files. This is a project authorization rule, not a GitHub access restriction.
+
 Read `PROJECT_MASTER.md`, `docs/PROJECT_CONTEXT.md`, `docs/team/00_START_HERE.md`, `docs/team/01_SHARED_RULES.md`, the human teammate's `MASTER_<NAME>.md`, the assigned Issue, `docs/INTERFACES.md`, open/accepted decisions and prerequisite handoffs before implementation. Do not infer your teammate or claim another owner's task.
 
 Matty's GitHub account is `MattyAnd`. Start README with teammates and roles. Keep README and architecture in plain language. Disclose the reviewed systems, review method, similarities and evidence-based architecture rationale without claiming proven superiority.

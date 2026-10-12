@@ -1,8 +1,18 @@
 # Project master instructions
 
-Instruction deployment: 1.5 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.6 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
+
+## Instruction authority
+
+The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
+
+This covers AGENTS.md, PROJECT_MASTER.md, all five role masters, numbered files 00-04 and other shared instruction/policy records. Teammates may propose corrections in Issues. Record Matty's explicit authorization for the specific change before editing or publishing; it can authorize his assistant to maintain the files. Passing checks alone does not supply that authorization.
+
+At the start of work, fetch and read main's published instruction commit/version while preserving local code. Local or uploaded copies, newer timestamps, higher version numbers and AI-generated replacements have no independent authority. Report conflicts or suspected unauthorized changes to Matty. Instruction updates become active when authorized and published to main. Historical copies may document past work but cannot replace current instructions.
+
+GitHub permissions are separate from this rule. MattyAnd currently has write access, not administrator access. Repository-owner action is needed for GitHub-enforced access restrictions; this instruction publication does not claim such restrictions were enabled.
 
 ## Merge rule
 
