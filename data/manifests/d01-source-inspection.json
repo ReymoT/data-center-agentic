@@ -1,0 +1,156 @@
+{
+  "task": "D01",
+  "source_url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/data/CarbonIntensity/AZPS_NG_%26_avgCI.csv",
+  "source_commit": "a92b4755aca560e34a98d14028dda629eb968482",
+  "source_path": "data/CarbonIntensity/AZPS_NG_&_avgCI.csv",
+  "acquisition_time_utc": "2026-10-12T19:31:06.279633+00:00",
+  "inspection_time_utc": "2026-10-12T19:29:53.888099+00:00",
+  "validation": {
+    "sha256": "e05789a1dbf940e0554b0e8db42d84ed5cc0279d0050206fb048ba832ef24ef4",
+    "pinned_checksum_matches": true,
+    "columns": [
+      "timestamp",
+      "WND",
+      "SUN",
+      "WAT",
+      "OIL",
+      "NG",
+      "COL",
+      "NUC",
+      "OTH",
+      "avg_CI"
+    ],
+    "row_count": 8760,
+    "first_timestamp_utc": "2022-01-01T00:00:00+00:00",
+    "last_timestamp_utc": "2022-12-31T23:00:00+00:00",
+    "avg_CI_min": 251.22162645218947,
+    "avg_CI_max": 749.1955146635997,
+    "avg_CI_mean": 575.0418721742574,
+    "errors": []
+  },
+  "meaning": "average carbon intensity associated with electricity consumption",
+  "numerical_unit": "g/kWh",
+  "unit_evidence": "https://github.com/HewlettPackard/dc-rl/blob/a92b4755aca560e34a98d14028dda629eb968482/envs/bat_env_fwd_view.py#L218-L243",
+  "unit_evidence_status": "upstream kWh multiplication; CO2/CO2e label conflicts",
+  "pollutant_basis": null,
+  "timestamp_timezone": "UTC",
+  "source_interval_convention": null,
+  "meaning_evidence": "https://github.com/HewlettPackard/dc-rl/blob/a92b4755aca560e34a98d14028dda629eb968482/README.md#L342-L370",
+  "license_evidence": [
+    "https://github.com/HewlettPackard/dc-rl/blob/a92b4755aca560e34a98d14028dda629eb968482/LICENSE",
+    "https://github.com/HewlettPackard/dc-rl/blob/a92b4755aca560e34a98d14028dda629eb968482/README.md#L577-L591"
+  ],
+  "dataset_redistribution_verified": false,
+  "transformations": [
+    "UTF-8/CSV parsing",
+    "UTC-aware parsing",
+    "numeric parsing"
+  ],
+  "source_values_modified": false,
+  "excluded_records": 0,
+  "annual_magnitude_comparison": {
+    "source": "https://www.epa.gov/system/files/documents/2024-01/egrid2022_summary_tables.pdf",
+    "table": "1, page 2, AZNM WECC Southwest total output emission rates",
+    "year": 2022,
+    "co2_lb_per_mwh": 776.0,
+    "co2e_lb_per_mwh": 779.4,
+    "conversion_g_per_kwh_per_lb_per_mwh": 0.45359237,
+    "co2_g_per_kwh": 351.98767912,
+    "co2e_g_per_kwh": 353.529893178,
+    "interpretation": "Same order of magnitude only; not an acceptance threshold.",
+    "limits": "AZNM region differs from AZPS; unweighted hourly source mean differs from generation-weighted annual eGRID; source pollutant basis unresolved. No transmission-loss adjustment, marginal factor, or source rescaling applied."
+  },
+  "acceptance_complete": false,
+  "blockers": [
+    "Q05: CO2 versus CO2e conflicts within upstream calculation documentation.",
+    "Q05: source timestamp interval-start versus interval-end convention unverified.",
+    "Q05: dataset-specific redistribution rights unverified; repository has mixed licensing.",
+    "Annual eGRID magnitude comparison is regional only; AZPS factor alignment unverified.",
+    "F02 schemas/consumer validation and Ved independent 24-hour reproduction pending."
+  ],
+  "acquisition_date_utc": "2026-10-12",
+  "acquisition_note": "End-to-end module download repeated successfully; exact acquisition timestamp captured by module.",
+  "source_git_blob_sha1": "d5337a654e77c938d0909e76d56efdf3ad491e83",
+  "instruction_commit": "51d7ab8a57f8dc5dc3a7b3ad3139705e7e801c29",
+  "instruction_version": "1.6",
+  "reproduction_command": "python3 -m dc_sustainability.data.carbon_source 'data/raw/AZPS_NG_&_avgCI.csv' --download --report data/processed/d01-validation.json",
+  "first_24_hour_check": {
+    "method": "Primary assistant compared CSV timestamp offsets to 0..23 UTC, checked first/last rows and numerical range; not independent reproduction.",
+    "first": "(datetime.datetime(2022, 1, 1, 0, 0, tzinfo=datetime.timezone.utc), 631.6617084572886)",
+    "last": "(datetime.datetime(2022, 1, 1, 23, 0, tzinfo=datetime.timezone.utc), 541.7221627408993)",
+    "count": 24,
+    "min": 541.7221627408993,
+    "max": 672.2776436504105
+  },
+  "verification": {
+    "python": "3.9.6 (available local runtime; proposed 3.12 not verified)",
+    "pytest": "25 passed: 12 D01 tests and 13 existing provider mock tests",
+    "ruff": "0.17.0 lint and formatting checks passed for changed Python files",
+    "download": "Module acquisition and local validation both passed on pinned bytes",
+    "setup_validation": "Blocked: available Python lacks tomllib; no full setup success claimed",
+    "independent_reproduction": "Pending Ved"
+  },
+  "acceptance_review": {
+    "review_time_utc": "2026-10-12T19:38:53.807113+00:00",
+    "review_document": "data/D01_ACCEPTANCE_REVIEW.md",
+    "instruction_commit": "51d7ab8a57f8dc5dc3a7b3ad3139705e7e801c29",
+    "calculation_evidence": {
+      "comparison_repository_commit": "135f21862cb2427b3dbad690519bc05c5f6c539e",
+      "comparison_commit_date": "2026-04-03",
+      "actual_exporter_commit_verified": false,
+      "formula": "sum(generation[f] * factor[f]) / sum(generation[f])",
+      "factors": {
+        "WND": 11,
+        "SUN": 41,
+        "WAT": 24,
+        "OIL": 650,
+        "NG": 490,
+        "COL": 820,
+        "NUC": 12,
+        "OTH": 230
+      },
+      "factor_table_label": "gCO2eq/kWh",
+      "code_url": "https://github.com/facebookresearch/CarbonExplorer/blob/135f21862cb2427b3dbad690519bc05c5f6c539e/src/download_and_process.py#L93-L176",
+      "paper_url": "https://arxiv.org/html/2201.10036v3",
+      "paper_table": 2,
+      "rows_compared": 8760,
+      "max_absolute_difference": 0.0,
+      "inference": "Fixed-factor generation-mix CO2e-labeled emissions proxy; not direct measured hourly CO2.",
+      "unresolved": [
+        "Exact exporter provenance",
+        "GWP and lifecycle/system boundary"
+      ]
+    },
+    "interval_evidence": {
+      "eia_instructions_url": "https://www.eia.gov/survey/form/eia_930/instructions.pdf",
+      "historical_eia_context_url": "https://www.eia.gov/todayinenergy/detail.php?id=49216",
+      "upstream_extract_url": "https://github.com/facebookresearch/CarbonExplorer/blob/135f21862cb2427b3dbad690519bc05c5f6c539e/src/download_and_process.py#L107-L159",
+      "confirmed_eia_convention": "hour-ending UTC",
+      "inferred_csv_convention": "hour-ending if EIA labels preserved by export",
+      "exact_csv_convention_verified": false,
+      "current_helper_status": "Provisional interval-start only; do not use for accepted episodes",
+      "conditional_january_1_indices_if_hour_ending": [
+        8,
+        37
+      ]
+    },
+    "licensing_evidence": {
+      "eia_reuse_url": "https://www.eia.gov/about/copyrights_reuse.php",
+      "eia_status": "EIA information products reusable/distributable with requested source/date acknowledgment",
+      "carbonexplorer_license_url": "https://github.com/facebookresearch/CarbonExplorer/blob/135f21862cb2427b3dbad690519bc05c5f6c539e/LICENSE",
+      "carbonexplorer_license": "CC BY-NC 4.0",
+      "conditions": "Noncommercial use, attribution, license information and change indications; see full terms",
+      "derived_csv_license_applicability_verified": false
+    },
+    "f02_evidence": {
+      "adopted_schema_present_on_reviewed_main": false,
+      "interface_document_status": "Proposed blueprint 1.0",
+      "required_handoff": "Versioned CarbonFact examples, unit/model and interval representation, provenance IDs; independent reproduction and consumer tests"
+    },
+    "evidence_file_sha256": {
+      "CarbonExplorer/src/download_and_process.py": "6e1f124e251aad4a73dcf70ee0acbecdcf85032860607d9c515f4fdc855d0412",
+      "CarbonExplorer/LICENSE": "7c6858d0e71dc8b858255270ad4b5004e80b5b058bf5bbc408a28430d6ddbf4b",
+      "SustainDC/explore_ci.py": "03e8545aa21e285a2f967a10bb96b331528fe09684ea9900f377cfd85a6e1298"
+    }
+  }
+}
