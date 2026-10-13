@@ -224,14 +224,15 @@ _UNORDERED_SORT_KEYS: dict[str, Optional[str]] = {
 
 
 def _canonicalize_unordered(
-    value: Any, *, field_name: Optional[str] = None,
+    value: Any, 
+    *, 
+    field_name: Optional[str] = None,
     root_sort_keys: Optional[dict[str, str]] = None,
 ) -> Any:
     """Recursively sort only collections whose order is semantically irrelevant."""
     if isinstance(value, dict):
         normalized = {
-            key: _canonicalize_unordered(item, field_name=key)
-            for key, item in value.items()
+            key: _canonicalize_unordered(item, field_name=key) for key, item in value.items()
         }
         # Sort each unordered list at the point where its parent field is known.
         for key, item in tuple(normalized.items()):
@@ -700,13 +701,19 @@ class VisibleState(Versioned):
             PROPOSED_DECISION_SLOTS + PROPOSED_COMPLETION_SLOTS,
         )
         forecast_slots = [f.valid_slot for f in self.carbon_facts]
-        out_of_window = [slot for slot in forecast_slots if not self.current_slot <= slot < visible_end]
+        out_of_window = [
+            slot for slot in forecast_slots if not self.current_slot <= slot < visible_end
+        ]
         if out_of_window:
             raise ValueError(
                 "carbon forecasts must be current/future slots within the visible episode horizon: "
                 f"{sorted(out_of_window)}"
             )
-        bad_missing = [slot for slot in self.missing_carbon_slots if not self.current_slot <= slot < visible_end]
+        bad_missing = [
+            slot 
+            for slot in self.missing_carbon_slots 
+            if not self.current_slot <= slot < visible_end
+        ]
         if bad_missing:
             raise ValueError(
                 "missing carbon slots must be current/future slots within the visible episode horizon: "
@@ -735,7 +742,8 @@ class VisibleState(Versioned):
             constraint_ids=(),
         )
         projected_ids = tuple(
-            constraint.constraint_id for constraint in visible_constraints_for(provisional, snapshot)
+            constraint.constraint_id 
+            for constraint in visible_constraints_for(provisional, snapshot)
         )
         return cls(**{**provisional.model_dump(), "constraint_ids": projected_ids})
 
