@@ -1,0 +1,36 @@
+{
+  "backend": "hand-enumeration",
+  "backend_version": "n/a",
+  "bound_kg": null,
+  "certification_basis": "exhaustive enumeration of 12 feasible pairs",
+  "elapsed_s": 0.0,
+  "gap": null,
+  "input_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "kind": "visible",
+  "matching_work_job_ids": [
+    "J1",
+    "J2"
+  ],
+  "objective_kg": 48.4,
+  "offline_only": true,
+  "record_type": "SolverResult",
+  "schedule": [
+    {
+      "job_id": "J1",
+      "start_slot": 2
+    },
+    {
+      "job_id": "J2",
+      "start_slot": 4
+    }
+  ],
+  "schema_version": "1.0.0",
+  "solver_result_id": "SOLVE-HAND-1",
+  "status": "certified_optimal",
+  "termination": "exhaustive enumeration",
+  "tie_break": null,
+  "time_limit_s": null,
+  "tolerance": null,
+  "unresolved_reason": null,
+  "uses_future_arrivals": false
+}

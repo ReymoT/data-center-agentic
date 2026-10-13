@@ -1,0 +1,29 @@
+{
+  "check_id": "CHK-DEC-HAND1-00-2",
+  "episode_id": "EP-HAND1",
+  "errors": [
+    "missing capacity evidence"
+  ],
+  "evidence": [
+    {
+      "ids": [],
+      "kind": "capacity",
+      "status": "missing"
+    }
+  ],
+  "impact_claim_support": "not_assessed",
+  "performed": [],
+  "plan_hash": "efa92b4047cf1613e77070a5366996712b822f32a511f00751c9947fab597090",
+  "record_type": "CheckResult",
+  "schema_version": "1.0.0",
+  "skipped": [
+    {
+      "name": "capacity",
+      "reason": "no capacity constraint available"
+    }
+  ],
+  "slot": 0,
+  "state_version": 0,
+  "status": "error",
+  "violations": []
+}

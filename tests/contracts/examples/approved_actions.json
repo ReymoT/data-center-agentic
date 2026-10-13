@@ -1,0 +1,15 @@
+{
+  "check_id": "CHK-DEC-HAND1-00-1",
+  "episode_id": "EP-HAND1",
+  "plan_hash": "efa92b4047cf1613e77070a5366996712b822f32a511f00751c9947fab597090",
+  "record_type": "ApprovedActions",
+  "schema_version": "1.0.0",
+  "slot": 0,
+  "starts": [
+    {
+      "job_id": "J1",
+      "start_slot": 0
+    }
+  ],
+  "state_version": 0
+}

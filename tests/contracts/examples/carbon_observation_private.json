@@ -1,0 +1,21 @@
+{
+  "fact_id": "FACT-OBS-CI-s00",
+  "fact_kind": "observation",
+  "observed_at_utc": "2022-01-01T07:00:00Z",
+  "quality_status": "unvalidated",
+  "record_type": "CarbonObservation",
+  "schema_version": "1.0.0",
+  "semantics": {
+    "emissions_factor_type": "average",
+    "interval_convention": "unresolved",
+    "pollutant_basis": "unresolved",
+    "slot_mapping_status": "provisional"
+  },
+  "source_id": "SRC-HAND",
+  "source_sha256": null,
+  "unit": "g/kWh",
+  "valid_from_utc": null,
+  "valid_slot": 0,
+  "valid_to_utc": null,
+  "value": 500.0
+}

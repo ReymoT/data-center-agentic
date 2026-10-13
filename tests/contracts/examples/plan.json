@@ -1,0 +1,25 @@
+{
+  "abstentions": [],
+  "deferrals": [],
+  "episode_id": "EP-HAND1",
+  "evidence_ids": [
+    "CON-CAP-01",
+    "FACT-JOB-J1",
+    "FACT-JOB-J2"
+  ],
+  "record_type": "Plan",
+  "schema_version": "1.0.0",
+  "slot": 0,
+  "starts": [
+    {
+      "job_id": "J1",
+      "start_slot": 0
+    },
+    {
+      "job_id": "J2",
+      "start_slot": 2
+    }
+  ],
+  "state_version": 0,
+  "status": "proposed"
+}
