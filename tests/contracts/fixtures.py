@@ -23,6 +23,7 @@ SOURCE_ID = "SRC-HAND"
 
 
 def source() -> s.SourceRef:
+    """Return provenance for the team-authored synthetic hand-example fixtures."""
     return s.SourceRef(
         source_id=SOURCE_ID,
         path="tests/contracts/fixtures.py",
@@ -31,10 +32,12 @@ def source() -> s.SourceRef:
 
 
 def site(pue: float = 1.0) -> s.SiteConfig:
+    """Build SITE1 with 40 kW background load, hourly slots, and the supplied PUE."""
     return s.SiteConfig(site_id="SITE1", background_kw=40, pue=pue, slot_hours=1)
 
 
 def jobs() -> dict[str, s.Job]:
+    """Return the three hand-example jobs, including J3 with an infeasible deadline."""
     return {
         "J1": s.Job(
             job_id="J1",
@@ -67,6 +70,7 @@ def jobs() -> dict[str, s.Job]:
 def snapshot(
     capacity_kw: float = 100.0, include_capacity: bool = True, pue: float = 1.0
 ) -> s.ConstraintSnapshot:
+    """Build hand-example constraints with optional capacity evidence and configurable site PUE."""
     cons = [
         s.Constraint(
             constraint_id="CON-FRESH-01",
@@ -111,6 +115,7 @@ def snapshot(
 
 
 def semantics() -> s.CarbonSemantics:
+    """Return explicitly unresolved carbon semantics with a provisional slot mapping."""
     return s.CarbonSemantics(
         pollutant_basis="unresolved",
         interval_convention="unresolved",
@@ -120,6 +125,7 @@ def semantics() -> s.CarbonSemantics:
 
 
 def forecasts(issued_slot: int = 0) -> tuple[s.CarbonForecast, ...]:
+    """Build seven perfect-foresight synthetic forecasts issued at the requested slot."""
     issued = SLOT0_UTC + timedelta(hours=issued_slot)
     return tuple(
         s.CarbonForecast(
@@ -138,6 +144,7 @@ def forecasts(issued_slot: int = 0) -> tuple[s.CarbonForecast, ...]:
 
 
 def observations() -> tuple[s.CarbonObservation, ...]:
+    """Build seven private realized carbon observations from the synthetic hand series."""
     return tuple(
         s.CarbonObservation(
             fact_id=f"FACT-OBS-CI-s{i:02d}",
@@ -206,6 +213,7 @@ def plan(status: str = "proposed") -> s.Plan:
 
 
 def abstention_plan() -> s.Plan:
+    """Build a slot-4 proposal abstaining from J3 because of its infeasible deadline."""
     return s.Plan(
         episode_id=EPISODE_ID,
         slot=4,
@@ -218,6 +226,7 @@ def abstention_plan() -> s.Plan:
 
 
 def check_pass(p: s.Plan | None = None) -> s.CheckResult:
+    """Build a synthetic passing result bound to the supplied plan and capacity evidence."""
     p = p or plan()
     return s.CheckResult(
         check_id="CHK-DEC-HAND1-00-1",
@@ -243,6 +252,7 @@ def check_pass(p: s.Plan | None = None) -> s.CheckResult:
 
 
 def check_missing_capacity(p: s.Plan | None = None) -> s.CheckResult:
+    """Build an error result for the supplied plan with missing capacity evidence."""
     p = p or plan()
     return s.CheckResult(
         check_id="CHK-DEC-HAND1-00-2",
@@ -259,12 +269,14 @@ def check_missing_capacity(p: s.Plan | None = None) -> s.CheckResult:
 
 
 def approved_actions() -> s.ApprovedActions:
+    """Derive the hand plan's current-slot actions from its synthetic passing check."""
     return s.ApprovedActions.from_checked_plan(
         plan("approved"), check_pass(), expected_state_version=0
     )
 
 
 def decision_record() -> s.DecisionRecord:
+    """Build an executed greedy-A trace for J1 with checked stages and no model calls."""
     p, chk = plan(), check_pass()
     return s.DecisionRecord(
         decision_id="DEC-HAND1-00",
@@ -284,6 +296,7 @@ def decision_record() -> s.DecisionRecord:
 
 
 def solver_result() -> s.SolverResult:
+    """Return the hand-enumerated optimal reference schedule for J1 and J2."""
     return s.SolverResult(
         solver_result_id="SOLVE-HAND-1",
         kind="visible",
@@ -305,6 +318,7 @@ def solver_result() -> s.SolverResult:
 
 
 def episode_result() -> s.EpisodeResult:
+    """Build a 30-slot synthetic episode result with completed work and uncomputed totals."""
     load = {0: 40.0, 1: 40.0, 2: 30.0, 3: 30.0}
     return s.EpisodeResult(
         episode_id=EPISODE_ID,
@@ -331,6 +345,7 @@ def episode_result() -> s.EpisodeResult:
 
 
 def private_episode() -> s.PrivateEpisode:
+    """Build the private synthetic manifest with jobs, generator metadata, and observations."""
     return s.PrivateEpisode(
         episode_id=EPISODE_ID,
         scenario_id="hand-example",
@@ -356,6 +371,7 @@ def private_episode() -> s.PrivateEpisode:
 
 
 def policy_output() -> s.PolicyOutput:
+    """Wrap the hand plan in a greedy-A output with a template explanation and claim."""
     return s.PolicyOutput(
         system="greedy_a",
         output_status="ok",
@@ -378,6 +394,7 @@ def policy_output() -> s.PolicyOutput:
 
 
 def build_examples() -> dict[str, s.Record]:
+    """Return named synthetic records used to generate and validate committed JSON examples."""
     snap = snapshot()
     state = visible_state(snap)
     j = jobs()
@@ -403,6 +420,7 @@ def build_examples() -> dict[str, s.Record]:
 
 
 def main() -> None:
+    """Write all synthetic example records as sorted, indented JSON files in EXAMPLES_DIR."""
     EXAMPLES_DIR.mkdir(exist_ok=True)
     for name, rec in build_examples().items():
         (EXAMPLES_DIR / f"{name}.json").write_text(

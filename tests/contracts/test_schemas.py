@@ -14,17 +14,20 @@ JOB = dict(
 
 
 def job(**over) -> s.Job:
+    """Build a valid baseline job with supplied field overrides for contract tests."""
     return s.Job(**{**JOB, **over})
 
 
 # ---------------------------------------------------------------- 1. infeasible job is valid
 def test_infeasible_job_is_structurally_valid_and_serializable():
+    """Verify an impossible deadline retains negative slack and round-trips through JSON."""
     j = fx.jobs()["J3"]
     assert j.slack_slots == -1  # arrival 4 + duration 3 > deadline 6
     assert s.Job.from_json(j.to_json()) == j
 
 
 def test_even_deadline_before_arrival_stays_representable():
+    """Verify a deadline preceding arrival remains a structurally valid job."""
     assert job(arrival_slot=5, deadline_slot=2).slack_slots < 0
 
 
@@ -52,17 +55,20 @@ def test_even_deadline_before_arrival_stays_representable():
     ],
 )
 def test_job_rejects_invalid_field_values(field, value):
+    """Verify job fields reject invalid types, identifiers, and scalar ranges."""
     with pytest.raises(ValueError):
         job(**{field: value})
 
 
 def test_job_power_int_is_normalised_to_float():
+    """Verify integer power inputs are stored as floating-point values."""
     assert isinstance(job(power_kw=40).power_kw, float)
 
 
 # ---------------------------------------------------------------- 4. non-finite numbers
 @pytest.mark.parametrize("bad", [float("nan"), float("inf"), float("-inf")])
 def test_nonfinite_numbers_rejected(bad):
+    """Verify jobs, sites, and carbon forecasts reject NaN and infinite values."""
     with pytest.raises(ValueError):
         job(power_kw=bad)
     with pytest.raises(ValueError):
@@ -75,12 +81,14 @@ def test_nonfinite_numbers_rejected(bad):
 
 @pytest.mark.parametrize("token", ["NaN", "Infinity", "-Infinity"])
 def test_nonfinite_json_rejected(token):
+    """Verify nonfinite numeric tokens in JSON cannot bypass job validation."""
     text = fx.jobs()["J1"].to_json().replace('"power_kw":40.0', f'"power_kw":{token}')
     with pytest.raises(ValueError):
         s.Job.from_json(text)
 
 
 def test_from_jsonable_rejects_bool_and_float_slots():
+    """Verify decoded JSON preserves strict slot types and rejects nonfinite power."""
     data = fx.jobs()["J1"].to_jsonable()
     for bad in (True, 1.0):
         with pytest.raises(ValueError):
@@ -91,6 +99,7 @@ def test_from_jsonable_rejects_bool_and_float_slots():
 
 # ---------------------------------------------------------------- 3. duplicate ids
 def test_duplicate_ids_rejected():
+    """Verify state, snapshot, plan, forecast, and private job collections reject duplicates."""
     j = fx.jobs()
     snap = fx.snapshot()
     state = fx.visible_state(snap).model_dump()
@@ -130,6 +139,7 @@ def test_duplicate_ids_rejected():
 
 # ---------------------------------------------------------------- 5. strict action records
 def test_unexpected_fields_rejected_everywhere():
+    """Verify extra fields are rejected in exchanged records and nested action records."""
     for rec in (fx.plan(), fx.approved_actions(), fx.jobs()["J1"], fx.check_pass()):
         data = rec.to_jsonable()
         with pytest.raises(ValueError):
@@ -143,6 +153,7 @@ def test_unexpected_fields_rejected_everywhere():
 
 
 def test_approved_actions_only_current_slot_and_bound_to_checked_plan():
+    """Verify approval requires a passing matching check and selects only current starts."""
     p, chk = fx.plan("approved"), fx.check_pass()
     aa = s.ApprovedActions.from_checked_plan(p, chk, 0)
     assert [(a.job_id, a.start_slot) for a in aa.starts] == [("J1", 0)]  # J2@2 is an intention
@@ -166,6 +177,7 @@ def test_approved_actions_only_current_slot_and_bound_to_checked_plan():
 
 
 def test_backdated_and_unknown_job_starts_remain_representable_for_the_checker():
+    """Verify structural plans retain backdated and unknown-job starts for checker evaluation."""
     p = s.Plan(
         episode_id="EP-A",
         slot=3,
@@ -180,6 +192,7 @@ def test_backdated_and_unknown_job_starts_remain_representable_for_the_checker()
 
 
 def test_plan_status_excluded_from_hash_but_content_included():
+    """Verify plan hashes ignore status and start ordering but change with start content."""
     assert fx.plan("proposed").plan_hash == fx.plan("approved").plan_hash
     changed = s.Plan(
         **{**fx.plan().model_dump(), "starts": (s.PlannedStart(job_id="J1", start_slot=1),)}
@@ -190,6 +203,7 @@ def test_plan_status_excluded_from_hash_but_content_included():
 
 
 def test_job_cannot_be_started_and_deferred():
+    """Verify a plan rejects simultaneous start and deferral for the same job."""
     with pytest.raises(ValueError, match="both started"):
         s.Plan(
             episode_id="EP-A",
@@ -215,6 +229,7 @@ PRIVATE_FIELDS = [
 
 @pytest.mark.parametrize("field", PRIVATE_FIELDS)
 def test_visible_records_have_no_private_fields(field):
+    """Verify policy-visible records reject each private fixture field."""
     for rec in (fx.visible_state(), fx.jobs()["J1"], fx.forecasts()[0]):
         with pytest.raises(ValueError):
             type(rec).from_jsonable({**rec.to_jsonable(), field: "x"})
@@ -225,6 +240,7 @@ def test_visible_records_have_no_private_fields(field):
 
 
 def test_visible_serializations_contain_no_private_keys_or_values():
+    """Verify public examples serialize without private fixture keys or recognizable labels."""
     ex = fx.build_examples()
     private = {"private_episode", "carbon_observation_private"}
     for name, rec in ex.items():
@@ -237,6 +253,7 @@ def test_visible_serializations_contain_no_private_keys_or_values():
 
 
 def test_private_episode_does_carry_private_data_and_is_not_a_visible_state():
+    """Verify private metadata and observations cannot deserialize as a visible state."""
     pe = fx.private_episode()
     assert pe.split == "development" and len(pe.realized_carbon) == 7
     with pytest.raises(ValueError):
@@ -244,11 +261,13 @@ def test_private_episode_does_carry_private_data_and_is_not_a_visible_state():
 
 
 def test_assert_no_private_keys_finds_nested_leak():
+    """Verify the privacy guard finds forbidden keys inside nested mappings and lists."""
     with pytest.raises(ValueError, match="seed"):
         s.assert_no_private_keys({"a": [{"b": {"seed": 1}}]})
 
 
 def test_visible_state_carbon_facts_reject_observations():
+    """Verify realized observations cannot enter the policy-visible forecast collection."""
     obs = fx.observations()[0].to_jsonable()
     state = fx.visible_state().to_jsonable()
     state["carbon_facts"] = [obs]
@@ -260,12 +279,14 @@ def test_visible_state_carbon_facts_reject_observations():
     "bad", ["EP-heldout1", "EP-DEV1", "EP-test", "EP-seed7", "EP_1", "J1", "EP-"]
 )
 def test_episode_id_must_be_opaque_and_well_formed(bad):
+    """Verify malformed episode IDs and obvious split or seed labels are rejected."""
     with pytest.raises(ValueError):
         s.VisibleState(**{**fx.visible_state().model_dump(), "episode_id": bad})
 
 
 # ---------------------------------------------------------------- 7. observation vs forecast
 def test_forecast_requires_issue_time_and_observation_forbids_it():
+    """Verify forecast issue times and private observation timestamps remain separate fields."""
     f = fx.forecasts()[0].to_jsonable()
     del f["issued_at_utc"]
     with pytest.raises(ValueError, match="issued_at_utc"):
@@ -279,6 +300,7 @@ def test_forecast_requires_issue_time_and_observation_forbids_it():
 
 
 def test_fact_kind_has_no_default_confusion():
+    """Verify carbon record discriminators reject mismatched types and dispatch observations."""
     f = fx.forecasts()[0].to_jsonable()
     assert f["fact_kind"] == "forecast"
     with pytest.raises(ValueError):
@@ -290,6 +312,7 @@ def test_fact_kind_has_no_default_confusion():
 
 
 def test_forecast_needs_semantics_stated_explicitly():
+    """Verify forecasts require both carbon semantics and an explicit forecast kind."""
     f = fx.forecasts()[0].to_jsonable()
     del f["semantics"]
     with pytest.raises(ValueError):
@@ -301,6 +324,7 @@ def test_forecast_needs_semantics_stated_explicitly():
 
 
 def test_unresolved_q05_semantics_are_representable_but_not_overclaimed():
+    """Verify unresolved semantics cannot certify interval conventions or agreed slot mappings."""
     sem = fx.semantics()
     assert (sem.pollutant_basis, sem.interval_convention) == ("unresolved", "unresolved")
     with pytest.raises(ValueError, match="agreed"):
@@ -331,6 +355,7 @@ def test_unresolved_q05_semantics_are_representable_but_not_overclaimed():
 
 # ---------------------------------------------------------------- 8. units, sources, timestamps
 def test_required_units_and_sources():
+    """Verify forecasts require provenance and slot identifiers with the correct intensity unit."""
     f = fx.forecasts()[0].to_jsonable()
     for key in ("unit", "source_id", "valid_slot", "fact_id"):
         broken = {k: v for k, v in f.items() if k != key}
@@ -356,6 +381,7 @@ def test_required_units_and_sources():
     ],
 )
 def test_constraint_type_unit_and_applicability(ctype, unit, site, jobs):
+    """Verify each constraint uses the correct unit and an appropriate site or job target."""
     with pytest.raises(ValueError):
         s.Constraint(
             constraint_id="CON-X-1",
@@ -369,6 +395,7 @@ def test_constraint_type_unit_and_applicability(ctype, unit, site, jobs):
 
 
 def test_constraint_id_prefix_and_slot_limit_integrality():
+    """Verify constraint IDs need the CON prefix and slot limits must be integral."""
     base = dict(
         constraint_type="freshness",
         limit_value=2,
@@ -395,18 +422,21 @@ def test_constraint_id_prefix_and_slot_limit_integrality():
     ],
 )
 def test_malformed_or_non_utc_timestamps_rejected(bad):
+    """Verify forecast issue times reject malformed, naive, and nonzero-offset timestamps."""
     f = fx.forecasts()[0].to_jsonable()
     with pytest.raises(ValueError):
         s.CarbonForecast.from_jsonable({**f, "issued_at_utc": bad})
 
 
 def test_utc_timestamps_normalised_and_serialised_with_z():
+    """Verify zero-offset timestamps serialize with the canonical UTC Z suffix."""
     f = fx.forecasts()[0].to_jsonable()
     ok = s.CarbonForecast.from_jsonable({**f, "issued_at_utc": "2022-01-01T07:00:00+00:00"})
     assert ok.to_jsonable()["issued_at_utc"] == "2022-01-01T07:00:00Z"
 
 
 def test_invalid_interval_structure():
+    """Verify observation intervals require paired endpoints and positive duration."""
     base = fx.observations()[0].model_dump()
     sem = s.CarbonSemantics(
         pollutant_basis="unresolved",
@@ -422,6 +452,7 @@ def test_invalid_interval_structure():
 
 
 def test_site_and_job_structural_ranges():
+    """Verify sites reject PUE below one, negative background power, and zero slot duration."""
     with pytest.raises(ValueError):
         s.SiteConfig(site_id="S", background_kw=40, pue=0.9, slot_hours=1)  # PUE below 1
     with pytest.raises(ValueError):
@@ -433,16 +464,19 @@ def test_site_and_job_structural_ranges():
 # ---------------------------------------------------------------- versions
 @pytest.mark.parametrize("bad", ["2.0.0", "1.99.0", "0.9.0", "1.0", "v1", "", 1])
 def test_invalid_or_unsupported_schema_versions_rejected(bad):
+    """Verify malformed, incompatible, and newer schema versions fail deserialization."""
     with pytest.raises(ValueError):
         s.Job.from_jsonable({**fx.jobs()["J1"].to_jsonable(), "schema_version": bad})
 
 
 def test_older_compatible_minor_versions_accepted_only_if_not_newer():
+    """Verify the current schema version is accepted by job deserialization."""
     assert s.Job.from_jsonable({**fx.jobs()["J1"].to_jsonable(), "schema_version": "1.0.0"})
     assert s.SCHEMA_VERSION == "1.0.0"
 
 
 def test_parse_record_dispatch_and_unknown_type():
+    """Verify record dispatch rejects missing and unknown record types."""
     with pytest.raises(ValueError, match="record_type"):
         s.parse_record({"record_type": "Nope"})
     with pytest.raises(ValueError, match="record_type"):
@@ -452,6 +486,7 @@ def test_parse_record_dispatch_and_unknown_type():
 # ---------------------------------------------------------------- 9. round trips + committed examples
 @pytest.mark.parametrize("name", sorted(fx.build_examples()))
 def test_every_example_round_trips_with_stable_names_and_version(name):
+    """Verify examples preserve envelopes, record equality, JSON, and hashes across round trips."""
     rec = fx.build_examples()[name]
     data = rec.to_jsonable()
     assert data["schema_version"] == s.SCHEMA_VERSION
@@ -464,6 +499,7 @@ def test_every_example_round_trips_with_stable_names_and_version(name):
 
 @pytest.mark.parametrize("name", sorted(fx.build_examples()))
 def test_committed_example_files_match_builders(name):
+    """Verify committed JSON examples equal their builders and deserialize to the same records."""
     path = Path(fx.EXAMPLES_DIR) / f"{name}.json"
     assert path.exists(), "run: python -m tests.contracts.fixtures"
     assert json.loads(path.read_text()) == fx.build_examples()[name].to_jsonable()
@@ -472,6 +508,7 @@ def test_committed_example_files_match_builders(name):
 
 # ---------------------------------------------------------------- 10. context hashing
 def test_context_hash_deterministic_and_order_independent():
+    """Verify context and state hashes remain stable when unordered collections are reversed."""
     snap, state = fx.snapshot(), fx.visible_state()
     a = s.Context.build(state, snap, "flat")
     b = s.Context.build(state, snap, "flat")
@@ -493,6 +530,7 @@ def test_context_hash_deterministic_and_order_independent():
 
 
 def test_graph_and_flat_representations_share_one_content_hash():
+    """Verify graph and flat contexts carry identical canonical content hashes."""
     snap, state = fx.snapshot(), fx.visible_state()
     graph = s.Context.build(state, snap, "graph")
     flat = s.Context.build(state, snap, "flat")
@@ -501,6 +539,7 @@ def test_graph_and_flat_representations_share_one_content_hash():
 
 
 def test_context_hash_changes_when_a_fact_or_constraint_changes():
+    """Verify capacity or visible-state changes alter the context content hash."""
     state = fx.visible_state()
     base = s.Context.build(state, fx.snapshot(), "flat").content_hash
     cap70 = fx.snapshot(capacity_kw=70.0)
@@ -510,6 +549,7 @@ def test_context_hash_changes_when_a_fact_or_constraint_changes():
 
 
 def test_context_detects_tampered_hash_and_mismatched_inputs():
+    """Verify context validation rejects tampered hashes and inconsistent snapshot references."""
     ctx = s.Context.build(fx.visible_state(), fx.snapshot(), "flat").to_jsonable()
     ctx["content_hash"] = "f" * 64
     with pytest.raises(ValueError, match="content_hash"):
@@ -525,6 +565,7 @@ def test_context_detects_tampered_hash_and_mismatched_inputs():
 
 
 def test_context_evidence_ids_cover_visible_records_only():
+    """Verify evidence IDs cover visible facts and exclude future jobs and observations."""
     ids = set(s.Context.build(fx.visible_state(), fx.snapshot(), "flat").content.evidence_ids)
     assert {"FACT-JOB-J1", "FACT-JOB-J2", "FACT-CI-s00", "CON-CAP-01", "FACT-SITE-BG"} <= ids
     assert not any(i.startswith("FACT-OBS") for i in ids) and "FACT-JOB-J3" not in ids
@@ -532,6 +573,7 @@ def test_context_evidence_ids_cover_visible_records_only():
 
 # ---------------------------------------------------------------- visible state invariants
 def test_visible_state_invariants():
+    """Verify visible job timing and disjoint present/missing forecast slots."""
     st = fx.visible_state().model_dump()
     j = fx.jobs()
     with pytest.raises(ValueError, match="not arrived"):  # future arrival cannot be 'waiting'
@@ -549,6 +591,7 @@ def test_visible_state_invariants():
 
 
 def test_running_occupancy_is_half_open():
+    """Verify running-job load includes the start slot and excludes the end slot."""
     j = fx.jobs()
     st = s.VisibleState(
         **{
@@ -561,6 +604,7 @@ def test_running_occupancy_is_half_open():
 
 
 def test_visible_state_rejects_running_jobs_that_have_already_ended():
+    """Verify a running job must still occupy the visible state's current slot."""
     j = fx.jobs()["J1"]  # starts at 0, duration 2, exclusive end 2
     base = fx.visible_state(current_slot=2).model_dump()
     with pytest.raises(ValueError, match="must still occupy the current slot"):
@@ -574,6 +618,7 @@ def test_visible_state_rejects_running_jobs_that_have_already_ended():
 
 
 def test_visible_state_rejects_invalid_completed_job_intervals():
+    """Verify completed jobs have positive intervals ending by the current slot."""
     base = fx.visible_state(current_slot=2).model_dump()
     bad_intervals = (
         s.CompletedJobView(job_id="J9", start_slot=2, end_slot=2),
@@ -599,6 +644,7 @@ def test_visible_state_rejects_invalid_completed_job_intervals():
 
 
 def test_missing_forecast_slots_are_explicit_not_fabricated():
+    """Verify missing forecast slots are retained explicitly without invented carbon values."""
     st = s.VisibleState(
         **{
             **fx.visible_state().model_dump(),
@@ -611,6 +657,7 @@ def test_missing_forecast_slots_are_explicit_not_fabricated():
 
 # ---------------------------------------------------------------- capacity evidence (K03 groundwork)
 def test_capacity_is_a_single_authoritative_constraint_and_absence_is_not_unlimited():
+    """Verify capacity comes only from its constraint and missing evidence raises an error."""
     assert fx.snapshot().capacity_kw == 100.0
     assert fx.snapshot(capacity_kw=70.0).capacity_kw == 70.0
     with pytest.raises(s.MissingEvidenceError):
@@ -619,6 +666,7 @@ def test_capacity_is_a_single_authoritative_constraint_and_absence_is_not_unlimi
 
 
 def test_snapshot_rejects_unknown_site_or_source():
+    """Verify snapshot constraints reference the snapshot site and known provenance sources."""
     snap = fx.snapshot().model_dump()
     bad = {**snap["constraints"][0], "applies_to_site": "OTHER"}
     with pytest.raises(ValueError, match="unknown site"):
@@ -630,6 +678,7 @@ def test_snapshot_rejects_unknown_site_or_source():
 
 # ---------------------------------------------------------------- check results
 def test_check_result_consistency_rules():
+    """Verify verdicts agree with check outcomes, violations, errors, and capacity evidence."""
     p = fx.plan()
     base = dict(
         check_id="CHK-1",
@@ -699,6 +748,7 @@ def test_check_result_consistency_rules():
 
 
 def test_feasibility_and_impact_claim_support_are_separate_fields():
+    """Verify a feasible plan can still have unsupported impact claims."""
     chk = fx.check_pass()
     unsupported = s.CheckResult(
         **{**chk.model_dump(), "impact_claim_support": "unsupported", "evidence": chk.evidence + ()}
@@ -708,6 +758,7 @@ def test_feasibility_and_impact_claim_support_are_separate_fields():
 
 # ---------------------------------------------------------------- decision records
 def test_decision_record_never_implies_passing_stages():
+    """Verify absent or unchecked proposal stages never imply a passing check."""
     rec = fx.decision_record()
     assert rec.repaired is None and rec.fallback is None
     assert set(rec.not_applicable_stages) == {"repaired", "fallback"}
@@ -716,6 +767,7 @@ def test_decision_record_never_implies_passing_stages():
 
 
 def test_decision_record_execution_gate_consistency():
+    """Verify execution requires a passing matching gate and consistent stage applicability."""
     d = fx.decision_record().model_dump()
     with pytest.raises(ValueError, match="passing execution_check"):
         s.DecisionRecord(**{**d, "execution_check": None})
@@ -733,6 +785,7 @@ def test_decision_record_execution_gate_consistency():
 
 
 def test_decision_record_numbers_validated():
+    """Verify decision metrics reject negative, nonfinite, Boolean, and fractional values."""
     d = fx.decision_record().model_dump()
     for key, bad in (
         ("latency_ms", -1.0),
@@ -746,6 +799,7 @@ def test_decision_record_numbers_validated():
 
 
 def test_policy_output_envelope():
+    """Verify output status controls plan presence and systems use supported identifiers."""
     with pytest.raises(ValueError, match="requires a plan"):
         s.PolicyOutput(system="plain_llm", output_status="ok")
     with pytest.raises(ValueError, match="may only accompany"):
@@ -759,6 +813,7 @@ def test_policy_output_envelope():
 
 
 def test_explanation_claim_value_needs_unit_and_unique_ids():
+    """Verify numeric claims require units and explanation claim IDs remain unique."""
     with pytest.raises(ValueError, match="together"):
         s.Claim(claim_id="C1", text="x", value=1.0)
     c = s.Claim(claim_id="C1", text="x")
@@ -768,11 +823,13 @@ def test_explanation_claim_value_needs_unit_and_unique_ids():
 
 # ---------------------------------------------------------------- solver results
 def solver(**over):
+    """Build a solver result with supplied overrides for status and certification tests."""
     base = fx.solver_result().model_dump()
     return s.SolverResult(**{**base, **over})
 
 
 def test_solver_statuses_are_distinct_and_never_inferred_from_timeouts():
+    """Verify uncertified solver statuses require reasons and cannot carry certified output."""
     assert solver().status == "certified_optimal"
     inf = solver(
         status="certified_infeasible",
@@ -798,6 +855,7 @@ def test_solver_statuses_are_distinct_and_never_inferred_from_timeouts():
 
 
 def test_solver_certification_and_visibility_rules():
+    """Verify solver certificates, schedules, and future-arrival access match the result kind."""
     with pytest.raises(ValueError, match="certification_basis"):
         solver(certification_basis=None)
     with pytest.raises(ValueError, match="certified_optimal requires"):
@@ -818,6 +876,7 @@ def test_solver_certification_and_visibility_rules():
 
 # ---------------------------------------------------------------- episode results
 def test_episode_result_shape_and_partitions():
+    """Verify episode slots, phases, job outcomes, counts, and completed-work definitions."""
     r = fx.episode_result().model_dump()
     with pytest.raises(ValueError, match="contiguous"):
         s.EpisodeResult(**{**r, "slots": r["slots"][:-1]})
@@ -835,6 +894,7 @@ def test_episode_result_shape_and_partitions():
 
 
 def test_extra_fields_cannot_smuggle_calculations_into_slot_records():
+    """Verify slot records reject undeclared calculation fields."""
     with pytest.raises(ValueError):
         s.SlotRecord(
             slot=0, phase="decision", job_load_kw=0, background_load_kw=40, emissions_factor=1.2
@@ -843,6 +903,7 @@ def test_extra_fields_cannot_smuggle_calculations_into_slot_records():
 # ---------------------------------------------------------------- additional F02 review regressions
 
 def test_policy_context_does_not_leak_constraints_for_future_jobs():
+    """Verify context and state omit constraints identifying jobs that have not arrived."""
     snap = fx.snapshot()
     state = fx.visible_state(snap)
     context = s.Context.build(state, snap, "flat")
@@ -854,6 +915,7 @@ def test_policy_context_does_not_leak_constraints_for_future_jobs():
 
 
 def test_job_constraint_becomes_visible_after_job_arrives():
+    """Verify an arrived job exposes its deadline constraint and evidence ID."""
     snap = fx.snapshot()
     state = fx.visible_state(
         snap,
@@ -868,6 +930,7 @@ def test_job_constraint_becomes_visible_after_job_arrives():
 
 
 def test_context_contains_referenced_source_provenance():
+    """Verify context retains source records and their redistribution status."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     source_ids = {source.source_id for source in context.content.sources}
     assert "SRC-HAND" in source_ids
@@ -875,6 +938,7 @@ def test_context_contains_referenced_source_provenance():
 
 
 def test_checked_plan_rejects_check_from_different_episode_or_slot():
+    """Verify action approval rejects a check bound to another episode or slot."""
     plan = fx.plan("approved")
     check = fx.check_pass(plan)
     with pytest.raises(ValueError, match="episode"):
@@ -892,6 +956,7 @@ def test_checked_plan_rejects_check_from_different_episode_or_slot():
 
 
 def test_decision_record_rejects_execution_check_from_different_episode_or_slot():
+    """Verify execution checks match the decision record's episode and slot."""
     record = fx.decision_record()
     bad_episode_check = record.execution_check.model_copy(update={"episode_id": "EP-OTHER"})
     with pytest.raises(ValueError, match="episode"):
@@ -906,6 +971,7 @@ def test_decision_record_rejects_execution_check_from_different_episode_or_slot(
 
 
 def test_versioned_json_deserialization_requires_explicit_envelope():
+    """Verify JSON text and decoded objects require explicit record type and schema version."""
     data = fx.jobs()["J1"].to_jsonable()
     missing_type = dict(data)
     del missing_type["record_type"]
@@ -922,12 +988,14 @@ def test_versioned_json_deserialization_requires_explicit_envelope():
 
 
 def test_schema_version_rejects_trailing_newline():
+    """Verify schema version parsing rejects trailing data after the semantic version."""
     data = fx.jobs()["J1"].to_jsonable()
     with pytest.raises(ValueError, match="schema_version"):
         s.Job.from_jsonable({**data, "schema_version": "1.0.0\n"})
 
 
 def test_nested_unordered_constraint_jobs_hash_identically():
+    """Verify nested job applicability lists are treated as unordered during hashing."""
     c1 = s.Constraint(
         constraint_id="CON-NF-J1-J2",
         constraint_type="nonflexible",
@@ -951,6 +1019,7 @@ def test_nested_unordered_constraint_jobs_hash_identically():
 
 
 def test_solver_schedule_and_per_slot_job_id_sets_hash_identically_when_reordered():
+    """Verify schedule and per-slot job ID ordering does not affect canonical hashes."""
     result = fx.solver_result()
     reversed_schedule = s.SolverResult(
         **{
@@ -984,6 +1053,7 @@ def test_solver_schedule_and_per_slot_job_id_sets_hash_identically_when_reordere
 
 
 def test_unordered_episode_job_id_collections_hash_identically():
+    """Verify reversing completed-job IDs preserves the episode result hash."""
     result = fx.episode_result()
     reordered = s.EpisodeResult(
         **{
@@ -995,6 +1065,7 @@ def test_unordered_episode_job_id_collections_hash_identically():
 
 
 def test_plan_future_intentions_excludes_backdated_starts():
+    """Verify future intentions include only starts strictly after the decision slot."""
     plan = s.Plan(
         episode_id="EP-A",
         slot=3,
@@ -1009,6 +1080,7 @@ def test_plan_future_intentions_excludes_backdated_starts():
 
 
 def test_context_rejects_conflicting_job_and_deadline_constraint():
+    """Verify context construction rejects contradictory job and constraint deadlines."""
     snap = fx.snapshot()
     altered = tuple(
         s.Constraint(**{**c.model_dump(), "limit_value": 5})
@@ -1025,12 +1097,14 @@ def test_context_rejects_conflicting_job_and_deadline_constraint():
 
 
 def test_constraint_snapshot_rejects_missing_source_records():
+    """Verify snapshot constraints cannot omit their referenced provenance records."""
     snap = fx.snapshot()
     with pytest.raises(ValueError, match="unknown sources"):
         s.ConstraintSnapshot(**{**snap.model_dump(), "sources": ()})
 
 
 def test_context_rejects_visible_fact_with_unresolved_source_reference():
+    """Verify context construction rejects forecasts referencing unavailable source records."""
     snap = fx.snapshot()
     forecasts = tuple(
         s.CarbonForecast(**{**f.model_dump(), "source_id": "SRC-MISSING"})
@@ -1043,6 +1117,7 @@ def test_context_rejects_visible_fact_with_unresolved_source_reference():
 
 
 def test_decision_record_rejects_execution_check_for_unrecorded_plan():
+    """Verify execution checks must identify a plan recorded in a proposal stage."""
     record = fx.decision_record()
     bad_check = record.execution_check.model_copy(update={"plan_hash": "f" * 64})
     with pytest.raises(ValueError, match="recorded stage plan"):
@@ -1050,6 +1125,7 @@ def test_decision_record_rejects_execution_check_for_unrecorded_plan():
 
 
 def test_deserialized_context_cannot_drop_source_provenance_or_evidence_ids():
+    """Verify rehashed context payloads still require complete provenance and evidence IDs."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     data = context.to_jsonable()
 
@@ -1071,6 +1147,7 @@ def test_deserialized_context_cannot_drop_source_provenance_or_evidence_ids():
 
 
 def test_deserialized_context_rejects_hidden_job_constraint_even_with_rehashed_content():
+    """Verify recomputing a context hash cannot expose a hidden job's constraint."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     data = context.to_jsonable()
     hidden_constraint = next(
@@ -1086,6 +1163,7 @@ def test_deserialized_context_rejects_hidden_job_constraint_even_with_rehashed_c
 
 
 def test_context_rejects_unreferenced_source_records_that_could_leak_private_metadata():
+    """Verify rehashed contexts reject unrelated sources that could disclose private metadata."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     data = context.to_jsonable()
     extra_source = fx.source().model_dump(mode="json")
@@ -1100,6 +1178,7 @@ def test_context_rejects_unreferenced_source_records_that_could_leak_private_met
 
 
 def test_context_content_rejects_duplicate_nested_identifiers():
+    """Verify context content rejects duplicate nested source IDs."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     content = context.content.model_dump()
     content["sources"] = context.content.sources + context.content.sources
@@ -1109,6 +1188,7 @@ def test_context_content_rejects_duplicate_nested_identifiers():
 
 
 def test_visible_state_from_snapshot_projects_only_currently_visible_constraint_ids():
+    """Verify snapshot-based state construction projects constraints for visible jobs only."""
     snap = fx.snapshot()
     state = s.VisibleState.from_snapshot(
         snap,
@@ -1124,6 +1204,7 @@ def test_visible_state_from_snapshot_projects_only_currently_visible_constraint_
 
 
 def test_context_rejects_constraint_ids_copied_from_the_full_snapshot():
+    """Verify context construction rejects state IDs copied from hidden snapshot constraints."""
     snapshot = fx.snapshot()
     state = fx.visible_state(snapshot)
     leaked_state = s.VisibleState(
@@ -1140,6 +1221,7 @@ def test_context_rejects_constraint_ids_copied_from_the_full_snapshot():
 
 
 def test_visible_state_rejects_past_or_out_of_episode_carbon_slots():
+    """Verify forecast and missing-slot records stay within the visible episode horizon."""
     state = fx.visible_state()
     with pytest.raises(ValueError, match="visible episode horizon"):
         s.VisibleState(
@@ -1155,6 +1237,7 @@ def test_visible_state_rejects_past_or_out_of_episode_carbon_slots():
 
 
 def test_passing_check_requires_every_core_safety_check_and_traceable_capacity():
+    """Verify passing checks require every core check and constraint-linked capacity evidence."""
     baseline = fx.check_pass().to_jsonable()
     baseline["performed"] = [
         check for check in baseline["performed"] if check["name"] != "nonflexible"
@@ -1172,6 +1255,7 @@ def test_passing_check_requires_every_core_safety_check_and_traceable_capacity()
 
 
 def test_constraint_snapshot_rejects_multiple_capacity_limits():
+    """Verify a snapshot rejects multiple capacity constraints even with distinct IDs."""
     snap = fx.snapshot()
     capacity = next(item for item in snap.constraints if item.constraint_type == "capacity")
     second = s.Constraint(
@@ -1184,6 +1268,7 @@ def test_constraint_snapshot_rejects_multiple_capacity_limits():
 
 
 def test_deserialized_context_rejects_conflicting_job_constraint():
+    """Verify rehashed deserialized context still rejects contradictory job constraints."""
     context = s.Context.build(fx.visible_state(), fx.snapshot(), "flat")
     data = context.to_jsonable()
     changed = []
@@ -1199,6 +1284,7 @@ def test_deserialized_context_rejects_conflicting_job_constraint():
 
 
 def test_decision_record_rejects_stage_plan_from_another_episode_or_slot():
+    """Verify proposal stages match the decision episode and slot even when execution is blocked."""
     record = fx.decision_record()
     original = record.model_dump()
     for changes in (
@@ -1226,6 +1312,7 @@ def test_decision_record_rejects_stage_plan_from_another_episode_or_slot():
 def test_execution_recheck_can_use_a_newer_state_version_for_the_same_slot():
     # The plan was proposed at version 0. The execution gate rechecks it against version 1
     # before applying, then binds ApprovedActions to that exact current version.
+    """Verify execution can use a newer same-slot check while actions bind to its state version."""
     plan = fx.plan("approved")
     original_check = fx.check_pass(plan)
     latest_check = s.CheckResult.from_jsonable(
@@ -1254,6 +1341,7 @@ def test_execution_recheck_can_use_a_newer_state_version_for_the_same_slot():
 
 
 def test_executed_trace_must_record_all_and_only_approved_current_starts():
+    """Verify an executed trace cannot omit any checked current-slot starts."""
     plan = s.Plan(
         episode_id=fx.EPISODE_ID,
         slot=0,
@@ -1283,6 +1371,7 @@ def test_executed_trace_must_record_all_and_only_approved_current_starts():
 def test_accepted_noop_step_can_be_recorded_as_executed():
     # The clock/running work advances on an accepted empty action set. A plan with only
     # future intentions has no current starts, but the checked step itself can execute.
+    """Verify a passing plan with future starts only can record execution with no current starts."""
     p = s.Plan(
         episode_id=fx.EPISODE_ID,
         slot=0,

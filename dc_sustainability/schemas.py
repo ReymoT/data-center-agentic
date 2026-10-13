@@ -70,6 +70,7 @@ class MissingEvidenceError(ContractError):
 
 # --------------------------------------------------------------------------- scalar types
 def _finite(value: float) -> float:
+    """Normalize a validated finite number to float, including negative zero."""
     return float(value) + 0.0  # int -> float, -0.0 -> 0.0
 
 
@@ -96,6 +97,7 @@ _SPLIT_TOKENS = ("heldout", "held", "dev", "train", "test", "split", "seed", "or
 
 
 def _episode_safe(value: str) -> str:
+    """Reject episode IDs containing obvious split, seed, or oracle labels."""
     low = value.lower().replace("_", "").replace("-", "")
     for token in _SPLIT_TOKENS:
         if token in low:
@@ -114,6 +116,7 @@ EpisodeId = Annotated[
 
 
 def _parse_utc(value: Any) -> datetime:
+    """Parse a datetime or ISO timestamp and require an explicit zero UTC offset."""
     if isinstance(value, datetime):
         parsed = value
     elif isinstance(value, str):
@@ -157,6 +160,7 @@ _CONSTRAINT_UNITS = {
 # --------------------------------------------------------------------------- base classes
 def _check_version(value: str) -> str:
     # fullmatch rejects trailing newlines and any other data beyond MAJOR.MINOR.PATCH.
+    """Require a semantic version in the supported major and no newer than this schema."""
     match = _VERSION_RE.fullmatch(value)
     if not match:
         raise ValueError(f"invalid schema_version {value!r}; expected MAJOR.MINOR.PATCH")
@@ -173,6 +177,7 @@ SchemaVersion = Annotated[str, Strict(), AfterValidator(_check_version)]
 
 
 def _get(obj: Any, dotted: str) -> Any:
+    """Look up a nested mapping value using a dot-separated key path."""
     for part in dotted.split("."):
         obj = obj[part]
     return obj
@@ -253,12 +258,14 @@ def _canonicalize_unordered(
 
 
 def canonical_json(data: Any) -> str:
+    """Serialize data as compact, sorted UTF-8-friendly JSON, rejecting nonfinite numbers."""
     return json.dumps(
         data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
     )
 
 
 def sha256_hex(data: Any) -> str:
+    """Return the SHA-256 hex digest of the canonical JSON encoding of data."""
     return hashlib.sha256(canonical_json(data).encode("utf-8")).hexdigest()
 
 
@@ -272,22 +279,27 @@ class Record(BaseModel):
     _HASH_EXCLUDE: ClassVar[frozenset] = frozenset()
 
     def to_jsonable(self) -> dict:
+        """Return JSON-compatible field values without excluding or reordering collections."""
         return self.model_dump(mode="json")
 
     def canonical_dict(self) -> dict:
+        """Normalize unordered collections and omit fields excluded from content identity."""
         data = self.to_jsonable()
         for name in self._HASH_EXCLUDE:
             data.pop(name, None)
         return _canonicalize_unordered(data, root_sort_keys=self._SORT_KEYS)
 
     def canonical_hash(self) -> str:
+        """Hash the normalized record content with SHA-256."""
         return sha256_hex(self.canonical_dict())
 
     def to_json(self) -> str:
+        """Serialize all record fields as compact JSON with sorted object keys."""
         return canonical_json(self.to_jsonable())
 
     @classmethod
     def from_json(cls, text: str):
+        """Construct this record from JSON text using strict field validation."""
         return cls.model_validate_json(text)
 
     @classmethod
@@ -312,6 +324,7 @@ class Versioned(Record):
 
     @classmethod
     def _require_envelope(cls, data: Any) -> None:
+        """Require an object with this record type and an explicit schema version."""
         if not isinstance(data, dict):
             raise ContractError("versioned record JSON must be an object")
         expected_type = cls.model_fields["record_type"].default
@@ -326,6 +339,7 @@ class Versioned(Record):
 
     @classmethod
     def from_json(cls, text: str):
+        """Validate JSON text after requiring its explicit version and type envelope."""
         try:
             data = json.loads(text)
         except (TypeError, json.JSONDecodeError) as exc:
@@ -335,6 +349,7 @@ class Versioned(Record):
 
     @classmethod
     def from_jsonable(cls, data: dict):
+        """Validate decoded JSON with an explicit envelope and strict scalar types."""
         cls._require_envelope(data)
         try:
             text = json.dumps(data, allow_nan=False)
@@ -356,6 +371,7 @@ def assert_no_private_keys(data: Any, *, path: str = "$") -> None:
 
 
 def _unique(values, what: str) -> None:
+    """Raise ValueError listing duplicate values in a named collection."""
     seen, dups = set(), set()
     for v in values:
         (dups if v in seen else seen).add(v)
@@ -399,6 +415,7 @@ class Constraint(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate units, exclusive site/job applicability, limit ranges, and unique job IDs."""
         if self.unit != _CONSTRAINT_UNITS[self.constraint_type]:
             raise ValueError(
                 f"{self.constraint_type} constraint requires unit "
@@ -438,6 +455,7 @@ class ConstraintSnapshot(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate unique IDs, source/site references, and at most one capacity constraint."""
         _unique([c.constraint_id for c in self.constraints], "constraint ids")
         _unique([s.source_id for s in self.sources], "source ids")
         capacity_constraints = [c for c in self.constraints if c.constraint_type == "capacity"]
@@ -453,10 +471,12 @@ class ConstraintSnapshot(Versioned):
         return self
 
     def constraints_of(self, constraint_type: str) -> tuple[Constraint, ...]:
+        """Return snapshot constraints matching the requested type in their stored order."""
         return tuple(c for c in self.constraints if c.constraint_type == constraint_type)
 
     @property
     def capacity_kw(self) -> float:
+        """Return the single capacity limit in kW, raising if capacity evidence is absent."""
         caps = self.constraints_of("capacity")
         if not caps:
             raise MissingEvidenceError(
@@ -521,6 +541,7 @@ class CarbonSemantics(Record):
 
     @model_validator(mode="after")
     def _check(self):
+        """Reject an agreed slot mapping when its interval convention is still unresolved."""
         if self.slot_mapping_status == "agreed" and self.interval_convention == "unresolved":
             raise ValueError(
                 "slot mapping cannot be 'agreed' while interval convention is unresolved"
@@ -532,6 +553,7 @@ QualityStatus = Literal["validated", "unvalidated", "suspect"]
 
 
 def _interval_ok(start: Optional[datetime], end: Optional[datetime]) -> None:
+    """Require both optional interval endpoints together and a strictly increasing interval."""
     if (start is None) != (end is None):
         raise ValueError("valid_from_utc and valid_to_utc must be given together")
     if start is not None and end <= start:
@@ -557,6 +579,7 @@ class CarbonObservation(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate interval endpoints and require stated semantics for interval or slot mapping."""
         _interval_ok(self.valid_from_utc, self.valid_to_utc)
         if self.valid_from_utc is not None and self.semantics.interval_convention == "unresolved":
             raise ValueError("a valid UTC interval requires a resolved interval convention")
@@ -590,6 +613,7 @@ class CarbonForecast(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate the optional interval and require a provisional or agreed slot mapping."""
         _interval_ok(self.valid_from_utc, self.valid_to_utc)
         if self.valid_from_utc is not None and self.semantics.interval_convention == "unresolved":
             raise ValueError("a valid UTC interval requires a resolved interval convention")
@@ -632,6 +656,7 @@ class VisibleState(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate unique IDs, job timing, and forecast availability within the visible horizon."""
         ids = (
             [j.job_id for j in self.waiting_jobs]
             + [r.job.job_id for r in self.running_jobs]
@@ -790,6 +815,7 @@ class ContextContent(Record):
 
     @model_validator(mode="after")
     def _check_unique(self):
+        """Reject duplicate job, forecast, constraint, source, and evidence identifiers."""
         job_ids = (
             [job.job_id for job in self.waiting_jobs]
             + [running.job.job_id for running in self.running_jobs]
@@ -864,6 +890,7 @@ class Context(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate the content hash, visibility, provenance, evidence IDs, and job consistency."""
         if self.content_hash != self.content.canonical_hash():
             raise ValueError("content_hash does not match canonical content")
         assert_no_private_keys(self.content.to_jsonable())
@@ -939,6 +966,7 @@ class Context(Versioned):
         representation: Literal["graph", "flat"],
         presentation_sha256: Optional[str] = None,
     ) -> "Context":
+        """Build hashed policy context from matching inputs with visible evidence only."""
         if state.constraint_snapshot_id != snapshot.snapshot_id:
             raise ContractError("state and constraint snapshot ids differ")
         if state.site != snapshot.site:
@@ -1046,6 +1074,7 @@ class Plan(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Reject duplicate starts/deferrals and jobs both started and deferred or abstained."""
         _unique([s.job_id for s in self.starts], "started job ids")
         _unique([d.job_id for d in self.deferrals], "deferred job ids")
         started = {s.job_id for s in self.starts}
@@ -1091,6 +1120,7 @@ class ApprovedActions(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Require unique approved job IDs and starts in the action set's current slot."""
         _unique([s.job_id for s in self.starts], "approved job ids")
         bad = [s.job_id for s in self.starts if s.start_slot != self.slot]
         if bad:
@@ -1141,6 +1171,7 @@ class Claim(Record):
 
     @model_validator(mode="after")
     def _check(self):
+        """Require a numeric claim value and its unit to be supplied together."""
         if (self.value is None) != (self.unit is None):
             raise ValueError("claim value and unit must be given together")
         return self
@@ -1154,6 +1185,7 @@ class Explanation(Record):
 
     @model_validator(mode="after")
     def _check(self):
+        """Reject duplicate claim IDs within the explanation."""
         _unique([c.claim_id for c in self.claims], "claim ids")
         return self
 
@@ -1170,6 +1202,7 @@ class PolicyOutput(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Require a plan exactly when the output status is successful."""
         if self.output_status == "ok" and self.plan is None:
             raise ValueError("output_status 'ok' requires a plan")
         if self.output_status != "ok" and self.plan is not None:
@@ -1242,6 +1275,7 @@ class CheckResult(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate verdicts and performed checks, requiring traceable capacity for passes."""
         _unique([p.name for p in self.performed], "performed checks")
         _unique([e.kind for e in self.evidence], "evidence kinds")
         outcomes = {p.outcome for p in self.performed}
@@ -1302,6 +1336,7 @@ class StageRecord(Record):
 
     @model_validator(mode="after")
     def _check(self):
+        """Bind an optional stage check to its plan hash, episode, slot, and state version."""
         if self.check is not None:
             if self.check.plan_hash != self.plan.plan_hash:
                 raise ValueError("stage check refers to a different plan")
@@ -1343,6 +1378,7 @@ class DecisionRecord(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate stages and require execution to match the checked current starts."""
         _unique(self.not_applicable_stages, "not_applicable_stages")
         for stage_name in ("initial", "repaired", "fallback"):
             stage_record = getattr(self, stage_name)
@@ -1439,6 +1475,7 @@ class SolverResult(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate visibility, certification, status-dependent outputs, and schedule IDs."""
         if self.kind == "visible" and self.uses_future_arrivals:
             raise ValueError("a visible-state solve cannot use future arrivals")
         if self.kind == "hindsight" and not self.uses_future_arrivals:
@@ -1516,6 +1553,7 @@ class EpisodeResult(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Validate contiguous slot phases, unique job outcomes, and completed-job counts."""
         expected = self.n_decision_slots + self.n_completion_slots
         if [s.slot for s in self.slots] != list(range(expected)):
             raise ValueError(f"slots must be contiguous 0..{expected - 1}")
@@ -1565,6 +1603,7 @@ class PrivateEpisode(Versioned):
 
     @model_validator(mode="after")
     def _check(self):
+        """Reject duplicate private job IDs and realized carbon observation IDs."""
         _unique([j.job.job_id for j in self.jobs], "job ids")
         _unique([o.fact_id for o in self.realized_carbon], "carbon observation ids")
         return self
