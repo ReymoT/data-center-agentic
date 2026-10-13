@@ -1,1 +1,1 @@
-"""Reserved for Matty: common production schedule/evidence checks. Not implemented."""
+"""Matty's fixed-rule checker; unresolved decisions still block execution approval."""

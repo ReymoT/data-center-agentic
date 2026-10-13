@@ -15,7 +15,7 @@ Our research question: Does an ontology-grounded, tool-verified agent improve th
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains project documentation, F02 shared schemas/examples, D01 carbon ingestion, and the remaining implementation scaffold. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
+This repository contains project documentation, F02 shared schemas/examples, D01 carbon ingestion, and Matty's A01 transport/accounting and A03 fixed schedule checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
 
 ## Systems we reviewed and why we chose this architecture
 
@@ -87,11 +87,23 @@ To validate the proposed full Windows environment:
 
 Installation needs package-index access. Smoke checks run imports, SHACL/SPARQL, a tiny MILP, classifier fit/save/load and a LangGraph route without an LLM. See [environment instructions](requirements/README.md) for status and troubleshooting. The supplied lock is a candidate, not a final provider-inclusive environment. Do not use its Windows wheel hashes on other platforms.
 
-The offline test command runs the existing F02 contract, D01 source-inspection and [provider-mock helper](tests/llm/README.md) suites. On the current base they total 193 tests plus 19 subtests: 168 contract cases, 12 data cases and 13 helper cases. Contract examples and generated data-test CSVs are labeled synthetic; network/model boundaries are mocked only in tests. These checks do not prove the source's scientific acceptance, consumer integration or live inference. CI runs the same whole test directory on PRs and main.
+The offline test command runs F02 contracts, D01 inspection, provider helpers, actual Ollama transport against a local synthetic HTTP test server, and actual fixed schedule checks. Synthetic fixtures and server responses are test-only; they do not establish model inference, source acceptance or end-to-end integration. CI runs the same whole test directory on PRs and main. [The A01/A03 handoff](docs/handoffs/A01_A03_AGREED_CORE.md) links implementation and verification evidence.
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. GPU details and final runtime/SDK/model-digest/seed/resource pins remain pending. The model is not installed or live-tested by this acceptance; no held-out/cloud/paid run is authorized.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Ollama 0.40.3 is installed, but Qwen3 8B is absent. Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
+
+## Available adapter and checker core
+
+[The shared Ollama transport](dc_sustainability/llm/provider.py) performs real HTTP, strict F02 parsing, pin checks, deadlines and attempt accounting. It uses the Python standard library without choosing an SDK. Both LLM callers must share one run ledger. Prompts/output projections, a validated model-specific token counter, explicit deployment pins and run limits are still required; there is no runnable experiment configuration or automatic model installation.
+
+[The fixed checker](dc_sustainability/verification/checker.py) checks visible job/evidence IDs, timing, deadlines, nonflexible starts and proposed/running occupancy against authoritative capacity. Changing the constraint from 100 to 70 kW changes the check. Known violations are rejected; an otherwise feasible proposal receives an explicit unresolved-rule error. Q01-Q04 still block overall approval, and no execution gate or numerical-claim certification is supplied.
+
+Run these components' offline tests with:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/llm/test_ollama_provider.py tests/verification/test_checker.py -q
+```
 
 ## Data, experiments and outputs
 

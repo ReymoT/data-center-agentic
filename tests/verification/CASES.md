@@ -2,7 +2,7 @@
 
 Task: A03 preparation. Owner: Matty Anderson (MattyAnd). Technical contact: Nisha. Prepared 2026-10-10 from instruction deployment 1.4 and the final October proposal.
 
-Status: test specifications, not executable tests or a completed checker. Ved's F02 schemas and Matty's production checker do not exist yet. This catalogue introduces no shared record schema, provider mock, scientific decision or runtime implementation. Translate each case into a parameterized test against the adopted F02 records when implementation begins.
+Status update 2026-10-12: Ved's F02 1.0.0 records and Matty's fixed checker core now exist. [Executable tests](test_checker.py) exercise the fixed expectations, including boundary/type/missing-evidence cases. Q01-Q04 scenarios remain unresolved; successful fixed subchecks do not approve execution. See [the handoff](../../docs/handoffs/A01_A03_AGREED_CORE.md). This catalogue does not define a second validator or scientific decision.
 
 ## Common setup and assertions
 

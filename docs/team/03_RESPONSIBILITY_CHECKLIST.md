@@ -1,6 +1,6 @@
 # Shared responsibility and coverage checklist
 
-Version: 1.8 — 2026-10-12. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
+Version: 1.9 — 2026-10-12. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
 
 Use the published main checklist. Teammates and their AI assistants must not change or replace this shared instruction file without Matty's explicit authorization; propose corrections in an Issue.
 
@@ -88,3 +88,5 @@ Dependencies are artifact prerequisites; development may use agreed fixtures/con
 - [ ] Do not claim another member's task or start duplicate assistant sessions without explicit reassignment.
 
 **Human roles still awaiting a name:** integration coordinator, backup, authorized merge actor and API budget approver (Q09/Q11). These are governance decisions, not forgotten coding modules. Matty prepares the role/permission choices and summary template; the team/user assigns authority. Nisha confirms course deliverables (Q13). Optional extensions have no active implementation assignment until separately approved; they are outside required coverage.
+
+A01 is tracked in [issue #6](https://github.com/ReymoT/data-center-agentic/issues/6) and A03 in [issue #7](https://github.com/ReymoT/data-center-agentic/issues/7), assigned to Matty. [Agreed core evidence](../handoffs/A01_A03_AGREED_CORE.md) is available; full task boxes remain pending.

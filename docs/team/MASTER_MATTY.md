@@ -1,6 +1,6 @@
 # Master instructions — Matty
 
-Version: 1.8 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.9 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -40,7 +40,7 @@ You assist Matty Anderson. The user explicitly assigns you **initial GitHub repo
 
 ## Required inputs and decisions
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md): Matty owns A01/F03 shared adapter/environment preparation, including F02 consumer checks. Ved's merged schemas/examples are now available; adoption is still pending. Target GPU, exact runtime/SDK/model-digest pins and remaining freeze settings are not yet supplied. Do not label A01 complete or start experiments from the acceptance alone.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md): Matty owns A01/F03 shared adapter/environment preparation, including F02 consumer checks. Ved's merged schemas/examples are now available; adoption is still pending. The [hardware inventory](../HARDWARE.md) now records the supplied Intel Arc 140V, system RAM, driver and installed runtime; accepted deployment/artifact/context/seed/resource pins remain pending. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is implemented and offline tested, with full acceptance still blocked. Do not label A01 complete or start experiments from the acceptance alone.
 
 Inspect current repository contents and human authorization before remote changes. Use all five masters, shared checklist/open decisions, Ved's contracts/context, Reimo's simulator, Edison's math/A fallback, Nisha's explanation/evaluation interfaces. Q09 selects the model/budget; Q11 selects coordinator/permissions, not automatically you. Q12 records concrete cross-cutting allocations. Other unresolved semantics must reach the common checker/runtime through approved configuration, not private choices.
 

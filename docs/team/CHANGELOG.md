@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.8 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.9 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.9 - 2026-10-12
+
+- Matty requested development of the agreed A01/A03 portions and supplied his hardware. [The handoff](../handoffs/A01_A03_AGREED_CORE.md) records actual code, tests and remaining acceptance blockers, with self-assigned issues #6/#7.
+- Implemented local Ollama REST transport/accounting and fixed-rule F02 schedule/evidence checks. No execution approvals, live inference, synthetic production responses, shared-schema/settings changes or new SDK dependency are claimed.
+- Recorded hardware and installed runtime observations. GPU/driver inventory is available; Qwen installation, measured offload/resources and accepted deployment pins remain pending. Updated current README/architecture and instruction status, keeping scientific decisions and exact merge/authority rules unchanged.
+- Aligned the five numbered files, five role versions and project master to 1.9. Full A01/A03 and downstream consumer acceptance remain open.
 
 ## Deployment 1.8 - 2026-10-12
 

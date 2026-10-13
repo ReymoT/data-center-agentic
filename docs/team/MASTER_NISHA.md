@@ -1,6 +1,6 @@
 # Master instructions — Nisha
 
-Version: 1.8 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.9 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -37,7 +37,7 @@ You assist Nisha Mahadev Kolekar. Lead the plain-LLM comparison, evidence-based 
 
 ## Required inputs and decisions
 
-Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. Target GPU and final pins/seed list remain pending.
+Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. The [hardware inventory](../HARDWARE.md) is available. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is available for consumer preparation; final pins/projections/context rules/seed list and integration acceptance remain pending.
 
 Use Ved's schemas, equivalent contexts and certified references; Reimo's immutable development/held-out fixture loaders; Edison's impacts/policies/model manifests; Matty's common provider, runtime and trace interfaces. Q01–Q04 define validity; Q07–Q10 define metrics/protocol; Q12 confirms runner/report lead allocation; Q13 defines actual submission needs. Publish evaluation requirements early so producers log the fields you need. Never wait until the final week to discover missing trace evidence.
 

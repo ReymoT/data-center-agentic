@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.8 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.9 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -32,7 +32,7 @@ The proposal pairs Matty/Nisha on E4-E6 and Reimo/Ved on E1/E3; Edison owns E2. 
 - [REVIEW_RECORD.md](REVIEW_RECORD.md): current audit and verification limits.
 - [CHANGELOG.md](CHANGELOG.md): instruction adaptations from the preserved source archive.
 
-Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. [Q09](../decisions/Q09_OLLAMA_QWEN3.md) accepts local Ollama, Qwen3 8B Q4_K_M and temperature 0.2. Matty prepares the shared adapter; Nisha prepares the plain/explanation paths; Ved supports contract compatibility. GPU details and deployment pins remain pending. See [the owner handoff](../handoffs/Q09_ACCEPTANCE.md). Platform adoption remains Q13.
+Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. [Q09](../decisions/Q09_OLLAMA_QWEN3.md) accepts local Ollama, Qwen3 8B Q4_K_M and temperature 0.2. Matty prepares the shared adapter; Nisha prepares the plain/explanation paths; Ved supports contract compatibility. [Hardware inventory](../HARDWARE.md) is now available and [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is implemented; deployment pins and full integration remain pending. See [the owner handoff](../handoffs/Q09_ACCEPTANCE.md). Platform adoption remains Q13.
 
 ## Implementation order
 

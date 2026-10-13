@@ -1,6 +1,6 @@
 # Architecture for the final scheduling study
 
-Status: current implementation boundaries and target design, updated 2026-10-12, instruction deployment 1.8. Published under the project manager's instruction without a formal document-review gate. F02 records and D01 source inspection are implemented; the complete scheduling pipeline remains planned. Read [interfaces](INTERFACES.md) for implemented records and proposed APIs, and [open decisions](team/04_OPEN_DECISIONS.md) for unresolved rules.
+Status: current implementation boundaries and target design, updated 2026-10-12, instruction deployment 1.9. Published under the project manager's instruction without a formal document-review gate. F02 records, D01 source inspection and A01/A03 agreed core code are implemented; the complete scheduling pipeline remains planned. Read [interfaces](INTERFACES.md) for implemented records and proposed APIs, and [open decisions](team/04_OPEN_DECISIONS.md) for unresolved rules.
 
 ## Research question
 
@@ -20,9 +20,11 @@ We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the cr
 |---|---|---|
 | F02, Ved | Strict contract 1.0.0 records for jobs, visible/private carbon, constraints, contexts, plans, checks, actions and traces; serialization, canonical hashes and committed examples | Records validate structure and consistency; they do not calculate a schedule verdict or execute actions. Actual consumer adoption is pending. |
 | D01, Reimo | Pinned source download/checksum, CSV validation, private UTC observations and provenance/uncertainty reports | Pollutant scope, physical interval mapping, dataset rights, F02 adaptation and independent reproduction remain pending. It does not generate episodes or visible forecasts. |
+| A01, Matty | Local Ollama REST transport, strict F02 parsing, explicit runtime/artifact checks, request deadlines and shared attempt accounting | Offline HTTP tests use a synthetic local server. Real inference, accepted output projections, context counter and deployment/run pins remain pending. |
+| A03, Matty | Fixed schedule/evidence checks on actual records; authoritative capacity and running occupancy | Known violations are rejected. Q01-Q04 remain unresolved, so otherwise feasible plans receive an error and no execution approval. Claim arithmetic is not certified. |
 | F03, Matty | Hashed Windows Python 3.12 candidate, dependency smoke checks and CI for all existing offline tests | No provider SDK, Ollama installation, live inference or final multi-platform environment is certified. |
 
-The provider helper lives only under tests and replays labeled outcomes. Reserved package directories contain no working simulator, retrieval, policies, checker, gate, agent or evaluator. A serialized example of a passing check is a fixture, not evidence that a checker ran. No experiment result or completed integration is claimed.
+The provider helper lives only under tests and replays labeled outcomes. Simulator, retrieval, policies, gate, agent and evaluator remain planned. The adapter/checker core is tested without those components; see [the handoff](handoffs/A01_A03_AGREED_CORE.md). A serialized example of a passing check is a fixture, not evidence that a checker ran. No experiment result or completed integration is claimed.
 
 ## Planned data flow
 
@@ -42,7 +44,7 @@ The source loader returns private timestamp/value pairs and a source-inspection 
 
 F02 separates private observations and episodes from visible state and forecasts. A constraint snapshot holds source provenance and the authoritative capacity constraint; capacity is not duplicated in site configuration. Missing capacity raises an explicit error. Context records carry only the sources, constraints and forecast facts relevant to currently visible jobs, with hashes for graph/flat equivalence checks.
 
-Plan records retain structurally valid but infeasible proposals so the future checker can report their failures. Check/action/decision records require explicit evidence and consistent identifiers. Their validation does not replace the future production checker, latest-state execution gate or independent evaluator. Changing capacity in evidence must eventually change checker behavior; schema tests alone do not demonstrate that end-to-end behavior.
+Plan records retain structurally valid but infeasible proposals. The fixed checker now calculates their rule violations and reports performed/skipped checks in CheckResult, bound to plan hash/state version. It uses unchanged F02 records. Its 100-to-70 kW test proves a constraint input changes the capacity subcheck; the RDF retrieval and execution gate still need separate integration evidence. Unresolved coverage and freshness rules prevent overall approval.
 
 ## Two different graphs
 
@@ -52,7 +54,7 @@ The LangGraph workflow represents steps and conditional routes. Its shared state
 
 ## Policy behavior and execution
 
-The accepted development provider is local Ollama with Qwen3 8B Q4_K_M and temperature 0.2 for both LLM systems. [Q09](decisions/Q09_OLLAMA_QWEN3.md) lists accepted development settings and unresolved runtime/SDK/artifact/GPU/seed/resource pins. The adapter and live model path are not implemented or tested by this architecture document.
+The accepted development provider is local Ollama with Qwen3 8B Q4_K_M and temperature 0.2 for both LLM systems. [Q09](decisions/Q09_OLLAMA_QWEN3.md) lists accepted development settings and unresolved runtime/SDK/artifact/GPU/seed/resource pins. The common low-level transport is implemented with offline HTTP tests. [Hardware inventory](HARDWARE.md) now records Matty's Intel GPU and installed runtime; Qwen inference and measured offload remain untested.
 
 The agent route is read state, retrieve context, propose, verify, optionally repair once, verify again, then use a checked greedy-A fallback if needed. The gate rechecks against the latest state. Missing verification means abstention or escalation. Explanation generation uses recorded evidence and cannot change the approved action. At most three model calls include proposal, optional repair and explanation; SDK retries count too. No model calls occur in slots 24-29.
 
@@ -76,8 +78,8 @@ Faithfulness review preserves independent blinded Matty/Nisha ratings before adj
 
 ## Interfaces, modules and completion
 
-Named interfaces include `read_state`, `get_context`, `check_schedule`, controller-only `execute_step` and `write_trace`. These callable APIs, the provider adapter and experiment CLI remain planned. F02's Job/Plan/Context/CheckResult/ApprovedActions/DecisionRecord and other records are implemented in `dc_sustainability/schemas.py`. The [interface document](INTERFACES.md) is the single maintained contract, with consumer adoption explicitly pending.
+Named interfaces include `read_state`, `get_context`, `check_schedule`, controller-only `execute_step` and `write_trace`. `check_schedule` now implements the fixed core above, and the local provider transport is available. State/retrieval, execution/trace APIs and the experiment CLI remain planned. F02's Job/Plan/Context/CheckResult/ApprovedActions/DecisionRecord and other records are implemented in `dc_sustainability/schemas.py`. The [interface document](INTERFACES.md) is the single maintained contract, with consumer adoption explicitly pending.
 
-Run the existing offline checks using the [README quick start](../README.md). The current suites cover strict records, source inspection and provider helper behavior; they do not prove schedule checking or live inference. [The maintenance handoff](handoffs/F03_F04_F05_MAINTENANCE.md) records the actual environment and test evidence. Do not present stubs, fabricated traces or a constant passing verdict as implementation.
+Run the existing offline checks using the [README quick start](../README.md). The current suites cover strict records, source inspection, helpers, real local HTTP transport and fixed schedule-checking behavior. They do not prove live inference, integrated execution or independent scientific acceptance. [The maintenance handoff](handoffs/F03_F04_F05_MAINTENANCE.md) records the actual environment and test evidence. Do not present stubs, fabricated traces or a constant passing verdict as implementation.
 
 An actual model-driven development episode with repair or fallback is required for E4 acceptance. Mocks suffice for ordinary offline CI, not final integration evidence. Matty owns early and final end-to-end acceptance, Nisha independently verifies results, Ved reproduces on another machine, and each module owner fixes defects. The [demo plan](DEMO.md) and [project plan](PROJECT_PLAN.md) record the remaining evidence.

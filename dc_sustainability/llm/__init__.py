@@ -1,1 +1,1 @@
-"""Reserved for Matty: shared provider; Nisha: plain comparison. Not implemented."""
+"""Matty's shared Ollama transport; Nisha's plain comparison remains to be integrated."""
