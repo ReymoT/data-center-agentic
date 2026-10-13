@@ -922,29 +922,19 @@ class Context(Versioned):
         required_source_ids |= {f.source_id for f in self.content.carbon_facts}
         missing_sources = required_source_ids - source_ids
         if missing_sources:
-            raise ValueError(
-                "context is missing source provenance records: " f"{sorted(missing_sources)}"
-            )
+            raise ValueError("context is missing source provenance records: " f"{sorted(missing_sources)}")
         unrelated_sources = source_ids - required_source_ids
         if unrelated_sources:
-            raise ValueError(
-                "context includes unrelated source records: " f"{sorted(unrelated_sources)}"
-            )
+            raise ValueError("context includes unrelated source records: " f"{sorted(unrelated_sources)}")
         expected_evidence_ids = {"FACT-SITE-BG", "FACT-SITE-PUE", "FACT-SITE-SLOTH"}
         expected_evidence_ids |= {f"FACT-JOB-{j.job_id}" for j in self.content.waiting_jobs}
         expected_evidence_ids |= {
             f"FACT-JOB-{running.job.job_id}" for running in self.content.running_jobs
         }
-        expected_evidence_ids |= {
-            f"FACT-JOB-{job.job_id}" for job in self.content.completed_jobs
-        }
-        expected_evidence_ids |= {
-            f"FACT-JOB-{job_id}" for job_id in self.content.missed_job_ids
-        }
+        expected_evidence_ids |= {f"FACT-JOB-{job.job_id}" for job in self.content.completed_jobs}
+        expected_evidence_ids |= {f"FACT-JOB-{job_id}" for job_id in self.content.missed_job_ids}
         expected_evidence_ids |= {fact.fact_id for fact in self.content.carbon_facts}
-        expected_evidence_ids |= {
-            constraint.constraint_id for constraint in self.content.constraints
-        }
+        expected_evidence_ids |= {constraint.constraint_id for constraint in self.content.constraints}
         if set(self.content.evidence_ids) != expected_evidence_ids:
             raise ValueError("context evidence IDs do not match visible records")
         # Context may arrive from JSON rather than Context.build. Re-run cross-record checks
@@ -1298,7 +1288,14 @@ class CheckResult(Versioned):
                 raise ValueError(
                     "a passing result cannot contain failed/error checks or violations"
                 )
-            required_pass_checks = {"schema", "ids", "timing", "deadline", "nonflexible", "capacity"}
+            required_pass_checks = {
+              "schema", 
+              "ids", 
+              "timing", 
+              "deadline", 
+              "nonflexible", 
+              "capacity"
+            }
             missing_checks = required_pass_checks - performed_names
             if missing_checks:
                 raise ValueError(
@@ -1394,9 +1391,7 @@ class DecisionRecord(Versioned):
                 stage_record.plan.episode_id != self.episode_id
                 or stage_record.plan.slot != self.slot
             ):
-                raise ValueError(
-                    f"{stage_name} plan episode/slot does not match decision record"
-                )
+                raise ValueError(f"{stage_name} plan episode/slot does not match decision record")
         if self.execution_check is not None:
             if self.execution_check.episode_id != self.episode_id:
                 raise ValueError("execution_check episode does not match decision record")
@@ -1408,8 +1403,7 @@ class DecisionRecord(Versioned):
                 if stage_record is not None
             ]
             matching_plans = [
-                plan for plan in recorded_plans
-                if plan.plan_hash == self.execution_check.plan_hash
+                plan for plan in recorded_plans if plan.plan_hash == self.execution_check.plan_hash
             ]
             if not matching_plans:
                 raise ValueError("execution_check does not match a recorded stage plan")
