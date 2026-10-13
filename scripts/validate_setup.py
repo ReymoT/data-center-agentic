@@ -53,6 +53,59 @@ for owner in ("Matty", "Reimo", "Ved", "Edison", "Nisha"):
     expected = {key: value for key, value in checklist.items() if value[2] == owner}
     require(role == expected, f"Role inventory differs from checklist: {owner}")
 
+deployment_match = re.search(
+    r"^Instruction deployment: ([0-9]+\.[0-9]+)\b",
+    (ROOT / "PROJECT_MASTER.md").read_text(encoding="utf-8"),
+    re.MULTILINE,
+)
+require(deployment_match is not None, "Project master must declare instruction deployment")
+version_paths = sorted(TEAM.glob("MASTER_*.md")) + sorted(TEAM.glob("0[0-4]_*.md"))
+require(len(version_paths) == 10, "Expected five numbered files and five role masters")
+if deployment_match:
+    deployment = deployment_match.group(1)
+    for path in version_paths:
+        match = re.search(
+            r"^Version: ([0-9]+\.[0-9]+)\b", path.read_text(encoding="utf-8"), re.MULTILINE
+        )
+        require(
+            match is not None and match.group(1) == deployment,
+            f"Instruction deployment differs or is missing: {path.relative_to(ROOT)}",
+        )
+    require(
+        (TEAM / "CHANGELOG.md")
+        .read_text(encoding="utf-8")
+        .startswith(f"# Instruction deployment changelog\n\nCurrent deployment: {deployment} "),
+        "Changelog current deployment differs from project master",
+    )
+
+interface_path = ROOT / "docs/INTERFACES.md"
+schema_path = ROOT / "dc_sustainability/schemas.py"
+require(interface_path.is_file(), "Missing canonical F02 interface document")
+require(schema_path.is_file(), "Missing implemented F02 schemas")
+if interface_path.is_file() and schema_path.is_file():
+    document_version = re.search(
+        r"Contract version:\*\* ([0-9]+\.[0-9]+\.[0-9]+)",
+        interface_path.read_text(encoding="utf-8"),
+    )
+    schema_version = re.search(
+        r'^SCHEMA_VERSION = "([0-9]+\.[0-9]+\.[0-9]+)"',
+        schema_path.read_text(encoding="utf-8"),
+        re.MULTILINE,
+    )
+    require(
+        document_version is not None
+        and schema_version is not None
+        and document_version.group(1) == schema_version.group(1),
+        "Canonical interface contract version differs from implemented schemas",
+    )
+legacy_interface = ROOT / "docs/Interfaces F02"
+require(
+    legacy_interface.is_file()
+    and legacy_interface.stat().st_size < 1000
+    and "[INTERFACES.md](INTERFACES.md)" in legacy_interface.read_text(encoding="utf-8"),
+    "Alternate F02 path must remain a short compatibility pointer",
+)
+
 for path in ROOT.rglob("*.md"):
     if any(part in {".git", ".venv", "tmp"} for part in path.relative_to(ROOT).parts):
         continue
@@ -119,6 +172,5 @@ if errors:
     print("Bootstrap validation failed:\n" + "\n".join(errors), file=sys.stderr)
     raise SystemExit(1)
 print("PASS: 50 task records, role inventories, acyclic dependencies, local Markdown links,")
-print(
-    "      config placeholders, dependency inputs, README preferences and seven-file policy rules."
-)
+print("      deployment/contract versions, canonical interface pointer, config placeholders,")
+print("      dependency inputs, README preferences and seven-file policy rules.")

@@ -1,6 +1,6 @@
 # Project master instructions
 
-Instruction deployment: 1.7 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.8 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 
@@ -24,7 +24,11 @@ Record agreement in the Issue or decision record before implementing shared-form
 
 The research question is: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
-Read the [README](README.md) and [architecture](docs/ARCHITECTURE.md) for the planned scheduling study, main agent/plain-LLM comparison and four additional references. Read [implemented F02 interfaces](docs/Interfaces%20F02) and their pending consumer-adoption status, with [the checklist](docs/team/03_RESPONSIBILITY_CHECKLIST.md) for ownership. Do not duplicate schemas or claim teammate-owned tasks.
+Read the [README](README.md) and [architecture](docs/ARCHITECTURE.md) for the planned scheduling study, main agent/plain-LLM comparison and four additional references. Read [implemented F02 interfaces](docs/INTERFACES.md) and their pending consumer-adoption status, with [the checklist](docs/team/03_RESPONSIBILITY_CHECKLIST.md) for ownership. Do not duplicate schemas or claim teammate-owned tasks.
+
+Use actual implementation and test evidence. Do not substitute stubs, constant success verdicts, fabricated model responses or invented traces/results for working functionality. Label synthetic fixtures and test doubles honestly; a mock does not establish live inference or integrated acceptance. Missing dependencies or decisions remain explicit blockers.
+
+[The F03/F04/F05 maintenance handoff](docs/handoffs/F03_F04_F05_MAINTENANCE.md) records current offline CI, instruction and documentation evidence. F03's final provider-inclusive environment remains pending; F04/F05 continue as maintenance duties.
 
 The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices. [Q09](docs/decisions/Q09_OLLAMA_QWEN3.md) now records Matty's acceptance of local Ollama with Qwen3 8B and temperature 0.2. Matty owns the shared adapter/environment, Nisha the plain/explanation paths, and Ved contract compatibility. They can proceed with documented development preparation. GPU details and final runtime/SDK/artifact/seed/resource pins remain pending; this is not live-experiment readiness.
 

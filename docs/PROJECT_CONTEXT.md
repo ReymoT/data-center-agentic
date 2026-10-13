@@ -22,4 +22,6 @@ Record affected teammates' agreement before changing shared formats or settings.
 
 Matty accepted Nisha's local Ollama/Qwen3 8B recommendation and selected temperature 0.2. [Q09](decisions/Q09_OLLAMA_QWEN3.md) records accepted development settings and owner handoff; [the reply](https://github.com/ReymoT/data-center-agentic/issues/2#issuecomment-6136759988) notifies Nisha/Ved. Matty owns the shared adapter/environment, Nisha plain/explanations, and Ved contract compatibility. GPU details and exact runtime/SDK/model-digest/seed/resource pins remain pending. Do not treat development acceptance as a frozen or runnable experiment configuration.
 
+Matty's 2026-10-12 instruction requires real implementation evidence: no stubs, hard-coded successful outcomes, fabricated model responses or invented traces/results may be presented as working functionality. Synthetic fixtures and test mocks must be labeled and cannot establish live inference or integrated acceptance. He explicitly requested the ready F03/F04/F05 maintenance; [the handoff](handoffs/F03_F04_F05_MAINTENANCE.md) records its evidence and remaining inputs.
+
 - Cleanup authorization on 2026-10-10 is limited to this repository: replace obsolete architecture/setup records and correct Matty's setup commit attribution, preserving teammates' contributions and synced source files.

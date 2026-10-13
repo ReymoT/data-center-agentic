@@ -213,7 +213,7 @@ def main():
             1,
             2.4,
             "24 decision + 6 completion slots; no completion-slot model calls. Q01–Q13 stay open where unresolved.\n"
-            "Earlier “Model D” names the agent; random_forest_d is a separate system. Components are not yet implemented.",
+            "Implemented: F02 schemas and D01 ingestion. Simulator, policies, checker and gate remain planned.",
             10.5,
         )
         destination = ROOT / "architecture"
@@ -226,7 +226,8 @@ def main():
             " <title>Ontology-grounded, tool-verified agent versus plain LLM: planned architecture</title>\n"
             " <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. "
             "Four additional scheduling references share visible inputs and an execution gate; "
-            "private data and offline references stay outside policy inputs.</desc>\n <metadata>",
+            "private data and offline references stay outside policy inputs. F02 schemas and D01 ingestion "
+            "are implemented; the full scheduling pipeline remains planned.</desc>\n <metadata>",
             1,
         )
         svg_path.write_text(

@@ -1,6 +1,6 @@
 # Decisions still requiring confirmation
 
-Version: 1.7 — 2026-10-12. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
+Version: 1.8 — 2026-10-12. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
 
 Main contains the authoritative instruction versions. Changes to this shared instruction index and policy records require Matty's explicit authorization; affected teammates must still agree on shared formats/settings. Propose recommendations in Issues until authorized.
 

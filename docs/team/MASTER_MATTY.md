@@ -1,6 +1,6 @@
 # Master instructions — Matty
 
-Version: 1.7 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.8 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -82,4 +82,4 @@ The shared rules define publication, state-transition and handoff procedures. Th
 
 ## Bootstrap repository adaptation
 
-Matty's confirmed GitHub ID is `MattyAnd`. Follow [project context](../PROJECT_CONTEXT.md): README starts with teammates and roles, discloses reviewed systems and selection method/similarities, and uses plain language with architecture. The [single interface draft](../INTERFACES.md) remains proposed pending F02 implementation and producer/consumer validation. No scientific decision or allocation was changed. See [changelog](CHANGELOG.md).
+Matty's confirmed GitHub ID is `MattyAnd`. Follow [project context](../PROJECT_CONTEXT.md): README starts with teammates and roles, discloses reviewed systems and selection method/similarities, and uses plain language with architecture. The [single interface specification](../INTERFACES.md) contains implemented F02 contract 1.0.0; producer/consumer adoption remains pending. See [the maintenance handoff](../handoffs/F03_F04_F05_MAINTENANCE.md) for completed current work and F03's remaining provider/platform inputs. Do not count mocks, stubs or fabricated results as implementation acceptance. No scientific decision or allocation was changed. See [changelog](CHANGELOG.md).

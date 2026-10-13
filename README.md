@@ -55,9 +55,9 @@ Live equipment control, cooling or water savings, reinforcement learning, Modeli
 
 ## Start with the instructions
 
-Read [PROJECT_MASTER.md](PROJECT_MASTER.md), [shared rules](docs/team/01_SHARED_RULES.md), your `MASTER_<NAME>.md` in [the complete package](docs/team/00_START_HERE.md), [interfaces](docs/INTERFACES.md), [open decisions](docs/team/04_OPEN_DECISIONS.md), your assigned Issue and upstream handoffs. Ved and consumers will define and validate the shared schemas and CLI names during implementation. The current interface document describes the planned boundaries.
+Read [PROJECT_MASTER.md](PROJECT_MASTER.md), [shared rules](docs/team/01_SHARED_RULES.md), your `MASTER_<NAME>.md` in [the complete package](docs/team/00_START_HERE.md), [interfaces](docs/INTERFACES.md), [open decisions](docs/team/04_OPEN_DECISIONS.md), your assigned Issue and upstream handoffs. Ved's contract 1.0.0 schemas and examples are implemented. The interface document distinguishes those records from planned callable APIs; each consumer must still validate adoption. Experiment CLI names are not runnable commands yet.
 
-See [the setup handoff](docs/handoffs/F01.md) for checks and implementation dependencies, and [the publication audit](docs/team/REVIEW_RECORD.md) for the current documentation status. These documents are published under the project manager's instruction; formal document review is not required.
+See [the current maintenance handoff](docs/handoffs/F03_F04_F05_MAINTENANCE.md) for checks and remaining inputs, and [the publication audit](docs/team/REVIEW_RECORD.md) for current documentation status. The [original setup handoff](docs/handoffs/F01.md) is historical. These documents are published under the project manager's instruction; formal document review is not required.
 
 ## Quick start for the repository foundation
 
@@ -79,22 +79,31 @@ To validate the proposed full Windows environment:
 .venv\Scripts\python.exe -m pip install --require-hashes -r requirements/requirements-windows-py312.lock.txt
 .venv\Scripts\python.exe -m pip check
 .venv\Scripts\python.exe scripts/smoke_dependencies.py
-.venv\Scripts\python.exe -m pytest tests/llm/test_provider_mocks.py -q
+.venv\Scripts\python.exe -m pytest tests -q
 .venv\Scripts\python.exe -m ruff check dc_sustainability scripts tests
 .venv\Scripts\python.exe -m ruff format --check dc_sustainability scripts tests
+.venv\Scripts\python.exe -m compileall -q dc_sustainability scripts tests
 ```
 
 Installation needs package-index access. Smoke checks run imports, SHACL/SPARQL, a tiny MILP, classifier fit/save/load and a LangGraph route without an LLM. See [environment instructions](requirements/README.md) for status and troubleshooting. The supplied lock is a candidate, not a final provider-inclusive environment. Do not use its Windows wheel hashes on other platforms.
 
-The [offline provider mocks](tests/llm/README.md) have 13 helper tests for scripted responses, failures and call evidence. They need no model account or provider SDK. Scheduling algorithms and the production provider adapter remain unimplemented; these helper tests do not establish their acceptance.
+The offline test command runs the existing F02 contract, D01 source-inspection and [provider-mock helper](tests/llm/README.md) suites. On the current base they total 193 tests plus 19 subtests: 168 contract cases, 12 data cases and 13 helper cases. Contract examples and generated data-test CSVs are labeled synthetic; network/model boundaries are mocked only in tests. These checks do not prove the source's scientific acceptance, consumer integration or live inference. CI runs the same whole test directory on PRs and main.
 
-Copy `.env.example` to a local `.env` only when Q09 is approved. All provider/account/settings placeholders are blank; no paid call is enabled. [The configuration template](configs/project.example.json) records known proposal constants and keeps open decisions null. It is not a production loader or an execution permission.
+All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
 Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. GPU details and final runtime/SDK/model-digest/seed/resource pins remain pending. The model is not installed or live-tested by this acceptance; no held-out/cloud/paid run is authorized.
 
 ## Data, experiments and outputs
 
-Reimo will acquire the pinned SustainDC Arizona carbon file, verify units and UTC alignment, and calibrate synthetic job distributions from Frontier job records. EPA eGRID supplies an annual plausibility check. Forecast replay is perfect foresight and must be labeled. [Data instructions](data/README.md) record the required acquisition evidence; source access and redistribution are not certified here.
+Reimo implemented pinned SustainDC Arizona source acquisition, checksum/CSV inspection and private UTC observations. Pollutant meaning, physical hour-start/hour-end mapping, derived-data redistribution rights, F02 adaptation and independent source reproduction still block accepted experimental use. [Data instructions](data/README.md) record acquisition and evidence. Frontier-calibrated job generation and episodes remain planned; EPA eGRID is an annual plausibility check. Perfect-foresight forecast replay must be labeled and must not be confused with a live forecast.
+
+The implemented source-inspection command is:
+
+```powershell
+.venv\Scripts\python.exe -m dc_sustainability.data.carbon_source --help
+```
+
+Its help describes local inspection and the optional pinned download. A download uses the network and requires new destination/report files. Validation success is not scientific acceptance; returned records are not adopted F02 forecasts. Offline CI does not download the source.
 
 The proposal requires 40 development episodes and 30 held-out episodes: six dates across four scenarios plus six missing-forecast episodes. Three trials for each LLM and one for each A/B/C/D policy produce 300 runs. Held-out data cannot tune models, prompts or thresholds. The agent has at most three model calls per decision including explanation; the plain LLM has one. Paid runs await Q09.
 
@@ -110,4 +119,4 @@ A pull request can be merged once its checks pass. A teammate review is welcome 
 
 Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. Matty is the project manager and has also authorized direct publication of these documents to `main`. Development can use short task branches, with applicable checks before publication. [Module ownership](docs/OWNERSHIP.md) supports technical coordination, and [repository settings](docs/REPOSITORY_SETTINGS.md) record the current workflow. Matty's GitHub account for this project is [MattyAnd](https://github.com/MattyAnd).
 
-The [project plan](docs/PROJECT_PLAN.md) links the authoritative checklist and timeline. The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices and records the manager's workflow instruction under Q11. Shared contracts, source evidence, model/budget, remaining team permissions, detailed allocations and target platforms still need to be established. Tests of a skeleton are not integrated acceptance. Final end-to-end acceptance belongs to Matty, independent verification to Nisha, and second-machine reproduction to Ved.
+The [project plan](docs/PROJECT_PLAN.md) links the authoritative checklist and timeline. The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices and records partial Q09/Q11 decisions. Shared-record consumer adoption, source evidence, final provider/budget pins, remaining team permissions, detailed allocations and target platforms still need evidence. Stubs, constant success verdicts and fabricated model responses/traces/results are not completion evidence. Final end-to-end acceptance belongs to Matty, independent verification to Nisha, and second-machine reproduction to Ved.

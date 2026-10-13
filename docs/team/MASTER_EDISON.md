@@ -1,6 +1,6 @@
 # Master instructions — Edison
 
-Version: 1.7 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.8 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 

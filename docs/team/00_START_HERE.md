@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.7 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.8 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -26,7 +26,7 @@ The proposal pairs Matty/Nisha on E4-E6 and Reimo/Ved on E1/E3; Edison owns E2. 
 - MASTER_VED.md: contracts, ontology/retrieval, offline reference schedules and reproduction.
 - MASTER_EDISON.md: impacts, greedy policies, trained decision tree/random forest and model artifacts.
 - 01_SHARED_RULES.md: scope, coordination, publication and acceptance rules.
-- 02_INTERFACE_CONTRACTS.md: pointer to [implemented F02 records](../Interfaces%20F02) and their adoption status.
+- 02_INTERFACE_CONTRACTS.md: pointer to [implemented F02 records](../INTERFACES.md) and their adoption status.
 - 03_RESPONSIBILITY_CHECKLIST.md: 50 tasks, owners, technical contacts, dependencies and acceptance evidence.
 - 04_OPEN_DECISIONS.md: unresolved scientific and project decisions. Do not infer defaults.
 - [REVIEW_RECORD.md](REVIEW_RECORD.md): current audit and verification limits.
@@ -36,7 +36,7 @@ Dependency inputs are maintained only under [requirements](../../requirements/RE
 
 ## Implementation order
 
-1. Resolve required allocations/coordination choices. Ved develops schemas and examples with producer/consumer validation.
+1. Resolve required allocations/coordination choices. Ved's F02 schemas/examples are implemented; producers and consumers validate adoption against them.
 2. Reimo supplies immutable development fixtures; Edison supplies hand-checked impacts and A; Matty/Nisha develop their separate verification paths; Ved builds graph and offline references.
 3. Establish a development vertical slice before full training or paid runs.
 4. Validate data and labels, train C/D, integrate both LLM systems and explanations.

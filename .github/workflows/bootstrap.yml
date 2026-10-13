@@ -26,14 +26,15 @@ jobs:
         env:
           LANGSMITH_TRACING: 'false'
         run: python scripts/smoke_dependencies.py
-      - name: Test offline provider mocks
-        run: python -m pytest tests/llm/test_provider_mocks.py -q
-      - name: Lint scaffold scripts
+      - name: Test all existing offline modules and contracts
+        run: python -m pytest tests -q
+      - name: Lint Python code
         run: python -m ruff check dc_sustainability scripts tests
       - name: Check formatting
         run: python -m ruff format --check dc_sustainability scripts tests
-      - name: Compile scaffold scripts
+      - name: Compile Python code
         run: python -m compileall -q dc_sustainability scripts tests
 
-# Add production unit/contract tests when the respective modules are implemented.
+# New offline tests under tests/ are included automatically as modules are implemented.
+# Model/live tests require a separately authorized run and must not enter ordinary CI.
 # No provider secrets, paid calls, production fixtures or scientific runs here.

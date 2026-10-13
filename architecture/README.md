@@ -1,6 +1,6 @@
 # Final scheduling architecture
 
-The current diagram replaces the obsolete engineering image. It describes the planned final-proposal scheduling study; it does not claim that components have been implemented.
+The current diagram replaces the obsolete engineering image. Its flow describes the planned final-proposal scheduling study. The footer records the implemented subset: F02 records and D01 ingestion. Simulator, policies, production checker and execution gate remain planned; diagram boxes are not execution evidence.
 
 The diagram starts with the exact research question. The main comparison is the ontology-grounded, tool-verified agent versus the plain LLM. Four additional policies provide scheduling reference results. Workload scheduling is the experimental setting, and conclusions remain limited to the evaluated scenarios.
 

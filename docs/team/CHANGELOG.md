@@ -1,6 +1,17 @@
 # Instruction deployment changelog
 
-Current deployment: 1.7 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.8 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.8 - 2026-10-12
+
+- Matty explicitly requested the ready F03/F04/F05 maintenance. [Issue #5](https://github.com/ReymoT/data-center-agentic/issues/5) records the confirmed CI and instruction/documentation defects, scope and evidence.
+- Expanded offline PR/main pytest to all existing tests, including F02 contracts and D01 ingestion. Preserved the existing hashed Windows candidate and verified it in a new isolated environment. The final provider-inclusive lock and other supported platforms remain pending.
+- Replaced the superseded interface blueprint at `docs/INTERFACES.md` with Ved's implemented specification, preserving its bytes exactly. The alternate filename is now a compatibility pointer, not a second contract. No schema fields, examples, consumer behavior or scientific settings changed.
+- Corrected current README, architecture, diagram, plan, readiness, audit, masters and shared references. Distinguish implemented records/inspection from missing simulator, retrieval, checker, gate, provider and experiment code. Historical handoffs and source attachments remain preserved.
+- Added the user's requirement for real implementation evidence: no stubs, constant success verdicts, fabricated responses/traces/results or mock-based integration claims. Existing synthetic fixtures/test helpers stay labeled.
+- Aligned all five numbered and role versions to 1.8 and extended setup validation for deployment alignment and a single implemented contract location. The 50 task allocations/dependencies, exact seven-file merge/authority rules and open decisions remain unchanged.
+
+See [the maintenance handoff](../handoffs/F03_F04_F05_MAINTENANCE.md) for commands, observed results, artifact hashes and remaining F03 inputs. F04/F05 remain ongoing maintenance responsibilities.
 
 ## Deployment 1.7 - 2026-10-12
 

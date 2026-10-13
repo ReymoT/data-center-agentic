@@ -1,6 +1,6 @@
 # Shared rules for all five assistants
 
-Version: 1.7 — 2026-10-12. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.8 — 2026-10-12. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 
@@ -22,6 +22,8 @@ Follow explicit human instructions, the October final proposal and accepted deci
 
 Required systems: `agent`, `plain_llm`, `greedy_a`, `greedy_b`, `decision_tree_c`, `random_forest_d`. The old architecture's “Model D” is the agent; the final proposal's policy D is the random forest. Use explicit identifiers everywhere.
 
+Implementation evidence must be real. Do not present stubs, constant passing verdicts, fabricated model responses or invented traces/results as working functionality. Label synthetic fixtures and mocks; they do not prove production, live-model or integrated acceptance. Preserve errors and missing-input blockers rather than fabricating a successful path.
+
 One simulated site, one resource pool, hourly slots, nonpreemptive jobs, constant job power, fixed cooling/battery behavior. IT capacity is 100 kW including 40 kW background. Jobs use 10–40 kW for 1–4 hours. PUE is the design assumption 1.2; hand checks also use 1.0. Capacity is IT load before PUE. No fine-tuning, live equipment control, water/cooling savings, Modelica/FMU, reinforcement learning or enterprise integrations are required. Optional persistence, Cambium, component ablations and GUI follow the core experiment only through separately approved issues.
 
 Episodes contain 24 decision slots, indexed 0–23, and six completion slots, 24–29. No model calls in completion slots. Arrivals stop before slot 18 and deadlines are completion boundaries at or before 30. Slot 0 is Phoenix midnight, 07:00 UTC. Whether any already-planned jobs may start after slot 23 remains decision Q01; do not silently choose. Occupancy is `[start, start + duration)`. Nonflexible jobs start at arrival. Running jobs cannot move or pause. Rejection starts no new jobs but the clock and running work advance; failed/missed/unfinished jobs stay in records.
@@ -42,7 +44,7 @@ Development has 40 episodes across four scenarios. Held-out evaluation has six d
 | `docs/team/03_RESPONSIBILITY_CHECKLIST.md` | Scope/accountability index, maintained by Matty; link each row to its Issue. |
 | `docs/handoffs/<task-id>.md` | Stable technical handoff, written by task owner and validated with deliverable. |
 | `docs/decisions/` and open-decision index | Approved rules and reasons, with affected consumers and effective version. |
-| `docs/INTERFACES.md` | Single current shared contract, maintained by Ved with producer/consumer review. |
+| `docs/INTERFACES.md` | Implemented F02 contract 1.0.0, maintained by Ved; actual consumer adoption still needs evidence. |
 
 Use one mutually exclusive Issue status: Pending → Ready → In progress → Verifying → Done. Blocked records its previous state and a precise unblock condition. Merged work is Verifying until acceptance is demonstrated. A closed Issue is not automatically Done. Reopened defects/reverts must invalidate affected downstream readiness.
 
