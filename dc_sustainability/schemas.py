@@ -205,7 +205,6 @@ _UNORDERED_SORT_KEYS: dict[str, Optional[str]] = {
     "abstentions": None,
     "executed_starts": "job_id",
     "not_applicable_stages": None,
-    "completed_job_ids": None,
     "deadline_missed_job_ids": None,
     "unfinished_job_ids": None,
     "jobs": "job.job_id",
