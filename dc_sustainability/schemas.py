@@ -27,10 +27,10 @@ from pydantic import (
     BeforeValidator,
     ConfigDict,
     Field,
-    model_validator,
     PlainSerializer,
     Strict,
     StringConstraints,
+    model_validator,
 )
 
 SCHEMA_VERSION = "1.0.0"
