@@ -1295,12 +1295,12 @@ class CheckResult(Versioned):
                     "a passing result cannot contain failed/error checks or violations"
                 )
             required_pass_checks = {
-              "schema",
-              "ids",
-              "timing",
-              "deadline",
-              "nonflexible",
-              "capacity",
+                "schema",
+                "ids",
+                "timing",
+                "deadline",
+                "nonflexible",
+                "capacity",
             }
             missing_checks = required_pass_checks - performed_names
             if missing_checks:
