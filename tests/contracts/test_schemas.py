@@ -903,6 +903,7 @@ def test_extra_fields_cannot_smuggle_calculations_into_slot_records():
 
 # ---------------------------------------------------------------- additional F02 review regressions
 
+
 def test_policy_context_does_not_leak_constraints_for_future_jobs():
     """Verify context and state omit constraints identifying jobs that have not arrived."""
     snap = fx.snapshot()
