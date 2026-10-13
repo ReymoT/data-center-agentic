@@ -960,14 +960,10 @@ def test_decision_record_rejects_execution_check_from_different_episode_or_slot(
     record = fx.decision_record()
     bad_episode_check = record.execution_check.model_copy(update={"episode_id": "EP-OTHER"})
     with pytest.raises(ValueError, match="episode"):
-        s.DecisionRecord(
-            **{**record.model_dump(), "execution_check": bad_episode_check}
-        )
+        s.DecisionRecord(**{**record.model_dump(), "execution_check": bad_episode_check})
     bad_slot_check = record.execution_check.model_copy(update={"slot": 1})
     with pytest.raises(ValueError, match="slot"):
-        s.DecisionRecord(
-            **{**record.model_dump(), "execution_check": bad_slot_check}
-        )
+        s.DecisionRecord(**{**record.model_dump(), "execution_check": bad_slot_check})
 
 
 def test_versioned_json_deserialization_requires_explicit_envelope():
@@ -1004,17 +1000,11 @@ def test_nested_unordered_constraint_jobs_hash_identically():
         applies_to_jobs=("J1", "J2"),
         source_id="SRC-HAND",
     )
-    c2 = s.Constraint(
-        **{**c1.model_dump(), "applies_to_jobs": tuple(reversed(c1.applies_to_jobs))}
-    )
+    c2 = s.Constraint(**{**c1.model_dump(), "applies_to_jobs": tuple(reversed(c1.applies_to_jobs))})
     assert c1.canonical_hash() == c2.canonical_hash()
     snap = fx.snapshot()
-    snap1 = s.ConstraintSnapshot(
-        **{**snap.model_dump(), "constraints": snap.constraints + (c1,)}
-    )
-    snap2 = s.ConstraintSnapshot(
-        **{**snap.model_dump(), "constraints": snap.constraints + (c2,)}
-    )
+    snap1 = s.ConstraintSnapshot(**{**snap.model_dump(), "constraints": snap.constraints + (c1,)})
+    snap2 = s.ConstraintSnapshot(**{**snap.model_dump(), "constraints": snap.constraints + (c2,)})
     assert snap1.canonical_hash() == snap2.canonical_hash()
 
 
@@ -1088,9 +1078,7 @@ def test_context_rejects_conflicting_job_and_deadline_constraint():
         else c
         for c in snap.constraints
     )
-    inconsistent_snap = s.ConstraintSnapshot(
-        **{**snap.model_dump(), "constraints": altered}
-    )
+    inconsistent_snap = s.ConstraintSnapshot(**{**snap.model_dump(), "constraints": altered})
     state = fx.visible_state(inconsistent_snap)
     with pytest.raises(ValueError, match="deadline limit conflicts"):
         s.Context.build(state, inconsistent_snap, "flat")
@@ -1107,8 +1095,7 @@ def test_context_rejects_visible_fact_with_unresolved_source_reference():
     """Verify context construction rejects forecasts referencing unavailable source records."""
     snap = fx.snapshot()
     forecasts = tuple(
-        s.CarbonForecast(**{**f.model_dump(), "source_id": "SRC-MISSING"})
-        for f in fx.forecasts()
+        s.CarbonForecast(**{**f.model_dump(), "source_id": "SRC-MISSING"}) for f in fx.forecasts()
     )
     state = fx.visible_state(snap)
     state = s.VisibleState(**{**state.model_dump(), "carbon_facts": forecasts})
@@ -1170,9 +1157,7 @@ def test_context_rejects_unreferenced_source_records_that_could_leak_private_met
     extra_source["source_id"] = "SRC-FUTURE"
     extra_source["path"] = "private/future-job-fixture.csv"
     data["content"]["sources"].append(extra_source)
-    data["content_hash"] = s.ContextContent.from_jsonable(
-        data["content"]
-    ).canonical_hash()
+    data["content_hash"] = s.ContextContent.from_jsonable(data["content"]).canonical_hash()
     with pytest.raises(ValueError, match="unrelated source records"):
         s.Context.from_jsonable(data)
 
@@ -1224,12 +1209,8 @@ def test_visible_state_rejects_past_or_out_of_episode_carbon_slots():
     """Verify forecast and missing-slot records stay within the visible episode horizon."""
     state = fx.visible_state()
     with pytest.raises(ValueError, match="visible episode horizon"):
-        s.VisibleState(
-            **{**state.model_dump(), "current_slot": 1, "carbon_facts": fx.forecasts()}
-        )
-    future_forecast = s.CarbonForecast(
-        **{**fx.forecasts()[0].model_dump(), "valid_slot": 30}
-    )
+        s.VisibleState(**{**state.model_dump(), "current_slot": 1, "carbon_facts": fx.forecasts()})
+    future_forecast = s.CarbonForecast(**{**fx.forecasts()[0].model_dump(), "valid_slot": 30})
     with pytest.raises(ValueError, match="visible episode horizon"):
         s.VisibleState(**{**state.model_dump(), "carbon_facts": (future_forecast,)})
     with pytest.raises(ValueError, match="visible episode horizon"):
@@ -1262,9 +1243,7 @@ def test_constraint_snapshot_rejects_multiple_capacity_limits():
         **{**capacity.to_jsonable(), "constraint_id": "CON-CAP-02", "limit_value": 70.0}
     )
     with pytest.raises(ValueError, match="at most one capacity"):
-        s.ConstraintSnapshot(
-            **{**snap.to_jsonable(), "constraints": (*snap.constraints, second)}
-        )
+        s.ConstraintSnapshot(**{**snap.to_jsonable(), "constraints": (*snap.constraints, second)})
 
 
 def test_deserialized_context_rejects_conflicting_job_constraint():
@@ -1318,9 +1297,7 @@ def test_execution_recheck_can_use_a_newer_state_version_for_the_same_slot():
     latest_check = s.CheckResult.from_jsonable(
         {**original_check.to_jsonable(), "check_id": "CHK-LATEST-1", "state_version": 1}
     )
-    actions = s.ApprovedActions.from_checked_plan(
-        plan, latest_check, expected_state_version=1
-    )
+    actions = s.ApprovedActions.from_checked_plan(plan, latest_check, expected_state_version=1)
     assert actions.state_version == 1
     assert actions.plan_hash == plan.plan_hash
 
@@ -1331,13 +1308,9 @@ def test_execution_recheck_can_use_a_newer_state_version_for_the_same_slot():
     assert latest_record.execution_check.state_version == 1
 
     with pytest.raises(ValueError, match="latest expected state version"):
-        s.ApprovedActions.from_checked_plan(
-            plan, latest_check, expected_state_version=0
-        )
+        s.ApprovedActions.from_checked_plan(plan, latest_check, expected_state_version=0)
     with pytest.raises(ValueError, match="non-negative integer"):
-        s.ApprovedActions.from_checked_plan(
-            plan, latest_check, expected_state_version=True
-        )
+        s.ApprovedActions.from_checked_plan(plan, latest_check, expected_state_version=True)
 
 
 def test_executed_trace_must_record_all_and_only_approved_current_starts():
