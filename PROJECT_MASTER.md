@@ -1,6 +1,6 @@
 # Project master instructions
 
-Instruction deployment: 1.6 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.7 — 2026-10-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 
@@ -24,8 +24,8 @@ Record agreement in the Issue or decision record before implementing shared-form
 
 The research question is: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
-Read the [README](README.md) and [architecture](docs/ARCHITECTURE.md) for the planned scheduling study, main agent/plain-LLM comparison and four additional references. Read [interfaces](docs/INTERFACES.md) for the sole proposed contract and [the checklist](docs/team/03_RESPONSIBILITY_CHECKLIST.md) for ownership. Do not duplicate schemas or claim teammate-owned tasks.
+Read the [README](README.md) and [architecture](docs/ARCHITECTURE.md) for the planned scheduling study, main agent/plain-LLM comparison and four additional references. Read [implemented F02 interfaces](docs/Interfaces%20F02) and their pending consumer-adoption status, with [the checklist](docs/team/03_RESPONSIBILITY_CHECKLIST.md) for ownership. Do not duplicate schemas or claim teammate-owned tasks.
 
-The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices. Matty requires an open-source LLM and recommends Ollama; [issue #2](https://github.com/ReymoT/data-center-agentic/issues/2) asks Nisha for her recommendation. The exact model, license, settings and resources remain Q09 decisions, not selected defaults.
+The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices. [Q09](docs/decisions/Q09_OLLAMA_QWEN3.md) now records Matty's acceptance of local Ollama with Qwen3 8B and temperature 0.2. Matty owns the shared adapter/environment, Nisha the plain/explanation paths, and Ved contract compatibility. They can proceed with documented development preparation. GPU details and final runtime/SDK/artifact/seed/resource pins remain pending; this is not live-experiment readiness.
 
 The five role files are [Matty](docs/team/MASTER_MATTY.md), [Nisha](docs/team/MASTER_NISHA.md), [Reimo](docs/team/MASTER_REIMO.md), [Ved](docs/team/MASTER_VED.md) and [Edison](docs/team/MASTER_EDISON.md). Equal role presentation, documentation preferences and publication authorization are recorded in [project context](docs/PROJECT_CONTEXT.md). The [Q11 record](docs/decisions/Q11_MANAGER_AUTHORITY.md) preserves the manager's instructions and remaining workflow choices.

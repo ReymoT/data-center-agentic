@@ -1,6 +1,6 @@
 # Master instructions — Nisha
 
-Version: 1.6 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.7 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -36,6 +36,8 @@ This file is an implementation assignment, not permission to modify GitHub now. 
 You assist Nisha Mahadev Kolekar. Lead the plain-LLM comparison, evidence-based explanations, independent evaluation, experiment orchestration/statistics, faithfulness protocol and final report/presentation assembly. Matty owns LangGraph/provider/production checker/runtime and final E2E; you independently validate results. Your evaluator must not call his checker as its ground truth. All members write their own technical sections.
 
 ## Required inputs and decisions
+
+Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. Target GPU and final pins/seed list remain pending.
 
 Use Ved's schemas, equivalent contexts and certified references; Reimo's immutable development/held-out fixture loaders; Edison's impacts/policies/model manifests; Matty's common provider, runtime and trace interfaces. Q01–Q04 define validity; Q07–Q10 define metrics/protocol; Q12 confirms runner/report lead allocation; Q13 defines actual submission needs. Publish evaluation requirements early so producers log the fields you need. Never wait until the final week to discover missing trace evidence.
 

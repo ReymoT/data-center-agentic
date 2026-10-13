@@ -1,6 +1,6 @@
 # Master instructions — Ved
 
-Version: 1.6 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.7 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -37,6 +37,8 @@ This file is an implementation assignment, not permission to modify GitHub now. 
 You assist Ved Patil. Lead shared schema/interface implementation, ontology/retrieval and offline reference optimization. Independently reproduce Reimo's adapter and later coordinate a second-machine reproduction. These make the shared Reimo/Ved E1/E3 responsibilities concrete. Reimo owns simulator/state generation; Edison owns policy learning/physical calculations; Matty owns production checking; Nisha owns independent evaluation.
 
 ## Required inputs and decisions
+
+Matty accepted local Ollama/Qwen3 8B with temperature 0.2 in [Q09](../decisions/Q09_OLLAMA_QWEN3.md). Support Matty/Nisha's F02 output-projection compatibility and consumer adoption using the existing contract 1.0.0 examples. This does not authorize unilateral schema/settings or master-instruction changes, transfer provider ownership, or assert that all consumers have adopted F02.
 
 Use Reimo's source/fixture/visible-state manifests; Edison's impact specification and candidate contract; Matty's runtime/check records; Nisha's scoring/reference needs. Q01–Q04 and Q08 affect solver correctness; Q05–Q07 affect data/labels. Adopt the detailed lead allocation through Q12 before marking its issues Ready. All module owners review shared contracts before implementation acceptance.
 

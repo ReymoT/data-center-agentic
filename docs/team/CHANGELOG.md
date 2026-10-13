@@ -1,6 +1,16 @@
 # Instruction deployment changelog
 
-Current deployment: 1.6 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. The proposed interface contract remains version 1.0 until F02 defines and validates schemas. Instruction versions do not imply schema adoption.
+Current deployment: 1.7 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.7 - 2026-10-12
+
+- Recorded Matty's acceptance of Nisha's local Ollama/Qwen3 8B Q4_K_M recommendation and his temperature-0.2 selection for both LLM systems. Exact deployment pins, GPU details, matched trial seeds and resource/run authorization remain open.
+- Published the decision and owner handoff: Matty prepares A01/F03, Nisha prepares L01/L02 and Ved supports F02 compatibility. Notified them in issue #2. No task is marked Done or transferred; no live run, SDK installation or schema change is claimed.
+- Preserved all upstream teammate commits, including Reimo's D01 carbon loader and Ved's F02 schemas/examples. Updated stale setup-only status and the shared interface pointer to acknowledge those implementations without claiming consumer adoption.
+- Aligned the five numbered files and five role versions, project master, context, readiness, dependency/test guidance and README. The identical seven-file merge/authority rules and 50 task allocations/dependencies remain unchanged.
+- Existing contract, carbon-loader and offline-provider-mock suites passed locally: 193 tests and 19 subtests. These checks do not validate model inference or end-to-end integration.
+
+See [the 1.7 handoff](../handoffs/Q09_ACCEPTANCE.md) for evidence, authorized owner preparation and remaining inputs.
 
 ## Deployment 1.6 - 2026-10-12
 

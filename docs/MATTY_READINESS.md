@@ -10,7 +10,7 @@ Matty is the project manager and explicitly authorizes document publication to m
 
 ## Required inputs
 
-- Ved: validated F02 schemas and examples, equivalent graph/flat contexts with hashes, authoritative constraints, graph failure fixtures and offline reference interfaces. No schema implementation is present in the current scaffold.
+- Ved: F02 schema implementation and examples are merged at `a61a7f2`, contract 1.0.0. The existing contract suite passes locally; each consumer still needs adoption/compatibility evidence. Actual graph/flat retrieval, graph failure fixtures and offline reference implementations remain required.
 - Reimo: immutable development fixtures, private/public visibility boundaries, simulator reset/state/step, source/unit/license manifests, split/fold/seed rules and stale/missing-evidence examples.
 - Edison: verified impacts, reusable A fallback, A/B adapters, candidate features and trained C/D artifacts with hashes, reload and consumer tests.
 - Nisha: plain/explanation records and prompts, independent scoring/rubric, common runner/CLI/resume contract, blinded samples, original ratings and later evaluation/report artifacts.
@@ -20,7 +20,7 @@ Matty is the project manager and explicitly authorizes document publication to m
 
 The explicit user request authorizes local repository preparation and Matty's documentation preferences. F01 structure/templates and initial F04/F05 documents can proceed without deciding scientific behavior. Supplied candidate dependency validation supports F03. Publication supplies the repository foundation and documentation without a formal review request. It does not establish F02 schemas, implement blocked scientific rules or claim integrated acceptance. The current setup handoff and audit record document verified evidence and limits.
 
-Implementation acceptance for A01-A04 and integration awaits upstream contracts/code and applicable accepted decisions. In particular, Q09 blocks provider choice/live spending; Q01-Q04 block scheduling/checker semantics. The [full decision index](team/04_OPEN_DECISIONS.md) records remaining choices and the partial Q11 resolution for manager authority and publication:
+Matty accepted local Ollama/Qwen3 8B and temperature 0.2 in [Q09](decisions/Q09_OLLAMA_QWEN3.md). A01/F03 adapter, accounting, environment and consumer-check preparation can proceed. Nisha owns L01/L02 preparation using that common adapter; Ved supports F02 compatibility. Actual adapter/plain/retrieval integration and acceptance still require implemented dependencies. Target GPU and final runtime/SDK/artifact/seed/resource pins remain pending. Q01-Q04 continue to block dependent scheduling/checker semantics. The [full decision index](team/04_OPEN_DECISIONS.md) records remaining choices and the partial Q11 resolution for manager authority and publication:
 
 Q01 completion starts; Q02 partial infeasibility; Q03 coverage/deferrals/work/scoring denominators; Q04 issue times/freshness/partial coverage/fallback scope; Q05 verified source meaning/units/times/rights; Q06 distributions/seeds/splits; Q07 ML features/rollout/metrics/ties; Q08 solver certification/objective/limits; Q09 provider/settings/budget/account; Q10 blinded review/sample/statistics; Q11 coordinator/permissions/accounts/publisher/merge; Q12 lead/technical-contact allocations; Q13 course deadline/delivery/license/retention/platforms.
 

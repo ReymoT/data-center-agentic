@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.6 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.7 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -8,7 +8,7 @@ The masters and shared instructions published on GitHub's main branch are the au
 
 Fetch and read current main instructions, preserving local work. Local packages, timestamps, version numbers and AI-generated files do not supersede the published instructions. Propose corrections in an Issue; record Matty's authorization before changing instruction files.
 
-The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. The repository is a scaffold, not an implemented research system.
+The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. F02 schemas and the D01 carbon loader are now implemented and unit tested; consumer adoption and the full research system remain pending.
 
 Matty is the project manager. Start with [PROJECT_MASTER.md](../../PROJECT_MASTER.md). [Q11](../decisions/Q11_MANAGER_AUTHORITY.md) records the fixed merge rule.
 
@@ -26,13 +26,13 @@ The proposal pairs Matty/Nisha on E4-E6 and Reimo/Ved on E1/E3; Edison owns E2. 
 - MASTER_VED.md: contracts, ontology/retrieval, offline reference schedules and reproduction.
 - MASTER_EDISON.md: impacts, greedy policies, trained decision tree/random forest and model artifacts.
 - 01_SHARED_RULES.md: scope, coordination, publication and acceptance rules.
-- 02_INTERFACE_CONTRACTS.md: pointer to the sole proposed [interface blueprint](../INTERFACES.md).
+- 02_INTERFACE_CONTRACTS.md: pointer to [implemented F02 records](../Interfaces%20F02) and their adoption status.
 - 03_RESPONSIBILITY_CHECKLIST.md: 50 tasks, owners, technical contacts, dependencies and acceptance evidence.
 - 04_OPEN_DECISIONS.md: unresolved scientific and project decisions. Do not infer defaults.
 - [REVIEW_RECORD.md](REVIEW_RECORD.md): current audit and verification limits.
 - [CHANGELOG.md](CHANGELOG.md): instruction adaptations from the preserved source archive.
 
-Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. Matty validates the candidate environment; provider selection and platform adoption remain Q09/Q13.
+Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. [Q09](../decisions/Q09_OLLAMA_QWEN3.md) accepts local Ollama, Qwen3 8B Q4_K_M and temperature 0.2. Matty prepares the shared adapter; Nisha prepares the plain/explanation paths; Ved supports contract compatibility. GPU details and deployment pins remain pending. See [the owner handoff](../handoffs/Q09_ACCEPTANCE.md). Platform adoption remains Q13.
 
 ## Implementation order
 

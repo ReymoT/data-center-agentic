@@ -1,6 +1,6 @@
 # Candidate environment
 
-These are the sole maintained copies of package 1.0's proposed core input and Windows x64 CPython 3.12 lock. The lock was dependency-resolved before this task; runtime validation in this branch must be reported separately in [the handoff](../docs/handoffs/F01.md). Provider SDK/settings remain unresolved Q09. Supported platforms and Python adoption remain Q13. Do not claim this is the final environment.
+These are the sole maintained copies of package 1.0's proposed core input and Windows x64 CPython 3.12 lock. The lock was dependency-resolved before this task; runtime validation in this branch must be reported separately in [the handoff](../docs/handoffs/F01.md). [Q09](../docs/decisions/Q09_OLLAMA_QWEN3.md) now accepts Ollama/Qwen3 8B with temperature 0.2; Matty owns SDK compatibility/version-lock preparation. No provider SDK has been added to this lock yet. Deployment pins/resources remain pending; supported platforms and Python adoption remain Q13. Do not claim this is the final environment.
 
 Create an isolated Python 3.12 environment, install using `--require-hashes`, run `pip check`, `scripts/smoke_dependencies.py`, Ruff check/format, then the offline bootstrap validator as shown in [README](../README.md). Package installation requires network access; smoke execution itself is offline and uses no model.
 

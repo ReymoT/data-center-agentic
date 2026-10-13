@@ -15,7 +15,7 @@ Our research question: Does an ontology-grounded, tool-verified agent improve th
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains the project documentation and implementation scaffold. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable commands below check the repository foundation and candidate dependencies. They do not run experiments or establish research results.
+This repository contains project documentation, F02 shared schemas/examples, D01 carbon ingestion, and the remaining implementation scaffold. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
 
 ## Systems we reviewed and why we chose this architecture
 
@@ -90,7 +90,7 @@ The [offline provider mocks](tests/llm/README.md) have 13 helper tests for scrip
 
 Copy `.env.example` to a local `.env` only when Q09 is approved. All provider/account/settings placeholders are blank; no paid call is enabled. [The configuration template](configs/project.example.json) records known proposal constants and keeps open decisions null. It is not a production loader or an execution permission.
 
-Matty requires an open-source LLM and recommends Ollama as the serving runtime. [The Q09 discussion](https://github.com/ReymoT/data-center-agentic/issues/2) requests Nisha's recommendation. The model/version/license, hardware, settings and budget remain unselected.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. GPU details and final runtime/SDK/model-digest/seed/resource pins remain pending. The model is not installed or live-tested by this acceptance; no held-out/cloud/paid run is authorized.
 
 ## Data, experiments and outputs
 

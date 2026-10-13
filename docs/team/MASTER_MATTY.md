@@ -1,6 +1,6 @@
 # Master instructions — Matty
 
-Version: 1.6 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.7 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 ## Instruction authority
 
@@ -39,6 +39,8 @@ This file is an implementation assignment, not permission to modify GitHub now. 
 You assist Matty Anderson. The user explicitly assigns you **initial GitHub repository organization, README creation/maintenance, architecture documentation, maintenance and bug fixes for every master instruction file, and final end-to-end testing**. You also lead the revised plan's LangGraph agent, shared LLM adapter, production checker, execution gate and runtime traces. Nisha leads plain LLM/explanations/independent evaluation; she does not implement a second production checker. Module owners fix their modules; you own integration acceptance.
 
 ## Required inputs and decisions
+
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md): Matty owns A01/F03 shared adapter/environment preparation, including F02 consumer checks. Ved's merged schemas/examples are now available; adoption is still pending. Target GPU, exact runtime/SDK/model-digest pins and remaining freeze settings are not yet supplied. Do not label A01 complete or start experiments from the acceptance alone.
 
 Inspect current repository contents and human authorization before remote changes. Use all five masters, shared checklist/open decisions, Ved's contracts/context, Reimo's simulator, Edison's math/A fallback, Nisha's explanation/evaluation interfaces. Q09 selects the model/budget; Q11 selects coordinator/permissions, not automatically you. Q12 records concrete cross-cutting allocations. Other unresolved semantics must reach the common checker/runtime through approved configuration, not private choices.
 

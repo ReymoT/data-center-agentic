@@ -1,6 +1,6 @@
 # Test areas
 
-Directories reserve module-owner test locations. They currently contain no production tests. Matty owns `e2e/`, Ved owns `contracts/`, Nisha owns independent `evaluation/`, and other directories follow module ownership.
+Directories reserve module-owner test locations. Ved's F02 contract tests and Reimo's D01 carbon-loader tests are now executable alongside the provider-mock helper tests. Matty owns `e2e/`, Ved owns `contracts/`, Nisha owns independent `evaluation/`, and other directories follow module ownership. Scheduling/checker/runtime tests still require those implementations.
 
 Matty's [production checker case catalogue](verification/CASES.md) prepares 19 cases with established rule expectations and four scenarios waiting for Q01-Q04. It is a test specification, not an executable suite or passing checker evidence.
 
