@@ -1,0 +1,44 @@
+{
+  "evidence_kind": "local_installation_blob_integrity_not_inference",
+  "verified_at_utc": "2026-10-13T04:32:59.5491759Z",
+  "local_manifest_sha256": "b3d9ba7c899cfd112df2574c6a91458a70b724c5e4e50dfffd75574b2d1648e7",
+  "blobs": [
+    {
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "sha256": "05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76",
+      "size_bytes": 487,
+      "hash_and_size_verified": true
+    },
+    {
+      "media_type": "application/vnd.ollama.image.model",
+      "sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+      "size_bytes": 5225374496,
+      "hash_and_size_verified": true
+    },
+    {
+      "media_type": "application/vnd.ollama.image.template",
+      "sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+      "size_bytes": 1723,
+      "hash_and_size_verified": true
+    },
+    {
+      "media_type": "application/vnd.ollama.image.license",
+      "sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "size_bytes": 11338,
+      "hash_and_size_verified": true
+    },
+    {
+      "media_type": "application/vnd.ollama.image.params",
+      "sha256": "cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+      "size_bytes": 120,
+      "hash_and_size_verified": true
+    },
+    {
+      "media_type": "application/vnd.docker.distribution.manifest.v2+json",
+      "sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "size_bytes": 859,
+      "hash_and_size_verified": true
+    }
+  ],
+  "model_calls": 0
+}

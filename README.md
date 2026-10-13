@@ -91,7 +91,15 @@ The offline test command runs F02 contracts, D01 inspection, provider helpers, a
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Ollama 0.40.3 is installed, but Qwen3 8B is absent. Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Ollama 0.40.3 and Qwen3 8B Q4_K_M are installed, with [verified digest/license and reproducible setup](docs/OLLAMA_SETUP.md). Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
+
+## Installed local model
+
+Matty completed the independent A01/F03 installation and identity checks. Qwen3 8B Q4_K_M is installed locally; its full digest, license, template/default-parameter hashes and independently checked stored blobs are recorded. Weights remain outside GitHub. Use [the model setup guide](docs/OLLAMA_SETUP.md) to reproduce or compare metadata. No inference or GPU-throughput test was performed, and the remaining deployment/context/projection/seed/resource choices still block live readiness.
+
+```powershell
+.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b.json
+```
 
 ## Available adapter and checker core
 

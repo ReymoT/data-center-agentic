@@ -9,3 +9,19 @@ The canonical interface, schema code/examples, carbon code/manifests, dependency
 Local verification passed 258 tests and 19 subtests, lint, formatting, compilation, pip consistency, dependency smoke, setup and whitespace checks. The 65 new tests exercise actual fixed-checker logic and actual local HTTP transport with labeled synthetic server responses. The server is test-only; no model inference, execution approval, independent scientific evaluation or live integration is claimed. Q01-Q04 and remaining Q09 deployment/context/projection/resource inputs still block full A01/A03 acceptance. F03's final provider-inclusive/platform acceptance remains pending.
 
 Matty authorizes direct publication to main. No formal review request, independent approval or successful scientific experiment is claimed. The original package archive remains unchanged outside Git.
+
+## Subsequent A01/F03 model setup
+
+On 2026-10-12, Matty authorized the independent installation and identity-recording
+step. [The model setup handoff](../handoffs/A01_F03_MODEL_SETUP.md) records successful
+Qwen3 8B Q4_K_M installation, complete digest/license metadata, six independently
+verified stored blobs and a fresh matching metadata comparison. Weights and private
+machine identifiers stay outside Git. No model inference or GPU measurement ran.
+
+The repository now passes 264 tests and 19 subtests, lint, formatting (36 Python
+files), compilation, pip consistency, setup validation and whitespace checks.
+Six new inventory tests use labeled synthetic metadata and cover actual validation
+failures; they are not evidence of inference. Shared schemas, dependencies, model
+generation settings, scientific decisions and the seven-file policies are preserved.
+Instruction deployment remains 1.9. Full A01/F03 integration and acceptance still
+need the documented run inputs and consumer evidence.

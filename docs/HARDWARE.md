@@ -12,7 +12,7 @@ Device name, product ID, device ID and the raw screenshot are excluded from publ
 | GPU | Intel Arc 140V integrated graphics; Windows labels it “(16GB)” |
 | GPU driver | 32.0.101.8132, read from Win32_VideoController |
 | Ollama | CLI and local `/api/version` both report 0.40.3 |
-| Installed models | Local `/api/tags` and `ollama list` show only `llama3.2:3b` |
+| Installed models | Local `/api/tags` and `ollama list` now show `qwen3:8b` Q4_K_M and the preserved `llama3.2:3b` |
 | Loaded models | `ollama ps` was empty at inspection |
 
 Intel integrated graphics uses system RAM and has no separate dedicated VRAM bank.
@@ -26,11 +26,9 @@ Vulkan is enabled by default when its backend is installed. This identifies a
 possible acceleration path, not proof that this laptop has offloaded the selected
 model. [Ollama hardware documentation](https://docs.ollama.com/gpu).
 
-Qwen3 8B is not installed. No model was downloaded, loaded or called during this work.
-The existing Llama model is not an approved substitute. No GPU driver, service
-environment or machine setting was changed.
+Update 2026-10-12: Matty authorized and completed Qwen3 8B installation. [The setup guide](OLLAMA_SETUP.md) records its digest/license and independently verified blobs. No model was loaded or called; the existing Llama model is preserved and is not an approved substitute. No GPU driver or service environment was changed.
 
-Before live readiness, record Qwen's actual full digest/metadata, accept the exact
+Qwen's full digest/license metadata is now recorded. Before live readiness, accept the exact
 deployment configuration, validate the prompt/context policy, and authorize a
 bounded development smoke run. Capture actual `ollama ps` processor/offload output,
 memory use, token throughput and latency against the 120-second call target.

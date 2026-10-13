@@ -4,6 +4,8 @@ Current deployment: 1.9 - 2026-10-12. The original source archive remains packag
 
 ## Deployment 1.9 - 2026-10-12
 
+- Subsequent authorized A01/F03 setup installed the accepted Qwen3 8B Q4_K_M, recorded full digest/license/template/default-parameter metadata and independently verified all stored blobs. Added a read-only inventory/compare tool and [setup handoff](../handoffs/A01_F03_MODEL_SETUP.md). No shared instruction rule, schema, generation setting, SDK/lock or scientific decision changed; deployment stays 1.9. Live inference and full A01/F03 acceptance remain pending.
+
 - Matty requested development of the agreed A01/A03 portions and supplied his hardware. [The handoff](../handoffs/A01_A03_AGREED_CORE.md) records actual code, tests and remaining acceptance blockers, with self-assigned issues #6/#7.
 - Implemented local Ollama REST transport/accounting and fixed-rule F02 schedule/evidence checks. No execution approvals, live inference, synthetic production responses, shared-schema/settings changes or new SDK dependency are claimed.
 - Recorded hardware and installed runtime observations. GPU/driver inventory is available; Qwen installation, measured offload/resources and accepted deployment pins remain pending. Updated current README/architecture and instruction status, keeping scientific decisions and exact merge/authority rules unchanged.
