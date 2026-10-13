@@ -900,6 +900,7 @@ def test_extra_fields_cannot_smuggle_calculations_into_slot_records():
             slot=0, phase="decision", job_load_kw=0, background_load_kw=40, emissions_factor=1.2
         )
 
+
 # ---------------------------------------------------------------- additional F02 review regressions
 
 def test_policy_context_does_not_leak_constraints_for_future_jobs():
@@ -1169,7 +1170,6 @@ def test_context_content_rejects_duplicate_nested_identifiers():
     content["sources"] = context.content.sources + context.content.sources
     with pytest.raises(ValueError, match="duplicate context source ids"):
         s.ContextContent(**content)
-
 
 
 def test_visible_state_from_snapshot_projects_only_currently_visible_constraint_ids():
