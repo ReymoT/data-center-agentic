@@ -928,7 +928,7 @@ class Context(Versioned):
         unrelated_sources = source_ids - required_source_ids
         if unrelated_sources:
             raise ValueError(
-              f"context includes unrelated source records: {sorted(unrelated_sources)}"
+                f"context includes unrelated source records: {sorted(unrelated_sources)}"
             )
         expected_evidence_ids = {"FACT-SITE-BG", "FACT-SITE-PUE", "FACT-SITE-SLOTH"}
         expected_evidence_ids |= {f"FACT-JOB-{j.job_id}" for j in self.content.waiting_jobs}
@@ -1300,7 +1300,7 @@ class CheckResult(Versioned):
               "timing",
               "deadline",
               "nonflexible",
-              "capacity"
+              "capacity",
             }
             missing_checks = required_pass_checks - performed_names
             if missing_checks:
