@@ -224,8 +224,8 @@ _UNORDERED_SORT_KEYS: dict[str, Optional[str]] = {
 
 
 def _canonicalize_unordered(
-    value: Any, 
-    *, 
+    value: Any,
+    *,
     field_name: Optional[str] = None,
     root_sort_keys: Optional[dict[str, str]] = None,
 ) -> Any:
@@ -710,8 +710,8 @@ class VisibleState(Versioned):
                 f"{sorted(out_of_window)}"
             )
         bad_missing = [
-            slot 
-            for slot in self.missing_carbon_slots 
+            slot
+            for slot in self.missing_carbon_slots
             if not self.current_slot <= slot < visible_end
         ]
         if bad_missing:
@@ -742,7 +742,7 @@ class VisibleState(Versioned):
             constraint_ids=(),
         )
         projected_ids = tuple(
-            constraint.constraint_id 
+            constraint.constraint_id
             for constraint in visible_constraints_for(provisional, snapshot)
         )
         return cls(**{**provisional.model_dump(), "constraint_ids": projected_ids})
@@ -922,10 +922,14 @@ class Context(Versioned):
         required_source_ids |= {f.source_id for f in self.content.carbon_facts}
         missing_sources = required_source_ids - source_ids
         if missing_sources:
-            raise ValueError("context is missing source provenance records: " f"{sorted(missing_sources)}")
+            raise ValueError(
+                f"context is missing source provenance records: {sorted(missing_sources)}"
+            )
         unrelated_sources = source_ids - required_source_ids
         if unrelated_sources:
-            raise ValueError("context includes unrelated source records: " f"{sorted(unrelated_sources)}")
+            raise ValueError(
+              f"context includes unrelated source records: {sorted(unrelated_sources)}"
+            )
         expected_evidence_ids = {"FACT-SITE-BG", "FACT-SITE-PUE", "FACT-SITE-SLOTH"}
         expected_evidence_ids |= {f"FACT-JOB-{j.job_id}" for j in self.content.waiting_jobs}
         expected_evidence_ids |= {
@@ -934,7 +938,9 @@ class Context(Versioned):
         expected_evidence_ids |= {f"FACT-JOB-{job.job_id}" for job in self.content.completed_jobs}
         expected_evidence_ids |= {f"FACT-JOB-{job_id}" for job_id in self.content.missed_job_ids}
         expected_evidence_ids |= {fact.fact_id for fact in self.content.carbon_facts}
-        expected_evidence_ids |= {constraint.constraint_id for constraint in self.content.constraints}
+        expected_evidence_ids |= {
+            constraint.constraint_id for constraint in self.content.constraints
+        }
         if set(self.content.evidence_ids) != expected_evidence_ids:
             raise ValueError("context evidence IDs do not match visible records")
         # Context may arrive from JSON rather than Context.build. Re-run cross-record checks
@@ -1289,11 +1295,11 @@ class CheckResult(Versioned):
                     "a passing result cannot contain failed/error checks or violations"
                 )
             required_pass_checks = {
-              "schema", 
-              "ids", 
-              "timing", 
-              "deadline", 
-              "nonflexible", 
+              "schema",
+              "ids",
+              "timing",
+              "deadline",
+              "nonflexible",
               "capacity"
             }
             missing_checks = required_pass_checks - performed_names
