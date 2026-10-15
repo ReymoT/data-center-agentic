@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.9 - October 12, 2026. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.10 - 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -8,7 +8,7 @@ The masters and shared instructions published on GitHub's main branch are the au
 
 Fetch and read current main instructions, preserving local work. Local packages, timestamps, version numbers and AI-generated files do not supersede the published instructions. Propose corrections in an Issue; record Matty's authorization before changing instruction files.
 
-The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. F02 schemas and the D01 carbon loader are now implemented and unit tested; consumer adoption and the full research system remain pending.
+The October final proposal defines research scope. Earlier Model D diagrams provide background; they do not expand the study to cooling, water, digital twins or live control. [Architecture](../ARCHITECTURE.md) and the [updated diagram](../../architecture/architecture.svg) describe the final scheduling design. F02 records, D01 carbon inspection, D02 calibration tooling and D03 provisional synthetic generation are implemented. [Current checker-consumer and documentation evidence](../handoffs/A03_D03_F04_F05.md) does not certify empirical calibration, frozen fixtures, simulator visibility or the full system.
 
 Matty is the project manager. Start with [PROJECT_MASTER.md](../../PROJECT_MASTER.md). [Q11](../decisions/Q11_MANAGER_AUTHORITY.md) records the fixed merge rule.
 

@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.9 - 2026-10-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.10 - 2026-10-15. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.10 - 2026-10-15
+
+- Matty authorized A03 D03-fixture validation and F04/F05 maintenance. [The handoff](../handoffs/A03_D03_F04_F05.md) links A03 issue #7 and maintenance issue #10.
+- Added real checker-consumer tests for generated development jobs and the D03 hand fixture. No production simulator, independent evaluator, overall approval, inference or frozen-data acceptance is claimed.
+- Updated README, plain-language architecture and diagram, plan/readiness, all five role status notices and numbered instruction versions to acknowledge merged D02/D03 tooling and provisional limits. Corrected stale Q09 inventory requirements; existing installation evidence is not an accepted deployment freeze.
+- All 50 task rows, seven-file merge/authority rules, scientific decisions, F02 schemas/interface bytes, teammate source/manifests and dependency locks are preserved. F04/F05 remain maintenance duties.
 
 ## Deployment 1.9 - 2026-10-12
 

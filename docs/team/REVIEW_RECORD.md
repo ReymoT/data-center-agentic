@@ -1,6 +1,17 @@
 # Publication audit
 
-Instruction deployment: 1.9 - 2026-10-12. Current scope is Matty's A01/A03 agreed core and supplied hardware. [The implementation handoff](../handoffs/A01_A03_AGREED_CORE.md) links issues #6/#7, code, tests and limits. [The previous maintenance handoff](../handoffs/F03_F04_F05_MAINTENANCE.md) retains its historical evidence. This is a publication audit, not a formal reviewer-approval gate.
+Instruction deployment: 1.10 - 2026-10-15. Current maintenance is recorded in [the D03 consumer handoff](../handoffs/A03_D03_F04_F05.md). The dated evidence below describes prior publications.
+
+Previous deployment: 1.9 - 2026-10-12. Current scope is Matty's A01/A03 agreed core and supplied hardware. [The implementation handoff](../handoffs/A01_A03_AGREED_CORE.md) links issues #6/#7, code, tests and limits. [The previous maintenance handoff](../handoffs/F03_F04_F05_MAINTENANCE.md) retains its historical evidence. This is a publication audit, not a formal reviewer-approval gate.
+
+Deployment 1.10 verification: 742 tests and 19 subtests passed locally, including
+29 actual D03-to-checker consumer cases. Lint/format (41 Python files), compilation,
+setup, pip, dependency smoke and whitespace passed. Architecture SVG/PNG were
+visually checked; README's new catalog command ran successfully. The handoff records
+the observed Windows CRLF/Git LF hash difference with equal JSON content. All task
+allocations, seven-file policies, schemas/interface bytes, teammate code/manifests
+and locks remain unchanged. Q01-Q06 remain pending where documented; partial
+consumer evidence does not establish full A03, simulator or scientific acceptance.
 
 Affected files were checked for scope, unresolved decisions, identity, exclusions and honest implementation status. README retains equally formatted roles, Matty/Nisha together, and the reviewed systems/rationale. Architecture text and visually inspected SVG/PNG identify F02/D01 and A01/A03 core as implemented, with the complete pipeline still planned. Hardware publication excludes raw screenshot and device/product IDs.
 

@@ -71,7 +71,7 @@ py -3.12 -m venv .venv
 .venv\Scripts\python.exe scripts/validate_setup.py
 ```
 
-The checker needs only the Python standard library and makes no network or model calls. It validates documentation links, task ownership/dependencies, role consistency, configuration placeholders and dependency input locations.
+The setup validator needs only the Python standard library and makes no network or model calls. It validates documentation links, task ownership/dependencies, role consistency, configuration placeholders and dependency input locations.
 
 To validate the proposed full Windows environment:
 
@@ -87,7 +87,7 @@ To validate the proposed full Windows environment:
 
 Installation needs package-index access. Smoke checks run imports, SHACL/SPARQL, a tiny MILP, classifier fit/save/load and a LangGraph route without an LLM. See [environment instructions](requirements/README.md) for status and troubleshooting. The supplied lock is a candidate, not a final provider-inclusive environment. Do not use its Windows wheel hashes on other platforms.
 
-The offline test command runs F02 contracts, D01 inspection, provider helpers, actual Ollama transport against a local synthetic HTTP test server, and actual fixed schedule checks. Synthetic fixtures and server responses are test-only; they do not establish model inference, source acceptance or end-to-end integration. CI runs the same whole test directory on PRs and main. [The A01/A03 handoff](docs/handoffs/A01_A03_AGREED_CORE.md) links implementation and verification evidence.
+The offline test command runs F02 contracts, D01 inspection, D02 calibration tooling, D03 provisional scenarios, provider helpers, actual Ollama transport against a local synthetic HTTP test server, and actual fixed schedule checks. [New A03 consumer tests](tests/verification/test_d03_consumer.py) exercise D03-generated development jobs against those fixed checks without issuing approvals. Synthetic fixtures and server responses are test-only; they do not establish model inference, source acceptance or end-to-end integration. CI runs the same whole test directory on PRs and main. [The A01/A03 handoff](docs/handoffs/A01_A03_AGREED_CORE.md) links implementation and verification evidence.
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
@@ -115,7 +115,7 @@ Run these components' offline tests with:
 
 ## Data, experiments and outputs
 
-Reimo implemented pinned SustainDC Arizona source acquisition, checksum/CSV inspection and private UTC observations. Pollutant meaning, physical hour-start/hour-end mapping, derived-data redistribution rights, F02 adaptation and independent source reproduction still block accepted experimental use. [Data instructions](data/README.md) record acquisition and evidence. Frontier-calibrated job generation and episodes remain planned; EPA eGRID is an annual plausibility check. Perfect-foresight forecast replay must be labeled and must not be confused with a live forecast.
+Reimo implemented pinned SustainDC Arizona source acquisition, checksum/CSV inspection and private UTC observations. Pollutant meaning, physical hour-start/hour-end mapping, derived-data redistribution rights, F02 adaptation and independent source reproduction still block accepted experimental use. [Data instructions](data/README.md) record acquisition and evidence. D02 implements explicit-field/unit calibration tooling, but actual Frontier access and empirical statistics are still blocked. D03 implements provisional synthetic jobs across four scenarios and private episode assembly; it is not Frontier-calibrated or the frozen development/held-out dataset. Q05/Q06 and downstream adoption remain open. EPA eGRID is an annual plausibility check. Perfect-foresight forecast replay must be labeled and must not be confused with a live forecast.
 
 The implemented source-inspection command is:
 
@@ -124,6 +124,16 @@ The implemented source-inspection command is:
 ```
 
 Its help describes local inspection and the optional pinned download. A download uses the network and requires new destination/report files. Validation success is not scientific acceptance; returned records are not adopted F02 forecasts. Offline CI does not download the source.
+
+Use [D02 calibration instructions](data/D02_CALIBRATION.md) for its implemented Python API and source blockers, and [D03 instructions](data/D03_SYNTHETIC_SCENARIOS.md) for the provisional generator. The following implemented command writes a new synthetic development job catalog; use a new filename if it already exists. This test seed is not an accepted experiment seed.
+
+```powershell
+New-Item -ItemType Directory -Force data/private | Out-Null
+.venv\Scripts\python.exe -m dc_sustainability.data.scenarios data/private/d03-local-jobs.json --seed 42 --split development
+.venv\Scripts\python.exe -m pytest tests/verification/test_d03_consumer.py -q
+```
+
+The local catalog is ignored by Git. It contains private job metadata and future arrivals: do not pass it wholesale to a policy. Windows CRLF and Git's LF bytes produce different file hashes despite matching JSON content; [the current handoff](docs/handoffs/A03_D03_F04_F05.md) records the observed hashes. The A03 test-only arrived-job projection is not the missing S01 simulator.
 
 The proposal requires 40 development episodes and 30 held-out episodes: six dates across four scenarios plus six missing-forecast episodes. Three trials for each LLM and one for each A/B/C/D policy produce 300 runs. Held-out data cannot tune models, prompts or thresholds. The agent has at most three model calls per decision including explanation; the plain LLM has one. Paid runs await Q09.
 

@@ -1,6 +1,6 @@
 # Shared rules for all five assistants
 
-Version: 1.9 — 2026-10-12. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.10 — 2026-10-15. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 

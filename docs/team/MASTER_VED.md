@@ -1,6 +1,8 @@
 # Master instructions — Ved
 
-Version: 1.9 — 2026-10-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.10 — 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
+
+Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
 ## Instruction authority
 

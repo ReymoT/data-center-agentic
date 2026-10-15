@@ -20,8 +20,10 @@ We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the cr
 |---|---|---|
 | F02, Ved | Strict contract 1.0.0 records for jobs, visible/private carbon, constraints, contexts, plans, checks, actions and traces; serialization, canonical hashes and committed examples | Records validate structure and consistency; they do not calculate a schedule verdict or execute actions. Actual consumer adoption is pending. |
 | D01, Reimo | Pinned source download/checksum, CSV validation, private UTC observations and provenance/uncertainty reports | Pollutant scope, physical interval mapping, dataset rights, F02 adaptation and independent reproduction remain pending. It does not generate episodes or visible forecasts. |
+| D02, Reimo | Checksum-pinned Frontier job-table inspection with explicit field/unit mappings, exclusion reports and calibration/scaling tooling | Real Frontier access, source field/unit/license verification (Q05), empirical statistics and accepted scaling (Q06) remain pending. |
+| D03, Reimo | Seeded synthetic job generation, hand jobs and private episode assembly; withholding forecasts preserves private actuals | Distributions are provisional and not Frontier-calibrated. Q05/Q06, D04 allocation/freeze, simulator visibility and downstream acceptance remain pending. |
 | A01, Matty | Local Ollama REST transport, strict F02 parsing, explicit runtime/artifact checks, request deadlines and shared attempt accounting | Offline HTTP tests use a synthetic local server. Real inference, accepted output projections, context counter and deployment/run pins remain pending. |
-| A03, Matty | Fixed schedule/evidence checks on actual records; authoritative capacity and running occupancy | Known violations are rejected. Q01-Q04 remain unresolved, so otherwise feasible plans receive an error and no execution approval. Claim arithmetic is not certified. |
+| A03, Matty | Fixed schedule/evidence checks on actual records; authoritative capacity/running occupancy; consumer tests using actual D03-generated development jobs | Known violations are rejected. Q01-Q04 remain unresolved, so otherwise feasible plans receive an error and no execution approval. Claim arithmetic is not certified. |
 | F03, Matty | Hashed Windows Python 3.12 candidate, dependency smoke checks, CI and verified local Ollama/Qwen installation inventory | Final provider/framework environment, accepted deployment pins, live inference and multi-platform certification remain pending. See [model setup](OLLAMA_SETUP.md). |
 
 The provider helper lives only under tests and replays labeled outcomes. Simulator, retrieval, policies, gate, agent and evaluator remain planned. The adapter/checker core is tested without those components; see [the handoff](handoffs/A01_A03_AGREED_CORE.md). A serialized example of a passing check is a fixture, not evidence that a checker ran. No experiment result or completed integration is claimed.
@@ -36,7 +38,7 @@ The provider helper lives only under tests and replays labeled outcomes. Simulat
 6. Matty records initial, repaired, fallback, final and actually executed stages separately. Nisha's runner owns the episode loop and experiment checkpoint/resume.
 7. Nisha independently scores original outputs and execution records. Offline reference schedules, hand arithmetic and blinded claim review provide comparison evidence.
 
-This pipeline is planned. The implemented records provide its shared data boundaries, and source inspection supplies private evidence. Neither component simulates execution.
+This pipeline is planned. The implemented records provide its shared data boundaries, and source inspection supplies private evidence. D02 prepares calibration and D03 supplies provisional private fixtures; none of these modules simulates execution.
 
 ## How the implemented records connect
 
@@ -45,6 +47,8 @@ The source loader returns private timestamp/value pairs and a source-inspection 
 F02 separates private observations and episodes from visible state and forecasts. A constraint snapshot holds source provenance and the authoritative capacity constraint; capacity is not duplicated in site configuration. Missing capacity raises an explicit error. Context records carry only the sources, constraints and forecast facts relevant to currently visible jobs, with hashes for graph/flat equivalence checks.
 
 Plan records retain structurally valid but infeasible proposals. The fixed checker now calculates their rule violations and reports performed/skipped checks in CheckResult, bound to plan hash/state version. It uses unchanged F02 records. Its 100-to-70 kW test proves a constraint input changes the capacity subcheck; the RDF retrieval and execution gate still need separate integration evidence. Unresolved coverage and freshness rules prevent overall approval.
+
+D03 jobs can now be exercised through F02 visible records and the actual fixed checker. [The consumer tests](../tests/verification/test_d03_consumer.py) explicitly build synthetic constraints and an arrived-job view only for tests. They demonstrate fixed-rule compatibility, not production S01 visibility or integrated approval. No private episode, split/seed label or future arrival is provided to the checker as a policy view. [The handoff](handoffs/A03_D03_F04_F05.md) records scope and commands.
 
 ## Two different graphs
 
@@ -80,6 +84,6 @@ Faithfulness review preserves independent blinded Matty/Nisha ratings before adj
 
 Named interfaces include `read_state`, `get_context`, `check_schedule`, controller-only `execute_step` and `write_trace`. `check_schedule` now implements the fixed core above, and the local provider transport is available. State/retrieval, execution/trace APIs and the experiment CLI remain planned. F02's Job/Plan/Context/CheckResult/ApprovedActions/DecisionRecord and other records are implemented in `dc_sustainability/schemas.py`. The [interface document](INTERFACES.md) is the single maintained contract, with consumer adoption explicitly pending.
 
-Run the existing offline checks using the [README quick start](../README.md). The current suites cover strict records, source inspection, helpers, real local HTTP transport and fixed schedule-checking behavior. They do not prove live inference, integrated execution or independent scientific acceptance. [The maintenance handoff](handoffs/F03_F04_F05_MAINTENANCE.md) records the actual environment and test evidence. Do not present stubs, fabricated traces or a constant passing verdict as implementation.
+Run the existing offline checks using the [README quick start](../README.md). The current suites cover strict records, source/calibration inspection, provisional scenario generation, helpers, real local HTTP transport and fixed checking of hand and D03-generated jobs. They do not prove live inference, integrated execution or independent scientific acceptance. [The maintenance handoff](handoffs/F03_F04_F05_MAINTENANCE.md) records the actual environment and test evidence. Do not present stubs, fabricated traces or a constant passing verdict as implementation.
 
 An actual model-driven development episode with repair or fallback is required for E4 acceptance. Mocks suffice for ordinary offline CI, not final integration evidence. Matty owns early and final end-to-end acceptance, Nisha independently verifies results, Ved reproduces on another machine, and each module owner fixes defects. The [demo plan](DEMO.md) and [project plan](PROJECT_PLAN.md) record the remaining evidence.

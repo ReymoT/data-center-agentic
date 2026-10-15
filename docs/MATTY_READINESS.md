@@ -1,5 +1,7 @@
 # Matty duties and readiness
 
+Current update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged at main `d081cf5`. [The A03/F04/F05 handoff](handoffs/A03_D03_F04_F05.md) records real fixed-checker consumer tests and updated documentation. Empirical Frontier calibration, Q01-Q06, simulator/policies and full acceptance remain pending where documented. The older dated entries below are historical.
+
 Current update, 2026-10-12: [A01/A03 agreed core](handoffs/A01_A03_AGREED_CORE.md) is implemented and offline tested; [hardware inventory](HARDWARE.md) is supplied. Full adapter/checker acceptance and downstream integration remain blocked by the documented decisions/inputs. This update supersedes older preparation-only status below.
 
 Read the complete [Matty master](team/MASTER_MATTY.md) and [checklist](team/03_RESPONSIBILITY_CHECKLIST.md) for authoritative task rows and technical contacts. The final proposal groups Matty/Nisha on E4-E6; the package clarifies leads but Q12 still awaits team acceptance.
