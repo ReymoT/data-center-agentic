@@ -113,3 +113,12 @@ and local loader both validated the actual pinned bytes. Available Python was 3.
 the proposed 3.12 environment was not verified. `scripts/validate_setup.py` could not run
 because that interpreter lacks `tomllib`. No dependencies, CI or shared configuration
 were changed. No assigned D01 Issue or independent receiver acceptance is claimed.
+
+## D03 provisional synthetic scenarios
+
+[Generation, acceptance evidence and limitations](D03_SYNTHETIC_SCENARIOS.md)
+describes the deterministic four-scenario generator, hand jobs and normal
+withheld-forecast variant. The [tiny development job catalog](manifests/d03-provisional-jobs.json)
+is explicitly synthetic and provisional, not Frontier-calibrated or a D04 freeze.
+Use `python -m dc_sustainability.data.scenarios <new-output.json> --seed 42 --split development`
+to reproduce it. No shared F02 schema or Q05/Q06 decision was changed.
