@@ -1,0 +1,1011 @@
+{
+  "calibration_status": "provisional_not_Frontier_validated",
+  "distribution_specification": "Generate private jobs; split is caller metadata, not a D04 allocation.\n\n    Independent discrete uniforms: power 10..40 kW, duration 1..4 hours,\n    arrival 0..17, slack per scenario capped at 30-arrival-duration. Slack applies to every job, including\n    nonflexible jobs (which must still start at arrival). Spike has exactly eight\n    arrivals in 6..9; remaining arrivals sample uniformly outside that interval.\n    These development choices require Q06 agreement before scientific freeze.\n    ",
+  "generator_version": "d03-provisional-v1",
+  "hand_jobs": [
+    {
+      "arrival_slot": 0,
+      "deadline_slot": 6,
+      "duration_slots": 2,
+      "flexible": true,
+      "job_id": "J1",
+      "power_kw": 40.0,
+      "record_type": "Job",
+      "schema_version": "1.0.0"
+    },
+    {
+      "arrival_slot": 0,
+      "deadline_slot": 6,
+      "duration_slots": 2,
+      "flexible": true,
+      "job_id": "J2",
+      "power_kw": 30.0,
+      "record_type": "Job",
+      "schema_version": "1.0.0"
+    },
+    {
+      "arrival_slot": 4,
+      "deadline_slot": 6,
+      "duration_slots": 3,
+      "flexible": true,
+      "job_id": "J3",
+      "power_kw": 20.0,
+      "record_type": "Job",
+      "schema_version": "1.0.0"
+    }
+  ],
+  "scenarios": {
+    "infeasible": [
+      {
+        "intentionally_infeasible": true,
+        "job": {
+          "arrival_slot": 3,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J01",
+          "power_kw": 28.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 1,
+          "deadline_slot": 7,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J02",
+          "power_kw": 12.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 7,
+          "deadline_slot": 13,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J03",
+          "power_kw": 27.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 30,
+          "duration_slots": 4,
+          "flexible": true,
+          "job_id": "J04",
+          "power_kw": 17.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 13,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J05",
+          "power_kw": 34.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 13,
+          "deadline_slot": 20,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J06",
+          "power_kw": 18.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 12,
+          "duration_slots": 3,
+          "flexible": true,
+          "job_id": "J07",
+          "power_kw": 13.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 12,
+          "deadline_slot": 20,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J08",
+          "power_kw": 21.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 18,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J09",
+          "power_kw": 33.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 26,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J10",
+          "power_kw": 39.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 2,
+          "deadline_slot": 12,
+          "duration_slots": 3,
+          "flexible": true,
+          "job_id": "J11",
+          "power_kw": 36.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 12,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J12",
+          "power_kw": 11.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "infeasible",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      }
+    ],
+    "limited": [
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J01",
+          "power_kw": 17.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 4,
+          "deadline_slot": 7,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J02",
+          "power_kw": 31.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 19,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J03",
+          "power_kw": 28.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J04",
+          "power_kw": 12.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 7,
+          "deadline_slot": 8,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J05",
+          "power_kw": 27.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 22,
+          "duration_slots": 4,
+          "flexible": false,
+          "job_id": "J06",
+          "power_kw": 17.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 9,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J07",
+          "power_kw": 34.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 13,
+          "deadline_slot": 16,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J08",
+          "power_kw": 18.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 9,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J09",
+          "power_kw": 13.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 12,
+          "deadline_slot": 14,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J10",
+          "power_kw": 21.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 10,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J11",
+          "power_kw": 33.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 19,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J12",
+          "power_kw": 39.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "limited",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      }
+    ],
+    "normal": [
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 3,
+          "deadline_slot": 12,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J01",
+          "power_kw": 28.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 1,
+          "deadline_slot": 7,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J02",
+          "power_kw": 12.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 7,
+          "deadline_slot": 13,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J03",
+          "power_kw": 27.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 30,
+          "duration_slots": 4,
+          "flexible": true,
+          "job_id": "J04",
+          "power_kw": 17.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 13,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J05",
+          "power_kw": 34.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 13,
+          "deadline_slot": 20,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J06",
+          "power_kw": 18.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 12,
+          "duration_slots": 3,
+          "flexible": true,
+          "job_id": "J07",
+          "power_kw": 13.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 12,
+          "deadline_slot": 20,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J08",
+          "power_kw": 21.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 18,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J09",
+          "power_kw": 33.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 26,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J10",
+          "power_kw": 39.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 2,
+          "deadline_slot": 12,
+          "duration_slots": 3,
+          "flexible": true,
+          "job_id": "J11",
+          "power_kw": 36.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 12,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J12",
+          "power_kw": 11.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "normal",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      }
+    ],
+    "spike": [
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 12,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J01",
+          "power_kw": 12.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 7,
+          "deadline_slot": 13,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J02",
+          "power_kw": 27.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 9,
+          "deadline_slot": 17,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J03",
+          "power_kw": 24.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 16,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J04",
+          "power_kw": 32.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 16,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J05",
+          "power_kw": 14.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 17,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J06",
+          "power_kw": 12.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 6,
+          "deadline_slot": 16,
+          "duration_slots": 3,
+          "flexible": true,
+          "job_id": "J07",
+          "power_kw": 37.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 8,
+          "deadline_slot": 18,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J08",
+          "power_kw": 33.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 12,
+          "deadline_slot": 21,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J09",
+          "power_kw": 39.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 1,
+          "deadline_slot": 11,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J10",
+          "power_kw": 36.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 13,
+          "deadline_slot": 18,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J11",
+          "power_kw": 32.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 0,
+          "deadline_slot": 8,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J12",
+          "power_kw": 34.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 1,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J13",
+          "power_kw": 37.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 10,
+          "deadline_slot": 20,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J14",
+          "power_kw": 24.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 2,
+          "deadline_slot": 10,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J15",
+          "power_kw": 21.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 14,
+          "deadline_slot": 20,
+          "duration_slots": 3,
+          "flexible": false,
+          "job_id": "J16",
+          "power_kw": 32.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 13,
+          "deadline_slot": 20,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J17",
+          "power_kw": 27.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 2,
+          "deadline_slot": 12,
+          "duration_slots": 4,
+          "flexible": true,
+          "job_id": "J18",
+          "power_kw": 22.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 14,
+          "deadline_slot": 23,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J19",
+          "power_kw": 31.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      },
+      {
+        "intentionally_infeasible": false,
+        "job": {
+          "arrival_slot": 17,
+          "deadline_slot": 20,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J20",
+          "power_kw": 17.0,
+          "record_type": "Job",
+          "schema_version": "1.0.0"
+        },
+        "scenario_id": "spike",
+        "seed": 42,
+        "split": "development",
+        "synthetic": true
+      }
+    ]
+  },
+  "seed": 42,
+  "source": {
+    "commit": null,
+    "path": "dc_sustainability/data/scenarios.py",
+    "record_type": "SourceRef",
+    "redistribution_status": "permitted",
+    "schema_version": "1.0.0",
+    "sha256": null,
+    "source_id": "SRC-D03-SYNTHETIC"
+  },
+  "split": "development",
+  "synthetic": true
+}
