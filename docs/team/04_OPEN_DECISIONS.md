@@ -1,12 +1,14 @@
 # Decisions still requiring confirmation
 
-Version: 1.12 — 2026-10-18. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
+Version: 1.13 — 2026-10-19. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
 
 Main contains the authoritative instruction versions. Changes to this shared instruction index and policy records require Matty's explicit authorization; affected teammates must still agree on shared formats/settings. Propose recommendations in Issues until authorized.
 
 Q11 is partially resolved by [Matty's manager instruction](../decisions/Q11_MANAGER_AUTHORITY.md): Matty is team manager; PRs may merge once checks pass, teammate review is welcome but not required, and shared-format or settings changes require affected teammates' agreement first. Other Q11 choices remain open; this does not select scientific defaults.
 
 Q09 update, 2026-10-12: Matty accepted Nisha's recommendation for local Ollama with Qwen3 8B Q4_K_M and selected temperature 0.2 for both LLM systems. [The decision](../decisions/Q09_OLLAMA_QWEN3.md) and [owner handoff](../handoffs/Q09_ACCEPTANCE.md) record accepted development settings and remaining run requirements. Matty may prepare the shared adapter, Nisha the plain/explanation paths and Ved contract compatibility. Matty supplied [hardware details](../HARDWARE.md); actual Qwen offload/resources remain unmeasured. This is partial resolution, not an experiment freeze.
+
+D06 update, 2026-10-19: [the version-matched structural verification](../handoffs/D06_F04_F05_VERIFICATION.md) is recorded. It does not settle Q05 pollutant/interval/rights/factor questions, Q06 distribution/split/freeze choices or F02 adoption. None is accepted from a checksum match or passing CI.
 
 | ID | Unresolved point / recommended direction where useful | Driver and required participants | Resolve before |
 |---|---|---|---|

@@ -49,7 +49,7 @@ def main():
             )
 
         text(1, 123, "Data Center Sustainability Agent", 25, "bold")
-        text(1, 119.5, "Final scheduling study | Planned architecture | 18 October 2026", 14)
+        text(1, 119.5, "Final scheduling study | Planned architecture | 19 October 2026", 14)
         text(1, 116.5, "RESEARCH QUESTION", 12, "bold")
         text(
             1,
@@ -213,7 +213,7 @@ def main():
             1,
             2.4,
             "24 decision + 6 completion slots; no completion-slot model calls. Q01–Q13 stay open where unresolved.\n"
-            "Implemented: F02; D01-D03 tooling/fixtures; S01 and L01 preparation; A01/A03 core. Integration pending.",
+            "Implemented: F02; D01-D03/D06 tooling; S01/L01 preparation; A01/A03 core. Full acceptance pending.",
             10.5,
         )
         destination = ROOT / "architecture"
@@ -226,7 +226,7 @@ def main():
             " <title>Ontology-grounded, tool-verified agent versus plain LLM: planned architecture</title>\n"
             " <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. "
             "Four additional scheduling references share visible inputs and an execution gate; "
-            "private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D03 provisional fixtures, S01 transitions, L01 preparation "
+            "private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D06 structural source/window checks, D03 provisional fixtures, S01 transitions, L01 preparation "
             "and A01/A03 core are implemented; scientific acceptance and the full scheduling pipeline remain pending.</desc>\n <metadata>",
             1,
         )

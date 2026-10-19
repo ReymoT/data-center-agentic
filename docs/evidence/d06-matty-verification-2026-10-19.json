@@ -1,0 +1,95 @@
+{
+  "verification": "Matty F04/F05 verification of merged D06; structural reproduction only",
+  "date_phoenix": "2026-10-19",
+  "verifier": "Matty Anderson (MattyAnd)",
+  "base_commit": "488ddfb3a4b8442e65d5d27140304bca6746e6fd",
+  "source_commit": "a92b4755aca560e34a98d14028dda629eb968482",
+  "source_url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/data/CarbonIntensity/AZPS_NG_%26_avgCI.csv",
+  "source_size_bytes": 601730,
+  "source_sha256": "e05789a1dbf940e0554b0e8db42d84ed5cc0279d0050206fb048ba832ef24ef4",
+  "source_git_blob_sha1": "d5337a654e77c938d0909e76d56efdf3ad491e83",
+  "acquisition_time_utc": "2026-10-19T21:19:19.152541+00:00",
+  "checker_run_utc": "2026-10-19T21:19:19.290302+00:00",
+  "python": "3.12.14",
+  "operating_system": "Windows",
+  "code": [
+    {
+      "path": "scripts/d06_check_window.py",
+      "git_blob": "2e12b04d82b407209a3bfb8125ca3f03a2b48ead",
+      "executed_file_sha256": "98c8bfed41a8d4d15ca86ace8d57c8fdee053a889394819850e5be25efb27a9a"
+    },
+    {
+      "path": "dc_sustainability/data/carbon_source.py",
+      "git_blob": "0a0978d605561bdbfe53c0a64ca78eb53821d709",
+      "executed_file_sha256": "71f4058e06a17e537c946756b35664881169a2e72209858d003af8fe1788eac6"
+    }
+  ],
+  "local_reports": [
+    {
+      "path": "data/processed/matty-d06-adapter-2026-10-19.json",
+      "sha256": "6b3106739b2648f380e1194ee14eea6f2598b12502536d226d493695e2529d0b",
+      "committed": false
+    },
+    {
+      "path": "data/processed/matty-d06-window-2026-10-19.json",
+      "sha256": "ea1c9b0c56446774866da9df62677d5df813ad3920a487d4a51f2d165fbcc452",
+      "committed": false
+    }
+  ],
+  "structural_result": {
+    "cli_exit_code": 0,
+    "result_passes_with_adapter_comparison": true,
+    "source_checksums_match": true,
+    "year_rows": 8760,
+    "valid_timestamp_rows": 8760,
+    "first_timestamp_utc": "2022-01-01T00:00:00+00:00",
+    "last_timestamp_utc": "2022-12-31T23:00:00+00:00",
+    "duplicate_timestamps": 0,
+    "non_hourly_steps": 0,
+    "utc_day": "2022-01-01",
+    "window_rows": 24,
+    "contiguous_hourly": true,
+    "expected_hours_present": true,
+    "problems": [],
+    "adapter_rows": 8760,
+    "window_values_identical": true,
+    "reference_comparison": {
+      "year_exact_equal": {
+        "min": true,
+        "max": true,
+        "mean": true
+      },
+      "jan1_exact_equal": {
+        "first": true,
+        "last": true,
+        "min": true,
+        "max": true
+      }
+    }
+  },
+  "focused_tests": {
+    "pytest_tests_passed": 21,
+    "pytest_subtests_passed": 19,
+    "unittest_adapter_tests_passed": 12,
+    "unittest_checker_tests_passed": 9,
+    "fixtures": "synthetic test data; separate from actual-source reproduction"
+  },
+  "limits": [
+    "Does not authenticate or replace Ved's original JSON reports.",
+    "Does not settle pollutant basis, source interval convention, dataset rights or factor alignment (Q05).",
+    "Does not adopt policy-facing F02 carbon/forecast records, select splits/seeds or freeze data (Q06).",
+    "UTC calendar-day check is not the Phoenix-midnight 30-slot episode mapping.",
+    "No raw CSV, per-hour source values or raw local report is committed."
+  ],
+  "local_publication_checks": {
+    "pytest_tests_passed": 810,
+    "pytest_subtests_passed": 19,
+    "ruff_lint": "passed",
+    "ruff_format_files": 49,
+    "compilation": "passed",
+    "pip_check": "passed",
+    "setup_instruction_links_policies": "passed",
+    "git_diff_check": "passed",
+    "diagram": "regenerated and visually inspected"
+  }
+}

@@ -1,10 +1,12 @@
 # Master instructions — Ved
 
-Version: 1.12 — 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.13 — 2026-10-19. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
 Presentation deadline: November 18, 2026, reported by Matty on October 18. Read [the Q13 record](../decisions/Q13_PRESENTATION_DEADLINE.md) and [current plan](../PROJECT_PLAN.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed. Older internal targets do not set course deadlines or certify readiness.
+
+Current D06 update, 2026-10-19: Ved's checker and handoff are merged. [Matty's verification](../handoffs/D06_F04_F05_VERIFICATION.md) records a fresh version-matched Windows structural pass on the pinned source, separate from Ved's original JSON. Source semantics/rights and full D06/Q05 acceptance remain open; no schema, setting or task ownership changed.
 
 ## Instruction authority
 

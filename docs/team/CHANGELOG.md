@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.12 - 2026-10-18. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.13 - 2026-10-19. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.13 - 2026-10-19
+
+- Matty explicitly requested the D06 handoff verification and F04/F05 documentation follow-up. [Issue #20](https://github.com/ReymoT/data-center-agentic/issues/20) records confirmed stale reproduction status/test counts and the scope. [The handoff](../handoffs/D06_F04_F05_VERIFICATION.md) records actual commands and limits.
+- Ran unchanged merged D01/D06 code against the real pinned source on Windows Python 3.12.14. The new local report includes 8,760 valid timestamps and passes the current structural gate with requested adapter comparison; compact code/source/report-hash evidence is published without raw or per-hour data.
+- Preserved Ved's original Linux record with a dated Matty addendum, corrected current README/architecture/data/plan/audit status and diagram, and aligned all numbered/role version headers and affected status notices. Earlier JSON is not retroactively authenticated; Q05, Q06 and policy-facing adoption remain open.
+- Preserved all 50 task rows, exact seven-file merge/authority policies, schema/interface bytes, teammate code/tests, shared settings, locks and source attachments. A01 is still waiting; the deferred D02/Q13 follow-ups and unsent Q01-Q04 draft are untouched. This completes a maintenance increment, not the full ongoing F04/F05 duties or D06 scientific acceptance.
 
 ## Deployment 1.12 - 2026-10-18
 

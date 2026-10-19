@@ -17,7 +17,7 @@ Our research question: Does an ontology-grounded, tool-verified agent improve th
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains project documentation, F02 shared schemas/examples, D01 carbon ingestion, and Matty's A01 transport/accounting and A03 fixed schedule checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
+This repository contains project documentation, F02 records, D01-D03 data tooling/provisional fixtures, D06 source/window checks, S01 simulator transitions, L01 preparation and Matty's A01 transport/accounting and A03 fixed checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
 
 ## Systems we reviewed and why we chose this architecture
 
@@ -27,7 +27,7 @@ AssetOps is similar to our project because it connects facts and dependencies th
 
 We chose a combination of these ideas because our question requires connected evidence, exact calculations, bounded model decisions and comparable saved outputs. RDF represents domain facts. LangGraph manages the agent's sequence of steps. Python checks decide whether a simulated action can execute. This is our best-fit design rationale, not proof that it is the best architecture or will outperform the alternatives. The experiments will test the complete agent; they cannot isolate the ontology's contribution. We have not reproduced these external systems or compared their accuracy directly.
 
-The [source review record](docs/SOURCE_REVIEW.md) identifies the supplied documents and their public references. The [updated architecture diagram](architecture/architecture.svg) and [plain-language architecture document](docs/ARCHITECTURE.md) describe the final scheduling study. The diagram shows the planned design, not implemented components.
+The [source review record](docs/SOURCE_REVIEW.md) identifies the supplied documents and their public references. The [updated architecture diagram](architecture/architecture.svg) and [plain-language architecture document](docs/ARCHITECTURE.md) describe the final scheduling study. The diagram shows the target design; its status note identifies implemented components and remaining acceptance limits.
 
 ![Planned architecture for the final scheduling study](architecture/architecture.png)
 
@@ -89,7 +89,7 @@ To validate the proposed full Windows environment:
 
 Installation needs package-index access. Smoke checks run imports, SHACL/SPARQL, a tiny MILP, classifier fit/save/load and a LangGraph route without an LLM. See [environment instructions](requirements/README.md) for status and troubleshooting. The supplied lock is a candidate, not a final provider-inclusive environment. Do not use its Windows wheel hashes on other platforms.
 
-The offline test command runs F02 contracts, D01 inspection, D02 calibration tooling, D03 provisional scenarios, provider helpers, actual Ollama transport against a local synthetic HTTP test server, and actual fixed schedule checks. [New A03 consumer tests](tests/verification/test_d03_consumer.py) exercise D03-generated development jobs against those fixed checks without issuing approvals. Synthetic fixtures and server responses are test-only; they do not establish model inference, source acceptance or end-to-end integration. CI runs the same whole test directory on PRs and main. [The A01/A03 handoff](docs/handoffs/A01_A03_AGREED_CORE.md) links implementation and verification evidence.
+The offline test command runs F02 contracts, D01/D06 inspection, D02 calibration tooling, D03 provisional scenarios, S01 transitions, L01 preparation, provider helpers, actual Ollama transport against a local synthetic HTTP test server, and actual fixed schedule checks. [New A03 consumer tests](tests/verification/test_d03_consumer.py) exercise D03-generated development jobs against those fixed checks without issuing approvals. Synthetic fixtures and server responses are test-only; they do not establish model inference, source acceptance or end-to-end integration. CI runs the same whole test directory on PRs and main. [The A01/A03 handoff](docs/handoffs/A01_A03_AGREED_CORE.md) links implementation and verification evidence.
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
@@ -129,7 +129,7 @@ Reimo's [S01 simulator](dc_sustainability/simulator/core.py) is merged through P
 
 ## Data, experiments and outputs
 
-Reimo implemented pinned SustainDC Arizona source acquisition, checksum/CSV inspection and private UTC observations. Pollutant meaning, physical hour-start/hour-end mapping, derived-data redistribution rights, F02 adaptation and independent source reproduction still block accepted experimental use. [Data instructions](data/README.md) record acquisition and evidence. D02 implements explicit-field/unit calibration tooling, but actual Frontier access and empirical statistics are still blocked. D03 implements provisional synthetic jobs across four scenarios and private episode assembly; it is not Frontier-calibrated or the frozen development/held-out dataset. Q05/Q06 and downstream adoption remain open. EPA eGRID is an annual plausibility check. Perfect-foresight forecast replay must be labeled and must not be confused with a live forecast.
+Reimo implemented pinned SustainDC Arizona source acquisition, checksum/CSV inspection and private UTC observations. Ved's D06 checker/handoff is now merged. [Matty's version-matched Windows verification](docs/handoffs/D06_F04_F05_VERIFICATION.md) reproduced the pinned checksums, 8,760 valid timestamps and a 24-hour UTC window with identical adapter values. This is structural evidence; pollutant meaning, physical interval mapping, dataset rights, factor alignment and F02 adoption still block accepted experimental use. [Data instructions](data/README.md) record acquisition and evidence. D02 implements explicit-field/unit calibration tooling, but actual Frontier access and empirical statistics are still blocked. D03 implements provisional synthetic jobs across four scenarios and private episode assembly; it is not Frontier-calibrated or the frozen development/held-out dataset. Q05/Q06 and downstream adoption remain open. EPA eGRID is an annual plausibility check. Perfect-foresight forecast replay must be labeled and must not be confused with a live forecast.
 
 The implemented source-inspection command is:
 
@@ -147,7 +147,7 @@ New-Item -ItemType Directory -Force data/private | Out-Null
 .venv\Scripts\python.exe -m pytest tests/verification/test_d03_consumer.py -q
 ```
 
-The local catalog is ignored by Git. It contains private job metadata and future arrivals: do not pass it wholesale to a policy. Windows CRLF and Git's LF bytes produce different file hashes despite matching JSON content; [the current handoff](docs/handoffs/A03_D03_F04_F05.md) records the observed hashes. The A03 test-only arrived-job projection is not the missing S01 simulator.
+The local catalog is ignored by Git. It contains private job metadata and future arrivals: do not pass it wholesale to a policy. Windows CRLF and Git's LF bytes produce different file hashes despite matching JSON content; [the current handoff](docs/handoffs/A03_D03_F04_F05.md) records the observed hashes. The A03 test-only arrived-job projection is separate from the now-implemented S01 simulator; it does not establish full integration.
 
 The proposal requires 40 development episodes and 30 held-out episodes: six dates across four scenarios plus six missing-forecast episodes. Three trials for each LLM and one for each A/B/C/D policy produce 300 runs. Held-out data cannot tune models, prompts or thresholds. The agent has at most three model calls per decision including explanation; the plain LLM has one. Paid runs await Q09.
 

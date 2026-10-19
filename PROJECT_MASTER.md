@@ -1,6 +1,6 @@
 # Project master instructions
 
-Instruction deployment: 1.12 — 2026-10-18. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.13 — 2026-10-19. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 
@@ -23,6 +23,8 @@ After merging a task branch, verify that its latest work is included in main and
 Record agreement in the Issue or decision record before implementing shared-format or settings changes. Passing checks does not replace this agreement. The rule applies to all teammates. It does not waive technical acceptance, independent evaluation or unresolved scientific decisions. It describes merge eligibility; it does not change GitHub access or branch-protection settings.
 
 ## Shared project records
+
+Current D06 update, 2026-10-19: [Matty's handoff verification](docs/handoffs/D06_F04_F05_VERIFICATION.md) records merged D06 tooling and a fresh Windows structural pass using the exact merged checker. Original evidence limitations and Q05/policy-facing acceptance remain explicit; no scientific choice or shared setting is changed.
 
 Matty reports the course presentation is due November 18, 2026. [Q13](docs/decisions/Q13_PRESENTATION_DEADLINE.md) records the source and remaining requirements; [the current plan](docs/PROJECT_PLAN.md) supersedes conflicting older presentation dates. Separate report/code deadlines remain unconfirmed.
 

@@ -1,5 +1,7 @@
 # Project plan
 
+D06 verification update, October 19, 2026: [the current handoff](handoffs/D06_F04_F05_VERIFICATION.md) records merged source/window tooling and an actual version-matched Windows structural pass, separate from Ved's original reports. F04/F05 documentation is aligned; this does not close D06/Q05 scientific acceptance, change any timeline, resume A01 or perform the deferred D02/Q13 follow-ups.
+
 Current update, October 18, 2026: Matty reports the project presentation is due November 18, 2026. [The partial Q13 record](decisions/Q13_PRESENTATION_DEADLINE.md) preserves his statement and the remaining course requirements. No exact time, timezone, duration, format/rubric or separate report/code deadline has been confirmed.
 
 Nisha coordinates presentation assembly; all teammates supply their verified technical contributions. Assemble the research question, reviewed systems and design rationale, current architecture, methods, actual available results and limitations. Arrange slides and rehearsal before November 18; preparation dates still need coordination. Keep implemented/tested work distinct from proposed or blocked work. If experiments are incomplete, state that plainly. A scheduled presentation does not prove completion or justify fabricated findings, a reduced protocol or bypassed scientific acceptance.

@@ -3,6 +3,8 @@
 Owner: Ved (D06). Source owner: Reimo (D01/D02/D05). Status: **partial source evidence, not D06/Q05 acceptance** (see "What this does not settle").
 This document reuses the existing F02 schemas and `docs/INTERFACES.md` unchanged; they are not needed for this check.
 
+Current verification: [Matty's dated Windows addendum](#9-mattys-windows-verification-october-19-2026) below records a fresh run of the merged checker. The Linux run and older test counts below remain historical.
+
 ## Quick run (Linux/macOS shell; run from the repository root)
 
 ```sh
@@ -105,3 +107,29 @@ git diff --check
 D06 deliverables: `scripts/d06_check_window.py`, `tests/data/test_d06_window_check.py`, `data/D06_REPRODUCTION.md`.
 Local only (gitignored, never commit): `data/raw/*.csv`, `data/processed/d06-*.json`, `.venv/`.
 Running the check does not require pushing, opening a PR or commenting.
+
+## 9. Matty's Windows verification, October 19, 2026
+
+Matty independently ran the unchanged merged D01 downloader and D06 checker from
+main `488ddfb3a4b8442e65d5d27140304bca6746e6fd`, using the existing Windows Python
+3.12.14 environment and new ignored source/report paths. The CLI exited 0 with
+`PASS (structural)`. The new report includes `year.valid_timestamp_rows: 8760`,
+24 expected January 1 UTC hours and a successful requested adapter comparison.
+The source size, SHA-256 and Git blob match the pinned references above.
+
+[The verification handoff](../docs/handoffs/D06_F04_F05_VERIFICATION.md) gives the
+actual commands, evidence distinctions and limits. [The compact evidence record](../docs/evidence/d06-matty-verification-2026-10-19.json)
+identifies the exact executed code and new local reports by hash. CSV/per-hour
+values and full reports are not committed.
+
+Current focused tests passed 21 tests and 19 subtests; separate unittest runs passed
+12 adapter and nine checker tests. This supersedes the older three-checker-test
+count for the current suite. The Linux run in sections 4-5 is retained as reported
+historical evidence, including its environment limits. The Windows command forms
+in Matty's handoff are now verified separately; the macOS commands have not been
+verified by this work.
+
+This is Matty's new code/report pairing, not a claim that Ved regenerated his
+original JSON. His issue #13 evidence-version caveat remains attached to those
+original reports. Scientific semantics, rights, factor alignment, policy-facing
+adoption and full D06 acceptance remain open; no source values or code changed.

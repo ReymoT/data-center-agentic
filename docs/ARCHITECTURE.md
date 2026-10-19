@@ -1,6 +1,6 @@
 # Architecture for the final scheduling study
 
-Status: current implementation boundaries and target design, updated 2026-10-12, instruction deployment 1.9. Published under the project manager's instruction without a formal document-review gate. F02 records, D01 source inspection and A01/A03 agreed core code are implemented; the complete scheduling pipeline remains planned. Read [interfaces](INTERFACES.md) for implemented records and proposed APIs, and [open decisions](team/04_OPEN_DECISIONS.md) for unresolved rules.
+Status: current implementation boundaries and target design, updated 2026-10-19, instruction deployment 1.13. Published under the project manager's instruction without a formal document-review gate. F02 records, D01 source inspection and A01/A03 agreed core code are implemented; the complete scheduling pipeline remains planned. Read [interfaces](INTERFACES.md) for implemented records and proposed APIs, and [open decisions](team/04_OPEN_DECISIONS.md) for unresolved rules.
 
 ## Research question
 
@@ -19,7 +19,8 @@ We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the cr
 | Component | Actual behavior | Acceptance limit |
 |---|---|---|
 | F02, Ved | Strict contract 1.0.0 records for jobs, visible/private carbon, constraints, contexts, plans, checks, actions and traces; serialization, canonical hashes and committed examples | Records validate structure and consistency; they do not calculate a schedule verdict or execute actions. Actual consumer adoption is pending. |
-| D01, Reimo | Pinned source download/checksum, CSV validation, private UTC observations and provenance/uncertainty reports | Pollutant scope, physical interval mapping, dataset rights, F02 adaptation and independent reproduction remain pending. It does not generate episodes or visible forecasts. |
+| D01, Reimo | Pinned source download/checksum, CSV validation, private UTC observations and provenance/uncertainty reports | D06 now provides bounded independent structural/window evidence; pollutant scope, physical interval mapping, dataset rights, factor alignment and F02 adaptation remain pending. It does not generate episodes or visible forecasts. |
+| D06, Ved; verified by Matty | Standalone pinned-byte/UTC/window checker and reproduction handoff; actual Windows rerun matches the adapter and includes the merged checker's required valid-timestamp field | Structural reproduction only. It does not authenticate Ved's earlier JSON, settle Q05 semantics/rights or adopt policy-facing carbon facts. See [the verification](handoffs/D06_F04_F05_VERIFICATION.md). |
 | D02, Reimo | Checksum-pinned Frontier job-table inspection with explicit field/unit mappings, exclusion reports and calibration/scaling tooling | Real Frontier access, source field/unit/license verification (Q05), empirical statistics and accepted scaling (Q06) remain pending. |
 | D03, Reimo | Seeded synthetic job generation, hand jobs and private episode assembly; withholding forecasts preserves private actuals | Distributions are provisional and not Frontier-calibrated. Q05/Q06, D04 allocation/freeze, simulator visibility and downstream acceptance remain pending. |
 | S01, Reimo | Deterministic reset/state/step, arrived-job visibility, current-slot action validation, occupancy and 30-slot history | Completion behavior requires an explicit development choice; Q01-Q04, runtime approval, S02/P01 impact accounting and downstream acceptance remain pending. |
@@ -40,7 +41,7 @@ The provider helper lives only under tests and replays labeled outcomes. The sim
 6. Matty records initial, repaired, fallback, final and actually executed stages separately. Nisha's runner owns the episode loop and experiment checkpoint/resume.
 7. Nisha independently scores original outputs and execution records. Offline reference schedules, hand arithmetic and blinded claim review provide comparison evidence.
 
-The complete pipeline remains planned. F02 supplies shared boundaries, D01/D02 inspect source/calibration inputs, D03 supplies provisional private fixtures, and S01 now performs actual deterministic transitions. L01 preparation uses the real shared transport. Controlled retrieval, policies, approval gate, agent, impact accounting and independent evaluation still require their own implementations and acceptance.
+The complete pipeline remains planned. F02 supplies shared boundaries, D01/D02 inspect source/calibration inputs, D06 independently checks the pinned carbon source/window, D03 supplies provisional private fixtures, and S01 now performs actual deterministic transitions. L01 preparation uses the real shared transport. Controlled retrieval, policies, approval gate, agent, impact accounting and independent evaluation still require their own implementations and acceptance.
 
 ## How the implemented records connect
 

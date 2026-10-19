@@ -1,5 +1,8 @@
 # Publication audit
 
+Current D06 maintenance, October 19, 2026: [Matty's verification](../handoffs/D06_F04_F05_VERIFICATION.md) records a new current-checker structural pass and documentation alignment. The focused suite passed 21 tests and 19 subtests. This is not scientific acceptance or authentication of Ved's old JSON; prior dated audit entries below remain historical. Instruction deployment is now 1.13.
+
+
 Instruction deployment: 1.10 - 2026-10-15. Current maintenance is recorded in [the D03 consumer handoff](../handoffs/A03_D03_F04_F05.md). The dated evidence below describes prior publications.
 
 Previous deployment: 1.9 - 2026-10-12. Current scope is Matty's A01/A03 agreed core and supplied hardware. [The implementation handoff](../handoffs/A01_A03_AGREED_CORE.md) links issues #6/#7, code, tests and limits. [The previous maintenance handoff](../handoffs/F03_F04_F05_MAINTENANCE.md) retains its historical evidence. This is a publication audit, not a formal reviewer-approval gate.

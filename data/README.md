@@ -1,6 +1,6 @@
 # Data acquisition preparation
 
-Owner: Reimo. D01 source inspection is implemented; no scenario fixtures are delivered here. Complete the outstanding source verification before scientific claims:
+Owner: Reimo for source acquisition; Ved owns independent D06 checks. D01/D06 inspection and D03 provisional synthetic fixtures are implemented, with separate acceptance limits. Complete the outstanding source verification before scientific claims:
 
 - SustainDC/dc-rl Arizona file `AZPS_NG_&_avgCI.csv`, pinned commit `a92b4755aca560e34a98d14028dda629eb968482`: expected 8,760 hourly 2022 UTC records and `avg_CI`; verify CO2 versus CO2e, units and interval convention.
 - Frontier job-information table: runtime, mean-power and wall-time distributions for scaled synthetic jobs. Validate job-versus-node units and exclusions. Flexibility/deadlines are synthetic. Do not load node telemetry.
@@ -8,7 +8,7 @@ Owner: Reimo. D01 source inspection is implemented; no scenario fixtures are del
 
 Record acquisition URL/date, source version/checksum, schema, units/time zones, preprocessing/exclusions, allowed redistribution and regeneration command in validated manifests. See Q05/Q06. No license/access or source validity is presumed. Keep raw/private/processed inputs outside Git; only validated permitted fixtures/manifests belong in version control.
 
-Reimo supplies a tiny development hand fixture first; Ved independently reproduces a 24-hour window by Oct 16. If access/validation fails by then, the proposal permits clearly labeled synthetic fallback with narrower conclusions. Development and held-out windows must not overlap. Private manifests, future arrivals, realized scoring carbon and oracle answers must never enter policy context.
+The original internal plan targeted Ved's independent 24-hour reproduction for October 16. The merged D06 handoff and Matty's subsequent verification are recorded below; the historical date is not completion evidence. If access/validation fails by then, the proposal permits clearly labeled synthetic fallback with narrower conclusions. Development and held-out windows must not overlap. Private manifests, future arrivals, realized scoring carbon and oracle answers must never enter policy context.
 
 ## D01 acquisition and validation
 
@@ -104,8 +104,7 @@ The pinned repository [LICENSE](https://github.com/HewlettPackard/dc-rl/blob/a92
 is MIT, while its README describes some CC BY-NC 4.0-derived material. Dataset-specific
 redistribution rights remain unverified; keep raw and processed data untracked. Q05 needs
 pollutant, interval and licensing evidence plus source-specific factor alignment. F02 schema
-adoption/consumer tests and Ved's independent 24-hour reproduction remain outstanding.
-D01 is not marked Done. D02, scenario generation and simulator integration are untouched.
+adoption/consumer tests remain outstanding. Ved's bounded D06 reproduction and Matty's independent current-checker run are now recorded below; they do not resolve those scientific gates. D01 is not marked Done. The source-inspection module itself does not implement D02, scenarios or simulator integration.
 
 Local verification on October 12: 12 D01 tests and 13 existing provider mock tests passed;
 Ruff 0.17.0 lint/format checks and Git whitespace checks passed. The implemented downloader
@@ -122,3 +121,20 @@ withheld-forecast variant. The [tiny development job catalog](manifests/d03-prov
 is explicitly synthetic and provisional, not Frontier-calibrated or a D04 freeze.
 Use `python -m dc_sustainability.data.scenarios <new-output.json> --seed 42 --split development`
 to reproduce it. No shared F02 schema or Q05/Q06 decision was changed.
+
+## D06 independent source/window evidence
+
+Ved's [D06 handoff](D06_REPRODUCTION.md) and checker merged through PR #19.
+[Matty's October 19 verification](../docs/handoffs/D06_F04_F05_VERIFICATION.md)
+ran the exact merged code in Windows Python 3.12 on a newly acquired, pinned source.
+It recorded a structural pass with 8,760 valid timestamps, 24 expected January 1 UTC
+hours and matching adapter values. The compact evidence records code/source/report
+hashes without publishing the raw CSV or individual hourly values.
+
+The earlier three-checker-test count is historical; the current focused suite passed
+21 tests and 19 subtests (12 adapter tests plus nine checker tests). Synthetic unit
+tests and actual-source reproduction are distinct evidence. Ved's old JSON caveat
+is not silently cleared by Matty's separate new reports. Q05 semantics/rights, Q06
+freeze and policy-facing adoption remain unresolved. Raw and processed outputs stay
+outside Git. Use the verified Windows commands in Matty's handoff and new filenames
+for reruns; preserve existing evidence.
