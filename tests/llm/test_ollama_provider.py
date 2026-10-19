@@ -363,3 +363,42 @@ def test_concurrent_attempt_is_refused_without_a_second_dispatch(server):
         generate(client, system="plain_llm")
     thread.join(timeout=2)
     assert len(results) == len(server.requests) == len(client.attempts) == 1
+
+
+@pytest.mark.parametrize("system", ["agent", "plain_llm"])
+@pytest.mark.parametrize("shape", ["array", "object"])
+def test_deep_json_failure_is_recorded_and_exhausts_run_budget(server, system, shape):
+    # Real HTTP with deliberately invalid-for-this-boundary synthetic content.
+    # This exceeds CPython's decoder nesting limit within the allowed byte limit.
+    if shape == "array":
+        raw = b"[" * 4000 + b"0" + b"]" * 4000
+    else:
+        raw = b'{"x":' * 4000 + b"0" + b"}" * 4000
+    server.body = raw
+    client = provider(server, max_run_attempts=1)
+    attempt = generate(client, system=system, decision_deadline=time.monotonic() + 10)
+    assert attempt.output is None and "invalid response:" in attempt.error
+    assert attempt.raw_response == raw and attempt.http_status == 200
+    assert attempt.prompt_tokens is attempt.completion_tokens is None
+    assert client.attempts == (attempt,) and len(server.requests) == 1
+    # A new slot must not bypass a run cap after the decoder failed.
+    state = s.VisibleState.from_snapshot(
+        f.snapshot(), episode_id=f.EPISODE_ID, current_slot=1, state_version=1
+    )
+    server.body = envelope()
+    with pytest.raises(CallBlocked, match="run attempt cap"):
+        generate(client, system=system, state=state)
+    assert client.attempts == (attempt,) and len(server.requests) == 1
+
+
+@pytest.mark.parametrize("system,cap", [("agent", 3), ("plain_llm", 1)])
+def test_deep_json_failures_keep_the_existing_per_decision_caps(server, system, cap):
+    server.body = b"[" * 4000 + b"0" + b"]" * 4000
+    client = provider(server)
+    for _ in range(cap):
+        attempt = generate(client, system=system, decision_deadline=time.monotonic() + 10)
+        assert attempt.error and attempt.output is None
+        assert attempt.raw_response == server.body
+    with pytest.raises(CallBlocked, match="per-decision attempt cap"):
+        generate(client, system=system, seed=999)
+    assert len(client.attempts) == len(server.requests) == cap

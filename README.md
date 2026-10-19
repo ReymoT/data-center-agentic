@@ -107,6 +107,8 @@ Matty completed the independent A01/F03 installation and identity checks. Qwen3 
 
 [The shared Ollama transport](dc_sustainability/llm/provider.py) performs real HTTP, strict F02 parsing, pin checks, deadlines and attempt accounting. It uses the Python standard library without choosing an SDK. Both LLM callers must share one run ledger. Prompts/output projections, a validated model-specific token counter, explicit deployment pins and run limits are still required; there is no runnable experiment configuration or automatic model installation.
 
+[The A01 accounting fix](docs/handoffs/A01_ERROR_ACCOUNTING_AND_FOLLOWUPS.md) retains excessively nested JSON failures as spent attempts, including their raw responses. These errors cannot escape the run ledger or allow a new slot to bypass its call cap. The same handoff links the requested Q10-Q13 proposals; they remain pending agreement and do not supply missing runtime settings.
+
 [The fixed checker](dc_sustainability/verification/checker.py) checks visible job/evidence IDs, timing, deadlines, nonflexible starts and proposed/running occupancy against authoritative capacity. Changing the constraint from 100 to 70 kW changes the check. Known violations are rejected; an otherwise feasible proposal receives an explicit unresolved-rule error. Q01-Q04 still block overall approval, and no execution gate or numerical-claim certification is supplied.
 
 Run these components' offline tests with:

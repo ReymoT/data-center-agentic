@@ -328,7 +328,9 @@ class OllamaProvider:
                 raw, status, request_id = exc.raw, exc.status, exc.request_id
                 error, uncertain = str(exc), True
                 output = None
-            except (ValueError, TypeError, KeyError, AttributeError) as exc:
+            except (ValueError, TypeError, KeyError, AttributeError, RecursionError) as exc:
+                # Excessive JSON nesting is a failed response after a spent call.
+                # Keep its raw evidence and ledger entry just like other parse errors.
                 error, output = f"invalid response: {exc}", None
             attempt = Attempt(
                 client_trace_id=uuid4().hex,

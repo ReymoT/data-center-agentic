@@ -27,3 +27,11 @@ Run the existing helper tests offline:
 The tests cover credential-free operation with network guards, raw malformed outputs, failures without automatic retries, explicit subsequent attempts, a one-response plain script, a three-outcome agent script, extra calls, unused script stages and mutation-resistant records. The three-outcome script includes a failed repair attempt; it does not execute a real agent workflow or certify its retry/call accounting. A blocked extra invocation appears in attempt_count for test evidence but incurs no real provider charge.
 
 Mocks must not be used as evidence of an actual model-driven episode, valid scheduling, independent scoring, token/cost accuracy or A01/A02 acceptance. Keep requests/responses synthetic and replace the generic callable wrapper with the adopted SDK/F02 boundary during integration. Nisha's production modules are not changed by this task.
+
+## Nested JSON response failures
+
+The actual loopback HTTP tests in `test_ollama_provider.py` include excessively
+nested synthetic arrays/objects for both LLM systems. The decoder failure must
+retain the spent `Attempt` and original bytes, return no parsed output and preserve
+the run cap across different visible states as well as the existing per-decision
+caps. These cases do not call Ollama or establish live inference acceptance.
