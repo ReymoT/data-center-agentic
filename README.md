@@ -91,14 +91,14 @@ The offline test command runs F02 contracts, D01 inspection, D02 calibration too
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Ollama 0.40.3 and Qwen3 8B Q4_K_M are installed, with [verified digest/license and reproducible setup](docs/OLLAMA_SETUP.md). Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Qwen3 8B Q4_K_M is installed with [verified digest/license and reproducible setup](docs/OLLAMA_SETUP.md). The original runtime inventory was 0.40.3; a read-only check on 2026-10-18 now observes Ollama 0.40.5 and a changed rendered-default-parameter hash. This runtime drift is recorded separately and is not an accepted deployment pin. Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
 
 ## Installed local model
 
-Matty completed the independent A01/F03 installation and identity checks. Qwen3 8B Q4_K_M is installed locally; its full digest, license, template/default-parameter hashes and independently checked stored blobs are recorded. Weights remain outside GitHub. Use [the model setup guide](docs/OLLAMA_SETUP.md) to reproduce or compare metadata. No inference or GPU-throughput test was performed, and the remaining deployment/context/projection/seed/resource choices still block live readiness.
+Matty completed the independent A01/F03 installation and identity checks. Qwen3 8B Q4_K_M is installed locally; its full digest, license, template/default-parameter hashes and independently checked original stored blobs are recorded. [The dated runtime inventory](docs/evidence/ollama-qwen3-8b-2026-10-18.json) retains the later 0.40.5 observation; the model digest/license/template hashes match the original evidence, while the runtime and rendered parameter-text hash differ. Weights remain outside GitHub. Use [the model setup guide](docs/OLLAMA_SETUP.md) to reproduce or compare metadata. No inference or GPU-throughput test was performed, and the remaining deployment/context/projection/seed/resource choices still block live readiness.
 
 ```powershell
-.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b.json
+.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-18.json
 ```
 
 ## Available adapter and checker core
@@ -112,6 +112,18 @@ Run these components' offline tests with:
 ```powershell
 .venv\Scripts\python.exe -m pytest tests/llm/test_ollama_provider.py tests/verification/test_checker.py -q
 ```
+
+## Available plain-LLM preparation and simulator
+
+Nisha's [plain comparator](dc_sustainability/llm/plain.py) and Matty's strict context-boundary fix are merged through PR #14. It uses one shared-adapter request, keeps the original response and performs no repair or fallback. The [assessment](docs/handoffs/L01_MATTY_ASSESSMENT.md) is historical candidate evidence; the fix is now on main. Full L01 still needs agreed context/deployment inputs and an actual development episode.
+
+Reimo's [S01 simulator](dc_sustainability/simulator/core.py) is merged through PR #15. It reveals arrived jobs, applies typed current-slot actions, records occupancy/completions/misses, and advances on rejection. Its constructor requires an explicit development completion-start choice; neither choice resolves Q01. It supplies no production approval authority or impact math. [New intake tests](tests/verification/test_s01_checker_intake.py) exercise the actual S01 states and A03 checks through 30 rejected slots without fabricated approvals.
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/llm/test_plain.py tests/llm/test_plain_context_boundary.py tests/verification/test_s01_checker_intake.py -q
+```
+
+[The current five-task handoff](docs/handoffs/OCT18_TASK_READINESS.md) records the Q09 proposal, Q13 request, merged-fix verification and remaining checker/agent/gate dependencies. Proposals remain in Issues; configuration placeholders are not filled from them.
 
 ## Data, experiments and outputs
 

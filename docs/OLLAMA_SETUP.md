@@ -4,7 +4,9 @@ Matty completed this independent A01/F03 setup on 2026-10-12, following the acce
 [Q09 direction](decisions/Q09_OLLAMA_QWEN3.md). Installation and identity checks are
 complete. Full provider/environment and experimental acceptance remain pending.
 
-## Installed artifact
+Update 2026-10-18: the local CLI/API now report Ollama 0.40.5. The [dated inventory](evidence/ollama-qwen3-8b-2026-10-18.json) has the same model digest, size, quantization, license and template hashes as the original inventory, but different runtime and rendered default-parameter-text hashes. The original comparison correctly rejects this drift. No automatic runtime update/downgrade, model call or deployment acceptance was performed by this work. [Q09's concrete proposal](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6257425665) awaits affected-member agreement.
+
+## Original installation evidence, 2026-10-12
 
 | Item | Observed value |
 |---|---|
@@ -44,7 +46,7 @@ after downloading rather than trusting the name or short ID.
 ollama --version
 ollama pull qwen3:8b
 ollama list
-.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b.json
+.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-18.json
 ollama ps
 ```
 
@@ -54,6 +56,8 @@ during inspection, compares saved runtime/artifact/license/template/parameter me
 and reports errors on mismatches. Optional `--out NEW_FILE` records a new inventory
 and refuses to overwrite an existing file. Local file paths and full license/template
 text are excluded. The endpoint descriptions are in [Ollama's show API](https://docs.ollama.com/api-reference/show-model-details).
+
+Use the original `ollama-qwen3-8b.json` only when comparing against the historical 0.40.3 installation. Comparing today's 0.40.5 runtime against it is expected to fail; do not edit the saved record to hide that mismatch. The new inventory is observational evidence, not an approved pin.
 
 A mismatch requires investigation; do not silently accept a different artifact,
 runtime or model. No model weights, user-specific paths or raw machine identifiers

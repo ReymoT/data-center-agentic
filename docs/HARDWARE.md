@@ -11,7 +11,7 @@ Device name, product ID, device ID and the raw screenshot are excluded from publ
 | System RAM | 32 GB installed, 31.5 GB usable |
 | GPU | Intel Arc 140V integrated graphics; Windows labels it “(16GB)” |
 | GPU driver | 32.0.101.8132, read from Win32_VideoController |
-| Ollama | CLI and local `/api/version` both report 0.40.3 |
+| Ollama | Original inventory: 0.40.3. Read-only CLI/API recheck on 2026-10-18: 0.40.5; deployment acceptance remains pending. |
 | Installed models | Local `/api/tags` and `ollama list` now show `qwen3:8b` Q4_K_M and the preserved `llama3.2:3b` |
 | Loaded models | `ollama ps` was empty at inspection |
 
@@ -28,7 +28,7 @@ model. [Ollama hardware documentation](https://docs.ollama.com/gpu).
 
 Update 2026-10-12: Matty authorized and completed Qwen3 8B installation. [The setup guide](OLLAMA_SETUP.md) records its digest/license and independently verified blobs. No model was loaded or called; the existing Llama model is preserved and is not an approved substitute. No GPU driver or service environment was changed.
 
-Qwen's full digest/license metadata is now recorded. Before live readiness, accept the exact
+Qwen's full digest/license metadata is now recorded. [The later runtime inventory](evidence/ollama-qwen3-8b-2026-10-18.json) retains the observed 0.40.5 runtime and changed rendered parameter-text hash; original evidence is preserved. This recheck made no model call or machine setting change. Before live readiness, accept the exact
 deployment configuration, validate the prompt/context policy, and authorize a
 bounded development smoke run. Capture actual `ollama ps` processor/offload output,
 memory use, token throughput and latency against the 120-second call target.
