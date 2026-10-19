@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.10 - 2026-10-15. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.11 - 2026-10-18. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.11 - 2026-10-18
+
+- Matty supplied the November 18 presentation deadline while completing the Q13 confirmation task in [issue #16](https://github.com/ReymoT/data-center-agentic/issues/16). [The partial decision record](../decisions/Q13_PRESENTATION_DEADLINE.md) quotes his source statement; no instructor document or separate report/code deadline is inferred.
+- Corrected the conflicting presentation/rehearsal timeline in the plan, start guide and Matty/Nisha/Ved instructions. Added a consistent deadline notice to all five roles, README, project master and project context. Aligned all ten numbered/role deployment headers.
+- Nisha remains the presentation/report assembly lead; all teammates supply verified contributions. Presentation preparation does not waive scientific freeze, independent scoring or final acceptance, and no positive results or reduced experiment protocol are invented.
+- All 50 task rows, seven-file merge/authority rules, F02 contracts, code, settings, source attachments and historical handoffs remain unchanged. Q13 remains open for the other course/delivery facts and agreements.
 
 ## Deployment 1.10 - 2026-10-15
 

@@ -1,8 +1,10 @@
 # Master instructions — Ved
 
-Version: 1.10 — 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.11 — 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
+
+Presentation deadline: November 18, 2026, reported by Matty on October 18. Read [the Q13 record](../decisions/Q13_PRESENTATION_DEADLINE.md) and [current plan](../PROJECT_PLAN.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed. Older internal targets do not set course deadlines or certify readiness.
 
 ## Instruction authority
 
@@ -73,7 +75,7 @@ Own `dc_sustainability/schemas.py`, `dc_sustainability/knowledge/`, `dc_sustaina
 
 Publish contract examples first to everyone; graph/context to Matty/Nisha; label caches to Edison; independent references to Nisha; second-person data verification to Reimo. O02 waits on P03's candidate specification, not a trained C/D model, avoiding a training/label cycle. Missing forecast cases need explicit statuses rather than fabricated labels. Each handoff includes reproducible commands, source and contract hashes, exclusions, solver settings/status and consumer checks.
 
-Done requires reviewed schemas, graph/query/SHACL tests, end-to-end capacity-change proof, certified and independently checked reference artifacts, successful receiving-module tests on merged code and complete documentation. October 16 source reproduction, October 23 retrieval, early labels for Edison's October 30 training, November 13 freeze and December 2 reproduction are your key dates. Review Nisha's independent validator without replacing it with Matty's checker logic.
+Done requires reviewed schemas, graph/query/SHACL tests, end-to-end capacity-change proof, certified and independently checked reference artifacts, successful receiving-module tests on merged code and complete documentation. October 16 source reproduction, October 23 retrieval, early labels for Edison's October 30 training and November 13 freeze were internal targets, not completion evidence. Give Nisha your verified technical contribution for the November 18 presentation; the historical December 2 reproduction target is subject to replanning and is not a course deadline. Review Nisha's independent validator without replacing it with Matty's checker logic.
 
 
 ## Coordination instructions for your assistant

@@ -1,8 +1,10 @@
 # Master instructions — Nisha
 
-Version: 1.10 — 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.11 — 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
+
+Presentation deadline: November 18, 2026, reported by Matty on October 18. Read [the Q13 record](../decisions/Q13_PRESENTATION_DEADLINE.md) and [current plan](../PROJECT_PLAN.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed. Older internal targets do not set course deadlines or certify readiness.
 
 ## Instruction authority
 
@@ -71,7 +73,7 @@ Own `dc_sustainability/llm/plain.py`, `dc_sustainability/explanations/`, `prompt
 
 Give explanation interfaces/prompts and scoring requirements to Matty early; give private fixture/reference needs to Reimo/Ved; give model metric format to Edison. Provide CLI hooks/specification for each module owner. Return independent E2E verification to Matty and reproduction commands to Ved. Publish frozen protocol, runner/config manifest, raw outputs, scored tables, annotation originals/adjudication, figures, limitations and report/presentation.
 
-Done means the plain system is a fair uncorrected comparator, independent truth tests pass, all planned runs or documented failures are accounted for, metrics and blinded reviews follow the frozen protocol, figures reproduce from saved outputs, all authors review the report and Matty's final E2E findings are addressed. LLM paths target Oct 30, tests/freeze Nov 13, analysis Nov 23, rehearsal Dec 2, delivery Dec 4 subject to course requirements.
+Done means the plain system is a fair uncorrected comparator, independent truth tests pass, all planned runs or documented failures are accounted for, metrics and blinded reviews follow the frozen protocol, figures reproduce from saved outputs, all authors review the report and Matty's final E2E findings are addressed. Coordinate the November 18 presentation with all authors and confirm its time, duration, format and rubric in Q13. Prepare slides and rehearsal before that date using verified evidence available then, clearly identifying pending experiments and limitations. Earlier November 23 analysis, December 2 rehearsal and December 4 delivery targets do not define this presentation schedule or separate final submission deadlines. This presentation milestone does not waive the final R05, E06/E07 or freeze acceptance criteria.
 
 
 ## Coordination instructions for your assistant

@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.10 - 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.11 - 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -43,6 +43,6 @@ Dependency inputs are maintained only under [requirements](../../requirements/RE
 5. Complete failure tests, independent scoring and blinded pre-evaluation annotation; freeze the protocol.
 6. Run held-out experiments, analyze results, reproduce on a second machine and finish Matty's final E2E acceptance.
 
-Internal targets: October 16 data/simulator and second-person check; October 23 A/B and retrieval; October 30 C/D and LLM paths; November 6 repair/fallback/gate; November 13 freeze; November 23 experiments/analysis; December 2 reproduction/rehearsal; December 4 delivery. An earlier course deadline takes precedence. November 26-27 is reserved.
+Matty reports the course presentation is due November 18, 2026. [Q13](../decisions/Q13_PRESENTATION_DEADLINE.md) records this partial confirmation and remaining requirements. Use [the current plan](../PROJECT_PLAN.md): earlier November 23 analysis, December 2 rehearsal and December 4 delivery targets cannot serve as the presentation schedule. Separate final report/code/release deadlines remain unconfirmed; scientific acceptance and freeze requirements are unchanged.
 
 Maintain README, architecture, plan, interfaces, coordination, handoffs and decisions in their linked repository locations. Avoid detached latest copies and duplicate contracts. README starts with equally formatted teammate roles, groups Matty/Nisha, and discloses reviewed systems, comparison method and architecture rationale. Use MattyAnd for authentication and commit attribution.

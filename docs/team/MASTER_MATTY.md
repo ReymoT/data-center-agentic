@@ -1,8 +1,10 @@
 # Master instructions — Matty
 
-Version: 1.10 — 2026-10-15. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.11 — 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
+
+Presentation deadline: November 18, 2026, reported by Matty on October 18. Read [the Q13 record](../decisions/Q13_PRESENTATION_DEADLINE.md) and [current plan](../PROJECT_PLAN.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed. Older internal targets do not set course deadlines or certify readiness.
 
 ## Instruction authority
 
@@ -67,7 +69,7 @@ Own root README/AGENTS/environment/config loader, `.github/`, `docs/ARCHITECTURE
 
 Test valid/invalid IDs/types, all timing/capacity/deadline rules, graph-driven limits/missing links, stale/duplicate approvals, direct gate bypass, parse failures, timeouts, tool errors, exhausted budgets, one-repair/three-call caps, recorded fallback and advancing rejected slots. Test shared provider setting equality and trace completeness with Nisha. Include no-forecast/insufficient-evidence and intentionally impossible fixtures. CI must not spend money by default.
 
-F01/F03/F05 require a validated repository foundation and runnable documentation; F04 remains your ongoing duty through release. A02 requires a real model-driven episode, not an example transcript. I01 proves pre-freeze integration; I04 is complete only when final E2E evidence is saved, independently reviewed, blockers fixed and receiving evaluator/report artifacts are reproducible. Never mark the whole project complete merely because the agent responds. Targets: bootstrap first, LLM paths Oct 30, gated repair/fallback Nov 6, freeze Nov 13, final E2E/reproduction Dec 2 and release Dec 4, subject to course deadline.
+F01/F03/F05 require a validated repository foundation and runnable documentation; F04 remains your ongoing duty through release. A02 requires a real model-driven episode, not an example transcript. I01 proves pre-freeze integration; I04 is complete only when final E2E evidence is saved, independently reviewed, blockers fixed and receiving evaluator/report artifacts are reproducible. Never mark the whole project complete merely because the agent responds. Earlier internal implementation targets remain planning estimates in the current plan. Prepare your verified contributions for the November 18 presentation with Nisha. December 2 E2E and December 4 release were historical internal targets, not confirmed course deadlines; do not use them to postpone presentation preparation or imply final acceptance.
 
 
 ## Coordination instructions for your assistant

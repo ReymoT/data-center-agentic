@@ -11,6 +11,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 FSE 598, Arizona State University.
 
+The project presentation is due November 18, 2026, as reported by Matty. See [the plan](docs/PROJECT_PLAN.md) and [remaining course requirements](docs/decisions/Q13_PRESENTATION_DEADLINE.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed.
+
 Our research question: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
