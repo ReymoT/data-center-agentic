@@ -156,6 +156,14 @@ class PlainLLMPolicy:
         key = (state.episode_id, state.current_slot)
         if key in self._requested:
             raise CallBlocked("the plain LLM already used its one request for this decision")
+        # F02 model_copy/model_construct can bypass validation, including the content
+        # hash and unique-job checks. Revalidate before rendering or spending an attempt.
+        state = s.VisibleState.model_validate(
+            state.model_dump(mode="python", warnings="none"), strict=True
+        )
+        context = s.Context.model_validate(
+            context.model_dump(mode="python", warnings="none"), strict=True
+        )
         _check_context(state, context)
         messages = render_messages(context)
         self._requested.add(key)
