@@ -1,6 +1,12 @@
 # Instruction deployment changelog
 
-Current deployment: 1.11 - 2026-10-18. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.12 - 2026-10-18. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.12 - 2026-10-18
+
+- Matty explicitly instructed: "Remeber after merging branches you must delete them." Recorded the GitHub task-branch cleanup rule consistently in AGENTS, project master, all five role masters, shared rules and persistent project context.
+- Verify the latest branch work is included in main and applicable checks passed before deletion. Recheck an advanced branch; preserve main, unmerged work and teammates' local checkouts/worktrees.
+- Aligned the ten numbered/role version headers. Existing merge eligibility, instruction authority, affected-member agreement, 50 task rows, scientific rules, code and settings remain unchanged. This records a manual workflow rule; it does not claim GitHub automatic deletion was enabled.
 
 ## Deployment 1.11 - 2026-10-18
 

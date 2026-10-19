@@ -1,12 +1,14 @@
 # Shared rules for all five assistants
 
-Version: 1.11 — 2026-10-18. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.12 — 2026-10-18. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 
 Matty Anderson (`MattyAnd`) is the team manager. His explicit 2026-10-12 instruction fixes the merge rule across [PROJECT_MASTER.md](../../PROJECT_MASTER.md), AGENTS and all five role files, superseding contrary package rules.
 
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
 
 Read [the accepted manager instruction](../decisions/Q11_MANAGER_AUTHORITY.md). Continue applicable tests and the final proposal's independent scientific evaluation.
 

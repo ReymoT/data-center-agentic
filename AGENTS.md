@@ -20,6 +20,8 @@ Matty is the team manager. His explicit 2026-10-12 instruction fixes the merge r
 
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
+After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
+
 Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. Passing checks alone does not replace that agreement. Perform applicable technical verification and preserve independent scientific evaluation.
 
 Production checker and independent evaluation validator have different implementations. Keep private inputs/oracles outside policy views. Ordinary CI is offline with no paid calls. The final proposal's independent scientific evaluation remains required. Other unresolved Q11 settings remain in the decision index.

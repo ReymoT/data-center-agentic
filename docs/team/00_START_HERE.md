@@ -1,6 +1,6 @@
 # Team master instruction package
 
-Version: 1.11 - 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.12 - 2026-10-18. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 

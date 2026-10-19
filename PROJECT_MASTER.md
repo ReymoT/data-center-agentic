@@ -1,6 +1,6 @@
 # Project master instructions
 
-Instruction deployment: 1.11 — 2026-10-18. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.12 — 2026-10-18. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 
@@ -17,6 +17,8 @@ GitHub permissions are separate from this rule. MattyAnd currently has write acc
 ## Merge rule
 
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
+
+After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
 
 Record agreement in the Issue or decision record before implementing shared-format or settings changes. Passing checks does not replace this agreement. The rule applies to all teammates. It does not waive technical acceptance, independent evaluation or unresolved scientific decisions. It describes merge eligibility; it does not change GitHub access or branch-protection settings.
 

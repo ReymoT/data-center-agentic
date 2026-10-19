@@ -27,3 +27,9 @@ Matty's 2026-10-12 instruction requires real implementation evidence: no stubs, 
 - Cleanup authorization on 2026-10-10 is limited to this repository: replace obsolete architecture/setup records and correct Matty's setup commit attribution, preserving teammates' contributions and synced source files.
 
 On 2026-10-18, Matty reported: "We need to do a project presentation by nov 18". Record the presentation deadline as November 18, 2026 in this project year. [The partial Q13 record](decisions/Q13_PRESENTATION_DEADLINE.md) preserves the source and scope; no instructor document has been supplied. Time/timezone, duration, format/rubric, separate report/code deadlines, license, retention and platforms remain unconfirmed. This supersedes conflicting older presentation/rehearsal targets, without changing scientific settings, acceptance or task ownership.
+
+Matty instructed on 2026-10-18: "Remeber after merging branches you must delete them."
+
+After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
+
+This applies to GitHub task-branch cleanup after verified integration. Preserve teammates' local checkouts/worktrees and unpublished work; deleting a merged remote branch does not remove its commits from main.
