@@ -117,15 +117,11 @@ class WindowCheckTests(unittest.TestCase):
             "adapter_rows": 8760,
             "window_values_identical": False,
         }
-        self.assertFalse(
-            checker.result_passes(result, compare_adapter_requested=True)
-        )
+        self.assertFalse(checker.result_passes(result, compare_adapter_requested=True))
 
     def test_requested_adapter_comparison_missing_makes_result_fail(self):
         result = _passing_result()
-        self.assertFalse(
-            checker.result_passes(result, compare_adapter_requested=True)
-        )
+        self.assertFalse(checker.result_passes(result, compare_adapter_requested=True))
 
     def test_adapter_mismatch_does_not_fail_when_comparison_not_requested(self):
         result = _passing_result()

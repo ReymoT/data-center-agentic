@@ -177,7 +177,6 @@
 #     raise SystemExit(main())
 
 
-
 #!/usr/bin/env python3
 """D06 independent check of the pinned Arizona carbon CSV and one UTC 24-hour window.
 
@@ -204,8 +203,16 @@ PIN = "a92b4755aca560e34a98d14028dda629eb968482"
 REF_SHA256 = "e05789a1dbf940e0554b0e8db42d84ed5cc0279d0050206fb048ba832ef24ef4"
 REF_BLOB = "d5337a654e77c938d0909e76d56efdf3ad491e83"
 HEADER = [
-    "timestamp", "WND", "SUN", "WAT", "OIL",
-    "NG", "COL", "NUC", "OTH", "avg_CI",
+    "timestamp",
+    "WND",
+    "SUN",
+    "WAT",
+    "OIL",
+    "NG",
+    "COL",
+    "NUC",
+    "OTH",
+    "avg_CI",
 ]
 
 # Prior-documentation reference values (targets to compare against, not evidence).
@@ -279,17 +286,13 @@ def check(path: Path, day: str) -> dict:
             try:
                 value = float(cell)
             except ValueError:
-                problems.append(
-                    f"row {n}: {name} is not numeric: {cell!r}"
-                )
+                problems.append(f"row {n}: {name} is not numeric: {cell!r}")
                 continue
 
             numeric_values[name] = value
 
             if not math.isfinite(value) or value < 0:
-                problems.append(
-                    f"row {n}: {name}={cell} not finite and nonnegative"
-                )
+                problems.append(f"row {n}: {name}={cell} not finite and nonnegative")
 
         # Keep observations aligned with valid timestamps and avg_CI values.
         if timestamp is not None and "avg_CI" in numeric_values:
@@ -315,30 +318,20 @@ def check(path: Path, day: str) -> dict:
         "non_hourly_steps": len(gaps),
         "gaps_sample": gaps[:5],
         "starts_2022_01_01T00Z": (
-            bool(stamps)
-            and stamps[0] == datetime(2022, 1, 1, tzinfo=timezone.utc)
+            bool(stamps) and stamps[0] == datetime(2022, 1, 1, tzinfo=timezone.utc)
         ),
         "ends_2022_12_31T23Z": (
-            bool(stamps)
-            and stamps[-1] == datetime(
-                2022, 12, 31, 23, tzinfo=timezone.utc
-            )
+            bool(stamps) and stamps[-1] == datetime(2022, 12, 31, 23, tzinfo=timezone.utc)
         ),
         "min": min(ci_values) if ci_values else None,
         "max": max(ci_values) if ci_values else None,
-        "mean": (
-            math.fsum(ci_values) / len(ci_values)
-            if ci_values
-            else None
-        ),
+        "mean": (math.fsum(ci_values) / len(ci_values) if ci_values else None),
     }
 
     try:
         d0 = _parse_utc_day(day)
     except ValueError:
-        problems.append(
-            f"invalid --day value: {day!r} (expected YYYY-MM-DD)"
-        )
+        problems.append(f"invalid --day value: {day!r} (expected YYYY-MM-DD)")
         d0 = None
 
     if d0 is not None:
@@ -355,27 +348,16 @@ def check(path: Path, day: str) -> dict:
     window = {
         "utc_day": day,
         "rows": len(win),
-        "contiguous_hourly": all(
-            b[0] - a[0] == timedelta(hours=1)
-            for a, b in zip(win, win[1:])
-        ),
+        "contiguous_hourly": all(b[0] - a[0] == timedelta(hours=1) for a, b in zip(win, win[1:])),
         "expected_hours_present": (
             d0 is not None
-            and [timestamp for timestamp, _ in win]
-            == [
-                d0 + timedelta(hours=h)
-                for h in range(24)
-            ]
+            and [timestamp for timestamp, _ in win] == [d0 + timedelta(hours=h) for h in range(24)]
         ),
         "first": wv[0] if wv else None,
         "last": wv[-1] if wv else None,
         "min": min(wv) if wv else None,
         "max": max(wv) if wv else None,
-        "mean": (
-            math.fsum(wv) / len(wv)
-            if wv
-            else None
-        ),
+        "mean": (math.fsum(wv) / len(wv) if wv else None),
         "observations": [
             {
                 "timestamp": timestamp.isoformat(),
@@ -403,15 +385,9 @@ def check(path: Path, day: str) -> dict:
         "window": window,
         "problems": problems,
         "reference_comparison": {
-            "year_exact_equal": {
-                key: year[key] == value
-                for key, value in REF_YEAR.items()
-            },
+            "year_exact_equal": {key: year[key] == value for key, value in REF_YEAR.items()},
             "jan1_exact_equal": (
-                {
-                    key: window[key] == value
-                    for key, value in REF_JAN1.items()
-                }
+                {key: window[key] == value for key, value in REF_JAN1.items()}
                 if day == "2022-01-01"
                 else "n/a (not 2022-01-01)"
             ),
@@ -490,16 +466,12 @@ def compare_adapter(path: Path, result: dict) -> dict:
     from dc_sustainability.data.carbon_source import load_source
 
     pairs, _ = load_source(path)
-    by_ts = {
-        timestamp.isoformat(): value
-        for timestamp, value in pairs
-    }
+    by_ts = {timestamp.isoformat(): value for timestamp, value in pairs}
 
     observations = result["window"]["observations"]
 
     same = all(
-        by_ts.get(observation["timestamp"]) == observation["avg_CI"]
-        for observation in observations
+        by_ts.get(observation["timestamp"]) == observation["avg_CI"] for observation in observations
     )
 
     return {
@@ -536,16 +508,12 @@ def main() -> int:
             "checker": "scripts/d06_check_window.py (standalone)",
             "file": str(args.csv),
             "source_pin": PIN,
-            "problems": [
-                f"could not read or parse source CSV: {exc}"
-            ],
+            "problems": [f"could not read or parse source CSV: {exc}"],
         }
 
     if args.compare_adapter and not result.get("problems"):
         try:
-            result["adapter_comparison"] = compare_adapter(
-                args.csv, result
-            )
+            result["adapter_comparison"] = compare_adapter(args.csv, result)
         except Exception as exc:
             result["adapter_comparison"] = {
                 "adapter_rows": None,
@@ -592,10 +560,7 @@ def main() -> int:
     )
 
     for observation in window.get("observations", []):
-        print(
-            f"  {observation['timestamp']}  "
-            f"{observation['avg_CI']!r}"
-        )
+        print(f"  {observation['timestamp']}  {observation['avg_CI']!r}")
 
     print("problems:", result.get("problems") or "none")
 
