@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.13 - 2026-10-19. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.14 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.14 - 2026-10-20
+
+- Matty explicitly requested all six October 20 priorities. [Issue #25](https://github.com/ReymoT/data-center-agentic/issues/25) records confirmed stale status/date defects and authorized scope; [the handoff](../handoffs/OCT20_SIX_PRIORITIES.md) gives evidence and limits.
+- Recorded actual Q03/Q09 agreements, Q10 partial agreement and open clarifications, Matty/Nisha coordinator acceptance, remaining Q12 confirmations, and Nisha-reported Group 15 course dates. Sent focused missing-input follow-ups; no scientific agreement invented.
+- Added reproducible E01 draft cross-checks and public offline probe input preparation. Runtime inventory shows 0.40.6 versus agreed 0.40.5; no inference. E01 remains draft with one reported capacity-slack discrepancy.
+- Preserved all 50 task rows, exact seven-file policies, F02 bytes, teammate code/prompts/locks, source attachments and unmerged work. Blank runtime examples remain non-runnable. Updated all ten package headers, README/architecture/plan/context and the dated coordination summary.
 
 ## Deployment 1.13 - 2026-10-19
 

@@ -1,6 +1,6 @@
 # Shared rules for all five assistants
 
-Version: 1.13 — 2026-10-19. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.14 — 2026-10-20. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 
@@ -50,7 +50,7 @@ Development has 40 episodes across four scenarios. Held-out evaluation has six d
 
 Use one mutually exclusive Issue status: Pending → Ready → In progress → Verifying → Done. Blocked records its previous state and a precise unblock condition. Merged work is Verifying until acceptance is demonstrated. A closed Issue is not automatically Done. Reopened defects/reverts must invalidate affected downstream readiness.
 
-The human integration coordinator and backup are not yet selected (Q11). Until selected, do not have several assistants edit the summary table or pretend it is current. Use Issues for current truth; Matty can create the summary template during bootstrap. After selection, the coordinator refreshes it once per active team day and at milestones, showing last synchronization time. Keep it as a project record, not a temporary file.
+Matty is integration coordinator and summary publisher; Nisha accepted the backup role when Matty is unavailable, recorded in [Q11](../decisions/Q11_MANAGER_AUTHORITY.md). Only the active publisher updates the shared summary; other assistants use their authorized Issues/handoffs. Refresh it on active team days and milestones with its synchronization date. This is a manual project record, not monitoring or an assistant wakeup service. Remaining Q12 allocations and access choices stay explicit.
 
 ## Start and resume procedure
 

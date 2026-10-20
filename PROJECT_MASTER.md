@@ -1,6 +1,8 @@
 # Project master instructions
 
-Instruction deployment: 1.13 — 2026-10-19. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Current decision intake, October 20, 2026: [Q01-Q04 status](docs/decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](docs/decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](docs/decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+
+Instruction deployment: 1.14 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 
@@ -26,7 +28,7 @@ Record agreement in the Issue or decision record before implementing shared-form
 
 Current D06 update, 2026-10-19: [Matty's handoff verification](docs/handoffs/D06_F04_F05_VERIFICATION.md) records merged D06 tooling and a fresh Windows structural pass using the exact merged checker. Original evidence limitations and Q05/policy-facing acceptance remain explicit; no scientific choice or shared setting is changed.
 
-Matty reports the course presentation is due November 18, 2026. [Q13](docs/decisions/Q13_PRESENTATION_DEADLINE.md) records the source and remaining requirements; [the current plan](docs/PROJECT_PLAN.md) supersedes conflicting older presentation dates. Separate report/code deadlines remain unconfirmed.
+Course planning update, October 20, 2026: Nisha reports Group 15 presents in class November 16, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Read [Q13](docs/decisions/Q13_PRESENTATION_DEADLINE.md) and [the current plan](docs/PROJECT_PLAN.md). Timezone, rubric/formats and separate code/release requirements remain unconfirmed. Rehearsal must be before November 16; no exact day is agreed. These are attributed course reports, not verified outcomes or scientific acceptance.
 
 The research question is: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
@@ -36,7 +38,7 @@ Use actual implementation and test evidence. Do not substitute stubs, constant s
 
 [The F03/F04/F05 maintenance handoff](docs/handoffs/F03_F04_F05_MAINTENANCE.md) records current offline CI, instruction and documentation evidence. F03's final provider-inclusive environment remains pending; F04/F05 continue as maintenance duties.
 
-The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices. [Q09](docs/decisions/Q09_OLLAMA_QWEN3.md) now records Matty's acceptance of local Ollama with Qwen3 8B and temperature 0.2. Matty owns the shared adapter/environment, Nisha the plain/explanation paths, and Ved contract compatibility. They can proceed with documented development preparation. [Hardware inventory](docs/HARDWARE.md) is now available and [A01/A03 core](docs/handoffs/A01_A03_AGREED_CORE.md) is implemented; final deployment/artifact/context/seed/resource pins remain pending; this is not live-experiment readiness.
+The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices. [Q09](docs/decisions/Q09_OLLAMA_QWEN3.md) now records Matty's acceptance of local Ollama with Qwen3 8B and temperature 0.2. Matty owns the shared adapter/environment, Nisha the plain/explanation paths, and Ved contract compatibility. They can proceed with documented development preparation. [Hardware inventory](docs/HARDWARE.md) is now available and [A01/A03 core](docs/handoffs/A01_A03_AGREED_CORE.md) is implemented; the October 20 Q09 record now accepts development pins/seeds/projections, with observed runtime mismatch and context validation still blocking live readiness.
 
 Current update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [The D03 checker-consumer handoff](docs/handoffs/A03_D03_F04_F05.md) records bounded fixed-rule validation and F04/F05 maintenance; empirical calibration, scientific agreement and downstream acceptance remain pending.
 

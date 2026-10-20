@@ -1,11 +1,16 @@
-# Coordination summary template
+# Team coordination summary
 
-Status: inactive template. Matty is the confirmed project manager. Q11 has not named the summary publisher or backup; remaining permissions and delegation choices stay open. No live team status is asserted. The designated single publisher will fill this after activation; other assistants use their authorized Issues and handoffs.
+Last synchronized: October 20, 2026 (America/Phoenix project day). Publisher/integration coordinator: Matty Anderson (MattyAnd). Backup when Matty is unavailable: Nisha Mahadev Kolekar (nkolekar-nk), who [accepted](https://github.com/ReymoT/data-center-agentic/issues/21#issuecomment-6283905610); [Matty confirmed](https://github.com/ReymoT/data-center-agentic/issues/21#issuecomment-6298590974). This is a manual dated snapshot, not automatic monitoring. Issues/evidence take precedence over a stale summary.
 
-Last synchronized: not yet published.
-Publisher: unresolved Q11.
+| Task / Issue | Human owner | State | Evidence and exact next unblock condition |
+|---|---|---|---|
+| A01/F03, [#6](https://github.com/ReymoT/data-center-agentic/issues/6) | Matty | Blocked after implemented offline core | Q09 setup agreed. Installed 0.40.6 differs from 0.40.5 pin. Resolve drift, validate actual counter/context and authorize bounded probe. |
+| A03, [#7](https://github.com/ReymoT/data-center-agentic/issues/7) | Matty | Blocked after fixed checks | Matty replied to Q03. Need Edison Q01-Q04 input and unsettled joint-infeasibility rules. Empty-queue no-call handling needs implementation. |
+| A02/A04, [#18](https://github.com/ReymoT/data-center-agentic/issues/18), [#17](https://github.com/ReymoT/data-center-agentic/issues/17) | Matty | Blocked, previous Pending | Need documented A01/checker/K02/P02/S01 prerequisites and actual integration. Neither is implemented. |
+| E01, [#24](https://github.com/ReymoT/data-center-agentic/issues/24) | Nisha; Ved technical contact | Verifying draft preparation | [PR #23](https://github.com/ReymoT/data-center-agentic/pull/23) remains draft/unmerged at f5a2542. Matty reproduced 871 tests + 19 subtests and nine hand cases; slack discrepancy reported. Need owner correction/decision, protocol agreement, independent replay and real saved outputs. |
+| Q10/E04, [#22](https://github.com/ReymoT/data-center-agentic/issues/22) | Nisha | Blocked, previous In progress | Baseline partial agreement; summary assertion scope and queue eligibility need resolution, Ved reply missing. No freeze. |
+| Q11/Q12, [#21](https://github.com/ReymoT/data-center-agentic/issues/21) | Matty | In progress | Coordinator/backup accepted; Nisha allocation confirmed. Reimo/Ved/Edison confirmations requested. Task rows unchanged. |
+| Q13, [#16](https://github.com/ReymoT/data-center-agentic/issues/16) | Nisha course; Matty environment/license | In progress | Reported Nov 16 class / Nov 18 submission / Dec 2 demo / Dec 9 report recorded. Need timezone/rubrics and missing platform/license/access/retention agreements. |
+| D06, [#13](https://github.com/ReymoT/data-center-agentic/issues/13) | Ved | Blocked after structural verification | Actual Windows reproduction recorded; Q05 source semantics/rights and policy-facing F02 adoption remain open. No new D02 access follow-up started. |
 
-| Task / Issue | Human owner | Technical contact | State | Dependency evidence | Blocker and exact unblock condition | Branch / PR | Next checkpoint |
-|---|---|---|---|---|---|---|---|
-
-Use Pending, Ready, In progress, Verifying, Done, or Blocked with previous state. Link the [checklist](team/03_RESPONSIBILITY_CHECKLIST.md). Merged is not Done until acceptance is verified. Record stale summaries explicitly; they never reassign a task.
+Full 50-task primary/contact/dependency assignments remain in [the checklist](team/03_RESPONSIBILITY_CHECKLIST.md). This summary does not reassign tasks or equate preparation with completion. [The six-priority handoff](handoffs/OCT20_SIX_PRIORITIES.md) records Matty's work. No unmerged branch, local worktree or independent evaluator implementation is replaced.

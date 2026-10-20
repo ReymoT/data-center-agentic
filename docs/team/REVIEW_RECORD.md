@@ -1,5 +1,7 @@
 # Publication audit
 
+Current October 20 maintenance, deployment 1.14: [issue #25](https://github.com/ReymoT/data-center-agentic/issues/25) records the authorized six-priority scope and stale documentation defects. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records current technical evidence and limits. Prior audit entries below are historical. E01 remains an unmerged draft; no scientific/live-run approval is claimed.
+
 Current D06 maintenance, October 19, 2026: [Matty's verification](../handoffs/D06_F04_F05_VERIFICATION.md) records a new current-checker structural pass and documentation alignment. The focused suite passed 21 tests and 19 subtests. This is not scientific acceptance or authentication of Ved's old JSON; prior dated audit entries below remain historical. Instruction deployment is now 1.13.
 
 
