@@ -1,5 +1,33 @@
 # Project plan
 
+Current planning update, October 20, 2026. Matty accepted [Nisha's Canvas-reported Group 15 schedule](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6283757221). [Q13](decisions/Q13_PRESENTATION_DEADLINE.md) records attribution and missing requirements. Matty's assistant has not independently inspected Canvas or an instructor document. Timezone remains unconfirmed; do not convert the reported times.
+
+| Course milestone reported by Nisha | Planning action and owner |
+|---|---|
+| November 16: Group 15 first class presentation | Be presentation-ready for this class; Nisha coordinates assembly, all authors provide actual verified contributions. Rehearsal before November 16, exact date still to agree. |
+| November 18, 11:59 pm: presentation submission | Nisha coordinates submission; timezone, duration, format/rubric and destination still to confirm. |
+| December 2: Group 15 second round/demo; DEMO Submission 11:59 pm | Prepare a truthful working-demo path against this reported milestone; demo expectations still to confirm. Matty's runbook/final acceptance and all module owners' dependencies remain required. |
+| December 9, 11:59 pm: final report | Nisha coordinates R05 assembly, all authors provide evidence-backed sections. Length/format/rubric and separate code/repository submission details remain unknown. |
+
+This task updates the plan only; it does not create slides or run experiments. November 23 analysis, December 2 rehearsal and December 4 delivery were earlier internal estimates and are superseded as course scheduling guidance. December 2 is now a reported demo day, not a rehearsal date. A separate code/release deadline is still unknown. Historical entries below are retained as context, not alternate active deadlines.
+
+## Current critical path
+
+1. Matty has answered Q03 and confirmed the runtime can be designed for zero-call empty no-ops. Edison must still reply to Q01-Q04; joint-infeasibility and Q08 certification details remain open. Implement and test shared no-call behavior only under the recorded rule; do not claim it already works.
+2. Q09 setup is agreed by Nisha/Ved/Matty. Resolve the observed Ollama 0.40.6 versus accepted 0.40.5 mismatch, validate both rendered prompts with a real pinned counter, then obtain bounded run authorization. [Offline probe inputs](evidence/q09-probe-preparation-2026-10-20.json) are prepared, not dispatched.
+3. Nisha's E01 draft has an [acceptance issue](https://github.com/ReymoT/data-center-agentic/issues/24). Actual hand checks found a tiny capacity tolerance discrepancy; fix/agree it without coupling evaluation truth to A03. Independent replay and saved policy outputs remain future evidence.
+4. Resolve Q10 summary-claim scope and queue eligibility with Nisha and obtain Ved's sampling/analysis agreement before E04 freeze. Preserve original ratings, failures and the planned sample; no silent reduction.
+5. Matty is coordinator/publisher, Nisha accepted backup. Record remaining Reimo/Ved/Edison Q12 confirmations. Keep current primary/contact rows; no reassignment by stale status.
+6. Nisha confirms course timezone/rubrics/demo/report/code requirements. Remaining contributors confirm platform/license/access/retention needs. No LICENSE, visibility, storage or retention change is assumed.
+
+Matty's [six-priority handoff](handoffs/OCT20_SIX_PRIORITIES.md), [decision index](team/04_OPEN_DECISIONS.md) and [dated coordination snapshot](COORDINATION.md) link evidence and outstanding inputs. The [50-task checklist](team/03_RESPONSIBILITY_CHECKLIST.md) remains authoritative for ownership/dependencies. Q11 coordination-role acceptance does not remove scientific agreement or independent evaluation.
+
+The study still requires its real data/fixture decisions, math/A/B, graph/retrieval and references, trained C/D, both LLM paths, gate/runner, development integration and failure tests, independent blinded review, freeze, held-out runs, scoring/reproduction and final E2E/release. There are no held-out results yet. If only development evidence exists at the presentation, label it that way; if less exists, state that honestly. Nisha's expectation of development-review results is a plan, not a result or permission to invent them. Course dates do not waive acceptance or silently narrow the protocol.
+
+## Historical dated entries and estimates
+
+The entries below describe earlier knowledge. Their unknown report/demo dates, pending Q09 agreements and November 18-only presentation planning are superseded by the October 20 record above. Internal milestone dates are estimates, not current promises or evidence of completion.
+
 D06 verification update, October 19, 2026: [the current handoff](handoffs/D06_F04_F05_VERIFICATION.md) records merged source/window tooling and an actual version-matched Windows structural pass, separate from Ved's original reports. F04/F05 documentation is aligned; this does not close D06/Q05 scientific acceptance, change any timeline, resume A01 or perform the deferred D02/Q13 follow-ups.
 
 Current update, October 18, 2026: Matty reports the project presentation is due November 18, 2026. [The partial Q13 record](decisions/Q13_PRESENTATION_DEADLINE.md) preserves his statement and the remaining course requirements. No exact time, timezone, duration, format/rubric or separate report/code deadline has been confirmed.

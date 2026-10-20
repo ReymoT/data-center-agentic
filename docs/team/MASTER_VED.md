@@ -1,10 +1,12 @@
 # Master instructions — Ved
 
-Version: 1.13 — 2026-10-19. Repository: https://github.com/ReymoT/data-center-agentic
+Current decision intake, October 20, 2026: [Q01-Q04 status](../decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](../decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](../decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+
+Version: 1.14 — 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
-Presentation deadline: November 18, 2026, reported by Matty on October 18. Read [the Q13 record](../decisions/Q13_PRESENTATION_DEADLINE.md) and [current plan](../PROJECT_PLAN.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed. Older internal targets do not set course deadlines or certify readiness.
+Course planning update, October 20, 2026: Nisha reports Group 15 presents in class November 16, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Read [Q13](../decisions/Q13_PRESENTATION_DEADLINE.md) and [the current plan](../PROJECT_PLAN.md). Timezone, rubric/formats and separate code/release requirements remain unconfirmed. Rehearsal must be before November 16; no exact day is agreed. These are attributed course reports, not verified outcomes or scientific acceptance.
 
 Current D06 update, 2026-10-19: Ved's checker and handoff are merged. [Matty's verification](../handoffs/D06_F04_F05_VERIFICATION.md) records a fresh version-matched Windows structural pass on the pinned source, separate from Ved's original JSON. Source semantics/rights and full D06/Q05 acceptance remain open; no schema, setting or task ownership changed.
 
@@ -79,7 +81,7 @@ Own `dc_sustainability/schemas.py`, `dc_sustainability/knowledge/`, `dc_sustaina
 
 Publish contract examples first to everyone; graph/context to Matty/Nisha; label caches to Edison; independent references to Nisha; second-person data verification to Reimo. O02 waits on P03's candidate specification, not a trained C/D model, avoiding a training/label cycle. Missing forecast cases need explicit statuses rather than fabricated labels. Each handoff includes reproducible commands, source and contract hashes, exclusions, solver settings/status and consumer checks.
 
-Done requires reviewed schemas, graph/query/SHACL tests, end-to-end capacity-change proof, certified and independently checked reference artifacts, successful receiving-module tests on merged code and complete documentation. October 16 source reproduction, October 23 retrieval, early labels for Edison's October 30 training and November 13 freeze were internal targets, not completion evidence. Give Nisha your verified technical contribution for the November 18 presentation; the historical December 2 reproduction target is subject to replanning and is not a course deadline. Review Nisha's independent validator without replacing it with Matty's checker logic.
+Done requires reviewed schemas, graph/query/SHACL tests, end-to-end capacity-change proof, certified and independently checked reference artifacts, successful receiving-module tests on merged code and complete documentation. October 16 source reproduction, October 23 retrieval, early labels for Edison's October 30 training and November 13 freeze were internal targets, not completion evidence. Give Nisha verified contributions for the reported November 16 class presentation and November 18 submission. Coordinate reproduction with the reported December 2 demo and December 9 report; the old December 2 reproduction estimate is not independent course authority. Review Nisha's independent validator without replacing it with Matty's checker logic.
 
 
 ## Coordination instructions for your assistant

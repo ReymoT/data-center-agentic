@@ -1,5 +1,7 @@
 # Matty project preferences
 
+Current update, October 20, 2026: Matty authorized all six audit priorities. [The handoff](handoffs/OCT20_SIX_PRIORITIES.md) records actual work and decisions. Matty is coordinator/publisher, Nisha accepted backup and her Q12 allocation. Q09 setup is agreed (0.40.5, full digest, seeds 101/102/103, projections/bounds), but observed 0.40.6 and missing validated counter block inference. Nisha reports Nov 16 class presentation, Nov 18 presentation submission, Dec 2 demo, Dec 9 report; timezone/rubrics/code requirements remain unknown. Q01-Q04/Q10 and license/platform agreements stay partial. Earlier dated notes below are history where superseded.
+
 Recorded from Matty's explicit request on 2026-10-10 for this FSE 598 project.
 
 - Matty Anderson's GitHub account is [MattyAnd](https://github.com/MattyAnd). Do not substitute the repository owner's account for Matty.
@@ -18,7 +20,7 @@ Record Matty's authorization for the specific change before editing instructions
 
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
-Record affected teammates' agreement before changing shared formats or settings. These preferences and the explicit manager instruction take precedence over older team-package workflow requirements. Technical verification and the final proposal's independent evaluation remain part of project acceptance. Provider/budget, scientific semantics, remaining account permissions, backup/publisher assignments and source licensing remain as recorded in the decision index. This repository file is persistent project context, read through root AGENTS.md; no global account memory was modified.
+Record affected teammates' agreement before changing shared formats or settings. These preferences and the explicit manager instruction take precedence over older team-package workflow requirements. Technical verification and the final proposal's independent evaluation remain part of project acceptance. Provider/budget, scientific semantics, remaining account permissions, remaining workflow/access settings and source licensing remain as recorded in the decision index; the October 20 accepted coordinator/backup roles are recorded there. This repository file is persistent project context, read through root AGENTS.md; no global account memory was modified.
 
 Matty accepted Nisha's local Ollama/Qwen3 8B recommendation and selected temperature 0.2. [Q09](decisions/Q09_OLLAMA_QWEN3.md) records accepted development settings and owner handoff; [the reply](https://github.com/ReymoT/data-center-agentic/issues/2#issuecomment-6136759988) notifies Nisha/Ved. Matty owns the shared adapter/environment, Nisha plain/explanations, and Ved contract compatibility. Matty supplied [hardware details](HARDWARE.md), and [A01/A03 core](handoffs/A01_A03_AGREED_CORE.md) is implemented. Exact accepted runtime/SDK/model-digest/context/seed/resource pins remain pending. Do not treat development acceptance as a frozen or runnable experiment configuration.
 

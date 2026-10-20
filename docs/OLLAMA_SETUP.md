@@ -1,5 +1,7 @@
 # Local Qwen model setup
 
+Current update, October 20, 2026: [Nisha/Ved/Matty agreed development setup](decisions/Q09_DEPLOYMENT_OCT20.md), including Ollama 0.40.5, digest, seeds and projections. The [new read-only inventory](evidence/ollama-qwen3-8b-2026-10-20.json) instead observes 0.40.6 with unchanged model/template/parameter hashes. Comparison to the 0.40.5 record is expected to fail. Do not overwrite history or silently accept drift. Counter/context validation and bounded run authorization remain required; no model calls. The dated entries below retain earlier setup evidence.
+
 Matty completed this independent A01/F03 setup on 2026-10-12, following the accepted
 [Q09 direction](decisions/Q09_OLLAMA_QWEN3.md). Installation and identity checks are
 complete. Full provider/environment and experimental acceptance remain pending.
