@@ -11,7 +11,7 @@ All teammates contribute their technical sections, interface coordination and re
 
 FSE 598, Arizona State University.
 
-The project presentation is due November 18, 2026, as reported by Matty. See [the plan](docs/PROJECT_PLAN.md) and [remaining course requirements](docs/decisions/Q13_PRESENTATION_DEADLINE.md). Presentation time, duration and format, and separate report/code deadlines remain unconfirmed.
+Nisha reports Group 15 presents in class November 16, 2026, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Timezone, rubrics/formats and separate code/release requirements remain unconfirmed. See [the plan](docs/PROJECT_PLAN.md) and [attributed course record](docs/decisions/Q13_PRESENTATION_DEADLINE.md).
 
 Our research question: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
@@ -93,21 +93,21 @@ The offline test command runs F02 contracts, D01/D06 inspection, D02 calibration
 
 All provider/account/settings placeholders in `.env.example` are blank. Keep them blank until the complete Q09 deployment configuration is recorded; the accepted development direction below does not fill missing pins. [The configuration template](configs/project.example.json) records known proposal constants and keeps decision entries null. It is not a production loader or an execution permission.
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Qwen3 8B Q4_K_M is installed with [verified digest/license and reproducible setup](docs/OLLAMA_SETUP.md). The original runtime inventory was 0.40.3; a read-only check on 2026-10-18 now observes Ollama 0.40.5 and a changed rendered-default-parameter hash. This runtime drift is recorded separately and is not an accepted deployment pin. Final runtime/SDK/model-digest/seed/context/resource pins remain pending. No inference or held-out/cloud/paid run was performed.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision](docs/decisions/Q09_OLLAMA_QWEN3.md) records the accepted development settings and owners: Matty prepares the shared adapter/environment, Nisha prepares plain/explanations, and Ved supports F02 compatibility. Matty supplied his [Intel Arc 140V / 32 GB hardware details](docs/HARDWARE.md); Qwen3 8B Q4_K_M is installed with [verified digest/license and reproducible setup](docs/OLLAMA_SETUP.md). The [October 20 Q09 record](docs/decisions/Q09_DEPLOYMENT_OCT20.md) accepts runtime 0.40.5, the full model digest, seeds 101/102/103, output projections and bounded probe rules. Today's read-only inventory observes 0.40.6 instead. That mismatch, the missing validated prompt counter/context measurements and explicit run authorization block live calls. No inference or held-out/cloud/paid run was performed.
 
 ## Installed local model
 
-Matty completed the independent A01/F03 installation and identity checks. Qwen3 8B Q4_K_M is installed locally; its full digest, license, template/default-parameter hashes and independently checked original stored blobs are recorded. [The dated runtime inventory](docs/evidence/ollama-qwen3-8b-2026-10-18.json) retains the later 0.40.5 observation; the model digest/license/template hashes match the original evidence, while the runtime and rendered parameter-text hash differ. Weights remain outside GitHub. Use [the model setup guide](docs/OLLAMA_SETUP.md) to reproduce or compare metadata. No inference or GPU-throughput test was performed, and the remaining deployment/context/projection/seed/resource choices still block live readiness.
+Qwen3 8B Q4_K_M is installed locally, with recorded digest/license and original stored-blob checks. [Today's inventory](docs/evidence/ollama-qwen3-8b-2026-10-20.json) reports Ollama 0.40.6. It preserves the model/template/parameter hashes from the agreed 0.40.5 evidence, which remains historical. Comparing metadata against today's inventory checks for further drift; it does not approve 0.40.6 for inference. Weights stay outside GitHub. The [setup guide](docs/OLLAMA_SETUP.md) records reproducible checks and the remaining context/run gates. No inference or GPU-throughput test was performed.
 
 ```powershell
-.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-18.json
+.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-20.json
 ```
 
 ## Available adapter and checker core
 
-[The shared Ollama transport](dc_sustainability/llm/provider.py) performs real HTTP, strict F02 parsing, pin checks, deadlines and attempt accounting. It uses the Python standard library without choosing an SDK. Both LLM callers must share one run ledger. Prompts/output projections, a validated model-specific token counter, explicit deployment pins and run limits are still required; there is no runnable experiment configuration or automatic model installation.
+[The shared Ollama transport](dc_sustainability/llm/provider.py) performs real HTTP, strict F02 parsing, pin checks, deadlines and attempt accounting. It uses the Python standard library without choosing an SDK. Both LLM callers must share one run ledger. Q09 now records development output projections/pins/limits; a validated model-specific prompt counter, runtime match and actual run evidence are still required; there is no runnable experiment configuration or automatic model installation.
 
-[The A01 accounting fix](docs/handoffs/A01_ERROR_ACCOUNTING_AND_FOLLOWUPS.md) retains excessively nested JSON failures as spent attempts, including their raw responses. These errors cannot escape the run ledger or allow a new slot to bypass its call cap. The same handoff links the requested Q10-Q13 proposals; they remain pending agreement and do not supply missing runtime settings.
+[The A01 accounting fix](docs/handoffs/A01_ERROR_ACCOUNTING_AND_FOLLOWUPS.md) retains excessively nested JSON failures as spent attempts, including their raw responses. These errors cannot escape the run ledger or allow a new slot to bypass its call cap. The same handoff links the earlier Q10-Q13 proposals; use the October 20 decision records for their current partial agreements and remaining gates.
 
 [The fixed checker](dc_sustainability/verification/checker.py) checks visible job/evidence IDs, timing, deadlines, nonflexible starts and proposed/running occupancy against authoritative capacity. Changing the constraint from 100 to 70 kW changes the check. Known violations are rejected; an otherwise feasible proposal receives an explicit unresolved-rule error. Q01-Q04 still block overall approval, and no execution gate or numerical-claim certification is supplied.
 
@@ -127,7 +127,7 @@ Reimo's [S01 simulator](dc_sustainability/simulator/core.py) is merged through P
 .venv\Scripts\python.exe -m pytest tests/llm/test_plain.py tests/llm/test_plain_context_boundary.py tests/verification/test_s01_checker_intake.py -q
 ```
 
-[The current five-task handoff](docs/handoffs/OCT18_TASK_READINESS.md) records the Q09 proposal, Q13 request, merged-fix verification and remaining checker/agent/gate dependencies. Proposals remain in Issues; configuration placeholders are not filled from them.
+[The October 20 handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) records the latest agreements, follow-ups and nine A03/E01 hand cases. E01 [PR #23](https://github.com/ReymoT/data-center-agentic/pull/23) remains draft and unmerged: its 871-test suite passes locally, but full evaluation acceptance and a capacity-slack discrepancy remain open. [Offline probe preparation](scripts/prepare_q09_probe.py) renders public development inputs and reports blocked gates; it never calls a model. The October 18 handoff is historical. Configuration examples remain blank.
 
 ## Data, experiments and outputs
 

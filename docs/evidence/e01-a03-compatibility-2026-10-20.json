@@ -1,0 +1,115 @@
+{
+  "review_date": "2026-10-20",
+  "evidence_kind": "synthetic_hand_case_compatibility_not_acceptance",
+  "production_base": "91eead14678c30e148d43b22df7e72c538bacbe9",
+  "draft_head": "f5a2542c1816ed0f34d8f784053453ae9b26c1f6",
+  "protocol": "Q01-Q03-draft-2026-10-20",
+  "review_script_sha256_lf": "d8103d8fb514e0567f365b4a13bf6daa8722db6013a3424ddbac0cf6822c4ee0",
+  "cases": [
+    {
+      "case": "sequential_80_then_70_kw",
+      "a03_capacity": "pass",
+      "a03_overall": "error",
+      "a03_overload_slots": [],
+      "e01_status": "valid",
+      "e01_codes": [],
+      "overall_comparison": "not_comparable"
+    },
+    {
+      "case": "future_only_110_kw",
+      "a03_capacity": "fail",
+      "a03_overall": "fail",
+      "a03_overload_slots": [
+        2,
+        3
+      ],
+      "e01_status": "invalid",
+      "e01_codes": [
+        "capacity",
+        "capacity"
+      ],
+      "overall_comparison": "agree"
+    },
+    {
+      "case": "running_plus_future_110_kw",
+      "a03_capacity": "fail",
+      "a03_overall": "fail",
+      "a03_overload_slots": [
+        1
+      ],
+      "e01_status": "invalid",
+      "e01_codes": [
+        "capacity"
+      ],
+      "overall_comparison": "agree"
+    },
+    {
+      "case": "exact_100_kw_before_pue",
+      "a03_capacity": "pass",
+      "a03_overall": "error",
+      "a03_overload_slots": [],
+      "e01_status": "valid",
+      "e01_codes": [],
+      "overall_comparison": "not_comparable"
+    },
+    {
+      "case": "changed_capacity_70_kw",
+      "a03_capacity": "fail",
+      "a03_overall": "fail",
+      "a03_overload_slots": [
+        2,
+        3
+      ],
+      "e01_status": "invalid",
+      "e01_codes": [
+        "capacity",
+        "capacity"
+      ],
+      "overall_comparison": "agree"
+    },
+    {
+      "case": "slot23_finishes_at30",
+      "a03_capacity": "pass",
+      "a03_overall": "error",
+      "a03_overload_slots": [],
+      "e01_status": "valid",
+      "e01_codes": [],
+      "overall_comparison": "not_comparable"
+    },
+    {
+      "case": "missing_capacity",
+      "a03_capacity": "error",
+      "a03_overall": "error",
+      "a03_overload_slots": [],
+      "e01_status": "invalid",
+      "e01_codes": [
+        "capacity_unverifiable"
+      ],
+      "overall_comparison": "not_comparable"
+    },
+    {
+      "case": "omission_is_not_full_checker_agreement",
+      "a03_capacity": "pass",
+      "a03_overall": "error",
+      "a03_overload_slots": [],
+      "e01_status": "invalid",
+      "e01_codes": [
+        "omitted_job"
+      ],
+      "overall_comparison": "not_comparable"
+    },
+    {
+      "case": "capacity_slack_disagreement",
+      "a03_capacity": "fail",
+      "a03_overall": "fail",
+      "a03_overload_slots": [
+        2
+      ],
+      "e01_status": "valid",
+      "e01_codes": [],
+      "overall_comparison": "checker_failed_valid"
+    }
+  ],
+  "model_calls": 0,
+  "full_e01_accepted": false
+}

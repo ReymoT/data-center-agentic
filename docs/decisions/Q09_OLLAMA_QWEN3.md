@@ -1,5 +1,7 @@
 # Q09: accepted Ollama and Qwen3 development direction
 
+Current authority, October 20, 2026: [the development setup agreement](Q09_DEPLOYMENT_OCT20.md) supersedes the earlier pending-pin/seed/projection/warm-up status below. Nisha, Ved and Matty agreed the concrete setup with additions. Installed runtime is now 0.40.6 versus agreed 0.40.5; validated context handling and explicit run authorization remain gates. Full A01/experiment acceptance is not complete. The dated original record below is preserved as history, not a competing current configuration. Effective instruction deployment: 1.14.
+
 Decision ID: Q09, partial resolution. Status: runtime/model direction and listed development settings accepted; deployment and experiment freeze pending.
 
 Driver: Matty Anderson (MattyAnd). Affected LLM owner: Nisha Mahadev Kolekar (nkolekar-nk). Contract contact: Ved Patil (vedp3705).

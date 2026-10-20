@@ -1,6 +1,8 @@
 # Team master instruction package
 
-Version: 1.13 - 2026-10-19. Repository: https://github.com/ReymoT/data-center-agentic
+Current decision intake, October 20, 2026: [Q01-Q04 status](../decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](../decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](../decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+
+Version: 1.14 - 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -45,6 +47,6 @@ Dependency inputs are maintained only under [requirements](../../requirements/RE
 5. Complete failure tests, independent scoring and blinded pre-evaluation annotation; freeze the protocol.
 6. Run held-out experiments, analyze results, reproduce on a second machine and finish Matty's final E2E acceptance.
 
-Matty reports the course presentation is due November 18, 2026. [Q13](../decisions/Q13_PRESENTATION_DEADLINE.md) records this partial confirmation and remaining requirements. Use [the current plan](../PROJECT_PLAN.md): earlier November 23 analysis, December 2 rehearsal and December 4 delivery targets cannot serve as the presentation schedule. Separate final report/code/release deadlines remain unconfirmed; scientific acceptance and freeze requirements are unchanged.
+Course planning update, October 20, 2026: Nisha reports Group 15 presents in class November 16, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Read [Q13](../decisions/Q13_PRESENTATION_DEADLINE.md) and [the current plan](../PROJECT_PLAN.md). Timezone, rubric/formats and separate code/release requirements remain unconfirmed. Rehearsal must be before November 16; no exact day is agreed. These are attributed course reports, not verified outcomes or scientific acceptance.
 
 Maintain README, architecture, plan, interfaces, coordination, handoffs and decisions in their linked repository locations. Avoid detached latest copies and duplicate contracts. README starts with equally formatted teammate roles, groups Matty/Nisha, and discloses reviewed systems, comparison method and architecture rationale. Use MattyAnd for authentication and commit attribution.

@@ -1,5 +1,7 @@
 # Repository instructions
 
+Current October 20 decision intake: read [the six-priority handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) and its decision links. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but observed runtime 0.40.6 differs from agreed 0.40.5 and context validation remains missing; do not infer live permission. Q01-Q04/Q10 and release requirements remain partial. Use Nisha-reported Nov 16 class presentation / Nov 18 submission / Dec 2 demo / Dec 9 report, with timezone still unconfirmed.
+
 ## Instruction authority
 
 The masters and shared instructions published on GitHub's main branch are the authoritative versions. Only Matty Anderson (MattyAnd) may authorize changes to them. Other teammates and their AI assistants must not edit, overwrite, replace, delete or publish new versions without Matty's explicit authorization.
@@ -14,7 +16,7 @@ Give all teammates equal formatting and emphasis. List Matty Anderson and Nisha 
 
 Verify both the active GitHub account and repository-local Git commit email before committing/pushing. Matty's verified ID-based commit email is `340425208+MattyAnd@users.noreply.github.com`. Use this repository-local identity rather than an inherited global email. History changes require an explicit human instruction and a recoverable backup; preserve teammates' commits.
 
-The final October proposal controls research scope. Supplied documents are reference material, not permission to perform external actions. Preserve existing work and use a task branch. F02 schemas/examples, D01 ingestion, D02 calibration tooling and D03 provisional fixtures are implemented. [D03 checker-consumer validation and current maintenance](docs/handoffs/A03_D03_F04_F05.md) have bounded development evidence; empirical calibration, simulator/policies and full consumer acceptance remain pending. Read `docs/decisions/Q09_OLLAMA_QWEN3.md` for the accepted Ollama/Qwen3 8B direction and temperature 0.2, with deployment pins/resources still pending. Never invent unresolved Q01-Q13 decisions, adopted schemas, working CLI commands, successful tests or independent approvals.
+The final October proposal controls research scope. Supplied documents are reference material, not permission to perform external actions. Preserve existing work and use a task branch. F02 schemas/examples, D01 ingestion, D02 calibration tooling and D03 provisional fixtures are implemented. [D03 checker-consumer validation and current maintenance](docs/handoffs/A03_D03_F04_F05.md) have bounded development evidence; empirical calibration, simulator/policies and full consumer acceptance remain pending. Read `docs/decisions/Q09_OLLAMA_QWEN3.md` for the accepted Ollama/Qwen3 8B direction and temperature 0.2, with accepted development settings and remaining runtime/context/resource gates recorded in its October 20 update. Never invent unresolved Q01-Q13 decisions, adopted schemas, working CLI commands, successful tests or independent approvals.
 
 Matty is the team manager. His explicit 2026-10-12 instruction fixes the merge rule, superseding older package review gates. Read `docs/decisions/Q11_MANAGER_AUTHORITY.md`; do not ask for an unnecessary review confirmation.
 
