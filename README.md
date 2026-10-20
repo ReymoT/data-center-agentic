@@ -17,7 +17,7 @@ Our research question: Does an ontology-grounded, tool-verified agent improve th
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains project documentation, F02 records, D01-D03 data tooling/provisional fixtures, D06 source/window checks, S01 simulator transitions, L01 preparation and Matty's A01 transport/accounting and A03 fixed checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
+This repository contains project documentation, F02 records, D01-D03 data tooling/provisional fixtures, D06 source/window checks, S01 simulator transitions, L01 preparation, E01 independent decision/claim validation preparation and Matty's A01 transport/accounting and A03 fixed checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
 
 ## Systems we reviewed and why we chose this architecture
 
@@ -127,7 +127,7 @@ Reimo's [S01 simulator](dc_sustainability/simulator/core.py) is merged through P
 .venv\Scripts\python.exe -m pytest tests/llm/test_plain.py tests/llm/test_plain_context_boundary.py tests/verification/test_s01_checker_intake.py -q
 ```
 
-[The October 20 handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) records the latest agreements, follow-ups and nine A03/E01 hand cases. E01 [PR #23](https://github.com/ReymoT/data-center-agentic/pull/23) remains draft and unmerged: its 871-test suite passes locally, but full evaluation acceptance and a capacity-slack discrepancy remain open. [Offline probe preparation](scripts/prepare_q09_probe.py) renders public development inputs and reports blocked gates; it never calls a model. The October 18 handoff is historical. Configuration examples remain blank.
+[The October 20 handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) records the latest agreements, follow-ups and nine A03/E01 hand cases. Nisha's E01 preparation is available through [PR #23](https://github.com/ReymoT/data-center-agentic/pull/23), with [Matty's review and boundary fixes](docs/handoffs/E01_MERGE_REVIEW.md). It independently checks one supplied decision and numerical claims. Full protocol acceptance, independent episode replay and actual saved-output evaluation remain open in issue #24. The previously reported capacity-slack discrepancy is fixed; historical f5a2542 evidence remains unchanged. [Offline probe preparation](scripts/prepare_q09_probe.py) renders public development inputs and reports blocked gates; it never calls a model. The October 18 handoff is historical. Configuration examples remain blank.
 
 ## Data, experiments and outputs
 
