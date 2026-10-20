@@ -284,7 +284,9 @@ def test_graph_capacity_change_changes_the_verdict():
 
 
 def test_completion_slot_has_no_decision():
-    state = f.visible_state().model_copy(update={"current_slot": 24})
+    state = s.VisibleState.from_snapshot(
+        f.snapshot(), episode_id=f.EPISODE_ID, current_slot=24, state_version=24
+    )
     with pytest.raises(ValueError, match="completion"):
         v.facts_from_state(state, f.snapshot())
 

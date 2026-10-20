@@ -1,10 +1,10 @@
 # E01 independent validator: first deliverable
 
-Task ID / Issue: E01. No E01 Issue exists yet. The rules come from [issue #7](https://github.com/ReymoT/data-center-agentic/issues/7) (Q01-Q04).
+Task ID / Issue: E01, [issue #24](https://github.com/ReymoT/data-center-agentic/issues/24). The rules come from [issue #7](https://github.com/ReymoT/data-center-agentic/issues/7) (Q01-Q04).
 Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk); technical contact Ved (vedp3705); Matty for checker-disagreement cases.
 Active assistant session / instruction version: one Claude Code session for Nisha; instruction deployment 1.13.
 Objective: Judge each decision's validity, and the numbers in explanations, independently of the production checker.
-Base commit / branch / PR: base `91eead1` on main; branch `nisha/e01-independent-validator`; PR not yet opened.
+Base commit / branch / PR: base `91eead1` on main; branch `nisha/e01-independent-validator`; [PR #23](https://github.com/ReymoT/data-center-agentic/pull/23). The original author preparation record below describes f5a2542; Matty's authorized merge review is recorded separately in [E01_MERGE_REVIEW.md](E01_MERGE_REVIEW.md).
 
 Changed paths:
 - `dc_sustainability/evaluation/validator.py` (new): `facts_from_state`, `validate_plan`, `validate_output`, `compare_with_check`, and the explicit `Protocol` / `Q03_DRAFT` rule set.
@@ -30,7 +30,7 @@ Pending cases (status `pending`, neither pass nor fail):
 - Matching a claim to the quantity it describes: F02 `Claim` has no quantity kind, so a reviewer chooses the reference (E04). A `claim_kind` field would need Ved's agreement.
 
 Design choices to confirm with the team:
-- Future intentions count toward capacity, so a plan whose later starts overlap past capacity is invalid.
+- Future intentions count toward capacity, confirmed against actual A03 by Matty. Review fixes remove the unagreed capacity margin and enforce the fixed episode end at 30; independent logic is retained.
 - A citation to an unknown evidence ID is recorded as a note for E04 and does not change validity.
 
 Input and output contract/config versions: F02 1.0.0. No schema, setting, prompt or other owner's module changed.
@@ -51,9 +51,9 @@ Exact reproduction commands:
 Tests actually run and observed results: Windows, Python 3.12.10, hashed lock. 871 tests and 19 subtests passed (816 before, 55 new). Ruff check/format, compileall, setup validation and pip check passed. Mutation check: six deliberate bugs were injected (capacity tolerance, deadline, last-start window, omission check, infeasibility verdict, running load). Each made the tests fail, and the code was restored afterward. Expected values are hand-derived: 54.5 kg and 48.4 kg for the proposal's hand schedules, 110 kW overloads, and the D03 generator's `intentionally_infeasible` labels matched by independent arithmetic over 4 scenarios × 10 seeds.
 
 Limitations and open decisions:
-- Not E01 acceptance. Matty and Edison still have to agree Q03, the decision must be recorded, and the pending cases must be resolved.
+- Not full E01 acceptance. Matty has now confirmed Q03; Edison's reply and the unsettled cases remain pending. See the main decision ledger. Merging this preparation does not freeze the draft protocol.
 - Validates one decision from a supplied state. Rebuilding the state independently from a private episode plus executed starts (to catch simulator disagreements) is the next step.
 - No run over real policy outputs yet, because no policy produces traces yet.
 
 Receiving owner and consumer check: Ved, to review the independence boundary and the `claim_kind` question; Matty, to compare `compare_with_check` results against A03 on shared cases; Edison, to cross-check the emissions arithmetic against P01 once it exists.
-Next checkpoint: open the PR and an E01 Issue, then add episode replay and the remaining Q03 boundary cases after the decision is recorded.
+Next checkpoint: complete the checked merge under Matty's current authorization, then continue independent episode replay and unsettled protocol/unit/reference work in issue #24. Final merge/CI and branch cleanup evidence belongs in the Issue.

@@ -6,7 +6,7 @@ project rules. It deliberately does not import or call the production checker
 treats a CheckResult as truth: ``compare_with_check`` only reports disagreements.
 
 Rules follow the Q01-Q03 drafts in issue #7 (Q01/Q02/Q04 agreed by Reimo and Ved; Q03
-confirmed by Nisha and agreed by Ved; Matty and Edison pending). They live in an explicit
+confirmed by Nisha and agreed by Ved and Matty; Edison pending). They live in an explicit
 ``Protocol`` so nothing here is a silent default. Cases the drafts do not settle are
 reported as ``pending`` findings, never as passes or failures.
 """
@@ -15,8 +15,6 @@ from dataclasses import dataclass
 from typing import Literal
 
 from dc_sustainability import schemas as s
-
-FLOAT_SLACK = 1e-9  # floating-point slack for kW comparisons, not a tolerance rule
 
 
 @dataclass(frozen=True)
@@ -36,7 +34,7 @@ class Protocol:
 
 Q03_DRAFT = Protocol(
     name="Q01-Q03-draft-2026-10-20",
-    status="Q03 confirmed by Nisha, agreed by Ved; Matty and Edison pending (issue #7)",
+    status="Q03 confirmed by Nisha, agreed by Ved and Matty; Edison pending (issue #7)",
     last_start_slot=23,
 )
 
@@ -51,6 +49,7 @@ Code = Literal[
     "start_before_arrival",
     "start_after_last_start",
     "deadline",
+    "episode_horizon",
     "nonflexible_start",
     "capacity",
     "capacity_unverifiable",
@@ -92,8 +91,15 @@ def facts_from_state(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> D
     """Collect decision facts from a visible state and its authoritative snapshot.
 
     Capacity is read from the snapshot's constraint records here, not via schema helpers,
-    and a deadline constraint that contradicts a visible job is refused.
+    and constraints that contradict a visible job are refused. F02 validates record
+    structure only; visibility and job/constraint consistency are derived here.
     """
+    state = s.VisibleState.model_validate(
+        state.model_dump(mode="python", warnings="none"), strict=True
+    )
+    snapshot = s.ConstraintSnapshot.model_validate(
+        snapshot.model_dump(mode="python", warnings="none"), strict=True
+    )
     if state.constraint_snapshot_id != snapshot.snapshot_id or state.site != snapshot.site:
         raise ValueError("state and snapshot describe different sites or snapshots")
     if state.current_slot >= s.PROPOSED_DECISION_SLOTS:
@@ -107,11 +113,28 @@ def facts_from_state(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> D
     waiting = {job.job_id: job for job in state.waiting_jobs}
     running = {view.job.job_id: (view.job, view.start_slot) for view in state.running_jobs}
     jobs = {**waiting, **{job_id: job for job_id, (job, _) in running.items()}}
+    known = set(jobs) | {view.job_id for view in state.completed_jobs} | set(state.missed_job_ids)
+    visible_ids = {
+        c.constraint_id
+        for c in snapshot.constraints
+        if c.applies_to_site == site_id or (c.applies_to_jobs and set(c.applies_to_jobs) <= known)
+    }
+    if set(state.constraint_ids) != visible_ids:
+        raise ValueError("visible constraint IDs do not match the authoritative snapshot")
     for constraint in snapshot.constraints:
-        if constraint.constraint_type != "deadline":
-            continue
         for job_id in constraint.applies_to_jobs:
-            if job_id in jobs and jobs[job_id].deadline_slot != constraint.limit_value:
+            job = jobs.get(job_id)
+            if job is None:
+                continue
+            values = {
+                "arrival": job.arrival_slot,
+                "deadline": job.deadline_slot,
+                "nonflexible": job.arrival_slot,
+            }
+            kind = constraint.constraint_type
+            if kind in values and (
+                constraint.limit_value != values[kind] or (kind == "nonflexible" and job.flexible)
+            ):
                 raise ValueError(f"{constraint.constraint_id} contradicts job {job_id}")
     evidence = {"FACT-SITE-BG", "FACT-SITE-PUE", "FACT-SITE-SLOTH"}
     evidence |= {f"FACT-JOB-{job_id}" for job_id in jobs}
@@ -144,6 +167,9 @@ class ValidationResult:
     empty_queue: bool
     justified_abstentions: tuple[str, ...]
     protocol: str
+    # Internal comparison metadata, not an F02 schema or an independent truth source.
+    # An unbound legacy/manual result cannot be compared to a production check.
+    decision_key: tuple[str, int, int, str] | None = None
 
     @property
     def valid(self) -> bool:
@@ -153,7 +179,8 @@ class ValidationResult:
 def _legal_starts(job: s.Job, earliest: int, protocol: Protocol) -> range:
     """Start slots allowed by arrival, Q01 and the completion deadline, ignoring capacity."""
     first = max(earliest, job.arrival_slot)
-    last = min(protocol.last_start_slot, job.deadline_slot - job.duration_slots)
+    end = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS
+    last = min(protocol.last_start_slot, min(job.deadline_slot, end) - job.duration_slots)
     if not job.flexible:
         return (
             range(job.arrival_slot, job.arrival_slot + 1)
@@ -170,7 +197,7 @@ def _fits_alone(job: s.Job, start: int, facts: DecisionFacts) -> bool:
         load += sum(
             j.power_kw for j, st in facts.running.values() if st <= t < st + j.duration_slots
         )
-        if load > facts.capacity_kw + FLOAT_SLACK:
+        if load > facts.capacity_kw:
             return False
     return True
 
@@ -187,6 +214,7 @@ def _assess_abstention(job: s.Job, facts: DecisionFacts, protocol: Protocol) -> 
 
 def validate_plan(plan: s.Plan, facts: DecisionFacts, protocol: Protocol) -> ValidationResult:
     """Validate one proposed plan against the decision facts and protocol."""
+    plan = s.Plan.model_validate(plan.model_dump(mode="python", warnings="none"), strict=True)
     findings: list[Finding] = []
     justified: list[str] = []
     if (plan.episode_id, plan.slot, plan.state_version) != (
@@ -229,6 +257,11 @@ def validate_plan(plan: s.Plan, facts: DecisionFacts, protocol: Protocol) -> Val
             findings.append(Finding("start_after_last_start", p.job_id, p.start_slot))
         if p.start_slot + job.duration_slots > job.deadline_slot:
             findings.append(Finding("deadline", p.job_id, p.start_slot))
+        if (
+            p.start_slot + job.duration_slots
+            > s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS
+        ):
+            findings.append(Finding("episode_horizon", p.job_id, p.start_slot))
         if not job.flexible and p.start_slot != job.arrival_slot:
             findings.append(Finding("nonflexible_start", p.job_id, p.start_slot))
 
@@ -244,7 +277,7 @@ def validate_plan(plan: s.Plan, facts: DecisionFacts, protocol: Protocol) -> Val
             load = facts.background_kw + sum(
                 j.power_kw for j, st in occupied if st <= t < st + j.duration_slots
             )
-            if load > facts.capacity_kw + FLOAT_SLACK:
+            if load > facts.capacity_kw:
                 findings.append(Finding("capacity", slot=t, detail=f"{load:g} kW"))
 
     for d in plan.deferrals:
@@ -284,6 +317,7 @@ def validate_plan(plan: s.Plan, facts: DecisionFacts, protocol: Protocol) -> Val
         empty_queue=empty_queue,
         justified_abstentions=tuple(justified),
         protocol=protocol.name,
+        decision_key=(facts.episode_id, facts.slot, facts.state_version, plan.plan_hash),
     )
 
 
@@ -291,6 +325,10 @@ def validate_output(
     output: s.PolicyOutput | None, facts: DecisionFacts, protocol: Protocol
 ) -> ValidationResult:
     """Validate a policy's output; missing, malformed and error outputs are invalid."""
+    if output is not None:
+        output = s.PolicyOutput.model_validate(
+            output.model_dump(mode="python", warnings="none"), strict=True
+        )
     if output is None or output.output_status != "ok" or output.plan is None:
         status = "missing" if output is None else output.output_status
         return ValidationResult(
@@ -310,10 +348,17 @@ Disagreement = Literal["agree", "checker_passed_invalid", "checker_failed_valid"
 def compare_with_check(result: ValidationResult, check: s.CheckResult) -> Disagreement:
     """Report how the production verdict relates to this one; neither is changed.
 
-    A checker error, or a pending result here, is not comparable rather than counted
-    as agreement.
+    Unbound/different decisions, checker errors and pending results are not
+    comparable. A check from a different proposal must never count as agreement.
     """
-    if check.status == "error" or result.status == "pending":
+    check = s.CheckResult.model_validate(
+        check.model_dump(mode="python", warnings="none"), strict=True
+    )
+    if (
+        result.decision_key != (check.episode_id, check.slot, check.state_version, check.plan_hash)
+        or check.status == "error"
+        or result.status == "pending"
+    ):
         return "not_comparable"
     if check.status == "pass":
         return "agree" if result.valid else "checker_passed_invalid"

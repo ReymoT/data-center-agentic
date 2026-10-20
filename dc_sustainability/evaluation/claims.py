@@ -9,17 +9,24 @@ series: forecasts for forecast claims, private realized observations for outcome
 import math
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
+from decimal import Decimal
 from typing import Literal
 
 from dc_sustainability import schemas as s
 
 CLAIM_TOLERANCE = 0.05  # kWh and kg, the proposal's claim-scoring rule
-FLOAT_SLACK = 1e-9  # minimal floating-point slack on top of the tolerance
 TOLERANCE_UNITS = frozenset({"kWh", "kg"})
 
 
 class CarbonUnavailable(KeyError):
     """A slot needed for an emissions value has no carbon value."""
+
+
+def _nonnegative_finite(value: float, name: str) -> None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        raise ValueError(f"{name} must be finite numeric data")
+    if value < 0:
+        raise ValueError(f"{name} must be nonnegative")
 
 
 def carbon_series(
@@ -53,7 +60,9 @@ def job_emissions_kg(
     for t in range(start_slot, start_slot + job.duration_slots):
         if t not in carbon:
             raise CarbonUnavailable(t)
+        _nonnegative_finite(carbon[t], f"carbon at slot {t}")
         total += site.pue * job.power_kw * site.slot_hours * carbon[t] / 1000
+    _nonnegative_finite(total, "job emissions")
     return total
 
 
@@ -96,16 +105,26 @@ def score_numeric_claim(claim: s.Claim, reference: float | None, reference_unit:
     Matching a claim to the quantity it describes is the reviewer's job (E04); F02
     claims carry a value and unit but no quantity kind.
     """
+    claim = s.Claim.model_validate(claim.model_dump(mode="python", warnings="none"), strict=True)
+    if reference is not None and (
+        isinstance(reference, bool)
+        or not isinstance(reference, (int, float))
+        or not math.isfinite(reference)
+    ):
+        reference = None
     if claim.value is None:
         return ClaimScore(claim.claim_id, "not_numeric", None, reference, None)
     if reference is None:
         return ClaimScore(claim.claim_id, "reference_unavailable", claim.value, None, None)
-    error = abs(claim.value - reference)
+    # Compare decimal representations of the recorded values. This includes an
+    # exact 0.05 boundary without a guessed epsilon that credits larger errors.
+    difference = abs(Decimal(str(claim.value)) - Decimal(str(reference)))
+    error = float(difference)
     if claim.unit != reference_unit:
         return ClaimScore(claim.claim_id, "unit_mismatch", claim.value, reference, None)
     if claim.unit not in TOLERANCE_UNITS:
         return ClaimScore(claim.claim_id, "unscored_unit", claim.value, reference, error)
-    status = "correct" if error <= CLAIM_TOLERANCE + FLOAT_SLACK else "incorrect"
+    status = "correct" if difference <= Decimal(str(CLAIM_TOLERANCE)) else "incorrect"
     return ClaimScore(claim.claim_id, status, claim.value, reference, error)
 
 
@@ -133,4 +152,6 @@ def compare_emissions(
     a, b = set(candidate_completed), set(baseline_completed)
     if a != b:
         return Comparison("not_comparable", None, f"completed jobs differ: {sorted(a ^ b)}")
+    _nonnegative_finite(candidate_kg, "candidate emissions")
+    _nonnegative_finite(baseline_kg, "baseline emissions")
     return Comparison("comparable", baseline_kg - candidate_kg, "same completed jobs")
