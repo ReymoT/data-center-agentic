@@ -4,6 +4,7 @@ The test server is deliberately not a model and is never shipped as a production
 fallback. Tests exercise actual serialization, sockets, deadlines and bookkeeping.
 """
 
+import http.client
 import json
 import threading
 import time
@@ -146,6 +147,27 @@ def test_real_http_serialization_f02_parse_and_evidence_preservation(server):
         "num_ctx": 16384,
         "num_predict": 1536,
     }
+
+
+@pytest.mark.parametrize("protocol", ["HTTP/1.0", "HTTP/1.1"])
+def test_http_response_stream_is_closed_on_interrupted_body_read(server, monkeypatch, protocol):
+    # HTTP/1.0 detaches the response from HTTPConnection before returning it. Keep
+    # it alive here so GC cannot conceal a stream/socket leak after an early error.
+    observed = []
+    original = http.client.HTTPConnection.getresponse
+    monkeypatch.setattr(server.RequestHandlerClass, "protocol_version", protocol)
+
+    def capture(connection):
+        response = original(connection)
+        observed.append(response)
+        return response
+
+    monkeypatch.setattr(http.client.HTTPConnection, "getresponse", capture)
+    result = generate(provider(server, max_response_bytes=250))
+    assert "response exceeds configured byte limit" in result.error
+    assert len(result.raw_response) == 251 and result.http_status == 200
+    assert len(observed) == 3  # real version, tags and synthetic chat responses
+    assert all(response.isclosed() for response in observed)
 
 
 def test_both_systems_share_identical_artifact_and_generation_settings(server):

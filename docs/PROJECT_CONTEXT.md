@@ -1,6 +1,6 @@
 # Matty project preferences
 
-Current October 20 maintenance: [eight priorities and actual handoffs](handoffs/OCT20_EIGHT_PRIORITIES.md). Nisha adopted merged E01 preparation and owns independent replay. Runtime revalidation, a validated prompt counter and missing teammate decisions remain gates; metadata inspection and offline tests do not establish inference or experiment results.
+Current October 20 maintenance: [reviewed merges and follow-ups](handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md). Plain LLM empty-queue no-op handling and independent E01 episode replay are merged with review tests. Full runtime/agent/runner, model inference and saved-run acceptance remain pending; shared scientific/runtime/source decisions are not inferred from passing tests.
 
 Current update, October 20, 2026: Matty authorized all six audit priorities. [The handoff](handoffs/OCT20_SIX_PRIORITIES.md) records actual work and decisions. Matty is coordinator/publisher, Nisha accepted backup and her Q12 allocation. Q09 setup is agreed (0.40.5, full digest, seeds 101/102/103, projections/bounds), but observed 0.40.6 and missing validated counter block inference. Nisha reports Nov 16 class presentation, Nov 18 presentation submission, Dec 2 demo, Dec 9 report; timezone/rubrics/code requirements remain unknown. Q01-Q04/Q10 and license/platform agreements stay partial. Earlier dated notes below are history where superseded.
 
