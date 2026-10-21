@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current October 20 decision intake: read [reviewed merges and follow-ups](docs/handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md). L01 empty-queue guard and independent E01 replay are merged with bounded review tests; agent/runner behavior and real saved-run acceptance are not implemented. Matty is coordinator/publisher, Nisha backup. Q09 runtime/tokenizer/context gates, Edison Q01-Q04, joint infeasibility/Q08, Ved Q10/eligibility and remaining source/release/allocation inputs stay explicit. Nisha/Matty accept summary-assertion coverage and keeping selected pairs. Course dates remain Nisha-reported with timezone/rubrics unconfirmed.
+Current decision intake, October 21, 2026: [today's actions and evidence](docs/handoffs/OCT21_ACTIONS.md). Matty supports Nisha's option B to show a time-infeasible arrival for one decision, but the affected owners' agreement is still missing; current simulator/checker/evaluator behavior is unchanged. Current miss-on-arrival scoring interpretation has Nisha/Matty support, not a frozen protocol. Plain L01's zero-call guard and E01 replay are already merged. A01's partial-body timeout is reproduced with matched socket pairs and remains open. Runtime/tokenizer, Q01-Q04/Q08, Q10, source/freeze, allocation and course/release gates remain explicit. No shared format, setting, task owner or scientific rule changed.
 
 ## Instruction authority
 

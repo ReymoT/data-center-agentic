@@ -1,5 +1,7 @@
 # Test areas
 
+For A01's intermittent partial-body timeout, `python scripts/diagnose_provider_wire.py --full-suite --out <new-local-json-path>` observes the existing synthetic tests with matched socket endpoints and byte/hash evidence. It never contacts Ollama. Use a new path each time. Observation changes timing; passing runs are not a timeout fix. See [the dated handoff](../docs/handoffs/OCT21_ACTIONS.md) for the reproduced failure and passing observations. No payload, deadline or assertion is weakened.
+
 Directories reserve module-owner test locations. Ved's F02 contract tests and Reimo's D01 carbon-loader tests are now executable alongside the provider-mock helper tests. Matty owns `e2e/`, Ved owns `contracts/`, Nisha owns independent `evaluation/`, and other directories follow module ownership. Matty's fixed checker and Ollama transport now have executable tests; full scheduling/runtime integration remains pending.
 
 Matty's [production checker case catalogue](verification/CASES.md) prepares 19 cases with established rule expectations and four scenarios waiting for Q01-Q04. [Executable fixed-core tests](verification/test_checker.py) now exercise its decided rules; overall checker approval still waits for Q01-Q04.

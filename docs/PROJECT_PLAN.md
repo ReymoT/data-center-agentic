@@ -1,5 +1,7 @@
 # Project plan
 
+October 21 action update: [today's handoff](handoffs/OCT21_ACTIONS.md) records actual diagnostics and owner requests. Resolve [the arrival-visibility proposal](decisions/Q03_INFEASIBLE_ARRIVAL_PROPOSAL.md) before changing S01/E01/A03 behavior or claiming runtime abstention evidence. Matty can continue A01 diagnostics and F04/F05 intake now; A02/A04/I01, annotation and freeze still require real agreed dependencies. The course planning dates below are unchanged and attributed.
+
 Current planning update, October 20, 2026. Matty accepted [Nisha's Canvas-reported Group 15 schedule](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6283757221). [Q13](decisions/Q13_PRESENTATION_DEADLINE.md) records attribution and missing requirements. Matty's assistant has not independently inspected Canvas or an instructor document. Timezone remains unconfirmed; do not convert the reported times.
 
 | Course milestone reported by Nisha | Planning action and owner |

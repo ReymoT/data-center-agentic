@@ -1,8 +1,8 @@
 # Master instructions — Reimo
 
-Current decision intake, October 20, 2026: [reviewed merges and follow-ups](../handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md) records merged L01 empty-queue handling and independent E01 replay with bounded review fixes. These are offline-tested preparation, not actual saved-run or both-system runtime acceptance. Agent/runner no-call behavior, A01 runtime/tokenizer validation, Edison Q01-Q04 input, joint infeasibility/Q08, Ved Q10/eligibility agreement and remaining source/release/allocation inputs stay open. Summary-assertion coverage and retaining selected pairs are accepted by Nisha/Matty; do not reopen them as unanswered. Matty remains coordinator/publisher and Nisha backup. No F02, setting, task owner or policy rule changed.
+Current decision intake, October 21, 2026: [today's actions and evidence](../handoffs/OCT21_ACTIONS.md). Matty supports Nisha's option B to show a time-infeasible arrival for one decision, but the affected owners' agreement is still missing; current simulator/checker/evaluator behavior is unchanged. Current miss-on-arrival scoring interpretation has Nisha/Matty support, not a frozen protocol. Plain L01's zero-call guard and E01 replay are already merged. A01's partial-body timeout is reproduced with matched socket pairs and remains open. Runtime/tokenizer, Q01-Q04/Q08, Q10, source/freeze, allocation and course/release gates remain explicit. No shared format, setting, task owner or scientific rule changed.
 
-Version: 1.16 — 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.17 — 2026-10-21. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 

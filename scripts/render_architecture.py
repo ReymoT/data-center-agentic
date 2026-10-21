@@ -49,7 +49,7 @@ def main():
             )
 
         text(1, 123, "Data Center Sustainability Agent", 25, "bold")
-        text(1, 119.5, "Final scheduling study | Planned architecture | 20 October 2026", 14)
+        text(1, 119.5, "Final scheduling study | Planned architecture | 21 October 2026", 14)
         text(1, 116.5, "RESEARCH QUESTION", 12, "bold")
         text(
             1,
