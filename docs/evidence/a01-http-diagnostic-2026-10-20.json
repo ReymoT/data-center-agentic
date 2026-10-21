@@ -1,0 +1,45 @@
+{
+  "evidence_kind": "synthetic_http_body_diagnostic_not_inference",
+  "model_calls": 0,
+  "base_main": "b06cda7f1018bbd935603a2ea0d460b21f6fdf81",
+  "scope": "Existing full offline suite plus 10 metadata inspection tests",
+  "result": {
+    "passed": 915,
+    "subtests_passed": 19,
+    "failed": 1
+  },
+  "failure": "deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+  "root_cause": "unresolved",
+  "events": [
+    {
+      "event": "start",
+      "method": "POST",
+      "path": "/api/chat"
+    },
+    {
+      "event": "server_write",
+      "bytes": 24001,
+      "returned": 24001,
+      "seconds": 0.0
+    },
+    {
+      "event": "read",
+      "requested": 65536,
+      "before": 24001,
+      "received": 23360,
+      "remaining": 641
+    },
+    {
+      "event": "read_error",
+      "before": 641,
+      "error": "timed out"
+    },
+    {
+      "event": "error",
+      "error": "timed out",
+      "bytes": 23360,
+      "status": 200,
+      "seconds": 10.0
+    }
+  ]
+}

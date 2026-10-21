@@ -1,0 +1,35 @@
+{
+  "evidence_kind": "gguf_tokenizer_metadata_not_token_counts",
+  "gguf_version": 3,
+  "tensor_count": 399,
+  "metadata_entries": 28,
+  "metadata_prefix_bytes": 5932859,
+  "metadata_prefix_sha256": "9c4e3192913f960ec8837634fecc8240fd4af0faa6928a220d43e59158d5c818",
+  "tensor_data_read": false,
+  "model_calls": 0,
+  "validated_prompt_counter": false,
+  "tokenizer": {
+    "tokenizer.chat_template": {
+      "utf8_bytes": 4116,
+      "sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5"
+    },
+    "tokenizer.ggml.add_bos_token": false,
+    "tokenizer.ggml.bos_token_id": 151643,
+    "tokenizer.ggml.eos_token_id": 151645,
+    "tokenizer.ggml.merges": {
+      "items": 151387,
+      "canonical_json_sha256": "24fa2ae2a398e50784a1fff678482094af4f63e6783d35686726abacda8dc371"
+    },
+    "tokenizer.ggml.model": "gpt2",
+    "tokenizer.ggml.padding_token_id": 151643,
+    "tokenizer.ggml.pre": "qwen2",
+    "tokenizer.ggml.token_type": {
+      "items": 151936,
+      "canonical_json_sha256": "536de815c96740a876dbaaa0b181fc54b71e958de2063d4d1a7f425f8692cc16"
+    },
+    "tokenizer.ggml.tokens": {
+      "items": 151936,
+      "canonical_json_sha256": "40d4ea40d5a19d60f50b7acfd7c66026cfca9c0186b7b52a69e757fca65af538"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "evidence_kind": "offline_tokenizer_rendering_candidate_not_deployment_validation",
+  "status": "blocked",
+  "model_calls": 0,
+  "validated_prompt_counter": false,
+  "tokenizers_version": "0.23.3",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "tokenizer_source": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+  "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+  "rendering_scope": "installed Go template, exactly system then user, think=false, no tools",
+  "schema_scope": "format retained in request; not a template variable on this legacy path",
+  "renderer_binary_sha256": "104ec89be46d55f58efa92fc682eff63e5e65e2f64f70aa92c899f34595c663f",
+  "renderer_source_sha256": "f469b08190b4e3a14a1985766542ce4c7e3961d90645650311cbbd111bbf82b1",
+  "hand_derived_render_vectors_passed": 3,
+  "candidates": [
+    {
+      "system": "plain_llm",
+      "request_sha256": "264630e066a9bc96f9cee6b0666e30168154d622cff7d35cbf3c75f0a3b42b90",
+      "candidate_prompt_sha256": "838cf1cc69c5df754af0d8ec4431cb1de4cf87c41762866c65aa85df8ab26ccc",
+      "candidate_prompt_utf8_bytes": 8232,
+      "candidate_bpe_tokens": 2291,
+      "token_ids_sha256": "74f284e49f76fd67395b1eacda32bb083224e1d54f32767485950d3014c83cc3",
+      "schema_utf8_bytes": 5143
+    },
+    {
+      "system": "agent",
+      "request_sha256": "c8f78bea9c593a750fe661b2def59136525897d0ee5b064d005c450a7af279eb",
+      "candidate_prompt_sha256": "713c32e9ebc8882dc43a51c4371963806a8382ecb4293cda3e1f38768d05f8c7",
+      "candidate_prompt_utf8_bytes": 7033,
+      "candidate_bpe_tokens": 2003,
+      "token_ids_sha256": "c3c2c88aa52d665bf31c9b86cddeb53a367b88d460776973e6ee596efff62466",
+      "schema_utf8_bytes": 3155
+    }
+  ],
+  "blockers": [
+    "HF tokenizer behavior versus installed GGUF/runtime tokenizer not validated",
+    "Actual 0.40.6 native-versus-template rendering path not established",
+    "Restricted candidate does not implement general agent repair/history rendering",
+    "New tokenizer dependency not adopted in shared environment/locks",
+    "Runtime agreement, service/context validation and explicit run authorization pending"
+  ]
+}

@@ -1,8 +1,8 @@
 # Team master instruction package
 
-Current decision intake, October 20, 2026: [Q01-Q04 status](../decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](../decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](../decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+Current decision intake, October 20, 2026: [the eight-priority handoff](../handoffs/OCT20_EIGHT_PRIORITIES.md) records this maintenance and the latest replies. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but runtime 0.40.6 revalidation still needs Ved and actual counter/context validation. Nisha accepts full summary-assertion review and keeping selected pairs under Q10; eligibility and Ved's agreement remain open. Nisha fetched merged E01 preparation at b06cda7 and owns the next independent replay. Edison's Q01-Q04 input, other Q12 confirmations and Q13/source requirements remain outstanding. No scientific setting, task owner or F02 contract changed.
 
-Version: 1.14 - 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.15 - 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 
@@ -36,7 +36,7 @@ D06 update, 2026-10-19: read [the current verification](../handoffs/D06_F04_F05_
 - [REVIEW_RECORD.md](REVIEW_RECORD.md): current audit and verification limits.
 - [CHANGELOG.md](CHANGELOG.md): instruction adaptations from the preserved source archive.
 
-Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. [Q09](../decisions/Q09_OLLAMA_QWEN3.md) accepts local Ollama, Qwen3 8B Q4_K_M and temperature 0.2. Matty prepares the shared adapter; Nisha prepares the plain/explanation paths; Ved supports contract compatibility. [Hardware inventory](../HARDWARE.md) is now available and [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is implemented; deployment pins and full integration remain pending. See [the owner handoff](../handoffs/Q09_ACCEPTANCE.md). Platform adoption remains Q13.
+Dependency inputs are maintained only under [requirements](../../requirements/README.md). The original package archive remains unchanged outside Git. [Q09](../decisions/Q09_OLLAMA_QWEN3.md) accepts local Ollama, Qwen3 8B Q4_K_M and temperature 0.2. Matty prepares the shared adapter; Nisha prepares the plain/explanation paths; Ved supports contract compatibility. [Hardware inventory](../HARDWARE.md) is now available and [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is implemented; October 20 development settings are recorded, while runtime revalidation, actual context/tokenizer validation and full integration remain pending. See [the owner handoff](../handoffs/Q09_ACCEPTANCE.md). Platform adoption remains Q13.
 
 ## Implementation order
 

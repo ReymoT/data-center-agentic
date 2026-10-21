@@ -19,6 +19,8 @@ We test this question through workload scheduling at one simulated data center. 
 
 This repository contains project documentation, F02 records, D01-D03 data tooling/provisional fixtures, D06 source/window checks, S01 simulator transitions, L01 preparation, E01 independent decision/claim validation preparation and Matty's A01 transport/accounting and A03 fixed checks. The scheduling pipeline, training, experiment CLI and demonstration are not implemented yet. The executable checks validate the existing components and candidate dependencies; they do not run experiments or establish research results.
 
+Current October 20 maintenance: [eight priorities and actual handoffs](docs/handoffs/OCT20_EIGHT_PRIORITIES.md). Nisha adopted merged E01 preparation and owns independent replay. Runtime revalidation, a validated prompt counter and missing teammate decisions remain gates; metadata inspection and offline tests do not establish inference or experiment results.
+
 ## Systems we reviewed and why we chose this architecture
 
 We reviewed AssetOps Knowledge Graph and AssetOpsBench, LC-Opt, Google DeepMind's data-center cooling system, and Schneider Electric's Resource Advisor Copilot. Our supplied system review compared their data, asset relationships, division of work between an LLM and deterministic software, testing, uncertainty, safety and approval controls.

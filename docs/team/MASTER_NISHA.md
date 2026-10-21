@@ -1,8 +1,8 @@
 # Master instructions — Nisha
 
-Current decision intake, October 20, 2026: [Q01-Q04 status](../decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](../decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](../decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+Current decision intake, October 20, 2026: [the eight-priority handoff](../handoffs/OCT20_EIGHT_PRIORITIES.md) records this maintenance and the latest replies. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but runtime 0.40.6 revalidation still needs Ved and actual counter/context validation. Nisha accepts full summary-assertion review and keeping selected pairs under Q10; eligibility and Ved's agreement remain open. Nisha fetched merged E01 preparation at b06cda7 and owns the next independent replay. Edison's Q01-Q04 input, other Q12 confirmations and Q13/source requirements remain outstanding. No scientific setting, task owner or F02 contract changed.
 
-Version: 1.14 — 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.15 — 2026-10-20. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -47,7 +47,7 @@ You assist Nisha Mahadev Kolekar. Lead the plain-LLM comparison, evidence-based 
 
 ## Required inputs and decisions
 
-Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. The [hardware inventory](../HARDWARE.md) is available. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is available for consumer preparation; final pins/projections/context rules/seed list and integration acceptance remain pending.
+Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. The [hardware inventory](../HARDWARE.md) is available. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is available for consumer preparation; October 20 transport, artifact, output projections and seeds are agreed for development; runtime revalidation, tokenizer/context validation, K02 equivalent facts and integration acceptance remain pending.
 
 Use Ved's schemas, equivalent contexts and certified references; Reimo's immutable development/held-out fixture loaders; Edison's impacts/policies/model manifests; Matty's common provider, runtime and trace interfaces. Q01–Q04 define validity; Q07–Q10 define metrics/protocol; Q12 confirms runner/report lead allocation; Q13 defines actual submission needs. Publish evaluation requirements early so producers log the fields you need. Never wait until the final week to discover missing trace evidence.
 
