@@ -1,4 +1,5 @@
-# Recommended core stack checked on 2026-10-10. LLM provider SDK not yet selected.
+# Core stack checked on 2026-10-10; Q09 now accepts standard-library Ollama REST.
+# No provider SDK dependency is needed; new tokenizer dependencies require agreement.
 joblib==1.6.0
 langgraph==1.2.14
 matplotlib==3.11.2

@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current October 20 decision intake: read [the six-priority handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) and its decision links. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but observed runtime 0.40.6 differs from agreed 0.40.5 and context validation remains missing; do not infer live permission. Q01-Q04/Q10 and release requirements remain partial. Use Nisha-reported Nov 16 class presentation / Nov 18 submission / Dec 2 demo / Dec 9 report, with timezone still unconfirmed.
+Current October 20 decision intake: read [the eight-priority handoff](docs/handoffs/OCT20_EIGHT_PRIORITIES.md) and its decision links. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but observed runtime 0.40.6 differs from agreed 0.40.5 and context validation remains missing; do not infer live permission. Q01-Q04/Q10 and release requirements remain partial. Use Nisha-reported Nov 16 class presentation / Nov 18 submission / Dec 2 demo / Dec 9 report, with timezone still unconfirmed.
 
 ## Instruction authority
 

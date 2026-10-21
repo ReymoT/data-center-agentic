@@ -1,6 +1,6 @@
 # Decisions still requiring confirmation
 
-Version: 1.14 — 2026-10-20. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
+Version: 1.15 — 2026-10-20. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
 
 Current October 20 intake: [Q01-Q04 ledger](../decisions/Q01_Q04_AGREEMENT_STATUS.md), [Q09 setup agreement](../decisions/Q09_DEPLOYMENT_OCT20.md), [Q10 partial review agreement](../decisions/Q10_REVIEW_STATUS.md), [Q11 coordination-role acceptance](../decisions/Q11_MANAGER_AUTHORITY.md), and [Q13 reported course dates](../decisions/Q13_PRESENTATION_DEADLINE.md). [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records actual implementation boundaries. Earlier dated status entries below remain historical where superseded. Passing tests does not create missing owner agreement.
 

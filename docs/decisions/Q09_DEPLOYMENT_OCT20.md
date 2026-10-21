@@ -1,6 +1,6 @@
 # Q09: October 20 development setup agreement
 
-Status: agreed development setup with technical gates; not a frozen experiment or inference authorization. Instruction deployment 1.14. Sources: [Nisha's agreement and additions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6278309369), [Ved's agreement](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6283858363), [Matty's confirmation](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6298590019). Earlier recommendation/acceptance remains in [issue #2](https://github.com/ReymoT/data-center-agentic/issues/2).
+Status: agreed development setup with technical gates; not a frozen experiment or inference authorization. Instruction deployment 1.15. Sources: [Nisha's agreement and additions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6278309369), [Ved's agreement](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6283858363), [Matty's confirmation](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6298590019). Earlier recommendation/acceptance remains in [issue #2](https://github.com/ReymoT/data-center-agentic/issues/2).
 
 | Item | Agreed development rule |
 |---|---|
@@ -20,7 +20,7 @@ Status: agreed development setup with technical gates; not a frozen experiment o
 
 [Fresh metadata-only inventory](../evidence/ollama-qwen3-8b-2026-10-20.json) observes 0.40.6. Model digest, template and parameter-text hashes match the [0.40.5 inventory](../evidence/ollama-qwen3-8b-2026-10-18.json); runtime does not. Zero model calls. Preserve both records and historical 0.40.3 evidence. The agreed 0.40.5 deployment check must reject the current installation.
 
-Matty proposed revalidating 0.40.6 for both systems in his linked reply. Nisha/Ved agreement is pending. No silent pin change or downgrade occurs here. The [setup guide](../OLLAMA_SETUP.md) and [hardware record](../HARDWARE.md) retain actual evidence; no dedicated 16 GB GPU, offload, throughput, energy measurement or successful inference is inferred from Intel shared RAM.
+Matty proposed revalidating 0.40.6 for both systems in his linked reply. [Nisha agreed to revalidation with conditions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6306094258), and [Matty accepted those conditions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6306237802). Ved's agreement and actual validation are pending. Preserve both inventories, use identical runtime/artifact/template/default parameters for both systems and reject drift. No automatic-update/service settings were changed. No silent pin change or downgrade occurs here. The [setup guide](../OLLAMA_SETUP.md) and [hardware record](../HARDWARE.md) retain actual evidence; no dedicated 16 GB GPU, offload, throughput, energy measurement or successful inference is inferred from Intel shared RAM.
 
 ## Prepared bounded probe and remaining gates
 
@@ -33,3 +33,7 @@ Before dispatch: resolve runtime drift; implement/validate a pinned tokenizer/te
 For evaluation, one identical public-development warm-up per paired trial is reported separately from decision budgets and counted in run totals; fix agent/plain order before freeze because cache state affects latency. No warm-ups, held-out, cloud or paid calls are authorized here. Empty-queue no-call behavior remains a Q03 shared implementation requirement, not completed functionality.
 
 Matty owns A01/F03 adapter, counter/context validation, pin checks and probe preparation; Nisha owns L01/L02 plain/explanation integration and E02 accounting; Ved supports unchanged F02/K02 compatibility. Full A01/F03/L01 acceptance still needs real evidence and the remaining prerequisites. Configuration examples stay blank and non-runnable. No schema, lock or generation implementation changed.
+
+## Counter research follow-up, October 20
+
+[The eight-priority handoff](../handoffs/OCT20_EIGHT_PRIORITIES.md) records a real isolated tokenizers 0.23.3/Go-template candidate, measured request shapes and a direct GGUF/reference vocabulary/merge comparison. Counts are candidate-only, not validated runtime counts. No production callback, new shared dependency, context ceiling or runtime pin is adopted. Exact runtime rendering/tokenization equivalence and affected-owner dependency agreement remain required; the prepared probe remains blocked with zero model calls.
