@@ -1,8 +1,8 @@
 # Project master instructions
 
-Current decision intake, October 20, 2026: [Q01-Q04 status](docs/decisions/Q01_Q04_AGREEMENT_STATUS.md) records Matty's reply and missing Edison input; [Q09 setup](docs/decisions/Q09_DEPLOYMENT_OCT20.md) is agreed but blocked by runtime drift/context validation; [Q10](docs/decisions/Q10_REVIEW_STATUS.md) remains partial. Matty is coordinator/publisher and Nisha backup; Nisha confirmed her Q12 allocation, the other owners are pending. [The handoff](docs/handoffs/OCT20_SIX_PRIORITIES.md) records actual E01 checks and remaining gates. No teammate task, scientific default or shared schema changed.
+Current decision intake, October 20, 2026: [the eight-priority handoff](docs/handoffs/OCT20_EIGHT_PRIORITIES.md) records this maintenance and the latest replies. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but runtime 0.40.6 revalidation still needs Ved and actual counter/context validation. Nisha accepts full summary-assertion review and keeping selected pairs under Q10; eligibility and Ved's agreement remain open. Nisha fetched merged E01 preparation at b06cda7 and owns the next independent replay. Edison's Q01-Q04 input, other Q12 confirmations and Q13/source requirements remain outstanding. No scientific setting, task owner or F02 contract changed.
 
-Instruction deployment: 1.14 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.15 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 

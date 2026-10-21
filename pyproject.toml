@@ -4,7 +4,8 @@ version = "0.0.0"
 description = "Repository scaffold for a simulated carbon-aware scheduling study"
 requires-python = ">=3.12,<3.13"
 # Python target is a package proposal pending Q13, not portable-lock certification.
-# No provider dependency, production entry point or code license selected yet.
+# Q09 uses standard-library Ollama REST; no provider SDK dependency is required.
+# Production entry point, code license and portable-platform acceptance remain pending.
 
 [tool.ruff]
 target-version = "py312"

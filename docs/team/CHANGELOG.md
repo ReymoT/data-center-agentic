@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.14 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.15 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.15 - 2026-10-20
+
+- Matty authorized all eight current priorities. [Issue #27](https://github.com/ReymoT/data-center-agentic/issues/27) records confirmed stale coordinator, publisher, transport, pin and seed instructions. Corrected current paragraphs and all ten package headers; historical evidence is retained.
+- Recorded Nisha's runtime/Q10 replies and receiving adoption of merged E01 preparation; replay stays with Nisha. Refreshed current Issue summaries without erasing earlier records or inventing missing agreements.
+- Added bounded offline GGUF metadata/reference inspection, a restricted real-BPE/Go-rendering counter candidate and actual isolated research measurements. This is not a validated prompt counter or inference authorization. The existing local HTTP timeout remains disclosed, with partial-body diagnostic evidence.
+- Preserved all 50 task rows, exact seven-file policies, canonical F02 bytes, locks, generation settings, teammate code and independent evaluation ownership. [Eight-priority evidence and remaining gates](../handoffs/OCT20_EIGHT_PRIORITIES.md).
 
 ## Deployment 1.14 - 2026-10-20
 

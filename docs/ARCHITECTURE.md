@@ -1,5 +1,7 @@
 # Architecture for the final scheduling study
 
+Current October 20 maintenance: [eight priorities and actual handoffs](handoffs/OCT20_EIGHT_PRIORITIES.md). Nisha adopted merged E01 preparation and owns independent replay. Runtime revalidation, a validated prompt counter and missing teammate decisions remain gates; metadata inspection and offline tests do not establish inference or experiment results.
+
 Status: current implementation boundaries and target design, updated 2026-10-20, instruction deployment 1.14. Published under the project manager's instruction without a formal document-review gate. F02 records, D01 source inspection and A01/A03 agreed core code are implemented; the complete scheduling pipeline remains planned. Read [interfaces](INTERFACES.md) for implemented records and proposed APIs, and [open decisions](team/04_OPEN_DECISIONS.md) for unresolved rules.
 
 ## Research question
