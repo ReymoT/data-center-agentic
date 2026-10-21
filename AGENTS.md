@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current October 20 decision intake: read [the eight-priority handoff](docs/handoffs/OCT20_EIGHT_PRIORITIES.md) and its decision links. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but observed runtime 0.40.6 differs from agreed 0.40.5 and context validation remains missing; do not infer live permission. Q01-Q04/Q10 and release requirements remain partial. Use Nisha-reported Nov 16 class presentation / Nov 18 submission / Dec 2 demo / Dec 9 report, with timezone still unconfirmed.
+Current October 20 decision intake: read [reviewed merges and follow-ups](docs/handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md). L01 empty-queue guard and independent E01 replay are merged with bounded review tests; agent/runner behavior and real saved-run acceptance are not implemented. Matty is coordinator/publisher, Nisha backup. Q09 runtime/tokenizer/context gates, Edison Q01-Q04, joint infeasibility/Q08, Ved Q10/eligibility and remaining source/release/allocation inputs stay explicit. Nisha/Matty accept summary-assertion coverage and keeping selected pairs. Course dates remain Nisha-reported with timezone/rubrics unconfirmed.
 
 ## Instruction authority
 

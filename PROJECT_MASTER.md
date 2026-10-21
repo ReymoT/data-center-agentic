@@ -1,8 +1,8 @@
 # Project master instructions
 
-Current decision intake, October 20, 2026: [the eight-priority handoff](docs/handoffs/OCT20_EIGHT_PRIORITIES.md) records this maintenance and the latest replies. Matty is coordinator/summary publisher, Nisha backup. Q09 development settings are agreed, but runtime 0.40.6 revalidation still needs Ved and actual counter/context validation. Nisha accepts full summary-assertion review and keeping selected pairs under Q10; eligibility and Ved's agreement remain open. Nisha fetched merged E01 preparation at b06cda7 and owns the next independent replay. Edison's Q01-Q04 input, other Q12 confirmations and Q13/source requirements remain outstanding. No scientific setting, task owner or F02 contract changed.
+Current decision intake, October 20, 2026: [reviewed merges and follow-ups](docs/handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md) records merged L01 empty-queue handling and independent E01 replay with bounded review fixes. These are offline-tested preparation, not actual saved-run or both-system runtime acceptance. Agent/runner no-call behavior, A01 runtime/tokenizer validation, Edison Q01-Q04 input, joint infeasibility/Q08, Ved Q10/eligibility agreement and remaining source/release/allocation inputs stay open. Summary-assertion coverage and retaining selected pairs are accepted by Nisha/Matty; do not reopen them as unanswered. Matty remains coordinator/publisher and Nisha backup. No F02, setting, task owner or policy rule changed.
 
-Instruction deployment: 1.15 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.16 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 

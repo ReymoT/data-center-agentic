@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.15 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.16 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.16 - 2026-10-20
+
+- Matty explicitly requested review/merge of L01 PR #30 and E01 PR #28, then all remaining recommendations. [Issue #31](https://github.com/ReymoT/data-center-agentic/issues/31) records confirmed stale Q10/index and implementation-status defects before edits.
+- Reviewed both branches, preserved original commits, added three L01 boundary cases and nine independent replay regressions/fixes. Both PRs merged after exact-head CI; exact merged-main checks passed before their branches were safely deleted. Full task/protocol acceptance remains open.
+- Corrected current index/ledger/plan/context/coordination/README/architecture and all ten package headers, preserving historical evidence and actual Q10 agreements. Repaired garbled UTF-8 punctuation in maintained diagram/handoff text. Fixed a reproduced A01 owned-response cleanup leak without changing limits or claiming the separate timeout fixed. [The handoff](../handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md) records tests, bounded A01 diagnostic findings and exact remaining owner actions.
+- Preserved all 50 task rows, seven-file policies, F02 bytes, shared locks/prompts/settings and independent ownership. No model calls, fake results or unagreed scientific choices. F04/F05 remain ongoing maintenance duties.
 
 ## Deployment 1.15 - 2026-10-20
 

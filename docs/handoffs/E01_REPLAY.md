@@ -16,7 +16,7 @@ What it does:
 - `executed_starts(records, episode_id)` collects executed starts by slot from one run's `DecisionRecord`s. Records from another episode, mixed runs/systems/trials, or two records for one slot are refused as trace defects.
 - `compare_result` and `compare_state` list every place a recorded `EpisodeResult` or `VisibleState` differs from the replay. Nothing recorded is used as truth or corrected.
 - `Replay.state_at(t)` gives the replayed visible state, so `validator.facts_from_state` and `validate_plan` can judge a decision against replayed state rather than the state the runtime supplied.
-- Completed work follows Q03.5: completed job IDs and completed IT energy (power Ãƒâ€” duration Ãƒâ€” slot hours, before PUE). Missed and unfinished jobs earn no credit; missed jobs are also listed as unfinished.
+- Completed work follows Q03.5: completed job IDs and completed IT energy (power × duration × slot hours, before PUE). Missed and unfinished jobs earn no credit; missed jobs are also listed as unfinished.
 
 Rules applied (from the shared rules, S01 handoff text and `Q03_DRAFT`, not from simulator code):
 - Occupancy is `[start, start + duration)`; a job completes at boundary `start + duration`; everything ends by boundary 30.
@@ -45,7 +45,7 @@ Exact reproduction commands:
 
 Tests actually run and observed results: Windows, Python 3.12.10, hashed lock. 928 tests and 19 subtests passed (906 on main before, 22 new); all 112 evaluation tests pass. Ruff check/format, compileall, setup validation and pip check passed.
 - Hand truth: boundary states and slot outcomes for the hand schedule (J1@0, J2@2; J3 missed on arrival at 4; 140 kWh completed IT energy, unchanged at PUE 1.2), missed timing after the last legal start, Q01 slot-24 miss, nonflexible miss, capacity overlap (110 kW in slots 0 and 1), exact-capacity boundary, impossible executions, missing capacity, and result/state mismatches.
-- S01 consumer check: a greedy driver over the four D03 scenarios Ãƒâ€” 3 seeds, including a batch the simulator rejects. The replay found no findings and no mismatches with the simulator's `EpisodeResult` or any decision-slot `VisibleState`.
+- S01 consumer check: a greedy driver over the four D03 scenarios × 3 seeds, including a batch the simulator rejects. The replay found no findings and no mismatches with the simulator's `EpisodeResult` or any decision-slot `VisibleState`.
 - Mutation check: five deliberate bugs (missed one slot late, non-strict capacity, completion one slot late, duplicate starts allowed, PUE in completed energy) each made tests fail; the code was restored afterward.
 
 Limitations and open decisions:

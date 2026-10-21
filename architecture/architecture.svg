@@ -3,7 +3,7 @@
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="1224pt" viewBox="0 0 1152 1224" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <title>Ontology-grounded, tool-verified agent versus plain LLM: planned architecture</title>
- <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. Four additional scheduling references share visible inputs and an execution gate; private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D06 structural source/window checks, D03 provisional fixtures, S01 transitions, L01 preparation and A01/A03 core are implemented; scientific acceptance and the full scheduling pipeline remain pending.</desc>
+ <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. Four additional scheduling references share visible inputs and an execution gate; private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D06 structural source/window checks, D03 provisional fixtures, S01 transitions, L01 empty-queue handling, independent E01 replay preparation and A01/A03 core are implemented; scientific acceptance and the full scheduling pipeline remain pending.</desc>
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
@@ -332,7 +332,7 @@ z
     <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="58.973513" transform="rotate(-0 39.744 58.973513)">Data Center Sustainability Agent</text>
    </g>
    <g id="text_2">
-    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="83.49745" transform="rotate(-0 39.744 83.49745)">Final scheduling study | Planned architecture | 19 October 2026</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="83.49745" transform="rotate(-0 39.744 83.49745)">Final scheduling study | Planned architecture | 20 October 2026</text>
    </g>
    <g id="text_3">
     <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="39.744" y="110.047833" transform="rotate(-0 39.744 110.047833)">RESEARCH QUESTION</text>
@@ -431,11 +431,12 @@ z
    <g id="text_30">
     <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 654.710294)">Equivalent flat facts</text>
     <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 668.513438)">Same provider and settings</text>
-    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 682.316583)">One model call</text>
-    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 696.119728)">No tools or corrective feedback</text>
-    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 709.922872)">No repair or fallback</text>
-    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 723.726017)">Original output retained for scoring</text>
-    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 737.529161)">Unsafe starts can still be blocked</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 682.316583)">At most one model call</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 696.119728)">Empty queue: zero calls</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 709.922872)">No tools or corrective feedback</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 723.726017)">No repair or fallback</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 737.529161)">Original output retained for scoring</text>
+    <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(499.392 751.332306)">Unsafe starts can still be blocked</text>
    </g>
    <g id="text_31">
     <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #203449" x="805.824" y="631.255388" transform="rotate(-0 805.824 631.255388)">3C  Additional references</text>
@@ -485,7 +486,7 @@ z
    </g>
    <g id="text_41">
     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1179.923578)">24 decision + 6 completion slots; no completion-slot model calls. Q01–Q13 stay open where unresolved.</text>
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1192.526449)">Implemented: F02; D01-D03/D06 tooling; S01/L01 preparation; A01/A03 core. Full acceptance pending.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1192.526449)">Implemented: F02; D01-D03/D06; S01; L01 no-op; E01 replay prep; A01/A03 core. Acceptance pending.</text>
    </g>
   </g>
  </g>

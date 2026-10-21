@@ -133,6 +133,7 @@ class OllamaProvider:
         raw = bytearray()
         status = request_id = None
         cutoff = None
+        response = None
         try:
             conn.connect()
             request_socket = conn.sock
@@ -184,7 +185,14 @@ class OllamaProvider:
         finally:
             if cutoff is not None:
                 cutoff.cancel()
-            conn.close()
+            # A will-close response (including HTTP/1.0) is detached by
+            # HTTPConnection.getresponse. Own its stream explicitly on early
+            # size/deadline/read errors rather than relying on garbage collection.
+            try:
+                if response is not None:
+                    response.close()
+            finally:
+                conn.close()
 
     def _verify_pins(self, deadline: float):
         version = json.loads(self._http("GET", "/api/version", None, deadline)[0])
