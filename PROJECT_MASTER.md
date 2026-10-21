@@ -1,8 +1,8 @@
 # Project master instructions
 
-Current decision intake, October 20, 2026: [reviewed merges and follow-ups](docs/handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md) records merged L01 empty-queue handling and independent E01 replay with bounded review fixes. These are offline-tested preparation, not actual saved-run or both-system runtime acceptance. Agent/runner no-call behavior, A01 runtime/tokenizer validation, Edison Q01-Q04 input, joint infeasibility/Q08, Ved Q10/eligibility agreement and remaining source/release/allocation inputs stay open. Summary-assertion coverage and retaining selected pairs are accepted by Nisha/Matty; do not reopen them as unanswered. Matty remains coordinator/publisher and Nisha backup. No F02, setting, task owner or policy rule changed.
+Current decision intake, October 21, 2026: [today's actions and evidence](docs/handoffs/OCT21_ACTIONS.md). Matty supports Nisha's option B to show a time-infeasible arrival for one decision, but the affected owners' agreement is still missing; current simulator/checker/evaluator behavior is unchanged. Current miss-on-arrival scoring interpretation has Nisha/Matty support, not a frozen protocol. Plain L01's zero-call guard and E01 replay are already merged. A01's partial-body timeout is reproduced with matched socket pairs and remains open. Runtime/tokenizer, Q01-Q04/Q08, Q10, source/freeze, allocation and course/release gates remain explicit. No shared format, setting, task owner or scientific rule changed.
 
-Instruction deployment: 1.16 — 2026-10-20. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.17 — 2026-10-21. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 

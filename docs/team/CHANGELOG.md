@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.16 - 2026-10-20. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.17 - 2026-10-21. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.17 - 2026-10-21
+
+- Matty explicitly authorized the October 21 recommendations. [Issue #33](https://github.com/ReymoT/data-center-agentic/issues/33) records stale L01/coordination/audit guidance before correction. All ten numbered/role headers, project master and affected current records are synchronized.
+- Recorded Nisha's current miss-accounting interpretation and Matty's option B recommendation with missing affected-owner agreement explicit. No simulator/checker/evaluator behavior or scoring default is changed. Corrected the contradictory claim that L01 has no merged empty-queue guard and the old current audit's unmerged E01 claim.
+- Added a reproducible socket-pair diagnostic and compact observed evidence of the unchanged A01 partial-body timeout, including the failing run alongside passing runs. Payloads, deadlines, assertions and production transport are unchanged. No root-cause fix, inference, synthetic implementation or final acceptance is claimed.
+- Sent one consolidated owner request naming exact pending inputs. [Today's handoff](../handoffs/OCT21_ACTIONS.md) gives per-item results, commands and remaining gates. All 50 allocations, exact seven-file policies, F02 bytes, shared locks/settings and source attachments are preserved. F04/F05 remain ongoing duties.
 
 ## Deployment 1.16 - 2026-10-20
 

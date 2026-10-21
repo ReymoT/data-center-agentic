@@ -1,0 +1,950 @@
+{
+  "evidence_kind": "synthetic_http_socket_pair_observation_not_inference",
+  "observed_date": "2026-10-21",
+  "base_main": "aa90fb0ae7f3bba6b9b625d58429b6b26c22b03d",
+  "command": ".venv\\Scripts\\python.exe scripts/diagnose_provider_wire.py --full-suite --out ../oct21-http-wire-published-tool.json",
+  "observer_note": "Captured before the post-test snapshot lock hardening; the send/recv/shutdown wrappers are unchanged. Timing instrumentation is not neutral.",
+  "raw_local_artifact_sha256": "bc7b989e1f2afc2f727276d5d1390745d6dcd3a6596dae6fdb20d677e18d24d8",
+  "pytest_exit_code": 1,
+  "passed": 958,
+  "failed": 1,
+  "subtests_passed": 19,
+  "model_calls": 0,
+  "payloads_deadlines_assertions_unchanged": true,
+  "root_cause_established": false,
+  "timeout_fixed": false,
+  "cases": [
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "sent_body_bytes": 24001,
+      "sent_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "received_body_bytes": 23360,
+      "received_body_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "full_body_hash_matches": false,
+      "events": [
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.157000000006519,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 131,
+          "sha256": "ec9bf62a2a274ecd699af6f8ab09d4c827dbebbe50d553418d7f74ffde0225f2"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.157000000006519,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 131
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.157000000006519,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.157000000006519,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 3399
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 3530
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 116,
+          "sha256": "caa0a8098d4ab1d803a108fca207a40f4996b74a3ff2749e1f050fc098676c70"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 116
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 24001
+        },
+        {
+          "event": "shutdown_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "how": 1
+        },
+        {
+          "event": "shutdown_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50215
+            ],
+            [
+              "127.0.0.1",
+              50218
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "how": 1
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.172000000020489,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 116
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 6.188000000081956,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 23360
+        },
+        {
+          "event": "recv_error",
+          "pair": [
+            [
+              "127.0.0.1",
+              50218
+            ],
+            [
+              "127.0.0.1",
+              50215
+            ]
+          ],
+          "seconds": 16.15700000000652,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "error": "timed out"
+        }
+      ]
+    },
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "sent_body_bytes": 24001,
+      "sent_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "received_body_bytes": 24001,
+      "received_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "full_body_hash_matches": true,
+      "events": [
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 131,
+          "sha256": "5ec875a6cd26f1e0aba3077f7bb6471476d560975e96cf98875c728f4c72f045"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 131
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 3399
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 3530
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 116,
+          "sha256": "03d2b829a72c9923b88af98bbaea9c149277ffaa50b3d43f9b40118d315ef31c"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 116
+        },
+        {
+          "event": "send_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "send_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 24001
+        },
+        {
+          "event": "shutdown_start",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "how": 1
+        },
+        {
+          "event": "shutdown_done",
+          "pair": [
+            [
+              "127.0.0.1",
+              50223
+            ],
+            [
+              "127.0.0.1",
+              50226
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "how": 1
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.32900000002701,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 116
+        },
+        {
+          "event": "recv",
+          "pair": [
+            [
+              "127.0.0.1",
+              50226
+            ],
+            [
+              "127.0.0.1",
+              50223
+            ]
+          ],
+          "seconds": 16.344000000040978,
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 24001
+        }
+      ]
+    }
+  ],
+  "additional_observations": [
+    {
+      "command": ".venv\\Scripts\\python.exe scripts/diagnose_provider_wire.py --out ../oct21-http-wire-final-tool.json",
+      "observer_sha256": "b4ee4a6c0f6b1ec3e54652889b6001bf3f9e9e72aad3aeeacf801918e2e77315",
+      "raw_local_artifact_sha256": "467d9e16f71773d5d5a72e4642a73ed1bf713c6eb9a15aad2d8d9ba1ddfe27ad",
+      "pytest_exit_code": 1,
+      "passed": 46,
+      "failed": 1,
+      "cases": [
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "sent_body_bytes": 24001,
+          "sent_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_body_bytes": 24001,
+          "received_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "full_body_hash_matches": true,
+          "events": [
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 131,
+              "sha256": "14b31cb838a5f160c4492df54d967a17a559e1f0eccea8946400afc9727a1cd6"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 131
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 3399,
+              "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 3399
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 3530
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 116,
+              "sha256": "8a4962abf71129695a7032b569c5a859d4f99f0dad33a0e2c89a8aac35834e7b"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 116
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 24001,
+              "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 24001
+            },
+            {
+              "event": "shutdown_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "how": 1
+            },
+            {
+              "event": "shutdown_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53832
+                ],
+                [
+                  "127.0.0.1",
+                  53835
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "how": 1
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 116
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53835
+                ],
+                [
+                  "127.0.0.1",
+                  53832
+                ]
+              ],
+              "seconds": 2.922000000020489,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+              "bytes": 24001
+            }
+          ]
+        },
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "sent_body_bytes": 24001,
+          "sent_body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_body_bytes": 23360,
+          "received_body_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+          "full_body_hash_matches": false,
+          "events": [
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 131,
+              "sha256": "6a89922d501641c3900f8a68e75eb3b57be631f040342d123167793322f0742d"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 131
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 3399,
+              "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 3399
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 3530
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 116,
+              "sha256": "8a4962abf71129695a7032b569c5a859d4f99f0dad33a0e2c89a8aac35834e7b"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 116
+            },
+            {
+              "event": "send_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 24001,
+              "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+            },
+            {
+              "event": "send_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 24001
+            },
+            {
+              "event": "shutdown_start",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "how": 1
+            },
+            {
+              "event": "shutdown_done",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53836
+                ],
+                [
+                  "127.0.0.1",
+                  53839
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "how": 1
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.9540000000270084,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 116
+            },
+            {
+              "event": "recv",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 2.969000000040978,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "bytes": 23360
+            },
+            {
+              "event": "recv_error",
+              "pair": [
+                [
+                  "127.0.0.1",
+                  53839
+                ],
+                [
+                  "127.0.0.1",
+                  53836
+                ]
+              ],
+              "seconds": 12.954000000027008,
+              "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+              "error": "timed out"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

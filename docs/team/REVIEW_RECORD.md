@@ -1,6 +1,12 @@
 # Publication audit
 
-Current October 20 maintenance, deployment 1.14: [issue #25](https://github.com/ReymoT/data-center-agentic/issues/25) records the authorized six-priority scope and stale documentation defects. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records current technical evidence and limits. Prior audit entries below are historical. E01 remains an unmerged draft; no scientific/live-run approval is claimed.
+Current publication increment, October 21, deployment 1.17: [issue #33](https://github.com/ReymoT/data-center-agentic/issues/33) and [the handoff](../handoffs/OCT21_ACTIONS.md) record authorized corrections, diagnostics, checks and remaining limits. L01 #30 and E01 #28 are merged; neither is an unmerged draft now. The new option B is a pending shared proposal, not implemented behavior. A01's socket-level timeout is reproduced and remains open. This is a publication audit, not a required teammate-review gate.
+
+## Historical publication entries
+
+All dated entries below describe their original publication state; they do not replace the current status above.
+
+Historical October 20 initial maintenance, deployment 1.14: [issue #25](https://github.com/ReymoT/data-center-agentic/issues/25) records the authorized six-priority scope and stale documentation defects. [The handoff](../handoffs/OCT20_SIX_PRIORITIES.md) records current technical evidence and limits. Prior audit entries below are historical. E01 remains an unmerged draft; no scientific/live-run approval is claimed.
 
 Current D06 maintenance, October 19, 2026: [Matty's verification](../handoffs/D06_F04_F05_VERIFICATION.md) records a new current-checker structural pass and documentation alignment. The focused suite passed 21 tests and 19 subtests. This is not scientific acceptance or authentication of Ved's old JSON; prior dated audit entries below remain historical. Instruction deployment is now 1.13.
 
