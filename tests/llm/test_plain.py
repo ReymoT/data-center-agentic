@@ -13,6 +13,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import pytest
 
 from dc_sustainability import schemas as s
+from dc_sustainability.evaluation import validator as v
 from dc_sustainability.llm import plain
 from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.llm.provider import CallBlocked, Deployment, OllamaProvider
@@ -275,6 +276,89 @@ def test_completion_slot_makes_no_call(server):
     with pytest.raises(CallBlocked, match="completion"):
         propose(PlainLLMPolicy(provider(server)), late, context)
     assert server.requests == []
+
+
+def test_empty_queue_records_a_noop_without_any_request(server):
+    shared = provider(server)
+    state, context = state_and_context(waiting_job_ids=())
+    decision = propose(PlainLLMPolicy(shared), state, context)
+    assert server.requests == [] and shared.attempts == ()
+    assert decision.empty_queue_noop
+    assert (decision.attempt, decision.blocked_reason) == (None, None)
+    out = decision.output
+    assert (out.output_status, out.explanation, out.raw_response) == ("ok", None, None)
+    assert (out.plan.episode_id, out.plan.slot, out.plan.state_version) == (f.EPISODE_ID, 0, 0)
+    assert (out.plan.starts, out.plan.deferrals, out.plan.abstentions) == ((), (), ())
+    assert decision.context_hash == context.content_hash
+
+
+def test_empty_queue_noop_is_the_valid_decision_for_e01(server):
+    state, context = state_and_context(waiting_job_ids=())
+    decision = propose(PlainLLMPolicy(provider(server)), state, context)
+    facts = v.facts_from_state(state, f.snapshot())
+    result = v.validate_output(decision.output, facts, v.Q03_DRAFT)
+    assert result.valid and result.empty_queue
+
+
+def test_empty_queue_noop_does_not_depend_on_the_runtime(server):
+    # Even a runtime that would block dispatch is never consulted for an empty queue.
+    server.version = "different-runtime"
+    state, context = state_and_context(waiting_job_ids=())
+    decision = propose(PlainLLMPolicy(provider(server)), state, context)
+    assert decision.empty_queue_noop and decision.output.output_status == "ok"
+    assert server.requests == []
+
+
+def test_empty_queue_noop_still_uses_the_decision(server):
+    policy = PlainLLMPolicy(provider(server))
+    state, context = state_and_context(waiting_job_ids=())
+    propose(policy, state, context)
+    with pytest.raises(CallBlocked, match="one request"):
+        propose(policy, state, context)
+    assert server.requests == []
+
+
+def test_waiting_jobs_still_get_exactly_one_request(server):
+    decision = propose(PlainLLMPolicy(provider(server)))
+    assert not decision.empty_queue_noop
+    assert len(server.requests) == 1
+
+
+def test_empty_queue_still_refuses_mismatched_context_without_dispatch(server):
+    state, context = state_and_context(waiting_job_ids=())
+    other = context.model_copy(update={"content_hash": "0" * 64})
+    shared = provider(server)
+    with pytest.raises(ValueError):
+        propose(PlainLLMPolicy(shared), state, other)
+    assert server.requests == [] and shared.attempts == ()
+
+
+def test_empty_queue_still_refuses_completion_slot_without_dispatch(server):
+    state, context = state_and_context(waiting_job_ids=())
+    shared = provider(server)
+    late = state.model_copy(update={"current_slot": s.PROPOSED_DECISION_SLOTS})
+    with pytest.raises(CallBlocked, match="completion"):
+        propose(PlainLLMPolicy(shared), late, context)
+    assert server.requests == [] and shared.attempts == ()
+
+
+def test_empty_waiting_queue_preserves_running_work_without_dispatch(server):
+    snapshot = f.snapshot()
+    running = s.RunningJobView(job=f.jobs()["J1"], start_slot=0)
+    state = s.VisibleState.from_snapshot(
+        snapshot,
+        episode_id=f.EPISODE_ID,
+        current_slot=1,
+        state_version=1,
+        running_jobs=(running,),
+    )
+    context = s.Context.build(state, snapshot, "flat")
+    shared = provider(server)
+    decision = propose(PlainLLMPolicy(shared), state, context)
+    assert decision.empty_queue_noop and decision.output.plan.starts == ()
+    assert state.running_jobs == context.content.running_jobs == (running,)
+    assert state.current_slot == 1  # only the future runtime owns progression
+    assert server.requests == [] and shared.attempts == ()
 
 
 def test_prompt_hash_ignores_line_endings(tmp_path, monkeypatch):

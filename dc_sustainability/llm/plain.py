@@ -117,8 +117,9 @@ def _response_text(attempt: Attempt) -> str | None:
 class PlainDecision:
     """One plain decision: scored output plus the evidence needed to trace it.
 
-    ``attempt`` is None only when the adapter blocked before dispatch; the reason is
-    kept in ``blocked_reason``. A schema-valid ``output`` is still only a proposal.
+    ``attempt`` is None when the adapter blocked before dispatch, with the reason in
+    ``blocked_reason``, or when the waiting queue was empty and no request was made
+    (``empty_queue_noop``). A schema-valid ``output`` is still only a proposal.
     """
 
     output: s.PolicyOutput
@@ -127,6 +128,7 @@ class PlainDecision:
     messages_sha256: str
     prompt_template_sha256: str
     context_hash: str
+    empty_queue_noop: bool = False
 
 
 class PlainLLMPolicy:
@@ -149,7 +151,8 @@ class PlainLLMPolicy:
         """Make the single allowed request for this decision and keep what came back.
 
         Calling twice for the same episode/slot raises, even if the first call was
-        blocked before dispatch: the plain system never gets a second chance.
+        blocked before dispatch: the plain system never gets a second chance. With no
+        waiting jobs, no request is made and a deterministic no-op is recorded (Q03.4).
         """
         if state.current_slot >= s.PROPOSED_DECISION_SLOTS:
             raise CallBlocked("no model calls in completion slots")
@@ -172,6 +175,17 @@ class PlainLLMPolicy:
             prompt_template_sha256=prompt_template_sha256(),
             context_hash=context.content_hash,
         )
+        if not state.waiting_jobs:
+            # Q03.4: an empty queue has one valid output, so neither LLM system calls the
+            # model. The no-op has no explanation; its claim review is not applicable (Q10).
+            noop = s.Plan(
+                episode_id=state.episode_id,
+                slot=state.current_slot,
+                state_version=state.state_version,
+                status="proposed",
+            )
+            output = s.PolicyOutput(system="plain_llm", output_status="ok", plan=noop)
+            return PlainDecision(output, None, None, **evidence, empty_queue_noop=True)
         try:
             attempt = self._provider.generate(
                 system="plain_llm",
