@@ -1,8 +1,9 @@
 """L01 plain-LLM comparison: one shared-adapter call per decision, never corrected.
 
-The plain system sees the same flat F02 context as the agent and makes exactly one
-request through Matty's OllamaProvider, which fixes model and generation settings for
-both systems. The original response is kept for scoring. There are no tools, checker
+For a nonempty waiting queue the plain system sees the same flat F02 context as the
+agent and makes one request through Matty's OllamaProvider, which fixes model and
+generation settings for both systems. An empty queue returns a no-call proposal.
+The original model response is kept for scoring. There are no tools, checker
 feedback, repair, retry or greedy-A fallback here; the runtime gate decides what may
 execute, and blocked or failed decisions still advance the simulator.
 
