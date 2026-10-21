@@ -4,7 +4,7 @@ Task ID / Issue: L01, [issue #12](https://github.com/ReymoT/data-center-agentic/
 Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk); technical contact Matty (A01 adapter and runtime boundary).
 Active assistant session / instruction version: one Claude Code session for Nisha; instruction deployment 1.15.
 Objective: Close the L01 gap Matty noted in #7: the plain path had no empty-queue guard.
-Base commit / branch / PR: base `894f39f` on main; branch `nisha/l01-empty-queue-guard`; PR to be opened.
+Base commit / branch / PR: base `894f39f` on main; branch `nisha/l01-empty-queue-guard`; [PR #30](https://github.com/ReymoT/data-center-agentic/pull/30).
 
 Changed paths:
 - `dc_sustainability/llm/plain.py`: `PlainLLMPolicy.propose` returns a no-op without calling the provider when the visible state has no waiting jobs. `PlainDecision` gains `empty_queue_noop` (a local L01 field, not an F02 change).
@@ -40,3 +40,7 @@ Limitations and open decisions:
 
 Receiving owner and consumer check: Matty, to confirm this matches the runtime boundary's no-op record and to mirror it on the agent path; Nisha (E02), to count these slots in the empty-queue total and exclude them from the primary accuracy denominator.
 Next checkpoint: verify zero dispatch for both systems once the runtime/runner exists.
+
+## Matty review addendum
+
+Matty explicitly requested review and merge if sound. The no-op shape is accepted as a policy proposal only: the future runtime owns execution/recheck/clock progression. Three added review cases check invalid context, completion refusal with an empty queue, and already-running work with no waiting jobs. All 24 focused plain tests pass. F02, provider, prompts, settings and locks are unchanged. The initial full run had 922 passes/19 subtests plus the known unrelated local deep-object HTTP timeout; no deadline/assertion was changed. Final publication checks and exact commit/CI evidence are recorded in PR #30 and issue #12 after execution. Full L01 and both-system runtime acceptance remain open.

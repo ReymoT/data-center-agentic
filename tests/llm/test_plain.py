@@ -324,6 +324,43 @@ def test_waiting_jobs_still_get_exactly_one_request(server):
     assert len(server.requests) == 1
 
 
+def test_empty_queue_still_refuses_mismatched_context_without_dispatch(server):
+    state, context = state_and_context(waiting_job_ids=())
+    other = context.model_copy(update={"content_hash": "0" * 64})
+    shared = provider(server)
+    with pytest.raises(ValueError):
+        propose(PlainLLMPolicy(shared), state, other)
+    assert server.requests == [] and shared.attempts == ()
+
+
+def test_empty_queue_still_refuses_completion_slot_without_dispatch(server):
+    state, context = state_and_context(waiting_job_ids=())
+    shared = provider(server)
+    late = state.model_copy(update={"current_slot": s.PROPOSED_DECISION_SLOTS})
+    with pytest.raises(CallBlocked, match="completion"):
+        propose(PlainLLMPolicy(shared), late, context)
+    assert server.requests == [] and shared.attempts == ()
+
+
+def test_empty_waiting_queue_preserves_running_work_without_dispatch(server):
+    snapshot = f.snapshot()
+    running = s.RunningJobView(job=f.jobs()["J1"], start_slot=0)
+    state = s.VisibleState.from_snapshot(
+        snapshot,
+        episode_id=f.EPISODE_ID,
+        current_slot=1,
+        state_version=1,
+        running_jobs=(running,),
+    )
+    context = s.Context.build(state, snapshot, "flat")
+    shared = provider(server)
+    decision = propose(PlainLLMPolicy(shared), state, context)
+    assert decision.empty_queue_noop and decision.output.plan.starts == ()
+    assert state.running_jobs == context.content.running_jobs == (running,)
+    assert state.current_slot == 1  # only the future runtime owns progression
+    assert server.requests == [] and shared.attempts == ()
+
+
 def test_prompt_hash_ignores_line_endings(tmp_path, monkeypatch):
     original = plain.prompt_template_sha256()
     for name in plain.PROMPT_FILES:
