@@ -4,7 +4,7 @@ Task ID / Issue: E01, [issue #24](https://github.com/ReymoT/data-center-agentic/
 Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk); technical contact Ved (vedp3705); Reimo for S01 consumer questions; Matty for runtime traces.
 Active assistant session / instruction version: one Claude Code session for Nisha; instruction deployment 1.14.
 Objective: Rebuild each slot's state from a private episode and the starts that were actually executed, independently of the simulator, so simulator or trace defects show up as mismatches.
-Base commit / branch / PR: base `b06cda7` on main; branch `nisha/e01-episode-replay`; PR to be opened.
+Base commit / branch / PR: base `b06cda7` on main; branch `nisha/e01-episode-replay`; [PR #28](https://github.com/ReymoT/data-center-agentic/pull/28).
 
 Changed paths:
 - `dc_sustainability/evaluation/replay.py` (new): `replay_episode`, `executed_starts`, `compare_result`, `compare_state` and `Replay.state_at`.
@@ -16,7 +16,7 @@ What it does:
 - `executed_starts(records, episode_id)` collects executed starts by slot from one run's `DecisionRecord`s. Records from another episode, mixed runs/systems/trials, or two records for one slot are refused as trace defects.
 - `compare_result` and `compare_state` list every place a recorded `EpisodeResult` or `VisibleState` differs from the replay. Nothing recorded is used as truth or corrected.
 - `Replay.state_at(t)` gives the replayed visible state, so `validator.facts_from_state` and `validate_plan` can judge a decision against replayed state rather than the state the runtime supplied.
-- Completed work follows Q03.5: completed job IDs and completed IT energy (power × duration × slot hours, before PUE). Missed and unfinished jobs earn no credit; missed jobs are also listed as unfinished.
+- Completed work follows Q03.5: completed job IDs and completed IT energy (power Ãƒâ€” duration Ãƒâ€” slot hours, before PUE). Missed and unfinished jobs earn no credit; missed jobs are also listed as unfinished.
 
 Rules applied (from the shared rules, S01 handoff text and `Q03_DRAFT`, not from simulator code):
 - Occupancy is `[start, start + duration)`; a job completes at boundary `start + duration`; everything ends by boundary 30.
@@ -45,7 +45,7 @@ Exact reproduction commands:
 
 Tests actually run and observed results: Windows, Python 3.12.10, hashed lock. 928 tests and 19 subtests passed (906 on main before, 22 new); all 112 evaluation tests pass. Ruff check/format, compileall, setup validation and pip check passed.
 - Hand truth: boundary states and slot outcomes for the hand schedule (J1@0, J2@2; J3 missed on arrival at 4; 140 kWh completed IT energy, unchanged at PUE 1.2), missed timing after the last legal start, Q01 slot-24 miss, nonflexible miss, capacity overlap (110 kW in slots 0 and 1), exact-capacity boundary, impossible executions, missing capacity, and result/state mismatches.
-- S01 consumer check: a greedy driver over the four D03 scenarios × 3 seeds, including a batch the simulator rejects. The replay found no findings and no mismatches with the simulator's `EpisodeResult` or any decision-slot `VisibleState`.
+- S01 consumer check: a greedy driver over the four D03 scenarios Ãƒâ€” 3 seeds, including a batch the simulator rejects. The replay found no findings and no mismatches with the simulator's `EpisodeResult` or any decision-slot `VisibleState`.
 - Mutation check: five deliberate bugs (missed one slot late, non-strict capacity, completion one slot late, duplicate starts allowed, PUE in completed energy) each made tests fail; the code was restored afterward.
 
 Limitations and open decisions:
@@ -56,3 +56,13 @@ Limitations and open decisions:
 
 Receiving owner and consumer check: Reimo, to confirm the replay's reading of S01 timing (especially miss-on-arrival); Matty, to confirm `DecisionRecord.executed_starts` is the trace field E02/I01 will save; Ved, to review the independence boundary.
 Next checkpoint: run the replay over the first real saved development run once the runtime writes `DecisionRecord`s and `EpisodeResult`s, keeping every finding and mismatch.
+
+## Matty review addendum
+
+Matty explicitly requested review and merge if sound. Nine hand-derived regressions reproduced missing authoritative site/snapshot/visible-constraint comparison, contradictory/unknown job-constraint input, nonhourly input and unverified completed-work scalar handling. The bounded fixes preserve raw F02, independent logic and Nisha's original commits. All 121 focused evaluation tests pass after correction.
+
+Comparison scope is explicit: job-state/identity/load structure is checked; forecast issuance and mutation-version history are not derivable from executed starts alone. Per-slot/total energy/emissions remain outside this structural comparison. A supplied completed_work scalar raises an explicit unverified-mapping error until the unit/definition/reference mapping is agreed; no arbitrary numeric truth is selected. The separate derived completed-job IDs and before-PUE IT energy remain available. Illegal unknown/nonwaiting/slot-mismatched starts are reported and omitted under the existing draft reconstruction; this is not a physical reconstruction of arbitrary corrupt executions. Full scientific acceptance remains open.
+
+The missed-on-arrival question remains with Reimo/protocol agreement. Matty confirmed the existing DecisionRecord.executed_starts field as actual confirmed execution, not proposed future starts. A04/E02 real persistence and saved-output validation remain future work. Final current-base full checks and merge/CI evidence are recorded in PR #28 and issue #24 after execution.
+
+Current-base review validation before L01 merge: all 949 tests and 19 subtests passed; all 121 evaluation tests passed; Ruff lint/format (65 files), setup/links/version/task/policy checks and whitespace passed. The nine new regressions failed against the original implementation and pass after correction. No production-checker/simulator/impact import was added.

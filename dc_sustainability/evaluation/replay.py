@@ -177,6 +177,25 @@ def replay_episode(
     if any(type(t) is not int or not 0 <= t < END for t in executed):
         raise ValueError("executed starts must be keyed by slots 0..29")
     jobs = {p.job.job_id: p.job for p in episode.jobs}
+    if episode.snapshot.site.slot_hours != 1:
+        raise ValueError("replay requires hourly slots")
+    for constraint in episode.snapshot.constraints:
+        for job_id in constraint.applies_to_jobs:
+            if job_id not in jobs:
+                raise ValueError(
+                    f"constraint {constraint.constraint_id} names unknown job {job_id}"
+                )
+            job = jobs[job_id]
+            expected = {
+                "arrival": job.arrival_slot,
+                "deadline": job.deadline_slot,
+                "nonflexible": job.arrival_slot,
+            }
+            kind = constraint.constraint_type
+            if kind in expected and (
+                constraint.limit_value != expected[kind] or (kind == "nonflexible" and job.flexible)
+            ):
+                raise ValueError(f"constraint {constraint.constraint_id} contradicts job {job_id}")
     capacity = _capacity(episode.snapshot)
     background = episode.snapshot.site.background_kw
 
@@ -292,12 +311,19 @@ def _same_kw(a: float, b: float) -> bool:
 
 
 def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, ...]:
-    """Every place a recorded EpisodeResult disagrees with the replay."""
+    """Compare structural outcomes and loads, not impact totals or unagreed work units.
+
+    A supplied completed_work scalar cannot receive a clean result without an agreed
+    unit/definition mapping. Per-slot/total energy and emissions remain outside this
+    structural comparison until independent impact reference selection is established.
+    """
     result = s.EpisodeResult.model_validate(
         result.model_dump(mode="python", warnings="none"), strict=True
     )
     if result.episode_id != replay.episode.episode_id:
         raise ValueError("the result belongs to another episode")
+    if result.completed_work is not None:
+        raise ValueError("completed_work comparison requires an agreed unit/definition mapping")
     out: list[Mismatch] = []
 
     def check(field, slot, expected, recorded):
@@ -339,7 +365,11 @@ def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, .
 
 
 def compare_state(replay: Replay, state: s.VisibleState) -> tuple[Mismatch, ...]:
-    """Every place a recorded visible state disagrees with the replayed boundary."""
+    """Compare job state and authoritative metadata against the replayed boundary.
+
+    Forecast issuance and mutation-version history cannot be derived from executed
+    starts alone and are not certified by this structural comparison.
+    """
     state = s.VisibleState.model_validate(
         state.model_dump(mode="python", warnings="none"), strict=True
     )
@@ -347,7 +377,22 @@ def compare_state(replay: Replay, state: s.VisibleState) -> tuple[Mismatch, ...]
         raise ValueError("the state belongs to another episode")
     t = state.current_slot
     b = replay.boundaries[t]
+    snapshot = replay.episode.snapshot
+    known = (
+        set(b.waiting) | {j for j, _ in b.running} | {j for j, _, _ in b.completed} | set(b.missed)
+    )
+    constraint_ids = tuple(
+        sorted(
+            constraint.constraint_id
+            for constraint in snapshot.constraints
+            if constraint.applies_to_site == snapshot.site.site_id
+            or (constraint.applies_to_jobs and set(constraint.applies_to_jobs) <= known)
+        )
+    )
     recorded = {
+        "constraint_snapshot_id": state.constraint_snapshot_id,
+        "site": state.site,
+        "constraint_ids": tuple(sorted(state.constraint_ids)),
         "waiting": tuple(sorted(j.job_id for j in state.waiting_jobs)),
         "running": tuple(sorted((r.job.job_id, r.start_slot) for r in state.running_jobs)),
         "completed": tuple(
@@ -356,6 +401,9 @@ def compare_state(replay: Replay, state: s.VisibleState) -> tuple[Mismatch, ...]
         "missed": tuple(sorted(state.missed_job_ids)),
     }
     expected = {
+        "constraint_snapshot_id": snapshot.snapshot_id,
+        "site": snapshot.site,
+        "constraint_ids": constraint_ids,
         "waiting": b.waiting,
         "running": b.running,
         "completed": b.completed,
