@@ -1,0 +1,3980 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "synthetic": true,
+  "note": "Hand-written pilot cases on the hand-example fixture; not model outputs.",
+  "cases": [
+    {
+      "case_id": "DEV01",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 4
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 at slot 2 and J2 at slot 4, the lowest-carbon feasible slots in the forecast. Both finish before their deadline at slot 6. Forecast job emissions are 48.4 kg, 6.1 kg less than starting both as soon as possible (54.5 kg).",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-JOB-J1"
+                ],
+                "value": 22.0,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J2"
+                ],
+                "value": 26.4,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C3",
+                "text": "Peak load is 80 kW, within the 100 kW capacity limit.",
+                "evidence_ids": [
+                  "FACT-SITE-BG",
+                  "FACT-JOB-J1",
+                  "CON-CAP-01"
+                ],
+                "value": 80.0,
+                "unit": "kW"
+              }
+            ],
+            "limitations": [
+              "Emissions use perfect-foresight forecasts, not measured values."
+            ]
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 0
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 now and J2 at slot 2 so both jobs finish early. Total forecast emissions are 54.5 kg.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J1 at slots 0-1 has forecast emissions of 38.0 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s00",
+                  "FACT-CI-s01",
+                  "FACT-JOB-J1"
+                ],
+                "value": 38.0,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J2 at slots 2-3 has forecast emissions of 16.5 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-JOB-J2"
+                ],
+                "value": 16.5,
+                "unit": "kg"
+              }
+            ],
+            "limitations": [
+              "Forecasts may differ from actual carbon intensity."
+            ]
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV02",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [],
+            "deferrals": [
+              {
+                "job_id": "J1",
+                "reason": "waiting_for_lower_carbon",
+                "detail": null,
+                "evidence_ids": []
+              },
+              {
+                "job_id": "J2",
+                "reason": "waiting_for_lower_carbon",
+                "detail": null,
+                "evidence_ids": []
+              }
+            ],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Defer J1 and J2. Slot 3 has the lowest forecast intensity in the window, 250 g/kWh, and both jobs can still finish by slot 6.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "The forecast for slot 3 is 250 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s03"
+                ],
+                "value": 250.0,
+                "unit": "g/kWh"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J1 can start as late as slot 4 and still meet its deadline.",
+                "evidence_ids": [
+                  "FACT-JOB-J1",
+                  "CON-DL-J1"
+                ],
+                "value": 4.0,
+                "unit": "slot"
+              }
+            ],
+            "limitations": [
+              "Forecasts beyond slot 6 are missing."
+            ]
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 4
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Running J1 at slot 2 and J2 at slot 4 lowers forecast emissions by about 11.2% compared with running both as soon as possible.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Forecast job emissions for this schedule are 48.4 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 48.4,
+                "unit": "kg"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV03",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 1,
+        "state_version": 1,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [
+          {
+            "job": {
+              "schema_version": "1.0.0",
+              "record_type": "Job",
+              "job_id": "J1",
+              "arrival_slot": 0,
+              "duration_slots": 2,
+              "power_kw": 40.0,
+              "deadline_slot": 6,
+              "flexible": true
+            },
+            "start_slot": 0
+          }
+        ],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T08:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 1,
+            "state_version": 1,
+            "starts": [],
+            "deferrals": [
+              {
+                "job_id": "J2",
+                "reason": "capacity",
+                "detail": null,
+                "evidence_ids": []
+              }
+            ],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Defer J2. J1 is still running at slot 1, so starting J2 now would raise the load to 110 kW, above the 100 kW capacity. J2 can start at slot 2 after J1 finishes.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Starting J2 at slot 1 would make the load 110 kW.",
+                "evidence_ids": [
+                  "FACT-SITE-BG",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2",
+                  "CON-CAP-01"
+                ],
+                "value": 110.0,
+                "unit": "kW"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J1 finishes at slot 2.",
+                "evidence_ids": [
+                  "FACT-JOB-J1"
+                ],
+                "value": 2.0,
+                "unit": "slot"
+              }
+            ],
+            "limitations": [
+              "Assumes no new jobs arrive before slot 2."
+            ]
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 1,
+            "state_version": 1,
+            "starts": [
+              {
+                "job_id": "J2",
+                "start_slot": 1
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J2 now. The capacity check passed with a load of 110 kW, within the 100 kW limit.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Load at slot 1 would be 110 kW.",
+                "evidence_ids": [
+                  "FACT-SITE-BG",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 110.0,
+                "unit": "kW"
+              },
+              {
+                "claim_id": "C2",
+                "text": "The capacity check passed.",
+                "evidence_ids": [
+                  "CON-CAP-01"
+                ],
+                "value": null,
+                "unit": null
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV04",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [],
+        "missing_carbon_slots": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 0
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 now and J2 at slot 2 so both finish well before the slot 6 deadline. No carbon forecasts are available, so no emissions estimate is given.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Both jobs finish by slot 4.",
+                "evidence_ids": [
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 4.0,
+                "unit": "slot"
+              }
+            ],
+            "limitations": [
+              "Carbon forecasts are missing for all slots 0-23."
+            ]
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 0
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 now and J2 at slot 2. This saves 6.1 kg of CO2 compared with the greedy schedule, because slot 0 has an intensity of 500 g/kWh.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Slot 0 carbon intensity is 500 g/kWh.",
+                "evidence_ids": [],
+                "value": 500.0,
+                "unit": "g/kWh"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV05",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 0
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 0
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start both jobs now. Load stays at 80 kW, below the 100 kW capacity limit.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Load at slot 0 is 80 kW.",
+                "evidence_ids": [
+                  "FACT-SITE-BG",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 80.0,
+                "unit": "kW"
+              },
+              {
+                "claim_id": "C2",
+                "text": "The capacity limit is 100 kW.",
+                "evidence_ids": [
+                  "CON-CAP-01"
+                ],
+                "value": 100.0,
+                "unit": "kW"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [],
+            "deferrals": [],
+            "abstentions": [
+              {
+                "job_id": null,
+                "reason": "missing_evidence",
+                "detail": null,
+                "evidence_ids": [],
+                "constraint_ids": []
+              }
+            ],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Abstain from starting any job: the site has no capacity constraint on record, so a safe load cannot be confirmed.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "No capacity constraint is available for SITE1.",
+                "evidence_ids": [],
+                "value": null,
+                "unit": null
+              }
+            ],
+            "limitations": [
+              "Both jobs can still start later if a capacity record becomes available."
+            ]
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV06",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 4,
+        "state_version": 4,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J3",
+            "arrival_slot": 4,
+            "duration_slots": 3,
+            "power_kw": 20.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [
+          {
+            "job_id": "J1",
+            "start_slot": 0,
+            "end_slot": 2
+          },
+          {
+            "job_id": "J2",
+            "start_slot": 2,
+            "end_slot": 4
+          }
+        ],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T11:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T11:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T11:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-DL-J3",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 4,
+            "state_version": 4,
+            "starts": [],
+            "deferrals": [
+              {
+                "job_id": "J3",
+                "reason": "waiting_for_lower_carbon",
+                "detail": null,
+                "evidence_ids": []
+              }
+            ],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Defer J3 until slot 5, when carbon intensity is lower. It can still finish by its deadline.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "The slot 5 forecast is 480 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s05"
+                ],
+                "value": 480.0,
+                "unit": "g/kWh"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J3 can still finish by its deadline if it starts at slot 5.",
+                "evidence_ids": [
+                  "FACT-JOB-J3"
+                ],
+                "value": null,
+                "unit": null
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 4,
+            "state_version": 4,
+            "starts": [],
+            "deferrals": [],
+            "abstentions": [
+              {
+                "job_id": "J3",
+                "reason": "infeasible_deadline",
+                "detail": null,
+                "evidence_ids": [],
+                "constraint_ids": [
+                  "CON-DL-J3"
+                ]
+              }
+            ],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Abstain from J3: it needs 3 slots, so starting now at slot 4 ends at slot 7, after its deadline at slot 6.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J3 needs 3 slots.",
+                "evidence_ids": [
+                  "FACT-JOB-J3"
+                ],
+                "value": 3.0,
+                "unit": "slot"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J3's deadline is slot 6.",
+                "evidence_ids": [
+                  "CON-DL-J3"
+                ],
+                "value": 6.0,
+                "unit": "slot"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV07",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [],
+            "deferrals": [],
+            "abstentions": [
+              {
+                "job_id": null,
+                "reason": "other",
+                "detail": null,
+                "evidence_ids": [],
+                "constraint_ids": []
+              }
+            ],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Abstain this slot. Measured carbon intensity right now is 500 g/kWh, which is too high, and neither job can run without exceeding capacity.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Measured intensity at slot 0 is 500 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s00"
+                ],
+                "value": 500.0,
+                "unit": "g/kWh"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [
+              {
+                "job_id": "J2",
+                "reason": "waiting_for_lower_carbon",
+                "detail": null,
+                "evidence_ids": []
+              }
+            ],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Plan J1 for slot 2 and defer J2. Slot 2's forecast intensity of 300 g/kWh is lower than slot 0's 500 g/kWh.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "The slot 2 forecast is 300 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s02"
+                ],
+                "value": 300.0,
+                "unit": "g/kWh"
+              },
+              {
+                "claim_id": "C2",
+                "text": "The slot 0 forecast is 500 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s00"
+                ],
+                "value": 500.0,
+                "unit": "g/kWh"
+              }
+            ],
+            "limitations": [
+              "Forecasts are perfect-foresight development values, not live forecasts."
+            ]
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV08",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 0
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 now and J2 at slot 2.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J1 emits 40.0 kg at slots 0-1.",
+                "evidence_ids": [
+                  "FACT-CI-s00",
+                  "FACT-CI-s01",
+                  "FACT-JOB-J1"
+                ],
+                "value": 40.0,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C2",
+                "text": "The slot 0 forecast is 500 g/kWh.",
+                "evidence_ids": [
+                  "FACT-CI-s03"
+                ],
+                "value": 500.0,
+                "unit": "g/kWh"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 4
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 at slot 2 and J2 at slot 4. The reference solver confirmed this schedule is optimal.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Forecast emissions for this schedule are 48.4 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 48.4,
+                "unit": "kg"
+              }
+            ],
+            "limitations": [
+              "Forecasts beyond slot 6 are missing."
+            ]
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV09",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 4
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "J1 runs at slots 2-3 for 22.0 kg and J2 runs at slots 4-5. J2 arrived at slot 1, so it could not start earlier.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-JOB-J1"
+                ],
+                "value": 22.0,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C2",
+                "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J2"
+                ],
+                "value": 26.4,
+                "unit": "kg"
+              }
+            ],
+            "limitations": [
+              "Emissions are forecasts."
+            ]
+          },
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [
+              {
+                "job_id": "J2",
+                "reason": "other",
+                "detail": null,
+                "evidence_ids": [],
+                "constraint_ids": []
+              }
+            ],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 at slot 2 and skip J2. This cuts forecast emissions to 22.0 kg, a saving of 32.5 kg compared with running both jobs as soon as possible.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "J1 at slots 2-3 emits 22.0 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-JOB-J1"
+                ],
+                "value": 22.0,
+                "unit": "kg"
+              },
+              {
+                "claim_id": "C2",
+                "text": "This saves 32.5 kg versus running both jobs as soon as possible.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 32.5,
+                "unit": "kg"
+              }
+            ],
+            "limitations": []
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV10",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 0,
+        "state_version": 0,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J1",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 40.0,
+            "deadline_slot": 6,
+            "flexible": true
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Job",
+            "job_id": "J2",
+            "arrival_slot": 0,
+            "duration_slots": 2,
+            "power_kw": 30.0,
+            "deadline_slot": 6,
+            "flexible": true
+          }
+        ],
+        "running_jobs": [],
+        "completed_jobs": [],
+        "missed_job_ids": [],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s00",
+            "value": 500.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 0,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s01",
+            "value": 450.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 1,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s02",
+            "value": 300.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 2,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s03",
+            "value": 250.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 3,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s04",
+            "value": 400.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 4,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T07:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "malformed",
+          "plan": null,
+          "explanation": null,
+          "raw_response": "{\"output_status\": \"ok\", \"plan\": {\"starts\": [{\"job_id\": \"J1\", \"start_"
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 0,
+            "state_version": 0,
+            "starts": [
+              {
+                "job_id": "J1",
+                "start_slot": 2
+              },
+              {
+                "job_id": "J2",
+                "start_slot": 4
+              }
+            ],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": {
+            "source": "llm",
+            "summary": "Start J1 at slot 2 and J2 at slot 4 to use the lower forecast intensity at slots 2-5.",
+            "claims": [
+              {
+                "claim_id": "C1",
+                "text": "Forecast emissions for this schedule are 48.4 kg.",
+                "evidence_ids": [
+                  "FACT-CI-s02",
+                  "FACT-CI-s03",
+                  "FACT-CI-s04",
+                  "FACT-CI-s05",
+                  "FACT-JOB-J1",
+                  "FACT-JOB-J2"
+                ],
+                "value": 48.4,
+                "unit": "kg"
+              }
+            ],
+            "limitations": [
+              "Forecasts beyond slot 6 are missing."
+            ]
+          },
+          "raw_response": null
+        }
+      }
+    },
+    {
+      "case_id": "DEV11",
+      "snapshot": {
+        "schema_version": "1.0.0",
+        "record_type": "ConstraintSnapshot",
+        "snapshot_id": "SNAP1",
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "constraints": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-CAP-01",
+            "constraint_type": "capacity",
+            "limit_value": 100.0,
+            "unit": "kW",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-FRESH-01",
+            "constraint_type": "freshness",
+            "limit_value": 2.0,
+            "unit": "slot",
+            "applies_to_site": "SITE1",
+            "applies_to_jobs": [],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J1",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J1"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "Constraint",
+            "constraint_id": "CON-DL-J3",
+            "constraint_type": "deadline",
+            "limit_value": 6.0,
+            "unit": "slot",
+            "applies_to_site": null,
+            "applies_to_jobs": [
+              "J3"
+            ],
+            "source_id": "SRC-HAND",
+            "source_version": null
+          }
+        ],
+        "sources": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "SourceRef",
+            "source_id": "SRC-HAND",
+            "path": "tests/contracts/fixtures.py",
+            "commit": null,
+            "sha256": null,
+            "redistribution_status": "permitted"
+          }
+        ]
+      },
+      "state": {
+        "schema_version": "1.0.0",
+        "record_type": "VisibleState",
+        "episode_id": "EP-HAND1",
+        "current_slot": 5,
+        "state_version": 5,
+        "site": {
+          "schema_version": "1.0.0",
+          "record_type": "SiteConfig",
+          "site_id": "SITE1",
+          "background_kw": 40.0,
+          "pue": 1.0,
+          "slot_hours": 1.0
+        },
+        "waiting_jobs": [],
+        "running_jobs": [],
+        "completed_jobs": [
+          {
+            "job_id": "J1",
+            "start_slot": 0,
+            "end_slot": 2
+          },
+          {
+            "job_id": "J2",
+            "start_slot": 2,
+            "end_slot": 4
+          }
+        ],
+        "missed_job_ids": [
+          "J3"
+        ],
+        "carbon_facts": [
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s05",
+            "value": 480.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 5,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T12:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          },
+          {
+            "schema_version": "1.0.0",
+            "record_type": "CarbonForecast",
+            "fact_kind": "forecast",
+            "fact_id": "FACT-CI-s06",
+            "value": 520.0,
+            "unit": "g/kWh",
+            "source_id": "SRC-HAND",
+            "source_sha256": null,
+            "valid_slot": 6,
+            "valid_from_utc": null,
+            "valid_to_utc": null,
+            "issued_at_utc": "2022-01-01T12:00:00Z",
+            "forecast_kind": "perfect_foresight",
+            "semantics": {
+              "pollutant_basis": "unresolved",
+              "interval_convention": "unresolved",
+              "emissions_factor_type": "average",
+              "slot_mapping_status": "provisional"
+            },
+            "quality_status": "unvalidated"
+          }
+        ],
+        "missing_carbon_slots": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "constraint_snapshot_id": "SNAP1",
+        "constraint_ids": [
+          "CON-CAP-01",
+          "CON-DL-J1",
+          "CON-DL-J3",
+          "CON-FRESH-01"
+        ]
+      },
+      "outputs": {
+        "X": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 5,
+            "state_version": 5,
+            "starts": [],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": null,
+          "raw_response": null
+        },
+        "Y": {
+          "output_status": "ok",
+          "plan": {
+            "schema_version": "1.0.0",
+            "record_type": "Plan",
+            "episode_id": "EP-HAND1",
+            "slot": 5,
+            "state_version": 5,
+            "starts": [],
+            "deferrals": [],
+            "abstentions": [],
+            "evidence_ids": [],
+            "status": "proposed"
+          },
+          "explanation": null,
+          "raw_response": null
+        }
+      }
+    }
+  ]
+}
