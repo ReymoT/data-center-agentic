@@ -1,3 +1,10 @@
+"""P01 shared energy and emissions calculations; savings are refused without matching work.
+
+Facility kWh = PUE x IT kW x hours and kg = kWh x g/kWh / 1000. PUE scales energy only;
+capacity stays an IT-power check elsewhere. Missing carbon leaves emissions as None, never 0.
+The pollutant basis (CO2 versus CO2e) is unresolved under Q05, so no label is implied here.
+"""
+
 import hashlib
 import json
 import math
@@ -25,7 +32,7 @@ __all__ = [
 
 _BlockReason = Literal[
     "missing_carbon",
-    "missing_evidence",
+    "zero_baseline",
     "completed_jobs_differ",
     "unfinished_work",
     "horizon_mismatch",
@@ -106,6 +113,13 @@ class Impact:
 
 @dataclass(frozen=True)
 class Savings:
+    """Baseline minus candidate site emissions for the same inputs, horizon and completed work.
+
+    A positive ``savings_kg`` means the candidate emits less; a negative value means it emits
+    more. ``of_baseline_job`` and ``of_baseline_site`` are fractions (0.112, not 11.2) of the
+    named baseline denominator.
+    """
+
     kind: Literal["savings"]
     baseline_schedule_id: str
     candidate_schedule_id: str
@@ -146,6 +160,11 @@ def calculate_impact(
     completed_job_ids: Iterable[str],
     carbon_g_per_kwh: Mapping[int, float],
 ) -> Impact:
+    """Return per-slot and total energy/emissions for one schedule over ``horizon``.
+
+    Only slots inside the horizon count. A completed job must run fully inside it. A placed
+    job that is not completed is leftover unless it already ended before the horizon began.
+    """
     schedule_id = _identifier(schedule_id, "schedule_id")
     input_id = _identifier(input_id, "input_id")
     if not isinstance(horizon, Horizon):
@@ -278,7 +297,11 @@ def calculate_impact(
         horizon=horizon,
         site=site,
         completed_job_ids=frozenset(completed),
-        leftover_job_ids=frozenset(starts) - completed,
+        leftover_job_ids=frozenset(
+            job_id
+            for job_id, start_slot in starts.items()
+            if job_id not in completed and start_slot + jobs[job_id][1] > horizon_start
+        ),
         slots=tuple(slot_rows),
         totals=totals,
     )
@@ -315,8 +338,8 @@ def compare(baseline: Impact, candidate: Impact) -> Comparison:
         return _blocked(
             baseline,
             candidate,
-            "missing_evidence",
-            "baseline job or site emissions are zero",
+            "zero_baseline",
+            "baseline job or site emissions are zero, so no fraction is defined",
         )
     savings_kg = site_kg - candidate_kg
     return Savings(

@@ -181,3 +181,99 @@ def test_display1_does_not_change_the_stored_total():
     display1(stored)
     assert asap.totals.site_emissions_kg == stored
     assert stored == pytest.approx(170.5, abs=0.01)
+
+
+def test_pue_1_2_scales_background_and_site():
+    asap = ledger("asap", {"J1": 0, "J2": 2}, pue=1.2)
+    assert asap.totals.background_energy_kwh == pytest.approx(1.2 * 40 * 7, abs=0.01)
+    assert asap.totals.background_emissions_kg == pytest.approx(1.2 * 116, abs=0.01)
+    assert asap.totals.site_emissions_kg == pytest.approx(1.2 * 170.5, abs=0.01)
+
+
+def test_half_hour_slots_halve_energy_and_emissions():
+    impact = calculate_impact(
+        "s",
+        "i",
+        HORIZON,
+        Site(40, 1, 0.5),
+        WORK,
+        (Placement("J1", 0), Placement("J2", 2)),
+        ("J1", "J2"),
+        CARBON,
+    )
+    assert impact.totals.job_energy_kwh == pytest.approx(70, abs=0.01)
+    assert impact.totals.job_emissions_kg == pytest.approx(54.5 / 2, abs=0.01)
+
+
+def test_worse_candidate_gives_negative_savings():
+    asap = ledger("asap", {"J1": 0, "J2": 2})
+    shifted = ledger("shifted", {"J1": 2, "J2": 4})
+    result = compare(shifted, asap)
+    assert isinstance(result, Savings)
+    assert result.savings_kg == pytest.approx(-6.1, abs=0.01)
+
+
+def test_zero_carbon_baseline_is_blocked_as_zero_baseline():
+    zero = {slot: 0 for slot in range(7)}
+    blocked = compare(
+        ledger("asap", {"J1": 0, "J2": 2}, carbon=zero),
+        ledger("shifted", {"J1": 2, "J2": 4}, carbon=zero),
+    )
+    assert isinstance(blocked, Blocked)
+    assert blocked.reason == "zero_baseline"
+
+
+def test_different_horizons_are_blocked():
+    asap = ledger("asap", {"J1": 0, "J2": 2})
+    shorter = calculate_impact(
+        "short",
+        "hand",
+        Horizon(0, 6),
+        Site(40, 1, 1),
+        WORK,
+        (Placement("J1", 2), Placement("J2", 4)),
+        ("J1", "J2"),
+        CARBON,
+    )
+    blocked = compare(asap, shorter)
+    assert isinstance(blocked, Blocked)
+    assert blocked.reason == "horizon_mismatch"
+
+
+def test_different_inputs_are_blocked():
+    asap = ledger("asap", {"J1": 0, "J2": 2})
+    other_carbon = dict(CARBON)
+    other_carbon[3] = 260
+    shifted = ledger("shifted", {"J1": 2, "J2": 4}, carbon=other_carbon)
+    blocked = compare(asap, shifted)
+    assert isinstance(blocked, Blocked)
+    assert blocked.reason == "inputs_differ"
+
+
+def test_job_ended_before_horizon_is_not_leftover():
+    impact = calculate_impact(
+        "s",
+        "i",
+        Horizon(2, 7),
+        Site(40, 1, 1),
+        WORK,
+        (Placement("J1", 0), Placement("J2", 2)),
+        ("J2",),
+        CARBON,
+    )
+    assert impact.leftover_job_ids == frozenset()
+    assert impact.totals.job_energy_kwh == pytest.approx(60, abs=0.01)
+
+
+@pytest.mark.parametrize(
+    ("placements", "completed"),
+    [
+        ((Placement("J1", 0), Placement("J1", 2)), ("J1",)),
+        ((Placement("J9", 0),), ()),
+        ((Placement("J1", 6),), ("J1",)),
+    ],
+    ids=["duplicate-start", "unknown-job", "completed-outside-horizon"],
+)
+def test_invalid_placements_raise(placements, completed):
+    with pytest.raises(ImpactError):
+        calculate_impact("s", "i", HORIZON, Site(40, 1, 1), WORK, placements, completed, CARBON)
