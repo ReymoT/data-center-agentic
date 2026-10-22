@@ -3,6 +3,8 @@
 Keep payloads, assertions and deadlines unchanged. The observer changes timing, so
 a passing run is not a timeout fix. Output contains lengths/hashes, not body text.
 Use a new output path for each run; previous evidence is never overwritten.
+An optional synthetic-server protocol experiment is not a production setting or
+acceptance run. Existing tests may still set their own explicit protocol cases.
 """
 
 import argparse
@@ -12,6 +14,7 @@ import socket
 import sys
 import threading
 import time
+from http.server import ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,7 +23,9 @@ sys.path.insert(0, str(ROOT))
 import pytest  # noqa: E402
 
 
-def diagnose(*, full_suite: bool, output: Path) -> int:
+def diagnose(*, full_suite: bool, output: Path, synthetic_protocol: str | None = None) -> int:
+    if synthetic_protocol not in {None, "HTTP/1.0", "HTTP/1.1"}:
+        raise ValueError("synthetic protocol must be HTTP/1.0 or HTTP/1.1")
     # Reserve the output before tests/monkeypatches; preserve earlier observations.
     with output.open("x", encoding="utf-8") as handle:
         events, streams = [], {}
@@ -89,6 +94,19 @@ def diagnose(*, full_suite: bool, output: Path) -> int:
                 current_test = item.nodeid
                 record("test")
 
+            @pytest.hookimpl(hookwrapper=True)
+            def pytest_fixture_setup(self, fixturedef, request):
+                outcome = yield
+                if (
+                    synthetic_protocol is not None
+                    and fixturedef.argname == "server"
+                    and outcome.excinfo is None
+                ):
+                    server = outcome.get_result()
+                    if isinstance(server, ThreadingHTTPServer):
+                        server.RequestHandlerClass.protocol_version = synthetic_protocol
+                        record("synthetic_server_protocol", protocol=synthetic_protocol)
+
         target = ROOT / "tests" if full_suite else ROOT / "tests/llm/test_ollama_provider.py"
         exit_code = None
         socket.socket.sendall = send
@@ -125,6 +143,7 @@ def diagnose(*, full_suite: bool, output: Path) -> int:
                         evidence_kind="synthetic_http_wire_observation_not_inference",
                         model_calls=0,
                         full_suite=full_suite,
+                        synthetic_protocol_override=synthetic_protocol,
                         pytest_exit_code=exit_code,
                         observer_changes_timing=True,
                         events=captured_events,
@@ -141,8 +160,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--full-suite", action="store_true")
     parser.add_argument("--out", required=True, type=Path)
+    parser.add_argument(
+        "--synthetic-protocol",
+        choices=["HTTP/1.0", "HTTP/1.1"],
+        help="Controlled test-server experiment only; no production protocol is changed.",
+    )
     args = parser.parse_args()
-    raise SystemExit(diagnose(full_suite=args.full_suite, output=args.out))
+    raise SystemExit(
+        diagnose(
+            full_suite=args.full_suite, output=args.out, synthetic_protocol=args.synthetic_protocol
+        )
+    )
 
 
 if __name__ == "__main__":

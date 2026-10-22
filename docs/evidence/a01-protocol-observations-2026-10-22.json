@@ -1,0 +1,57 @@
+{
+  "evidence_kind": "controlled_synthetic_protocol_observation_not_inference",
+  "observed_date": "2026-10-22",
+  "base_main": "2d78cfbfcdfa11eae48cf2f2b5167ece934ec24d",
+  "observer_sha256": "f348134eb7f3bed0142f42d05bf1d851c7325c6b47b34c8732a7b1f7f5edb33b",
+  "model_calls": 0,
+  "production_protocol_changed": false,
+  "original_response_bodies_assertions_deadlines_unchanged": true,
+  "instrumentation_changes_timing": true,
+  "root_cause_established": false,
+  "timeout_fixed": false,
+  "limitation": "One run per synthetic fixture protocol; explicit protocol test cases may override the initial fixture setting. Earlier failures remain evidence.",
+  "observations": [
+    {
+      "protocol": "HTTP/1.0",
+      "command": ".venv\\Scripts\\python.exe scripts/diagnose_provider_wire.py --synthetic-protocol HTTP/1.0 --out ../oct22-http10-diagnostic.json",
+      "pytest_exit_code": 0,
+      "passed": 47,
+      "raw_artifact_sha256": "742f02154073ef3506359d514e99314c0499cee3ed17e5fb35092b08995c9d40",
+      "deep_object_cases": [
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 24001,
+          "sent_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 24001,
+          "sent_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        }
+      ]
+    },
+    {
+      "protocol": "HTTP/1.1",
+      "command": ".venv\\Scripts\\python.exe scripts/diagnose_provider_wire.py --synthetic-protocol HTTP/1.1 --out ../oct22-http11-diagnostic.json",
+      "pytest_exit_code": 0,
+      "passed": 47,
+      "raw_artifact_sha256": "2d49a5140be8f06d7bd5c32a2c1d2e810416a4f75439828c43decbbf0e5dcd93",
+      "deep_object_cases": [
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+          "bytes": 24001,
+          "sent_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+          "bytes": 24001,
+          "sent_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+          "received_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        }
+      ]
+    }
+  ]
+}

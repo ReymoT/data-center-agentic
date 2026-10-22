@@ -1,6 +1,14 @@
 # Instruction deployment changelog
 
-Current deployment: 1.17 - 2026-10-21. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.18 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.18 - 2026-10-22
+
+- Matty requested P01 review/merge first, then all October22 recommendations. [Issue #37](https://github.com/ReymoT/data-center-agentic/issues/37) records stale Edison Q01-Q04/Q12 status before edits. All ten package headers and affected current records are synchronized.
+- Reviewed/merged P01 #35, preserving original commits. Five added cases exposed finite-ratio/large-display failures; bounded fixes retain existing API/units/error/rounding behavior. Exact PR/main CI986 tests/19 subtests passed before latest merged branch cleanup. [P01 issue #36](https://github.com/ReymoT/data-center-agentic/issues/36) retains separate receiving/S02 acceptance.
+- Recorded Edison's actual replies, Matty's Q04 recommendation and still-pending exact window, arrival optionB/Q08 and all other missing inputs. Edison allocation is confirmed; Reimo/Ved remain pending. October25 P02 is a future checkpoint, not a delivered policy or missed target.
+- Continued A01 diagnosis with explicitly labeled synthetic HTTP1.0/1.1 experiments. Their passing observations are not a timeout fix or production protocol change. No original payload/deadline/assertion or model/runtime setting changed. [Today's handoff](../handoffs/OCT22_ACTIONS.md) retains actual results and per-item limits.
+- Preserved all50 task rows/owners/dependencies, exact seven-file policies, F02/interfaces/requirements/prompts/settings and the newly merged P01 code/tests. No scientific rule, source permission, inference or integrated acceptance is invented.
 
 ## Deployment 1.17 - 2026-10-21
 

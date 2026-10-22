@@ -1,5 +1,7 @@
 # Team manager and repository review policy
 
+October22 Q12 intake: [Edison confirmed his existing allocations/contact duties](https://github.com/ReymoT/data-center-agentic/issues/21#issuecomment-6334579111). Matty/Nisha roles are already accepted; only Reimo/Ved allocation confirmations remain missing. No role, permission, task row or manager/merge rule changes. [Current actions](../handoffs/OCT22_ACTIONS.md).
+
 Decision ID: Q11, partial resolution.
 Status: accepted explicit human instruction.
 Authority: Matty Anderson, GitHub `MattyAnd`.
