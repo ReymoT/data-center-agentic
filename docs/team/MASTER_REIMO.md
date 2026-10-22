@@ -1,8 +1,8 @@
 # Master instructions — Reimo
 
-Current decision intake, October 21, 2026: [today's actions and evidence](../handoffs/OCT21_ACTIONS.md). Matty supports Nisha's option B to show a time-infeasible arrival for one decision, but the affected owners' agreement is still missing; current simulator/checker/evaluator behavior is unchanged. Current miss-on-arrival scoring interpretation has Nisha/Matty support, not a frozen protocol. Plain L01's zero-call guard and E01 replay are already merged. A01's partial-body timeout is reproduced with matched socket pairs and remains open. Runtime/tokenizer, Q01-Q04/Q08, Q10, source/freeze, allocation and course/release gates remain explicit. No shared format, setting, task owner or scientific rule changed.
+Current October 22 intake: [reviewed P01 and actions](../handoffs/OCT22_ACTIONS.md). Edison replied to Q01-Q04 and confirmed Q12; only Reimo/Ved allocation confirmations remain missing. Matty recommends whole-decision checked A for incomplete required fresh forecast coverage, with the exact window still awaiting affected-owner agreement. P01 arithmetic is reviewed/merged with five added cases; S02 calling convention/adoption and completed-work mapping remain open. Arrival option B, joint infeasibility/Q08, runtime/tokenizer/context, Q10 and source/freeze/course/release gates remain explicit. P02's checkpoint is October 25; it is not delivered by the P01 merge. A01 timeout has no proven fix. No shared format, setting or task owner changed.
 
-Version: 1.17 — 2026-10-21. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.18 — 2026-10-22. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 

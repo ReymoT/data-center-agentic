@@ -1,5 +1,7 @@
 # Test areas
 
+P01 now has27 metrics cases, including five Matty review cases in `tests/metrics/test_p01_review.py`. The F02 hand conversion is a labeled component check, not production S02 adoption. A01's optional `--synthetic-protocol HTTP/1.0` or `HTTP/1.1` observer mode is a controlled test-server experiment only; original tests/deadlines/assertions remain intact, and passing runs never establish a timeout fix.
+
 For A01's intermittent partial-body timeout, `python scripts/diagnose_provider_wire.py --full-suite --out <new-local-json-path>` observes the existing synthetic tests with matched socket endpoints and byte/hash evidence. It never contacts Ollama. Use a new path each time. Observation changes timing; passing runs are not a timeout fix. See [the dated handoff](../docs/handoffs/OCT21_ACTIONS.md) for the reproduced failure and passing observations. No payload, deadline or assertion is weakened.
 
 Directories reserve module-owner test locations. Ved's F02 contract tests and Reimo's D01 carbon-loader tests are now executable alongside the provider-mock helper tests. Matty owns `e2e/`, Ved owns `contracts/`, Nisha owns independent `evaluation/`, and other directories follow module ownership. Matty's fixed checker and Ollama transport now have executable tests; full scheduling/runtime integration remains pending.
