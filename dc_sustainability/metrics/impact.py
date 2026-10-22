@@ -10,7 +10,7 @@ import json
 import math
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_HALF_UP, Decimal, localcontext
 from typing import Literal
 
 __all__ = [
@@ -341,7 +341,9 @@ def compare(baseline: Impact, candidate: Impact) -> Comparison:
             "zero_baseline",
             "baseline job or site emissions are zero, so no fraction is defined",
         )
-    savings_kg = site_kg - candidate_kg
+    savings_kg = _produced(site_kg - candidate_kg, "savings")
+    job_fraction = _produced(savings_kg / job_kg, "baseline job savings fraction")
+    site_fraction = _produced(savings_kg / site_kg, "baseline site savings fraction")
     return Savings(
         kind="savings",
         baseline_schedule_id=baseline.schedule_id,
@@ -351,15 +353,20 @@ def compare(baseline: Impact, candidate: Impact) -> Comparison:
         horizon=baseline.horizon,
         completed_job_ids=baseline.completed_job_ids,
         savings_kg=savings_kg,
-        of_baseline_job=savings_kg / job_kg,
-        of_baseline_site=savings_kg / site_kg,
+        of_baseline_job=job_fraction,
+        of_baseline_site=site_fraction,
     )
 
 
 def display1(value: float) -> str:
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
         raise ImpactError("display value must be a finite number")
-    quantized = Decimal(str(value)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP)
+    number = Decimal(str(value))
+    # Quantize needs room for the integer digits, one decimal and a rounding carry.
+    # Raise precision only locally; reporting must not mutate caller arithmetic.
+    with localcontext() as context:
+        context.prec = max(context.prec, number.adjusted() + 3)
+        quantized = number.quantize(Decimal("0.1"), rounding=ROUND_HALF_UP)
     return format(quantized, "f")
 
 
