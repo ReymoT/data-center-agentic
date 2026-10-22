@@ -216,9 +216,10 @@ def calculate_impact(
     loads = {slot: [] for slot in range(horizon_start, horizon_end)}
     for job_id, start_slot in starts.items():
         power_kw, duration_slots = jobs[job_id]
-        for slot in range(start_slot, start_slot + duration_slots):
-            if horizon_start <= slot < horizon_end:
-                loads[slot].append(power_kw)
+        first = max(start_slot, horizon_start)
+        last = min(start_slot + duration_slots, horizon_end)
+        for slot in range(first, last):
+            loads[slot].append(power_kw)
 
     slot_rows: list[SlotImpact] = []
     job_parts: list[float] = []
@@ -228,7 +229,9 @@ def calculate_impact(
     carbon_gap = False
     for slot in range(horizon_start, horizon_end):
         job_load = math.fsum(loads[slot])
-        energy_kwh = pue * (job_load + background_kw) * slot_hours
+        energy_kwh = _produced(
+            pue * (job_load + background_kw) * slot_hours, f"energy at slot {slot}"
+        )
         grams = carbon.get(slot)
         if grams is None:
             emissions_kg = None
@@ -236,7 +239,7 @@ def calculate_impact(
             if job_load != 0.0:
                 job_gap = True
         else:
-            emissions_kg = energy_kwh * grams / 1000.0
+            emissions_kg = _produced(energy_kwh * grams / 1000.0, f"emissions at slot {slot}")
             job_parts.append(pue * job_load * slot_hours * grams / 1000.0)
             background_parts.append(pue * background_kw * slot_hours * grams / 1000.0)
             site_parts.append(emissions_kg)
@@ -250,15 +253,23 @@ def calculate_impact(
             )
         )
 
+    job_emissions_kg = None if job_gap else _produced(math.fsum(job_parts), "job emissions")
+    background_emissions_kg = (
+        None if carbon_gap else _produced(math.fsum(background_parts), "background emissions")
+    )
+    site_emissions_kg = None if carbon_gap else _produced(math.fsum(site_parts), "site emissions")
     totals = Totals(
-        job_energy_kwh=math.fsum(pue * row.job_load_kw * slot_hours for row in slot_rows),
-        background_energy_kwh=math.fsum(
-            pue * row.background_load_kw * slot_hours for row in slot_rows
+        job_energy_kwh=_produced(
+            math.fsum(pue * row.job_load_kw * slot_hours for row in slot_rows), "job energy"
         ),
-        site_energy_kwh=math.fsum(row.energy_kwh for row in slot_rows),
-        job_emissions_kg=None if job_gap else math.fsum(job_parts),
-        background_emissions_kg=None if carbon_gap else math.fsum(background_parts),
-        site_emissions_kg=None if carbon_gap else math.fsum(site_parts),
+        background_energy_kwh=_produced(
+            math.fsum(pue * row.background_load_kw * slot_hours for row in slot_rows),
+            "background energy",
+        ),
+        site_energy_kwh=_produced(math.fsum(row.energy_kwh for row in slot_rows), "site energy"),
+        job_emissions_kg=job_emissions_kg,
+        background_emissions_kg=background_emissions_kg,
+        site_emissions_kg=site_emissions_kg,
     )
     return Impact(
         schedule_id=schedule_id,
@@ -391,6 +402,12 @@ def _identifier(value: object, label: str) -> str:
 def _job_id(value: object, label: str) -> str:
     if not isinstance(value, str):
         raise ImpactError(f"{label} must be a string")
+    return value
+
+
+def _produced(value: float, label: str) -> float:
+    if not math.isfinite(value):
+        raise ImpactError(f"{label} is not finite")
     return value
 
 

@@ -49,7 +49,9 @@ def test_hand_check_at_pue_1():
     assert shifted.totals.job_energy_kwh == pytest.approx(140, abs=0.01)
     assert shifted.totals.job_emissions_kg == pytest.approx(shifted_job_kg, abs=0.01)
     assert shifted.totals.background_emissions_kg == pytest.approx(background_kg, abs=0.01)
-    assert shifted.totals.site_emissions_kg == pytest.approx(shifted_job_kg + background_kg, abs=0.01)
+    assert shifted.totals.site_emissions_kg == pytest.approx(
+        shifted_job_kg + background_kg, abs=0.01
+    )
     assert shifted_job_kg + background_kg == pytest.approx(164.4, abs=0.01)
     assert asap_job_kg + background_kg == pytest.approx(170.5, abs=0.01)
 
@@ -125,6 +127,51 @@ def test_bool_power_and_negative_carbon_raise():
     bad[4] = -400
     with pytest.raises(ImpactError):
         ledger("asap", {"J1": 0, "J2": 2}, carbon=bad)
+
+
+def test_overflowing_product_raises():
+    with pytest.raises(ImpactError):
+        calculate_impact(
+            "s",
+            "i",
+            Horizon(0, 1),
+            Site(0, 1e308, 1),
+            (Work("J", 1e308, 1),),
+            (Placement("J", 0),),
+            ("J",),
+            {0: 1.0},
+        )
+
+
+def test_placement_before_horizon_counts_only_the_overlap():
+    impact = calculate_impact(
+        "s",
+        "i",
+        Horizon(0, 2),
+        Site(0, 1, 1),
+        (Work("J", 10, 2),),
+        (Placement("J", -1),),
+        (),
+        {0: 1000.0, 1: 1000.0},
+    )
+    assert [row.job_load_kw for row in impact.slots] == [10.0, 0.0]
+    assert impact.totals.job_energy_kwh == pytest.approx(10, abs=0.01)
+    assert impact.leftover_job_ids == frozenset({"J"})
+
+
+def test_long_placement_counts_only_the_horizon():
+    impact = calculate_impact(
+        "s",
+        "i",
+        Horizon(0, 2),
+        Site(0, 1, 1),
+        (Work("J", 10, 4_000_000),),
+        (Placement("J", 0),),
+        (),
+        {0: 1.0, 1: 1.0},
+    )
+    assert impact.totals.job_energy_kwh == pytest.approx(20, abs=0.01)
+    assert impact.leftover_job_ids == frozenset({"J"})
 
 
 def test_display1_does_not_change_the_stored_total():
