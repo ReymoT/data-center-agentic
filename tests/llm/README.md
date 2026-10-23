@@ -10,6 +10,8 @@ The optional artifact-pinned research CLI and cross-client controls use explicit
 
 Current parser portability and body-content controls: [receiving handoff](../../docs/handoffs/OCT23_S02_RECEIVING_AND_FOLLOWUPS.md). The nested pin test retains its original8001-byte payload and pre-dispatch/no-attempt assertions; actual decoder failure may be RecursionError or an accepted outer list's AttributeError. Six deterministic branch cases check exact causes/request paths and no spent budget. Test-only decoder controls are not a macOS run. Production provider/transport are unchanged. Six same-length content observations completed without proving a timeout fix.
 
+A01 lifecycle investigation, October 23: [exact-wire and close controls](../../docs/handoffs/A01_WIRE_LIFECYCLE_2026-10-23.md). A native Go server now reproduces the same 641-byte missing tail outside both our provider and Python HTTP server. The matching native wait-for-client-close sample completed with identical HTTP bytes. All eight outcomes are retained; close timing is a diagnostic lead, not a proven cause or production fix. Original provider/tests, settings and instruction 1.23 are unchanged. No model call.
+
 ## Historical mocked-provider preparation
 
 Task: A01 mock preparation only. Owner: Matty Anderson (MattyAnd). Date: 2026-10-12.

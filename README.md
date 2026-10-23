@@ -23,6 +23,8 @@ Current update, October 23: [S02 receiving verification and approved follow-ups]
 
 A01 offline update, October 23: [transport controls and Python rendering research](docs/handoffs/A01_TWO_PARTS_2026-10-23.md). Independent Windows curl reproduced the partial-body timeout, so its cause is not confined to our adapter or Python HTTP reader. A pure-Python research renderer matches 17 real Go-template vectors; 56 golden/rejection tests run without Go or tokenizers in ordinary CI. Real pinned BPE measurements remain research, not runtime counts or an adopted counter. No live inference, dependency/pin change or timeout fix is claimed.
 
+A01 lifecycle investigation, October 23: [exact-wire and close controls](docs/handoffs/A01_WIRE_LIFECYCLE_2026-10-23.md). A native Go server now reproduces the same 641-byte missing tail outside both our provider and Python HTTP server. The matching native wait-for-client-close sample completed with identical HTTP bytes. All eight outcomes are retained; close timing is a diagnostic lead, not a proven cause or production fix. Original provider/tests, settings and instruction 1.23 are unchanged. No model call.
+
 ## Systems we reviewed and why we chose this architecture
 
 We reviewed AssetOps Knowledge Graph and AssetOpsBench, LC-Opt, Google DeepMind's data-center cooling system, and Schneider Electric's Resource Advisor Copilot. Our supplied system review compared their data, asset relationships, division of work between an LLM and deterministic software, testing, uncertainty, safety and approval controls.
