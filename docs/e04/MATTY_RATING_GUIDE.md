@@ -1,5 +1,7 @@
 # Matty's E05 pilot rating guide
 
+Submission update, October 22: Matty has now supplied his completed first-pass workfile. The [original and validation handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md) supersede the earlier pending-Matty state below. Do not edit that original during comparison. Nisha first preserves her own original; paired agreement and separate joint adjudication follow. E05 remains Verifying.
+
 Status: guidance and a blank personal workfile, not completed ratings. Matty asked for recommendations to review before filling his own ratings. These recommendations explain the draft rule; they do not assign labels to DEV01-DEV11. Nisha owns E04, Matty supplies his own second ratings, and Ved is the technical contact. Read [the draft extraction rule](EXTRACTION_RULE.md), [packet](RATER_PACKET.md) and [technical handoff](../handoffs/E04_DEVELOPMENT_CASES.md).
 
 ## Recommended approach
@@ -30,4 +32,4 @@ Fill labels, supporting IDs, restatement flags, added assertions, completeness a
 
 The technical review session already inspected the generator/categories; Nisha co-authored the pilot. Record each actual rater's exposure. AI-suggested labels for these same pilot cases would make the resulting pass AI-assisted, and a human approving them would not turn them into independent original ratings. If that assistance is wanted, label it as practice and arrange new unexposed material or an agreed alternative with Nisha/Ved before claiming E05 acceptance. No fresh blind packet or alternative protocol is invented here.
 
-Next checkpoint: Matty's own original ratings and Nisha's original ratings, followed by structural checks, extraction/label agreement and retained adjudication. Q10 and E04/E05 remain open; the rubric is not frozen.
+Next checkpoint: Nisha's original ratings retained before viewing Matty's submitted labels, followed by paired extraction/label agreement and retained separate adjudication. Q10 and E04/E05 remain open; the rubric is not frozen.

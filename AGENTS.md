@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current October22 follow-up: [Nisha replies and E04 handoff](docs/handoffs/OCT22_NISHA_FOLLOWUPS.md). Nisha confirmed replay/L01 adoption and supplied exact arrival/Q04 boundaries, counter conditions and E01 quantity/reference proposals. Matty answered; remaining affected-owner agreements stay pending. E04 PR #39 preparation is merged; original human ratings and rubric freeze remain outstanding. The eventual counter must not need a Go compiler at runtime; none is adopted. A01 diagnosis remains deferred. P02 checkpoint is October25; only Reimo/Ved Q12 confirmations remain missing. No shared format, setting or task owner changed.
+Current E05 update, October 22: [Matty's original ratings submitted](docs/handoffs/E05_MATTY_RATINGS_2026-10-22.md), [issue #42](https://github.com/ReymoT/data-center-agentic/issues/42). His first pass covers 11 pairs / 22 output units and passes structural validation, with the submitted bytes and judgments unchanged. E05 is Verifying: Nisha must retain her own original before viewing these labels, then lead paired comparison and separate adjudication. Remaining Q10/rubric and affected-owner agreements stay open. Prior dated intake notes remain historical. A01 diagnosis remains deferred; no shared format, setting or task owner changed.
 
 ## Instruction authority
 
