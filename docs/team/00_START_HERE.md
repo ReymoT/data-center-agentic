@@ -1,8 +1,8 @@
 # Team master instruction package
 
-Current A01 update, October 22: [resumed work and evidence](../handoffs/A01_RESUME_2026-10-22.md). Matty resumed A01; counter and nested pin-metadata failures now block explicitly before chat dispatch, with six added regression/consumer cases. The original partial-body timeout also reproduced in an independent raw-socket control; no root cause or timeout fix is claimed. The latest read-only inventory observes Ollama 0.40.9 against the accepted 0.40.5 pin. Counter/runtime/deployment agreement and actual validation remain gates. E05 first-pass ratings remain submitted, with paired review/adjudication pending. Shared formats, settings and task ownership are unchanged.
+Current update, October 23: [K02 review and decision intake](../handoffs/OCT23_K02_DECISION_INTAKE.md). K02 PR #45 is merged and Matty's six additional offline consumer cases pass. Ved's Q10/E01 replies and Nisha's strict basis, runtime conditions, instruction 1.21 adoption and October 24 rating checkpoint are received. Full A01/A02/A04, E01/E05 and freeze remain open; the local transport timeout persists. No schema, runtime pin, dependency or allocation changed. Earlier dated status paragraphs are historical where superseded.
 
-Version: 1.21 - 2026-10-22. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.22 — 2026-10-23. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 

@@ -1,0 +1,26 @@
+{
+  "pr45_already_merged": true,
+  "head": "c76283323ee50c04931870eabb4add2cbec6a24c",
+  "merged_main": "09069a4a2080ababf707ce300f4a81c234143eac",
+  "pr_ci": 39912970002,
+  "main_ci": 39914060592,
+  "exact_ci_success": true,
+  "existing_knowledge_plain_cases_passed": 54,
+  "new_consumer_cases_passed": 6,
+  "new_tests_initial_author_errors_corrected": true,
+  "full_local_suite": {
+    "passed": 1057,
+    "subtests_passed": 19,
+    "failed": 1,
+    "failure": "existing object-plain_llm deep JSON timeout"
+  },
+  "latest_head_ancestor_verified": true,
+  "remote_branch_deleted_with_exact_head_lease": true,
+  "model_calls": 0,
+  "full_k01_a02_or_l01_acceptance": false,
+  "local_full_suite_log_sha256": "e25be4242477ce031147ff782166bd5ca9fcaa675df2235d3a2182c98879e056",
+  "peer_observation_file": "a01-peers-2026-10-23.json",
+  "diagnostic_commands_ran_concurrently": true,
+  "counter_dependency_runtime_or_setting_adopted": false,
+  "timeout_fixed": false
+}

@@ -1,8 +1,8 @@
 # Matty's E05 pilot rating guide
 
-Submission update, October 22: Matty has now supplied his completed first-pass workfile. The [original and validation handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md) supersede the earlier pending-Matty state below. Do not edit that original during comparison. Nisha first preserves her own original; paired agreement and separate joint adjudication follow. E05 remains Verifying.
+Submission update, October 22: Matty has now supplied his completed first-pass workfile. The [original and validation handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md) supersede the earlier pending-Matty state below. Do not edit that original during comparison. Nisha first preserves her own original; paired agreement and separate joint adjudication follow. E05 remains Verifying. Nisha has acknowledged intake and targets October 24 for her original ratings; her receiving reply and Matty's acknowledgment are in issue #42.
 
-Status: guidance and a blank personal workfile, not completed ratings. Matty asked for recommendations to review before filling his own ratings. These recommendations explain the draft rule; they do not assign labels to DEV01-DEV11. Nisha owns E04, Matty supplies his own second ratings, and Ved is the technical contact. Read [the draft extraction rule](EXTRACTION_RULE.md), [packet](RATER_PACKET.md) and [technical handoff](../handoffs/E04_DEVELOPMENT_CASES.md).
+Historical preparation status before submission: guidance and a blank personal workfile, not completed ratings. Matty asked for recommendations to review before filling his own ratings. These recommendations explain the draft rule; they do not assign labels to DEV01-DEV11. Nisha owns E04, Matty supplies his own second ratings, and Ved is the technical contact. Read [the draft extraction rule](EXTRACTION_RULE.md), [packet](RATER_PACKET.md) and [technical handoff](../handoffs/E04_DEVELOPMENT_CASES.md).
 
 ## Recommended approach
 

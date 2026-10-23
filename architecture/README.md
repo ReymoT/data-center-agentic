@@ -1,6 +1,6 @@
 # Final scheduling architecture
 
-The current diagram replaces the obsolete engineering image. Its flow describes the planned final-proposal scheduling study. The footer records implemented components: F02 records, D01-D03/D06 tooling, S01 transitions, P01 arithmetic pending S02 adoption, L01 no-op preparation, E01 replay/E04 draft review preparation and A01/A03 core. Retrieval, policies beyond P01, execution gate, agent and full pipeline remain planned; component boxes and synthetic review cases are not integrated execution or research-result evidence.
+The current diagram replaces the obsolete engineering image. Its flow describes the planned final-proposal scheduling study. The footer records implemented components: F02 records, D01-D03/D06 tooling, S01 transitions, K02 controlled retrieval with the existing F02 Context, P01 arithmetic pending S02 adoption, L01 no-op preparation, E01 replay/E04 draft review preparation and A01/A03 core. K02 has bounded Matty consumer evidence, while policies beyond P01, execution gate, agent and full pipeline remain planned; component boxes and synthetic review cases are not integrated execution or research-result evidence.
 
 The diagram starts with the exact research question. The main comparison is the ontology-grounded, tool-verified agent versus the plain LLM. Four additional policies provide scheduling reference results. Workload scheduling is the experimental setting, and conclusions remain limited to the evaluated scenarios.
 

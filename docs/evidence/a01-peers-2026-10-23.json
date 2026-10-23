@@ -1,0 +1,78 @@
+{
+  "evidence_kind": "independent_synthetic_http_peer_control_not_inference",
+  "body_bytes": 24001,
+  "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+  "source_sha256": "a83987683934447642f6cfa63430f123b2775f37e241e4fbab65a8ba3642dd26",
+  "model_calls": 0,
+  "one_observation_per_condition": true,
+  "acceptance_or_root_cause_proof": false,
+  "observations": [
+    {
+      "client": "raw_socket",
+      "server_close": "immediate",
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server_events": [
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ]
+    },
+    {
+      "client": "http_client_read1",
+      "server_close": "immediate",
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": null,
+      "seconds": 0.014999999999417923,
+      "server_events": [
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ]
+    },
+    {
+      "client": "raw_socket",
+      "server_close": "drain",
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server_events": [
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        },
+        {
+          "event": "peer_eof"
+        }
+      ]
+    },
+    {
+      "client": "http_client_read1",
+      "server_close": "drain",
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "error": "timed out",
+      "seconds": 10.014999999999418,
+      "server_events": [
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        },
+        {
+          "event": "drain_error",
+          "error": "timed out"
+        }
+      ]
+    }
+  ]
+}
