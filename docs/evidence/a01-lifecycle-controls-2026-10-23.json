@@ -1,0 +1,603 @@
+{
+  "evidence_kind": "fixed_synthetic_write_close_and_exact_wire_controls",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "model_calls": 0,
+  "body_bytes": 24001,
+  "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+  "source_sha256_lf": "97c57e7d946182ead28075841149a9bcbd0750d6cc7a1a2612cf22dcf0a82f30",
+  "provider_source_sha256_lf": "131b09abdd292fa1210214d7902132d8953bb347a78093d8d1d6062d42d36fa3",
+  "fixture_source_sha256_lf": "e24ae0ef414e73d556ecc38f30c86f1716d87d8e83960e627edd03f8ba9e2c54",
+  "native_source_sha256_lf": "cb351b3640dc0c8b931edb0b9ccd842c023277686d3b37a991816947b7b16a23",
+  "native_binary_sha256": "9da6922454754f7e2ce1bc98c483c03910892d3ff11e4f3e7a169fedd324f1c5",
+  "single_observation_per_condition": true,
+  "original_deadlines_and_production_transport_unchanged": true,
+  "limits": "Instrumentation itself affects timing; Python Date headers may differ between observations. Native controls replay the exact first captured wire, but change process/server implementation. Controlled close modes are not production proposals. Successful samples cannot erase failures or prove reliability.",
+  "observations": [
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": "invalid response: maximum recursion depth exceeded while decoding a JSON object from a unicode string",
+      "uncertain_outcome": false,
+      "http_status": 200,
+      "attempts": 1,
+      "seconds": 0.015999999988707714,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "shared_provider",
+      "close_mode": "original_close",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+      "events": [
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "post_start",
+          "seconds": 0.015999999988707714,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.015999999988707714,
+          "bytes": 116,
+          "sha256": "35a42934fefb3a756337ef1edb1468b1f14958c6571db0587bbd3093bb8def51"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.015999999988707714,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.015999999988707714,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.015999999988707714,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "client_returned",
+          "seconds": 0.015999999988707714
+        }
+      ]
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "f5136b1892e4a151aeb249a288e7a550081207311f60e55fed3318fb0d550c77",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.0
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.01600000000326,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+      "events": [
+        {
+          "event": "post_start",
+          "seconds": 0.0,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.0,
+          "bytes": 116,
+          "sha256": "35a42934fefb3a756337ef1edb1468b1f14958c6571db0587bbd3093bb8def51"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.0,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.0,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.0,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "client_returned",
+          "seconds": 10.01600000000326
+        }
+      ]
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": "invalid response: maximum recursion depth exceeded while decoding a JSON object from a unicode string",
+      "uncertain_outcome": false,
+      "http_status": 200,
+      "attempts": 1,
+      "seconds": 0.062000000005355105,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "shared_provider",
+      "close_mode": "wait_for_client",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "events": [
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.031000000002677552
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.031000000002677552
+        },
+        {
+          "event": "post_start",
+          "seconds": 0.031000000002677552,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.031000000002677552,
+          "bytes": 116,
+          "sha256": "dfc35e9369adc73897364de721b139cd6f460efe8629651b4aa2136a6e5cfb8b"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.031000000002677552,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.031000000002677552,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.031000000002677552,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.031000000002677552
+        },
+        {
+          "event": "client_returned",
+          "seconds": 0.062000000005355105
+        },
+        {
+          "event": "client_close_observed",
+          "seconds": 0.062000000005355105,
+          "eof": true,
+          "extra_bytes": 0
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.062000000005355105
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.062000000005355105
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.062000000005355105
+        }
+      ]
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.015999999988707714
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.015999999988707714
+        }
+      ],
+      "error": null,
+      "seconds": 0.015999999988707714,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "events": [
+        {
+          "event": "post_start",
+          "seconds": 0.015999999988707714,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.015999999988707714,
+          "bytes": 116,
+          "sha256": "dfc35e9369adc73897364de721b139cd6f460efe8629651b4aa2136a6e5cfb8b"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.015999999988707714,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.015999999988707714,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.015999999988707714,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "client_returned",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "client_close_observed",
+          "seconds": 0.015999999988707714,
+          "eof": true,
+          "extra_bytes": 0
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.015999999988707714
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.015999999988707714
+        }
+      ]
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "error": "invalid response: maximum recursion depth exceeded while decoding a JSON object from a unicode string",
+      "uncertain_outcome": false,
+      "http_status": 200,
+      "attempts": 1,
+      "seconds": 0.01600000000325963,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "shared_provider",
+      "close_mode": "half_close_then_wait",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "events": [
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.0
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.0
+        },
+        {
+          "event": "post_start",
+          "seconds": 0.01600000000325963,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.01600000000325963,
+          "bytes": 116,
+          "sha256": "dfc35e9369adc73897364de721b139cd6f460efe8629651b4aa2136a6e5cfb8b"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.01600000000325963,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.01600000000325963,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.01600000000325963,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.01600000000325963
+        },
+        {
+          "event": "server_write_half_closed",
+          "seconds": 0.01600000000325963
+        },
+        {
+          "event": "client_returned",
+          "seconds": 0.01600000000325963
+        },
+        {
+          "event": "client_close_observed",
+          "seconds": 0.01600000000325963,
+          "eof": true,
+          "extra_bytes": 0
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.01600000000325963
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.01600000000325963
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.01600000000325963
+        }
+      ]
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.014999999999417923
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.014999999999417923
+        }
+      ],
+      "error": null,
+      "seconds": 0.014999999999417923,
+      "server_post_shutdown_observed": true,
+      "server": "original_python_fixture",
+      "client": "raw_socket",
+      "close_mode": "half_close_then_wait",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "sent_wire_bytes": 24117,
+      "sent_wire_sha256": "d68a5422cdabffc36dd948a82f4c0ed319ca270ead157f9b8bc5185a77dc6b5e",
+      "events": [
+        {
+          "event": "post_start",
+          "seconds": 0.014999999999417923,
+          "tcp_nodelay": 0,
+          "send_buffer": 65536
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.014999999999417923,
+          "bytes": 116,
+          "sha256": "dfc35e9369adc73897364de721b139cd6f460efe8629651b4aa2136a6e5cfb8b"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.014999999999417923,
+          "bytes": 116
+        },
+        {
+          "event": "write_start",
+          "seconds": 0.014999999999417923,
+          "bytes": 24001,
+          "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+        },
+        {
+          "event": "write_returned",
+          "seconds": 0.014999999999417923,
+          "bytes": 24001
+        },
+        {
+          "event": "post_returned",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "server_write_half_closed",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "client_returned",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "client_close_observed",
+          "seconds": 0.014999999999417923,
+          "eof": true,
+          "extra_bytes": 0
+        },
+        {
+          "event": "post_handler_exit",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "server_shutdown_start",
+          "seconds": 0.014999999999417923
+        },
+        {
+          "event": "server_shutdown_returned",
+          "seconds": 0.014999999999417923
+        }
+      ]
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "f5136b1892e4a151aeb249a288e7a550081207311f60e55fed3318fb0d550c77",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.014999999999417923
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.014999999999417923
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.014999999999418,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      }
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 14600,
+          "seconds": 0.01600000000325963
+        },
+        {
+          "bytes": 9401,
+          "seconds": 0.01600000000325963
+        }
+      ],
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "4a612b38ac219e280df4623a050e9339976abfae0e74437cd8a70119e4e842fb",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      }
+    }
+  ]
+}
