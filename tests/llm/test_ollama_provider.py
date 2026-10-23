@@ -14,6 +14,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import pytest
 
 from dc_sustainability import schemas as s
+from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.llm.provider import CallBlocked, Deployment, OllamaProvider
 from tests.contracts import fixtures as f
 
@@ -358,6 +359,60 @@ def test_invalid_or_excessive_context_count_blocks_before_dispatch(server, count
     with pytest.raises(CallBlocked, match="context"):
         generate(client)
     assert not client.attempts and not server.requests
+
+
+@pytest.mark.parametrize("error", [ValueError, RuntimeError, RecursionError])
+def test_counter_failure_is_an_explicit_predispatch_block(server, monkeypatch, error):
+    def broken_counter(request):
+        raise error("synthetic counter failure")
+
+    client = OllamaProvider(deployment(server), count_prompt_tokens=broken_counter)
+
+    def no_network(*args):
+        pytest.fail("a failed counter must block before any HTTP operation")
+
+    monkeypatch.setattr(client, "_http", no_network)
+    with pytest.raises(CallBlocked, match="prompt token counting failed") as caught:
+        generate(client)
+    assert isinstance(caught.value.__cause__, error)
+    assert not client.attempts and not server.requests
+
+
+@pytest.mark.parametrize("path", ["/api/version", "/api/tags"])
+def test_nested_pin_response_is_an_explicit_predispatch_block(server, monkeypatch, path):
+    # Separate metadata test; original chat deep-JSON payloads/deadlines stay unchanged.
+    raw = b"[" * 4000 + b"0" + b"]" * 4000
+    original = server.RequestHandlerClass.do_GET
+
+    def respond(handler):
+        if handler.path == path:
+            handler.respond(raw)
+        else:
+            original(handler)
+
+    monkeypatch.setattr(server.RequestHandlerClass, "do_GET", respond)
+    client = provider(server)
+    with pytest.raises(CallBlocked, match="pre-dispatch verification failed") as caught:
+        generate(client)
+    assert isinstance(caught.value.__cause__, RecursionError)
+    assert not client.attempts and not server.requests
+
+
+def test_plain_consumer_keeps_counter_failure_and_does_not_retry(server, monkeypatch):
+    def broken_counter(request):
+        raise RuntimeError("synthetic unavailable tokenizer")
+
+    client = OllamaProvider(deployment(server), count_prompt_tokens=broken_counter)
+    monkeypatch.setattr(client, "_http", lambda *args: pytest.fail("must not use HTTP"))
+    policy = PlainLLMPolicy(client)
+    state = f.visible_state()
+    context = s.Context.build(state, f.snapshot(), "flat")
+    result = policy.propose(state, context, seed=7, decision_deadline=time.monotonic() + 3)
+    assert result.output.output_status == "error" and result.attempt is None
+    assert "prompt token counting failed" in result.blocked_reason
+    assert not client.attempts and not server.requests
+    with pytest.raises(CallBlocked, match="already used its one request"):
+        policy.propose(state, context, seed=7, decision_deadline=time.monotonic() + 3)
 
 
 @pytest.mark.parametrize(

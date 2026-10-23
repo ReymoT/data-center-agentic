@@ -1,6 +1,14 @@
 # Instruction deployment changelog
 
-Current deployment: 1.20 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.21 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.21 - 2026-10-22
+
+- Matty explicitly resumed A01, superseding the earlier diagnosis deferral. [Issue #6](https://github.com/ReymoT/data-center-agentic/issues/6) and [the handoff](../handoffs/A01_RESUME_2026-10-22.md) record scope and actual evidence.
+- Five new tests first reproduced raw counter and nested pin-metadata exceptions escaping the pre-dispatch boundary. Typed blocking now preserves consumer failure records without a chat attempt/retry; a sixth test validates the actual PlainLLMPolicy receiving path.
+- Added a reproducible synthetic-only independent peer control. An earlier raw-socket case also timed out at 23,360/24,001 bytes, outside the provider reader; later full transfers do not establish reliability or root cause. No timeout fix, production socket setting or test weakening is claimed.
+- Fresh metadata records 0.40.9; the accepted 0.40.5 pin remains unchanged. Corrected the earlier parameter-text hash comparison against 0.40.5, retaining both original inventories and making no semantic-equivalence claim. Both-system revalidation is a proposal only.
+- Preserve all original provider test functions/HTTP reader, all 50 task rows/exact policies, F02/interfaces/locks/prompts/settings, E05 originals and teammate code. Runtime/dependency/counter/context/probe gates remain open; no model calls or scientific decision change.
 
 ## Deployment 1.20 - 2026-10-22
 
@@ -14,15 +22,15 @@ Current deployment: 1.20 - 2026-10-22. The original source archive remains packa
 - Matty reviewed and authorized all seven latest recommendations. [Issue #40](https://github.com/ReymoT/data-center-agentic/issues/40) records stale receiving-adoption/reply/E04/course guidance before edits. [The handoff](../handoffs/OCT22_NISHA_FOLLOWUPS.md) records the actual replies and per-item limits.
 - Record Nisha's received E01/L01 adoption, exact conditional arrival/Q04 boundaries, counter conditions, E01 proposals and unpublished-rubric update. Matty's positions are posted; missing affected-owner agreement is not invented. An adopted counter must not need a Go compiler at runtime, but no production counter/dependency/pin is adopted. A01 diagnosis remains deferred.
 - Record reviewed E04 PR39, preserved synthetic assets and exact PR/main CI1016 tests/19 subtests. Prepare a rating guide and a blank personal workfile outside Git; no original human ratings or final rubric are fabricated. Matty requested guidance before providing his judgments; same-case AI-suggested answers cannot count as independent originals.
-- Preserve all50 task rows/owners/dependencies, exact seven-file policies, canonical F02/interfaces, existing teammate code/tests, requirements/configs/prompts and historical handoffs. Only architecture drawing status text changes in code; no protocol, inference, source right or integrated acceptance is selected.
+- Preserve all 50 task rows/owners/dependencies, exact seven-file policies, canonical F02/interfaces, existing teammate code/tests, requirements/configs/prompts and historical handoffs. Only architecture drawing status text changes in code; no protocol, inference, source right or integrated acceptance is selected.
 
 ## Deployment 1.18 - 2026-10-22
 
-- Matty requested P01 review/merge first, then all October22 recommendations. [Issue #37](https://github.com/ReymoT/data-center-agentic/issues/37) records stale Edison Q01-Q04/Q12 status before edits. All ten package headers and affected current records are synchronized.
+- Matty requested P01 review/merge first, then all October 22 recommendations. [Issue #37](https://github.com/ReymoT/data-center-agentic/issues/37) records stale Edison Q01-Q04/Q12 status before edits. All ten package headers and affected current records are synchronized.
 - Reviewed/merged P01 #35, preserving original commits. Five added cases exposed finite-ratio/large-display failures; bounded fixes retain existing API/units/error/rounding behavior. Exact PR/main CI986 tests/19 subtests passed before latest merged branch cleanup. [P01 issue #36](https://github.com/ReymoT/data-center-agentic/issues/36) retains separate receiving/S02 acceptance.
 - Recorded Edison's actual replies, Matty's Q04 recommendation and still-pending exact window, arrival optionB/Q08 and all other missing inputs. Edison allocation is confirmed; Reimo/Ved remain pending. October25 P02 is a future checkpoint, not a delivered policy or missed target.
 - Continued A01 diagnosis with explicitly labeled synthetic HTTP1.0/1.1 experiments. Their passing observations are not a timeout fix or production protocol change. No original payload/deadline/assertion or model/runtime setting changed. [Today's handoff](../handoffs/OCT22_ACTIONS.md) retains actual results and per-item limits.
-- Preserved all50 task rows/owners/dependencies, exact seven-file policies, F02/interfaces/requirements/prompts/settings and the newly merged P01 code/tests. No scientific rule, source permission, inference or integrated acceptance is invented.
+- Preserved all 50 task rows/owners/dependencies, exact seven-file policies, F02/interfaces/requirements/prompts/settings and the newly merged P01 code/tests. No scientific rule, source permission, inference or integrated acceptance is invented.
 
 ## Deployment 1.17 - 2026-10-21
 

@@ -1,0 +1,210 @@
+{
+  "evidence_kind": "a01_resume_error_boundaries_and_independent_peer_observations_not_inference",
+  "observed_date": "2026-10-22",
+  "base_main": "e9a6e6369663c47afcd3dcf79ab108960ebfebb9",
+  "baseline_provider_suite": {
+    "passed": 46,
+    "failed": 1,
+    "failure": "test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+    "error": "timed out",
+    "log_sha256": "58b0fefd10405188b34d695f1ab01b349de501f7fe67d91aba0b275ad79dbfaa"
+  },
+  "new_regressions": {
+    "initially_failed": 5,
+    "after_fix_passed": 6,
+    "includes_actual_plain_consumer": true
+  },
+  "ordinary_full_suite_after_fixes": {
+    "passed": 1022,
+    "subtests_passed": 19,
+    "seconds": 7.38,
+    "log_sha256": "1ba071a7106036167445779b9350068f7b97ec7be74156bf1de09ce79c3ed25e"
+  },
+  "original_provider_http_method_ast_unchanged": true,
+  "all_original_provider_test_functions_ast_unchanged": true,
+  "independent_control_first_observation": {
+    "evidence_kind": "independent_synthetic_http_peer_control_not_inference",
+    "body_bytes": 24001,
+    "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+    "source_sha256": "fa57390374750c06ca75d38eca4b8c4f5aa448f602b352c26d0fb8f518ba3eb0",
+    "model_calls": 0,
+    "one_observation_per_condition": true,
+    "acceptance_or_root_cause_proof": false,
+    "observations": [
+      {
+        "client": "raw_socket",
+        "server_close": "immediate",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.014999999999417923,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          }
+        ]
+      },
+      {
+        "client": "http_client_read1",
+        "server_close": "immediate",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.01600000000325963,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          }
+        ]
+      },
+      {
+        "client": "raw_socket",
+        "server_close": "drain",
+        "response_bytes": 23360,
+        "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+        "body_matches": false,
+        "error": "timed out",
+        "seconds": 10.015999999999622,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          },
+          {
+            "event": "drain_error",
+            "error": "timed out"
+          }
+        ]
+      },
+      {
+        "client": "http_client_read1",
+        "server_close": "drain",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.014999999999417923,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          },
+          {
+            "event": "peer_eof"
+          }
+        ]
+      }
+    ]
+  },
+  "portable_observer_validation": {
+    "evidence_kind": "independent_synthetic_http_peer_control_not_inference",
+    "body_bytes": 24001,
+    "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+    "source_sha256": "a83987683934447642f6cfa63430f123b2775f37e241e4fbab65a8ba3642dd26",
+    "model_calls": 0,
+    "one_observation_per_condition": true,
+    "acceptance_or_root_cause_proof": false,
+    "observations": [
+      {
+        "client": "raw_socket",
+        "server_close": "immediate",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.01599999999962165,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          }
+        ]
+      },
+      {
+        "client": "http_client_read1",
+        "server_close": "immediate",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.014999999999417923,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          }
+        ]
+      },
+      {
+        "client": "raw_socket",
+        "server_close": "drain",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.01599999999962165,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          },
+          {
+            "event": "peer_eof"
+          }
+        ]
+      },
+      {
+        "client": "http_client_read1",
+        "server_close": "drain",
+        "response_bytes": 24001,
+        "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+        "body_matches": true,
+        "error": null,
+        "seconds": 0.01599999999962165,
+        "server_events": [
+          {
+            "event": "write_returned",
+            "bytes": 24001
+          },
+          {
+            "event": "drain_error",
+            "error": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+          }
+        ]
+      }
+    ]
+  },
+  "observer_function_ast_sha256": "46feeda7e215073a5752774c027ab689a6548b77a0a261a32aa78152ddf9d401",
+  "observer_functions_ast_equal": true,
+  "observer_portability_changes": "ROOT resolves repository from scripts directory; import ordering/noqa and formatting only. observe/main function ASTs are unchanged. Both observations were single samples per condition; timing is not neutral.",
+  "interpretation": "The earlier independent raw-socket reader also timed out at23360/24001 bytes, bypassing OllamaProvider._http and HTTPResponse.read1. This demonstrates the symptom is not confined to the provider reader. Later complete transfers do not cancel the failure. No exact OS/driver/security-product cause, reliability claim or timeout fix is established.",
+  "model_calls": 0,
+  "shared_dependency_runtime_or_service_changes": false,
+  "timeout_fixed": false,
+  "root_cause_established": false,
+  "fresh_metadata_only_inventory": {
+    "runtime_version": "0.40.9",
+    "agreed_runtime_version": "0.40.5",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "d6b2700710ae824c6690a7b47383ea3836790cb59d52dc3018ad7b5530faf124",
+    "changed_from_oct20_comparison_fields": [
+      "runtime_version"
+    ],
+    "accepted_runtime_comparison_blocks": true,
+    "inventory_file": "ollama-qwen3-8b-2026-10-22.json",
+    "offline_preparation_file": "q09-probe-preparation-2026-10-22.json",
+    "same_request_hashes_as_oct20": true,
+    "model_calls": 0,
+    "new_runtime_or_counter_adopted": false,
+    "changed_from_accepted_oct18_comparison_fields": [
+      "runtime_version",
+      "parameters_sha256"
+    ],
+    "previous_hash_claim_corrected": "Q09/setup previously claimed parameter-text hash matched0.40.5; original records show it differs. No semantic parameter equivalence or model-blob change inferred."
+  }
+}

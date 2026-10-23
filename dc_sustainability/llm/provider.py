@@ -264,7 +264,15 @@ class OllamaProvider:
                 "num_predict": 1536,
             },
         }
-        count = self._count_prompt_tokens(json.loads(json.dumps(payload)))
+        try:
+            count = self._count_prompt_tokens(json.loads(json.dumps(payload)))
+        except CallBlocked:
+            raise
+        except Exception as exc:
+            # The injected counter is a pre-dispatch boundary. Consumers retain
+            # CallBlocked as a failed decision; no HTTP/chat attempt has been spent.
+            # Process interrupts (BaseException) still propagate normally.
+            raise CallBlocked(f"prompt token counting failed: {exc}") from exc
         if type(count) is not int or count <= 0 or count > self.deployment.max_prompt_tokens:
             raise CallBlocked("prompt exceeds validated context budget or token count is invalid")
         request_json = json.dumps(payload, allow_nan=False, separators=(",", ":"))
@@ -280,7 +288,14 @@ class OllamaProvider:
             try:
                 self._verify_pins(deadline)
                 _remaining(deadline)
-            except (_TransportError, TimeoutError, ValueError, TypeError, AttributeError) as exc:
+            except (
+                _TransportError,
+                TimeoutError,
+                ValueError,
+                TypeError,
+                AttributeError,
+                RecursionError,
+            ) as exc:
                 raise CallBlocked(f"pre-dispatch verification failed: {exc}") from exc
             self._counts[key] = self._counts.get(key, 0) + 1  # reserve before sending
             started = time.perf_counter()

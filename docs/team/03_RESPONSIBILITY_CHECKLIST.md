@@ -1,10 +1,12 @@
 # Shared responsibility and coverage checklist
 
+Current A01 resume: [issue #6](https://github.com/ReymoT/data-center-agentic/issues/6) and [the handoff](../handoffs/A01_RESUME_2026-10-22.md). Matty resumed work, implemented explicit pre-dispatch failure handling and preserved the unresolved transport/deployment gates. No task row or acceptance checkbox changes; earlier deferral notes are historical.
+
 Current E05 first pass: [issue #42](https://github.com/ReymoT/data-center-agentic/issues/42) and [the original-rating handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md). Matty's 22-output submission is retained unchanged and structurally valid. E05 is Verifying pending Nisha's original, paired agreement and joint adjudication; its task checkbox remains unchanged. Earlier dated preparation notes describe the prior state.
 
 Current follow-up: [F04/F05 #40](https://github.com/ReymoT/data-center-agentic/issues/40) and [the handoff](../handoffs/OCT22_NISHA_FOLLOWUPS.md) record received Nisha replies and merged E04 preparation. E05 personal ratings are now available to begin using [the guide](../e04/MATTY_RATING_GUIDE.md); no original human rating or final freeze is claimed. A01 diagnosis is deferred. All50 rows below are preserved.
 
-Version: 1.20 — 2026-10-22. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
+Version: 1.21 — 2026-10-22. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
 
 Use the published main checklist. Teammates and their AI assistants must not change or replace this shared instruction file without Matty's explicit authorization; propose corrections in an Issue.
 
