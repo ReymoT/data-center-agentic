@@ -1,6 +1,6 @@
 # Shared interface contract location
 
-Version: 1.20 - 2026-10-22. Contract owner: Ved.
+Version: 1.21 - 2026-10-22. Contract owner: Ved.
 
 Read [implemented F02 records](../INTERFACES.md), contract 1.0.0, with their examples and tests.
 The earlier draft has been superseded; actual consumer adoption remains pending.

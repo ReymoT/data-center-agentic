@@ -1,6 +1,8 @@
 # Local Qwen model setup
 
-Current update, October 20, 2026: [Nisha/Ved/Matty agreed development setup](decisions/Q09_DEPLOYMENT_OCT20.md), including Ollama 0.40.5, digest, seeds and projections. The [new read-only inventory](evidence/ollama-qwen3-8b-2026-10-20.json) instead observes 0.40.6 with unchanged model/template/parameter hashes. Comparison to the 0.40.5 record is expected to fail. Do not overwrite history or silently accept drift. Counter/context validation and bounded run authorization remain required; no model calls. The dated entries below retain earlier setup evidence.
+Latest October 22 metadata-only check: [installed 0.40.9 inventory](evidence/ollama-qwen3-8b-2026-10-22.json) matches October 20/0.40.6 model/template/parameter hashes. Runtime and parameter-text differ from the dated accepted 0.40.5 inventory, so the inventory comparison still rejects drift. No runtime, model or service setting changed and no model call ran. [A01 resume](handoffs/A01_RESUME_2026-10-22.md) records the proposed both-system revalidation and still-blocked offline probe; 0.40.5 is not silently replaced.
+
+Current update, October 20, 2026: [Nisha/Ved/Matty agreed development setup](decisions/Q09_DEPLOYMENT_OCT20.md), including Ollama 0.40.5, digest, seeds and projections. The [new read-only inventory](evidence/ollama-qwen3-8b-2026-10-20.json) instead observes 0.40.6; model/template hashes match October 18, while rendered parameter-text hash differs. Comparison to the 0.40.5 record is expected to fail. Do not overwrite history or silently accept drift. Counter/context validation and bounded run authorization remain required; no model calls. The dated entries below retain earlier setup evidence.
 
 Matty completed this independent A01/F03 setup on 2026-10-12, following the accepted
 [Q09 direction](decisions/Q09_OLLAMA_QWEN3.md). Installation and identity checks are

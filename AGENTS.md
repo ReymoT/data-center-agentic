@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current E05 update, October 22: [Matty's original ratings submitted](docs/handoffs/E05_MATTY_RATINGS_2026-10-22.md), [issue #42](https://github.com/ReymoT/data-center-agentic/issues/42). His first pass covers 11 pairs / 22 output units and passes structural validation, with the submitted bytes and judgments unchanged. E05 is Verifying: Nisha must retain her own original before viewing these labels, then lead paired comparison and separate adjudication. Remaining Q10/rubric and affected-owner agreements stay open. Prior dated intake notes remain historical. A01 diagnosis remains deferred; no shared format, setting or task owner changed.
+Current A01 update, October 22: [resumed work and evidence](docs/handoffs/A01_RESUME_2026-10-22.md). Matty resumed A01; counter and nested pin-metadata failures now block explicitly before chat dispatch, with six added regression/consumer cases. The original partial-body timeout also reproduced in an independent raw-socket control; no root cause or timeout fix is claimed. The latest read-only inventory observes Ollama 0.40.9 against the accepted 0.40.5 pin. Counter/runtime/deployment agreement and actual validation remain gates. E05 first-pass ratings remain submitted, with paired review/adjudication pending. Shared formats, settings and task ownership are unchanged.
 
 ## Instruction authority
 
