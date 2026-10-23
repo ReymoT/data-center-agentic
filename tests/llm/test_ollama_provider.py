@@ -394,7 +394,10 @@ def test_nested_pin_response_is_an_explicit_predispatch_block(server, monkeypatc
     client = provider(server)
     with pytest.raises(CallBlocked, match="pre-dispatch verification failed") as caught:
         generate(client)
-    assert isinstance(caught.value.__cause__, RecursionError)
+    # CPython/platform stack limits differ. If decoding accepts this nesting,
+    # its outer list is still invalid pin metadata and .get raises AttributeError.
+    # Either actual cause must be retained under the same pre-dispatch block.
+    assert isinstance(caught.value.__cause__, (RecursionError, AttributeError))
     assert not client.attempts and not server.requests
 
 

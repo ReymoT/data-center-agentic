@@ -1,0 +1,21 @@
+{
+  "environment": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "actual_windows_existing_nested_pin_tests": "2 passed",
+  "controlled_decoding_path": [
+    {
+      "path": "/api/version",
+      "result": "original internal-cause assertion fails",
+      "control": "test-only decoder returns the correct outer list type to model successful deep parsing; not a macOS run"
+    },
+    {
+      "path": "/api/tags",
+      "result": "original internal-cause assertion fails",
+      "control": "test-only decoder returns the correct outer list type to model successful deep parsing; not a macOS run"
+    }
+  ],
+  "macos_report": "Reimo: two expected RecursionError/observed AttributeError failures; not rerun on macOS here",
+  "production_behavior": "both exceptions already caught as CallBlocked before chat; no production bug demonstrated",
+  "raw_bytes": 8001,
+  "body_sha256": "e27caf5ca118a14225992d524c9aab8e5af0dcf3bbb402826928e30dd3fed327"
+}

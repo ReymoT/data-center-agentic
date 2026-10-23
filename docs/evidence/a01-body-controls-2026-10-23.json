@@ -1,0 +1,225 @@
+{
+  "evidence_kind": "fixed_same_length_content_controls_not_inference",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "model_calls": 0,
+  "one_observation_per_condition": true,
+  "same_process_python_server": true,
+  "client_deadline_seconds": 10,
+  "production_transport_changed": false,
+  "source_sha256": "368198b8df7f95f8a94cd3dc76f6bd4c921e39c0a0853e2532fdf5dbac02245e",
+  "control_source_sha256": "e22f4590ab16a079847c9b188e0aa0e62861c4bd38c9495e8bd6bb48072acc48",
+  "observations": [
+    {
+      "client": "raw_socket",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "read_chunks": [
+        116,
+        24001
+      ],
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "client_info": {},
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "original_nested_object",
+      "body_bytes": 24001,
+      "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+    },
+    {
+      "client": "curl",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "read_chunks": [],
+      "error": null,
+      "seconds": 0.04700000000593718,
+      "client_info": {
+        "executable": "curl.exe",
+        "exit_code": 0
+      },
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "original_nested_object",
+      "body_bytes": 24001,
+      "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+    },
+    {
+      "client": "raw_socket",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "e0b2419b0d7f761b82068f4226fdb8f4c7b53a28ae68072f3ccd5f02bfe1fefd",
+      "body_matches": true,
+      "read_chunks": [
+        116,
+        24001
+      ],
+      "error": null,
+      "seconds": 0.031000000002677552,
+      "client_info": {},
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "same_length_ascii",
+      "body_bytes": 24001,
+      "body_sha256": "e0b2419b0d7f761b82068f4226fdb8f4c7b53a28ae68072f3ccd5f02bfe1fefd"
+    },
+    {
+      "client": "curl",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "e0b2419b0d7f761b82068f4226fdb8f4c7b53a28ae68072f3ccd5f02bfe1fefd",
+      "body_matches": true,
+      "read_chunks": [],
+      "error": null,
+      "seconds": 0.031000000002677552,
+      "client_info": {
+        "executable": "curl.exe",
+        "exit_code": 0
+      },
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "same_length_ascii",
+      "body_bytes": 24001,
+      "body_sha256": "e0b2419b0d7f761b82068f4226fdb8f4c7b53a28ae68072f3ccd5f02bfe1fefd"
+    },
+    {
+      "client": "raw_socket",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "86d804d4ffadc08d21d2ae4522abd1e30d5d57654abfdcf8864881c842267fba",
+      "body_matches": true,
+      "read_chunks": [
+        116,
+        24001
+      ],
+      "error": null,
+      "seconds": 0.015999999988707714,
+      "client_info": {},
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "same_length_shallow_json",
+      "body_bytes": 24001,
+      "body_sha256": "86d804d4ffadc08d21d2ae4522abd1e30d5d57654abfdcf8864881c842267fba"
+    },
+    {
+      "client": "curl",
+      "server_process": "same_python",
+      "request_bytes": 3399,
+      "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+      "response_bytes": 24001,
+      "response_sha256": "86d804d4ffadc08d21d2ae4522abd1e30d5d57654abfdcf8864881c842267fba",
+      "body_matches": true,
+      "read_chunks": [],
+      "error": null,
+      "seconds": 0.031000000002677552,
+      "client_info": {
+        "executable": "curl.exe",
+        "exit_code": 0
+      },
+      "server_events": [
+        {
+          "event": "request",
+          "bytes": 3399,
+          "sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+        },
+        {
+          "event": "socket_buffers",
+          "send": 65536,
+          "receive": 65536
+        },
+        {
+          "event": "write_returned",
+          "bytes": 24001
+        }
+      ],
+      "body_kind": "same_length_shallow_json",
+      "body_bytes": 24001,
+      "body_sha256": "86d804d4ffadc08d21d2ae4522abd1e30d5d57654abfdcf8864881c842267fba"
+    }
+  ],
+  "limits": "Single observations cannot establish reliability or root cause; synthetic content variants are not valid model responses."
+}

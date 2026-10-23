@@ -1,5 +1,7 @@
 # October 23: received decisions and remaining agreement
 
+Current October23 receiving intake: [evidence and actions](../handoffs/OCT23_S02_RECEIVING_AND_FOLLOWUPS.md). Edison's E01 facility/IT distinction and exact S02 receiving acceptance are now received (issue24 comment6372892978; issue36 comment6374656136). Nisha may proceed on agreed current-None/unit/reference portions; optional future completed_work comparison tolerance remains proposed0.01kWh with Nisha/Ved agreement pending. New savings question: retain the current strict unfinished-work guard while affected owners resolve whether impossible-on-arrival jobs should ever be exempt. No change is adopted by Matty's recommendation. Earlier dated status entries below are historical where superseded.
+
 Matty authorized the recommendations and publication through [maintenance issue #46](https://github.com/ReymoT/data-center-agentic/issues/46). This records replies and their scope; it does not freeze an experiment or change a shared schema, runtime, dependency or scientific setting. Earlier dated records remain history where superseded.
 
 ## Q10: Ved replied; the exact refinement still needs Nisha
