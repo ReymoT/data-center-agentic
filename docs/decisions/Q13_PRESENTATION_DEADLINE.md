@@ -1,5 +1,7 @@
 # Q13: reported course dates and remaining delivery requirements
 
+October22 latest update: [Nisha checked Canvas again](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6352393282) and reports detailed rubrics/delivery requirements are not published; timezone is still unconfirmed. [Matty acknowledged this](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6354628796). Keep the attributed dates below; await her next check/instructor reply rather than treating her response as missing or repeating the same request. No course source, slide/submission or release setting is invented.
+
 Updated October 20, 2026. Partial confirmation, instruction deployment 1.14. Matty originally reported a November 18 presentation deadline. [Nisha's Canvas check on October 19](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6283757221) supplies Group 15's more specific schedule; [Matty accepted it for planning](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6298591471). Matty's assistant has not independently inspected Canvas/instructor documents. Attribute these dates to Nisha.
 
 | Milestone | Nisha-reported 2026 schedule |

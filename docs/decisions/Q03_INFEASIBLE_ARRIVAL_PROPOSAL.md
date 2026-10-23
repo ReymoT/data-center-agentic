@@ -1,5 +1,7 @@
 # Q03: proposal to expose a time-infeasible arrival for one decision
 
+October22 follow-up: [Nisha confirmed the exact independent replay/scoring/runner boundaries](https://github.com/ReymoT/data-center-agentic/issues/7#issuecomment-6352137381), conditional on the other owners; [Matty supported them](https://github.com/ReymoT/data-center-agentic/issues/7#issuecomment-6354628267). Impossible arrival is waiting at its arrival boundary, missed at the next; ordinary expiry is preserved, illegal execution is reported/not applied, and misses/unfinished work earn no completion credit. Reimo/Ved/Edison agreement and coordinated consumer implementation remain pending. No optionB behavior is adopted here.
+
 Status, October 21, 2026: proposed, not adopted. No simulator, policy, context, checker or evaluator behavior changes in this publication. [Nisha proposed option B](https://github.com/ReymoT/data-center-agentic/issues/7#issuecomment-6308222681); [Matty supports its direction and asks for the exact boundary confirmations](https://github.com/ReymoT/data-center-agentic/issues/7#issuecomment-6322088311). Passing checks or Matty's maintenance authorization does not supply the other owners' agreement.
 
 ## What current code does
@@ -23,9 +25,9 @@ The present infeasible scenario can demonstrate miss accounting. It cannot, by r
 | Owner | Reply still needed for the exact change |
 |---|---|
 | Reimo, S01/D03 | Confirm arrival-only exposure and next-boundary miss, with ordinary miss timing preserved. |
-| Edison, P01/P02 and learned policies | Confirm coverage, checked fallback and infeasible-job behavior; also supply the outstanding Q01–Q04 response. |
+| Edison, P01/P02 and learned policies | Confirm coverage, checked fallback and infeasible-job behavior; the broad Q01-Q04 reply is already received; confirm only the remaining exact optionB boundaries. |
 | Ved, F02/K02/O01 | Confirm equivalent context, record compatibility and reference/certification treatment, including joint contention/Q08. |
-| Nisha, E01/E02/E03 | Confirm these exact boundaries in independent replay/scoring and runner records. Her original recommendation is recorded; this is the requested implementation boundary confirmation. |
+| Nisha, E01/E02/E03 | Received in the October22 reply above, conditional on the remaining owners. E01 PR checkpoint: within two working days after recorded agreement; consumer evidence still required. |
 | Matty, A03/A04 | Direction supported in the linked reply; production checks/gate must still reject impossible starts and require actual consumer evidence. |
 
 The [consolidated owner request](https://github.com/ReymoT/data-center-agentic/issues/33#issuecomment-6322132165) asks for agreement, an exact alternative, or a blocker and checkpoint. Silence is not agreement.

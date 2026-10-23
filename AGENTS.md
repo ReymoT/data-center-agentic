@@ -1,6 +1,6 @@
 # Repository instructions
 
-Current October 22 intake: [reviewed P01 and actions](docs/handoffs/OCT22_ACTIONS.md). Edison replied to Q01-Q04 and confirmed Q12; only Reimo/Ved allocation confirmations remain missing. Matty recommends whole-decision checked A for incomplete required fresh forecast coverage, with the exact window still awaiting affected-owner agreement. P01 arithmetic is reviewed/merged with five added cases; S02 calling convention/adoption and completed-work mapping remain open. Arrival option B, joint infeasibility/Q08, runtime/tokenizer/context, Q10 and source/freeze/course/release gates remain explicit. P02's checkpoint is October 25; it is not delivered by the P01 merge. A01 timeout has no proven fix. No shared format, setting or task owner changed.
+Current October22 follow-up: [Nisha replies and E04 handoff](docs/handoffs/OCT22_NISHA_FOLLOWUPS.md). Nisha confirmed replay/L01 adoption and supplied exact arrival/Q04 boundaries, counter conditions and E01 quantity/reference proposals. Matty answered; remaining affected-owner agreements stay pending. E04 PR #39 preparation is merged; original human ratings and rubric freeze remain outstanding. The eventual counter must not need a Go compiler at runtime; none is adopted. A01 diagnosis remains deferred. P02 checkpoint is October25; only Reimo/Ved Q12 confirmations remain missing. No shared format, setting or task owner changed.
 
 ## Instruction authority
 

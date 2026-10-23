@@ -1,5 +1,7 @@
 # Q09: October 20 development setup agreement
 
+October22 follow-up: [Nisha accepts the official pinned-counter direction with five conditions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6352335506), and [Matty accepts them for his side](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6354628510). Count actual requests from both policy paths, validate against the accepted runtime after separate probe authorization, hash-pin offline artifacts/wheel, match rendering vectors, and fail explicitly before dispatch when counting fails or exceeds the ceiling. The eventual adopted counter must not need a Go compiler at runtime; the present helper is research only. Ved's dependency/runtime revalidation agreement and actual technical evidence remain pending. No shared dependency, runtime pin, counter or inference is adopted. A01 diagnosis remains deferred.
+
 Status: agreed development setup with technical gates; not a frozen experiment or inference authorization. Instruction deployment 1.15. Sources: [Nisha's agreement and additions](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6278309369), [Ved's agreement](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6283858363), [Matty's confirmation](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6298590019). Earlier recommendation/acceptance remains in [issue #2](https://github.com/ReymoT/data-center-agentic/issues/2).
 
 | Item | Agreed development rule |
