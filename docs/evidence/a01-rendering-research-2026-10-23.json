@@ -1,0 +1,83 @@
+{
+  "evidence_kind": "offline_python_go_rendering_and_bpe_research_not_runtime_validation",
+  "status": "blocked",
+  "model_calls": 0,
+  "http_operations": 0,
+  "provider_attempts": 0,
+  "validated_production_counter": false,
+  "shared_dependency_adopted": false,
+  "tokenizers_version": "0.23.3",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+  "source_hash_mode": "LF canonical for Go source; raw bytes for template/tokenizer/binary",
+  "oracle_source_sha256": "f3563ef44da8cd9ad0b3172c8fb36c83ba19b8df477c2e9d447601b3ce5b4c16",
+  "oracle_binary_sha256": "1353d5f212d8f665109ac03394f0549f944933feffc9b02b1eee39a8d53edfcc",
+  "golden_vectors_passed": 17,
+  "actual_request_shapes": [
+    {
+      "name": "actual_plain_path",
+      "request_sha256": "264630e066a9bc96f9cee6b0666e30168154d622cff7d35cbf3c75f0a3b42b90",
+      "schema_sha256": "50f64784351b0a84a2eb4cd9eb14e4daa0e370bd4e65045be0a28c3fa7080ae0",
+      "candidate_prompt_sha256": "838cf1cc69c5df754af0d8ec4431cb1de4cf87c41762866c65aa85df8ab26ccc",
+      "candidate_prompt_utf8_bytes": 8232,
+      "candidate_bpe_tokens": 2291,
+      "token_ids_sha256": "74f284e49f76fd67395b1eacda32bb083224e1d54f32767485950d3014c83cc3",
+      "python_go_bytes_equal": true
+    },
+    {
+      "name": "actual_plan_api",
+      "request_sha256": "c8f78bea9c593a750fe661b2def59136525897d0ee5b064d005c450a7af279eb",
+      "schema_sha256": "8d408f382922034d16e93b7d33e241f976935394162f1646acfb67fd31ab1ed0",
+      "candidate_prompt_sha256": "713c32e9ebc8882dc43a51c4371963806a8382ecb4293cda3e1f38768d05f8c7",
+      "candidate_prompt_utf8_bytes": 7033,
+      "candidate_bpe_tokens": 2003,
+      "token_ids_sha256": "c3c2c88aa52d665bf31c9b86cddeb53a367b88d460776973e6ee596efff62466",
+      "python_go_bytes_equal": true
+    },
+    {
+      "name": "synthetic_history_plan_api",
+      "request_sha256": "628842b2726154c7504b3a913d7b982c5818db2fa2eaba8aa657e8eae08c3d19",
+      "schema_sha256": "8d408f382922034d16e93b7d33e241f976935394162f1646acfb67fd31ab1ed0",
+      "candidate_prompt_sha256": "cb271f6bd4d9a00a00740cd5a46f8d8d7143138c1d0c24ae8af52a1cb6d67846",
+      "candidate_prompt_utf8_bytes": 7202,
+      "candidate_bpe_tokens": 2032,
+      "token_ids_sha256": "6db445b65f8a26f62ed78dbfc82541a0bea6723e60062e3748322a1c1c0406ca",
+      "python_go_bytes_equal": true
+    },
+    {
+      "name": "synthetic_explanation_api",
+      "request_sha256": "5f540e22f1a79bf95030cbccc810b3c81cccf5f0c8af5423d111d78aa661636f",
+      "schema_sha256": "ae07c7a0788a4a85972e71eb2f848cfc656cfab3c302db9d21db5dfb06619805",
+      "candidate_prompt_sha256": "642f9b6451d4f447b5d01df53a2ec145252f05db6d06f566c0819563cb13a703",
+      "candidate_prompt_utf8_bytes": 5382,
+      "candidate_bpe_tokens": 1626,
+      "token_ids_sha256": "1c8e3738bc1b1778e10e8fd93693ff672669c33f4b5f7ad9080f57b682667c87",
+      "python_go_bytes_equal": true
+    }
+  ],
+  "scope": "pinned legacy template; one initial system, alternating user/assistant nonempty text; think=false; no tools; schema retained in request, not counted as a template variable",
+  "blockers": [
+    "Actual accepted-runtime native-versus-template rendering and prompt_eval_count equivalence not established",
+    "Exact GGUF special-token/pre-tokenization equivalence remains unvalidated",
+    "Unsupported tools, thinking metadata, multiple system messages and nonalternating histories fail explicitly",
+    "Ved dependency/runtime agreement, service/context/resource evidence and separate inference authorization remain pending",
+    "No package lock, runtime pin or production callback adoption"
+  ],
+  "python_renderer_source_sha256": "b7042d9abb69f2b2e713bb6dff8a16a4f86ed7893a2c4d17df86e87ec765bd2a",
+  "validator_source_sha256": "c1138beeba1a00c50502f7178ea7729e8b0211ff585c225931db32cdf92507b3",
+  "golden_fixture_sha256": "16d0e7bcb1ccd367ea1c59c1253637a9b884ea3632d383b60a5eba7cda9bf8b3",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Windows",
+    "os_release": "11",
+    "os_version": "10.0.26300",
+    "machine_arch": "AMD64",
+    "reference_compiler": "go1.27.3 windows/amd64"
+  },
+  "ordinary_ci_golden_and_rejection_tests_passed": 56,
+  "full_local_suite": {
+    "passed": 1114,
+    "subtests_passed": 19,
+    "log_sha256": "5f101e1efae8f04f7080e78300c3a5c9a73deb619b97f40410bb94d61faee8d0"
+  }
+}
