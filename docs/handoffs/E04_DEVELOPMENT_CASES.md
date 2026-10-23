@@ -4,7 +4,7 @@ Task ID / Issue: E04, under Q10 in [issue #22](https://github.com/ReymoT/data-ce
 Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk); technical contact Ved (vedp3705); Matty as independent second rater (E05).
 Active assistant session / instruction version: one Claude Code session for Nisha; instruction deployment 1.18.
 Objective: Prepare the development material for the statement-extraction rule: a draft rule with worked examples, at least ten paired development cases, a blank annotation template, and structural checks for annotations.
-Base commit / branch / PR: base `f926128` on main; branch `nisha/e04-development-cases`; PR to be opened.
+Base commit / branch / PR: base `f926128` on main; branch `nisha/e04-development-cases`; [PR #39](https://github.com/ReymoT/data-center-agentic/pull/39).
 
 Changed paths:
 - `docs/e04/EXTRACTION_RULE.md` (new): draft rule `e04-extraction-draft-0`, covering what counts as a checkable assertion, IDs (Claim records keep their IDs; summary S1..., limitations L1...), duplicates, labels, outputs without an explanation, completeness, metrics and four worked examples that are not rating cases.
@@ -19,7 +19,7 @@ Cases: all on the hand-example fixture (J1, J2, J3; 40 kW background; 100 kW cap
 Blinding and independence:
 - The packet, case file and template contain no system identity or case category, and a test enforces that. X/Y order is fixed by seed 20261022, which is not a Q10 sampling seed.
 - `scripts/build_e04_cases.py` holds each case's category and which output stands for which system, so **raters should rate from `RATER_PACKET.md` before opening that script**.
-- Nisha (and this session) wrote the cases, so her development ratings are not blind to the case design. Matty's ratings, made from the packet alone, are the independent ones. This limits the pilot only; held-out review uses real saved outputs under the Q10 blinding.
+- Nisha (and her authoring session) wrote the cases, so her development ratings would not be blind to the case design. Packet-only second ratings were requested. Matty's technical review session subsequently inspected the generator and categories to verify the code; this session is therefore exposed to the design and must not be presented as a blinded second rating. No human ratings were generated or submitted by that review. Independent original ratings and disclosure of each rater's exposure remain required. Held-out review uses real saved outputs under Q10's agreed blinding.
 - No labels or ratings are filled in anywhere. The scoring tests use a separate small case built in the test, so the test file doesn't reveal expected labels for the development cases.
 
 Behavior:
@@ -51,5 +51,15 @@ Limitations and open decisions:
 - Agreement statistics (extraction agreement, percent agreement and Cohen's kappa) are not implemented yet. That comes next, once there are two rating files.
 - One-sided empty queues can't occur in these pairs, because both outputs share one state.
 
-Receiving owner and consumer check: Matty, to rate the 11 cases from `RATER_PACKET.md` with the template before reading the generator script (E05 development ratings); Ved, to comment on the rule's unit and reference wording alongside issue #24.
+Receiving owner and consumer check: the original request was for Matty to rate the packet before generator exposure; the technical-review exposure disclosed above must now be accounted for before any second ratings are claimed. Matty's own original ratings remain future work. Ved is asked to comment on the rule's unit and reference wording alongside issue #24.
 Next checkpoint: Nisha's and Matty's independent development ratings, then agreement statistics and adjudication, then freeze the rule with the agreed Q10 record.
+
+## Matty's technical review, October 22, 2026
+
+Reviewed original head `cb6f069c5650174605576c30208610d132eb07cd` against current main `f9261282054831465e5596ec07c90c129a58df0a`, instruction deployment 1.18, and live issues #22/#24. Original Nisha commits are retained. This is acceptance of draft preparation tooling, not a protocol freeze or completed E04/E05 rating task.
+
+Eight added regression cases first failed on the original implementation. The bounded fixes require an actually empty waiting queue and no raw text before a no-op is not applicable; reject repeated supporting IDs that could inflate precision; require an actual JSON boolean for the restatement flag; and reject site or visible-constraint references that disagree with the case's authoritative snapshot. The prior no-op test incorrectly used a state with waiting jobs and now uses an empty queue. No F02 record, provider setting, master instruction, physical scheduling rule or synthetic case output changed.
+
+Focused verification after fixes: all 30 E04 tests pass, and the generator `--check` confirms all three generated files are unchanged. The full local offline suite produced 1014 passes, 19 passing subtests and two failures in the previously documented A01 deep-object HTTP timeout cases (agent/plain); those tests and the provider were not modified or retried to hide the failures. Ruff check/format (72 Python files), compileall, setup validation, pip check and `git diff --check` pass. Exact PR/merged-main CI evidence is recorded in the PR after execution. Python for this review is 3.12.14. The historical author's test results above remain attributed to her environment.
+
+Before freeze, resolve issue #24's proposed unit/reference rules and explicit deduplication examples across all text fields. The current structured-explanation scorer does not extract checkable raw malformed text; the draft now discloses that limitation rather than implying a full raw-output assertion audit. Agreement statistics, actual original ratings, real saved development outputs and Ved's Q10 sampling/analysis/eligibility agreement remain outstanding. Eleven synthetic pairs do not establish ten pairs of real model output or experimental results. A01 timeout diagnosis remains deferred at Matty's request; ordinary required offline suite results do not resume it.

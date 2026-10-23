@@ -10,6 +10,9 @@ Q10 is still partial, so this is development material under a draft rubric, not 
 frozen protocol. Metrics follow MASTER_NISHA E04: faithfulness = supported/checkable,
 coverage = assertions with a supporting citation/checkable, precision = supporting
 claim-citation pairs/all cited pairs; zero denominators stay undefined (None).
+This pilot scores structured explanations only; raw malformed text is preserved for
+review, not assertion-extracted here. Human extraction/deduplication, unresolved units
+and two independent original ratings remain gates before a frozen real-output review.
 """
 
 import re
@@ -37,12 +40,13 @@ class BlindOutput:
     raw_response: str | None
 
     @property
-    def not_applicable(self) -> bool:
-        """An empty-queue no-op: a valid empty plan with no text to review (Q10)."""
+    def empty_plan_without_text(self) -> bool:
+        """A no-op candidate; its case must also confirm an empty waiting queue."""
         p = self.plan
         return (
             self.output_status == "ok"
             and self.explanation is None
+            and self.raw_response is None
             and p is not None
             and not (p.starts or p.deferrals or p.abstentions)
         )
@@ -54,6 +58,10 @@ class ReviewCase:
     snapshot: s.ConstraintSnapshot
     state: s.VisibleState
     outputs: dict[str, BlindOutput]
+
+    def not_applicable(self, key: str) -> bool:
+        """Q10 exempts only an empty-queue no-op, never an omitted waiting-job decision."""
+        return not self.state.waiting_jobs and self.outputs[key].empty_plan_without_text
 
 
 def _blind_output(data: dict, state: s.VisibleState) -> BlindOutput:
@@ -90,6 +98,10 @@ def load_cases(data: dict) -> tuple[ReviewCase, ...]:
         state = s.VisibleState.from_jsonable(raw["state"])
         if state.constraint_snapshot_id != snapshot.snapshot_id:
             raise ValueError(f"{raw['case_id']}: state and snapshot differ")
+        if state.site != snapshot.site:
+            raise ValueError(f"{raw['case_id']}: state site differs from its snapshot")
+        if not set(state.constraint_ids) <= {c.constraint_id for c in snapshot.constraints}:
+            raise ValueError(f"{raw['case_id']}: visible constraint is absent from its snapshot")
         if raw["case_id"] in seen:
             raise ValueError(f"duplicate case {raw['case_id']}")
         seen.add(raw["case_id"])
@@ -107,7 +119,7 @@ def blank_annotation(case: ReviewCase, key: str) -> dict:
     return {
         "case_id": case.case_id,
         "output": key,
-        "not_applicable": output.not_applicable,
+        "not_applicable": case.not_applicable(key),
         "explanation_present": output.explanation is not None,
         "assertions": [
             {
@@ -121,7 +133,7 @@ def blank_annotation(case: ReviewCase, key: str) -> dict:
             }
             for c in claims
         ],
-        "completeness": None if output.not_applicable else dict.fromkeys(COMPLETENESS),
+        "completeness": None if case.not_applicable(key) else dict.fromkeys(COMPLETENESS),
         "notes": "",
     }
 
@@ -137,8 +149,8 @@ def validate_annotation(case: ReviewCase, entry: dict, *, complete: bool) -> Non
         raise ValueError("annotation is for another case or output")
     output = case.outputs[key]
     where = f"{case.case_id}/{key}"
-    if entry.get("not_applicable") is not output.not_applicable:
-        raise ValueError(f"{where}: not_applicable must be {output.not_applicable}")
+    if entry.get("not_applicable") is not case.not_applicable(key):
+        raise ValueError(f"{where}: not_applicable must be {case.not_applicable(key)}")
     if entry.get("explanation_present") is not (output.explanation is not None):
         raise ValueError(f"{where}: explanation_present does not match the output")
     assertions = entry.get("assertions")
@@ -158,7 +170,7 @@ def validate_annotation(case: ReviewCase, entry: dict, *, complete: bool) -> Non
         _check_assertion(a, claims, complete, where)
 
     completeness = entry.get("completeness")
-    if output.not_applicable:
+    if case.not_applicable(key):
         if completeness is not None:
             raise ValueError(f"{where}: a no-op has no completeness rating")
         return
@@ -181,7 +193,7 @@ def _check_assertion(a: dict, claims: dict, complete: bool, where: str) -> None:
         if a.get("cited_ids") != list(claim.evidence_ids):
             raise ValueError(f"{where}: {aid} cited IDs must be the Claim's evidence IDs")
         restated = a.get("restated_in_summary")
-        if restated not in ((True, False) if complete else (True, False, None)):
+        if type(restated) is not bool and not (restated is None and not complete):
             raise ValueError(f"{where}: {aid} restated_in_summary must be true or false")
     elif source in _EXTRACTED_ID:
         if not isinstance(aid, str) or not _EXTRACTED_ID[source].match(aid):
@@ -201,6 +213,8 @@ def _check_assertion(a: dict, claims: dict, complete: bool, where: str) -> None:
             raise ValueError(f"{where}: {aid} needs supporting_cited_ids (may be empty)")
     elif not isinstance(supporting, list) or not set(supporting) <= set(a["cited_ids"]):
         raise ValueError(f"{where}: {aid} supporting IDs must be among its cited IDs")
+    elif len(supporting) != len(set(supporting)):
+        raise ValueError(f"{where}: {aid} supporting IDs must be unique")
 
 
 @dataclass(frozen=True)

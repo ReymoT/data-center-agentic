@@ -37,7 +37,7 @@ def test_cases_cover_the_q10_categories_with_at_least_ten_pairs():
     assert build.REQUIRED_CATEGORIES <= categories
     loaded = cases()
     assert len(loaded) == len(build.CASES)
-    reviewable = [c for c in loaded if not all(o.not_applicable for o in c.outputs.values())]
+    reviewable = [c for c in loaded if not all(c.not_applicable(k) for k in rv.OUTPUT_KEYS)]
     assert len(reviewable) >= 10
 
 
@@ -181,7 +181,7 @@ def test_failed_output_has_zero_coverage_and_undefined_faithfulness():
 
 
 def test_empty_queue_noop_is_not_applicable():
-    state = f.visible_state()
+    state = f.visible_state(waiting_job_ids=())
     noop = s.Plan(episode_id=f.EPISODE_ID, slot=0, state_version=0, status="proposed")
     case = rv.ReviewCase(
         "T2",
@@ -195,6 +195,55 @@ def test_empty_queue_noop_is_not_applicable():
     entry["completeness"] = dict.fromkeys(rv.COMPLETENESS, 0)
     with pytest.raises(ValueError, match="no-op"):
         rv.validate_annotation(case, entry, complete=True)
+
+
+@pytest.mark.parametrize("waiting, raw", [(("J1",), None), ((), "Unparsed text")])
+def test_empty_plan_is_not_enough_to_exempt_an_output(waiting, raw):
+    state = f.visible_state(waiting_job_ids=waiting)
+    noop = s.Plan(episode_id=f.EPISODE_ID, slot=0, state_version=0, status="proposed")
+    case = rv.ReviewCase(
+        "T3",
+        f.snapshot(),
+        state,
+        {k: rv.BlindOutput("ok", noop, None, raw) for k in rv.OUTPUT_KEYS},
+    )
+    entry = rv.blank_annotation(case, "X")
+    assert entry["not_applicable"] is False
+    entry["completeness"] = dict.fromkeys(rv.COMPLETENESS, 0)
+    score = rv.score_annotation(case, entry)
+    assert score is not None
+    assert (score.coverage, score.completeness) == (0.0, 0.0)
+
+
+def test_repeated_supporting_citation_cannot_inflate_precision():
+    case = small_case()
+    entry = filled(case)
+    entry["assertions"][0]["supporting_cited_ids"] = ["FACT-JOB-J1"] * 5
+    with pytest.raises(ValueError, match="unique"):
+        rv.score_annotation(case, entry)
+
+
+@pytest.mark.parametrize("restated", [0, 1])
+def test_restatement_requires_a_json_boolean(restated):
+    entry = filled(small_case())
+    entry["assertions"][0]["restated_in_summary"] = restated
+    with pytest.raises(ValueError, match="true or false"):
+        rv.validate_annotation(small_case(), entry, complete=True)
+
+
+@pytest.mark.parametrize("field,value", [("background_kw", 41.0), ("pue", 1.2)])
+def test_case_rejects_a_site_that_disagrees_with_its_snapshot(field, value):
+    data = json.loads(committed("development_cases.json"))
+    data["cases"][0]["state"]["site"][field] = value
+    with pytest.raises(ValueError, match="site"):
+        rv.load_cases(data)
+
+
+def test_case_rejects_a_visible_constraint_absent_from_its_snapshot():
+    data = json.loads(committed("development_cases.json"))
+    data["cases"][0]["state"]["constraint_ids"].append("CON-UNKNOWN")
+    with pytest.raises(ValueError, match="constraint"):
+        rv.load_cases(data)
 
 
 @pytest.mark.parametrize(
