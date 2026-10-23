@@ -3,7 +3,7 @@
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="1224pt" viewBox="0 0 1152 1224" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <title>Ontology-grounded, tool-verified agent versus plain LLM: planned architecture</title>
- <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. Four additional scheduling references share visible inputs and an execution gate; private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D06 structural source/window checks, D03 provisional fixtures, S01 transitions, P01 arithmetic pending S02 adoption, L01 empty-queue handling, independent E01 replay preparation and A01/A03 core are implemented; scientific acceptance and the full scheduling pipeline remain pending.</desc>
+ <desc>The main comparison tests accuracy, faithfulness and safety in workload scheduling. Four additional scheduling references share visible inputs and an execution gate; private data and offline references stay outside policy inputs. F02 schemas, D01/D02 tooling, D06 structural source/window checks, D03 provisional fixtures, S01 transitions, P01 arithmetic pending S02 adoption, L01 empty-queue handling, independent E01 replay and E04 draft synthetic review preparation and A01/A03 core are implemented; scientific acceptance and the full scheduling pipeline remain pending.</desc>
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
@@ -486,7 +486,7 @@ z
    </g>
    <g id="text_41">
     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1179.923578)">24 decision + 6 completion slots; no completion-slot model calls. Q01–Q13 stay open where unresolved.</text>
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1192.526449)">Implemented: F02; D01-D03/D06; S01; P01; L01 no-op; E01 replay prep; A01/A03 core. Acceptance pending.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #203449" transform="translate(39.744 1192.526449)">Implemented: F02; D01-D03/D06; S01; P01; L01 no-op; E01/E04 prep; A01/A03 core. Acceptance pending.</text>
    </g>
   </g>
  </g>

@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.18 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.19 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.19 - 2026-10-22
+
+- Matty reviewed and authorized all seven latest recommendations. [Issue #40](https://github.com/ReymoT/data-center-agentic/issues/40) records stale receiving-adoption/reply/E04/course guidance before edits. [The handoff](../handoffs/OCT22_NISHA_FOLLOWUPS.md) records the actual replies and per-item limits.
+- Record Nisha's received E01/L01 adoption, exact conditional arrival/Q04 boundaries, counter conditions, E01 proposals and unpublished-rubric update. Matty's positions are posted; missing affected-owner agreement is not invented. An adopted counter must not need a Go compiler at runtime, but no production counter/dependency/pin is adopted. A01 diagnosis remains deferred.
+- Record reviewed E04 PR39, preserved synthetic assets and exact PR/main CI1016 tests/19 subtests. Prepare a rating guide and a blank personal workfile outside Git; no original human ratings or final rubric are fabricated. Matty requested guidance before providing his judgments; same-case AI-suggested answers cannot count as independent originals.
+- Preserve all50 task rows/owners/dependencies, exact seven-file policies, canonical F02/interfaces, existing teammate code/tests, requirements/configs/prompts and historical handoffs. Only architecture drawing status text changes in code; no protocol, inference, source right or integrated acceptance is selected.
 
 ## Deployment 1.18 - 2026-10-22
 
