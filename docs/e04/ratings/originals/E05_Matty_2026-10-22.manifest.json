@@ -1,0 +1,54 @@
+{
+  "task_id": "E05",
+  "issue": 42,
+  "submission_date": "2026-10-22",
+  "rater": "MattyAnd",
+  "rubric_version": "e04-extraction-draft-0",
+  "original_filename": "E05_Matty_2026-10-22.json",
+  "source_filename": "E05_Matty_rating_workfile_2026-10-22.json",
+  "source_bytes": 41833,
+  "source_sha256": "3b3e0c7509b9bb7c3580f9586260db7c1a9e4356fe570e04fe09a6640e46f16a",
+  "original_git_blob_sha256": "3b3e0c7509b9bb7c3580f9586260db7c1a9e4356fe570e04fe09a6640e46f16a",
+  "base_main": "448d2e47254de173e00661a3a29950086c6690da",
+  "validation_instruction_deployment": "1.19",
+  "publication_instruction_deployment": "1.20",
+  "bound_artifact_sha256": {
+    "docs/e04/development_cases.json": "8d55d69b841b81c0d5bb20de47cbe3ed299cef433e81a6e0f67734d2d85d26f9",
+    "docs/e04/RATER_PACKET.md": "b37100e93eebd61b383dcc46d229a0526c19200b246c1f41970829354e304964",
+    "docs/e04/EXTRACTION_RULE.md": "33123a83ef1184967b4c8dc5d041ecdf9cc2a480f481c2e24d6f2af8f2d14018",
+    "dc_sustainability/evaluation/review.py": "7ef37522fddbc737e8269b10452ddc52eee413113a7d1fee63cf0370a4af4335"
+  },
+  "validation": {
+    "complete": true,
+    "output_units": 22,
+    "case_pairs": 11,
+    "expected_keys_present_exactly_once": true,
+    "structural_error_count": 0,
+    "assertions": 96,
+    "assertion_sources": {
+      "claim": 32,
+      "summary": 57,
+      "limitation": 7
+    },
+    "not_applicable_units": 2,
+    "judgments_modified": false,
+    "automated_truth_or_agreement_claimed": false
+  },
+  "provenance": {
+    "provided_by": "MattyAnd in the project chat, identified by him as his ratings",
+    "prior_guidance": "General rating guide and separate worked examples were provided; no pilot-case labels were supplied by this intake.",
+    "exposure_disclosure": "Prior technical-review generator exposure remains documented in E04 handoff; no additional blinding guarantee inferred.",
+    "underlying_material": "synthetic pilot cases, not real model or held-out outputs"
+  },
+  "receiving_action": "Nisha retains her own original ratings before viewing Matty labels, then pairs extractions, reports original agreement and preserves separate adjudication.",
+  "status": "first_pass_submitted_awaiting_paired_review_and_adjudication",
+  "remaining_questions": [
+    "named ASAP baseline/order",
+    "quantity and energy basis",
+    "cross-field deduplication and restatements",
+    "citation-support granularity",
+    "raw malformed-text assertion rule",
+    "Q10 design and eligibility agreement"
+  ],
+  "hash_scope": "Bound artifact hashes use Git blob bytes at base_main. Original hashes use the exact source bytes supplied by Matty."
+}

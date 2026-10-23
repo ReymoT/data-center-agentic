@@ -1,5 +1,7 @@
 # Publication audit
 
+Current E05 intake, deployment 1.20: [issue #42](https://github.com/ReymoT/data-center-agentic/issues/42) and [the handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md) record Matty's supplied original, exact SHA256 and actual structural validation. His first annotation pass is submitted unchanged. Nisha's original and paired review/adjudication remain pending; no full E05 completion, blinding guarantee, rubric freeze or model result is invented. Prior dated preparation entries remain historical.
+
 Current October22 follow-up, deployment1.19: [issue #40](https://github.com/ReymoT/data-center-agentic/issues/40) and [the handoff](../handoffs/OCT22_NISHA_FOLLOWUPS.md) record Matty's approved replies and current maintenance. Nisha's adoption and exact boundary/counter/course responses are received; E04 PR39 preparation is merged with green exact PR/main CI1016/19. Human ratings and remaining owner agreements stay open. A01 diagnosis is deferred. Prior dated publication entries below are historical; exact new publication CI is recorded in #40 after running.
 
 Current October22 publication increment, deployment1.18: [F04 #37](https://github.com/ReymoT/data-center-agentic/issues/37) and [the handoff](../handoffs/OCT22_ACTIONS.md) record reviewed P01 merge and actual Edison Q01-Q04/Q12 replies. P01 is merged, while S02/P02 and receiving adoption remain pending. New Q04 window/arrival/Q08 proposals and A01 timeout remain explicit. All earlier dated entries below describe their original state; no full scientific acceptance is inferred.

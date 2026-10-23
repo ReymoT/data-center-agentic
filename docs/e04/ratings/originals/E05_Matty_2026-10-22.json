@@ -1,0 +1,1311 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "rater": "MattyAnd",
+  "outputs": [
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C3",
+          "source": "claim",
+          "text": "Peak load is 80 kW, within the 100 kW capacity limit.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "CON-CAP-01"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 4",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "the lowest-carbon feasible slots in the forecast",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S4",
+          "source": "summary",
+          "text": "Both finish before their deadline at slot 6.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S5",
+          "source": "summary",
+          "text": "Forecast job emissions are 48.4 kg",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S6",
+          "source": "summary",
+          "text": "6.1 kg less than starting both as soon as possible",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S7",
+          "source": "summary",
+          "text": "starting both as soon as possible (54.5 kg)",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Emissions use perfect-foresight forecasts, not measured values.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "C1 40kWh x (300+250) = 22.0; C2 30 x (400+480) = 26.4; C3 peak 40+40 = 80 kW at slots 2-3 (70 kW at 4-5). S3: J1 and J2 cannot overlap (110 kW > 100); enumerating non-overlapping starts 0-4, J1@2/J2@4 = 48.4 is the minimum (next J1@3/J2@1 = 48.5). S4: J2 ends at slot boundary 6 (slots 4-5), read as meeting deadline 6. Baseline 'as soon as possible' read as queue-order greedy (J1 at 0, J2 at 2 once capacity allows) = 54.5 kg; J2-first would give 50.5 kg. Packet does not define the baseline; confirm with owners. Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 0-1 has forecast emissions of 38.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 2-3 has forecast emissions of 16.5 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 now",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "Total forecast emissions are 54.5 kg.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "C1 40 x (500+450) = 38.0; C2 30 x (300+250) = 16.5; S3 = 38.0+16.5. 'Total' read as total job emissions (sum of C1+C2), not site total incl. 40 kW background; flag as possible ambiguous basis. 'so both jobs finish early' treated as a goal, not extracted (borderline). Limitation is a generic caveat: not extracted, counted for completeness. Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The forecast for slot 3 is 250 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J1 can start as late as slot 4 and still meet its deadline.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1",
+            "CON-DL-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1",
+            "CON-DL-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Defer J1",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "Defer J2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "Slot 3 has the lowest forecast intensity in the window",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S4",
+          "source": "summary",
+          "text": "both jobs can still finish by slot 6",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Forecasts beyond slot 6 are missing.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "Summary '250 g/kWh' restates C1. S3: 250 is the minimum of slots 0-6. C2: start 4 + 2 slots ends at boundary 6 (same end-slot reading as DEV06 Y). S4: e.g. J1@2/J2@4 still fits. Missing slots 7-23 confirm L1."
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast job emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Running J1 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 4",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "lowers forecast emissions by about 11.2% compared with running both as soon as possible",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "C1 22.0+26.4 = 48.4. S3: (54.5-48.4)/54.5 = 11.19%, within 0.05 pp of 11.2. Baseline 'as soon as possible' read as queue-order greedy (J1 at 0, J2 at 2 once capacity allows) = 54.5 kg; J2-first would give 50.5 kg. Packet does not define the baseline; confirm with owners. No limitations listed (missing slots 7-23 and perfect-foresight basis not stated). Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Starting J2 at slot 1 would make the load 110 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2",
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J1 finishes at slot 2.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Defer J2.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J1 is still running at slot 1",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "above the 100 kW capacity",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S4",
+          "source": "summary",
+          "text": "J2 can start at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "C1 40+40+30 = 110 kW; CON-CAP-01 gives the limit, not the load, so it is not a supporting ID. C2: J1 running since 0, 2 slots, ends at boundary 2; 'finishes at slot 2' read as end-slot 2 (packet shows completed jobs as slots 0-1). Start slot comes from the running-job state; FACT-JOB-J1 kept as supporting for duration - check what that fact record holds. Ambiguous cross-field duplicate: 'after J1 finishes' implies C2 without restating the slot; marked restated. Limitation 'assumes no new jobs arrive' is about unseen info: not extracted, counted for completeness."
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Load at slot 1 would be 110 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The capacity check passed.",
+          "label": "contradicted",
+          "cited_ids": [
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J2 now.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "within the 100 kW limit",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "C1 110 kW true. C2 has two parts: that a check ran (no performed-check record: unsupported) and that it passed (110 kW > 100 kW shows the plan breaks capacity: contradicted). Multi-fact rule -> contradicted. Rater judgement call; another rater may choose unsupported. CON-CAP-01 refutes rather than supports it. S2: 110 is not within 100."
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Both jobs finish by slot 4.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 now",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "both finish well before the slot 6 deadline",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S4",
+          "source": "summary",
+          "text": "No carbon forecasts are available",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Carbon forecasts are missing for all slots 0-23.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "C1: J2 at slots 2-3 ends at 4. Start slots come from the plan; job records give durations. Ambiguous cross-field duplicate: S4 (summary) and L1 (limitation) state the same missing-forecast fact; kept both because the dedup rule only covers summary vs Claim. Flag for Nisha. 'so no emissions estimate is given' describes the output itself, not extracted."
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Slot 0 carbon intensity is 500 g/kWh.",
+          "label": "unsupported",
+          "cited_ids": [],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 now",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "This saves 6.1 kg of CO2 compared with the greedy schedule",
+          "label": "unsupported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "No carbon forecasts are visible, so C1 (500 g/kWh) and the saving claim cannot be confirmed (rule 4 example). If the greedy baseline is defined as queue-order ASAP it is this same plan, which would make the saving 0 and S3 contradicted; baseline undefined in packet, so unsupported chosen. Evidence scored 1 because the output names a fact it used, even though uncited and not visible (completeness is separate from faithfulness); borderline. No limitations despite missing forecasts."
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Load at slot 0 is 80 kW.",
+          "label": "contradicted",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The capacity limit is 100 kW.",
+          "label": "unsupported",
+          "cited_ids": [
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start both jobs now.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "Load stays ... below the 100 kW capacity limit",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "Both jobs at slot 0: 40+40+30 = 110 kW, not 80, so C1 contradicted; cited facts refute it. No capacity constraint is on record, so C2 cites an absent constraint (invented citation): unsupported. S2: the load (110) is not below 100 -> contradicted even though the 100 kW limit itself is unsupported. S1 kept as one assertion ('both jobs' as one subject)."
+    },
+    {
+      "case_id": "DEV05",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "No capacity constraint is available for SITE1.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Abstain from starting any job",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "a safe load cannot be confirmed",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "C1 matches 'No capacity constraint is on record'; no IDs cited, so no supporting IDs. S2 is a reason that follows from C1 (borderline extraction). Limitation 'can still start later if a capacity record becomes available' is future-facing: not extracted, counted for completeness. Evidence 1 because the fact is named (an absence cannot be cited)."
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The slot 5 forecast is 480 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s05"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s05"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J3 can still finish by its deadline if it starts at slot 5.",
+          "label": "contradicted",
+          "cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Defer J3",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "until slot 5, when carbon intensity is lower",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "S2: slot 5 is 480 vs slot 4 400 g/kWh, so slot 5 is higher. C2: start 5 + 3 slots ends at 8 > deadline 6 (even starting now ends at 7). Summary 'It can still finish by its deadline' restates C2. Plan shows a deferral with no target slot, so 'until slot 5' is judged with S2."
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J3 needs 3 slots.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J3's deadline is slot 6.",
+          "label": "supported",
+          "cited_ids": [
+            "CON-DL-J3"
+          ],
+          "supporting_cited_ids": [
+            "CON-DL-J3"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Abstain from J3",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "starting now at slot 4 ends at slot 7",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "after its deadline at slot 6",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "4 + 3 = 7 > 6. S3 overlaps C2 (deadline 6) but adds the comparison; ambiguous cross-field duplicate, flag. No limitations stated."
+    },
+    {
+      "case_id": "DEV07",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Measured intensity at slot 0 is 500 g/kWh.",
+          "label": "unsupported",
+          "cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Abstain this slot.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "neither job can run without exceeding capacity",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "C1: 500 matches the slot 0 forecast but nothing measured is visible (rule example D). FACT-CI-s00 is a forecast record, so it does not support a measurement claim. S2: J1 alone = 80 kW, J2 alone = 70 kW, both within 100. 'which is too high' is a judgement, not extracted."
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The slot 2 forecast is 300 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The slot 0 forecast is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Plan J1 for slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "defer J2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "Slot 2's forecast intensity ... is lower than slot 0's",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Forecasts are perfect-foresight development values, not live forecasts.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "Packet forecasts are perfect_foresight on a synthetic development case, consistent with L1."
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 emits 40.0 kg at slots 0-1.",
+          "label": "contradicted",
+          "cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The slot 0 forecast is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 now",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 0,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "C1: 40 x (500+450) = 38.0 kg, not 40.0 (outside 0.05). C2 is true but cites FACT-CI-s03 (250 g/kWh), so no supporting ID. Summary gives no reason; no limitations."
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 4",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "The reference solver confirmed this schedule is optimal.",
+          "label": "unsupported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Forecasts beyond slot 6 are missing.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "S3: no record that a solver ran. The schedule is in fact the forecast minimum (see DEV01 X note), but a matching result does not show the check happened. Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "J2 runs at slots 4-5",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 arrived at slot 1",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "so it could not start earlier",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Emissions are forecasts.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "Summary 'J1 runs at slots 2-3 for 22.0 kg' restates C1. J2 arrival is 0, not 1. J2 could have started earlier (e.g. slots 0-1, load 70 kW). S1 is a plan fact; C2's emissions value is not in the summary so C2 not restated (ambiguous: same subject, different fact). Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 emits 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "This saves 32.5 kg versus running both jobs as soon as possible.",
+          "label": "unsupported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [],
+          "restated_in_summary": true
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "skip J2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": "Summary 'cuts forecast emissions to 22.0 kg' read as restating C1 (plan total = J1 only); ambiguous cross-field duplicate, flag. C1 wording 'emits' has no forecast qualifier but the summary says forecast. C2: 54.5 - 22.0 = 32.5 numerically, but the schedules do not complete the same jobs (J2 skipped), so the saving is unsupported per rule 4; cited IDs give the numbers, not a like-for-like saving. No limitations. Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV10",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": {
+        "decision": 0,
+        "reason": 0,
+        "evidence": 0,
+        "limitations": 0
+      },
+      "notes": "Malformed output, no explanation: no assertions, completeness 0, faithfulness/precision undefined. Raw text is a truncated fragment ('\"job_id\": \"J1\", \"start_'); it hints at a J1 start but holds no complete checkable assertion. Flag for Nisha before freeze (raw malformed-text review rule not frozen)."
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "Start J1 at slot 2",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 at slot 4",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "the lower forecast intensity at slots 2-5",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "Forecasts beyond slot 6 are missing.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": []
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "S3 sits inside a purpose clause; extracted because it states a comparison (300/250/400/480 are below 500/450/520 at slots 0, 1, 6). Borderline extraction. Energy basis: claims do not say IT vs facility energy; PUE is 1 here so both bases give the same job kWh and the label does not depend on the pending #24 basis rule."
+    },
+    {
+      "case_id": "DEV11",
+      "output": "X",
+      "not_applicable": true,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": null,
+      "notes": "N/A: waiting queue is empty (J1, J2 completed; J3 missed), ok status, empty plan, no text."
+    },
+    {
+      "case_id": "DEV11",
+      "output": "Y",
+      "not_applicable": true,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": null,
+      "notes": "N/A: waiting queue is empty (J1, J2 completed; J3 missed), ok status, empty plan, no text."
+    }
+  ]
+}

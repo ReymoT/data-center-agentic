@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.19 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.20 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.20 - 2026-10-22
+
+- Matty supplied his original E05 ratings and explicitly requested publication/status update and tagging the next receiver. [Issue #42](https://github.com/ReymoT/data-center-agentic/issues/42) records intake and stale pending-Matty guidance before edits. [The handoff](../handoffs/E05_MATTY_RATINGS_2026-10-22.md) binds the original to the packet/rubric/validator.
+- Preserve all 41,833 source bytes, labels, extractions, citation choices, completeness and notes; all 22 expected output units / 96 assertions pass structural validation. This is Matty's submitted first pass, not automated adjudication or a model result.
+- E05 is Verifying. Nisha preserves her own original before opening Matty's labels, then leads matched extraction/label agreement and separate joint adjudication. Remaining rubric/Q10 and technical questions stay open; no blinding guarantee or freeze is fabricated.
+- Synchronize current status/version headers while preserving all 50 task rows, exact seven-file policies, F02/interfaces, shared settings/requirements and existing code/tests/canonical cases. No A01 diagnosis, model call or shared scoring-rule change.
 
 ## Deployment 1.19 - 2026-10-22
 
