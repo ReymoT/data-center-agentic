@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.21 - 2026-10-22. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.22 - 2026-10-23. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.22 - 2026-10-23
+
+- Matty authorized all reviewed recommendations; [maintenance #46](https://github.com/ReymoT/data-center-agentic/issues/46) records scope and real closure conditions. [The handoff](../handoffs/OCT23_K02_DECISION_INTAKE.md) records actual evidence and limits.
+- Reviewed already-merged K02 PR45; exact PR/main CI and latest-head ancestry verified before merged-branch deletion. Added six actual consumer cases, all passing, without production/API/schema changes. Equal Context hashes do not prove RDF reconstruction. Full K01/K03/A02/L01 acceptance stays separate.
+- Record received Ved Q10/E01 replies, Nisha strict basis/runtime additions/instruction1.21 adoption and October24 ratings checkpoint. Matty replies and one consolidated named-owner request are published. Exact refined sampling still needs Nisha; optional 0.01 kWh comparison remains a proposal. No frozen map, fabricated rating or model call.
+- Retain the ordinary local suite's 1057 passes / 19 passing subtests plus existing A01 timeout and independent 23360/24001-byte HTTP failure. No deadline/test/protocol workaround or timeout fix. Current runtime pin, locks, prompts, F02, canonical E04/E05 originals and all50 task rows/exact policies stay unchanged. Update README/plain architecture/diagram implementation status to include K02. Hosted publication checks are recorded in #46 after execution.
 
 ## Deployment 1.21 - 2026-10-22
 

@@ -1,6 +1,8 @@
 # Shared interface contract location
 
-Version: 1.21 - 2026-10-22. Contract owner: Ved.
+October 23: [K02 review and decision intake](../handoffs/OCT23_K02_DECISION_INTAKE.md). No F02 change; consumer acceptance remains task-specific.
+
+Version: 1.22 — 2026-10-23. Contract owner: Ved.
 
 Read [implemented F02 records](../INTERFACES.md), contract 1.0.0, with their examples and tests.
 The earlier draft has been superseded; actual consumer adoption remains pending.
