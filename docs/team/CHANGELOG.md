@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.22 - 2026-10-23. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.23 - 2026-10-23. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.23 - 2026-10-23
+
+- Matty authorized all12 issue recommendations and the sequential S02 receiving, A01/F03 diagnostic and F04/F05 tasks. [Issue50](https://github.com/ReymoT/data-center-agentic/issues/50) and [handoff](../handoffs/OCT23_S02_RECEIVING_AND_FOLLOWUPS.md) retain bounded closure criteria, exact actions, checks and unresolved gates.
+- Record S02 PR49 merge, Edison convention/facility-IT receiving acceptance, exact Q04/conditional-optionB and Q13 positions. Nine new real S01/S02/E01/F02/checker consumer cases pass; no redundant production slot guard because F02 boundary revalidation already rejects reordered slots. Keep strict unfinished-work guard pending affected-owner scoring decision.
+- Reproduce a test-only decoder-acceptance branch that fails the old platform-specific RecursionError assertion. Preserve nested metadata bytes, deadline, CallBlocked/cause, zero-chat/zero-attempt/cap assertions; permit the actual decoder-dependent RecursionError or decoded-list AttributeError. Six new deterministic branch tests cover exact causes and requests. No provider code, reader or protocol changed; no macOS rerun claimed.
+- Six fixed same-length synthetic body controls complete; all previous partial-body failures remain. No root cause, reliability or timeout fix inferred. Nisha October24 original-rating and Edison October25 P02 checkpoints stay upcoming; all50 task rows/exact policies, independent originals, scientific settings, contracts, locks, pins and prompts preserved.
 
 ## Deployment 1.22 - 2026-10-23
 

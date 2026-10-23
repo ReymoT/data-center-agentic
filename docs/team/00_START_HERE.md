@@ -1,8 +1,8 @@
 # Team master instruction package
 
-Current update, October 23: [K02 review and decision intake](../handoffs/OCT23_K02_DECISION_INTAKE.md). K02 PR #45 is merged and Matty's six additional offline consumer cases pass. Ved's Q10/E01 replies and Nisha's strict basis, runtime conditions, instruction 1.21 adoption and October 24 rating checkpoint are received. Full A01/A02/A04, E01/E05 and freeze remain open; the local transport timeout persists. No schema, runtime pin, dependency or allocation changed. Earlier dated status paragraphs are historical where superseded.
+Current update, October 23: [S02 receiving verification and approved follow-ups](../handoffs/OCT23_S02_RECEIVING_AND_FOLLOWUPS.md). S02 PR #49 is merged. Edison accepted the exact calling convention and facility/IT distinction; Matty's real S01/S02/E01 receiving checks pass. Edison's exact Q04/window/conditional optionB and Q13 positions are received. The strict unfinished-work savings guard stays unchanged pending the new affected-owner question. A01 has a platform-dependent test-assertion correction and additional synthetic transport controls, not a timeout fix or adopted counter. Nisha's October 24 ratings and Edison's October 25 P02 checkpoints remain upcoming. Full A01/A02/A03/A04, E01/E05, integration and freeze remain open. No shared schema, runtime pin, lock, prompt, assignment or scientific setting changed. Earlier dated entries are historical where superseded.
 
-Version: 1.22 — 2026-10-23. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.23 — 2026-10-23. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 

@@ -1,8 +1,8 @@
 # Shared interface contract location
 
-October 23: [K02 review and decision intake](../handoffs/OCT23_K02_DECISION_INTAKE.md). No F02 change; consumer acceptance remains task-specific.
+October 23: [S02 receiving and follow-ups](../handoffs/OCT23_S02_RECEIVING_AND_FOLLOWUPS.md). No F02 change; consumer acceptance is task-specific.
 
-Version: 1.22 — 2026-10-23. Contract owner: Ved.
+Version: 1.23 — 2026-10-23. Contract owner: Ved.
 
 Read [implemented F02 records](../INTERFACES.md), contract 1.0.0, with their examples and tests.
 The earlier draft has been superseded; actual consumer adoption remains pending.

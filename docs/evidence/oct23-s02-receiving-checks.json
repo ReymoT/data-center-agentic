@@ -1,0 +1,30 @@
+{
+  "base_main": "4932b014945c38bdcbd9e08cdb2e5af536c02944",
+  "python": "3.12.14 Windows",
+  "new_consumer_cases": 9,
+  "new_parser_cases": 6,
+  "focused_s02_metrics": 35,
+  "full_local": {
+    "passed": 1135,
+    "subtests_passed": 19,
+    "failed": 2,
+    "failures": [
+      "test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]"
+    ],
+    "reason": "existing partial-body timeout; no protocol/deadline/test workaround",
+    "concurrent_other_checks_disclosed": true
+  },
+  "sandbox_permission_failure_retained": "initial sandbox smoke temp write and six focused socket cases blocked; unchanged checks pass with permitted loopback/workspace temp",
+  "model_calls": 0,
+  "full_a01_complete": false,
+  "full_s02_scientific_acceptance": false,
+  "source_hashes": {
+    "dc_sustainability/llm/provider.py": "131b09abdd292fa1210214d7902132d8953bb347a78093d8d1d6062d42d36fa3",
+    "dc_sustainability/simulator/impact.py": "ecb8ecee93a04e1534385bcf00f09b3c9699fc4d37311c4dfa19b49fec992bc7",
+    "dc_sustainability/metrics/impact.py": "fa057cbb0b81e541b19b0288793406a58a8a8b04ce9fd9455c258e22e6a78f62",
+    "tests/e2e/test_s02_receiving.py": "1048660ea60451e128d8288e33c9a221974c5b32b0730615307eaf21abaec20c",
+    "tests/llm/test_pin_parser_boundaries.py": "e08102c42888757f9f50b1fce5c2901f88d04df8dc4323baf19c99a8666ce1a7",
+    "scripts/diagnose_a01_body_controls.py": "368198b8df7f95f8a94cd3dc76f6bd4c921e39c0a0853e2532fdf5dbac02245e"
+  }
+}
