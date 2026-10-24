@@ -1,6 +1,14 @@
 # Instruction deployment changelog
 
-Current deployment: 1.23 - 2026-10-23. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.24 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.24 - 2026-10-24
+
+- Matty explicitly approved every October 24 audit recommendation, independent A01 work and F04/F05 refresh. [Issue #54](https://github.com/ReymoT/data-center-agentic/issues/54) and [handoff](../handoffs/OCT24_DECISION_INTAKE_AND_A01.md) record scope and limits.
+- Correct missing-input status for Ved tokenizer/runtime direction/Q12 and Nisha sampling agreement, E01 October 27 checkpoint and K02/L01 receiving checks. Sampling implementation checkpoint October 30; Nisha original October 24 and P02 October 25 remain distinct deliveries.
+- Record Matty responses on exact Q08 certification, deferred optional completed_work precision and conditional review of Nisha savings proposal. Current None field and strict helper remain unchanged; no scientific default, format, ownership, policy or runtime pin change.
+- Four predeclared TCP-state observations complete before snapshots: no stalled-state evidence or root-cause fix. Read-only runtime inventory now reports 0.40.10; accepted pin stays 0.40.5 and renewed direction/actual validation remain gates. Zero model calls, service/config changes or adopted dependency.
+- Preserve all 50 task rows, exact seven-file authority/merge/cleanup policies, F02/locks/prompts/fixtures/original ratings and teammate code. Full A01/A02/A03/A04/E01/E05/source/freeze acceptance remains open.
 
 ## Deployment 1.23 - 2026-10-23
 

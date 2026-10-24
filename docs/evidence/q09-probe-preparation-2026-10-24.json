@@ -1,0 +1,719 @@
+{
+  "evidence_kind": "offline_probe_input_preparation_not_inference",
+  "status": "blocked",
+  "schema_version": "1.0.0",
+  "context_hash": "5a890f148a49a19bfa924df727ab5b10657d25b18d17b07cae2243e5d544d165",
+  "episode_id": "EP-HAND1",
+  "slot": 0,
+  "fixture_scope": "public synthetic hand example; carbon semantics unresolved",
+  "agreed_runtime_version": "0.40.5",
+  "observed_runtime_version": "0.40.10",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "trial_seeds": [
+    101,
+    102,
+    103
+  ],
+  "probe_seed": 101,
+  "bounds": {
+    "max_run_attempts": 2,
+    "max_response_bytes": 2097152,
+    "per_call_seconds": 120,
+    "overall_seconds": 300,
+    "parallel_calls": 1,
+    "warmup_calls": 0
+  },
+  "model_calls": 0,
+  "blockers": [
+    "Pinned tokenizer/template-aware counter and both rendered prompt measurements missing",
+    "12000-token ceiling provisional; no pre-dispatch context validation evidence",
+    "Explicit bounded inference run authorization not recorded",
+    "runtime_version: agreed 0.40.5, observed '0.40.10'"
+  ],
+  "candidates": [
+    {
+      "system": "plain_llm",
+      "response_record": "PolicyOutput",
+      "request_sha256": "264630e066a9bc96f9cee6b0666e30168154d622cff7d35cbf3c75f0a3b42b90",
+      "request_utf8_bytes": 14259,
+      "message_characters": 8122,
+      "rendered_prompt_tokens": null,
+      "request": {
+        "model": "qwen3:8b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You recommend when flexible computing jobs should start at one simulated data-center site. The goal is lower carbon emissions without breaking any scheduling rule.\n\nScheduling rules:\n- Time is divided into hourly slots. Slot 0 is midnight in Phoenix (07:00 UTC). Decision slots are 0-23, slots 24-29 are completion slots, and the episode ends at boundary 30.\n- A job that starts at slot s with duration d occupies slots s to s+d-1, the half-open interval [s, s+d). A started job cannot pause, move or split.\n- A job cannot start before its arrival slot or before the current slot.\n- A job must finish by its completion deadline: start slot + duration <= deadline slot.\n- A nonflexible job must start at its arrival slot.\n- In every occupied slot, background IT load plus the IT load of all running and planned jobs must not exceed the site capacity constraint. Capacity applies to IT load before PUE.\n- Only starts at the current slot can be executed now. Later starts are intentions and will be decided again at later slots.\n\nImpact rules:\n- Energy in one slot is PUE x total IT kW x slot length in hours, in kWh.\n- Emissions are kWh x carbon intensity in g/kWh / 1000, in kg.\n- Carbon values in the facts are forecasts, not measured outcomes.\n\nEvidence rules:\n- Use only the facts provided. Every fact and constraint has an evidence ID that starts with FACT- or CON-.\n- Cite the evidence IDs you rely on. Do not invent IDs, values, checks or sources.\n- If a required fact is missing, say so instead of assuming a value.\n\nExplanation rules:\n- The summary states which jobs start now, which are deferred or abstained, and why.\n- Each claim has a short text, the evidence IDs that support it and, for a number, its value and unit (kW, kWh, slot, h, g/kWh or kg).\n- Say whether an impact is a forecast. Do not present a forecast as a measured result.\n- A savings claim must name what it is compared with, over which slots, and use the same completed work in both schedules.\n- Only claim a check was performed if it was actually performed.\n- List assumptions and limitations, such as missing or stale forecasts.\n\nHow to answer:\n- You have exactly one response. There are no tools, no schedule checker and no second attempt.\n- Return one JSON object that matches the supplied schema, containing both the schedule and its explanation.\n- No schedule checks are performed before you answer, so do not claim that any were.\n- You may start, defer or abstain for any visible job. Give a reason and evidence IDs for each deferral or abstention."
+          },
+          {
+            "role": "user",
+            "content": "Decision request.\n\nUse these exact identifiers in your JSON:\n- record_type \"PolicyOutput\", schema_version \"1.0.0\", system \"plain_llm\", output_status \"ok\".\n- plan: record_type \"Plan\", schema_version \"1.0.0\", episode_id \"EP-HAND1\", slot 0, state_version 0, status \"proposed\".\n- explanation: source \"llm\".\n\nVisible facts as flat JSON. The evidence_ids list holds every ID you may cite.\n{\"carbon_facts\":[{\"fact_id\":\"FACT-CI-s00\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":0,\"valid_to_utc\":null,\"value\":500.0},{\"fact_id\":\"FACT-CI-s01\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":1,\"valid_to_utc\":null,\"value\":450.0},{\"fact_id\":\"FACT-CI-s02\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":2,\"valid_to_utc\":null,\"value\":300.0},{\"fact_id\":\"FACT-CI-s03\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":3,\"valid_to_utc\":null,\"value\":250.0},{\"fact_id\":\"FACT-CI-s04\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":4,\"valid_to_utc\":null,\"value\":400.0},{\"fact_id\":\"FACT-CI-s05\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":5,\"valid_to_utc\":null,\"value\":480.0},{\"fact_id\":\"FACT-CI-s06\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":6,\"valid_to_utc\":null,\"value\":520.0}],\"completed_jobs\":[],\"constraints\":[{\"applies_to_jobs\":[],\"applies_to_site\":\"SITE1\",\"constraint_id\":\"CON-CAP-01\",\"constraint_type\":\"capacity\",\"limit_value\":100.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"kW\"},{\"applies_to_jobs\":[\"J1\"],\"applies_to_site\":null,\"constraint_id\":\"CON-DL-J1\",\"constraint_type\":\"deadline\",\"limit_value\":6.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"slot\"},{\"applies_to_jobs\":[],\"applies_to_site\":\"SITE1\",\"constraint_id\":\"CON-FRESH-01\",\"constraint_type\":\"freshness\",\"limit_value\":2.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"slot\"}],\"current_slot\":0,\"episode_id\":\"EP-HAND1\",\"evidence_ids\":[\"CON-CAP-01\",\"CON-DL-J1\",\"CON-FRESH-01\",\"FACT-CI-s00\",\"FACT-CI-s01\",\"FACT-CI-s02\",\"FACT-CI-s03\",\"FACT-CI-s04\",\"FACT-CI-s05\",\"FACT-CI-s06\",\"FACT-JOB-J1\",\"FACT-JOB-J2\",\"FACT-SITE-BG\",\"FACT-SITE-PUE\",\"FACT-SITE-SLOTH\"],\"missed_job_ids\":[],\"missing_carbon_slots\":[],\"running_jobs\":[],\"site\":{\"background_kw\":40.0,\"pue\":1.0,\"record_type\":\"SiteConfig\",\"schema_version\":\"1.0.0\",\"site_id\":\"SITE1\",\"slot_hours\":1.0},\"snapshot_id\":\"SNAP1\",\"sources\":[{\"commit\":null,\"path\":\"tests/contracts/fixtures.py\",\"record_type\":\"SourceRef\",\"redistribution_status\":\"permitted\",\"schema_version\":\"1.0.0\",\"sha256\":null,\"source_id\":\"SRC-HAND\"}],\"state_version\":0,\"waiting_jobs\":[{\"arrival_slot\":0,\"deadline_slot\":6,\"duration_slots\":2,\"flexible\":true,\"job_id\":\"J1\",\"power_kw\":40.0,\"record_type\":\"Job\",\"schema_version\":\"1.0.0\"},{\"arrival_slot\":0,\"deadline_slot\":6,\"duration_slots\":2,\"flexible\":true,\"job_id\":\"J2\",\"power_kw\":30.0,\"record_type\":\"Job\",\"schema_version\":\"1.0.0\"}]}"
+          }
+        ],
+        "format": {
+          "$defs": {
+            "Abstention": {
+              "additionalProperties": false,
+              "description": "``job_id`` None abstains for the whole decision (Q02 per-job vs whole is open).",
+              "properties": {
+                "job_id": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Job Id"
+                },
+                "reason": {
+                  "enum": [
+                    "infeasible_deadline",
+                    "constraint_violation",
+                    "missing_evidence",
+                    "stale_evidence",
+                    "other"
+                  ],
+                  "title": "Reason",
+                  "type": "string"
+                },
+                "detail": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Detail"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "constraint_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^CON-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Constraint Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "reason"
+              ],
+              "title": "Abstention",
+              "type": "object"
+            },
+            "Claim": {
+              "additionalProperties": false,
+              "properties": {
+                "claim_id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                  "title": "Claim Id",
+                  "type": "string"
+                },
+                "text": {
+                  "minLength": 1,
+                  "title": "Text",
+                  "type": "string"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Value"
+                },
+                "unit": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "kW",
+                        "kWh",
+                        "slot",
+                        "h",
+                        "g/kWh",
+                        "kg"
+                      ],
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Unit"
+                }
+              },
+              "required": [
+                "claim_id",
+                "text"
+              ],
+              "title": "Claim",
+              "type": "object"
+            },
+            "Deferral": {
+              "additionalProperties": false,
+              "properties": {
+                "job_id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                  "title": "Job Id",
+                  "type": "string"
+                },
+                "reason": {
+                  "enum": [
+                    "waiting_for_lower_carbon",
+                    "capacity",
+                    "missing_evidence",
+                    "other"
+                  ],
+                  "title": "Reason",
+                  "type": "string"
+                },
+                "detail": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Detail"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "job_id",
+                "reason"
+              ],
+              "title": "Deferral",
+              "type": "object"
+            },
+            "Explanation": {
+              "additionalProperties": false,
+              "properties": {
+                "source": {
+                  "enum": [
+                    "llm",
+                    "template"
+                  ],
+                  "title": "Source",
+                  "type": "string"
+                },
+                "summary": {
+                  "minLength": 1,
+                  "title": "Summary",
+                  "type": "string"
+                },
+                "claims": {
+                  "default": [],
+                  "items": {
+                    "$ref": "#/$defs/Claim"
+                  },
+                  "title": "Claims",
+                  "type": "array"
+                },
+                "limitations": {
+                  "default": [],
+                  "items": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "title": "Limitations",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "source",
+                "summary"
+              ],
+              "title": "Explanation",
+              "type": "object"
+            },
+            "Plan": {
+              "additionalProperties": false,
+              "description": "A proposal. Starts may be future intentions; only current-slot starts are executable.\n\nCoverage (must every visible job appear?) and omission semantics are Q02/Q03 and are\nintentionally not enforced. Backdated or unknown-job starts are structurally valid so the\nchecker can report them as violations.",
+              "properties": {
+                "schema_version": {
+                  "default": "1.0.0",
+                  "title": "Schema Version",
+                  "type": "string"
+                },
+                "record_type": {
+                  "const": "Plan",
+                  "default": "Plan",
+                  "title": "Record Type",
+                  "type": "string"
+                },
+                "episode_id": {
+                  "pattern": "^EP-[A-Za-z0-9]{1,32}$",
+                  "title": "Episode Id",
+                  "type": "string"
+                },
+                "slot": {
+                  "minimum": 0,
+                  "title": "Slot",
+                  "type": "integer"
+                },
+                "state_version": {
+                  "minimum": 0,
+                  "title": "State Version",
+                  "type": "integer"
+                },
+                "starts": {
+                  "default": [],
+                  "items": {
+                    "$ref": "#/$defs/PlannedStart"
+                  },
+                  "title": "Starts",
+                  "type": "array"
+                },
+                "deferrals": {
+                  "default": [],
+                  "items": {
+                    "$ref": "#/$defs/Deferral"
+                  },
+                  "title": "Deferrals",
+                  "type": "array"
+                },
+                "abstentions": {
+                  "default": [],
+                  "items": {
+                    "$ref": "#/$defs/Abstention"
+                  },
+                  "title": "Abstentions",
+                  "type": "array"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "status": {
+                  "enum": [
+                    "proposed",
+                    "approved",
+                    "executed",
+                    "rejected"
+                  ],
+                  "title": "Status",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "episode_id",
+                "slot",
+                "state_version",
+                "status"
+              ],
+              "title": "Plan",
+              "type": "object"
+            },
+            "PlannedStart": {
+              "additionalProperties": false,
+              "properties": {
+                "job_id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                  "title": "Job Id",
+                  "type": "string"
+                },
+                "start_slot": {
+                  "minimum": 0,
+                  "title": "Start Slot",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "job_id",
+                "start_slot"
+              ],
+              "title": "PlannedStart",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Envelope returned by ``propose``; ``plan`` is None when there is no usable plan.",
+          "properties": {
+            "schema_version": {
+              "default": "1.0.0",
+              "title": "Schema Version",
+              "type": "string"
+            },
+            "record_type": {
+              "const": "PolicyOutput",
+              "default": "PolicyOutput",
+              "title": "Record Type",
+              "type": "string"
+            },
+            "system": {
+              "enum": [
+                "agent",
+                "plain_llm",
+                "greedy_a",
+                "greedy_b",
+                "decision_tree_c",
+                "random_forest_d"
+              ],
+              "title": "System",
+              "type": "string"
+            },
+            "output_status": {
+              "enum": [
+                "ok",
+                "no_output",
+                "malformed",
+                "error"
+              ],
+              "title": "Output Status",
+              "type": "string"
+            },
+            "plan": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Plan"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "explanation": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Explanation"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "raw_response": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Raw Response"
+            }
+          },
+          "required": [
+            "system",
+            "output_status"
+          ],
+          "title": "PolicyOutput",
+          "type": "object"
+        },
+        "stream": false,
+        "think": false,
+        "keep_alive": "30m",
+        "options": {
+          "temperature": 0.2,
+          "top_p": 1,
+          "seed": 101,
+          "num_ctx": 16384,
+          "num_predict": 1536
+        }
+      }
+    },
+    {
+      "system": "agent",
+      "response_record": "Plan",
+      "request_sha256": "c8f78bea9c593a750fe661b2def59136525897d0ee5b064d005c450a7af279eb",
+      "request_utf8_bytes": 11034,
+      "message_characters": 6923,
+      "rendered_prompt_tokens": null,
+      "request": {
+        "model": "qwen3:8b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You recommend when flexible computing jobs should start at one simulated data-center site. The goal is lower carbon emissions without breaking any scheduling rule.\n\nScheduling rules:\n- Time is divided into hourly slots. Slot 0 is midnight in Phoenix (07:00 UTC). Decision slots are 0-23, slots 24-29 are completion slots, and the episode ends at boundary 30.\n- A job that starts at slot s with duration d occupies slots s to s+d-1, the half-open interval [s, s+d). A started job cannot pause, move or split.\n- A job cannot start before its arrival slot or before the current slot.\n- A job must finish by its completion deadline: start slot + duration <= deadline slot.\n- A nonflexible job must start at its arrival slot.\n- In every occupied slot, background IT load plus the IT load of all running and planned jobs must not exceed the site capacity constraint. Capacity applies to IT load before PUE.\n- Only starts at the current slot can be executed now. Later starts are intentions and will be decided again at later slots.\n\nImpact rules:\n- Energy in one slot is PUE x total IT kW x slot length in hours, in kWh.\n- Emissions are kWh x carbon intensity in g/kWh / 1000, in kg.\n- Carbon values in the facts are forecasts, not measured outcomes.\n\nEvidence rules:\n- Use only the facts provided. Every fact and constraint has an evidence ID that starts with FACT- or CON-.\n- Cite the evidence IDs you rely on. Do not invent IDs, values, checks or sources.\n- If a required fact is missing, say so instead of assuming a value.\n\nReturn a proposed Plan matching the supplied schema. This is a transport compatibility probe, with no tools or execution. Use only the supplied public development facts; do not claim checks ran."
+          },
+          {
+            "role": "user",
+            "content": "{\"carbon_facts\":[{\"fact_id\":\"FACT-CI-s00\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":0,\"valid_to_utc\":null,\"value\":500.0},{\"fact_id\":\"FACT-CI-s01\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":1,\"valid_to_utc\":null,\"value\":450.0},{\"fact_id\":\"FACT-CI-s02\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":2,\"valid_to_utc\":null,\"value\":300.0},{\"fact_id\":\"FACT-CI-s03\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":3,\"valid_to_utc\":null,\"value\":250.0},{\"fact_id\":\"FACT-CI-s04\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":4,\"valid_to_utc\":null,\"value\":400.0},{\"fact_id\":\"FACT-CI-s05\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":5,\"valid_to_utc\":null,\"value\":480.0},{\"fact_id\":\"FACT-CI-s06\",\"fact_kind\":\"forecast\",\"forecast_kind\":\"perfect_foresight\",\"issued_at_utc\":\"2022-01-01T07:00:00Z\",\"quality_status\":\"unvalidated\",\"record_type\":\"CarbonForecast\",\"schema_version\":\"1.0.0\",\"semantics\":{\"emissions_factor_type\":\"average\",\"interval_convention\":\"unresolved\",\"pollutant_basis\":\"unresolved\",\"slot_mapping_status\":\"provisional\"},\"source_id\":\"SRC-HAND\",\"source_sha256\":null,\"unit\":\"g/kWh\",\"valid_from_utc\":null,\"valid_slot\":6,\"valid_to_utc\":null,\"value\":520.0}],\"completed_jobs\":[],\"constraints\":[{\"applies_to_jobs\":[],\"applies_to_site\":\"SITE1\",\"constraint_id\":\"CON-CAP-01\",\"constraint_type\":\"capacity\",\"limit_value\":100.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"kW\"},{\"applies_to_jobs\":[\"J1\"],\"applies_to_site\":null,\"constraint_id\":\"CON-DL-J1\",\"constraint_type\":\"deadline\",\"limit_value\":6.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"slot\"},{\"applies_to_jobs\":[],\"applies_to_site\":\"SITE1\",\"constraint_id\":\"CON-FRESH-01\",\"constraint_type\":\"freshness\",\"limit_value\":2.0,\"record_type\":\"Constraint\",\"schema_version\":\"1.0.0\",\"source_id\":\"SRC-HAND\",\"source_version\":null,\"unit\":\"slot\"}],\"current_slot\":0,\"episode_id\":\"EP-HAND1\",\"evidence_ids\":[\"CON-CAP-01\",\"CON-DL-J1\",\"CON-FRESH-01\",\"FACT-CI-s00\",\"FACT-CI-s01\",\"FACT-CI-s02\",\"FACT-CI-s03\",\"FACT-CI-s04\",\"FACT-CI-s05\",\"FACT-CI-s06\",\"FACT-JOB-J1\",\"FACT-JOB-J2\",\"FACT-SITE-BG\",\"FACT-SITE-PUE\",\"FACT-SITE-SLOTH\"],\"missed_job_ids\":[],\"missing_carbon_slots\":[],\"running_jobs\":[],\"site\":{\"background_kw\":40.0,\"pue\":1.0,\"record_type\":\"SiteConfig\",\"schema_version\":\"1.0.0\",\"site_id\":\"SITE1\",\"slot_hours\":1.0},\"snapshot_id\":\"SNAP1\",\"sources\":[{\"commit\":null,\"path\":\"tests/contracts/fixtures.py\",\"record_type\":\"SourceRef\",\"redistribution_status\":\"permitted\",\"schema_version\":\"1.0.0\",\"sha256\":null,\"source_id\":\"SRC-HAND\"}],\"state_version\":0,\"waiting_jobs\":[{\"arrival_slot\":0,\"deadline_slot\":6,\"duration_slots\":2,\"flexible\":true,\"job_id\":\"J1\",\"power_kw\":40.0,\"record_type\":\"Job\",\"schema_version\":\"1.0.0\"},{\"arrival_slot\":0,\"deadline_slot\":6,\"duration_slots\":2,\"flexible\":true,\"job_id\":\"J2\",\"power_kw\":30.0,\"record_type\":\"Job\",\"schema_version\":\"1.0.0\"}]}"
+          }
+        ],
+        "format": {
+          "$defs": {
+            "Abstention": {
+              "additionalProperties": false,
+              "description": "``job_id`` None abstains for the whole decision (Q02 per-job vs whole is open).",
+              "properties": {
+                "job_id": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Job Id"
+                },
+                "reason": {
+                  "enum": [
+                    "infeasible_deadline",
+                    "constraint_violation",
+                    "missing_evidence",
+                    "stale_evidence",
+                    "other"
+                  ],
+                  "title": "Reason",
+                  "type": "string"
+                },
+                "detail": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Detail"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                },
+                "constraint_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^CON-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Constraint Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "reason"
+              ],
+              "title": "Abstention",
+              "type": "object"
+            },
+            "Deferral": {
+              "additionalProperties": false,
+              "properties": {
+                "job_id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                  "title": "Job Id",
+                  "type": "string"
+                },
+                "reason": {
+                  "enum": [
+                    "waiting_for_lower_carbon",
+                    "capacity",
+                    "missing_evidence",
+                    "other"
+                  ],
+                  "title": "Reason",
+                  "type": "string"
+                },
+                "detail": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Detail"
+                },
+                "evidence_ids": {
+                  "default": [],
+                  "items": {
+                    "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                    "type": "string"
+                  },
+                  "title": "Evidence Ids",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "job_id",
+                "reason"
+              ],
+              "title": "Deferral",
+              "type": "object"
+            },
+            "PlannedStart": {
+              "additionalProperties": false,
+              "properties": {
+                "job_id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                  "title": "Job Id",
+                  "type": "string"
+                },
+                "start_slot": {
+                  "minimum": 0,
+                  "title": "Start Slot",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "job_id",
+                "start_slot"
+              ],
+              "title": "PlannedStart",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "description": "A proposal. Starts may be future intentions; only current-slot starts are executable.\n\nCoverage (must every visible job appear?) and omission semantics are Q02/Q03 and are\nintentionally not enforced. Backdated or unknown-job starts are structurally valid so the\nchecker can report them as violations.",
+          "properties": {
+            "schema_version": {
+              "default": "1.0.0",
+              "title": "Schema Version",
+              "type": "string"
+            },
+            "record_type": {
+              "const": "Plan",
+              "default": "Plan",
+              "title": "Record Type",
+              "type": "string"
+            },
+            "episode_id": {
+              "pattern": "^EP-[A-Za-z0-9]{1,32}$",
+              "title": "Episode Id",
+              "type": "string"
+            },
+            "slot": {
+              "minimum": 0,
+              "title": "Slot",
+              "type": "integer"
+            },
+            "state_version": {
+              "minimum": 0,
+              "title": "State Version",
+              "type": "integer"
+            },
+            "starts": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/PlannedStart"
+              },
+              "title": "Starts",
+              "type": "array"
+            },
+            "deferrals": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/Deferral"
+              },
+              "title": "Deferrals",
+              "type": "array"
+            },
+            "abstentions": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/Abstention"
+              },
+              "title": "Abstentions",
+              "type": "array"
+            },
+            "evidence_ids": {
+              "default": [],
+              "items": {
+                "pattern": "^(FACT|CON)-[A-Za-z0-9][A-Za-z0-9_.:-]{0,59}$",
+                "type": "string"
+              },
+              "title": "Evidence Ids",
+              "type": "array"
+            },
+            "status": {
+              "enum": [
+                "proposed",
+                "approved",
+                "executed",
+                "rejected"
+              ],
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": [
+            "episode_id",
+            "slot",
+            "state_version",
+            "status"
+          ],
+          "title": "Plan",
+          "type": "object"
+        },
+        "stream": false,
+        "think": false,
+        "keep_alive": "30m",
+        "options": {
+          "temperature": 0.2,
+          "top_p": 1,
+          "seed": 101,
+          "num_ctx": 16384,
+          "num_predict": 1536
+        }
+      }
+    }
+  ]
+}
