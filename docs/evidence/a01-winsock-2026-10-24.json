@@ -1,0 +1,2135 @@
+{
+  "evidence_kind": "read_only_winsock_tcp_info_original_test_observation",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "model_calls": 0,
+  "tcp_info_v0_size": 88,
+  "field_offsets": {
+    "State": 0,
+    "Mss": 4,
+    "ConnectionTimeMs": 8,
+    "TimestampsEnabled": 16,
+    "RttUs": 20,
+    "MinRttUs": 24,
+    "BytesInFlight": 28,
+    "Cwnd": 32,
+    "SndWnd": 36,
+    "RcvWnd": 40,
+    "RcvBuf": 44,
+    "BytesOut": 48,
+    "BytesIn": 56,
+    "BytesReordered": 64,
+    "BytesRetrans": 68,
+    "FastRetrans": 72,
+    "DupAcksIn": 76,
+    "TimeoutEpisodes": 80,
+    "SynRetrans": 84
+  },
+  "source_sha256_lf": "a30e167cc84361f44081d396edc23154739bea38cc983532865b88c045ec54f6",
+  "provider_sha256_lf": "131b09abdd292fa1210214d7902132d8953bb347a78093d8d1d6062d42d36fa3",
+  "fixture_sha256_lf": "e24ae0ef414e73d556ecc38f30c86f1716d87d8e83960e627edd03f8ba9e2c54",
+  "observations": [
+    {
+      "event": "test_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5160000000032596
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5310000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57645
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 4,
+          "TimestampsEnabled": 0,
+          "RttUs": 101,
+          "MinRttUs": 58,
+          "BytesInFlight": 0,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5310000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57645
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 4,
+          "TimestampsEnabled": 0,
+          "RttUs": 101,
+          "MinRttUs": 58,
+          "BytesInFlight": 1,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5310000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57645
+        ],
+        "peer": [
+          "127.0.0.1",
+          57644
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 5,
+          "TimestampsEnabled": 0,
+          "RttUs": 104,
+          "MinRttUs": 68,
+          "BytesInFlight": 0,
+          "Cwnd": 14711,
+          "SndWnd": 65280,
+          "RcvWnd": 65396,
+          "RcvBuf": 65535,
+          "BytesOut": 111,
+          "BytesIn": 139,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 26
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5310000000172295,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 26,
+      "remaining": 0
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57646
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 79,
+          "MinRttUs": 25,
+          "BytesInFlight": 0,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57646
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 79,
+          "MinRttUs": 25,
+          "BytesInFlight": 1,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57646
+        ],
+        "peer": [
+          "127.0.0.1",
+          57644
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 7,
+          "Mss": 1460,
+          "ConnectionTimeMs": 6,
+          "TimestampsEnabled": 0,
+          "RttUs": 75,
+          "MinRttUs": 47,
+          "BytesInFlight": 0,
+          "Cwnd": 14708,
+          "SndWnd": 65280,
+          "RcvWnd": 65264,
+          "RcvBuf": 65535,
+          "BytesOut": 108,
+          "BytesIn": 271,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 157
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 157,
+      "remaining": 0
+    },
+    {
+      "event": "server_body_send_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57647
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 75,
+          "MinRttUs": 48,
+          "BytesInFlight": 0,
+          "Cwnd": 14715,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 115,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 8001
+    },
+    {
+      "event": "server_body_send_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57647
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 72,
+          "MinRttUs": 48,
+          "BytesInFlight": 0,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 8001
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57647
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 72,
+          "MinRttUs": 48,
+          "BytesInFlight": 0,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57644
+        ],
+        "peer": [
+          "127.0.0.1",
+          57647
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 72,
+          "MinRttUs": 48,
+          "BytesInFlight": 1,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57647
+        ],
+        "peer": [
+          "127.0.0.1",
+          57644
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 76,
+          "MinRttUs": 56,
+          "BytesInFlight": 0,
+          "Cwnd": 18130,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 3530,
+          "BytesIn": 8116,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 8001
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "seconds": 1.5469999999913853,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 8001,
+      "remaining": 0
+    },
+    {
+      "event": "test_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.562000000005355
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57649
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 81,
+          "MinRttUs": 27,
+          "BytesInFlight": 0,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57649
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 81,
+          "MinRttUs": 27,
+          "BytesInFlight": 1,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57649
+        ],
+        "peer": [
+          "127.0.0.1",
+          57648
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 7,
+          "Mss": 1460,
+          "ConnectionTimeMs": 5,
+          "TimestampsEnabled": 0,
+          "RttUs": 82,
+          "MinRttUs": 44,
+          "BytesInFlight": 0,
+          "Cwnd": 14711,
+          "SndWnd": 65280,
+          "RcvWnd": 65396,
+          "RcvBuf": 65535,
+          "BytesOut": 111,
+          "BytesIn": 139,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 26
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 26,
+      "remaining": 0
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57650
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 64,
+          "MinRttUs": 16,
+          "BytesInFlight": 0,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57650
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 64,
+          "MinRttUs": 16,
+          "BytesInFlight": 1,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57650
+        ],
+        "peer": [
+          "127.0.0.1",
+          57648
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 4,
+          "TimestampsEnabled": 0,
+          "RttUs": 64,
+          "MinRttUs": 41,
+          "BytesInFlight": 0,
+          "Cwnd": 14708,
+          "SndWnd": 65280,
+          "RcvWnd": 65264,
+          "RcvBuf": 65535,
+          "BytesOut": 108,
+          "BytesIn": 271,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 157
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5780000000086147,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 157,
+      "remaining": 0
+    },
+    {
+      "event": "server_body_send_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57651
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 73,
+          "MinRttUs": 43,
+          "BytesInFlight": 0,
+          "Cwnd": 14715,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 115,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 8001
+    },
+    {
+      "event": "server_body_send_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57651
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 71,
+          "MinRttUs": 43,
+          "BytesInFlight": 0,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 8001
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57651
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 71,
+          "MinRttUs": 43,
+          "BytesInFlight": 0,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57648
+        ],
+        "peer": [
+          "127.0.0.1",
+          57651
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 71,
+          "MinRttUs": 43,
+          "BytesInFlight": 1,
+          "Cwnd": 22716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 8116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57651
+        ],
+        "peer": [
+          "127.0.0.1",
+          57648
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 76,
+          "MinRttUs": 53,
+          "BytesInFlight": 0,
+          "Cwnd": 18130,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 3530,
+          "BytesIn": 8116,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 8001
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 8001,
+      "remaining": 0
+    },
+    {
+      "event": "test_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57653
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 84,
+          "MinRttUs": 24,
+          "BytesInFlight": 0,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57653
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 84,
+          "MinRttUs": 24,
+          "BytesInFlight": 1,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57653
+        ],
+        "peer": [
+          "127.0.0.1",
+          57652
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 86,
+          "MinRttUs": 51,
+          "BytesInFlight": 0,
+          "Cwnd": 14711,
+          "SndWnd": 65280,
+          "RcvWnd": 65396,
+          "RcvBuf": 65535,
+          "BytesOut": 111,
+          "BytesIn": 139,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 26
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 26,
+      "remaining": 0
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57654
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 68,
+          "MinRttUs": 26,
+          "BytesInFlight": 0,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57654
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 68,
+          "MinRttUs": 26,
+          "BytesInFlight": 1,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57654
+        ],
+        "peer": [
+          "127.0.0.1",
+          57652
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 62,
+          "MinRttUs": 40,
+          "BytesInFlight": 0,
+          "Cwnd": 14708,
+          "SndWnd": 65280,
+          "RcvWnd": 65264,
+          "RcvBuf": 65535,
+          "BytesOut": 108,
+          "BytesIn": 271,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 157
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.5940000000118744,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 157,
+      "remaining": 0
+    },
+    {
+      "event": "server_body_send_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.6089999999967404,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57655
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 82,
+          "MinRttUs": 48,
+          "BytesInFlight": 0,
+          "Cwnd": 14716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 24001
+    },
+    {
+      "event": "server_body_send_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.6089999999967404,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57655
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 76,
+          "MinRttUs": 39,
+          "BytesInFlight": 0,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 24001
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.6089999999967404,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57655
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 76,
+          "MinRttUs": 39,
+          "BytesInFlight": 0,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.6089999999967404,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57652
+        ],
+        "peer": [
+          "127.0.0.1",
+          57655
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 76,
+          "MinRttUs": 39,
+          "BytesInFlight": 1,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.6089999999967404,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57655
+        ],
+        "peer": [
+          "127.0.0.1",
+          57652
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 3,
+          "TimestampsEnabled": 0,
+          "RttUs": 70,
+          "MinRttUs": 56,
+          "BytesInFlight": 0,
+          "Cwnd": 18130,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 3530,
+          "BytesIn": 24117,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 24001
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "seconds": 1.625,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 24001,
+      "remaining": 0
+    },
+    {
+      "event": "test_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.625
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57657
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 89,
+          "MinRttUs": 23,
+          "BytesInFlight": 0,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57657
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 89,
+          "MinRttUs": 23,
+          "BytesInFlight": 1,
+          "Cwnd": 14739,
+          "SndWnd": 65280,
+          "RcvWnd": 65424,
+          "RcvBuf": 65535,
+          "BytesOut": 139,
+          "BytesIn": 111,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57657
+        ],
+        "peer": [
+          "127.0.0.1",
+          57656
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 7,
+          "Mss": 1460,
+          "ConnectionTimeMs": 5,
+          "TimestampsEnabled": 0,
+          "RttUs": 90,
+          "MinRttUs": 66,
+          "BytesInFlight": 0,
+          "Cwnd": 14711,
+          "SndWnd": 65280,
+          "RcvWnd": 65396,
+          "RcvBuf": 65535,
+          "BytesOut": 111,
+          "BytesIn": 139,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 26
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 26,
+      "remaining": 0
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57658
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 62,
+          "MinRttUs": 23,
+          "BytesInFlight": 0,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57658
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 62,
+          "MinRttUs": 23,
+          "BytesInFlight": 1,
+          "Cwnd": 14871,
+          "SndWnd": 65024,
+          "RcvWnd": 65427,
+          "RcvBuf": 65535,
+          "BytesOut": 271,
+          "BytesIn": 108,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57658
+        ],
+        "peer": [
+          "127.0.0.1",
+          57656
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 60,
+          "MinRttUs": 36,
+          "BytesInFlight": 0,
+          "Cwnd": 14708,
+          "SndWnd": 65280,
+          "RcvWnd": 65264,
+          "RcvBuf": 65535,
+          "BytesOut": 108,
+          "BytesIn": 271,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 157
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 157,
+      "remaining": 0
+    },
+    {
+      "event": "server_body_send_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57659
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 68,
+          "MinRttUs": 44,
+          "BytesInFlight": 0,
+          "Cwnd": 14716,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 116,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 24001
+    },
+    {
+      "event": "server_body_send_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6410000000032596,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57659
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 65,
+          "MinRttUs": 42,
+          "BytesInFlight": 0,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "bytes": 24001
+    },
+    {
+      "event": "shutdown_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6560000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57659
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 65,
+          "MinRttUs": 42,
+          "BytesInFlight": 0,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "shutdown_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6560000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57656
+        ],
+        "peer": [
+          "127.0.0.1",
+          57659
+        ],
+        "tcp_nodelay": 0,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 5,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 65,
+          "MinRttUs": 42,
+          "BytesInFlight": 1,
+          "Cwnd": 35797,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 24233,
+          "BytesIn": 3530,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "how": 1
+    },
+    {
+      "event": "read_start",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6560000000172295,
+      "snapshot": {
+        "local": [
+          "127.0.0.1",
+          57659
+        ],
+        "peer": [
+          "127.0.0.1",
+          57656
+        ],
+        "tcp_nodelay": 1,
+        "send_buffer": 65536,
+        "receive_buffer": 65536,
+        "linger_on": 0,
+        "linger_seconds": 0,
+        "ioctl_result": 0,
+        "returned_bytes": 88,
+        "tcp": {
+          "State": 4,
+          "Mss": 1460,
+          "ConnectionTimeMs": 2,
+          "TimestampsEnabled": 0,
+          "RttUs": 62,
+          "MinRttUs": 54,
+          "BytesInFlight": 0,
+          "Cwnd": 18130,
+          "SndWnd": 65280,
+          "RcvWnd": 65535,
+          "RcvBuf": 65535,
+          "BytesOut": 3530,
+          "BytesIn": 24117,
+          "BytesReordered": 0,
+          "BytesRetrans": 0,
+          "FastRetrans": 0,
+          "DupAcksIn": 0,
+          "TimeoutEpisodes": 0,
+          "SynRetrans": 0
+        }
+      },
+      "remaining": 24001
+    },
+    {
+      "event": "read_returned",
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "seconds": 1.6560000000172295,
+      "snapshot": {
+        "error": "OSError: [WinError 10038] An operation was attempted on something that is not a socket"
+      },
+      "bytes": 24001,
+      "remaining": 0
+    }
+  ],
+  "test_results": [
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-agent]",
+      "outcome": "passed"
+    },
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[array-plain_llm]",
+      "outcome": "passed"
+    },
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-agent]",
+      "outcome": "passed"
+    },
+    {
+      "test": "tests/llm/test_ollama_provider.py::test_deep_json_failure_is_recorded_and_exhausts_run_budget[object-plain_llm]",
+      "outcome": "passed"
+    }
+  ],
+  "completed": true,
+  "limits": "Observer changes timing. TCP counters are not packet capture or proof of application delivery/root cause. API errors/unavailable snapshots retained. SO_ERROR is not read because reading error state could consume it. No settings, tests, assertions, payloads or deadlines changed; four cases once.",
+  "sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/winsock/sio-tcp-info",
+    "https://learn.microsoft.com/en-us/windows/win32/api/mstcpip/ns-mstcpip-tcp_info_v0",
+    "https://github.com/microsoft/win32metadata/blob/main/generation/WinSDK/RecompiledIdlHeaders/shared/mstcpip.h"
+  ],
+  "pytest_exit_code": 0
+}
