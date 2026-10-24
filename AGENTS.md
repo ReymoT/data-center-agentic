@@ -1,5 +1,7 @@
 # Repository instructions
 
+Audit update, instruction 1.26: [active guidance and issue audit](docs/handoffs/CODER_PLAN_AUDIT_2026-10-24.md) keeps the coder-owned rule unchanged, corrects received K02/readiness facts and routes P02/source/scoring work to #59/#60/#61. Reimo source ownership/blocker reply is received; October 26 is accepted for his evidence inventory only. Scientific acceptance and disputed shared behavior remain gated; ready agreed coding proceeds.
+
 Current manager update, October 24: [coder-owned decisions](docs/decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
 ## Instruction authority

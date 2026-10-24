@@ -7,6 +7,10 @@ the announcement first, followed by consistent master updates. [Announcement](ht
 This workflow amendment does not select an unresolved scientific rule, change a
 shared format/setting, transfer a task, or certify implementation acceptance.
 
+The rule was first published in instruction 1.25 and remains identical in the
+[1.26 active-guidance audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md). Package
+maintenance does not reset shared-question clocks or change decision authority.
+
 ## Rule shared by all assistants
 
 <!-- coder-decisions:start -->

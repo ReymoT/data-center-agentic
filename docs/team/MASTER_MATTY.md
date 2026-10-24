@@ -1,8 +1,10 @@
 # Master instructions — Matty
 
+Audit update, instruction 1.26: [active guidance and issue audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md) keeps the coder-owned rule unchanged, corrects received K02/readiness facts and routes P02/source/scoring work to #59/#60/#61. Reimo source ownership/blocker reply is received; October 26 is accepted for his evidence inventory only. Scientific acceptance and disputed shared behavior remain gated; ready agreed coding proceeds.
+
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.25 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.26 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -66,7 +68,7 @@ You assist Matty Anderson. The user explicitly assigns you **initial GitHub repo
 
 ## Required inputs and decisions
 
-Matty accepted local Ollama with Qwen3 8B and temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md): Matty owns A01/F03 shared adapter/environment preparation, including F02 consumer checks. Ved's merged schemas/examples are now available; adoption is still pending. The [hardware inventory](../HARDWARE.md) now records the supplied Intel Arc 140V, system RAM, driver and installed runtime; the October 20 development record accepts transport, the 0.40.5 runtime/artifact, generation settings and trial seeds; revalidation of the newly observed 0.40.9, tokenizer/context evidence and service-resource verification remain pending. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is implemented and offline tested, with full acceptance still blocked. Do not label A01 complete or start experiments from the acceptance alone.
+Matty accepted local Ollama with Qwen3 8B and temperature 0.2. Follow [Q09](../decisions/Q09_OLLAMA_QWEN3.md): Matty owns A01/F03 provider/environment and A02/A03/A04 coding. The accepted runtime pin remains 0.40.5; the [dated October 24 observation](../evidence/ollama-qwen3-8b-2026-10-24.json) is 0.40.10, not the older 0.40.9 observation. Counter/native/effective-setting/context/resource validation and separate inference authorization remain gates. K02 and Nisha's offline receiving result are available. Implement/test actual agreed checker, controller/trace and routing portions on existing F02/S01/K02 interfaces now; only disputed behavior and full positive/live acceptance wait. Do not claim a transport fix, execution approval or model episode from a passing fixture or status comment.
 
 Inspect current repository contents and human authorization before remote changes. Use all five masters, shared checklist/open decisions, Ved's contracts/context, Reimo's simulator, Edison's math/A fallback, Nisha's explanation/evaluation interfaces. Q09 records development model/settings and remaining run-authorization gates. Q11 records Matty as coordinator/summary publisher and Nisha as backup; remaining account permissions are separate. Q12 records concrete cross-cutting allocations. Other unresolved semantics must reach the common checker/runtime through approved configuration, not private choices.
 

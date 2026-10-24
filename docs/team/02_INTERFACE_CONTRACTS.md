@@ -2,7 +2,7 @@
 
 October 24: [coding decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md). F02 stays unchanged; internal choices follow the coding owner.
 
-Version: 1.25 — 2026-10-24. Contract owner: Ved.
+Version: 1.26 — 2026-10-24. Contract owner: Ved.
 
 Read [implemented F02 records](../INTERFACES.md), contract 1.0.0, with their examples and tests.
 The earlier draft has been superseded; actual consumer adoption remains pending.

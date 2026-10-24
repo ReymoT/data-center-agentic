@@ -1,6 +1,14 @@
 # Instruction deployment changelog
 
-Current deployment: 1.25 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.26 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.26 - 2026-10-24
+
+- Matty authorized a full audit of recent plan/master/issue consistency and evidence-based closures. [Audit #62](https://github.com/ReymoT/data-center-agentic/issues/62) records confirmed active guidance defects; [handoff](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md) records outcomes.
+- Keep the exact coder-owned/24-hour, merge, authority and cleanup policies unchanged. Synchronize all ten version headers. Correct active role inputs: received K02/Nisha result, latest dated runtime0.40.10 versus accepted0.40.5, no blanket Q12 readiness gate, and ready agreed implementation rather than only scaffolding/mocks.
+- Align current coordination/plan/architecture/decision facts with ready A03/A04/A02 and split #59P02/#60source/#61scoring; #36 is Done only for verified technical receiving. Its stale Verifying body was corrected without reopening or claiming scientific completion.
+- Reimo actual source ownership/blocker response is received. Accept October26 only as an evidence-inventory/checkpoint; source semantics/rights/suitability/freeze and Ved final verification stay open. Source-subset ownership is not full Q12 allocation confirmation.
+- Preserve all 50 task rows, source/ratings/fixtures/F02/locks/prompts/pins/code/tests and local worktrees. No model call, diagnostic rerun, scientific/shared setting or fake implementation result.
 
 ## Deployment 1.25 - 2026-10-24
 
