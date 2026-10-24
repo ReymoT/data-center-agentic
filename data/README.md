@@ -1,5 +1,12 @@
 # Data acquisition preparation
 
+Current D05 inventory for Issue #60: [source evidence and indexed claims](D05_SOURCE_EVIDENCE.md),
+[non-overwriting reproduction commands](D05_REPRODUCTION.md), and separate
+[D04/Q06 missing artifacts and freeze status](D04_Q06_STATUS.md).
+These consolidate existing D01/D06 evidence; source semantics, derived-data rights,
+scientific suitability and freeze remain unresolved. Historical D01/D03 records
+retain their original status statements; the D05 inventory explains later evidence.
+
 Owner: Reimo for source acquisition; Ved owns independent D06 checks. D01/D06 inspection and D03 provisional synthetic fixtures are implemented, with separate acceptance limits. Complete the outstanding source verification before scientific claims:
 
 - SustainDC/dc-rl Arizona file `AZPS_NG_&_avgCI.csv`, pinned commit `a92b4755aca560e34a98d14028dda629eb968482`: expected 8,760 hourly 2022 UTC records and `avg_CI`; verify CO2 versus CO2e, units and interval convention.
