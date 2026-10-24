@@ -26,6 +26,12 @@ class ExecutionController:
         self._traces = trace_store
         self._lock = threading.Lock()
 
+    def record_attempt(self, attempt, *, decision_id, run_id, stage):
+        """Persist original transport evidence before any controlled action."""
+        return self._traces.write_attempt(
+            attempt, decision_id=decision_id, run_id=run_id, stage=stage
+        )
+
     def execute_step(self, record, *, stage, expected_state_version):
         """Consume a nonexecuted F02 decision intention, not an execution capability.
 

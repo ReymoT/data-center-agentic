@@ -4,6 +4,7 @@ The directory is an explicit caller input. No experiment checkpoint/resume,
 storage permission or external service is configured by this module.
 """
 
+import base64
 import json
 import os
 import re
@@ -99,3 +100,39 @@ class TraceStore:
         except FileExistsError:
             return self.replay(record, stage, expected_state_version)
         return None
+
+    def write_attempt(self, attempt, *, decision_id, run_id, stage):
+        """Lossless internal A01 ledger artifact, separate from public F02 records."""
+        from dc_sustainability.llm.provider import Attempt
+
+        if not isinstance(attempt, Attempt) or not re.fullmatch(
+            r"[0-9a-f]{32}", attempt.client_trace_id
+        ):
+            raise ValueError("an actual provider Attempt with a valid trace ID is required")
+        s.DecisionRecord(
+            decision_id=decision_id,
+            run_id=run_id,
+            system=attempt.system,
+            episode_id=attempt.episode_id,
+            slot=attempt.slot,
+            final_status="blocked",
+        )
+        if stage not in {"propose", "repair", "explain"}:
+            raise ValueError("unknown provider-attempt stage")
+        directory = self.directory / "provider-attempts"
+        directory.mkdir(exist_ok=True)
+        payload = dict(vars(attempt))
+        payload.update(decision_id=decision_id, run_id=run_id, stage=stage)
+        payload["raw_response"] = base64.b64encode(attempt.raw_response).decode("ascii")
+        payload["raw_response_encoding"] = "base64"
+        payload["output"] = attempt.output.to_json() if attempt.output is not None else None
+        text = json.dumps(payload, sort_keys=True, allow_nan=False) + "\n"
+        path = directory / f"{attempt.client_trace_id}.json"
+        try:
+            _publish(path, text)
+        except FileExistsError:
+            if path.read_text(encoding="utf-8") != text:
+                raise ValueError(
+                    "a different provider attempt already uses this trace ID"
+                ) from None
+        return path
