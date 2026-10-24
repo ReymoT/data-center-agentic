@@ -3,13 +3,14 @@
 Builds a controlled RDF graph from a ``VisibleState`` and ``ConstraintSnapshot``.
 Only policy-visible data is included: no private fixture fields, no future
 arrivals, no realized carbon observations. The graph is a development
-representation for SPARQL retrieval (K02); full Brick/PROV-O/QUDT mapping
-is K01's scope and is not applied here.
+representation for SPARQL retrieval (K02); ontology loading, unit mapping,
+and SHACL validation live in ``dc_sustainability.knowledge.ontology``.
 """
 
-from rdflib import RDF, Graph, Literal, Namespace, URIRef
+from rdflib import RDF, RDFS, XSD, Graph, Literal, Namespace, URIRef
 
 from dc_sustainability import schemas as s
+from dc_sustainability.knowledge.ontology import BRICK, add_unit_metadata
 
 SCHED = Namespace("https://data-center-agentic.example.org/sched#")
 
@@ -25,23 +26,29 @@ def _id(iri: URIRef) -> str:
 
 
 def _add_job_triples(graph: Graph, job: s.Job, rdf_type: URIRef) -> None:
-    """Add common job property triples for a visible job."""
+    """Add common job property triples for a visible job, including unit metadata."""
     node = _iri(job.job_id)
     graph.add((node, RDF.type, rdf_type))
+    graph.add((node, RDF.type, SCHED.Job))
+    graph.add((node, RDFS.label, Literal(f"Job {job.job_id}")))
     graph.add((node, SCHED.arrivalSlot, Literal(job.arrival_slot)))
+    add_unit_metadata(graph, node, "slot")
     graph.add((node, SCHED.durationSlots, Literal(job.duration_slots)))
+    add_unit_metadata(graph, node, "slot")
     graph.add((node, SCHED.powerKw, Literal(job.power_kw)))
+    add_unit_metadata(graph, node, "kW")
     graph.add((node, SCHED.deadlineSlot, Literal(job.deadline_slot)))
+    add_unit_metadata(graph, node, "slot")
     graph.add((node, SCHED.flexible, Literal(job.flexible)))
 
 
 def _add_constraint_triples(graph: Graph, constraint: s.Constraint) -> None:
-    """Add constraint property triples."""
+    """Add constraint property triples, including semantic unit metadata."""
     node = _iri(constraint.constraint_id)
     graph.add((node, RDF.type, SCHED.Constraint))
     graph.add((node, SCHED.constraintType, Literal(constraint.constraint_type)))
     graph.add((node, SCHED.limitValue, Literal(constraint.limit_value)))
-    graph.add((node, SCHED.unit, Literal(constraint.unit)))
+    add_unit_metadata(graph, node, constraint.unit)
     graph.add((node, SCHED.source, _iri(constraint.source_id)))
     if constraint.applies_to_site is not None:
         graph.add((node, SCHED.appliesToSite, _iri(constraint.applies_to_site)))
@@ -52,9 +59,11 @@ def _add_constraint_triples(graph: Graph, constraint: s.Constraint) -> None:
 
 
 def _add_source_triples(graph: Graph, source: s.SourceRef) -> None:
-    """Add source provenance triples."""
+    """Add source provenance triples, including PROV-O linkage."""
     node = _iri(source.source_id)
     graph.add((node, RDF.type, SCHED.Source))
+    graph.add((node, RDF.type, SCHED["Entity"]))
+    graph.add((node, RDFS.label, Literal(f"Source {source.source_id}")))
     graph.add((node, SCHED.path, Literal(source.path)))
     graph.add((node, SCHED.redistributionStatus, Literal(source.redistribution_status)))
     if source.commit is not None:
@@ -64,18 +73,21 @@ def _add_source_triples(graph: Graph, source: s.SourceRef) -> None:
 
 
 def _add_forecast_triples(graph: Graph, fact: s.CarbonForecast) -> None:
-    """Add carbon forecast property triples including nested semantics."""
+    """Add carbon forecast property triples including nested semantics and unit mapping."""
     node = _iri(fact.fact_id)
     graph.add((node, RDF.type, SCHED.CarbonForecast))
     graph.add((node, SCHED.carbonValue, Literal(fact.value)))
     graph.add((node, SCHED.validSlot, Literal(fact.valid_slot)))
-    graph.add((node, SCHED.unit, Literal(fact.unit)))
-    graph.add((node, SCHED.source, _iri(fact.source_id)))
+    add_unit_metadata(graph, node, fact.unit)
+    graph.add((node, SCHED.carbonSource, _iri(fact.source_id)))
     graph.add(
         (
             node,
             SCHED.issuedAtUtc,
-            Literal(fact.issued_at_utc.isoformat().replace("+00:00", "Z")),
+            Literal(
+                fact.issued_at_utc.isoformat().replace("+00:00", "Z"),
+                datatype=XSD.dateTime,
+            ),
         )
     )
     graph.add((node, SCHED.forecastKind, Literal(fact.forecast_kind)))
@@ -90,7 +102,10 @@ def _add_forecast_triples(graph: Graph, fact: s.CarbonForecast) -> None:
             (
                 node,
                 SCHED.validFromUtc,
-                Literal(fact.valid_from_utc.isoformat().replace("+00:00", "Z")),
+                Literal(
+                    fact.valid_from_utc.isoformat().replace("+00:00", "Z"),
+                    datatype=XSD.dateTime,
+                ),
             )
         )
     if fact.valid_to_utc is not None:
@@ -98,7 +113,10 @@ def _add_forecast_triples(graph: Graph, fact: s.CarbonForecast) -> None:
             (
                 node,
                 SCHED.validToUtc,
-                Literal(fact.valid_to_utc.isoformat().replace("+00:00", "Z")),
+                Literal(
+                    fact.valid_to_utc.isoformat().replace("+00:00", "Z"),
+                    datatype=XSD.dateTime,
+                ),
             )
         )
     if fact.source_sha256 is not None:
@@ -118,6 +136,7 @@ def build_graph(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> Graph:
     # Episode metadata
     ep = _iri(state.episode_id)
     graph.add((ep, RDF.type, SCHED.Episode))
+    graph.add((ep, RDFS.label, Literal(f"Episode {state.episode_id}")))
     graph.add((ep, SCHED.currentSlot, Literal(state.current_slot)))
     graph.add((ep, SCHED.stateVersion, Literal(state.state_version)))
     graph.add((ep, SCHED.snapshotId, Literal(snapshot.snapshot_id)))
@@ -125,9 +144,14 @@ def build_graph(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> Graph:
     # Site config
     site_node = _iri(state.site.site_id)
     graph.add((site_node, RDF.type, SCHED.Site))
+    graph.add((site_node, RDF.type, BRICK.Building))
+    graph.add((site_node, RDFS.label, Literal(f"Site {state.site.site_id}")))
     graph.add((site_node, SCHED.backgroundKw, Literal(state.site.background_kw)))
+    add_unit_metadata(graph, site_node, "kW")
     graph.add((site_node, SCHED.pue, Literal(state.site.pue)))
+    add_unit_metadata(graph, site_node, "1")
     graph.add((site_node, SCHED.slotHours, Literal(state.site.slot_hours)))
+    add_unit_metadata(graph, site_node, "h")
 
     # Waiting jobs
     for job in state.waiting_jobs:
@@ -137,13 +161,18 @@ def build_graph(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> Graph:
     for view in state.running_jobs:
         _add_job_triples(graph, view.job, SCHED.RunningJob)
         graph.add((_iri(view.job.job_id), SCHED.startSlot, Literal(view.start_slot)))
+        add_unit_metadata(graph, _iri(view.job.job_id), "slot")
 
     # Completed jobs
     for view in state.completed_jobs:
         node = _iri(view.job_id)
         graph.add((node, RDF.type, SCHED.CompletedJob))
+        graph.add((node, RDF.type, SCHED.Job))
+        graph.add((node, RDFS.label, Literal(f"Completed job {view.job_id}")))
         graph.add((node, SCHED.startSlot, Literal(view.start_slot)))
+        add_unit_metadata(graph, node, "slot")
         graph.add((node, SCHED.endSlot, Literal(view.end_slot)))
+        add_unit_metadata(graph, node, "slot")
 
     # Missed jobs
     for job_id in state.missed_job_ids:
