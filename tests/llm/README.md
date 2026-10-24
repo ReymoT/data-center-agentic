@@ -51,3 +51,4 @@ the run cap across different visible states as well as the existing per-decision
 caps. These cases do not call Ollama or establish live inference acceptance.
 
 A01 TCP-state observation, October 24: [handoff](../../docs/handoffs/OCT24_DECISION_INTAKE_AND_A01.md). Four fixed native replays all completed before the 250 ms netstat snapshots, so no stalled TCP state was captured. Earlier failures remain; no production/test change or fix. The optional Windows diagnostic is outside ordinary CI execution.
+A01 Winsock observation, October 24: [reproduction, results and limits](../../docs/handoffs/A01_WINSOCK_OBSERVATION_2026-10-24.md). Four original deep-response cases passed under read-only TCP_INFO instrumentation; no stalled failure was captured. All snapshots/errors and prior failures are retained. The single ordinary suite retained 1,136 passes/19 subtests plus one existing object-plain timeout, without a rerun. No production/test/settings change or fix.
