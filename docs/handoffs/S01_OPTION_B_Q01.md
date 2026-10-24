@@ -1,5 +1,14 @@
 # S01 Option B and Q01 implementation handoff
 
+Publication update: the original local record below is historical. This work is
+published as draft [PR #64](https://github.com/ReymoT/data-center-agentic/pull/64)
+against main 2ec1e542, instruction 1.26. Reimo reports 219 focused passes after
+reconciliation, and hosted original-head CI reproduces 1,145 passes/19 subtests
+and six downstream failures. [Matty's receiving correction](S01_MATTY_RECEIVING.md)
+fixes his five failures; one Nisha independent-replay failure remains. The older
+local 785-test result below is not a current-main integration result. No merge or
+complete receiving acceptance is claimed.
+
 Reimo-owned local change, October 24, 2026. No commit, push, Issue update or
 teammate message was made. Branch: `feature/s01-scheduling-simulator`, base
 `a1d848f`. Authoritative main fetched/read:
