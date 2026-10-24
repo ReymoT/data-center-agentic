@@ -1,0 +1,218 @@
+{
+  "evidence_kind": "fixed_synthetic_windows_tcp_state_observations",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "model_calls": 0,
+  "plan": {
+    "modes": [
+      "original_close",
+      "wait_for_client",
+      "wait_for_client",
+      "original_close"
+    ],
+    "snapshot_delay_seconds": 0.25,
+    "retries": 0
+  },
+  "source_sha256_lf": "c237701fe8d30e1e467f821ecb9bd82f58c2f2c7d92d07b190da39a311918040",
+  "observer_source_sha256_lf": "97c57e7d946182ead28075841149a9bcbd0750d6cc7a1a2612cf22dcf0a82f30",
+  "native_source_sha256_lf": "cb351b3640dc0c8b931edb0b9ccd842c023277686d3b37a991816947b7b16a23",
+  "native_binary_sha256": "9da6922454754f7e2ce1bc98c483c03910892d3ff11e4f3e7a169fedd324f1c5",
+  "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+  "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+  "observations": [
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.014999999984866008
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.014999999984866008
+        }
+      ],
+      "error": null,
+      "seconds": 0.014999999984866008,
+      "client_returned_seconds": 0.014999999984866008,
+      "close_mode": "original_close",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "tcp_snapshots": [
+        {
+          "snapshot_started_seconds": 0.25,
+          "connections": [
+            {
+              "local": "127.0.0.1:54617",
+              "remote": "0.0.0.0:0",
+              "state": "LISTENING",
+              "pid": 30492
+            }
+          ],
+          "snapshot_finished_seconds": 0.3279999999795109
+        }
+      ],
+      "observation": 1
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.0
+        }
+      ],
+      "error": null,
+      "seconds": 0.0,
+      "client_returned_seconds": 0.0,
+      "close_mode": "wait_for_client",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "tcp_snapshots": [
+        {
+          "snapshot_started_seconds": 0.25,
+          "connections": [
+            {
+              "local": "127.0.0.1:54619",
+              "remote": "0.0.0.0:0",
+              "state": "LISTENING",
+              "pid": 24980
+            },
+            {
+              "local": "127.0.0.1:54620",
+              "remote": "127.0.0.1:54619",
+              "state": "TIME_WAIT",
+              "pid": 0
+            }
+          ],
+          "snapshot_finished_seconds": 0.28200000000651926
+        }
+      ],
+      "observation": 2
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.03200000000651926
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.03200000000651926
+        }
+      ],
+      "error": null,
+      "seconds": 0.03200000000651926,
+      "client_returned_seconds": 0.03200000000651926,
+      "close_mode": "wait_for_client",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "tcp_snapshots": [
+        {
+          "snapshot_started_seconds": 0.25,
+          "connections": [
+            {
+              "local": "127.0.0.1:54622",
+              "remote": "0.0.0.0:0",
+              "state": "LISTENING",
+              "pid": 5092
+            },
+            {
+              "local": "127.0.0.1:54623",
+              "remote": "127.0.0.1:54622",
+              "state": "TIME_WAIT",
+              "pid": 0
+            }
+          ],
+          "snapshot_finished_seconds": 0.28200000000651926
+        }
+      ],
+      "observation": 3
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.015000000013969839
+        }
+      ],
+      "error": null,
+      "seconds": 0.015000000013969839,
+      "client_returned_seconds": 0.015000000013969839,
+      "close_mode": "original_close",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "tcp_snapshots": [
+        {
+          "snapshot_started_seconds": 0.25,
+          "connections": [
+            {
+              "local": "127.0.0.1:54624",
+              "remote": "0.0.0.0:0",
+              "state": "LISTENING",
+              "pid": 16320
+            }
+          ],
+          "snapshot_finished_seconds": 0.28099999998812564
+        }
+      ],
+      "observation": 4
+    }
+  ],
+  "completed": true,
+  "limits": "Four single-machine observations, not a reliability estimate or fix. netstat may perturb timing and samples state after transfers that finish quickly. TCP state is not packet/queue evidence or proof of which layer lost bytes. Original raw client, native binary, provider/tests and deadlines unchanged."
+}

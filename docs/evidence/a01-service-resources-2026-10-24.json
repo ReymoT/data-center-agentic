@@ -1,0 +1,34 @@
+{
+  "evidence_kind": "read_only_listener_process_resource_inventory_not_effective_run_settings",
+  "captured_at_utc": "2026-10-24T16:13:51.2037323Z",
+  "listeners": [
+    {
+      "local_address": "127.0.0.1",
+      "port": 11434,
+      "pid": 34068,
+      "process_name": "ollama.exe",
+      "executable_sha256": "c691333e17b3b66f922804a09d030dc2ac69d5e92b3609ca5596ed803dcfe50f",
+      "file_version": null,
+      "product_version": null,
+      "linked_scm_services": []
+    }
+  ],
+  "os_caption": "Microsoft Windows 11 Home",
+  "os_version": "10.0.26300",
+  "cpu_model": "Intel(R) Core(TM) Ultra 7 258V",
+  "visible_memory_kib": 33047096,
+  "free_physical_memory_kib": 10498688,
+  "graphics": [
+    {
+      "Name": "Intel(R) Arc(TM) 140V GPU (16GB)",
+      "DriverVersion": "32.0.101.8132",
+      "AdapterRAM": 2147479552
+    }
+  ],
+  "graphics_limit": "AdapterRAM is the reported Windows field; shared-memory GPU offload and dedicated VRAM are not established",
+  "model_calls": 0,
+  "service_changes": 0,
+  "environment_changes": 0,
+  "actual_context_or_effective_generation_settings_validated": false,
+  "limits": "Process identity and metadata are observations, not inference readiness. A desktop/background process without an SCM match does not establish its update/startup configuration."
+}

@@ -49,3 +49,5 @@ nested synthetic arrays/objects for both LLM systems. The decoder failure must
 retain the spent `Attempt` and original bytes, return no parsed output and preserve
 the run cap across different visible states as well as the existing per-decision
 caps. These cases do not call Ollama or establish live inference acceptance.
+
+A01 TCP-state observation, October 24: [handoff](../../docs/handoffs/OCT24_DECISION_INTAKE_AND_A01.md). Four fixed native replays all completed before the 250 ms netstat snapshots, so no stalled TCP state was captured. Earlier failures remain; no production/test change or fix. The optional Windows diagnostic is outside ordinary CI execution.
