@@ -1,0 +1,414 @@
+# Data-center-agentic SHACL shapes
+# Version: 1.0.0 (ontology revision 2026-10-24)
+#
+# These shapes validate structural and semantic constraints on the policy-visible
+# episode graph built by dc_sustainability.knowledge.graph. They do NOT validate
+# scheduling feasibility (deadline satisfiability, capacity sufficiency, etc.).
+
+@prefix : <https://data-center-agentic.example.org/sched#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+:SiteShape rdf:type sh:NodeShape ;
+    sh:targetClass :Site ;
+    sh:property [
+        sh:path :backgroundKw ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :pue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 1.0 ;
+    ] ;
+    sh:property [
+        sh:path :slotHours ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minExclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+        sh:hasValue brick:Building ;
+    ] .
+
+:JobShape rdf:type sh:NodeShape ;
+    sh:targetClass :Job ;
+    sh:property [
+        sh:path :arrivalSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :durationSlots ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+    ] ;
+    sh:property [
+        sh:path :powerKw ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minExclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :deadlineSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :flexible ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+    ] .
+
+:RunningJobShape rdf:type sh:NodeShape ;
+    sh:targetClass :RunningJob ;
+    sh:property [
+        sh:path :startSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] .
+
+:CompletedJobShape rdf:type sh:NodeShape ;
+    sh:targetClass :CompletedJob ;
+    sh:property [
+        sh:path :startSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :endSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+    ] .
+
+:CarbonForecastShape rdf:type sh:NodeShape ;
+    sh:targetClass :CarbonForecast ;
+    sh:property [
+        sh:path :carbonValue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :validSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :unit ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("g/kWh") ;
+    ] ;
+    sh:property [
+        sh:path :carbonSource ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :Source ;
+    ] ;
+    sh:property [
+        sh:path :issuedAtUtc ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+    sh:property [
+        sh:path :forecastKind ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("perfect_foresight" "persistence" "unresolved") ;
+    ] ;
+    sh:property [
+        sh:path :qualityStatus ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("validated" "unvalidated" "suspect") ;
+    ] ;
+    sh:property [
+        sh:path :pollutantBasis ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("co2" "co2e" "unresolved") ;
+    ] ;
+    sh:property [
+        sh:path :intervalConvention ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("hour_start" "hour_end" "unresolved") ;
+    ] ;
+    sh:property [
+        sh:path :emissionsFactorType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("average" "marginal" "unresolved") ;
+    ] ;
+    sh:property [
+        sh:path :slotMappingStatus ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("unresolved" "provisional" "agreed") ;
+    ] ;
+    sh:property [
+        sh:path :validFromUtc ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+    sh:property [
+        sh:path :validToUtc ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+    sh:property [
+        sh:path :sourceSha256 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+:ConstraintShape rdf:type sh:NodeShape ;
+    sh:targetClass :Constraint ;
+    sh:property [
+        sh:path :constraintType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("capacity" "arrival" "deadline" "nonflexible" "freshness") ;
+    ] ;
+    sh:property [
+        sh:path :limitValue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+    ] ;
+    sh:property [
+        sh:path :unit ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :source ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class :Source ;
+    ] ;
+    sh:property [
+        sh:path :appliesToSite ;
+        sh:maxCount 1 ;
+        sh:class :Site ;
+    ] ;
+    sh:property [
+        sh:path :appliesToJob ;
+        sh:class :Job ;
+    ] ;
+    sh:property [
+        sh:path :sourceVersion ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :sourceSha256 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:sparql [
+        sh:message "A constraint must apply to exactly one of a site or a non-empty job list." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Constraint .
+                OPTIONAL { $this sched:appliesToSite ?site . }
+                OPTIONAL { $this sched:appliesToJob ?job . }
+                BIND (BOUND(?site) AS ?hasSite)
+                BIND (BOUND(?job) AS ?hasJob)
+                FILTER (?hasSite = ?hasJob)
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        sh:message "Capacity constraints must apply to a site and have a positive limit." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Constraint ;
+                      sched:constraintType "capacity" ;
+                      sched:limitValue ?limit .
+                OPTIONAL { $this sched:appliesToSite ?site . }
+                FILTER (!BOUND(?site) || ?limit <= 0)
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        sh:message "Slot-valued constraints (arrival, deadline, nonflexible, freshness) must have a non-negative integer limit." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Constraint ;
+                      sched:constraintType ?type ;
+                      sched:limitValue ?limit .
+                FILTER (?type IN ("arrival", "deadline", "nonflexible", "freshness"))
+                FILTER (?limit < 0 || ?limit != floor(?limit))
+            }
+        """ ;
+    ] .
+
+:SourceShape rdf:type sh:NodeShape ;
+    sh:targetClass :Source ;
+    sh:property [
+        sh:path :path ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :redistributionStatus ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ("unresolved" "permitted" "restricted") ;
+    ] ;
+    sh:property [
+        sh:path :commit ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path :sha256 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+:EpisodeShape rdf:type sh:NodeShape ;
+    sh:targetClass :Episode ;
+    sh:property [
+        sh:path :currentSlot ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :stateVersion ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+    ] ;
+    sh:property [
+        sh:path :snapshotId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .
+
+:CapacityEvidenceShape rdf:type sh:NodeShape ;
+    sh:targetClass :Site ;
+    sh:message "A site must have exactly one capacity constraint in the visible graph." ;
+    sh:sparql [
+        sh:message "Site is missing a capacity constraint; absence is not unlimited capacity." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Site .
+                FILTER NOT EXISTS {
+                    ?con a sched:Constraint ;
+                         sched:constraintType "capacity" ;
+                         sched:appliesToSite $this .
+                }
+            }
+        """ ;
+    ] .
+
+:UnitConsistencyShape rdf:type sh:NodeShape ;
+    sh:targetClass :Constraint ;
+    sh:message "Constraint unit must match the accepted unit for its constraint type." ;
+    sh:sparql [
+        sh:message "Constraint unit is not the accepted unit for its type." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Constraint ;
+                      sched:constraintType ?type ;
+                      sched:unit ?unit .
+                FILTER (
+                    (?type = "capacity" && ?unit != "kW") ||
+                    (?type = "arrival" && ?unit != "slot") ||
+                    (?type = "deadline" && ?unit != "slot") ||
+                    (?type = "nonflexible" && ?unit != "slot") ||
+                    (?type = "freshness" && ?unit != "slot")
+                )
+            }
+        """ ;
+    ] .
+
+:ConstraintSourceReferenceShape rdf:type sh:NodeShape ;
+    sh:targetClass :Constraint ;
+    sh:message "Constraint source references must resolve to a Source resource." ;
+    sh:sparql [
+        sh:message "Referenced source is missing or not a Source." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Constraint ;
+                      sched:source ?src .
+                FILTER NOT EXISTS { ?src a sched:Source . }
+            }
+        """ ;
+    ] .
+
+:ForecastSourceReferenceShape rdf:type sh:NodeShape ;
+    sh:targetClass :CarbonForecast ;
+    sh:message "Forecast source references must resolve to a Source resource." ;
+    sh:sparql [
+        sh:message "Referenced source is missing or not a Source." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:CarbonForecast ;
+                      sched:carbonSource ?src .
+                FILTER NOT EXISTS { ?src a sched:Source . }
+            }
+        """ ;
+    ] .
