@@ -1,8 +1,8 @@
 # Shared rules for all five assistants
 
-Current update, October 24: [approved decision intake and A01 evidence](../handoffs/OCT24_DECISION_INTAKE_AND_A01.md). Ved's tokenizer/runtime validation direction and Q12 confirmation are received. Nisha's exact sampling agreement, E01 October 27 checkpoint and K02/L01 receiving checks are received; sampling implementation is due October 30. Reimo's exact arrival/simulator decisions remain pending. Keep completed_work=None and defer optional scalar precision; keep the strict S02 savings guard pending affected-owner agreement. Read-only inventory observes Ollama 0.40.10; accepted pin remains 0.40.5. Four fixed synthetic TCP-state observations complete before snapshots, so no stalled state or timeout fix is demonstrated. Nisha's original ratings are due October 24; Edison P02 October 25. Full A01, integration and freeze remain open. No task ownership, shared format/setting, production code or original rating changes. Earlier dated entries are historical where superseded.
+Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.24 — 2026-10-24. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.25 — 2026-10-24. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 
@@ -11,6 +11,22 @@ Matty Anderson (`MattyAnd`) is the team manager. His explicit 2026-10-12 instruc
 A pull request can be merged once its checks pass. A teammate review is welcome but not required. Changes to shared data formats or settings still need the affected teammates to agree first.
 
 After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
+
+## Coding decisions and escalation
+
+<!-- coder-decisions:start -->
+The coder responsible for a component owns its internal implementation decisions within the agreed scope and contracts. Routine internal choices do not require prior approval from the technical contact, another teammate or Matty.
+
+For changes to shared interfaces, settings or scientific rules, the coding owner leads the exact proposal and obtains agreement from only the directly affected owners before implementation.
+
+Record the coding decision owner, exact change, directly affected consumers, required tests, request time and response deadline in the Issue or decision record. An unanswered or unresolved shared decision must be escalated by the coding owner to Matty within 24 elapsed hours for a short resolution meeting. Silence is not approval.
+
+Implement, test and publish the agreed independent portions immediately while a disputed portion is pending. Block only the specific affected behavior or acceptance step; do not hold the whole task when other work is ready.
+
+Existing task ownership, main-instruction authority, merge rules, independent scientific evaluation and model-call authorization remain unchanged.
+<!-- coder-decisions:end -->
+
+Read [the accepted workflow and examples](../decisions/Q11_CODER_OWNED_DECISIONS.md). Technical contacts advise on affected boundaries; they are not mandatory approvers of every internal coding choice.
 
 Read [the accepted manager instruction](../decisions/Q11_MANAGER_AUTHORITY.md). Continue applicable tests and the final proposal's independent scientific evaluation.
 
