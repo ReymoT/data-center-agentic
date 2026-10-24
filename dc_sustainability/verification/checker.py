@@ -12,6 +12,28 @@ from dc_sustainability import schemas as s
 from dc_sustainability.verification.rules import legal_starts
 
 
+def recheck_schedule(plan, visible_state, constraints):
+    """Runtime-only same-slot recheck; retain the original proposal hash.
+
+    F02 permits a newer execution state version. Revalidate actual plan content
+    against it rather than relabeling an old check or issuing an automatic pass.
+    Future or different-slot origins retain the ordinary binding error.
+    """
+    plan = s.Plan.model_validate(plan.model_dump(mode="python"), strict=True)
+    if (plan.episode_id, plan.slot) != (visible_state.episode_id, visible_state.current_slot) or (
+        plan.state_version > visible_state.state_version
+    ):
+        return check_schedule(plan, visible_state, constraints)
+    rebound = s.Plan.model_validate(
+        {**plan.model_dump(mode="python"), "state_version": visible_state.state_version},
+        strict=True,
+    )
+    check = check_schedule(rebound, visible_state, constraints)
+    return s.CheckResult.model_validate(
+        {**check.model_dump(mode="python"), "plan_hash": plan.plan_hash}, strict=True
+    )
+
+
 def check_schedule(
     plan: s.Plan, visible_state: s.VisibleState, constraints: s.ConstraintSnapshot
 ) -> s.CheckResult:
