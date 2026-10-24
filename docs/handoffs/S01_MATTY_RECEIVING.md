@@ -25,3 +25,14 @@ This is Matty's completed receiving correction, not full PR acceptance. Nisha ow
 the independent replay change; Ved has been asked for actual independent S01
 reproduction. PR #64 remains unmerged while checks fail. Record the final commit,
 actual receiving acceptance and merged-main CI in #7 after those gates are met.
+
+## Reconciliation after A03/A04 publication
+
+Main 7f836be8 is merged into this review branch. Only Matty's receiving-test
+conflict needed resolution: retain actual A03 physical pass/failure expectations,
+omission and deadline findings, raw-proposal bypass rejection and the dedicated
+Q01 True-setting refusal. Reimo simulator code/tests are unchanged. 323 actual
+simulator/contract/runtime/verification tests pass in1.29s. The independent
+infeasible replay test still fails in0.34s; Nisha owns that implementation. No
+full integration pass or S01 acceptance is inferred. Earlier receiving counts
+above describe the pre-A03 version and are retained as history.

@@ -36,20 +36,20 @@ def outcome(result, name):
     return next(c.outcome for c in result.performed if c.name == name)
 
 
-def test_sequential_hand_plan_fixed_checks_pass_without_inventing_coverage():
+def test_sequential_hand_plan_passes_all_agreed_physical_checks():
     snap = f.snapshot()
     view = state(snap)
     proposal = plan(view, (("J1", 0), ("J2", 2)))
     before = view.to_json()
     result = check_schedule(proposal, view, snap)
     assert all(c.outcome == "pass" for c in result.performed)
-    assert result.status == "error" and not result.violations
-    assert any("Q02/Q03" in e for e in result.errors)
+    assert result.status == "pass" and not result.violations
     assert result.plan_hash == proposal.plan_hash and result.state_version == view.state_version
     assert view.to_json() == before
     assert s.CheckResult.from_json(result.to_json()) == result
-    with pytest.raises(ValueError):
-        s.ApprovedActions.from_checked_plan(proposal, result, view.state_version)
+    assert s.ApprovedActions.from_checked_plan(proposal, result, view.state_version).starts == (
+        s.ApprovedStart(job_id="J1", start_slot=0),
+    )
 
 
 def test_consumer_reads_committed_f02_examples_without_changing_the_contract():
@@ -58,7 +58,7 @@ def test_consumer_reads_committed_f02_examples_without_changing_the_contract():
     snap = s.ConstraintSnapshot.from_json((f.EXAMPLES_DIR / "constraint_snapshot.json").read_text())
     result = check_schedule(proposal, view, snap)
     assert outcome(result, "capacity") == "pass"
-    assert result.status == "error" and not result.violations
+    assert result.status == "pass" and not result.violations
     assert result.impact_claim_support == "unsupported"  # fixture semantics are unresolved
 
 
@@ -219,7 +219,7 @@ def test_authoritative_job_constraint_conflict_is_not_ignored():
     assert "conflicts" in result.errors[0]
 
 
-def test_unresolved_completion_start_cannot_be_approved():
+def test_agreed_completion_start_prohibition_is_a_real_failure():
     snap = f.snapshot()
     job = s.Job(
         job_id="J4", arrival_slot=17, duration_slots=2, power_kw=20, deadline_slot=30, flexible=True
@@ -227,4 +227,4 @@ def test_unresolved_completion_start_cannot_be_approved():
     view = state(snap, current=23, waiting=(job,))
     result = check_schedule(plan(view, (("J4", 24),)), view, snap)
     assert outcome(result, "capacity") == "pass"
-    assert result.status == "error" and any("Q01" in e for e in result.errors)
+    assert result.status == "fail" and any("Q01" in v.message for v in result.violations)

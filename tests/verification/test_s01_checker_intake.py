@@ -1,6 +1,6 @@
 """Real S01/A03 consumer checks on synthetic development episodes, no fake approvals.
 
-Q01 forbids completion starts; Option B exposes impossible jobs for one decision.
+Only the agreed no-completion-start input is used; no raw proposal may bypass S01.
 These are rejection-path checks, not the unimplemented A04 gate or an agent episode.
 """
 
@@ -38,22 +38,26 @@ def test_real_states_check_without_approval_and_rejected_plans_advance_30_slots(
         starts = ((state.waiting_jobs[0].job_id, slot),) if state.waiting_jobs and slot < 24 else ()
         plan = proposal(state, starts)
         check = check_schedule(plan, state, private.snapshot)
-        impossible_start = bool(starts) and (
-            slot + state.waiting_jobs[0].duration_slots > state.waiting_jobs[0].deadline_slot
+        omitted = {j.job_id for j in state.waiting_jobs} - {j for j, _ in starts}
+        late = (
+            bool(starts)
+            and slot + state.waiting_jobs[0].duration_slots > state.waiting_jobs[0].deadline_slot
         )
-        if impossible_start:
-            # Independent expectation from the visible job's exact interval, not
-            # a checker verdict: Option B now exposes this illegal arrival.
-            assert check.status == "fail"
+        assert check.status == ("fail" if omitted or late else "pass")
+        assert not check.errors
+        if omitted:
+            assert any(
+                "omitted" in v.message and set(v.job_ids) == omitted for v in check.violations
+            )
+        if late:
             assert any(v.violation_type == "deadline" for v in check.violations)
-            assert not check.errors
-        else:
-            assert check.status == "error" and not check.violations
-            assert any("Q02/Q03" in error for error in check.errors)
         assert check.impact_claim_support == "unsupported"
         assert check.state_version == slot and check.plan_hash == plan.plan_hash
-        with pytest.raises(ValueError):
-            s.ApprovedActions.from_checked_plan(plan, check, slot)
+        if check.status != "pass":
+            with pytest.raises(ValueError):
+                s.ApprovedActions.from_checked_plan(plan, check, slot)
+        else:
+            assert s.ApprovedActions.from_checked_plan(plan, check, slot).state_version == slot
 
         # A raw model proposal cannot bypass S01's capability boundary. This is an
         # adversarial input, not a production execution-gate implementation.
@@ -69,11 +73,6 @@ def test_real_states_check_without_approval_and_rejected_plans_advance_30_slots(
         private_job.job.job_id for private_job in private.jobs
     }
     assert result.totals.job_energy_kwh is None  # S02/P01 not invented from load-only history.
-
-
-def test_retired_completion_start_setting_is_not_an_alternate_experiment():
-    with pytest.raises(ValueError, match="Q01"):
-        SchedulingSimulator(allow_completion_starts=True)
 
 
 @pytest.mark.parametrize("scenario", SCENARIOS)
@@ -93,3 +92,8 @@ def test_future_job_from_private_episode_is_unknown_to_actual_visible_state(scen
     transition = simulator.step(plan)
     assert transition.rejection and transition.slot.started_job_ids == ()
     assert simulator.state().current_slot == 1
+
+
+def test_retired_completion_start_setting_is_not_an_alternate_experiment():
+    with pytest.raises(ValueError, match="Q01"):
+        SchedulingSimulator(allow_completion_starts=True)
