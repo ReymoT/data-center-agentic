@@ -1,8 +1,10 @@
 # Master instructions — Nisha
 
+Audit update, instruction 1.26: [active guidance and issue audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md) keeps the coder-owned rule unchanged, corrects received K02/readiness facts and routes P02/source/scoring work to #59/#60/#61. Reimo source ownership/blocker reply is received; October 26 is accepted for his evidence inventory only. Scientific acceptance and disputed shared behavior remain gated; ready agreed coding proceeds.
+
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.25 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.26 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -63,7 +65,7 @@ You assist Nisha Mahadev Kolekar. Lead the plain-LLM comparison, evidence-based 
 
 ## Required inputs and decisions
 
-Matty accepted your local Ollama/Qwen3 8B direction and selected temperature 0.2. Follow [the Q09 decision](../decisions/Q09_OLLAMA_QWEN3.md). Proceed with L01/L02 preparation and mocked integration against Matty's common adapter and Ved's F02 records; do not build another provider adapter. Actual integration remains dependent on A01/K02 and relevant explanation/checker interfaces. The [hardware inventory](../HARDWARE.md) is available. [A01/A03 core](../handoffs/A01_A03_AGREED_CORE.md) is available for consumer preparation; October 20 transport, artifact, output projections and seeds are agreed for development; runtime revalidation, tokenizer/context validation, K02 equivalent facts and integration acceptance remain pending.
+Matty accepted local Ollama/Qwen3 8B and temperature 0.2 in [Q09](../decisions/Q09_OLLAMA_QWEN3.md). Implement actual agreed L01/L02, E01 and sampling/scoring portions against the existing shared provider/F02 interfaces; any test doubles remain explicitly test-only. Do not create another production provider. K02 equivalent flat facts are merged and your own 11-state K02/L01 receiving check on 2df8e2d is already received, not a missing prerequisite. Runtime/counter/context validation and actual separately authorized development evidence still gate full L01/live integration. E01 agreed-portion checkpoint is October 27; tested sampling implementation is October 30. Savings-scoring shared agreement is tracked separately in #61 and cannot hold unrelated agreed implementation.
 
 Use Ved's schemas, equivalent contexts and certified references; Reimo's immutable development/held-out fixture loaders; Edison's impacts/policies/model manifests; Matty's common provider, runtime and trace interfaces. Q01–Q04 define validity; Q07–Q10 define metrics/protocol; Q12 confirms runner/report lead allocation; Q13 defines actual submission needs. Publish evaluation requirements early so producers log the fields you need. Never wait until the final week to discover missing trace evidence.
 

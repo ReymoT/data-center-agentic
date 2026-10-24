@@ -1,8 +1,10 @@
 # Master instructions — Ved
 
+Audit update, instruction 1.26: [active guidance and issue audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md) keeps the coder-owned rule unchanged, corrects received K02/readiness facts and routes P02/source/scoring work to #59/#60/#61. Reimo source ownership/blocker reply is received; October 26 is accepted for his evidence inventory only. Scientific acceptance and disputed shared behavior remain gated; ready agreed coding proceeds.
+
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.25 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.26 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -66,7 +68,7 @@ You assist Ved Patil. Lead shared schema/interface implementation, ontology/retr
 
 Matty accepted local Ollama/Qwen3 8B with temperature 0.2 in [Q09](../decisions/Q09_OLLAMA_QWEN3.md). Support Matty/Nisha's F02 output-projection compatibility and consumer adoption using the existing contract 1.0.0 examples. This does not authorize unilateral schema/settings or master-instruction changes, transfer provider ownership, or assert that all consumers have adopted F02.
 
-Use Reimo's source/fixture/visible-state manifests; Edison's impact specification and candidate contract; Matty's runtime/check records; Nisha's scoring/reference needs. Q01–Q04 and Q08 affect solver correctness; Q05–Q07 affect data/labels. Adopt the detailed lead allocation through Q12 before marking its issues Ready. All module owners review shared contracts before implementation acceptance.
+Use Reimo's source/fixture/visible-state manifests; Edison's impact specification and candidate contract; Matty's runtime/check records; Nisha's scoring/reference needs. Q01–Q04 and Q08 affect solver correctness; Q05–Q07 affect data/labels. Your canonical allocation confirmation is received. Proceed with agreed assigned coding; do not wait for blanket Q12 closure before marking a ready portion Ready. Only directly affected consumers confirm shared changes before their acceptance. Independently verify the actual Reimo source bundle after its October 26 inventory; do not repeat completed D06 structural/window work as a substitute for missing source evidence.
 
 ## Coding checklist in implementation order
 
