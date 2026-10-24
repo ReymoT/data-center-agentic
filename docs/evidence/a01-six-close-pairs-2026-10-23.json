@@ -1,0 +1,588 @@
+{
+  "evidence_kind": "six_fixed_order_balanced_synthetic_close_pairs",
+  "plan": {
+    "orders": [
+      [
+        "original_close",
+        "wait_for_client"
+      ],
+      [
+        "wait_for_client",
+        "original_close"
+      ],
+      [
+        "original_close",
+        "wait_for_client"
+      ],
+      [
+        "wait_for_client",
+        "original_close"
+      ],
+      [
+        "original_close",
+        "wait_for_client"
+      ],
+      [
+        "wait_for_client",
+        "original_close"
+      ]
+    ],
+    "pairs": 6,
+    "native_observations": 12,
+    "reference_captures": 1,
+    "raw_client_deadline_seconds": 10,
+    "serial": true,
+    "retry_or_replacement": false
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "model_calls": 0,
+  "source_sha256_lf": "c01283e38fa8b2a70cddf252f14f841fc371aa2154a0b58f38e719dfe9ad8781",
+  "observer_source_sha256_lf": "97c57e7d946182ead28075841149a9bcbd0750d6cc7a1a2612cf22dcf0a82f30",
+  "native_source_sha256_lf": "cb351b3640dc0c8b931edb0b9ccd842c023277686d3b37a991816947b7b16a23",
+  "native_binary_sha256": "9da6922454754f7e2ce1bc98c483c03910892d3ff11e4f3e7a169fedd324f1c5",
+  "provider_source_sha256_lf": "131b09abdd292fa1210214d7902132d8953bb347a78093d8d1d6062d42d36fa3",
+  "fixture_source_sha256_lf": "e24ae0ef414e73d556ecc38f30c86f1716d87d8e83960e627edd03f8ba9e2c54",
+  "body_bytes": 24001,
+  "body_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+  "observations": [
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "5214602948666ca9d283dadb422160d31e875b820c678203cd5fbe1cfb0c983d",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.0
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.014999999999418,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 1,
+      "position": 1,
+      "complete_transport": false
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.0
+        }
+      ],
+      "error": null,
+      "seconds": 0.0,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 1,
+      "position": 2,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 14600,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 9401,
+          "seconds": 0.01600000000325963
+        }
+      ],
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 2,
+      "position": 1,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "5214602948666ca9d283dadb422160d31e875b820c678203cd5fbe1cfb0c983d",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.01600000000325963
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.0,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 2,
+      "position": 2,
+      "complete_transport": false
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "5214602948666ca9d283dadb422160d31e875b820c678203cd5fbe1cfb0c983d",
+      "read_chunks": [
+        {
+          "bytes": 14716,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 8760,
+          "seconds": 0.0
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.01600000000326,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 3,
+      "position": 1,
+      "complete_transport": false
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.01600000000325963
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.01600000000325963
+        }
+      ],
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 3,
+      "position": 2,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.0
+        }
+      ],
+      "error": null,
+      "seconds": 0.0,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 4,
+      "position": 1,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "5214602948666ca9d283dadb422160d31e875b820c678203cd5fbe1cfb0c983d",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.0
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.014999999999418,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 4,
+      "position": 2,
+      "complete_transport": false
+    },
+    {
+      "response_bytes": 23360,
+      "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+      "body_matches": false,
+      "header_bytes": 116,
+      "wire_sha256": "5214602948666ca9d283dadb422160d31e875b820c678203cd5fbe1cfb0c983d",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 23360,
+          "seconds": 0.0
+        }
+      ],
+      "error": "timed out",
+      "seconds": 10.015999999988708,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 5,
+      "position": 1,
+      "complete_transport": false
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.0
+        }
+      ],
+      "error": null,
+      "seconds": 0.0,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 5,
+      "position": 2,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.01600000000325963
+        }
+      ],
+      "error": null,
+      "seconds": 0.01600000000325963,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "wait_for_client",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "client_eof": true,
+        "close_mode": "wait_for_client",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "extra_request_bytes": 0,
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 6,
+      "position": 1,
+      "complete_transport": true
+    },
+    {
+      "response_bytes": 24001,
+      "response_sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c",
+      "body_matches": true,
+      "header_bytes": 116,
+      "wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "read_chunks": [
+        {
+          "bytes": 116,
+          "seconds": 0.0
+        },
+        {
+          "bytes": 24001,
+          "seconds": 0.0
+        }
+      ],
+      "error": null,
+      "seconds": 0.0,
+      "server": "native_go_exact_wire",
+      "client": "raw_socket",
+      "close_mode": "original_close",
+      "reference_wire_bytes": 24117,
+      "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+      "native_events": {
+        "body_write_bytes": 24001,
+        "close_mode": "original_close",
+        "configured_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+        "header_write_bytes": 116,
+        "request_bytes": 3399,
+        "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d"
+      },
+      "pair": 6,
+      "position": 2,
+      "complete_transport": true
+    }
+  ],
+  "completed": true,
+  "limits": "Small diagnostic on one machine, not a reliability estimate or production fix. Conditions use fresh connections/processes and different ephemeral request ports. Order is balanced deterministically, not randomized. Original fixture/provider/tests, shared settings and prior failures remain unchanged.",
+  "reference_observation": {
+    "response_bytes": 23360,
+    "response_sha256": "d7adfc98bfb8099b9c6fd63d51e7220c9cf633bffcbac3a603c61e34e86697b6",
+    "body_matches": false,
+    "error": "timed out",
+    "uncertain_outcome": true,
+    "http_status": 200,
+    "attempts": 1,
+    "seconds": 10.01600000000326,
+    "server_post_shutdown_observed": true,
+    "server": "original_python_fixture",
+    "client": "shared_provider",
+    "close_mode": "original_close",
+    "request_bytes": 3399,
+    "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+    "sent_wire_bytes": 24117,
+    "sent_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+    "events": [
+      {
+        "event": "server_shutdown_start",
+        "seconds": 0.0
+      },
+      {
+        "event": "server_shutdown_returned",
+        "seconds": 0.0
+      },
+      {
+        "event": "server_shutdown_start",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "server_shutdown_returned",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "post_start",
+        "seconds": 0.01600000000325963,
+        "tcp_nodelay": 0,
+        "send_buffer": 65536
+      },
+      {
+        "event": "write_start",
+        "seconds": 0.01600000000325963,
+        "bytes": 116,
+        "sha256": "cc27c0402ac58545ca9cdb1501ff0cb320f174245fd18d9c3e00f2a596998ded"
+      },
+      {
+        "event": "write_returned",
+        "seconds": 0.01600000000325963,
+        "bytes": 116
+      },
+      {
+        "event": "write_start",
+        "seconds": 0.01600000000325963,
+        "bytes": 24001,
+        "sha256": "1367b8def19870f2c2247ef7f26d85f0e1e628128743ed3276d88b36556e158c"
+      },
+      {
+        "event": "write_returned",
+        "seconds": 0.01600000000325963,
+        "bytes": 24001
+      },
+      {
+        "event": "post_returned",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "post_handler_exit",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "server_shutdown_start",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "server_shutdown_returned",
+        "seconds": 0.01600000000325963
+      },
+      {
+        "event": "client_returned",
+        "seconds": 10.01600000000326
+      }
+    ]
+  },
+  "reference_wire_bytes": 24117,
+  "reference_wire_sha256": "a42dae719c7da5468eb2ee2e42292c5ac9ee0d360c2bda9b083ecb3736cda1fd",
+  "reference_headers_latin1": "HTTP/1.0 200 OK\r\nServer: BaseHTTP/0.6 Python/3.12.14\r\nDate: Sat, 24 Oct 2026 00:17:09 GMT\r\nContent-Length: 24001\r\n\r\n",
+  "request_bytes": 3399,
+  "request_sha256": "04ebdb9574c77c0b30678005bb99083b82769a245090da35423bcd7036f43e3d",
+  "completed_native_observations": 12,
+  "outcome_counts": {
+    "original_close": {
+      "incomplete_or_error": 5,
+      "complete": 1
+    },
+    "wait_for_client": {
+      "complete": 6
+    }
+  },
+  "recorded_plan_url": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6377389187"
+}
