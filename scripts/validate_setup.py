@@ -168,6 +168,19 @@ for path in policy_paths:
             instruction_authority in path.read_text(encoding="utf-8"),
             f"Instruction authority differs or is missing: {path.relative_to(ROOT)}",
         )
+coding_decision_rule = "The coder responsible for a component owns its internal implementation decisions within the agreed scope and contracts. Routine internal choices do not require prior approval from the technical contact, another teammate or Matty.\n\nFor changes to shared interfaces, settings or scientific rules, the coding owner leads the exact proposal and obtains agreement from only the directly affected owners before implementation.\n\nRecord the coding decision owner, exact change, directly affected consumers, required tests, request time and response deadline in the Issue or decision record. An unanswered or unresolved shared decision must be escalated by the coding owner to Matty within 24 elapsed hours for a short resolution meeting. Silence is not approval.\n\nImplement, test and publish the agreed independent portions immediately while a disputed portion is pending. Block only the specific affected behavior or acceptance step; do not hold the whole task when other work is ready.\n\nExisting task ownership, main-instruction authority, merge rules, independent scientific evaluation and model-call authorization remain unchanged."
+coding_policy_paths = policy_paths + [
+    TEAM / "01_SHARED_RULES.md",
+    ROOT / "docs/decisions/Q11_CODER_OWNED_DECISIONS.md",
+]
+for path in coding_policy_paths:
+    require(path.is_file(), f"Missing coding-decision policy: {path.relative_to(ROOT)}")
+    if path.is_file():
+        require(
+            coding_decision_rule in path.read_text(encoding="utf-8"),
+            f"Coder-owned decision rule differs or is missing: {path.relative_to(ROOT)}",
+        )
+
 if errors:
     print("Bootstrap validation failed:\n" + "\n".join(errors), file=sys.stderr)
     raise SystemExit(1)

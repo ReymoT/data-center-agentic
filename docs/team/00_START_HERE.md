@@ -1,8 +1,10 @@
 # Team master instruction package
 
-Current update, October 24: [approved decision intake and A01 evidence](../handoffs/OCT24_DECISION_INTAKE_AND_A01.md). Ved's tokenizer/runtime validation direction and Q12 confirmation are received. Nisha's exact sampling agreement, E01 October 27 checkpoint and K02/L01 receiving checks are received; sampling implementation is due October 30. Reimo's exact arrival/simulator decisions remain pending. Keep completed_work=None and defer optional scalar precision; keep the strict S02 savings guard pending affected-owner agreement. Read-only inventory observes Ollama 0.40.10; accepted pin remains 0.40.5. Four fixed synthetic TCP-state observations complete before snapshots, so no stalled state or timeout fix is demonstrated. Nisha's original ratings are due October 24; Edison P02 October 25. Full A01, integration and freeze remain open. No task ownership, shared format/setting, production code or original rating changes. Earlier dated entries are historical where superseded.
+Current workflow, instruction 1.25: [Matty's coder-owned decision rule](../decisions/Q11_CODER_OWNED_DECISIONS.md) gives the implementer internal decision authority, limits shared confirmation to affected owners and escalates unresolved shared questions within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance. Existing scope, task ownership and scientific agreements remain unchanged.
 
-Version: 1.24 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
+Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
+
+Version: 1.25 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
 
 Give each teammate the whole package. Read the teammate's MASTER file, all numbered files 00-04, [project context](../PROJECT_CONTEXT.md), the assigned Issue and prerequisite handoffs. A detached role file is not the complete specification.
 

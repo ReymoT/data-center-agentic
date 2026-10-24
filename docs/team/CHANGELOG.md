@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.24 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.25 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.25 - 2026-10-24
+
+- Matty explicitly authorized [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57) before master edits, with all five members tagged and the verified E01 30h12m8s coordination example. No coding-time/idle-time or full scientific-acceptance claim.
+- Publish [the accepted Q11 amendment](../decisions/Q11_CODER_OWNED_DECISIONS.md): coder decides internal implementation; lead shared proposals only to directly affected owners; record an exact UTC proposal/deadline and escalate unresolved questions within 24 elapsed hours. Silence never becomes approval; shared agreement and tests remain required.
+- Put the exact common rule in AGENTS, PROJECT_MASTER, five role masters and shared rules. Clarify AGENTS' manager-approval restriction concerns instruction changes, not every ordinary coding choice. Keep all 50 task rows and existing exact authority/merge/cleanup policies unchanged.
+- Ready independent implementation proceeds while only disputed behavior/acceptance waits. No scientific default, runtime/dependency/schema change, production-code adoption or fabricated results. Update setup validation so policy drift in a role/shared rule is rejected. [Handoff](../handoffs/CODER_OWNED_DECISIONS_2026-10-24.md) records actual checks after execution.
 
 ## Deployment 1.24 - 2026-10-24
 
