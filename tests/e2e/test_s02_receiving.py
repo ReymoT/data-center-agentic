@@ -59,7 +59,7 @@ def test_boundary_revalidation_already_rejects_reordered_slot_records():
         account_realized(ep, invalid)
 
 
-def test_real_checker_cannot_supply_approval_or_advance_simulator():
+def test_real_checker_rejects_omission_without_advancing_simulator():
     ep = episode(hand_jobs()[:2])
     sim = simulator(ep)
     before = sim.state()
@@ -71,7 +71,8 @@ def test_real_checker_cannot_supply_approval_or_advance_simulator():
         starts=(s.PlannedStart(job_id="J1", start_slot=0),),
     )
     check = check_schedule(plan, before, ep.snapshot)
-    assert check.status == "error" and check.errors
+    assert check.status == "fail" and not check.errors
+    assert any(v.job_ids == ("J2",) and "omitted" in v.message for v in check.violations)
     with pytest.raises(ValueError):
         s.ApprovedActions.from_checked_plan(plan, check, before.state_version)
     assert sim.state() == before

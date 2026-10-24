@@ -95,12 +95,15 @@ def test_arrival_starts_check_every_generated_job_without_approving(generated):
             assert result.status == "fail" and outcome(result, "deadline") == "fail"
             assert any(v.violation_type == "deadline" for v in result.violations)
         else:
-            assert outcome(result, "deadline") == "pass" and not result.violations
-            assert result.status == "error" and any("Q02/Q03" in e for e in result.errors)
+            assert outcome(result, "deadline") == "pass"
+            omitted = {j.job_id for j in state.waiting_jobs} - {job.job_id}
+            assert result.status == ("fail" if omitted else "pass")
+            assert {j for v in result.violations for j in v.job_ids} == omitted
         assert result.impact_claim_support == "unsupported"
         assert s.CheckResult.from_json(result.to_json()) == result
-        with pytest.raises(ValueError):
-            s.ApprovedActions.from_checked_plan(plan, result, state.state_version)
+        if result.status != "pass":
+            with pytest.raises(ValueError):
+                s.ApprovedActions.from_checked_plan(plan, result, state.state_version)
     assert tuple(private.to_json() for private in generated) == original
 
 
@@ -186,7 +189,7 @@ def test_d03_hand_jobs_preserve_known_capacity_and_impossible_deadline_results()
     assert outcome(overlapping, "capacity") == "fail"
     assert [v.slot for v in overlapping.violations if v.violation_type == "capacity"] == [0, 1]
     sequential = check_schedule(proposal(state, (("J1", 0), ("J2", 2))), state, snapshot)
-    assert outcome(sequential, "capacity") == "pass" and sequential.status == "error"
+    assert outcome(sequential, "capacity") == "pass" and sequential.status == "pass"
     state = view(jobs, snapshot, 4)
     impossible = check_schedule(proposal(state, (("J3", 4),)), state, snapshot)
     assert outcome(impossible, "deadline") == impossible.status == "fail"

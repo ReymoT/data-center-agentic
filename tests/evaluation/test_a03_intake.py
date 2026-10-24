@@ -54,6 +54,7 @@ def test_current_checker_and_independent_capacity_agree(
         assert production.status == "fail"
         assert v.compare_with_check(reference, production) == "agree"
     else:
-        # Do not manufacture overall approval while Q02/Q03 are still unresolved.
-        assert production.status == "error"
-        assert v.compare_with_check(reference, production) == "not_comparable"
+        # Recorded Q01/Q03 agreement is now implemented by the production checker.
+        # Independent hand truth and independent validator code remain unchanged.
+        assert production.status == "pass"
+        assert v.compare_with_check(reference, production) == "agree"

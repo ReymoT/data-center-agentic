@@ -1,5 +1,7 @@
 # Production checker test cases
 
+October 24 implementation: [agreed checks](../../docs/handoffs/A03_AGREED_IMPLEMENTATION.md) now enforce Q01/Q03 coverage, deferral and individual abstention. Actual physical passes are possible; controller execution, Q04 routing and Q08 certification remain distinct. [Hand-derived regressions](test_agreed_rules.py) cover the new boundaries. Earlier dated preparation notes below are historical where superseded.
+
 Task: A03 preparation. Owner: Matty Anderson (MattyAnd). Technical contact: Nisha. Prepared 2026-10-10 from instruction deployment 1.4 and the final October proposal.
 
 Status update 2026-10-12: Ved's F02 1.0.0 records and Matty's fixed checker core now exist. [Executable tests](test_checker.py) exercise the fixed expectations, including boundary/type/missing-evidence cases. Q01-Q04 scenarios remain unresolved; successful fixed subchecks do not approve execution. See [the handoff](../../docs/handoffs/A01_A03_AGREED_CORE.md). This catalogue does not define a second validator or scientific decision.

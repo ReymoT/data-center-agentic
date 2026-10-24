@@ -1,6 +1,6 @@
 """Real S01/A03 consumer checks on synthetic development episodes, no fake approvals.
 
-Both explicit completion-start choices are tested; neither is selected as Q01 policy.
+Only the agreed no-completion-start input is used; no raw proposal may bypass S01.
 These are rejection-path checks, not the unimplemented A04 gate or an agent episode.
 """
 
@@ -25,12 +25,9 @@ def proposal(state, starts):
 
 
 @pytest.mark.parametrize("scenario", SCENARIOS)
-@pytest.mark.parametrize("completion_choice", (False, True))
-def test_real_states_check_without_approval_and_rejected_plans_advance_30_slots(
-    scenario, completion_choice
-):
+def test_real_states_check_without_approval_and_rejected_plans_advance_30_slots(scenario):
     private = episode(scenario=scenario)
-    simulator = SchedulingSimulator(allow_completion_starts=completion_choice)
+    simulator = SchedulingSimulator(allow_completion_starts=False)
     simulator.reset(private)
     for slot in range(30):
         state = simulator.state()
@@ -41,12 +38,26 @@ def test_real_states_check_without_approval_and_rejected_plans_advance_30_slots(
         starts = ((state.waiting_jobs[0].job_id, slot),) if state.waiting_jobs and slot < 24 else ()
         plan = proposal(state, starts)
         check = check_schedule(plan, state, private.snapshot)
-        assert check.status == "error" and not check.violations
-        assert any("Q02/Q03" in error for error in check.errors)
+        omitted = {j.job_id for j in state.waiting_jobs} - {j for j, _ in starts}
+        late = (
+            bool(starts)
+            and slot + state.waiting_jobs[0].duration_slots > state.waiting_jobs[0].deadline_slot
+        )
+        assert check.status == ("fail" if omitted or late else "pass")
+        assert not check.errors
+        if omitted:
+            assert any(
+                "omitted" in v.message and set(v.job_ids) == omitted for v in check.violations
+            )
+        if late:
+            assert any(v.violation_type == "deadline" for v in check.violations)
         assert check.impact_claim_support == "unsupported"
         assert check.state_version == slot and check.plan_hash == plan.plan_hash
-        with pytest.raises(ValueError):
-            s.ApprovedActions.from_checked_plan(plan, check, slot)
+        if check.status != "pass":
+            with pytest.raises(ValueError):
+                s.ApprovedActions.from_checked_plan(plan, check, slot)
+        else:
+            assert s.ApprovedActions.from_checked_plan(plan, check, slot).state_version == slot
 
         # A raw model proposal cannot bypass S01's capability boundary. This is an
         # adversarial input, not a production execution-gate implementation.

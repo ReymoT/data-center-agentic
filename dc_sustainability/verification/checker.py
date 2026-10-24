@@ -1,13 +1,15 @@
-"""A03 fixed-rule checks using F02 records; unresolved Q01-Q04 cannot approve execution.
+"""Production schedule checks using F02 and the recorded Q01-Q03 agreement.
 
-This is production logic, independent of the evaluation validator. It returns actual
-subcheck results, not an execution permit. Until coverage/partial-infeasibility rules
-are agreed, an otherwise feasible proposal returns an explicit error, never a pass.
+Independent of the evaluation validator. A feasible plan is not an execution permit:
+the controller must bind and recheck it before applying current-slot starts.
+Carbon/freshness and impact support remain separate from physical feasibility.
 """
 
+from collections import Counter
 from uuid import uuid4
 
 from dc_sustainability import schemas as s
+from dc_sustainability.verification.rules import legal_starts
 
 
 def check_schedule(
@@ -30,7 +32,12 @@ def check_schedule(
     performed = [s.PerformedCheck(name="schema", outcome="pass")]
     violations: list[s.Violation] = []
     errors: list[str] = []
-    skipped = [s.SkippedCheck(name="freshness", reason="Q04 issue-time and freshness rule pending")]
+    skipped = [
+        s.SkippedCheck(
+            name="freshness",
+            reason="Q04 routing requires a separately supplied trusted decision UTC",
+        )
+    ]
     evidence: list[s.EvidenceItem] = []
 
     def result() -> s.CheckResult:
@@ -40,7 +47,7 @@ def check_schedule(
             slot=plan.slot,
             state_version=state.state_version,
             plan_hash=plan.plan_hash,
-            status="error" if errors else "fail",
+            status="error" if errors else "fail" if violations else "pass",
             violations=tuple(violations),
             performed=tuple(performed),
             skipped=tuple(skipped),
@@ -101,7 +108,39 @@ def check_schedule(
                 message="job is not waiting; running/completed/missed work cannot be rescheduled",
             )
         )
-    performed.append(s.PerformedCheck(name="ids", outcome="fail" if unknown else "pass"))
+    whole = [a for a in plan.abstentions if a.job_id is None]
+    explicit = [
+        item.job_id
+        for item in (*plan.starts, *plan.deferrals, *plan.abstentions)
+        if item.job_id is not None
+    ]
+    counts = Counter(explicit)
+    invalid_whole = bool(whole) and (len(whole) != 1 or bool(explicit) or not jobs)
+    if whole and not invalid_whole:
+        counts.update(jobs.keys())
+    omitted = sorted(jobs.keys() - counts.keys())
+    duplicates = sorted(j for j, count in counts.items() if count > 1)
+    for ids, message in (
+        (omitted, "waiting jobs omitted from start/deferral/justified abstention"),
+        (duplicates, "waiting jobs covered more than once"),
+    ):
+        if ids:
+            violations.append(
+                s.Violation(violation_type="other", job_ids=tuple(ids), message=message)
+            )
+    if invalid_whole:
+        violations.append(
+            s.Violation(
+                violation_type="other",
+                message="whole-decision abstention must stand alone for a nonempty queue",
+            )
+        )
+    performed.append(
+        s.PerformedCheck(
+            name="ids",
+            outcome="fail" if unknown or omitted or duplicates or invalid_whole else "pass",
+        )
+    )
 
     horizon = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS
     outcomes = {name: "pass" for name in ("timing", "deadline", "nonflexible")}
@@ -170,7 +209,54 @@ def check_schedule(
                 "nonflexible work must start at arrival",
             )
         if start.start_slot >= s.PROPOSED_DECISION_SLOTS:
-            errors.append(f"Q01 completion-slot start unresolved for {job.job_id}")
+            reject(
+                "timing",
+                "other",
+                job.job_id,
+                start.start_slot,
+                "Q01 forbids new starts in completion slots 24-29",
+            )
+    capacity = snapshot.capacity_kw if snapshot.constraints_of("capacity") else None
+    reservations = tuple(
+        (
+            start.start_slot,
+            start.start_slot + jobs[start.job_id].duration_slots,
+            jobs[start.job_id].power_kw,
+        )
+        for start in plan.current_starts
+        if start.job_id in jobs
+    )
+    for deferred in plan.deferrals:
+        job = jobs.get(deferred.job_id)
+        if job and not legal_starts(
+            job, state, capacity, after=state.current_slot, reservations=reservations
+        ):
+            reject(
+                "timing",
+                "other",
+                job.job_id,
+                state.current_slot,
+                "deferral has no later legal start under known physical constraints",
+            )
+    abstentions = [
+        (a, jobs.values()) if a.job_id is None else (a, (jobs[a.job_id],))
+        for a in plan.abstentions
+        if a.job_id is None or a.job_id in jobs
+    ]
+    for abstention, targets in abstentions:
+        for job in targets:
+            opportunities = legal_starts(job, state, capacity)
+            unknown_capacity = capacity is None and bool(opportunities)
+            if (
+                opportunities and not (unknown_capacity and abstention.reason == "missing_evidence")
+            ) or (abstention.reason == "stale_evidence"):
+                reject(
+                    "timing",
+                    "other",
+                    job.job_id,
+                    state.current_slot,
+                    "abstention lacks individual physical justification; carbon is not infeasibility",
+                )
     for name, outcome in outcomes.items():
         ids = tuple(
             c.constraint_id
@@ -238,9 +324,5 @@ def check_schedule(
             s.PerformedCheck(
                 name="capacity", outcome="fail" if overloaded else "pass", constraint_ids=cap_ids
             )
-        )
-    if not violations:
-        errors.append(
-            "Q02/Q03 partial-infeasibility, coverage and deferral rules pending; no execution approval"
         )
     return result()
