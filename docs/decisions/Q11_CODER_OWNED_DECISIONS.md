@@ -11,6 +11,8 @@ The rule was first published in instruction 1.25 and remains identical in the
 [1.26 active-guidance audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md). Package
 maintenance does not reset shared-question clocks or change decision authority.
 
+Instruction 1.27 [implementation receiving maintenance](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md) retains the exact rule below. New code does not transfer ownership, restart response clocks or replace independent acceptance.
+
 ## Rule shared by all assistants
 
 <!-- coder-decisions:start -->

@@ -1,5 +1,7 @@
 # Team manager and repository review policy
 
+Current instruction1.27 implementation/receiving status is in [the published handoff](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). The authority, merge, cleanup and coder-owned rules remain unchanged.
+
 Current plan audit, instruction 1.26: [findings and dispositions](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md). Agreed A03/A04/A02 coding is Ready with only specific behavior/acceptance gates. #36 is Done for technical receiving; #59 P02, #60 source evidence and #61 scoring remain separately open. Reimo owns #60 and has an accepted October 26 inventory/blocker checkpoint. No new scientific rule, task ownership, runtime setting or completed implementation is inferred.
 
 Current workflow, instruction 1.26: [Matty's coder-owned decision rule](Q11_CODER_OWNED_DECISIONS.md) gives the implementer internal decision authority, limits shared confirmation to affected owners and escalates unresolved shared questions within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance. Existing scope, task ownership and scientific agreements remain unchanged.

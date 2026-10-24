@@ -1,6 +1,13 @@
 # Instruction deployment changelog
 
-Current deployment: 1.26 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.27 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+## Deployment 1.27 - 2026-10-24
+
+- Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.
+- Record exact already-received Q01/Q03/Q04 confirmations, the red/unmerged S01 receiving dependency, delivered D05 inventory and conditional Reimo scoring response. No source/scoring/freeze acceptance is inferred.
+- Synchronize instruction versions and current status only. Exact authority/merge/cleanup/coder rules, all50 task assignments, F02, locks/pins/prompts/source fixtures/original ratings remain unchanged.
+- Preserve actual local A01 failures and the bounded capture that did not reproduce a failure; no passing-control diagnostic PR or timeout fix. No model call. [Implementation/receiving handoff](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md).
 
 ## Deployment 1.26 - 2026-10-24
 

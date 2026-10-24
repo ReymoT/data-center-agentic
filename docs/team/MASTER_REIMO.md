@@ -1,10 +1,10 @@
 # Master instructions — Reimo
 
-Audit update, instruction 1.26: [active guidance and issue audit](../handoffs/CODER_PLAN_AUDIT_2026-10-24.md) keeps the coder-owned rule unchanged, corrects received K02/readiness facts and routes P02/source/scoring work to #59/#60/#61. Reimo source ownership/blocker reply is received; October 26 is accepted for his evidence inventory only. Scientific acceptance and disputed shared behavior remain gated; ready agreed coding proceeds.
+Current implementation, instruction 1.27: [published work and receiving gates](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). A03 physical checks, A04 execution/traces and A02 bounded orchestration are real merged code. PR #64 has Matty receiving fixes/current-main reconciliation but still needs Nisha replay and independent evidence; it is unmerged. D05 inventory PR #65 is published, not scientific source acceptance. A01 transport/deployment and P02/L02/runner/live acceptance remain open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged; older dated preparation notes are historical where superseded.
 
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.26 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.27 — 2026-10-24. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -63,7 +63,7 @@ You assist Reimo Tamme. Lead the data pipeline, scenario/split preparation and s
 
 ## Required inputs and decisions
 
-Use the final proposal, existing F02 examples, Matty's configuration/provider/checker boundaries and Edison's actual impact module. Implement actual agreed independent data/simulator functions and tests on permitted fixtures while only unresolved source mapping/shared behavior or scientific acceptance waits; do not invent hidden defaults. You lead source/regeneration/freeze evidence in [#60](https://github.com/ReymoT/data-center-agentic/issues/60), with Ved independently verifying in #13. Your October 26 checkpoint is accepted for evidence inventory and exact remaining blockers, not completed scientific acceptance. Existing source pollutant/interval/rights/suitability and split/freeze decisions remain unresolved; source meaning needs authoritative evidence. The separate Frontier-access follow-up remains deferred.
+Use the final proposal, existing F02 examples, Matty's configuration/provider/checker boundaries and Edison's actual impact module. Implement actual agreed independent data/simulator functions and tests on permitted fixtures while only unresolved source mapping/shared behavior or scientific acceptance waits; do not invent hidden defaults. You lead source/regeneration/freeze evidence in [#60](https://github.com/ReymoT/data-center-agentic/issues/60), with Ved independently verifying in #13. Your inventory checkpoint was delivered early and published through PR #65. Source scientific acceptance remains open for Ved's actual independent applicability findings and the remaining authoritative blockers. PR #64 includes current-main Matty receiving corrections but remains unmerged pending Nisha replay/independent evidence. Existing source pollutant/interval/rights/suitability and split/freeze decisions remain unresolved; source meaning needs authoritative evidence. The separate Frontier-access follow-up remains deferred.
 
 ## Coding checklist in implementation order
 

@@ -1,5 +1,7 @@
 # Shared interface and handoff blueprint
 
+Current implementation receiving note, Matty: [actual A03/A04/A02 APIs and remaining adoption](handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). Existing F02 1.0.0 records/specification are unchanged. Several formerly planned modules below now exist; their handoffs define actual entry points and receiving limits. This pointer does not claim all consumers have adopted them or replace the sole F02 contract. Earlier dated planning/adoption inventories below are historical where superseded.
+
 - **Contract version:** 1.0.0
 - **Document version:** 1.1 — 2026-10-12
 - **Contract owner:** Ved
