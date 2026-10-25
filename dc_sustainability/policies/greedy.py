@@ -110,7 +110,12 @@ def _reserve(occupancy: dict[int, float], start: int, job: s.Job) -> None:
 
 
 def _running_load(state: s.VisibleState) -> dict[int, float]:
-    load: dict[int, float] = {}
+    # The authoritative IT limit includes background, running and proposed work.
+    # PUE scales facility energy, not this capacity constraint.
+    horizon = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS
+    load: dict[int, float] = {
+        slot: state.site.background_kw for slot in range(state.current_slot, horizon)
+    }
     for running in state.running_jobs:
         for slot in range(running.start_slot, running.end_slot):
             load[slot] = load.get(slot, 0.0) + running.job.power_kw

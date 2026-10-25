@@ -11,6 +11,10 @@ def _job(**fields):
 
 def _run(waiting, *, capacity_kw=100.0, running=(), background_kw=None, pue=1.0):
     snap = f.snapshot(capacity_kw=capacity_kw, pue=pue)
+    if background_kw is not None:
+        snap = snap.model_copy(
+            update={"site": snap.site.model_copy(update={"background_kw": background_kw})}
+        )
     state = s.VisibleState.from_snapshot(
         snap,
         episode_id=f.EPISODE_ID,
@@ -20,10 +24,6 @@ def _run(waiting, *, capacity_kw=100.0, running=(), background_kw=None, pue=1.0)
         running_jobs=tuple(running),
     )
     context = s.Context.build(state, snap, "flat")
-    if background_kw is not None:
-        state = state.model_copy(
-            update={"site": state.site.model_copy(update={"background_kw": background_kw})}
-        )
     return propose(state, context)
 
 
@@ -87,7 +87,9 @@ def test_shuffled_waiting_jobs_return_the_same_start_job_ids():
     assert _ids(_run(jobs)) == _ids(_run(shuffled))
 
 
-def test_large_background_kw_does_not_block_it_fit():
+def test_background_consumes_it_capacity_but_pue_does_not_scale_kw():
     job = _job(job_id="J2", power_kw=60)
-    output = _run((job,), capacity_kw=100, background_kw=10_000, pue=2.0)
-    assert _ids(output) == ("J2",)
+    assert _ids(_run((job,), capacity_kw=100, background_kw=40, pue=2.0)) == ("J2",)
+    output = _run((job,), capacity_kw=100, background_kw=41, pue=2.0)
+    assert _ids(output) == ()
+    assert output.plan.abstentions[0].reason == "constraint_violation"
