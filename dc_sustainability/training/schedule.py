@@ -1,6 +1,8 @@
 """Probability-ranked feasible starts for training policies."""
 
+import math
 import re
+from numbers import Real
 
 from dc_sustainability import schemas as s
 
@@ -25,6 +27,13 @@ def schedule_from_probabilities(
             continue
         for start in _window(job, current):
             probability = classifier.selection_probability(job, start)
+            if (
+                isinstance(probability, bool)
+                or not isinstance(probability, Real)
+                or not math.isfinite(probability)
+                or not 0 <= probability <= 1
+            ):
+                raise ValueError("classifier selection probability must be finite and in [0, 1]")
             candidates.append((_candidate_key(job, start, probability), job, start, probability))
     candidates.sort(key=lambda item: item[0])
 
@@ -44,6 +53,20 @@ def schedule_from_probabilities(
         slot=visible_state.current_slot,
         state_version=visible_state.state_version,
         starts=tuple(starts),
+        abstentions=tuple(
+            s.Abstention(
+                job_id=job.job_id,
+                reason=(
+                    "missing_evidence"
+                    if capacity is None
+                    else "infeasible_deadline"
+                    if not _window(job, current)
+                    else "constraint_violation"
+                ),
+            )
+            for job in sorted(visible_state.waiting_jobs, key=lambda item: item.job_id)
+            if job.arrival_slot <= current and job.job_id not in scheduled
+        ),
         status="proposed",
     )
     return s.PolicyOutput(system=system, output_status="ok", plan=plan)
@@ -56,6 +79,7 @@ def _candidate_key(job: s.Job, start_slot: int, probability: float) -> tuple:
         -probability,
         start_slot,
         _job_number(job.job_id),
+        job.job_id,
     )
 
 
@@ -80,11 +104,11 @@ def _window(job: s.Job, current_slot: int) -> tuple[int, ...]:
         arrival = job.arrival_slot
         if arrival < current_slot or arrival > _LAST_START_SLOT:
             return ()
-        if arrival + job.duration_slots > job.deadline_slot:
+        if arrival + job.duration_slots > min(job.deadline_slot, 30):
             return ()
         return (arrival,)
     first = max(current_slot, job.arrival_slot)
-    last = min(_LAST_START_SLOT, job.deadline_slot - job.duration_slots)
+    last = min(_LAST_START_SLOT, job.deadline_slot - job.duration_slots, 30 - job.duration_slots)
     if first > last:
         return ()
     return tuple(range(first, last + 1))
