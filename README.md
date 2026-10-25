@@ -23,7 +23,9 @@ Current workflow update, October 24: [Matty's announcement](https://github.com/R
 
 [The current-plan audit](docs/handoffs/CODER_PLAN_AUDIT_2026-10-24.md) corrects stale pending-input/readiness text and links the separate P02, source and scoring issues. The coder-owned decision rule first published in 1.25 remains unchanged in 1.27. Reimo delivered the source inventory early through PR #65; final source/scientific acceptance is still open.
 
-A01 transport remains unresolved. The latest local full agent suite retained two original object-response timeouts; a separate bounded provider-file capture passed without capturing the stall. Neither passing tests nor hosted CI establish a fix. Runtime/counter/context and separate inference gates remain explicit in [the current handoff](docs/handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md).
+Latest October 24 receiving update: [the corrections and checks](docs/handoffs/OCT24_RECEIVING_CORRECTIONS.md) record Reimo's full allocation confirmation (#21 closed) and Ved's savings agreement (#61 ready for Nisha's implementation). K01 ontology/SHACL and K03 tests are merged, but completed-job/ambiguous-capacity validation and the actual graph-to-checker proof still need Ved's corrections. PR #64 still awaits independent replay and passing checks.
+
+A01 transport remains unresolved. One current full offline suite with stalled-thread/failure capture passes 1,225 tests and 19 subtests without capturing the timeout. Earlier ordinary-suite object-response failures remain retained; this pass and hosted CI do not establish a fix. Runtime/counter/context and separate inference gates remain explicit in [the receiving handoff](docs/handoffs/OCT24_RECEIVING_CORRECTIONS.md).
 
 ## Systems we reviewed and why we chose this architecture
 
