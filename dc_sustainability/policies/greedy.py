@@ -182,11 +182,11 @@ def _window(job: s.Job, current_slot: int) -> tuple[int, ...]:
         arrival = job.arrival_slot
         if arrival < current_slot or arrival > _LAST_START_SLOT:
             return ()
-        if arrival + job.duration_slots > job.deadline_slot:
+        if arrival + job.duration_slots > min(job.deadline_slot, 30):
             return ()
         return (arrival,)
     first = max(current_slot, job.arrival_slot)
-    last = min(_LAST_START_SLOT, job.deadline_slot - job.duration_slots)
+    last = min(_LAST_START_SLOT, job.deadline_slot - job.duration_slots, 30 - job.duration_slots)
     if first > last:
         return ()
     return tuple(range(first, last + 1))
