@@ -12,6 +12,8 @@ October 25 approved A01 validation: actual separate authorization received and r
 
 October 25 actual A01 native attempt: after the verified internal preflight fix, resume the same unused approval with identical requests/settings/bounds. One actual plain request reaches 120 seconds on CPU, retains an uncertain spent attempt and returns no response/API token counts. Stop before Plan; no model retry. Record observed context/sampler/resource subsets and verified owned-runner cleanup. Full A01 remains open; no shared setting, pin, dependency, instruction or rating changes. [Actual result](../handoffs/A01_NATIVE_TIMEOUT_2026-10-25.md).
 
+October 25 A01 host/F04/F05 refresh: preserve the spent CPU timeout. A zero-request metadata-only accepted-0.40.5 process retains the Arc 140V as Vulkan compute with integrated-GPU use enabled, then exits with its console child and listener gone. This identifies a concrete host candidate without model load/offload/performance claims or inference authorization. Refresh README, architecture, diagram, plan, coordination and decision status for merged P02 A/B, the P03 probability constructor and current 1,310-test/19-subtest main evidence. No instruction version, task, F02, scientific rule, model/runtime pin, accepted generation setting or original rating changes. [Handoff](../handoffs/A01_IGPU_HOST_CANDIDATE_2026-10-25.md).
+
 ## Deployment 1.27 - 2026-10-24
 
 - Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.

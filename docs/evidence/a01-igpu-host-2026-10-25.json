@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-10-25T21:58:48.5109890Z",
+  "runtime_version": "0.40.5",
+  "probe_kind": "metadata_only_host_discovery",
+  "model_requests": 0,
+  "loaded_models": 0,
+  "isolated_listener": "127.0.0.1:11436",
+  "environment": {
+    "OLLAMA_IGPU_ENABLE": "1",
+    "OLLAMA_VULKAN": "1",
+    "OLLAMA_NUM_PARALLEL": "1",
+    "OLLAMA_MAX_LOADED_MODELS": "1",
+    "OLLAMA_NO_CLOUD": "1"
+  },
+  "detected_compute": {
+    "library": "Vulkan",
+    "name": "Vulkan0",
+    "description": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "type": "iGPU",
+    "reported_total": "18.0 GiB",
+    "reported_available": "17.2 GiB",
+    "reported_driver": "0.0",
+    "reported_compute": "0.0"
+  },
+  "comparison_to_failed_cpu_run": {
+    "previous_OLLAMA_IGPU_ENABLE": "unset",
+    "previous_runtime_behavior": "The runtime detected the Arc 140V but dropped it and selected CPU.",
+    "candidate_behavior": "The same runtime retained the Arc 140V as Vulkan inference compute when integrated-GPU use was enabled."
+  },
+  "cleanup": {
+    "owned_server_exited": true,
+    "owned_console_child_exited": true,
+    "listener_remaining": false
+  },
+  "limits": [
+    "The memory values are runtime reports for shared integrated graphics memory, not dedicated VRAM measurements.",
+    "No model was loaded, so this does not prove layer offload, context fit, latency, token counts or completion within 120 seconds.",
+    "The runtime reported driver and compute fields as 0.0; this probe does not validate their semantic meaning.",
+    "This evidence does not authorize inference or adopt the acceleration setting for experiments."
+  ]
+}
