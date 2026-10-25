@@ -1,0 +1,46 @@
+{
+  "evidence_kind": "metadata_only_arc_vulkan_preflight_not_inference",
+  "captured_at_utc": "2026-10-25T22:47:36.232126+00:00",
+  "status": "passed",
+  "runtime_version": "0.40.5",
+  "runtime_executable_sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
+  "model_requests": 0,
+  "loaded_models": 0,
+  "isolated_listener": "127.0.0.1:11437",
+  "metadata_requests": {
+    "api_version": 3,
+    "api_tags": 2,
+    "api_show": 2,
+    "api_ps": 1,
+    "api_chat": 0,
+    "api_generate": 0
+  },
+  "environment": {
+    "OLLAMA_IGPU_ENABLE": "1",
+    "OLLAMA_VULKAN": "1",
+    "OLLAMA_NUM_PARALLEL": "1",
+    "OLLAMA_MAX_LOADED_MODELS": "1",
+    "OLLAMA_NO_CLOUD": "1"
+  },
+  "identity_matches_accepted_inventory": true,
+  "detected_compute": {
+    "library": "Vulkan",
+    "name": "Vulkan0",
+    "description": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "type": "iGPU",
+    "reported_total": "18.0 GiB",
+    "reported_available": "17.2 GiB",
+    "reported_driver": "0.0",
+    "reported_compute": "0.0"
+  },
+  "cleanup": {
+    "owned_server_exited": true,
+    "listener_remaining": false
+  },
+  "limits": [
+    "This launcher has no chat or generate endpoint and cannot dispatch inference.",
+    "Metadata readiness does not prove model load, layer offload, context fit or latency.",
+    "Runtime-reported integrated graphics memory is not dedicated VRAM.",
+    "This preflight does not authorize inference or adopt the candidate settings."
+  ]
+}
