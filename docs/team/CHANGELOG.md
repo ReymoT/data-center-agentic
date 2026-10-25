@@ -6,6 +6,8 @@ October 24 factual receiving correction (instruction policy remains 1.27): corre
 
 October25 factual receiving update: PR #75 delivers Edison A with Matty's authorized background-capacity fix, actual receiving and unchanged ownership; B stays open. Record the ordinary A01 timeout, zero-inference0.40.11 inventory and targeted owner/escalation actions. No instruction deployment, schema, pin, scientific rule or rating change. [Handoff](../handoffs/OCT25_P02A_AND_RUNTIME.md).
 
+October25 A01 increment: correct only synthetic HTTP teardown; keep all25 original provider test function sources/payloads/deadlines/assertions and production transport intact. Add real socket lifecycle/truncation tests;106 focused/1,244 full plus19 subtests pass and fixed24-case repetitions retained. Prepare official isolated accepted0.40.5/model identities with0 inference and active service unchanged; native two-call validation still needs actual approval/evidence. No instruction deployment or pin/dependency/scientific change. [Handoff](../handoffs/A01_FIXTURE_AND_PINNED_RUNTIME.md).
+
 ## Deployment 1.27 - 2026-10-24
 
 - Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.

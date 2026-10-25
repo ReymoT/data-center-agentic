@@ -25,7 +25,7 @@ Current workflow update, October 24: [Matty's announcement](https://github.com/R
 
 Latest October 25 update: [PR #75 receiving](docs/handoffs/P02A_MATTY_RECEIVING.md) corrects background IT capacity and tests actual A03/A04 execution, 30-slot replanning and agent fallback. This is partial A delivery; P02/B and full integration remain open. Q12 #21 stays closed, #61 scoring agreement is received, and Ved's K01/K03 defects still need corrections. [Owner actions and evidence](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
 
-A01 transport remains unresolved. The latest ordinary local suite retains 1,239 passes/19 subtests and one existing object-plain timeout; 137 focused receiving tests pass separately. A fresh metadata-only inventory observes runtime 0.40.11, while accepted 0.40.5 remains pinned. No inference, runtime adoption or transport fix is established. [Actual evidence and gates](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
+A01 update: the synthetic HTTP fixture now waits for client closure before shutdown, while all original payload/deadline/assertions remain intact. The full offline suite passes 1,244 tests and 19 subtests; deliberately incomplete responses still fail as uncertain spent attempts. An isolated official 0.40.5 runtime matches the accepted identities, with no inference and no change to the active 0.40.11 service. Native counter/effective-setting validation still requires the separate bounded probe. [Verified work and next gate](docs/handoffs/A01_FIXTURE_AND_PINNED_RUNTIME.md).
 
 ## Systems we reviewed and why we chose this architecture
 
