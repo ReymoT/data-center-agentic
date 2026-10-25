@@ -1,5 +1,7 @@
 # October 24 receiving corrections and A01 investigation
 
+Later status: [October25 delivery/runtime handoff](OCT25_P02A_AND_RUNTIME.md) supersedes missing-P02/latest-runtime/date-only E05 statements below. Preserve this dated record as history.
+
 Owner MattyAnd. Matty approved all recommendations from the latest issue review,
 including closing #21. Starting main was
 679475027bf3b8f0ee025869fcd7ffff4bc36b43; instruction 1.27 and F02 1.0.0 remain

@@ -17,15 +17,15 @@ Our research question: Does an ontology-grounded, tool-verified agent improve th
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains implemented F02 records, data/simulator/retrieval/impact tooling, plain/evaluator preparation and the production checker, execution controller and bounded agent core. The agent uses real components; reviewed prompts, P02 fallback, accepted runtime/counter, runner integration and a separately authorized model-driven episode remain required. Training, experiment CLI, held-out results and final demonstration are unfinished. Offline synthetic HTTP tests do not establish inference or research results. [Current implementation and evidence](docs/handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md).
+This repository contains implemented F02 records, data/simulator/retrieval/impact tooling, plain/evaluator preparation and the production checker, controller and bounded agent core. Greedy A and its real checked-fallback receiving are now delivered through PR #75. Reviewed prompts, accepted runtime/counter, runner integration and a separately authorized model-driven episode remain required. Greedy B, training, experiment CLI, held-out results and final demonstration are unfinished. [Current delivery and remaining inputs](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
 
 Current workflow update, October 24: [Matty's announcement](https://github.com/ReymoT/data-center-agentic/issues/57) and [instruction 1.27](docs/decisions/Q11_CODER_OWNED_DECISIONS.md) make the coder responsible for internal implementation choices. Shared changes need only directly affected owners; unresolved shared questions escalate within 24 elapsed hours. Ready coding continues while disputed behavior waits. The implementation/research status and existing scientific gates are unchanged.
 
 [The current-plan audit](docs/handoffs/CODER_PLAN_AUDIT_2026-10-24.md) corrects stale pending-input/readiness text and links the separate P02, source and scoring issues. The coder-owned decision rule first published in 1.25 remains unchanged in 1.27. Reimo delivered the source inventory early through PR #65; final source/scientific acceptance is still open.
 
-Latest October 24 receiving update: [the corrections and checks](docs/handoffs/OCT24_RECEIVING_CORRECTIONS.md) record Reimo's full allocation confirmation (#21 closed) and Ved's savings agreement (#61 ready for Nisha's implementation). K01 ontology/SHACL and K03 tests are merged, but completed-job/ambiguous-capacity validation and the actual graph-to-checker proof still need Ved's corrections. PR #64 still awaits independent replay and passing checks.
+Latest October 25 update: [PR #75 receiving](docs/handoffs/P02A_MATTY_RECEIVING.md) corrects background IT capacity and tests actual A03/A04 execution, 30-slot replanning and agent fallback. This is partial A delivery; P02/B and full integration remain open. Q12 #21 stays closed, #61 scoring agreement is received, and Ved's K01/K03 defects still need corrections. [Owner actions and evidence](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
 
-A01 transport remains unresolved. One current full offline suite with stalled-thread/failure capture passes 1,225 tests and 19 subtests without capturing the timeout. Earlier ordinary-suite object-response failures remain retained; this pass and hosted CI do not establish a fix. Runtime/counter/context and separate inference gates remain explicit in [the receiving handoff](docs/handoffs/OCT24_RECEIVING_CORRECTIONS.md).
+A01 transport remains unresolved. The latest ordinary local suite retains 1,239 passes/19 subtests and one existing object-plain timeout; 137 focused receiving tests pass separately. A fresh metadata-only inventory observes runtime 0.40.11, while accepted 0.40.5 remains pinned. No inference, runtime adoption or transport fix is established. [Actual evidence and gates](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
 
 ## Systems we reviewed and why we chose this architecture
 
@@ -105,10 +105,10 @@ Matty accepted local Ollama with Qwen3 8B and temperature 0.2. [The Q09 decision
 
 ## Installed local model
 
-Qwen3 8B Q4_K_M is installed outside Git. The [latest dated metadata](docs/evidence/ollama-qwen3-8b-2026-10-24.json) observes Ollama 0.40.10; accepted runtime 0.40.5 remains pinned. Model/template identities match earlier observations, but parameter-text differences and effective runtime/context/resource validation remain unresolved. This is installation evidence, not successful inference or GPU offload. [Setup and remaining gates](docs/OLLAMA_SETUP.md).
+Qwen3 8B Q4_K_M is installed outside Git. The [latest dated metadata](docs/evidence/ollama-qwen3-8b-2026-10-25.json) observes Ollama 0.40.11; accepted runtime 0.40.5 remains pinned. Model/template identities match earlier observations, but parameter-text differences and effective runtime/context/resource validation remain unresolved. This is installation evidence, not successful inference or GPU offload. [Setup and remaining gates](docs/OLLAMA_SETUP.md).
 
 ```powershell
-.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-24.json
+.venv\Scripts\python.exe scripts/inspect_ollama.py --compare docs/evidence/ollama-qwen3-8b-2026-10-25.json
 ```
 
 ## Available adapter and checker core

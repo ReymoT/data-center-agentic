@@ -1,0 +1,40 @@
+{
+  "evidence_kind": "installed_model_inventory_not_run_configuration",
+  "captured_at_utc": "2026-10-25T16:58:13.949427+00:00",
+  "model": "qwen3:8b",
+  "runtime_version": "0.40.11",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "size_bytes": 5225388164,
+  "details": {
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "8.2B",
+    "quantization_level": "Q4_K_M"
+  },
+  "capabilities": [
+    "completion",
+    "tools",
+    "thinking"
+  ],
+  "model_info": {
+    "general.architecture": "qwen3",
+    "general.parameter_count": 8190735360,
+    "qwen3.context_length": 40960,
+    "qwen3.block_count": 36,
+    "qwen3.embedding_length": 4096
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "utf8_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "source": "local /api/show license field",
+    "upstream_model_card": "https://huggingface.co/Qwen/Qwen3-8B",
+    "packaged_model": "https://ollama.com/library/qwen3:8b"
+  },
+  "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+  "parameters_sha256": "8ac335de6a31449a7839e1e0b00663f2adaca4f9c24a40b596a86740a9a97157",
+  "model_calls": 0,
+  "experiment_ready": false
+}

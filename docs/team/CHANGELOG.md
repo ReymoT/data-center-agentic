@@ -4,6 +4,8 @@ Current deployment: 1.27 - 2026-10-24. The original source archive remains packa
 
 October 24 factual receiving correction (instruction policy remains 1.27): corrected missed Reimo Q12/Ved savings replies, closed #21's confirmation scope, recorded merged K01/K03 with actual open defects, and refreshed README/architecture/plan/coordination/index. The current full offline capture passes1,225/19 without proving an A01 fix; sandbox-obstructed evidence is retained separately. No task rows, roles, merge/authority rules, F02, pins, original ratings or scientific settings change. See [receiving handoff](../handoffs/OCT24_RECEIVING_CORRECTIONS.md).
 
+October25 factual receiving update: PR #75 delivers Edison A with Matty's authorized background-capacity fix, actual receiving and unchanged ownership; B stays open. Record the ordinary A01 timeout, zero-inference0.40.11 inventory and targeted owner/escalation actions. No instruction deployment, schema, pin, scientific rule or rating change. [Handoff](../handoffs/OCT25_P02A_AND_RUNTIME.md).
+
 ## Deployment 1.27 - 2026-10-24
 
 - Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.
