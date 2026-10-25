@@ -1,1 +1,5 @@
-"""Reserved for Edison: greedy A/B and learned C/D inference. Not implemented."""
+"""Greedy policy entry points."""
+
+from dc_sustainability.policies.greedy import propose
+
+__all__ = ["propose"]
