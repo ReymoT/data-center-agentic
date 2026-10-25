@@ -8,6 +8,8 @@ October25 factual receiving update: PR #75 delivers Edison A with Matty's author
 
 October25 A01 increment: correct only synthetic HTTP teardown; keep all25 original provider test function sources/payloads/deadlines/assertions and production transport intact. Add real socket lifecycle/truncation tests;106 focused/1,244 full plus19 subtests pass and fixed24-case repetitions retained. Prepare official isolated accepted0.40.5/model identities with0 inference and active service unchanged; native two-call validation still needs actual approval/evidence. No instruction deployment or pin/dependency/scientific change. [Handoff](../handoffs/A01_FIXTURE_AND_PINNED_RUNTIME.md).
 
+October 25 approved A01 validation: actual separate authorization received and recorded; metadata preflight stopped on parameter-text hash mismatch before either model request. Offline reconstruction reproduces accepted/current hashes from identical defaults in different display orders. Retain both observations and the stopped-process record. Correct the internal comparator only for exact accepted-value group permutations; preserve types, stop order, all raw hashes, inventory fields and other pins. All 1,259 offline tests/19 subtests pass. No retry, inference, changed shared value/format, adopted pin/dependency or instruction deployment. [Actual result](../handoffs/A01_APPROVED_PREFLIGHT_2026-10-25.md).
+
 ## Deployment 1.27 - 2026-10-24
 
 - Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.
