@@ -1,5 +1,18 @@
 # A01: fixture lifecycle correction and accepted-runtime preparation
 
+Later October 25 actual result: the same unused authorization was resumed after
+the internal metadata fix. One plain request timed out at its 120-second cap;
+Plan was not called and no model retry occurred. [Actual evidence and next
+action](A01_NATIVE_TIMEOUT_2026-10-25.md). The earlier preparation/preflight status
+below is historical where superseded; no fresh approval was needed before the
+first actual request because the earlier preflight dispatched zero requests.
+
+Later October 25 result: Matty separately approved the bounded validation. Its
+preflight stopped before either request on a displayed parameter-text hash mismatch;
+the owned child is stopped and zero model calls occurred. [Actual result and strict
+guard proposal](A01_APPROVED_PREFLIGHT_2026-10-25.md). Preparation statements below
+are the earlier observation, not proof of stable parameter display ordering.
+
 Matty explicitly requested A01 completion and tagging the next owners. [The team
 priority notice](https://github.com/ReymoT/data-center-agentic/issues/18#issuecomment-6401393637)
 tags Nisha, Ved, Reimo and Edison with their next tasks and parallel dependencies.
