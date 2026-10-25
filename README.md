@@ -25,7 +25,7 @@ Current workflow update, October 24: [Matty's announcement](https://github.com/R
 
 Latest October 25 update: [PR #75 receiving](docs/handoffs/P02A_MATTY_RECEIVING.md) corrects background IT capacity and tests actual A03/A04 execution, 30-slot replanning and agent fallback. This is partial A delivery; P02/B and full integration remain open. Q12 #21 stays closed, #61 scoring agreement is received, and Ved's K01/K03 defects still need corrections. [Owner actions and evidence](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
 
-A01 transport remains unresolved. The latest ordinary local suite retains 1,239 passes/19 subtests and one existing object-plain timeout; 137 focused receiving tests pass separately. A fresh metadata-only inventory observes runtime 0.40.11, while accepted 0.40.5 remains pinned. No inference, runtime adoption or transport fix is established. [Actual evidence and gates](docs/handoffs/OCT25_P02A_AND_RUNTIME.md).
+A01 update: after the verified metadata-order fix, the actual approved plain request ran on CPU and reached its 120-second deadline. One uncertain attempt is spent; no response/API token counts were returned, and the Plan request was not sent. There was no model retry. Observed context was 16384 with temperature 0.2/top_p 1, but full native/settings/resource acceptance remains open. All owned processes are stopped. The offline suite passes 1,259 tests and 19 subtests; those are separate from this timed-out development request. [Actual result and next action](docs/handoffs/A01_NATIVE_TIMEOUT_2026-10-25.md).
 
 ## Systems we reviewed and why we chose this architecture
 

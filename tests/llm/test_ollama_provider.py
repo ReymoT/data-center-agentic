@@ -9,7 +9,7 @@ import json
 import threading
 import time
 from dataclasses import replace
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler
 
 import pytest
 
@@ -17,6 +17,7 @@ from dc_sustainability import schemas as s
 from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.llm.provider import CallBlocked, Deployment, OllamaProvider
 from tests.contracts import fixtures as f
+from tests.llm.http_fixture import DrainingHTTPServer
 
 DIGEST = "a" * 64  # synthetic artifact identity, not an installed model checksum
 
@@ -77,7 +78,7 @@ def server():
                 time.sleep(self.server.delay)
             self.respond(self.server.body, self.server.status)
 
-    httpd = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    httpd = DrainingHTTPServer(("127.0.0.1", 0), Handler)
     httpd.daemon_threads = True
     httpd.requests, httpd.delay, httpd.status = [], 0, 200
     httpd.version, httpd.request_id, httpd.body = "synthetic-1", None, envelope()
