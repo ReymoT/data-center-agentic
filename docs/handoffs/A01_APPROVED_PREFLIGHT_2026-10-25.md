@@ -1,5 +1,12 @@
 # A01: approved validation stopped before native dispatch
 
+Later October 25 actual result: the same unused authorization was resumed after
+the internal metadata fix. One plain request timed out at its 120-second cap;
+Plan was not called and no model retry occurred. [Actual evidence and next
+action](A01_NATIVE_TIMEOUT_2026-10-25.md). The earlier preparation/preflight status
+below is historical where superseded; no fresh approval was needed before the
+first actual request because the earlier preflight dispatched zero requests.
+
 Matty separately approved the prepared bounded two-call validation. [The actual
 authorization](https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6401913520)
 records the user's reply and the reviewed launcher/driver hashes. It permits at
