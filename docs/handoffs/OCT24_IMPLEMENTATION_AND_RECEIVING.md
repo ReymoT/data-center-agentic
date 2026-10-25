@@ -1,5 +1,7 @@
 # October 24 implementation and receiving handoff
 
+Later correction: [the receiving follow-up](OCT24_RECEIVING_CORRECTIONS.md) supersedes the pending #21/#61 status in this earlier snapshot. Reimo's full allocation confirmation and Ved's savings agreement were already received; #21 is now closed, and Nisha can implement #61. K01/K03 have since merged with open #71/#72 defects. Preserve the dated evidence below as history; its pending-response statements are not current requests.
+
 Owner MattyAnd. Matty approved every recommendation from the open-issue review,
 then PR #64 receiving, A03, focused A01 work, A04 and A02 in order. Instruction
 maintenance 1.27 reflects actual published code, not completed research. F02
