@@ -85,6 +85,11 @@ class Replay:
     def valid(self) -> bool:
         return not self.findings
 
+    @property
+    def completed_job_count(self) -> int:
+        """Jobs whose occupancy ended by boundary 30; kept apart from completed energy."""
+        return len(self.completed_job_ids)
+
     def state_at(
         self, slot: int, carbon_facts: tuple[s.CarbonForecast, ...] = ()
     ) -> s.VisibleState:
@@ -310,11 +315,45 @@ def _same_kw(a: float, b: float) -> bool:
     return math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-9)
 
 
-def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, ...]:
-    """Compare structural outcomes and loads, not impact totals or unagreed work units.
+WORK_UNIT = "kWh"
+WORK_DEFINITION = "completed_it_energy_before_pue_v1"  # the only mapping agreed in #24
 
-    A supplied completed_work scalar cannot receive a clean result without an agreed
-    unit/definition mapping. Per-slot/total energy and emissions remain outside this
+
+@dataclass(frozen=True)
+class WorkComparison:
+    """How a recorded ``EpisodeResult.completed_work`` relates to the replay.
+
+    ``absent`` is the expected case while producers keep the field None. Every supplied
+    value is ``not_comparable``: a different or missing mapping can never match, and
+    the agreed mapping has no agreed numeric precision yet, so its difference from the
+    replay is kept for the record but is never a pass (#24, Ved and Matty).
+    """
+
+    status: Literal["absent", "not_comparable"]
+    reason: Literal["", "mapping_differs", "precision_not_agreed"]
+    recorded: float | None
+    derived_kwh: float  # the replay's completed IT energy before PUE
+    difference_kwh: float | None  # recorded minus derived, for the agreed mapping only
+
+
+def compare_completed_work(replay: Replay, result: s.EpisodeResult) -> WorkComparison:
+    work = result.completed_work
+    derived = replay.completed_it_energy_kwh
+    if work is None:
+        return WorkComparison("absent", "", None, derived, None)
+    if (work.unit, work.definition) != (WORK_UNIT, WORK_DEFINITION):
+        return WorkComparison("not_comparable", "mapping_differs", work.value, derived, None)
+    return WorkComparison(
+        "not_comparable", "precision_not_agreed", work.value, derived, work.value - derived
+    )
+
+
+def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, ...]:
+    """Compare structural outcomes and loads, not impact totals.
+
+    A supplied completed_work value is reported as a ``completed_work`` mismatch
+    carrying its ``WorkComparison``, so it never passes silently; see
+    ``compare_completed_work``. Per-slot/total energy and emissions remain outside this
     structural comparison until independent impact reference selection is established.
     """
     result = s.EpisodeResult.model_validate(
@@ -322,9 +361,10 @@ def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, .
     )
     if result.episode_id != replay.episode.episode_id:
         raise ValueError("the result belongs to another episode")
-    if result.completed_work is not None:
-        raise ValueError("completed_work comparison requires an agreed unit/definition mapping")
     out: list[Mismatch] = []
+    work = compare_completed_work(replay, result)
+    if work.status != "absent":
+        out.append(Mismatch("completed_work", None, work, result.completed_work))
 
     def check(field, slot, expected, recorded):
         if expected != recorded:
