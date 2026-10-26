@@ -66,3 +66,19 @@ Comparison scope is explicit: job-state/identity/load structure is checked; fore
 The missed-on-arrival question remains with Reimo/protocol agreement. Matty confirmed the existing DecisionRecord.executed_starts field as actual confirmed execution, not proposed future starts. A04/E02 real persistence and saved-output validation remain future work. Final current-base full checks and merge/CI evidence are recorded in PR #28 and issue #24 after execution.
 
 Current-base review validation before L01 merge: all 949 tests and 19 subtests passed; all 121 evaluation tests passed; Ruff lint/format (65 files), setup/links/version/task/policy checks and whitespace passed. The nine new regressions failed against the original implementation and pass after correction. No production-checker/simulator/impact import was added.
+
+## Arrival option B correction (October 26, Nisha)
+
+Arrival option B is agreed in issue #7 (Nisha, Matty, Edison, Ved) and implemented in S01 by Reimo in draft PR #64. Under it, a job with no legal start on arrival is shown as waiting for its arrival decision and missed at the next boundary. PR #64's only remaining Nisha-owned failure was `test_s01_simulator_agrees_with_the_replay[infeasible]` (seed 0, slot 15): the simulator kept J01 waiting at its arrival decision while this replay had already missed it.
+
+Change, in E01 only:
+- `Protocol` gains `impossible_arrival_waits` (explicit Boolean, default False). A new named protocol `Q03_OPTION_B` sets it; `Q03_DRAFT` is unchanged, so existing callers and main's simulator agreement test keep their current behavior.
+- With the option on, an arrived job with no legal start stays waiting at `t == arrival_slot` and is missed at the first later boundary with no legal start. Ordinary expiry after the last legal start is unchanged.
+- An executed start for a waiting job with no legal start is reported as `executed_no_legal_start` and not applied, so the job is still missed at the next boundary. This cannot occur under `Q03_DRAFT`, where such a job is never waiting.
+- The validator already accepts a per-job abstention for a job with no legal start that fits, so no validator rule changed.
+
+Tests (hand truth, no simulator): J3 waits at 4 and is missed at 5 with the hand schedule unchanged (140 kWh); ordinary expiry unchanged; an executed start of J3 is reported and not applied; a mixed arrival still serves the feasible job; a nonflexible impossible arrival; an impossible arrival at slot 23 is missed at 24 (and at 23 under the draft rule); the protocol option must be an explicit Boolean. Three deliberate bugs (no arrival wait, no illegal-start finding, waiting two decisions) each made tests fail; the code was restored.
+
+For PR #64: after merging main, change the protocol in `test_s01_simulator_agrees_with_the_replay` from `Q03_DRAFT` to `Q03_OPTION_B` (one line). With that change, PR #64 head 3bb48b6 plus this correction passed 1,142 tests and 19 subtests locally (the 53 Ollama provider tests were deselected; this change does not touch them). On main, the full suite passed 1,325 tests and 19 subtests.
+
+Not changed: S01, the production checker, F02, settings and other owners' modules. This is not E01 acceptance; Q08 and real saved-output validation remain open.
