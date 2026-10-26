@@ -24,10 +24,15 @@ class Protocol:
     name: str
     status: str
     last_start_slot: int  # Q01: last decision slot in which a new job may start
+    # Arrival option B: a job with no legal start stays waiting for its arrival decision
+    # and is missed at the next boundary. False misses it at its arrival boundary.
+    impossible_arrival_waits: bool = False
 
     def __post_init__(self):
         if type(self.last_start_slot) is not int or self.last_start_slot < 0:
             raise ValueError("last_start_slot must be a non-negative integer")
+        if type(self.impossible_arrival_waits) is not bool:
+            raise ValueError("impossible_arrival_waits must be an explicit Boolean")
         if not self.name.strip() or not self.status.strip():
             raise ValueError("a protocol must be named and carry its agreement status")
 
@@ -36,6 +41,14 @@ Q03_DRAFT = Protocol(
     name="Q01-Q03-draft-2026-10-20",
     status="Q03 confirmed by Nisha, agreed by Ved and Matty; Edison pending (issue #7)",
     last_start_slot=23,
+)
+
+Q03_OPTION_B = Protocol(
+    name="Q01-Q03-option-b-2026-10-24",
+    status="arrival option B agreed by Nisha, Matty, Edison and Ved; S01 confirmed by Reimo"
+    " in PR #64 (issue #7)",
+    last_start_slot=23,
+    impossible_arrival_waits=True,
 )
 
 Code = Literal[

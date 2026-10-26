@@ -7,8 +7,10 @@ simulator or trace defect shows up as a mismatch instead of being copied.
 
 Timing follows the shared rules and the Q01 draft: occupancy is [start, start + duration),
 new starts only through ``protocol.last_start_slot`` and all work ends by boundary 30. A
-waiting job is missed at the first boundary where no legal start remains, so a job that is
-already impossible when it arrives is missed at its arrival boundary.
+waiting job is missed at the first boundary where no legal start remains. A job that is
+already impossible when it arrives is missed at its arrival boundary, or, under arrival
+option B (``protocol.impossible_arrival_waits``), waits for that one decision and is missed
+at the next boundary; an executed start for it is still reported.
 """
 
 import math
@@ -24,6 +26,7 @@ ReplayCode = Literal[
     "executed_slot_mismatch",  # recorded start slot differs from its decision slot
     "executed_unknown_job",
     "executed_not_waiting",  # not arrived, running, completed, missed or started twice
+    "executed_no_legal_start",  # waiting under option B, but cannot finish in time
     "capacity",
     "capacity_unverifiable",
 ]
@@ -162,8 +165,8 @@ def replay_episode(
 ) -> Replay:
     """Replay executed starts slot by slot and report every execution the rules forbid.
 
-    A start for a job that cannot run (unknown, not waiting, or recorded at another slot)
-    is reported and not applied. A start that overloads capacity is applied, because the
+    A start for a job that cannot run (unknown, not waiting, without a legal start, or
+    recorded at another slot) is reported and not applied. A start that overloads capacity is applied, because the
     job did run, and each overloaded slot is reported.
     """
     episode = s.PrivateEpisode.model_validate(
@@ -212,7 +215,10 @@ def replay_episode(
         for job_id in arrived:
             if job_id in running or job_id in completed or job_id in missed:
                 continue
-            if not _legal_starts(jobs[job_id], t, protocol):
+            arriving = t == jobs[job_id].arrival_slot
+            if not _legal_starts(jobs[job_id], t, protocol) and not (
+                arriving and protocol.impossible_arrival_waits
+            ):
                 missed.add(job_id)
         waiting = [
             j for j in arrived if j not in running and j not in completed and j not in missed
@@ -252,6 +258,8 @@ def replay_episode(
                         _why(job_id, t, jobs, running, completed, missed, started),
                     )
                 )
+            elif not _legal_starts(jobs[job_id], t, protocol):
+                findings.append(ReplayFinding("executed_no_legal_start", t, job_id))
             else:
                 started.append(job_id)
                 running[job_id] = t
