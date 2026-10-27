@@ -1,0 +1,349 @@
+# Data-center-agentic project ontology
+# Version: 1.0.0 (ontology revision 2026-10-24)
+#
+# This file declares the static schema/ontology layer for the ASU FSE 598 data-center
+# sustainability scheduling study. It is loaded offline and kept separate from
+# per-episode facts and runtime traces. See docs/ontology/README.md for semantics.
+
+@prefix : <https://data-center-agentic.example.org/sched#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+<https://data-center-agentic.example.org/sched>
+    rdf:type owl:Ontology ;
+    owl:versionIRI <https://data-center-agentic.example.org/sched/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    rdfs:label "Data-center-agentic scheduling ontology" ;
+    rdfs:comment "Project vocabulary for site, job, carbon, constraint, source, decision and check records." ;
+    prov:wasDerivedFrom <https://brickschema.org/schema/Brick> ,
+                        <http://www.w3.org/ns/prov> ,
+                        <http://qudt.org/2.1/vocab/unit> .
+
+# --------------------------------------------------------------------------- classes
+
+:Episode rdf:type owl:Class ;
+    rdfs:label "Episode" ;
+    rdfs:comment "A single scheduling episode at a decision or completion slot." .
+
+:Site rdf:type owl:Class ;
+    rdfs:label "Site" ;
+    rdfs:comment "Data-center site configuration." ;
+    rdfs:subClassOf brick:Building .
+
+:Job rdf:type owl:Class ;
+    rdfs:label "Job" ;
+    rdfs:comment "A constant-power non-preemptive workload." .
+
+:WaitingJob rdf:type owl:Class ;
+    rdfs:label "Waiting job" ;
+    rdfs:comment "Job that has arrived and is eligible to start." ;
+    rdfs:subClassOf :Job .
+
+:RunningJob rdf:type owl:Class ;
+    rdfs:label "Running job" ;
+    rdfs:comment "Job that has started and still occupies slots." ;
+    rdfs:subClassOf :Job .
+
+:CompletedJob rdf:type owl:Class ;
+    rdfs:label "Completed job" ;
+    rdfs:comment "Job whose execution interval has ended." ;
+    rdfs:subClassOf :Job .
+
+:Slot rdf:type owl:Class ;
+    rdfs:label "Slot" ;
+    rdfs:comment "Discrete scheduling slot represented as an integer index." .
+
+:CarbonFact rdf:type owl:Class ;
+    rdfs:label "Carbon fact" ;
+    rdfs:comment "Carbon intensity value with provenance and semantics." .
+
+:CarbonObservation rdf:type owl:Class ;
+    rdfs:label "Carbon observation" ;
+    rdfs:comment "Private realized carbon observation." ;
+    rdfs:subClassOf :CarbonFact .
+
+:CarbonForecast rdf:type owl:Class ;
+    rdfs:label "Carbon forecast" ;
+    rdfs:comment "Policy-visible carbon forecast issued before its validity slot." ;
+    rdfs:subClassOf :CarbonFact .
+
+:Constraint rdf:type owl:Class ;
+    rdfs:label "Constraint" ;
+    rdfs:comment "Typed scheduling limit with provenance." .
+
+:Source rdf:type owl:Class ;
+    rdfs:label "Source" ;
+    rdfs:comment "Provenance source for facts and constraints." ;
+    rdfs:subClassOf prov:Entity .
+
+:Decision rdf:type owl:Class ;
+    rdfs:label "Decision" ;
+    rdfs:comment "Runtime decision record." ;
+    rdfs:subClassOf prov:Activity .
+
+:Check rdf:type owl:Class ;
+    rdfs:label "Check" ;
+    rdfs:comment "Runtime check activity." ;
+    rdfs:subClassOf prov:Activity .
+
+# --------------------------------------------------------------------------- episode properties
+
+:currentSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range xsd:integer ;
+    rdfs:label "current slot" .
+
+:stateVersion rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range xsd:integer ;
+    rdfs:label "state version" .
+
+:snapshotId rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range xsd:string ;
+    rdfs:label "snapshot ID" .
+
+:missingCarbonSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range xsd:integer ;
+    rdfs:label "missing carbon slot" .
+
+:missedJob rdf:type owl:ObjectProperty ;
+    rdfs:domain :Episode ;
+    rdfs:range :Job ;
+    rdfs:label "missed job" .
+
+# --------------------------------------------------------------------------- site properties
+
+:backgroundKw rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Site ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "background IT load (kW)" ;
+    :unitCode "kW" ;
+    :qudtUnit unit:KiloW .
+
+:pue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Site ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "power usage effectiveness" ;
+    :unitCode "1" ;
+    :qudtUnit unit:UNITLESS .
+
+:slotHours rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Site ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "slot duration (hours)" ;
+    :unitCode "h" ;
+    :qudtUnit unit:HR .
+
+# --------------------------------------------------------------------------- job properties
+
+:arrivalSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:integer ;
+    rdfs:label "arrival slot" ;
+    :unitCode "slot" .
+
+:durationSlots rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:integer ;
+    rdfs:label "duration in slots" ;
+    :unitCode "slot" .
+
+:powerKw rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "constant power (kW)" ;
+    :unitCode "kW" ;
+    :qudtUnit unit:KiloW .
+
+:deadlineSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:integer ;
+    rdfs:label "deadline slot" ;
+    :unitCode "slot" .
+
+:flexible rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Job ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "flexible" .
+
+:startSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :RunningJob, :CompletedJob ;
+    rdfs:range xsd:integer ;
+    rdfs:label "start slot" ;
+    :unitCode "slot" .
+
+:endSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CompletedJob ;
+    rdfs:range xsd:integer ;
+    rdfs:label "end slot (exclusive)" ;
+    :unitCode "slot" .
+
+# --------------------------------------------------------------------------- carbon properties
+
+:carbonValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "carbon intensity value" ;
+    :unitCode "g/kWh" ;
+    :qudtUnit :GramPerKiloWattHour ;
+    rdfs:comment "Dimensional unit g CO2e/kWh; pollutant basis is recorded separately in :pollutantBasis." .
+
+:validSlot rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonForecast ;
+    rdfs:range xsd:integer ;
+    rdfs:label "valid slot" ;
+    :unitCode "slot" .
+
+:observedAtUtc rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonObservation ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "observed at UTC" .
+
+:issuedAtUtc rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonForecast ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "issued at UTC" .
+
+:forecastKind rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonForecast ;
+    rdfs:range xsd:string ;
+    rdfs:label "forecast kind" .
+
+:qualityStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "quality status" .
+
+:pollutantBasis rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "pollutant basis" .
+
+:intervalConvention rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "interval convention" .
+
+:emissionsFactorType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "emissions factor type" .
+
+:slotMappingStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "slot mapping status" .
+
+:validFromUtc rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "valid from UTC" .
+
+:validToUtc rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "valid to UTC" .
+
+:sourceSha256 rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range xsd:string ;
+    rdfs:label "source SHA-256" .
+
+:constraintSourceSha256 rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range xsd:string ;
+    rdfs:label "constraint source SHA-256" .
+
+# --------------------------------------------------------------------------- constraint properties
+
+:constraintType rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range xsd:string ;
+    rdfs:label "constraint type" .
+
+:limitValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "limit value" .
+
+:appliesToSite rdf:type owl:ObjectProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range :Site ;
+    rdfs:label "applies to site" .
+
+:appliesToJob rdf:type owl:ObjectProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range :Job ;
+    rdfs:label "applies to job" .
+
+:sourceVersion rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range xsd:string ;
+    rdfs:label "source version" .
+
+# --------------------------------------------------------------------------- source properties
+
+:path rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Source ;
+    rdfs:range xsd:string ;
+    rdfs:label "source path" .
+
+:redistributionStatus rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Source ;
+    rdfs:range xsd:string ;
+    rdfs:label "redistribution status" .
+
+:commit rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Source ;
+    rdfs:range xsd:string ;
+    rdfs:label "source commit" .
+
+:sha256 rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Source ;
+    rdfs:range xsd:string ;
+    rdfs:label "source SHA-256" .
+
+# --------------------------------------------------------------------------- provenance linking
+
+:source rdf:type owl:ObjectProperty ;
+    rdfs:domain :Constraint ;
+    rdfs:range :Source ;
+    rdfs:label "source" ;
+    rdfs:subPropertyOf prov:wasDerivedFrom .
+
+:carbonSource rdf:type owl:ObjectProperty ;
+    rdfs:domain :CarbonFact ;
+    rdfs:range :Source ;
+    rdfs:label "carbon source" ;
+    rdfs:subPropertyOf prov:wasDerivedFrom .
+
+:wasGeneratedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :CarbonFact, :Constraint ;
+    rdfs:range :Decision, :Check ;
+    rdfs:label "was generated by" ;
+    rdfs:subPropertyOf prov:wasGeneratedBy .
+
+# --------------------------------------------------------------------------- unit vocabulary
+
+:unitCode rdf:type owl:DatatypeProperty ;
+    rdfs:label "unit code" ;
+    rdfs:comment "The original F02 unit literal carried with the value for provenance." .
+
+:qudtUnit rdf:type owl:ObjectProperty ;
+    rdfs:label "QUDT unit" ;
+    rdfs:comment "Reference to a QUDT unit or project-defined dimensional unit." .
+
+:GramPerKiloWattHour rdf:type owl:Class ;
+    rdfs:label "gram per kilowatt-hour" ;
+    rdfs:comment "Project dimensional unit for carbon intensity; no official QUDT unit exists for g CO2e/kWh, so this class records the dimension explicitly while pollutant basis is separate." ;
+    rdfs:subClassOf qudt:Unit ;
+    :unitCode "g/kWh" .

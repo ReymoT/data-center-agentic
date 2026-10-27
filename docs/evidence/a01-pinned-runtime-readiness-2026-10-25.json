@@ -1,0 +1,138 @@
+{
+  "kind": "A01_fixture_correction_and_isolated_accepted_runtime_preparation_not_inference",
+  "runtime_version": "0.40.5",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+  "parameters_sha256": "b486bc5b19b3a10c136f738b4105a741fa4d3384d7cccadff0a694a994d86545",
+  "official_archive_url": "https://github.com/ollama/ollama/releases/download/v0.40.5/ollama-windows-amd64.zip",
+  "official_archive_bytes": 1471226485,
+  "official_archive_sha256": "5134ce7e3bc8e94d0494721c799ec293b429450d0c52461b0ee3647dd3bb4bb7",
+  "executable_sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
+  "all_copied_real_blobs_verified": [
+    {
+      "file": "sha256-05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76",
+      "bytes": 487,
+      "sha256": "05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76"
+    },
+    {
+      "file": "sha256-a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+      "bytes": 5225374496,
+      "sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f"
+    },
+    {
+      "file": "sha256-ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+      "bytes": 1723,
+      "sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4"
+    },
+    {
+      "file": "sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "bytes": 11338,
+      "sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
+    },
+    {
+      "file": "sha256-cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+      "bytes": 120,
+      "sha256": "cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb"
+    },
+    {
+      "file": "sha256-500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "bytes": 859,
+      "sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+    }
+  ],
+  "canonical_manifest_bytes": 859,
+  "canonical_manifest_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "isolated_metadata_matches_accepted_inventory": true,
+  "first_wrapper_comparison_failed_and_retained": true,
+  "isolated_listener_owned_by_started_child": true,
+  "isolated_process_stopped": true,
+  "models_loaded_during_inspection": 0,
+  "process_serial_settings": {
+    "OLLAMA_MAX_LOADED_MODELS": "1",
+    "OLLAMA_NUM_PARALLEL": "1"
+  },
+  "active_service_version_unchanged": "0.40.11",
+  "active_model_manifest_unchanged": true,
+  "model_calls": 0,
+  "native_equivalence_verified": false,
+  "effective_generation_settings_verified": false,
+  "production_counter_adopted": false,
+  "candidate_tokenizers_version": "0.23.3",
+  "candidate_tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "offline_go_vectors_passed": 17,
+  "candidate_measurements": [
+    {
+      "system": "plain_llm",
+      "request_sha256": "264630e066a9bc96f9cee6b0666e30168154d622cff7d35cbf3c75f0a3b42b90",
+      "candidate_prompt_tokens": 2291
+    },
+    {
+      "system": "agent",
+      "request_sha256": "c8f78bea9c593a750fe661b2def59136525897d0ee5b064d005c450a7af279eb",
+      "candidate_prompt_tokens": 2003
+    }
+  ],
+  "prepared_validation_bounds": {
+    "max_run_attempts": 2,
+    "max_response_bytes": 2097152,
+    "per_call_seconds": 120,
+    "overall_seconds": 300,
+    "parallel_calls": 1,
+    "warmup_calls": 0
+  },
+  "prepared_launcher_sha256": "ce757fa7f70fa90ae9a537d9fd8b4ae0e08e7661ff3fb46f344da6f07ddf7b4e",
+  "prepared_validation_driver_sha256": "29c9e131aa4e735fe323d721a15b95116f535bc2a22191e5bcada5db90dbe7df",
+  "fixed_original_deep_runs": {
+    "kind": "six_fixed_original_deep_case_runs_after_fixture_lifecycle_correction",
+    "declared_runs": 6,
+    "cases_per_run": 4,
+    "model_calls": 0,
+    "runs": [
+      {
+        "run": 1,
+        "exit_code": 0,
+        "log_sha256": "fdd78a118d4fc5ca676283bf90e6eff448f43abdfb93a0f5e9d9c444d86e6ea9",
+        "summary": "4 passed in 0.21s"
+      },
+      {
+        "run": 2,
+        "exit_code": 0,
+        "log_sha256": "e2ef45912140050b881a72f29eec9ca613acc8f3cc948e5904ee40d54987f46b",
+        "summary": "4 passed in 0.25s"
+      },
+      {
+        "run": 3,
+        "exit_code": 0,
+        "log_sha256": "546294bc3db0bf0fb5fc949c343df6e5b68a699a7e3f2af49c2cdf7ea72452f0",
+        "summary": "4 passed in 0.22s"
+      },
+      {
+        "run": 4,
+        "exit_code": 0,
+        "log_sha256": "dd47292d46ad10b391ef5af29355c6ab74530929898ae3ac90d9ae83fe0485d3",
+        "summary": "4 passed in 0.23s"
+      },
+      {
+        "run": 5,
+        "exit_code": 0,
+        "log_sha256": "c72e44d9eeec0a92dcd11d7e2102b7163a6cc5e0760cea7972d2850cbc3dde3e",
+        "summary": "4 passed in 0.24s"
+      },
+      {
+        "run": 6,
+        "exit_code": 0,
+        "log_sha256": "fdd78a118d4fc5ca676283bf90e6eff448f43abdfb93a0f5e9d9c444d86e6ea9",
+        "summary": "4 passed in 0.21s"
+      }
+    ],
+    "completed_runs": 6,
+    "all_passed": true
+  },
+  "first_write_shutdown_before_drain_candidate_failed": true,
+  "current_client_first_focused_tests": 106,
+  "current_client_first_full_tests": 1244,
+  "current_client_first_passing_subtests": 19,
+  "original_provider_test_function_sources_preserved": 25,
+  "fixture_only_correction_not_OS_or_driver_fix": true,
+  "separate_inference_authorization_recorded": false
+}

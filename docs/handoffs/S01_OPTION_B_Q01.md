@@ -1,5 +1,60 @@
 # S01 Option B and Q01 implementation handoff
 
+## October 26 local integration verification
+
+Reimo-authorized update of PR #64: starting head
+`3bb48b60d94e295ea924d8b66b92284b2e19e831`, clean working tree. Fetched and
+reviewed authoritative main `be87f581f39c1488ab429775b0d83fcff4b1e424`,
+instruction 1.27 and F02 1.0.0, plus PRs #64/#85 and Issue #7 replies.
+Merged main with `git merge --no-commit --no-ff origin/main`; no conflicts.
+The merge remains uncommitted. No push or GitHub write was performed.
+
+Main includes Nisha's PR #85 merge
+`8ac71461d0d3df786f607958cee9a004a1129731`. Applied her requested one-line
+`Q03_OPTION_B` switch only in `test_s01_simulator_agrees_with_the_replay`.
+Other `Q03_DRAFT` callers and old-protocol tests remain unchanged. Existing S01
+code/tests and Matty's receiving fixes are preserved. No additional production
+checker, F02, P01/S02 or evaluator implementation edits were made.
+
+Validation used macOS Python 3.12.15 in temporary environment
+`/private/tmp/s01-integration-20261026-venv`, with exact direct pins from
+`requirements/requirements-core.in`; this is not Windows hashed-lock CI evidence.
+Commands and results:
+
+```text
+python -m pytest tests/simulator -q                         51 passed
+python -m pytest tests/evaluation -q                        201 passed
+python -m pytest tests/evaluation/test_replay.py tests/evaluation/test_replay_review.py -q
+                                                          38 passed
+python -m pytest tests/verification/test_s01_checker_intake.py -q
+                                                          9 passed
+python -m pytest tests/contracts -q                         168 passed
+python -m pytest tests/verification tests/contracts -q      253 passed
+python -m pytest tests -q                                  1395 passed, 19 subtests passed
+python -m ruff check dc_sustainability scripts tests        passed
+python -m ruff format --check dc_sustainability scripts tests
+                                                          121 files formatted
+python scripts/validate_setup.py                           passed
+python -m compileall -q dc_sustainability scripts tests     passed
+python -m pip check                                        passed
+git diff --check                                          passed
+git diff --cached --check                                 passed
+```
+
+Unchanged main was extracted into a separate temporary directory and tested
+with the same environment: 1380 passed, 19 subtests passed; lint, formatting
+(121 files) and setup validation also passed. Integrated full run: 10.82s;
+main: 10.81s. All six original integration failures are resolved locally; no new
+regression observed. Initial older-environment collection lacked langgraph;
+after installing pinned dependencies, sandboxed HTTP fixture binding produced
+110 PermissionError setup errors (1285 tests passed). The permitted complete
+rerun above passed with no deselection, skip addition or weakened assertion.
+
+Ved's independent S01 reproduction is still pending in the inspected Issue #7
+record. Ready for hosted CI and receiving review after the human commits and
+pushes; no hosted-green, independent-reproduction or scientific acceptance is
+claimed by these local checks. Earlier dated evidence below is historical.
+
 Publication update: the original local record below is historical. This work is
 published as draft [PR #64](https://github.com/ReymoT/data-center-agentic/pull/64)
 against main 2ec1e542, instruction 1.26. Reimo reports 219 focused passes after

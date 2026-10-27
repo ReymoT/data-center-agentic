@@ -1,6 +1,25 @@
 # Instruction deployment changelog
 
-Current deployment: 1.26 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.27 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+October 24 factual receiving correction (instruction policy remains 1.27): corrected missed Reimo Q12/Ved savings replies, closed #21's confirmation scope, recorded merged K01/K03 with actual open defects, and refreshed README/architecture/plan/coordination/index. The current full offline capture passes1,225/19 without proving an A01 fix; sandbox-obstructed evidence is retained separately. No task rows, roles, merge/authority rules, F02, pins, original ratings or scientific settings change. See [receiving handoff](../handoffs/OCT24_RECEIVING_CORRECTIONS.md).
+
+October25 factual receiving update: PR #75 delivers Edison A with Matty's authorized background-capacity fix, actual receiving and unchanged ownership; B stays open. Record the ordinary A01 timeout, zero-inference0.40.11 inventory and targeted owner/escalation actions. No instruction deployment, schema, pin, scientific rule or rating change. [Handoff](../handoffs/OCT25_P02A_AND_RUNTIME.md).
+
+October25 A01 increment: correct only synthetic HTTP teardown; keep all25 original provider test function sources/payloads/deadlines/assertions and production transport intact. Add real socket lifecycle/truncation tests;106 focused/1,244 full plus19 subtests pass and fixed24-case repetitions retained. Prepare official isolated accepted0.40.5/model identities with0 inference and active service unchanged; native two-call validation still needs actual approval/evidence. No instruction deployment or pin/dependency/scientific change. [Handoff](../handoffs/A01_FIXTURE_AND_PINNED_RUNTIME.md).
+
+October 25 approved A01 validation: actual separate authorization received and recorded; metadata preflight stopped on parameter-text hash mismatch before either model request. Offline reconstruction reproduces accepted/current hashes from identical defaults in different display orders. Retain both observations and the stopped-process record. Correct the internal comparator only for exact accepted-value group permutations; preserve types, stop order, all raw hashes, inventory fields and other pins. All 1,259 offline tests/19 subtests pass. No retry, inference, changed shared value/format, adopted pin/dependency or instruction deployment. [Actual result](../handoffs/A01_APPROVED_PREFLIGHT_2026-10-25.md).
+
+October 25 actual A01 native attempt: after the verified internal preflight fix, resume the same unused approval with identical requests/settings/bounds. One actual plain request reaches 120 seconds on CPU, retains an uncertain spent attempt and returns no response/API token counts. Stop before Plan; no model retry. Record observed context/sampler/resource subsets and verified owned-runner cleanup. Full A01 remains open; no shared setting, pin, dependency, instruction or rating changes. [Actual result](../handoffs/A01_NATIVE_TIMEOUT_2026-10-25.md).
+
+October 25 A01 host/F04/F05 refresh: preserve the spent CPU timeout. A zero-request metadata-only accepted-0.40.5 process retains the Arc 140V as Vulkan compute with integrated-GPU use enabled, then exits with its console child and listener gone. This identifies a concrete host candidate without model load/offload/performance claims or inference authorization. Refresh README, architecture, diagram, plan, coordination and decision status for merged P02 A/B, the P03 probability constructor and current 1,310-test/19-subtest main evidence. No instruction version, task, F02, scientific rule, model/runtime pin, accepted generation setting or original rating changes. [Handoff](../handoffs/A01_IGPU_HOST_CANDIDATE_2026-10-25.md).
+
+## Deployment 1.27 - 2026-10-24
+
+- Matty authorized all reviewed issue/task recommendations. Publish actual A03/A04/A02 implementations and receiving limits; preserve equal team roles and plain README/architecture.
+- Record exact already-received Q01/Q03/Q04 confirmations, the red/unmerged S01 receiving dependency, delivered D05 inventory and conditional Reimo scoring response. No source/scoring/freeze acceptance is inferred.
+- Synchronize instruction versions and current status only. Exact authority/merge/cleanup/coder rules, all50 task assignments, F02, locks/pins/prompts/source fixtures/original ratings remain unchanged.
+- Preserve actual local A01 failures and the bounded capture that did not reproduce a failure; no passing-control diagnostic PR or timeout fix. No model call. [Implementation/receiving handoff](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md).
 
 ## Deployment 1.26 - 2026-10-24
 

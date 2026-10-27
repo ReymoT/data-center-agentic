@@ -7,6 +7,8 @@ series: forecasts for forecast claims, private realized observations for outcome
 """
 
 import math
+import re
+from collections import Counter
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from decimal import Decimal
@@ -14,8 +16,17 @@ from typing import Literal
 
 from dc_sustainability import schemas as s
 
-CLAIM_TOLERANCE = 0.05  # kWh and kg, the proposal's claim-scoring rule
-TOLERANCE_UNITS = frozenset({"kWh", "kg"})
+CLAIM_TOLERANCE = 0.05  # absolute and inclusive, no extra epsilon (agreed in #24)
+TOLERANCE_UNITS = frozenset({"kWh", "kg", "kW", "g/kWh"})
+EXACT_UNITS = frozenset({"slot", "h"})  # integer and equal; the study uses hourly slots
+# F02 Unit has no percent, so percentages are never numeric claims here: they stay with
+# the separately reported manual E04 review and are never counted as correct.
+
+EnergyBasis = Literal["it", "facility"]
+PUE_FACT_ID = "FACT-SITE-PUE"
+# Case-sensitive "IT", so the pronoun "it" never names a basis.
+_IT_WORDS = re.compile(r"\bIT\b|(?i:before PUE|excluding PUE|without PUE)")
+_FACILITY_WORDS = re.compile(r"\bfacility\b|including PUE|with PUE|after PUE", re.IGNORECASE)
 
 
 class CarbonUnavailable(KeyError):
@@ -84,10 +95,9 @@ ScoreStatus = Literal[
     "unit_mismatch",
     "not_numeric",
     "reference_unavailable",
-    # Pending: no agreed tolerance for kW, g/kWh, slot or h claims, and F02 Unit has
-    # no percentage unit for the 0.05 percentage-point rule.
-    "unscored_unit",
+    "basis_unstated",  # an energy claim that does not say IT or facility: unsupported
 ]
+SCORED = frozenset({"correct", "incorrect"})
 
 
 @dataclass(frozen=True)
@@ -99,13 +109,37 @@ class ClaimScore:
     abs_error: float | None
 
 
-def score_numeric_claim(claim: s.Claim, reference: float | None, reference_unit: str) -> ClaimScore:
+def stated_energy_basis(claim: s.Claim) -> EnergyBasis | None:
+    """The energy basis the claim's text or cited evidence identifies, or None.
+
+    The text must name one basis ("IT", "before PUE", "facility", "including PUE"), or
+    the claim must cite the site PUE fact, which identifies facility energy. Naming both,
+    or neither, leaves the basis unstated; a numeric match never chooses it (#24).
+    """
+    it = bool(_IT_WORDS.search(claim.text))
+    facility = bool(_FACILITY_WORDS.search(claim.text)) or PUE_FACT_ID in claim.evidence_ids
+    if it == facility:
+        return None
+    return "it" if it else "facility"
+
+
+def score_numeric_claim(
+    claim: s.Claim,
+    reference: float | None,
+    reference_unit: str,
+    *,
+    energy_basis: EnergyBasis | None = None,
+) -> ClaimScore:
     """Score one claim against an independently computed reference value.
 
     Matching a claim to the quantity it describes is the reviewer's job (E04); F02
-    claims carry a value and unit but no quantity kind.
+    claims carry a value and unit but no quantity kind. A kWh reference must say which
+    energy basis it is, and is used only for a claim that states that same basis; use
+    ``score_energy_claim`` to pick the reference from the claim's stated basis.
     """
     claim = s.Claim.model_validate(claim.model_dump(mode="python", warnings="none"), strict=True)
+    if reference_unit == "kWh" and energy_basis is None:
+        raise ValueError("a kWh reference must state its energy basis")
     if reference is not None and (
         isinstance(reference, bool)
         or not isinstance(reference, (int, float))
@@ -122,10 +156,63 @@ def score_numeric_claim(claim: s.Claim, reference: float | None, reference_unit:
     error = float(difference)
     if claim.unit != reference_unit:
         return ClaimScore(claim.claim_id, "unit_mismatch", claim.value, reference, None)
-    if claim.unit not in TOLERANCE_UNITS:
-        return ClaimScore(claim.claim_id, "unscored_unit", claim.value, reference, error)
-    status = "correct" if difference <= Decimal(str(CLAIM_TOLERANCE)) else "incorrect"
+    if claim.unit == "kWh":
+        stated = stated_energy_basis(claim)
+        if stated is None:
+            return ClaimScore(claim.claim_id, "basis_unstated", claim.value, reference, None)
+        if stated != energy_basis:
+            raise ValueError(f"{claim.claim_id} states a different energy basis than the reference")
+    if claim.unit in EXACT_UNITS:
+        if not float(reference).is_integer():
+            raise ValueError(f"a {claim.unit} reference must be a whole number")
+        status = "correct" if difference == 0 else "incorrect"  # 4.5 never equals a slot
+    else:
+        status = "correct" if difference <= Decimal(str(CLAIM_TOLERANCE)) else "incorrect"
     return ClaimScore(claim.claim_id, status, claim.value, reference, error)
+
+
+def score_energy_claim(
+    claim: s.Claim, *, it_kwh: float | None, facility_kwh: float | None
+) -> ClaimScore:
+    """Score a kWh claim only against the basis it states; an unstated basis is unsupported.
+
+    The other basis never rescues a claim: matching it is not checked at all.
+    """
+    basis = stated_energy_basis(claim)
+    if basis is None:  # scored as basis_unstated, whichever reference is passed
+        either = it_kwh if it_kwh is not None else facility_kwh
+        return score_numeric_claim(claim, either, "kWh", energy_basis="it")
+    reference = it_kwh if basis == "it" else facility_kwh
+    return score_numeric_claim(claim, reference, "kWh", energy_basis=basis)
+
+
+@dataclass(frozen=True)
+class ScoreSummary:
+    """Counts over a set of numeric claims. Unscored claims are counted, never correct."""
+
+    total: int
+    correct: int
+    incorrect: int
+    unscored: Mapping[str, int]  # status -> count, for every status other than scored ones
+
+    @property
+    def correct_of_all(self) -> float | None:
+        return self.correct / self.total if self.total else None
+
+    @property
+    def correct_of_scored(self) -> float | None:
+        scored = self.correct + self.incorrect
+        return self.correct / scored if scored else None
+
+
+def summarize(scores: Iterable[ClaimScore]) -> ScoreSummary:
+    counts = Counter(score.status for score in scores)
+    return ScoreSummary(
+        total=sum(counts.values()),
+        correct=counts["correct"],
+        incorrect=counts["incorrect"],
+        unscored={k: v for k, v in sorted(counts.items()) if k not in SCORED},
+    )
 
 
 @dataclass(frozen=True)

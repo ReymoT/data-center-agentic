@@ -1,0 +1,51 @@
+{
+  "task": "D05",
+  "review_date": "2026-10-24",
+  "instruction_commit": "2ec1e542c09066e2cf4d05953c5f076566a1e657",
+  "instruction_version": "1.26",
+  "method": "Pinned upstream documents retrieved and SHA-256 hashed; no upstream code executed. These are documentation hashes, not EIA input hashes.",
+  "documents": [
+    {
+      "path": "carbonexplorer-method.py",
+      "url": "https://raw.githubusercontent.com/facebookresearch/CarbonExplorer/135f21862cb2427b3dbad690519bc05c5f6c539e/src/download_and_process.py",
+      "sha256": "6e1f124e251aad4a73dcf70ee0acbecdcf85032860607d9c515f4fdc855d0412",
+      "bytes": 5894
+    },
+    {
+      "path": "carbonexplorer-license.txt",
+      "url": "https://raw.githubusercontent.com/facebookresearch/CarbonExplorer/135f21862cb2427b3dbad690519bc05c5f6c539e/LICENSE",
+      "sha256": "7c6858d0e71dc8b858255270ad4b5004e80b5b058bf5bbc408a28430d6ddbf4b",
+      "bytes": 19334
+    },
+    {
+      "path": "sustaindc-readme.md",
+      "url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/README.md",
+      "sha256": "3c556ddf75430c85774e24a3361a56119d9934a755264844185434084a913e7c",
+      "bytes": 33696
+    },
+    {
+      "path": "sustaindc-license.txt",
+      "url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/LICENSE",
+      "sha256": "ef0f2b1973f2ea351a8edaca64888b019ae4b08f50d2eaef4fd7643462140da6",
+      "bytes": 1095
+    },
+    {
+      "path": "sustaindc-plot.py",
+      "url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/explore_ci.py",
+      "sha256": "03e8545aa21e285a2f967a10bb96b331528fe09684ea9900f377cfd85a6e1298",
+      "bytes": 1951
+    },
+    {
+      "path": "sustaindc-battery.py",
+      "url": "https://raw.githubusercontent.com/HewlettPackard/dc-rl/a92b4755aca560e34a98d14028dda629eb968482/envs/bat_env_fwd_view.py",
+      "sha256": "e8ca091b6b9a433b3d645506b9ca51142b404cbae5194714e44cdf6a14dbd3e9",
+      "bytes": 10782
+    }
+  ],
+  "source_manifest": "data/manifests/d01-source-inspection.json",
+  "structural_verification": "docs/evidence/d06-matty-verification-2026-10-19.json",
+  "actual_exporter_revision_verified": false,
+  "original_eia_snapshot_sha256": null,
+  "dataset_redistribution_status": "unresolved",
+  "scientific_acceptance": false
+}

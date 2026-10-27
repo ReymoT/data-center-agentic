@@ -15,7 +15,7 @@ from dc_sustainability import schemas as s
 from dc_sustainability.data.scenarios import SCENARIOS, generate_jobs
 from dc_sustainability.evaluation import replay as r
 from dc_sustainability.evaluation import validator as v
-from dc_sustainability.evaluation.validator import Q03_DRAFT
+from dc_sustainability.evaluation.validator import Q03_DRAFT, Q03_OPTION_B
 from dc_sustainability.simulator import SchedulingSimulator
 from tests.contracts import fixtures as f
 
@@ -94,6 +94,76 @@ def test_nonflexible_job_is_missed_right_after_its_arrival():
     rep = replay(episode=episode_with([fixed]))
     assert rep.boundaries[3].waiting == ("N1",)
     assert rep.boundaries[4].missed == ("N1",)
+
+
+# ----------------------------------------------------------------- arrival option B
+def replay_b(executed=None, episode=None):
+    return r.replay_episode(episode or f.private_episode(), executed or {}, Q03_OPTION_B)
+
+
+def test_option_b_impossible_arrival_waits_one_decision_then_is_missed():
+    # J3 arrives at 4 needing 3 slots by deadline 6: no legal start, but under B it is
+    # shown for its arrival decision and missed at boundary 5.
+    rep = replay_b(starts(s0=["J1"], s2=["J2"]))
+    assert rep.valid
+    assert (rep.boundaries[4].waiting, rep.boundaries[4].missed) == (("J3",), ())
+    assert (rep.boundaries[5].waiting, rep.boundaries[5].missed) == ((), ("J3",))
+    assert rep.missed_job_ids == rep.unfinished_job_ids == ("J3",)
+    assert rep.completed_job_ids == ("J1", "J2") and rep.completed_it_energy_kwh == 140.0
+
+
+def test_option_b_leaves_ordinary_expiry_unchanged():
+    # J1 and J2 still wait through their last legal start (4) and are missed at 5.
+    rep = replay_b()
+    assert rep.boundaries[4].waiting == ("J1", "J2", "J3")
+    assert rep.boundaries[5].missed == ("J1", "J2", "J3")
+
+
+def test_option_b_start_of_an_impossible_arrival_is_reported_and_not_applied():
+    rep = replay_b(starts(s0=["J1"], s2=["J2"], s4=["J3"]))
+    assert codes(rep) == [("executed_no_legal_start", 4, "J3")]
+    assert rep.slots[4].running == () and rep.boundaries[5].missed == ("J3",)
+    assert rep.completed_job_ids == ("J1", "J2")
+
+
+def test_option_b_mixed_arrival_still_serves_the_feasible_job():
+    ok = s.Job(
+        job_id="F1", arrival_slot=4, duration_slots=1, power_kw=10, deadline_slot=6, flexible=True
+    )
+    ep = episode_with(list(f.jobs().values()) + [ok])
+    rep = replay_b(starts(s0=["J1"], s2=["J2"], s4=["F1"]), ep)
+    assert rep.valid
+    assert rep.boundaries[4].waiting == ("F1", "J3")
+    assert rep.boundaries[5].missed == ("J3",)
+    assert rep.completed_job_ids == ("F1", "J1", "J2")
+
+
+def test_option_b_nonflexible_impossible_arrival():
+    fixed = s.Job(
+        job_id="N2", arrival_slot=3, duration_slots=3, power_kw=10, deadline_slot=5, flexible=False
+    )
+    rep = replay_b(episode=episode_with([fixed]))
+    assert rep.boundaries[3].waiting == ("N2",)
+    assert rep.boundaries[4].missed == ("N2",)
+    assert codes(replay_b(starts(s3=["N2"]), episode_with([fixed]))) == [
+        ("executed_no_legal_start", 3, "N2")
+    ]
+
+
+def test_option_b_impossible_arrival_at_the_last_decision_slot():
+    # Arriving at 23 needing 8 slots cannot end by 30; it waits at 23 and is missed at 24.
+    late = s.Job(
+        job_id="L2", arrival_slot=23, duration_slots=8, power_kw=10, deadline_slot=30, flexible=True
+    )
+    rep = replay_b(episode=episode_with([late]))
+    assert rep.boundaries[23].waiting == ("L2",)
+    assert rep.boundaries[24].missed == ("L2",)
+    assert replay(episode=episode_with([late])).boundaries[23].missed == ("L2",)  # draft rule
+
+
+def test_protocol_option_must_be_explicit_boolean():
+    with pytest.raises(ValueError, match="Boolean"):
+        v.Protocol(name="x", status="y", last_start_slot=23, impossible_arrival_waits=1)
 
 
 # ----------------------------------------------------------------- executions the rules forbid
@@ -329,7 +399,7 @@ def test_s01_simulator_agrees_with_the_replay(scenario):
             ran = sim.step(action).slot.started_job_ids
             executed[t] = tuple(s.ApprovedStart(job_id=j, start_slot=t) for j in ran)
             states.append(sim.state())
-        rep = r.replay_episode(ep, executed, Q03_DRAFT)
+        rep = r.replay_episode(ep, executed, Q03_OPTION_B)
         assert rep.valid, (scenario, seed, rep.findings)
         assert r.compare_result(rep, sim.result(run_id="RUN-S01", system="greedy_a")) == ()
         for state in states[:24]:

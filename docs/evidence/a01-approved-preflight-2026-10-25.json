@@ -1,0 +1,91 @@
+{
+  "kind": "approved_A01_preflight_stopped_before_native_dispatch",
+  "authorization_ref": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6401913520",
+  "captured_at_utc": "2026-10-25T19:08:47.325410+00:00",
+  "runtime_version": "0.40.5",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+  "expected_parameters_sha256": "b486bc5b19b3a10c136f738b4105a741fa4d3384d7cccadff0a694a994d86545",
+  "observed_parameters_sha256": "8ac335de6a31449a7839e1e0b00663f2adaca4f9c24a40b596a86740a9a97157",
+  "failure": "Accepted identity comparison failed: parameters_sha256",
+  "model_calls": 0,
+  "native_validation_driver_started": false,
+  "retry": false,
+  "process": {
+    "isolated_port": 11435,
+    "requested_runtime": "0.40.5",
+    "model_calls": 0,
+    "process_serial_settings": {
+      "OLLAMA_MAX_LOADED_MODELS": "1",
+      "OLLAMA_NUM_PARALLEL": "1"
+    },
+    "child_pid": 8888,
+    "listener_pid": 8888,
+    "stopped": true,
+    "active_service_changed": false,
+    "metadata_differences": [
+      "parameters_sha256"
+    ]
+  },
+  "offline_analysis": {
+    "kind": "offline_parameter_text_hash_preimage_comparison_not_live_response",
+    "model_calls": 0,
+    "model_parameter_blob_sha256": "cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+    "source_parameter_values": {
+      "repeat_penalty": 1,
+      "stop": [
+        "<|im_start|>",
+        "<|im_end|>"
+      ],
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95
+    },
+    "enumerated_group_orders": 120,
+    "matches": {
+      "accepted_oct18": {
+        "sha256": "b486bc5b19b3a10c136f738b4105a741fa4d3384d7cccadff0a694a994d86545",
+        "group_order": [
+          "stop",
+          "temperature",
+          "top_k",
+          "top_p",
+          "repeat_penalty"
+        ],
+        "reconstructed_exact_hash_preimage": "stop                           \"<|im_start|>\"\nstop                           \"<|im_end|>\"\ntemperature                    0.6\ntop_k                          20\ntop_p                          0.95\nrepeat_penalty                 1"
+      },
+      "preflight_oct25": {
+        "sha256": "8ac335de6a31449a7839e1e0b00663f2adaca4f9c24a40b596a86740a9a97157",
+        "group_order": [
+          "top_p",
+          "repeat_penalty",
+          "stop",
+          "temperature",
+          "top_k"
+        ],
+        "reconstructed_exact_hash_preimage": "top_p                          0.95\nrepeat_penalty                 1\nstop                           \"<|im_start|>\"\nstop                           \"<|im_end|>\"\ntemperature                    0.6\ntop_k                          20"
+      }
+    },
+    "same_values_and_list_order": true,
+    "shared_pin_rule_changed": false,
+    "retry": false
+  },
+  "shared_guard_changed": false,
+  "native_equivalence_verified": false,
+  "effective_settings_verified": false,
+  "source_urls": [
+    "https://raw.githubusercontent.com/ollama/ollama/v0.40.5/server/routes.go",
+    "https://go.dev/ref/spec#For_range"
+  ],
+  "followup_internal_comparison_fix": {
+    "accepted_values_or_shared_settings_changed": false,
+    "inventory_record_fields_changed": false,
+    "scope": "exact 120 group-order hashes only for accepted 0.40.5/model/template, preserving stop order and all raw hashes",
+    "focused_tests_passed": 21,
+    "full_tests_passed": 1259,
+    "passing_subtests": 19,
+    "native_retry_performed": false,
+    "prepared_new_launcher_sha256": "d40880a9a8d71c571cc12363b5a064cb35e3798e5ff56a3e82c9e72b24d8704a",
+    "prepared_driver_sha256": "29c9e131aa4e735fe323d721a15b95116f535bc2a22191e5bcada5db90dbe7df"
+  }
+}

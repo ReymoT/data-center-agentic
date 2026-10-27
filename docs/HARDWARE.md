@@ -26,6 +26,15 @@ Vulkan is enabled by default when its backend is installed. This identifies a
 possible acceleration path, not proof that this laptop has offloaded the selected
 model. [Ollama hardware documentation](https://docs.ollama.com/gpu).
 
+Update 2026-10-25: the accepted Ollama 0.40.5 runtime's actual log explains the
+CPU-only A01 run. It detected the Arc 140V through Vulkan, then dropped the
+integrated GPU because `OLLAMA_IGPU_ENABLE` was unset. A later isolated,
+metadata-only launch with `OLLAMA_IGPU_ENABLE=1` retained the Arc 140V as Vulkan
+inference compute and reported 18.0 GiB total / 17.2 GiB available shared graphics
+memory. No model was loaded and zero requests were sent. This resolves a concrete
+host candidate, not model offload, throughput, context-fit or 120-second acceptance.
+[Evidence and limits](handoffs/A01_IGPU_HOST_CANDIDATE_2026-10-25.md).
+
 Update 2026-10-12: Matty authorized and completed Qwen3 8B installation. [The setup guide](OLLAMA_SETUP.md) records its digest/license and independently verified blobs. No model was loaded or called; the existing Llama model is preserved and is not an approved substitute. No GPU driver or service environment was changed.
 
 Qwen's full digest/license metadata is now recorded. [The later runtime inventory](evidence/ollama-qwen3-8b-2026-10-18.json) retains the observed 0.40.5 runtime and changed rendered parameter-text hash; original evidence is preserved. This recheck made no model call or machine setting change. Before live readiness, accept the exact

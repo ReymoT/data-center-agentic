@@ -14,6 +14,7 @@ policy-visible records only.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any
 
 from rdflib import Graph, Literal, URIRef
@@ -56,7 +57,7 @@ WHERE {
     ?fact a sched:CarbonForecast ;
           sched:carbonValue ?value ;
           sched:validSlot ?validSlot ;
-          sched:source ?src ;
+          sched:carbonSource ?src ;
           sched:issuedAtUtc ?issuedAt ;
           sched:forecastKind ?forecastKind .
 }
@@ -109,7 +110,15 @@ def _val(row: Any, idx: int) -> Any:
     if cell is None:
         return None
     if isinstance(cell, Literal):
-        return cell.toPython()
+        value = cell.toPython()
+        # Preserve XSD dateTime strings as ISO 8601 with Z suffix, matching F02.
+        if (
+            cell.datatype
+            and str(cell.datatype).endswith("dateTime")
+            and isinstance(value, datetime)
+        ):
+            return value.isoformat().replace("+00:00", "Z")
+        return value
     if isinstance(cell, URIRef):
         return _id(cell)
     return str(cell)
