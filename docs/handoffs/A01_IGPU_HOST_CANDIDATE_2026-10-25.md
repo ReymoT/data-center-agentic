@@ -53,6 +53,23 @@ Full A01 remains open. No model call, retry, scientific result, schema change,
 dependency change, runtime pin change, timeout extension, context reduction or
 task transfer is claimed here.
 
+## Affected-owner agreement, October 27
+
+Nisha and Ved have now explicitly accepted this host setting for both LLM
+systems: accepted Ollama 0.40.5, the same model and settings, Arc 140V through
+the existing Vulkan backend, `OLLAMA_IGPU_ENABLE=1`, context 16384, temperature
+0.2, `top_p=1` and the unchanged 120-second per-request budget. Their conditions
+require effective settings and actual backend/offload evidence, start/end
+runtime-model-template-parameter identity checks, and retained host, driver and
+environment details. CPU fallback or partial offload must be recorded and kept
+separate from full-offload comparisons.
+
+This resolves agreement to the run-environment setting. It does not authorize a
+model request. The earlier CPU timeout remains a spent uncertain attempt. A new
+explicitly bounded authorization is required before any live validation, and
+actual model load, offload, context fit, counts, latency and cleanup remain to be
+measured rather than inferred from the metadata-only preflight.
+
 ## F04/F05 status refresh
 
 The same publication refreshes the current plain-language project documents and
