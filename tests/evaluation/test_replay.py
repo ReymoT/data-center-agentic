@@ -399,7 +399,7 @@ def test_s01_simulator_agrees_with_the_replay(scenario):
             ran = sim.step(action).slot.started_job_ids
             executed[t] = tuple(s.ApprovedStart(job_id=j, start_slot=t) for j in ran)
             states.append(sim.state())
-        rep = r.replay_episode(ep, executed, Q03_DRAFT)
+        rep = r.replay_episode(ep, executed, Q03_OPTION_B)
         assert rep.valid, (scenario, seed, rep.findings)
         assert r.compare_result(rep, sim.result(run_id="RUN-S01", system="greedy_a")) == ()
         for state in states[:24]:

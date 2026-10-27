@@ -92,3 +92,8 @@ def test_future_job_from_private_episode_is_unknown_to_actual_visible_state(scen
     transition = simulator.step(plan)
     assert transition.rejection and transition.slot.started_job_ids == ()
     assert simulator.state().current_slot == 1
+
+
+def test_retired_completion_start_setting_is_not_an_alternate_experiment():
+    with pytest.raises(ValueError, match="Q01"):
+        SchedulingSimulator(allow_completion_starts=True)
