@@ -1,10 +1,10 @@
 # Shared rules for all five assistants
 
-Current implementation, instruction 1.27: [published work and receiving gates](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). A03 physical checks, A04 execution/traces and A02 bounded orchestration are real merged code. PR #64 has Matty receiving fixes/current-main reconciliation but still needs Nisha replay and independent evidence; it is unmerged. D05 inventory PR #65 is published, not scientific source acceptance. A01 transport/deployment and P02/L02/runner/live acceptance remain open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged; older dated preparation notes are historical where superseded.
+Current evaluation update, instruction 1.28: [the professor's inter-rater-reliability feedback](../decisions/PROFESSOR_FEEDBACK_IRR.md) is accepted. Nisha is the sole accountable owner for reliability reporting under E07/R05. Matty remains the independent second rater and joint adjudicator, not a second reporting owner. Report matched counts, label marginals, raw agreement, Cohen's kappa, undefined cases and interpretation before adjudication; keep extraction agreement separate and both originals unchanged.
 
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.27 — 2026-10-24. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.28 — 2026-10-27. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 

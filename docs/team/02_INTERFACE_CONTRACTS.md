@@ -1,10 +1,10 @@
 # Shared interface contract location
 
-Instruction 1.27: [current implementation receiving](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). F02 remains unchanged; use the sole contract below.
+Instruction 1.28: the [professor-feedback reliability requirement](../decisions/PROFESSOR_FEEDBACK_IRR.md) changes evaluation reporting only. F02 remains unchanged; use the sole contract below.
 
 October 24: [coding decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md). F02 stays unchanged; internal choices follow the coding owner.
 
-Version: 1.27 — 2026-10-24. Contract owner: Ved.
+Version: 1.28 — 2026-10-27. Contract owner: Ved.
 
 Read [implemented F02 records](../INTERFACES.md), contract 1.0.0, with their examples and tests.
 The earlier draft has been superseded; actual consumer adoption remains pending.
