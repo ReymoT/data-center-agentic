@@ -7,8 +7,10 @@ simulator or trace defect shows up as a mismatch instead of being copied.
 
 Timing follows the shared rules and the Q01 draft: occupancy is [start, start + duration),
 new starts only through ``protocol.last_start_slot`` and all work ends by boundary 30. A
-waiting job is missed at the first boundary where no legal start remains, so a job that is
-already impossible when it arrives is missed at its arrival boundary.
+waiting job is missed at the first boundary where no legal start remains. A job that is
+already impossible when it arrives is missed at its arrival boundary, or, under arrival
+option B (``protocol.impossible_arrival_waits``), waits for that one decision and is missed
+at the next boundary; an executed start for it is still reported.
 """
 
 import math
@@ -24,6 +26,7 @@ ReplayCode = Literal[
     "executed_slot_mismatch",  # recorded start slot differs from its decision slot
     "executed_unknown_job",
     "executed_not_waiting",  # not arrived, running, completed, missed or started twice
+    "executed_no_legal_start",  # waiting under option B, but cannot finish in time
     "capacity",
     "capacity_unverifiable",
 ]
@@ -84,6 +87,11 @@ class Replay:
     @property
     def valid(self) -> bool:
         return not self.findings
+
+    @property
+    def completed_job_count(self) -> int:
+        """Jobs whose occupancy ended by boundary 30; kept apart from completed energy."""
+        return len(self.completed_job_ids)
 
     def state_at(
         self, slot: int, carbon_facts: tuple[s.CarbonForecast, ...] = ()
@@ -162,8 +170,8 @@ def replay_episode(
 ) -> Replay:
     """Replay executed starts slot by slot and report every execution the rules forbid.
 
-    A start for a job that cannot run (unknown, not waiting, or recorded at another slot)
-    is reported and not applied. A start that overloads capacity is applied, because the
+    A start for a job that cannot run (unknown, not waiting, without a legal start, or
+    recorded at another slot) is reported and not applied. A start that overloads capacity is applied, because the
     job did run, and each overloaded slot is reported.
     """
     episode = s.PrivateEpisode.model_validate(
@@ -212,7 +220,10 @@ def replay_episode(
         for job_id in arrived:
             if job_id in running or job_id in completed or job_id in missed:
                 continue
-            if not _legal_starts(jobs[job_id], t, protocol):
+            arriving = t == jobs[job_id].arrival_slot
+            if not _legal_starts(jobs[job_id], t, protocol) and not (
+                arriving and protocol.impossible_arrival_waits
+            ):
                 missed.add(job_id)
         waiting = [
             j for j in arrived if j not in running and j not in completed and j not in missed
@@ -252,6 +263,8 @@ def replay_episode(
                         _why(job_id, t, jobs, running, completed, missed, started),
                     )
                 )
+            elif not _legal_starts(jobs[job_id], t, protocol):
+                findings.append(ReplayFinding("executed_no_legal_start", t, job_id))
             else:
                 started.append(job_id)
                 running[job_id] = t
@@ -310,11 +323,45 @@ def _same_kw(a: float, b: float) -> bool:
     return math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-9)
 
 
-def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, ...]:
-    """Compare structural outcomes and loads, not impact totals or unagreed work units.
+WORK_UNIT = "kWh"
+WORK_DEFINITION = "completed_it_energy_before_pue_v1"  # the only mapping agreed in #24
 
-    A supplied completed_work scalar cannot receive a clean result without an agreed
-    unit/definition mapping. Per-slot/total energy and emissions remain outside this
+
+@dataclass(frozen=True)
+class WorkComparison:
+    """How a recorded ``EpisodeResult.completed_work`` relates to the replay.
+
+    ``absent`` is the expected case while producers keep the field None. Every supplied
+    value is ``not_comparable``: a different or missing mapping can never match, and
+    the agreed mapping has no agreed numeric precision yet, so its difference from the
+    replay is kept for the record but is never a pass (#24, Ved and Matty).
+    """
+
+    status: Literal["absent", "not_comparable"]
+    reason: Literal["", "mapping_differs", "precision_not_agreed"]
+    recorded: float | None
+    derived_kwh: float  # the replay's completed IT energy before PUE
+    difference_kwh: float | None  # recorded minus derived, for the agreed mapping only
+
+
+def compare_completed_work(replay: Replay, result: s.EpisodeResult) -> WorkComparison:
+    work = result.completed_work
+    derived = replay.completed_it_energy_kwh
+    if work is None:
+        return WorkComparison("absent", "", None, derived, None)
+    if (work.unit, work.definition) != (WORK_UNIT, WORK_DEFINITION):
+        return WorkComparison("not_comparable", "mapping_differs", work.value, derived, None)
+    return WorkComparison(
+        "not_comparable", "precision_not_agreed", work.value, derived, work.value - derived
+    )
+
+
+def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, ...]:
+    """Compare structural outcomes and loads, not impact totals.
+
+    A supplied completed_work value is reported as a ``completed_work`` mismatch
+    carrying its ``WorkComparison``, so it never passes silently; see
+    ``compare_completed_work``. Per-slot/total energy and emissions remain outside this
     structural comparison until independent impact reference selection is established.
     """
     result = s.EpisodeResult.model_validate(
@@ -322,9 +369,10 @@ def compare_result(replay: Replay, result: s.EpisodeResult) -> tuple[Mismatch, .
     )
     if result.episode_id != replay.episode.episode_id:
         raise ValueError("the result belongs to another episode")
-    if result.completed_work is not None:
-        raise ValueError("completed_work comparison requires an agreed unit/definition mapping")
     out: list[Mismatch] = []
+    work = compare_completed_work(replay, result)
+    if work.status != "absent":
+        out.append(Mismatch("completed_work", None, work, result.completed_work))
 
     def check(field, slot, expected, recorded):
         if expected != recorded:

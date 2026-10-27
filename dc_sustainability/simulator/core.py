@@ -32,13 +32,14 @@ class SchedulingSimulator:
 
     ApprovedActions is a trusted runtime capability, not cryptographic proof of approval.
     Arbitrary Plan/dict inputs are rejected. This class does not issue approvals.
-    Q01 has no default: both choices are development parameters pending agreement.
+    Q01 permits starts only in slots 0–23; slots 24–29 drain running work.
     """
 
     def __init__(self, *, allow_completion_starts: bool):
         if type(allow_completion_starts) is not bool:
             raise ValueError("completion-start choice must be explicit Boolean")
-        self._allow_completion_starts = allow_completion_starts
+        if allow_completion_starts:
+            raise ValueError("Q01 forbids allow_completion_starts=True; use False")
         self._episode = None
 
     def reset(
@@ -118,11 +119,12 @@ class SchedulingSimulator:
             ):
                 continue
             latest = min(job.deadline_slot, 30) - job.duration_slots
-            if not self._allow_completion_starts:
-                latest = min(latest, 23)
+            latest = min(latest, 23)
             if not job.flexible:
                 latest = min(latest, job.arrival_slot)
-            if self._slot > latest:
+            # Option B exposes even impossible arrivals for their arrival decision.
+            # Start validation still rejects them; ordinary expiry timing is unchanged.
+            if self._slot > latest and self._slot > job.arrival_slot:
                 self._missed.add(job_id)
                 new.append(job_id)
         return tuple(sorted(new))
@@ -175,8 +177,8 @@ class SchedulingSimulator:
                 self._slot,
             ):
                 raise ValueError("action episode/slot/version mismatch")
-            if action.starts and self._slot >= 24 and not self._allow_completion_starts:
-                raise ValueError("completion starts disabled by explicit caller choice (Q01)")
+            if action.starts and self._slot >= 24:
+                raise ValueError("Q01 permits new starts only in slots 0–23")
             waiting = {j.job_id: j for j in self.state().waiting_jobs}
             for start in action.starts:
                 job = waiting.get(start.job_id)

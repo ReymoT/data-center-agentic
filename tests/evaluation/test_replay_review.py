@@ -62,5 +62,9 @@ def test_unagreed_completed_work_mapping_cannot_get_a_clean_comparison():
     record = hand_result(
         completed_work=s.CompletedWork(value=99, unit="jobs", definition="Completed jobs")
     )
-    with pytest.raises(ValueError, match="completed_work"):
-        r.compare_result(replay, record)
+    [mismatch] = r.compare_result(replay, record)
+    assert mismatch.field == "completed_work"
+    assert (mismatch.expected.status, mismatch.expected.reason) == (
+        "not_comparable",
+        "mapping_differs",
+    )

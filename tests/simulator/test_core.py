@@ -75,9 +75,12 @@ def test_arrival_hidden_information_and_impossible_miss():
     assert state.missing_carbon_slots == tuple(range(24))
     for _ in range(4):
         sim.step(action(sim))
-    assert sim.state().missed_job_ids == ("J3",)
+    assert "J3" in {j.job_id for j in sim.state().waiting_jobs}
+    assert sim.state().missed_job_ids == ()
     assert "CON-DL-J3" in sim.state().constraint_ids
-    assert sim.history[-1].missed_job_ids == ("J3",)
+    sim.step(action(sim))
+    assert sim.state().missed_job_ids == ("J1", "J2", "J3")
+    assert "J3" in sim.history[-1].missed_job_ids
     assert not any(
         key in state.to_json() for key in ("realized_carbon", "split", "seed", "scenario")
     )
@@ -153,23 +156,31 @@ def test_nonflexible_violation_explicit():
     assert sim.step(action(sim, "J1")).rejection
 
 
-@pytest.mark.parametrize("allow", [False, True])
-def test_completion_period_explicit_choice(allow):
+def test_completion_period_rejects_starts_and_accounts_all_slots():
     job = hand_jobs()[1].model_copy(update={"deadline_slot": 30})
-    sim = simulator(episode([job]), allow=allow)
+    sim = simulator(episode([job]))
     for _ in range(24):
         sim.step(action(sim))
     result = sim.step(action(sim, "J2"))
-    assert bool(result.rejection) is not allow
+    assert "Q01" in result.rejection
+    assert result.slot.started_job_ids == ()
+    assert result.slot.job_load_kw == 0
     while sim.state().current_slot < 30:
         sim.step(action(sim))
     output = sim.result(run_id="RUN-S01", system="greedy_a")
     assert len(output.slots) == 30
     assert sum(s.phase == "completion" for s in output.slots) == 6
     assert output.totals.site_energy_kwh is None
-    assert ("J2" in output.completed_job_ids) is allow
+    assert output.completed_job_ids == ()
+    assert output.deadline_missed_job_ids == ("J2",)
     with pytest.raises(RuntimeError):
         sim.step(action(sim))
+
+
+@pytest.mark.parametrize("choice", [True, 1, None, "false"])
+def test_completion_start_opt_in_is_rejected(choice):
+    with pytest.raises(ValueError):
+        SchedulingSimulator(allow_completion_starts=choice)
 
 
 @pytest.mark.parametrize("scenario", ["normal", "spike", "limited", "infeasible"])
@@ -331,3 +342,156 @@ def test_actual_d03_episode_consumer(scenario):
     changed = ep.model_copy(update={"realized_carbon": (), "seed": 100})
     first = sim.reset(ep)
     assert sim.reset(changed) == first
+
+
+@pytest.mark.parametrize("arrival", [0, 4, 17])
+@pytest.mark.parametrize("flexible", [False, True])
+def test_impossible_arrival_visible_once_and_rejected_atomically(arrival, flexible):
+    base = hand_jobs()[0]
+    impossible = base.model_copy(
+        update={
+            "job_id": "IMP",
+            "arrival_slot": arrival,
+            "duration_slots": 3,
+            "deadline_slot": arrival + 2,
+            "flexible": flexible,
+        }
+    )
+    feasible = base.model_copy(
+        update={
+            "job_id": "OK",
+            "arrival_slot": arrival,
+            "duration_slots": 1,
+            "deadline_slot": arrival + 2,
+            "power_kw": 10,
+        }
+    )
+    running = base.model_copy(
+        update={
+            "job_id": "RUN",
+            "duration_slots": arrival + 2,
+            "deadline_slot": arrival + 3,
+            "power_kw": 10,
+        }
+    )
+    ep = episode([impossible, feasible, running])
+    sim = simulator(ep)
+
+    def replay():
+        states = []
+        for slot in range(30):
+            state = sim.state()
+            states.append(state.to_json())
+            # F02 round trip retains the arrival view and private information boundary.
+            assert type(state).model_validate_json(state.to_json()) == state
+            if slot < arrival:
+                assert "IMP" not in {j.job_id for j in state.waiting_jobs}
+            if slot == arrival:
+                assert {"IMP", "OK"} <= {j.job_id for j in state.waiting_jobs}
+                assert "IMP" not in state.missed_job_ids
+                ids = ("OK", "IMP", "RUN") if slot == 0 else ("OK", "IMP")
+            elif slot == 0:
+                ids = ("RUN",)
+            elif slot == arrival + 1:
+                ids = ("OK",)
+                assert "IMP" in state.missed_job_ids
+                assert "IMP" not in {j.job_id for j in state.waiting_jobs}
+            else:
+                ids = ()
+            transition = sim.step(action(sim, *ids))
+            if slot == arrival:
+                assert transition.rejection
+                assert transition.slot.started_job_ids == ()
+                assert transition.slot.running_job_ids == (() if arrival == 0 else ("RUN",))
+                assert transition.slot.job_load_kw == (0 if arrival == 0 else 10)
+                assert transition.missed_job_ids == ("IMP",)
+                assert transition.nonflexible_violation_ids == (() if flexible else ("IMP",))
+        result = sim.result(run_id="RUN-OPTION-B", system="greedy_a")
+        assert "IMP" in result.deadline_missed_job_ids
+        assert "IMP" in result.unfinished_job_ids
+        assert "IMP" not in result.completed_job_ids
+        assert "OK" in result.completed_job_ids
+        assert all("IMP" not in t.slot.running_job_ids for t in sim.history)
+        if arrival:
+            assert "RUN" in result.completed_job_ids
+        return states, sim.history, result
+
+    first = replay()
+    sim.reset(ep)
+    assert replay() == first
+
+
+def test_slot_23_start_finishes_at_boundary_30_despite_slot_24_rejection():
+    # Longer than D03's generated durations, but valid F02 input at the horizon edge.
+    job = hand_jobs()[0].model_copy(
+        update={
+            "job_id": "EDGE",
+            "duration_slots": 7,
+            "deadline_slot": 30,
+        }
+    )
+    sim = simulator(episode([job]))
+    for _ in range(23):
+        sim.step(action(sim))
+    assert sim.step(action(sim, "EDGE")).rejection is None
+    assert sim.state().running_jobs[0].end_slot == 30
+    rejected = sim.step(action(sim, "EDGE"))
+    assert "Q01" in rejected.rejection
+    assert rejected.slot.started_job_ids == ()
+    assert rejected.slot.running_job_ids == ("EDGE",)
+    assert rejected.slot.job_load_kw == 40
+    for _ in range(25, 30):
+        sim.step(action(sim))
+    result = sim.result(run_id="RUN-EDGE", system="greedy_a")
+    assert result.completed_job_ids == ("EDGE",)
+    assert not result.unfinished_job_ids
+    assert not result.deadline_missed_job_ids
+    assert [s.slot for s in result.slots] == list(range(30))
+    assert result.slots[-1].completed_job_ids == ("EDGE",)
+    assert sum(s.job_load_kw for s in result.slots) == 7 * 40
+
+
+@pytest.mark.parametrize("arrival", [0, 4, 17])
+def test_impossible_arrival_without_start_gets_next_boundary_miss(arrival):
+    job = hand_jobs()[2].model_copy(
+        update={
+            "job_id": "IMP",
+            "arrival_slot": arrival,
+            "deadline_slot": arrival + 2,
+        }
+    )
+    sim = simulator(episode([job]))
+    for _ in range(arrival):
+        sim.step(action(sim))
+    assert sim.state().waiting_jobs == (job,)
+    assert sim.state().missed_job_ids == ()
+    transition = sim.step(action(sim))
+    assert transition.rejection is None
+    assert transition.missed_job_ids == ("IMP",)
+    assert not sim.state().waiting_jobs
+    assert sim.state().missed_job_ids == ("IMP",)
+    assert transition.slot.job_load_kw == 0
+
+
+def test_forecast_projection_keeps_explicit_issue_times_and_horizon():
+    sim = SchedulingSimulator(allow_completion_starts=False)
+    fact = forecasts()[0]
+    edge = fact.model_copy(update={"valid_slot": 23})
+    sim.reset(episode(hand_jobs()), forecasts_by_slot={0: (edge,)})
+    assert sim.state().carbon_facts == (edge,)
+    assert sim.state().missing_carbon_slots == tuple(range(23))
+    # Projection validates visibility, not Q04 freshness or policy fallback.
+    for issued in (-3, 1):
+        explicit = forecasts(issued_slot=issued)[0]
+        sim.reset(episode(hand_jobs()), forecasts_by_slot={0: (explicit,)})
+        assert sim.state().carbon_facts == (explicit,)
+    end = fact.model_copy(update={"valid_slot": 29})
+    sim.reset(episode(hand_jobs()), forecasts_by_slot={29: (end,)})
+    for _ in range(29):
+        sim.step(action(sim))
+    assert sim.state().carbon_facts == (end,)
+    assert sim.state().missing_carbon_slots == ()
+    sim.step(action(sim))
+    assert sim.state().missing_carbon_slots == ()
+    with pytest.raises(ValueError):
+        sim.reset(episode(hand_jobs()), forecasts_by_slot={0: (end,)})

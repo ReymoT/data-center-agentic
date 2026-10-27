@@ -67,7 +67,7 @@ def test_claim_scoring_edge_statuses():
     assert c.score_numeric_claim(claim(54.5), None, "kg").status == "reference_unavailable"
     text_only = s.Claim(claim_id="C2", text="J1 starts now.")
     assert c.score_numeric_claim(text_only, 54.5, "kg").status == "not_numeric"
-    assert c.score_numeric_claim(claim(40.0, "kW"), 40.0, "kW").status == "unscored_unit"
+    assert c.score_numeric_claim(claim(40.0, "kW"), 40.0, "kW").status == "correct"
 
 
 def test_savings_need_the_same_completed_jobs():
