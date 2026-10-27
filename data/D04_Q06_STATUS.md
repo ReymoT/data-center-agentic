@@ -1,5 +1,10 @@
 # D04/Q06 inventory — separate from source evidence
 
+October 26 local follow-up: [provisional D04 machinery and review gates](D04_SPLITS.md)
+now implements metadata allocation/folds/overlap tests. The inventory below is the
+October 24 historical missing-artifact snapshot; actual study selections, physical
+source semantics, independent acceptance and scientific freeze remain unresolved.
+
 Owner: Reimo. Technical contact: Nisha for D04; affected calibration/fixture
 consumers: Edison, Ved and Nisha. Reviewed October 24, 2026 on main
 `2ec1e542c09066e2cf4d05953c5f076566a1e657`, instruction 1.26.
