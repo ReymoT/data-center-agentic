@@ -1,0 +1,66 @@
+{
+  "evidence_kind": "bounded_arc_vulkan_development_validation_not_experiment",
+  "captured_at_utc": "2026-10-27T22:43:37.158504+00:00",
+  "authorization_ref": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6455375516",
+  "status": "plain_response_received_but_schema_invalid_plan_not_called",
+  "bounds": {
+    "maximum_serial_requests": 2,
+    "per_request_seconds": 120,
+    "overall_seconds": 300,
+    "warmup_requests": 0,
+    "retries": 0
+  },
+  "requests": {
+    "plain_llm": 1,
+    "agent_plan": 0,
+    "total": 1
+  },
+  "plain_attempt": {
+    "request_sha256": "264630e066a9bc96f9cee6b0666e30168154d622cff7d35cbf3c75f0a3b42b90",
+    "seed": 101,
+    "http_status": 200,
+    "latency_ms": 65382.4435,
+    "provider_total_duration_ns": 65375403500,
+    "prompt_tokens": 2291,
+    "offline_candidate_tokens": 2291,
+    "native_count_matches_candidate": true,
+    "completion_tokens": 720,
+    "uncertain_outcome": false,
+    "response_bytes": 3085,
+    "response_sha256": "e80c30131a923277962dfe038eb503b72d99b91475a01bb9255575723b822d4f",
+    "parsed_output": false,
+    "error": "invalid response: missing required schema_version envelope field"
+  },
+  "runtime": {
+    "version": "0.40.5",
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "8cc0007dceee22ee948234837dc27549bed43f827fc0b60372eecd91e7ddb32c",
+    "identity_unchanged_before_after": true,
+    "backend": "Vulkan",
+    "device": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "device_type": "iGPU",
+    "offloaded_layers": "37/37",
+    "api_size_bytes": 7536965058,
+    "api_size_vram_bytes": 7536965058,
+    "context_length": 16384,
+    "sampler_temperature": 0.2,
+    "sampler_top_p": 1.0,
+    "parallel_requests": 1,
+    "maximum_loaded_models": 1
+  },
+  "cleanup": {
+    "isolated_port": 11437,
+    "listener_remaining": false,
+    "owned_runtime_processes_remaining": 0,
+    "verified_after_wrapper_grace_period": true
+  },
+  "limits": [
+    "The response body is retained outside Git; this file publishes only its byte count and SHA256.",
+    "The schema-invalid response is not a usable PolicyOutput and is not an experiment result.",
+    "The Plan request was not sent because the Plain request failed the accepted output contract.",
+    "Full A01 remains open for a valid parsed response, paired-path evidence and production counter/settings acceptance.",
+    "Runtime-reported integrated graphics memory is shared system memory, not dedicated VRAM."
+  ]
+}
