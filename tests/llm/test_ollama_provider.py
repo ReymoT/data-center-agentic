@@ -139,7 +139,9 @@ def test_real_http_serialization_f02_parse_and_evidence_preservation(server):
     assert result.latency_ms > 0 and not result.uncertain_outcome
     assert result.model_digest == DIGEST and client.attempts == (result,)
     payload = server.requests[0]
-    assert payload["format"] == s.Plan.model_json_schema()
+    expected_format = s.Plan.model_json_schema()
+    expected_format["required"] += ["record_type", "schema_version"]
+    assert payload["format"] == expected_format
     assert payload["stream"] is False and payload["think"] is False
     assert payload["keep_alive"] == "30m"
     assert payload["options"] == {

@@ -105,6 +105,27 @@ def _remaining(deadline: float) -> float:
     return remaining
 
 
+def _response_format_schema(response_model: type[s.Record]) -> dict:
+    """Make Ollama's grammar require the envelope enforced by ``from_json``.
+
+    F02 gives the envelope fields Python defaults for ordinary construction, so
+    Pydantic does not list them as required in its generated schema. External
+    deserialization deliberately requires both fields. Add those existing
+    requirements to a request-local schema copy so generation and parsing cannot
+    disagree; this does not change the shared record definition.
+    """
+    schema = response_model.model_json_schema()
+    if not issubclass(response_model, s.Versioned):
+        return schema
+    properties = schema.get("properties", {})
+    envelope = ("record_type", "schema_version")
+    if any(name not in properties for name in envelope):
+        raise CallBlocked("response model lacks the required F02 version envelope")
+    required = list(schema.get("required", ()))
+    schema["required"] = [*required, *(name for name in envelope if name not in required)]
+    return schema
+
+
 class OllamaProvider:
     """One serialized adapter/ledger per run, shared by agent and plain paths.
 
@@ -252,7 +273,7 @@ class OllamaProvider:
         payload = {
             "model": "qwen3:8b",
             "messages": [dict(m) for m in messages],
-            "format": response_model.model_json_schema(),
+            "format": _response_format_schema(response_model),
             "stream": False,
             "think": False,
             "keep_alive": "30m",

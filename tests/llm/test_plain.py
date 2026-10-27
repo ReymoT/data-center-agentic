@@ -131,7 +131,9 @@ def test_request_uses_policy_output_schema_and_rendered_messages(server):
     state, context = state_and_context()
     decision = propose(PlainLLMPolicy(provider(server)), state, context)
     request = server.requests[0]
-    assert request["format"] == s.PolicyOutput.model_json_schema()
+    expected_format = s.PolicyOutput.model_json_schema()
+    expected_format["required"] += ["record_type", "schema_version"]
+    assert request["format"] == expected_format
     assert request["messages"] == plain.render_messages(context)
     assert decision.messages_sha256 == plain.messages_sha256(request["messages"])
     assert decision.context_hash == context.content_hash
