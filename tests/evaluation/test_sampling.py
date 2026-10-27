@@ -50,7 +50,6 @@ def test_nonflexible_job_has_only_its_arrival_slot():
 def test_impossible_window_makes_no_slot_eligible():
     impossible = episode([job("X1", 4, 3, 6)])  # latest start 3 < arrival 4
     assert q.eligible_slots(impossible) == ()
-    assert q.impossible_arrival_slots(impossible) == (4,)
 
 
 def test_window_stops_at_slot_23_and_boundary_30():
@@ -65,7 +64,6 @@ def test_union_of_windows_and_timing_only():
     huge = job("H1", 0, 1, 2, power=1000)
     ep = episode([huge, job("A2", 10, 1, 12)])
     assert q.eligible_slots(ep) == (0, 1, 10, 11)
-    assert q.impossible_arrival_slots(ep) == ()  # capacity-only failure is not in the stratum
 
 
 # ----------------------------------------------------------------- selection
@@ -131,25 +129,6 @@ def test_manifest_must_be_consistent():
     held_out = episodes[1].model_copy(update={"split": "held_out"})
     with pytest.raises(ValueError, match="splits"):
         q.select([episodes[0], held_out])
-
-
-# ----------------------------------------------------------------- abstention-boundary stratum
-def test_impossible_arrival_goes_to_the_separate_stratum_only():
-    ep = episode([job("X1", 4, 3, 6), job("A1", 10, 1, 12)], "EP-MIX")
-    record = q.select([ep])
-    assert [(x.episode_id, x.slot) for x in record.boundary] == [("EP-MIX", 4)]
-    assert 4 not in record.eligible["EP-MIX"]
-    assert all(x.slot != 4 for x in record.selections)
-    assert record.boundary_eligible == 1
-
-
-def test_boundary_stratum_is_a_census_up_to_the_cap():
-    under = [episode([job("X1", 4, 3, 6), job("A1", 0, 2, 9)], f"EP-B{i:02d}") for i in range(3)]
-    assert len(q.select(under).boundary) == 3
-    over = [episode([job("X1", 4, 3, 6), job("A1", 0, 2, 9)], f"EP-B{i:02d}") for i in range(31)]
-    record = q.select(over)
-    assert (record.boundary_eligible, len(record.boundary)) == (31, 30)
-    assert q.select(list(reversed(over))).boundary == record.boundary
 
 
 # ----------------------------------------------------------------- after the run

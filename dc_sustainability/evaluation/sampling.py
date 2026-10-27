@@ -7,9 +7,9 @@ made from the frozen manifest before any held-out output is opened, every select
 is kept (failures and one-sided no-ops included), and a shortfall is reported, never
 topped up.
 
-The separate abstention-boundary stratum for impossible-on-arrival jobs (arrival
-option B) is Nisha's #22 proposal, pending Ved's agreement. It is kept apart from the
-primary sample and is never used to replace or fill primary pairs.
+The proposed separate abstention-boundary stratum for impossible-on-arrival jobs
+(arrival option B) is not implemented here because affected-owner agreement is still
+pending in issue #22. This module exposes only the agreed primary sample.
 """
 
 import dataclasses
@@ -25,10 +25,8 @@ ALGORITHM = "q10-temporal-window-v1"
 GENERATOR = "python random.Random (MT19937)"
 SAMPLING_SEED = 20261019
 ANALYSIS_SEED = 20261020  # paired bootstrap; frozen with the selection, used later
-BOUNDARY_SEED = 20261021  # only if the boundary stratum exceeds BOUNDARY_CAP
 SLOTS_PER_EPISODE = 2
 TRIALS = (0, 1, 2)
-BOUNDARY_CAP = 30
 LAST_DECISION_SLOT = s.PROPOSED_DECISION_SLOTS - 1  # 23
 END = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS  # 30
 REVIEWED_SYSTEMS = ("agent", "plain_llm")
@@ -47,20 +45,6 @@ def eligible_slots(episode: s.PrivateEpisode) -> tuple[int, ...]:
         job = private.job
         slots.update(range(job.arrival_slot, min(latest_start(job), LAST_DECISION_SLOT) + 1))
     return tuple(sorted(slots))
-
-
-def impossible_arrival_slots(episode: s.PrivateEpisode) -> tuple[int, ...]:
-    """Arrival slots (0-23) of jobs with no permissible start window at all, by timing only."""
-    return tuple(
-        sorted(
-            {
-                p.job.arrival_slot
-                for p in episode.jobs
-                if p.job.arrival_slot <= LAST_DECISION_SLOT
-                and latest_start(p.job) < p.job.arrival_slot
-            }
-        )
-    )
 
 
 def stratum(episode: s.PrivateEpisode) -> str:
@@ -92,9 +76,6 @@ class SamplingRecord:
     shortfall: Mapping[str, int]  # episode ID -> slots it could not supply
     counts_by_trial: Mapping[int, int]
     counts_by_stratum: Mapping[str, int]
-    boundary_status: str
-    boundary_eligible: int  # impossible-on-arrival slots in the whole manifest
-    boundary: tuple[Selection, ...]  # separate stratum, reported apart
 
     @property
     def achieved(self) -> int:
@@ -161,19 +142,6 @@ def select(
             chosen.append((episode.episode_id, stratum(episode), slot))
     selections = _assign_trials(chosen, rng, trials)
 
-    # Separate abstention-boundary stratum: a census in canonical order, trials rotated.
-    census = [
-        (episode.episode_id, stratum(episode), slot)
-        for episode in episodes
-        for slot in impossible_arrival_slots(episode)
-    ]
-    kept = census
-    if len(census) > BOUNDARY_CAP:
-        kept = sorted(random.Random(BOUNDARY_SEED).sample(census, BOUNDARY_CAP))
-    boundary = tuple(
-        Selection(e, name, slot, trials[i % len(trials)]) for i, (e, name, slot) in enumerate(kept)
-    )
-
     return SamplingRecord(
         algorithm=ALGORITHM,
         generator=GENERATOR,
@@ -190,9 +158,6 @@ def select(
         shortfall=dict(sorted(shortfall.items())),
         counts_by_trial={t: sum(x.trial == t for x in selections) for t in trials},
         counts_by_stratum=dict(sorted(Counter(x.stratum for x in selections).items())),
-        boundary_status="proposed in #22, pending Ved; reported separately",
-        boundary_eligible=len(census),
-        boundary=boundary,
     )
 
 
