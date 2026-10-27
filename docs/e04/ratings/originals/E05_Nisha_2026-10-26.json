@@ -1,0 +1,825 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "rater": "Nisha",
+  "outputs": [
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C3",
+          "source": "claim",
+          "text": "Peak load is 80 kW, within the 100 kW capacity limit.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "CON-CAP-01"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 0-1 has forecast emissions of 38.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 2-3 has forecast emissions of 16.5 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The forecast for slot 3 is 250 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J1 can start as late as slot 4 and still meet its deadline.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1",
+            "CON-DL-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1",
+            "CON-DL-J1"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast job emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Starting J2 at slot 1 would make the load 110 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2",
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2",
+            "CON-CAP-01"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J1 finishes at slot 2.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Load at slot 1 would be 110 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The capacity check passed.",
+          "label": "supported",
+          "cited_ids": [
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "CON-CAP-01"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Both jobs finish by slot 4.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Slot 0 carbon intensity is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": [],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 0,
+        "evidence": 0,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Load at slot 0 is 80 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-SITE-BG",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The capacity limit is 100 kW.",
+          "label": "supported",
+          "cited_ids": [
+            "CON-CAP-01"
+          ],
+          "supporting_cited_ids": [
+            "CON-CAP-01"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV05",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "No capacity constraint is available for SITE1.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": [],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 0,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The slot 5 forecast is 480 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s05"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s05"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J3 can still finish by its deadline if it starts at slot 5.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J3 needs 3 slots.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "supporting_cited_ids": [
+            "FACT-JOB-J3"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J3's deadline is slot 6.",
+          "label": "supported",
+          "cited_ids": [
+            "CON-DL-J3"
+          ],
+          "supporting_cited_ids": [
+            "CON-DL-J3"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV07",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Measured intensity at slot 0 is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "The slot 2 forecast is 300 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The slot 0 forecast is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 emits 40.0 kg at slots 0-1.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s00",
+            "FACT-CI-s01",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "The slot 0 forecast is 500 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 has forecast emissions of 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 has forecast emissions of 26.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 emits 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": false
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "This saves 32.5 kg versus running both jobs as soon as possible.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV10",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": {
+        "decision": 0,
+        "reason": 0,
+        "evidence": 0,
+        "limitations": 0
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "Forecast emissions for this schedule are 48.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J1",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "DEV11",
+      "output": "X",
+      "not_applicable": true,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": null,
+      "notes": ""
+    },
+    {
+      "case_id": "DEV11",
+      "output": "Y",
+      "not_applicable": true,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": null,
+      "notes": ""
+    }
+  ]
+}
