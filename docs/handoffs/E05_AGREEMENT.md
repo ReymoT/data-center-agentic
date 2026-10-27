@@ -1,7 +1,7 @@
 # E05 agreement between the two original ratings, and the adjudication record
 
 Task ID / Issue: E05, [issue #42](https://github.com/ReymoT/data-center-agentic/issues/42); Q10 analysis rules in [#22](https://github.com/ReymoT/data-center-agentic/issues/22) (Ved's A1: extraction agreement reported separately from label agreement, percent agreement and Cohen's kappa on assertions both raters found, undefined kappa reported as undefined).
-Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk), E05 receiving lead; Matty (MattyAnd), E05 owner and second rater; Ved (vedp3705) for the analysis rules.
+Human owner / technical contacts if needed: Nisha Mahadev Kolekar (nkolekar-nk), sole accountable owner for the inter-rater reliability calculation and report; Matty (MattyAnd), independent second rater and joint adjudicator; Ved (vedp3705), analysis-rules contact if needed.
 Objective: compare two unchanged original ratings files and produce an empty joint adjudication record, without deciding any label.
 Base commit / branch: base `be87f58` on main; branch `nisha/e05-agreement`.
 
@@ -41,6 +41,6 @@ Limitations and open decisions:
 - Matching summary/limitation assertions between raters is a human step; the raters supply the pairs before agreement is final. No text similarity is used.
 - Supporting-citation choices and `restated_in_summary` are not yet compared; they feed coverage and precision and could be added.
 - Kappa on labels can be 0 or undefined when labels are very unbalanced, as here; percent agreement and the counts are always reported with it.
-- The adjudication record is a working file for the two raters; where it is published, and how adjudicated labels feed the final metrics, is Matty's E05 decision.
+- The adjudication record is a working file for the two raters. Nisha owns the retained reliability artifact and its final-report/presentation integration under E07/R05; Matty supplies his unchanged original and participates in adjudication. Reliability is computed before adjudication, never from adjudicated labels.
 
-Receiving owner and consumer check: Matty, for E05 receiving and the adjudication session; Ved, to confirm the agreement statistics match A1.
+Receiving owner and consumer check: Nisha, for the reliability artifact and reporting; Matty, as independent second rater and joint adjudicator; Ved may check consistency with the agreed A1 analysis rules but is not an additional task owner.

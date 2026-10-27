@@ -1,6 +1,8 @@
 # Instruction deployment changelog
 
-Current deployment: 1.27 - 2026-10-24. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.28 - 2026-10-27. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+October 27 professor-feedback update (instruction 1.28): adopt inter-rater reliability reporting for human faithfulness annotations. Nisha is the sole accountable reporting owner under E07/R05; Matty remains the independent second rater and joint adjudicator. Require matched counts, label marginals/confusion matrix, raw agreement, Cohen's kappa with undefined/imbalance interpretation and separate extraction agreement before adjudication for development and held-out reviews. PRs #91/#92 provide originals/tooling, not a completed reliability artifact or adjudication. F02, annotation labels, sampling rules and other task ownership remain unchanged. See [decision](../decisions/PROFESSOR_FEEDBACK_IRR.md).
 
 October 24 factual receiving correction (instruction policy remains 1.27): corrected missed Reimo Q12/Ved savings replies, closed #21's confirmation scope, recorded merged K01/K03 with actual open defects, and refreshed README/architecture/plan/coordination/index. The current full offline capture passes1,225/19 without proving an A01 fix; sandbox-obstructed evidence is retained separately. No task rows, roles, merge/authority rules, F02, pins, original ratings or scientific settings change. See [receiving handoff](../handoffs/OCT24_RECEIVING_CORRECTIONS.md).
 
