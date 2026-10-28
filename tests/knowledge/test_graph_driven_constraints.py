@@ -67,9 +67,7 @@ def _snapshot_from_graph(snap: s.ConstraintSnapshot, graph: Graph) -> s.Constrai
         # SPARQL returns a single URI or None; the schema expects a tuple.
         row["applies_to_jobs"] = (row["applies_to_jobs"],) if row["applies_to_jobs"] else ()
         typed_constraints.append(s.Constraint(**row))
-    return s.ConstraintSnapshot(
-        **{**snap.model_dump(), "constraints": tuple(typed_constraints)}
-    )
+    return s.ConstraintSnapshot(**{**snap.model_dump(), "constraints": tuple(typed_constraints)})
 
 
 def test_graph_conforms_for_single_job_state():
