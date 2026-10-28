@@ -5,7 +5,6 @@ from datetime import timedelta
 from dc_sustainability import schemas as s
 from dc_sustainability.data.scenarios import hand_jobs
 from dc_sustainability.reference.labels import (
-    CandidateLabel,
     label_decision,
     label_episode,
     labels_from_solver_result,

@@ -28,7 +28,7 @@ from typing import Optional
 from dc_sustainability import schemas as s
 from dc_sustainability.reference.solver import solve_visible
 from dc_sustainability.training.collect import CollectedDecision
-from dc_sustainability.training.features import candidate_features
+from dc_sustainability.training.features import FeatureRow, candidate_features
 
 
 @dataclass(frozen=True)
@@ -70,7 +70,7 @@ class LabeledDecision:
     def slot(self) -> int:
         return self.collected.slot
 
-    def training_rows(self) -> tuple[tuple[CandidateLabel, "FeatureRow"], ...]:
+    def training_rows(self) -> tuple[tuple[CandidateLabel, FeatureRow], ...]:
         """Return (label, feature_row) pairs that are safe to use for training."""
         row_by_key = {(row.job_id, row.start_slot): row for row in self.collected.rows}
         return tuple(
@@ -78,10 +78,6 @@ class LabeledDecision:
             for label in self.labels
             if label.is_training_row() and label.candidate_key in row_by_key
         )
-
-
-# Forward reference for type checking only.
-from dc_sustainability.training.features import FeatureRow
 
 
 def _candidate_hash(state_hash: str, job_id: str, start_slot: int) -> str:
