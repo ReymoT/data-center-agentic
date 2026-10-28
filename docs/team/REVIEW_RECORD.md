@@ -1,5 +1,7 @@
 # Publication audit
 
+October 28 factual refresh: PR #104 retains the completed development matching/IRR report while joint adjudication and the held-out repeat remain open. Issues #7/#13 are closed for their bounded scopes; #60 retains source evidence gaps and #102 now tracks the missing real development fold map blocking P04. Matty's deterministic-policy receiving boundary is offline code for E02 to consume, not a duplicate runner or experiment result. A01 remains a timed-out paired validation with a new bounded-output/timeout proposal pending affected-owner agreement and fresh authorization.
+
 Current October 25 F04/F05 refresh: [the A01 host handoff](../handoffs/A01_IGPU_HOST_CANDIDATE_2026-10-25.md) records the zero-request Arc/Vulkan discovery and its exact limits. README, architecture text/diagram, plan, coordination, hardware, readiness and decision status now include merged P02 A/B, the P03 probability constructor and the 1,310-test/19-subtest current-main baseline. Trained models, successful inference, complete integration and scientific results remain unclaimed. Instruction 1.27 and F02 1.0.0 are unchanged.
 
 Current implementation, instruction 1.27: A03/A04/A02 cores, P02 A/B and the P03 probability constructor are merged. PR #64 remains unmerged pending independent replay. D05 inventory is published without scientific source acceptance. A01 live validation, L02, trained C/D, the runner and full integration remain open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged.
