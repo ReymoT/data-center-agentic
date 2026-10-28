@@ -17,16 +17,32 @@ from dataclasses import dataclass
 from typing import Literal, get_args
 
 from dc_sustainability.evaluation import claims
-from dc_sustainability.evaluation.replay import Replay
+from dc_sustainability.evaluation.replay import Replay, ReplayCode
 
 BlockedReason = Literal[
     "completed_set_differs",
     "unfinished_set_differs",  # unfinished or deadline-missed job IDs differ
     "inputs_differ",  # episode, site, capacity, horizon, realized carbon, protocol or trial
     "unfinished_job_occupied",  # an unfinished job has executed occupancy in either run
+    "replay_findings",  # E01 replay shows the executed schedule itself was invalid
     "carbon_missing",  # a realized carbon value the comparison needs is absent
 ]
 REASON_ORDER: tuple[BlockedReason, ...] = get_args(BlockedReason)
+
+# Every E01 replay finding code is classified here; an unclassified code is refused, so a
+# new finding can never silently block or pass a comparison (#61).
+INVALIDATING_FINDINGS: frozenset[ReplayCode] = frozenset(
+    {
+        "executed_slot_mismatch",  # a start recorded for another slot
+        "executed_unknown_job",
+        "executed_not_waiting",  # not arrived, running, completed, missed or started twice
+        "executed_no_legal_start",  # option B: shown, but it could not finish in time
+        "capacity",  # an overload that actually ran
+    }
+)
+# Missing capacity evidence: execution cannot be checked, but nothing shown was illegal.
+# Recorded with the comparison, never a block on its own.
+NON_BLOCKING_FINDINGS: frozenset[ReplayCode] = frozenset({"capacity_unverifiable"})
 
 
 @dataclass(frozen=True)
@@ -57,6 +73,10 @@ class SavingsComparison:
     candidate_kg: float | None
     savings_kg: float | None  # baseline minus candidate; None whenever blocked
     counts: Mapping[str, WorkCounts]  # "baseline" / "candidate" -> counts
+    # "baseline" / "candidate" -> every replay finding as "code@slot" or "code@slot:job",
+    # sorted; the invalidating ones are what set ``replay_findings``.
+    findings: Mapping[str, tuple[str, ...]]
+    invalidating_findings: Mapping[str, tuple[str, ...]]
 
 
 def _counts(replay: Replay) -> WorkCounts:
@@ -67,6 +87,19 @@ def _counts(replay: Replay) -> WorkCounts:
 
 def _starts(replay: Replay) -> dict[str, int]:
     return {job_id: slot.slot for slot in replay.slots for job_id in slot.started}
+
+
+def _finding_codes(replay: Replay) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """All findings and the invalidating ones, as sorted "code@slot[:job]" strings."""
+    every, invalid = [], []
+    for f in replay.findings:
+        if f.code not in INVALIDATING_FINDINGS | NON_BLOCKING_FINDINGS:
+            raise ValueError(f"replay finding {f.code!r} is not classified for E03")
+        text = f"{f.code}@{f.slot}" + (f":{f.job_id}" if f.job_id else "")
+        every.append(text)
+        if f.code in INVALIDATING_FINDINGS:
+            invalid.append(text)
+    return tuple(sorted(every)), tuple(sorted(invalid))
 
 
 def _occupied_unfinished(replay: Replay) -> set[str]:
@@ -104,6 +137,9 @@ def compare_savings(baseline: Run, candidate: Run) -> SavingsComparison:
         reasons.add("inputs_differ")
     if _occupied_unfinished(a) or _occupied_unfinished(b):
         reasons.add("unfinished_job_occupied")
+    (a_all, a_invalid), (b_all, b_invalid) = _finding_codes(a), _finding_codes(b)
+    if a_invalid or b_invalid:
+        reasons.add("replay_findings")
 
     baseline_kg = candidate_kg = None
     try:
@@ -125,6 +161,8 @@ def compare_savings(baseline: Run, candidate: Run) -> SavingsComparison:
         candidate_kg=candidate_kg,
         savings_kg=None if ordered else baseline_kg - candidate_kg,
         counts={"baseline": _counts(a), "candidate": _counts(b)},
+        findings={"baseline": a_all, "candidate": b_all},
+        invalidating_findings={"baseline": a_invalid, "candidate": b_invalid},
     )
 
 
