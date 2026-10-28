@@ -1,7 +1,8 @@
 """Compare two original E05 ratings files and write the agreement report and adjudication record.
 
-Neither original is changed. The adjudication record starts with every disagreement
-undecided, for the raters to fill in jointly; check it afterwards with --check-adjudication.
+Neither original is changed. Writes the agreement report, the matching record and the
+adjudication record. The adjudication starts with every disagreement undecided, for the
+raters to fill in jointly; check it afterwards with --check-adjudication.
 
     python scripts/compare_e05_ratings.py --a RATINGS_A.json --b RATINGS_B.json --out-dir DIR
     python scripts/compare_e05_ratings.py --a ... --b ... --matches MATCHES.json --out-dir DIR
@@ -29,7 +30,10 @@ def main() -> int:
     parser.add_argument("--a", type=Path, required=True, help="first original ratings file")
     parser.add_argument("--b", type=Path, required=True, help="second original ratings file")
     parser.add_argument("--matches", type=Path, help="agreed summary/limitation ID pairs")
-    parser.add_argument("--out-dir", type=Path, help="where to write the two output files")
+    parser.add_argument("--out-dir", type=Path, help="where to write the output files")
+    parser.add_argument(
+        "--confirmed-by", action="append", default=[], help="a rater who agreed the matching"
+    )
     parser.add_argument("--check-adjudication", type=Path, help="validate a filled record")
     args = parser.parse_args()
 
@@ -52,10 +56,14 @@ def main() -> int:
     print(json.dumps(report, indent=2))
     if args.out_dir:
         args.out_dir.mkdir(parents=True, exist_ok=True)
-        record = agreement.adjudication_record(comparison)
-        for name, data in (("agreement_report.json", report), ("adjudication.json", record)):
+        outputs = (
+            ("agreement_report.json", report),
+            ("matching.json", agreement.matching_record(comparison, args.confirmed_by)),
+            ("adjudication.json", agreement.adjudication_record(comparison)),
+        )
+        for name, data in outputs:
             path = args.out_dir / name
-            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
             print(f"wrote {path}")
     return 0
 

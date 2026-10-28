@@ -222,3 +222,53 @@ def test_dropping_a_one_sided_assertion_needs_no_label():
     record = decided(g.adjudication_record(comparison))
     record["items"][1].update(decision="drop", decided_label=None)
     g.validate_adjudication(record, comparison)
+
+
+# ----------------------------------------------------------------- reliability report
+def test_marginals_and_confusion_matrix():
+    # Rater A: 31 supported, 1 contradicted; rater B: 32 supported.
+    a = ratings("A")
+    entry(a, "DEV01", "X")["assertions"][0]["label"] = "contradicted"
+    report = g.summary(g.compare(load(a), load(ratings("B"))))["labels_all_matched"]
+    assert report["marginals"] == {
+        "a": {"supported": 31, "contradicted": 1, "unsupported": 0},
+        "b": {"supported": 32, "contradicted": 0, "unsupported": 0},
+    }
+    assert report["confusion"]["supported"] == {
+        "supported": 31,
+        "contradicted": 0,
+        "unsupported": 0,
+    }
+    assert report["confusion"]["contradicted"]["supported"] == 1
+    assert sum(sum(row.values()) for row in report["confusion"].values()) == report["n"] == 32
+
+
+def test_denominators_disclose_no_ops_and_unmatched_assertions():
+    b = ratings("B")
+    entry(b, "DEV02", "X")["assertions"] += [
+        extracted("S1", "Defer J2.", "supported"),
+        extracted("L1", "No forecast for slot 7.", "supported", "limitation"),
+    ]
+    d = g.summary(g.compare(load(ratings("A")), load(b)))["denominators"]
+    assert (d["output_units"], d["not_applicable_outputs"], d["reviewed_outputs"]) == (22, 2, 20)
+    assert d["assertions"] == {"a": 32, "b": 34}
+    assert d["matched_assertions"] == 32
+    assert d["unmatched_assertions"] == {"b_limitation": 1, "b_summary": 1}
+    assert d["missing_ratings"] == 0
+
+
+def test_matching_record_lists_every_pair_and_every_unmatched_assertion():
+    a, b = ratings("A"), ratings("B")
+    entry(a, "DEV02", "X")["assertions"].append(extracted("S1", "Slot 3 is cheapest.", "supported"))
+    entry(b, "DEV02", "X")["assertions"] += [
+        extracted("S1", "Slot 3 has the lowest forecast.", "supported"),
+        extracted("S2", "Defer J2.", "supported"),
+    ]
+    comparison = g.compare(load(a), load(b), {("DEV02", "X"): [("S1", "S1")]})
+    record = g.matching_record(comparison, confirmed_by=["Nisha", "MattyAnd"])
+    assert len(record["matched"]) == 33
+    assert {"case_id": "DEV02", "output": "X", "a_id": "S1", "b_id": "S1",
+            "source": "extracted"} in record["matched"]  # fmt: skip
+    assert [(u["rater"], u["assertion_id"]) for u in record["unmatched"]] == [("b", "S2")]
+    assert record["originals"]["a"]["sha256"] == comparison.a.sha256
+    assert record["confirmed_by"] == ["Nisha", "MattyAnd"]
