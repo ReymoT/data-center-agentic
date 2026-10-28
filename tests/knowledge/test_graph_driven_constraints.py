@@ -14,6 +14,7 @@ so the results are stable and independent of simulator randomness.
 """
 
 import pytest
+from rdflib import Graph, Literal
 
 from dc_sustainability import schemas as s
 from dc_sustainability.knowledge.graph import SCHED, build_graph
@@ -52,6 +53,25 @@ def _plan_for(state: s.VisibleState) -> s.Plan:
     )
 
 
+def _snapshot_from_graph(snap: s.ConstraintSnapshot, graph: Graph) -> s.ConstraintSnapshot:
+    """Rebuild a ConstraintSnapshot from the SPARQL-retrieved constraints.
+
+    This closes the K03 graph-to-checker edge: the checker receives the
+    capacity value that the RDF graph actually exposes, not the original
+    snapshot used to build the graph.
+    """
+    retrieved = query_constraints(graph)
+    typed_constraints: list[s.Constraint] = []
+    for cap in retrieved:
+        row = dict(cap)
+        # SPARQL returns a single URI or None; the schema expects a tuple.
+        row["applies_to_jobs"] = (row["applies_to_jobs"],) if row["applies_to_jobs"] else ()
+        typed_constraints.append(s.Constraint(**row))
+    return s.ConstraintSnapshot(
+        **{**snap.model_dump(), "constraints": tuple(typed_constraints)}
+    )
+
+
 def test_graph_conforms_for_single_job_state():
     """The K01 graph for a single waiting job and capacity evidence passes SHACL."""
     state, snap = _single_job_state_and_snapshot()
@@ -76,8 +96,9 @@ def test_sparql_retrieves_capacity_constraint():
 def test_capacity_100_kw_allows_single_job():
     """A 100 kW capacity lets the 40 kW J1 start now; the checker passes."""
     state, snap = _single_job_state_and_snapshot(capacity_kw=100.0)
+    graph = build_graph(state, snap)
     plan = _plan_for(state)
-    result = check_schedule(plan, state, snap)
+    result = check_schedule(plan, state, _snapshot_from_graph(snap, graph))
     assert result.status == "pass"
     assert all(c.outcome == "pass" for c in result.performed)
     cap_check = next(c for c in result.performed if c.name == "capacity")
@@ -87,8 +108,9 @@ def test_capacity_100_kw_allows_single_job():
 def test_capacity_70_kw_blocks_single_job():
     """A 70 kW capacity is below the 80 kW total IT load, so the checker fails."""
     state, snap = _single_job_state_and_snapshot(capacity_kw=70.0)
+    graph = build_graph(state, snap)
     plan = _plan_for(state)
-    result = check_schedule(plan, state, snap)
+    result = check_schedule(plan, state, _snapshot_from_graph(snap, graph))
     assert result.status == "fail"
     cap_check = next(c for c in result.performed if c.name == "capacity")
     assert cap_check.outcome == "fail"
@@ -106,7 +128,7 @@ def test_retrieved_capacity_drives_checker_result():
         retrieved = query_constraints(graph)
         cap = next(c for c in retrieved if c["constraint_type"] == "capacity")
         assert cap["limit_value"] == capacity
-        result = check_schedule(_plan_for(state), state, snap)
+        result = check_schedule(_plan_for(state), state, _snapshot_from_graph(snap, graph))
         assert result.status == expected
 
 
@@ -204,3 +226,35 @@ def test_schema_rejects_duplicate_capacity_constraints():
             constraints=duplicate_capacity_constraints,
             sources=(fx.source(),),
         )
+
+
+def test_tampered_graph_capacity_fails_closed():
+    """If the RDF graph capacity is mutated away from the authoritative snapshot, the
+    graph-to-checker path must not silently authorize a start.
+
+    SHACL does not catch a changed numeric limit, so the regression proves the
+    checker is driven by the retrieved graph value and that the retrieved value
+    differs from the original snapshot.
+    """
+    state, snap = _single_job_state_and_snapshot(capacity_kw=100.0)
+    graph = build_graph(state, snap)
+
+    # Mutate the graph capacity to 200 kW, which would let the 40 kW J1 pass.
+    cap_node = SCHED["CON-CAP-01"]
+    graph.remove((cap_node, SCHED.limitValue, None))
+    graph.add((cap_node, SCHED.limitValue, Literal(200.0)))
+
+    retrieved_snapshot = _snapshot_from_graph(snap, graph)
+    assert retrieved_snapshot.capacity_kw == 200.0
+    assert retrieved_snapshot.capacity_kw != snap.capacity_kw
+
+    # The checker must see the retrieved (tampered) value, so the plan passes.
+    result = check_schedule(_plan_for(state), state, retrieved_snapshot)
+    assert result.status == "pass"
+
+    # But the retrieved context no longer matches the authoritative snapshot hash,
+    # so a production gate comparing retrieve(state, snap).context.content_hash to
+    # the flat context hash would detect the inconsistency.
+    flat_hash = s.Context.build(state, snap, "flat").content_hash
+    retrieved_hash = retrieve(state, retrieved_snapshot).context.content_hash
+    assert retrieved_hash != flat_hash
