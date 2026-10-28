@@ -1,0 +1,67 @@
+{
+  "evidence_kind": "bounded_development_validation_not_study_result",
+  "authorization_ref": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6475169542",
+  "repo_commit": "726e2e91737fdf3076adef1d96869d393b52369e",
+  "started_at_utc": "2026-10-28T09:58:08.849269-07:00",
+  "scope": "A01 Plain-first paired iGPU validation; no tools, simulator execution, study run, warm-up or retry",
+  "bounds": {
+    "maximum_serial_requests": 2,
+    "per_request_seconds": 120,
+    "overall_seconds": 300,
+    "actual_requests": 1,
+    "retries": 0
+  },
+  "runtime": {
+    "version": "0.40.5",
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "316504eda9b907ddeaf5403f02da3b12d13e998162db42cbb917a1e095cf731a",
+    "backend": "Vulkan",
+    "device": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "device_type": "iGPU",
+    "reported_offloaded_layers": "37/37",
+    "loaded_size_bytes": 7536965058,
+    "loaded_size_vram_bytes": 7536965058,
+    "context_length": 16384
+  },
+  "settings": {
+    "temperature": 0.2,
+    "top_p": 1,
+    "seed": 101,
+    "num_ctx": 16384,
+    "num_predict": 1536
+  },
+  "plain_attempt": {
+    "request_sha256": "59bf1f9f167e7e10d10b6c848180f9169253871d9b5132fa3cd9b72382a7f56d",
+    "offline_candidate_prompt_tokens": 2291,
+    "latency_ms": 119984.7596,
+    "http_status": null,
+    "native_prompt_tokens": null,
+    "completion_tokens": null,
+    "raw_response_bytes": 0,
+    "error": "timed out",
+    "uncertain_outcome": true,
+    "parsed_output": false
+  },
+  "agent_attempt": {
+    "dispatched": false,
+    "reason": "Plain did not return a valid, count-matched output before its fixed deadline"
+  },
+  "result": {
+    "status": "plain_timeout_paired_validation_failed",
+    "paired_validation_passed": false,
+    "production_counter_adopted": false,
+    "experiment_ready": false
+  },
+  "identity_and_cleanup": {
+    "before_after_runtime_model_template_parameter_identity_match": true,
+    "isolated_listener_remaining": false,
+    "remaining_owned_processes": 0,
+    "cleanup_verified": true
+  },
+  "retained_outside_git": {
+    "validation_record_sha256": "182c449a9d4c0799ef4f6e608691496eb33c6cf8edf04e6c943a9ee935ad4c1f",
+    "runtime_stderr_sha256": "f86f57e1a921dcab6816660766345b8ea2744e80729fbab4143a12750d2e9349"
+  }
+}
