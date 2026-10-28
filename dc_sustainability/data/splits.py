@@ -232,10 +232,13 @@ def _dates(candidates: tuple[date, ...], low: int, high: int) -> tuple[date, ...
     return tuple(sorted(candidates))
 
 
-def _select_windows(dev_pool, held_pool, date_seed):
+def _select_windows(dev_pool, held_pool, date_seed, *, development_only=False):
     selected: list[Window] = []
     partitions = []
-    for partition, pool, count in (("development", dev_pool, 10), ("held_out", held_pool, 6)):
+    requests = (("development", dev_pool, 10),)
+    if not development_only:
+        requests += (("held_out", held_pool, 6),)
+    for partition, pool, count in requests:
         chosen = []
         for day in sorted(pool, key=lambda d: _rank(date_seed, partition, d.isoformat())):
             window = Window(day)
@@ -481,3 +484,34 @@ def write_private_manifest(proposal: Proposal, directory: Path, *, code_revision
     with os.fdopen(fd, "wb") as stream:
         stream.write(payload)
     return path
+
+
+def propose_development_allocation(
+    *, development_candidates: tuple[date, ...], date_seed: int, job_seed: int
+) -> tuple[Allocation, ...]:
+    """Development-only proposal using D04 selection/identity/group/fold rules.
+
+    Seeds are exclusively development provenance; never reuse evaluator roots.
+    No held-out candidate pool, selection, seed or content is required or generated.
+    """
+    _seed(date_seed)
+    _seed(job_seed)
+    pool = _dates(development_candidates, 1, 14)
+    selected = _select_windows(pool, (), date_seed, development_only=True)
+    records = []
+    for _, windows in selected:
+        for window in windows:
+            for scenario in SCENARIOS:
+                identity = digest([VERSION, window.day.isoformat(), scenario])[:24]
+                seed = int(digest([VERSION, job_seed, window.day.isoformat(), scenario])[:16], 16)
+                records.append(
+                    Allocation(
+                        f"EP-{identity}",
+                        "development",
+                        scenario,
+                        seed,
+                        window,
+                        digest([window.source_sha256, window.day.isoformat()]),
+                    )
+                )
+    return blocked_folds(tuple(records))
