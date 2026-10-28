@@ -40,8 +40,57 @@ def test_actual_artifacts_regenerate_and_hash():
             == row["allocation_sha256"]
         )
     checksums = json.loads((ARTIFACT / "checksums.json").read_text())
+    assert set(checksums) == {"manifest.json", "fold-map.json"}
     for name, value in checksums.items():
-        assert hashlib.sha256((ARTIFACT / name).read_bytes()).hexdigest() == value
+        assert d.canonical_lf_sha256(ARTIFACT / name) == value
+
+
+def test_source_checkout_line_endings_and_content_changes(monkeypatch):
+    manifest, projection = artifacts()
+    original = Path.read_bytes
+    paths = set(manifest["code_file_sha256"])
+    modified = False
+
+    def checkout_bytes(path):
+        value = original(path)
+        if any(path.as_posix().endswith(p) for p in paths):
+            value = value.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+            if modified and path.name == "scenarios.py":
+                value += b"# actual source modification\r\n"
+        return value
+
+    monkeypatch.setattr(Path, "read_bytes", checkout_bytes)
+    assert json.loads(json.dumps(d.build_manifest())) == manifest
+    assert d.load_fold_map(manifest, projection) == projection
+    modified = True
+    assert d.build_manifest()["code_file_sha256"] != manifest["code_file_sha256"]
+    with pytest.raises(ValueError, match="manifest differs"):
+        d.load_fold_map(manifest, projection)
+
+
+@pytest.mark.parametrize("name", ["manifest.json", "fold-map.json", "checksums.json"])
+def test_json_checkout_line_endings_preserve_integrity(tmp_path, name):
+    original = (ARTIFACT / name).read_bytes().replace(b"\r\n", b"\n")
+    path = tmp_path / name
+    path.write_bytes(original.replace(b"\n", b"\r\n"))
+    expected = hashlib.sha256(original).hexdigest()
+    assert d.canonical_lf_sha256(path) == expected
+    assert json.loads(path.read_bytes()) == json.loads(original)
+    for changed in (original + b" ", original.rstrip(b"\n"), original.replace(b" ", b"  ", 1)):
+        path.write_bytes(changed)
+        assert d.canonical_lf_sha256(path) != expected
+
+
+def test_canonical_lf_preserves_other_source_bytes(tmp_path):
+    path = tmp_path / "source.py"
+    value = b"# UTF-8: \xc3\xa9\nx = 1\n# lone CR: \r"
+    path.write_bytes(value)
+    expected = hashlib.sha256(value).hexdigest()
+    assert d.canonical_lf_sha256(path) == expected
+    path.write_bytes(value.replace(b"\n", b"\r\n"))
+    assert d.canonical_lf_sha256(path) == expected
+    path.write_bytes(value.replace(b"1", b"2"))
+    assert d.canonical_lf_sha256(path) != expected
 
 
 def test_actual_counts_coverage_and_p03_consumer():

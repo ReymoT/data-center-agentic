@@ -74,13 +74,13 @@ coordination/training metadata, never policy state/context/model input.
 No held-out IDs, dates, labels, contents or evaluator seeds are exported.
 Episode-content hashes are explicitly null because no contents were generated.
 
-| File | Byte SHA-256 |
+| File | Canonical LF byte SHA-256 (CRLF to LF only) |
 |---|---|
 | `fold-map.json` | `c54ef1c35dd39628bcc6c4f18fb3cc241a70f8cf94b1b9445d9ea02234531fac` |
-| `manifest.json` | `beccc9b1e1b281e5e76f1038792721b7957fc8d506e8543ce9a7acdc4ca212e5` |
+| `manifest.json` | `2af72d8ed49801d64bd707cb1a9adc9e8b216ea7cd653dbb65c8ca3cf965cbb5` |
 
 Canonical manifest SHA-256 (exclude `manifest_sha256`, sorted compact UTF-8 JSON):
-`5f028708ac0c1b40fc2ec05d8fbe5153ff1457e049956cc7ebc070370f57b235`.
+`f8f68ce57bfdb0f36e273316f0db6ed8b6b151fafff885aafcdf0b91a778dfa6`.
 
 | Episode ID | Scenario | Source date | Fold |
 |---|---|---|---|
@@ -237,3 +237,79 @@ If main advances, preserve local work, deliberately integrate current main and r
 applicable checks. Publish as a clearly provisional proposal; obtain affected-owner
 agreement before adoption. Attach this handoff to #102 only when Reimo authorizes
 GitHub communication. No merge/delete commands are needed for this local deliverable.
+
+
+## PR #108 Windows CI repair — October 28
+
+Reimo's local repair session stayed on `reimo/d04-development-fold-map`, starting
+at `4b404860da7fd39eb2f64b5f86c8dcd2b4ccd3b4`. Fetched/read authoritative main
+`06060b6dd1d69e5af6556102aa5a7d8e5dd48e23`, instruction 1.28. No GitHub writes.
+
+Verified [run 40765162683](https://github.com/ReymoT/data-center-agentic/actions/runs/40765162683),
+Windows `bootstrap-offline` job 123087227710: 1,505 passed, three failures,
+19 subtests passed. Logs show only source provenance and consequent manifest hash
+mismatches in the regeneration assertion; the loader then rejects the manifest in
+the other two tests. Replacing local LF with CRLF reproduced logged raw hashes:
+`splits.py` becomes `2d6fd0f2f45eff805c5f30f7489c665aa8c3399884f2d31708877d1c74fcadfd`
+and `carbon_source.py` becomes
+`71f4058e06a17e537c946756b35664881169a2e72209858d003af8fe1788eac6`.
+
+`development_folds.canonical_lf_sha256` now hashes bytes after replacing CRLF with
+LF only. No stripping, JSON reserialization, encoding conversion, lone-CR removal
+or trailing-newline insertion occurs. This definition covers both the proposal's
+`code_file_sha256` and the two entries in `checksums.json`. It equals literal bytes
+for the generated LF files, while accepting CRLF checkouts. JSON formatting and
+actual content changes remain detectable. The manifest note records the source
+hash definition. Its compact canonical JSON hash remains the existing separate
+`splits.digest` definition; the exact regeneration/loader comparison is retained.
+
+Audit of generated JSON verification: this proposal's checksum assertion had the
+same raw-byte checkout defect and now uses canonical LF hashing with an exact
+checksum filename-set assertion. All three proposal JSON files have LF/CRLF tests,
+including rejection of whitespace/trailing-newline changes. Allocation/manifest
+object hashes in splits and episode hashes in scenarios already use canonical JSON
+and do not depend on checkout newlines. Scenario catalog regeneration compares literal bytes: its writer uses native
+text newlines, matching the platform checkout in the verified Windows run; that
+existing test passed. It does not define a cross-platform checksum and is unchanged. `Proposal.private_manifest` and its development
+projection retain literal checkout-byte source provenance (and explicit runtime
+metadata); those are freshly generated custody snapshots, not this committed
+cross-platform proposal. Their test checks the same literal local bytes. No global
+hash convention or private custody contract is changed. Pinned CSV/Frontier raw
+source hashes remain literal-byte integrity checks and are deliberately untouched.
+Other owners' diagnostic source/binary evidence hashes are outside this repair.
+
+Regenerated the manifest with the existing entry point into a new directory:
+
+```sh
+python -m dc_sustainability.data.development_folds /private/tmp/d04-108-lf-fix
+```
+
+Copied only the regenerated manifest; recomputed `checksums.json` from the two
+UTF-8/LF generated files using SHA-256 and sorted two-space JSON plus final LF.
+The writer still refuses overwrite. Compared every record and every other manifest
+field against the original, allowing only `code_revision_note`, `code_file_sha256`
+and `manifest_sha256` to differ. All 40 IDs, per-episode seeds, dates, allocation
+hashes, development roots 2026102801/2026102802 and 16/12/12 folds are unchanged.
+`fold-map.json` was byte-identical and was not rewritten. Its checksum remains
+`c54ef1c35dd39628bcc6c4f18fb3cc241a70f8cf94b1b9445d9ea02234531fac`.
+Current manifest hashes are in the table above. Only the development_folds.py
+source hash changed: `3bcd07419670fb39232e0a1eb8fb467959cdafbc339c9beea1c62672ca2e5c49`.
+
+Repair verification, macOS CPython 3.12.15, existing environment above:
+
+- Focused command above: 66 passed (1.61 seconds), including five added cases.
+- Full offline suite: 1,513 passed, 19 subtests passed (12.60 seconds).
+  Sandbox attempt: 1,403 passed and 110 local-socket permission setup errors;
+  authorized outside-sandbox rerun passed without skips or assertion bypasses.
+- Ruff lint and format check: pass, 141 files. Setup validator, compilation,
+  pip consistency and dependency smoke: pass. No provider/model call.
+- New source tests simulate CRLF for every provenance input, preserve the exact
+  manifest/loader result, then modify source content and require loader rejection.
+  Separate LF/CRLF tests preserve UTF-8 and lone CR bytes and detect source edits.
+
+These results do not claim a hosted Windows rerun: publication was not authorized.
+Scientific approval is still pending; Q05/Q06, F02/P03/O02 contracts and scientific
+allocation choices are unchanged. No commit, push, merge or GitHub comment occurred.
+The earlier publication section describes the original proposal; for this repair
+stage only development_folds.py, its test, manifest.json, checksums.json and this
+handoff, then commit and push to the existing branch/PR after identity verification.

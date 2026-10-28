@@ -2,13 +2,13 @@
   "allocator_version": "d04-provisional-v1",
   "code_file_sha256": {
     "dc_sustainability/data/carbon_source.py": "1a4ce5124962bb4efa1b705d0184c79ad2c5c76f9011df25f01652b015ad87a8",
-    "dc_sustainability/data/development_folds.py": "3467d05ef14503622641a10a5c6b3ac65f9d955214dfea295761c1f733dd85d6",
+    "dc_sustainability/data/development_folds.py": "3bcd07419670fb39232e0a1eb8fb467959cdafbc339c9beea1c62672ca2e5c49",
     "dc_sustainability/data/scenarios.py": "402e69b4693c7e39f72116f5ab88390bab922ade25fb6d155ac5d8f2d99bdd3f",
     "dc_sustainability/data/splits.py": "fb555aa98d37a04b09f2135d05cf31f5f91961e3c1feb99d2079e9737636602d",
     "dc_sustainability/schemas.py": "a3ebde01f7e3930a3c14ad0795eac28204d084ef3866171982af8a5da6d2591d"
   },
   "code_revision": "06060b6dd1d69e5af6556102aa5a7d8e5dd48e23",
-  "code_revision_note": "base revision plus exact working-file SHA256 values",
+  "code_revision_note": "base revision plus working-file SHA256 of canonical LF bytes (CRLF to LF only)",
   "development_candidates": [
     "2022-01-01",
     "2022-01-02",
@@ -231,7 +231,7 @@
   "held_out_allocation_generated": false,
   "held_out_exclusion_scope": "development allowlist only; global custody check remains pending",
   "job_runtime_requirement": "CPython 3.12; random.Random MT19937; record runtime at materialization",
-  "manifest_sha256": "5f028708ac0c1b40fc2ec05d8fbe5153ff1457e049956cc7ebc070370f57b235",
+  "manifest_sha256": "f8f68ce57bfdb0f36e273316f0db6ed8b6b151fafff885aafcdf0b91a778dfa6",
   "overlaps": [
     [
       "EP-0ca0b3104a65be14a32423ec",

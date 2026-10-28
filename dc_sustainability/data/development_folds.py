@@ -18,6 +18,16 @@ JOB_SEED = 2026102802
 CANDIDATES = tuple(date(2022, month, day) for month in range(1, 13) for day in range(1, 15))
 
 
+def canonical_lf_sha256(path: Path) -> str:
+    """Hash text bytes with CRLF replaced by LF; preserve every other byte.
+
+    No JSON reserialization, whitespace stripping, encoding conversion or final
+    newline insertion: source edits and artifact formatting changes remain visible.
+    Lone CR bytes are preserved too. Applies only to this proposal's text files.
+    """
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def proposed_records():
     return splits.propose_development_allocation(
         development_candidates=CANDIDATES, date_seed=DATE_SEED, job_seed=JOB_SEED
@@ -40,8 +50,8 @@ def build_manifest() -> dict:
         "scientific_acceptance": False,
         "policy_visible": False,
         "code_revision": BASE_REVISION,
-        "code_revision_note": "base revision plus exact working-file SHA256 values",
-        "code_file_sha256": {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in files},
+        "code_revision_note": "base revision plus working-file SHA256 of canonical LF bytes (CRLF to LF only)",
+        "code_file_sha256": {p: canonical_lf_sha256(root / p) for p in files},
         "allocator_version": splits.VERSION,
         "generator_version": scenarios.GENERATOR_VERSION,
         "source": {
