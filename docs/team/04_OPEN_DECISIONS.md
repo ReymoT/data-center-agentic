@@ -1,6 +1,6 @@
 # Decisions still requiring confirmation
 
-Professor feedback update, October 27: reporting inter-rater reliability for human faithfulness annotations is accepted and no longer an open ownership question. [Nisha is the sole accountable reporting owner](../decisions/PROFESSOR_FEEDBACK_IRR.md) under E07/R05. The calculation must precede adjudication and include matched counts, label marginals/confusion matrix, raw agreement, Cohen's kappa, undefined handling and interpretation; extraction agreement is separate. Human matching, retained development results, adjudication and later held-out application remain open execution work.
+Professor feedback update, October 28: reporting inter-rater reliability for human faithfulness annotations is accepted and no longer an open ownership question. [Nisha is the sole accountable reporting owner](../decisions/PROFESSOR_FEEDBACK_IRR.md) under E07/R05. PR #104 retains the completed development matching/report: 32 matched claims, 75% raw label agreement and kappa 0.00 under the documented prevalence limitation. Joint adjudication of 77 items and the later held-out application remain open execution work.
 
 Current implementation, instruction 1.28: S01 Option B/Q01, unlabeled P03 state collection, both E05 development originals, E05 agreement tooling and provisional D04 split tooling are merged. D04 remains scientifically provisional; A01 live validation, trained C/D, the runner, actual E05 matching/adjudication and full integration remain open. No successful model study or held-out result is claimed.
 
