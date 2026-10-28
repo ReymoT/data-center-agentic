@@ -6,8 +6,7 @@ from tests.contracts import fixtures as f
 
 
 def _context(state: s.VisibleState) -> s.Context:
-    snap = f.snapshot()
-    return s.Context.build(state, snap, representation="flat")
+    return s.Context.build(state, f.snapshot(), representation="flat")
 
 
 def test_hand_example_is_certified_optimal():
@@ -44,7 +43,8 @@ def test_infeasible_job_is_certified_infeasible():
 def test_missing_capacity_is_insufficient_evidence():
     snap = f.snapshot(include_capacity=False)
     state = f.visible_state(snap)
-    result = solve_visible(state, _context(state), time_limit_s=5.0)
+    ctx = s.Context.build(state, snap, representation="flat")
+    result = solve_visible(state, ctx, time_limit_s=5.0)
     assert result.status == "insufficient_evidence"
     assert result.schedule is None
     assert result.objective_kg is None
