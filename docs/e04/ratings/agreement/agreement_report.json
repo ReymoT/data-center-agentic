@@ -1,0 +1,131 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "originals": {
+    "a": {
+      "rater": "Nisha",
+      "sha256": "cf8543ae205bf83d5679d917739bb65733e51d74b573771aac040ea6e69ef4b3"
+    },
+    "b": {
+      "rater": "MattyAnd",
+      "sha256": "3b3e0c7509b9bb7c3580f9586260db7c1a9e4356fe570e04fe09a6640e46f16a"
+    }
+  },
+  "denominators": {
+    "output_units": 22,
+    "not_applicable_outputs": 2,
+    "reviewed_outputs": 20,
+    "missing_ratings": 0,
+    "assertions": {
+      "a": 32,
+      "b": 96
+    },
+    "matched_assertions": 32,
+    "unmatched_assertions": {
+      "b_limitation": 7,
+      "b_summary": 57
+    }
+  },
+  "not_applicable_outputs": 2,
+  "extraction": {
+    "both": 0,
+    "only_a": 0,
+    "only_b": 64,
+    "agreement": 0.0
+  },
+  "labels_all_matched": {
+    "n": 32,
+    "agreed": 24,
+    "percent": 75.0,
+    "kappa": 0.0,
+    "marginals": {
+      "a": {
+        "supported": 32,
+        "contradicted": 0,
+        "unsupported": 0
+      },
+      "b": {
+        "supported": 24,
+        "contradicted": 4,
+        "unsupported": 4
+      }
+    },
+    "confusion": {
+      "supported": {
+        "supported": 24,
+        "contradicted": 4,
+        "unsupported": 4
+      },
+      "contradicted": {
+        "supported": 0,
+        "contradicted": 0,
+        "unsupported": 0
+      },
+      "unsupported": {
+        "supported": 0,
+        "contradicted": 0,
+        "unsupported": 0
+      }
+    }
+  },
+  "labels_claims_only": {
+    "n": 32,
+    "agreed": 24,
+    "percent": 75.0,
+    "kappa": 0.0,
+    "marginals": {
+      "a": {
+        "supported": 32,
+        "contradicted": 0,
+        "unsupported": 0
+      },
+      "b": {
+        "supported": 24,
+        "contradicted": 4,
+        "unsupported": 4
+      }
+    },
+    "confusion": {
+      "supported": {
+        "supported": 24,
+        "contradicted": 4,
+        "unsupported": 4
+      },
+      "contradicted": {
+        "supported": 0,
+        "contradicted": 0,
+        "unsupported": 0
+      },
+      "unsupported": {
+        "supported": 0,
+        "contradicted": 0,
+        "unsupported": 0
+      }
+    }
+  },
+  "completeness": {
+    "decision": {
+      "n": 20,
+      "agreed": 20,
+      "percent": 100.0,
+      "kappa": 1.0
+    },
+    "reason": {
+      "n": 20,
+      "agreed": 18,
+      "percent": 90.0,
+      "kappa": 0.4444444444444447
+    },
+    "evidence": {
+      "n": 20,
+      "agreed": 18,
+      "percent": 90.0,
+      "kappa": 0.45945945945945976
+    },
+    "limitations": {
+      "n": 20,
+      "agreed": 19,
+      "percent": 95.0,
+      "kappa": 0.8999999999999999
+    }
+  }
+}

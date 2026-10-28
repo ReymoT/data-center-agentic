@@ -1,0 +1,757 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "originals": {
+    "a": {
+      "rater": "Nisha",
+      "sha256": "cf8543ae205bf83d5679d917739bb65733e51d74b573771aac040ea6e69ef4b3"
+    },
+    "b": {
+      "rater": "MattyAnd",
+      "sha256": "3b3e0c7509b9bb7c3580f9586260db7c1a9e4356fe570e04fe09a6640e46f16a"
+    }
+  },
+  "rule": "claims match by shared claim ID; summary/limitation assertions only through explicit rater-agreed ID pairs",
+  "confirmed_by": [
+    "Nisha"
+  ],
+  "matched": [
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "a_id": "C3",
+      "b_id": "C3",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "a_id": "C2",
+      "b_id": "C2",
+      "source": "claim"
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "a_id": "C1",
+      "b_id": "C1",
+      "source": "claim"
+    }
+  ],
+  "unmatched": [
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 at slot 2"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 4"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "the lowest-carbon feasible slots in the forecast"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S4",
+      "source": "summary",
+      "text": "Both finish before their deadline at slot 6."
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S5",
+      "source": "summary",
+      "text": "Forecast job emissions are 48.4 kg"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S6",
+      "source": "summary",
+      "text": "6.1 kg less than starting both as soon as possible"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S7",
+      "source": "summary",
+      "text": "starting both as soon as possible (54.5 kg)"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Emissions use perfect-foresight forecasts, not measured values."
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 now"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 2"
+    },
+    {
+      "case_id": "DEV01",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "Total forecast emissions are 54.5 kg."
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Defer J1"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "Defer J2"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "Slot 3 has the lowest forecast intensity in the window"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S4",
+      "source": "summary",
+      "text": "both jobs can still finish by slot 6"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Forecasts beyond slot 6 are missing."
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Running J1 at slot 2"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 4"
+    },
+    {
+      "case_id": "DEV02",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "lowers forecast emissions by about 11.2% compared with running both as soon as possible"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Defer J2."
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J1 is still running at slot 1"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "above the 100 kW capacity"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S4",
+      "source": "summary",
+      "text": "J2 can start at slot 2"
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J2 now."
+    },
+    {
+      "case_id": "DEV03",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "within the 100 kW limit"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 now"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 2"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "both finish well before the slot 6 deadline"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S4",
+      "source": "summary",
+      "text": "No carbon forecasts are available"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Carbon forecasts are missing for all slots 0-23."
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 now"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 2"
+    },
+    {
+      "case_id": "DEV04",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "This saves 6.1 kg of CO2 compared with the greedy schedule"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start both jobs now."
+    },
+    {
+      "case_id": "DEV05",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "Load stays ... below the 100 kW capacity limit"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Abstain from starting any job"
+    },
+    {
+      "case_id": "DEV05",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "a safe load cannot be confirmed"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Defer J3"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "until slot 5, when carbon intensity is lower"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Abstain from J3"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "starting now at slot 4 ends at slot 7"
+    },
+    {
+      "case_id": "DEV06",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "after its deadline at slot 6"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Abstain this slot."
+    },
+    {
+      "case_id": "DEV07",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "neither job can run without exceeding capacity"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Plan J1 for slot 2"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "defer J2"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "Slot 2's forecast intensity ... is lower than slot 0's"
+    },
+    {
+      "case_id": "DEV07",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Forecasts are perfect-foresight development values, not live forecasts."
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 now"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 2"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 at slot 2"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 4"
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "The reference solver confirmed this schedule is optimal."
+    },
+    {
+      "case_id": "DEV08",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Forecasts beyond slot 6 are missing."
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "J2 runs at slots 4-5"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 arrived at slot 1"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "so it could not start earlier"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "X",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Emissions are forecasts."
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 at slot 2"
+    },
+    {
+      "case_id": "DEV09",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "skip J2"
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S1",
+      "source": "summary",
+      "text": "Start J1 at slot 2"
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S2",
+      "source": "summary",
+      "text": "J2 at slot 4"
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "S3",
+      "source": "summary",
+      "text": "the lower forecast intensity at slots 2-5"
+    },
+    {
+      "case_id": "DEV10",
+      "output": "Y",
+      "rater": "b",
+      "assertion_id": "L1",
+      "source": "limitation",
+      "text": "Forecasts beyond slot 6 are missing."
+    }
+  ]
+}

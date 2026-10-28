@@ -201,12 +201,36 @@ def summary(comparison: Comparison) -> dict:
     def agreement(x: Agreement) -> dict:
         return {"n": x.n, "agreed": x.agreed, "percent": x.percent, "kappa": x.kappa}
 
+    def labels(matched: list[Matched]) -> dict:
+        return {
+            **agreement(_agreement([(m.a_label, m.b_label) for m in matched])),
+            **label_table(matched),
+        }
+
     e = comparison.extraction
+    sources = Counter(
+        (o.rater, "claim" if o.assertion["source"] == "claim" else o.assertion["source"])
+        for o in comparison.one_sided
+    )
     return {
         "rubric_version": review.RUBRIC_VERSION,
         "originals": {
             "a": {"rater": comparison.a.rater, "sha256": comparison.a.sha256},
             "b": {"rater": comparison.b.rater, "sha256": comparison.b.sha256},
+        },
+        "denominators": {
+            "output_units": len(comparison.a.entries),
+            "not_applicable_outputs": comparison.not_applicable,
+            "reviewed_outputs": len(comparison.completeness_pairs),
+            "missing_ratings": 0,  # both originals passed the complete structural check
+            "assertions": {
+                "a": _assertion_count(comparison.a),
+                "b": _assertion_count(comparison.b),
+            },
+            "matched_assertions": len(comparison.matched),
+            "unmatched_assertions": {
+                f"{rater}_{source}": n for (rater, source), n in sorted(sources.items())
+            },
         },
         "not_applicable_outputs": comparison.not_applicable,
         "extraction": {
@@ -215,9 +239,60 @@ def summary(comparison: Comparison) -> dict:
             "only_b": e.only_b,
             "agreement": e.agreement,
         },
-        "labels_all_matched": agreement(comparison.labels),
-        "labels_claims_only": agreement(comparison.claim_labels),
+        "labels_all_matched": labels(list(comparison.matched)),
+        "labels_claims_only": labels([m for m in comparison.matched if m.source == "claim"]),
         "completeness": {k: agreement(v) for k, v in comparison.completeness.items()},
+    }
+
+
+def _assertion_count(original: Original) -> int:
+    return sum(len(e["assertions"]) for e in original.entries.values() if not e["not_applicable"])
+
+
+def label_table(matched: Iterable[Matched]) -> dict:
+    """Each rater's label marginals and the confusion matrix (rows a, columns b)."""
+    matched = list(matched)
+    confusion = {x: dict.fromkeys(review.LABELS, 0) for x in review.LABELS}
+    for m in matched:
+        confusion[m.a_label][m.b_label] += 1
+    return {
+        "marginals": {
+            "a": {x: sum(m.a_label == x for m in matched) for x in review.LABELS},
+            "b": {x: sum(m.b_label == x for m in matched) for x in review.LABELS},
+        },
+        "confusion": confusion,
+    }
+
+
+def matching_record(comparison: Comparison, confirmed_by: Iterable[str] = ()) -> dict:
+    """The retained matching artifact: which assertions were paired and which were not."""
+    return {
+        "rubric_version": review.RUBRIC_VERSION,
+        "originals": summary(comparison)["originals"],
+        "rule": "claims match by shared claim ID; summary/limitation assertions only "
+        "through explicit rater-agreed ID pairs",
+        "confirmed_by": list(confirmed_by),
+        "matched": [
+            {
+                "case_id": m.key[0],
+                "output": m.key[1],
+                "a_id": m.a_id,
+                "b_id": m.b_id,
+                "source": m.source,
+            }
+            for m in comparison.matched
+        ],
+        "unmatched": [
+            {
+                "case_id": o.key[0],
+                "output": o.key[1],
+                "rater": o.rater,
+                "assertion_id": o.assertion["assertion_id"],
+                "source": o.assertion["source"],
+                "text": o.assertion["text"],
+            }
+            for o in comparison.one_sided
+        ],
     }
 
 
