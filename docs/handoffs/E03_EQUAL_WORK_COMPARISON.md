@@ -42,8 +42,27 @@ Exact reproduction commands:
 Tests actually run and observed results: Windows 11, Python 3.12.10, hashed lock. Full suite 1,368 tests and 19 subtests passed (1,356 on main before); Ruff check/format, compileall, setup validation and pip check passed.
 
 Limitations and open decisions:
-- A replay with findings (for example a capacity overload that did execute) is still compared, because the agreed rule has no reason for it; its findings stay on the `Replay`. Raise it in #61 if it should block.
+- Superseded by the replay-findings amendment below: invalidating replay findings now block.
 - `unfinished_job_occupied` cannot arise from the replay of legal starts under the current rules; it guards traces and future rule changes, and is tested on a hand-edited trace.
 - No real saved runs exist yet. Episode tables and the paired bootstrap are later E03/E02 work.
 
 Receiving owner and consumer check: Reimo and Ved, to confirm the conditions match their #61 agreements; Matty, for receiving review.
+
+## Replay-findings amendment (#61)
+
+Requested by Matty and supported by Reimo in #61: only independent replay findings that invalidate the executed schedule may block savings; warnings must not.
+
+- New blocked reason `replay_findings`, placed after `unfinished_job_occupied` in the fixed order.
+- Every E01 `ReplayCode` is classified in `comparison.py`:
+  - **invalidating** (`INVALIDATING_FINDINGS`): `executed_slot_mismatch`, `executed_unknown_job`, `executed_not_waiting`, `executed_no_legal_start`, `capacity`;
+  - **non-blocking** (`NON_BLOCKING_FINDINGS`): `capacity_unverifiable`. The run lacked capacity evidence, so execution can't be checked, but nothing shown was illegal; it is recorded and does not block on its own.
+  A finding code that is in neither set raises an error, so a new replay code can never silently block or pass a comparison.
+- Each result now records, for baseline and candidate, every replay finding and the invalidating ones as sorted `code@slot` or `code@slot:job` strings (`findings`, `invalidating_findings`). The originals stay on the `Replay`.
+- A blocked comparison still has no savings value. The S02 helper and P01 are unchanged.
+
+Tests (10 new, 22 in `tests/evaluation/test_comparison.py`): each invalidating code blocks with the same completed and missed jobs (capacity overload, unknown job, starting a running job, a start recorded for another slot, option B start of an impossible arrival); an invalid baseline blocks too; missing capacity evidence is recorded but comparable; every `ReplayCode` is classified exactly once; an unclassified code is refused; summary counts include `replay_findings`.
+- Mutation check: five deliberate bugs each made tests fail, and the code was restored: never blocking, warnings blocking, ignoring the baseline (first missed, then covered by a new test), accepting unclassified codes, capacity not invalidating.
+
+Results: full suite 1,498 tests and 19 subtests on this branch (based on main `726e2e9`); Ruff check/format, setup validation and pip check passed.
+
+Open for #61: whether `capacity_unverifiable` should also block. It is non-blocking here because it marks missing evidence rather than invalid execution; the inputs check already catches a capacity record that differs between the two runs.

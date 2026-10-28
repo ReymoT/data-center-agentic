@@ -9,9 +9,11 @@ as in the infeasible scenario.
 import ast
 import dataclasses
 from pathlib import Path
+from typing import get_args
 
 import pytest
 
+from dc_sustainability import schemas as s
 from dc_sustainability.evaluation import comparison as e
 from dc_sustainability.evaluation import replay as r
 from dc_sustainability.evaluation.validator import Q03_DRAFT, Q03_OPTION_B
@@ -133,3 +135,75 @@ def test_comparison_does_not_use_production_impact_or_the_s02_helper():
             imported.add(node.module or "")
     for forbidden in ("metrics", "simulator", "policies", "runtime", "verification"):
         assert not any(forbidden in module for module in imported), forbidden
+
+
+# ----------------------------------------------------------------- replay findings (#61)
+def _slot_mismatch():
+    executed = dict(CANDIDATE)
+    executed[3] = (s.ApprovedStart(job_id="J2", start_slot=4),)  # recorded for another slot
+    return executed
+
+
+@pytest.mark.parametrize(
+    "executed,invalidating",
+    [
+        # J1 and J2 together at slot 0: 110 kW > 100 kW in slots 0 and 1. Both still finish.
+        (starts(s0=["J1", "J2"]), ("capacity@0", "capacity@1")),
+        ({**CANDIDATE, 1: starts(s1=["J9"])[1]}, ("executed_unknown_job@1:J9",)),
+        ({**CANDIDATE, 3: starts(s3=["J1"])[3]}, ("executed_not_waiting@3:J1",)),
+        (_slot_mismatch(), ("executed_slot_mismatch@3:J2",)),
+    ],
+)
+def test_findings_that_invalidate_execution_block_the_comparison(executed, invalidating):
+    result = compare(candidate_starts=executed)
+    assert result.reasons == ("replay_findings",)  # same completed and missed jobs
+    assert result.savings_kg is None
+    assert result.invalidating_findings == {"baseline": (), "candidate": invalidating}
+    assert result.findings["candidate"] == invalidating
+
+
+def test_option_b_start_of_an_impossible_arrival_blocks():
+    baseline = run("greedy_a", BASELINE, protocol=Q03_OPTION_B)
+    candidate = run("agent", {**CANDIDATE, 4: starts(s4=["J2", "J3"])[4]}, protocol=Q03_OPTION_B)
+    result = e.compare_savings(baseline, candidate)
+    assert result.reasons == ("replay_findings",)
+    assert result.invalidating_findings["candidate"] == ("executed_no_legal_start@4:J3",)
+
+
+def test_missing_capacity_evidence_is_recorded_but_does_not_block():
+    episode = f.private_episode().model_copy(
+        update={"snapshot": f.snapshot(include_capacity=False)}
+    )
+    result = e.compare_savings(run("greedy_a", BASELINE, episode), run("agent", CANDIDATE, episode))
+    assert (result.status, result.reasons) == ("comparable", ())
+    assert result.savings_kg is not None
+    assert result.findings["candidate"] == ("capacity_unverifiable@2", "capacity_unverifiable@4")
+    assert result.invalidating_findings == {"baseline": (), "candidate": ()}
+
+
+def test_every_replay_code_is_classified_exactly_once():
+    codes = set(get_args(r.ReplayCode))
+    assert e.INVALIDATING_FINDINGS | e.NON_BLOCKING_FINDINGS == codes
+    assert not e.INVALIDATING_FINDINGS & e.NON_BLOCKING_FINDINGS
+
+
+def test_an_unclassified_finding_code_is_refused():
+    base = run("greedy_a", BASELINE)
+    odd = dataclasses.replace(base.replay, findings=(r.ReplayFinding("new_code", 0),))
+    with pytest.raises(ValueError, match="not classified"):
+        e.compare_savings(e.Run("greedy_a", 0, odd), run("agent", CANDIDATE))
+
+
+def test_replay_findings_are_counted_in_the_summary():
+    summary = e.summarize([compare(), compare(candidate_starts=starts(s0=["J1", "J2"]))])
+    assert (summary.comparable, summary.blocked) == (1, 1)
+    assert summary.by_reason == {"replay_findings": 1}
+
+
+def test_an_invalid_baseline_blocks_too():
+    result = compare(baseline_starts=starts(s0=["J1", "J2"]))  # overload in the baseline
+    assert result.reasons == ("replay_findings",)
+    assert result.invalidating_findings == {
+        "baseline": ("capacity@0", "capacity@1"),
+        "candidate": (),
+    }
