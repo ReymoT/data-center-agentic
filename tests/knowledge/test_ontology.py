@@ -234,7 +234,7 @@ def test_validate_graph_accepts_external_shapes_and_ontology():
     graph = build_graph(state, snap)
     shapes = load_shapes_graph()
     ontology = load_ontology_graph()
-    report = validate_graph(graph, shacl_graph=shapes, ont_graph=ontology, inference="rdfs")
+    report = validate_graph(graph, shacl_graph=shapes, ont_graph=ontology, inference=None)
     assert report.conforms
 
 
@@ -258,6 +258,15 @@ def test_validate_graph_without_inference_fails_without_building_type():
     report = validate_graph(graph, inference=None)
     assert not report.conforms
     assert "brick:Building" in report.report_text
+
+
+def test_validate_graph_rejects_rdfs_inference():
+    """Unsafe RDFS inference is rejected rather than silently ignored."""
+    snap = fx.snapshot()
+    state = fx.visible_state(snap)
+    graph = build_graph(state, snap)
+    with pytest.raises(ValueError, match="RDFS inference is unsupported"):
+        validate_graph(graph, inference="rdfs")
 
 
 def test_completed_job_graph_conforms():
