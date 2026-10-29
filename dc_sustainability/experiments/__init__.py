@@ -1,1 +1,1 @@
-"""Reserved for Nisha: common runner and resumable manifests. Not implemented."""
+"""Nisha's E02 experiment registry and resumable runner (E02-a: deterministic systems)."""
