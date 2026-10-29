@@ -49,18 +49,23 @@ class UnitInfo:
 # Explicit mapping from every F02 Unit value to a QUDT unit IRI or a project-defined
 # dimensional class. Values are never converted; the mapping only supplies a semantic
 # reference for the already-stated unit code.
+#
+# Canonical IRIs are verified against the pinned pyqudt 1.1.1 unit vocabulary
+# (.venv/lib64/python3.12/site-packages/qudt/ontology/resources/unit.rdf), which
+# uses the namespace http://qudt.org/vocab/unit# and local names:
+#   Kilowatt, Kilowatthour, Hour, Kilogram, Unitless, Gram.
 UNIT_MAP: Mapping[str, UnitInfo] = {
-    "kW": UnitInfo("kW", QUDT_UNIT.KiloW, "active electrical power"),
-    "kWh": UnitInfo("kWh", QUDT_UNIT["KiloW-HR"], "electrical energy"),
+    "kW": UnitInfo("kW", URIRef("http://qudt.org/vocab/unit#Kilowatt"), "active electrical power"),
+    "kWh": UnitInfo("kWh", URIRef("http://qudt.org/vocab/unit#Kilowatthour"), "electrical energy"),
     "slot": UnitInfo("slot", None, "discrete scheduling slot index; dimensionless ordinal"),
-    "h": UnitInfo("h", QUDT_UNIT.HR, "duration in hours"),
+    "h": UnitInfo("h", URIRef("http://qudt.org/vocab/unit#Hour"), "duration in hours"),
     "g/kWh": UnitInfo(
         "g/kWh",
         SCHED.GramPerKiloWattHour,
         "project dimensional unit for carbon intensity; pollutant basis recorded separately",
     ),
-    "kg": UnitInfo("kg", QUDT_UNIT.KiloGM, "mass"),
-    "1": UnitInfo("1", None, "dimensionless ratio (PUE)"),
+    "kg": UnitInfo("kg", URIRef("http://qudt.org/vocab/unit#Kilogram"), "mass"),
+    "1": UnitInfo("1", URIRef("http://qudt.org/vocab/unit#Unitless"), "dimensionless ratio (PUE)"),
 }
 
 # Aliases that F02 does not accept but may appear in raw data; reject them explicitly.
