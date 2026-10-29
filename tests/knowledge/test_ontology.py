@@ -1,14 +1,14 @@
 """K01 ontology, unit mapping, and SHACL validation tests."""
 
 import pytest
-from rdflib import RDF, RDFS, XSD, Graph, Literal, Namespace
+from rdflib import RDF, RDFS, XSD, Graph, Literal, Namespace, URIRef
 
+from dc_sustainability import schemas as s
 from dc_sustainability.knowledge.graph import SCHED, build_graph
 from dc_sustainability.knowledge.ontology import (
     BRICK,
     ONTOLOGY_IRI,
     ONTOLOGY_VERSION,
-    QUDT_UNIT,
     UnitInfo,
     UnitMappingError,
     add_unit_metadata,
@@ -44,14 +44,33 @@ def test_shapes_load_offline():
 
 def test_map_unit_known_codes():
     """All F02 unit codes map to a UnitInfo with the expected QUDT or project unit."""
-    assert map_unit("kW") == UnitInfo("kW", QUDT_UNIT.KiloW, "active electrical power")
-    assert map_unit("kWh") == UnitInfo("kWh", QUDT_UNIT.KiloW_HR, "electrical energy")
+    assert map_unit("kW") == UnitInfo(
+        "kW", URIRef("http://qudt.org/vocab/unit#Kilowatt"), "active electrical power"
+    )
+    assert map_unit("kWh") == UnitInfo(
+        "kWh", URIRef("http://qudt.org/vocab/unit#Kilowatthour"), "electrical energy"
+    )
     assert map_unit("slot") == UnitInfo(
         "slot", None, "discrete scheduling slot index; dimensionless ordinal"
     )
-    assert map_unit("h") == UnitInfo("h", QUDT_UNIT.HR, "duration in hours")
-    assert map_unit("kg") == UnitInfo("kg", QUDT_UNIT.KiloGM, "mass")
-    assert map_unit("1") == UnitInfo("1", None, "dimensionless ratio (PUE)")
+    assert map_unit("h") == UnitInfo(
+        "h", URIRef("http://qudt.org/vocab/unit#Hour"), "duration in hours"
+    )
+    assert map_unit("kg") == UnitInfo("kg", URIRef("http://qudt.org/vocab/unit#Kilogram"), "mass")
+    assert map_unit("1") == UnitInfo(
+        "1", URIRef("http://qudt.org/vocab/unit#Unitless"), "dimensionless ratio (PUE)"
+    )
+
+
+def test_map_unit_uses_canonical_qudt_iris():
+    """Unit IRIs match the pinned pyqudt 1.1.1 vocabulary, not implementation constants."""
+    # These expected values are hard-coded against the authoritative vocabulary so the
+    # test is independent of the implementation's QUDT_UNIT namespace convenience.
+    assert map_unit("kW").qudt_unit == URIRef("http://qudt.org/vocab/unit#Kilowatt")
+    assert map_unit("kWh").qudt_unit == URIRef("http://qudt.org/vocab/unit#Kilowatthour")
+    assert map_unit("h").qudt_unit == URIRef("http://qudt.org/vocab/unit#Hour")
+    assert map_unit("kg").qudt_unit == URIRef("http://qudt.org/vocab/unit#Kilogram")
+    assert map_unit("1").qudt_unit == URIRef("http://qudt.org/vocab/unit#Unitless")
 
 
 def test_map_unit_g_per_kwh_uses_project_unit():
@@ -75,7 +94,7 @@ def test_add_unit_metadata_adds_qudt_link():
     info = add_unit_metadata(graph, subject, "kW")
     assert info.code == "kW"
     assert (subject, SCHED.unit, Literal("kW")) in graph
-    assert (subject, SCHED.qudtUnit, QUDT_UNIT.KiloW) in graph
+    assert (subject, SCHED.qudtUnit, URIRef("http://qudt.org/vocab/unit#Kilowatt")) in graph
     assert (subject, RDFS.comment, Literal("active electrical power")) in graph
 
 
@@ -239,3 +258,53 @@ def test_validate_graph_without_inference_fails_without_building_type():
     report = validate_graph(graph, inference=None)
     assert not report.conforms
     assert "brick:Building" in report.report_text
+
+
+def test_completed_job_graph_conforms():
+    """A visible state with only completed jobs passes SHACL validation."""
+    snap = fx.snapshot()
+    state = s.VisibleState.from_snapshot(
+        snap,
+        episode_id="EP-COMPLETED",
+        current_slot=3,
+        state_version=3,
+        waiting_jobs=(fx.jobs()["J2"],),
+        completed_jobs=(s.CompletedJobView(job_id="J1", start_slot=0, end_slot=2),),
+        carbon_facts=tuple(
+            f for f in fx.forecasts() if 3 <= f.valid_slot < 3 + s.PROPOSED_DECISION_SLOTS
+        ),
+    )
+    graph = build_graph(state, snap)
+    report = validate_graph(graph)
+    assert report.conforms, report.report_text
+
+
+def test_duplicate_capacity_constraint_fails_validation():
+    """Two capacity constraints for the same site are rejected as ambiguous."""
+    snap = fx.snapshot()
+    state = fx.visible_state(snap)
+    graph = build_graph(state, snap)
+    # Add a second capacity constraint for the same site.
+    dup = SCHED["CON-CAP-DUP"]
+    graph.add((dup, RDF.type, SCHED.Constraint))
+    graph.add((dup, SCHED.constraintType, Literal("capacity")))
+    graph.add((dup, SCHED.limitValue, Literal(50.0)))
+    graph.add((dup, SCHED.unit, Literal("kW")))
+    graph.add((dup, SCHED.source, SCHED[fx.SOURCE_ID]))
+    graph.add((dup, SCHED.appliesToSite, SCHED["SITE1"]))
+    report = validate_graph(graph)
+    assert not report.conforms
+    assert "more than one capacity" in report.report_text.lower()
+
+
+def test_capacity_unit_must_be_kw():
+    """A capacity constraint with a non-kW unit fails unit-consistency validation."""
+    snap = fx.snapshot()
+    state = fx.visible_state(snap)
+    graph = build_graph(state, snap)
+    cap = SCHED["CON-CAP-01"]
+    graph.remove((cap, SCHED.unit, None))
+    graph.add((cap, SCHED.unit, Literal("slot")))
+    report = validate_graph(graph)
+    assert not report.conforms
+    assert "unit" in report.report_text.lower()

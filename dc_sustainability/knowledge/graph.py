@@ -164,10 +164,13 @@ def build_graph(state: s.VisibleState, snapshot: s.ConstraintSnapshot) -> Graph:
         add_unit_metadata(graph, _iri(view.job.job_id), "slot")
 
     # Completed jobs
+    # Only the policy-visible completion interval is emitted. The full Job
+    # record is intentionally not available in the visible state (completed
+    # job IDs are mutually exclusive with waiting/running jobs), so the node
+    # is typed only as :CompletedJob and validated by :CompletedJobShape.
     for view in state.completed_jobs:
         node = _iri(view.job_id)
         graph.add((node, RDF.type, SCHED.CompletedJob))
-        graph.add((node, RDF.type, SCHED.Job))
         graph.add((node, RDFS.label, Literal(f"Completed job {view.job_id}")))
         graph.add((node, SCHED.startSlot, Literal(view.start_slot)))
         add_unit_metadata(graph, node, "slot")

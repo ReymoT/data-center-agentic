@@ -44,7 +44,7 @@
     ] .
 
 :JobShape rdf:type sh:NodeShape ;
-    sh:targetClass :Job ;
+    sh:targetClass :WaitingJob, :RunningJob ;
     sh:property [
         sh:path :arrivalSlot ;
         sh:minCount 1 ;
@@ -354,6 +354,23 @@
                          sched:constraintType "capacity" ;
                          sched:appliesToSite $this .
                 }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        sh:message "Site has more than one capacity constraint; scheduling requires a single unambiguous limit." ;
+        sh:select """
+            PREFIX sched: <https://data-center-agentic.example.org/sched#>
+            SELECT $this
+            WHERE {
+                $this a sched:Site .
+                ?c1 a sched:Constraint ;
+                      sched:constraintType "capacity" ;
+                      sched:appliesToSite $this .
+                ?c2 a sched:Constraint ;
+                      sched:constraintType "capacity" ;
+                      sched:appliesToSite $this .
+                FILTER (str(?c1) < str(?c2))
             }
         """ ;
     ] .
