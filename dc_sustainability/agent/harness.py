@@ -169,6 +169,11 @@ class AgentHarness:
             except Exception as exc:
                 fatal = True
                 errors.append(f"attempt persistence failed: {exc}")
+        # A sent request may still be running: no further dispatch or model-derived plan.
+        uncertain = [a.client_trace_id for a in new if a.uncertain_outcome]
+        if uncertain:
+            fatal = True
+            errors.append(f"{stage} outcome unknown for {', '.join(uncertain)}; fail closed")
         fields = {
             "attempts": [*st["attempts"], *new],
             "errors": errors,
@@ -182,6 +187,7 @@ class AgentHarness:
         if (
             result is not None
             and result.error is None
+            and not uncertain
             and isinstance(result.output, response_model)
         ):
             if response_model is s.Explanation:
@@ -362,7 +368,9 @@ class AgentHarness:
             selected = final["selected"]
             if final["fatal"] or not self._time_left(final):
                 selected = None
-                final["errors"].append("execution withheld: persistence or decision deadline")
+                final["errors"].append(
+                    "execution withheld: persistence, unknown outcome or decision deadline"
+                )
             attempts = tuple(final["attempts"])
 
             def usage(name):

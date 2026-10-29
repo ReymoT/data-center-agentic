@@ -54,13 +54,14 @@ Exact reproduction commands:
 .venv\Scripts\python.exe scripts/validate_setup.py
 ```
 
-Tests actually run and observed results: Windows 11, Python 3.12.10, hashed lock. The full suite passed 1,544 tests and 19 subtests. Ruff check/format, setup validation and pip check passed. No model request was made.
+Tests actually run and observed results: Windows 11, Python 3.12.10, hashed lock. The full suite passed 1,546 tests and 19 subtests (after the fail-closed fix). Ruff check/format, setup validation and pip check passed. No model request was made.
 
-Questions for the owners (defaults implemented, flagged in #18):
-1. **Unit = A01 run (Matty).** Each unit gets a fresh provider ledger and harness, because the per-decision caps are keyed by episode and slot without trial. Confirm, or key the caps by trial instead.
-2. **Unknown outcome (Matty, Ved).** Stop the unit for reconciliation and start no further model unit until it is reconciled (the default). The alternative is to count the decision as failed and continue the episode.
-3. **Agent after an uncertain proposal (Matty).** The harness can still route to repair, which sends a second request while the first may still be running. The runner stops only after that decision. Should the harness skip repair after an uncertain attempt?
-4. **Budget admission.** A unit is admitted on its worst case (24 × the call cap), which is conservative because empty-queue decisions make no call.
+Owner decisions (Matty, #18 and the PR #113 review, 2026-10-29):
+1. **Unit = A01 run: accepted.** One fresh provider ledger and Agent harness per unit (system × episode × trial).
+2. **Unknown outcome: stop the unit** as `needs_reconciliation`. It is not an ordinary failed decision followed by continued execution.
+3. **After an uncertain Agent attempt: fail closed.** Implemented in `AgentHarness._call`: a newly persisted attempt with `uncertain_outcome` makes the decision fatal, so no repair, explanation or further provider dispatch follows, the fallback is not run, its output is not used, and no stage is selected. The controller records the blocked decision and the runner then stops the unit. Regressions: `tests/agent/test_harness.py::test_uncertain_proposal_fails_closed_with_repair_fallback_and_explanation_configured` and `tests/experiments/test_model_units.py::test_uncertain_agent_proposal_sends_nothing_more_and_needs_reconciliation` (exactly one request, no selected stage, unit needs reconciliation). Both fail with the guard disabled.
+
+Open note: a unit is admitted on its worst case (24 × the call cap), which is conservative because empty-queue decisions make no call.
 
 Limitations and next steps:
 - `decision_seconds`, `max_total_attempts` and the response bounds are not chosen. They wait on Matty's offline bounded-output measurement and affected-owner agreement (#6). Running needs an accepted A01 and a separate run authorization.

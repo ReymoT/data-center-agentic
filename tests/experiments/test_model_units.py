@@ -200,6 +200,23 @@ def test_uncertain_request_stops_the_unit_and_halts_model_units(tmp_path, model)
     assert len(model.requests) == 1
 
 
+def test_uncertain_agent_proposal_sends_nothing_more_and_needs_reconciliation(tmp_path, model):
+    model.fail_on, model.overlap = {1}, True  # repair would be routed if the call were failed
+    ep, path = write_bundle(tmp_path)
+    cfg = model_config(path, ep, model, systems=("agent",))
+    [st] = runner.run(cfg, tmp_path / "out", inputs(model))
+    assert st.status == "needs_reconciliation" and "unknown outcome" in st.detail
+    assert len(model.requests) == 1  # no repair, explanation or retry
+    root = tmp_path / "out" / cfg.run_id / "units"
+    [record] = traces(root, st.unit)
+    assert record.final_status == "blocked" and record.model_call_count == 1
+    assert record.initial is None and record.repaired is None and record.fallback is None
+    assert record.repair_count == 0 and not record.executed_starts
+    unknown = json.loads((root / st.unit.key / "unknown.json").read_text(encoding="utf-8"))
+    assert [a["outcome"] for a in unknown["attempts"]] == ["unknown"]
+    assert len(saved_attempts(root, st.unit)) == 1
+
+
 # ----------------------------------------------------------------- budget and refusals
 def test_run_attempt_budget_counts_persisted_attempts_across_calls(tmp_path, model):
     ep, path = write_bundle(tmp_path)
