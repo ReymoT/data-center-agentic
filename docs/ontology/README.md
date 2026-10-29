@@ -119,7 +119,7 @@ assert report.conforms
 print(report.report_text)
 ```
 
-`validate_graph` loads the bundled ontology and shapes offline, runs `pyshacl`, and returns a `ValidationReport`. The default inference level is `None` because RDFS inference would expand `:WaitingJob` / `:RunningJob` targets to the superclass `:Job` and incorrectly validate completed jobs against `:JobShape`. Callers that genuinely require RDFS inference can pass `inference="rdfs"` explicitly.
+`validate_graph` loads the bundled ontology and shapes offline, runs `pyshacl`, and returns a `ValidationReport`. Validation intentionally uses explicit types only (`inference=None`). Other inference values are rejected rather than silently ignored because pySHACL's RDFS expansion applies waiting/running job requirements to completed-job views that do not contain those private fields.
 
 ### Shape highlights
 

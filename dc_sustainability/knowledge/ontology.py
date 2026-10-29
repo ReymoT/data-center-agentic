@@ -166,7 +166,7 @@ def validate_graph(
     *,
     shacl_graph: Graph | None = None,
     ont_graph: Graph | None = None,
-    inference: str | None = "rdfs",
+    inference: str | None = None,
 ) -> ValidationReport:
     """Validate ``data_graph`` against the project SHACL shapes.
 
@@ -177,11 +177,11 @@ def validate_graph(
     shacl_graph:
         Optional SHACL shapes graph. If ``None``, the bundled shapes are loaded.
     ont_graph:
-        Optional ontology graph for RDFS inference. If ``None``, the bundled ontology
-        is loaded.
+        Optional ontology graph supplied to pySHACL. If ``None``, the bundled
+        ontology is loaded; inference remains disabled.
     inference:
-        Inference level passed to pySHACL. ``"rdfs"`` expands class hierarchies so
-        subclass targets (e.g. ``:WaitingJob`` as ``:Job``) are validated.
+        Only ``None`` is supported. RDFS inference is rejected because pySHACL
+        otherwise applies waiting/running job requirements to completed-job views.
 
     Returns
     -------
@@ -190,13 +190,11 @@ def validate_graph(
     """
     shapes = shacl_graph if shacl_graph is not None else load_shapes_graph()
     ontology = ont_graph if ont_graph is not None else load_ontology_graph()
-    # Issue #71: completed-job nodes are typed only as :CompletedJob in the
-    # policy-visible graph. pySHACL with RDFS inference expands
-    # sh:targetClass :WaitingJob/:RunningJob to the superclass :Job and then
-    # validates any :CompletedJob (also a subclass of :Job) against :JobShape,
-    # causing false missing-property violations. We therefore validate without
-    # RDFS inference; build_graph already emits explicit types such as
-    # brick:Building where required.
+    if inference is not None:
+        raise ValueError(
+            "RDFS inference is unsupported: it applies waiting/running requirements "
+            "to completed-job views; pass inference=None"
+        )
     conforms, report_graph, report_text = validate(
         data_graph,
         shacl_graph=shapes,
