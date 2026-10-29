@@ -51,7 +51,7 @@ class UnitInfo:
 # reference for the already-stated unit code.
 UNIT_MAP: Mapping[str, UnitInfo] = {
     "kW": UnitInfo("kW", QUDT_UNIT.KiloW, "active electrical power"),
-    "kWh": UnitInfo("kWh", QUDT_UNIT.KiloW_HR, "electrical energy"),
+    "kWh": UnitInfo("kWh", QUDT_UNIT["KiloW-HR"], "electrical energy"),
     "slot": UnitInfo("slot", None, "discrete scheduling slot index; dimensionless ordinal"),
     "h": UnitInfo("h", QUDT_UNIT.HR, "duration in hours"),
     "g/kWh": UnitInfo(
@@ -185,11 +185,18 @@ def validate_graph(
     """
     shapes = shacl_graph if shacl_graph is not None else load_shapes_graph()
     ontology = ont_graph if ont_graph is not None else load_ontology_graph()
+    # Issue #71: completed-job nodes are typed only as :CompletedJob in the
+    # policy-visible graph. pySHACL with RDFS inference expands
+    # sh:targetClass :WaitingJob/:RunningJob to the superclass :Job and then
+    # validates any :CompletedJob (also a subclass of :Job) against :JobShape,
+    # causing false missing-property violations. We therefore validate without
+    # RDFS inference; build_graph already emits explicit types such as
+    # brick:Building where required.
     conforms, report_graph, report_text = validate(
         data_graph,
         shacl_graph=shapes,
         ont_graph=ontology,
-        inference=inference,
+        inference=None,
         abort_on_first=False,
         meta_shacl=False,
         debug=False,
