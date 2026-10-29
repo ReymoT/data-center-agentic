@@ -96,14 +96,15 @@ F02 unit codes are mapped to explicit QUDT or project-defined units by `map_unit
 
 | F02 code | QUDT / project unit | Note |
 |----------|---------------------|------|
-| `kW` | `unit:KiloW` | active electrical power |
-| `kWh` | `unit:KiloW_HR` | electrical energy |
+| `kW` | `http://qudt.org/vocab/unit#Kilowatt` | active electrical power |
+| `kWh` | `http://qudt.org/vocab/unit#Kilowatthour` | electrical energy |
 | `slot` | — | discrete scheduling slot index; dimensionless ordinal |
-| `h` | `unit:HR` | duration in hours |
-| `g/kWh` | `sched:GramPerKiloWattHour` | project-defined dimensional unit for carbon intensity |
-| `kg` | `unit:KiloGM` | mass |
-| `1` | — | dimensionless ratio (PUE) |
+| `h` | `http://qudt.org/vocab/unit#Hour` | duration in hours |
+| `g/kWh` | `https://data-center-agentic.example.org/sched#GramPerKiloWattHour` | project-defined dimensional unit for carbon intensity |
+| `kg` | `http://qudt.org/vocab/unit#Kilogram` | mass |
+| `1` | `http://qudt.org/vocab/unit#Unitless` | **internal-only** dimensionless ratio used for the site PUE property; not an accepted F02 `Unit` value |
 
+The canonical IRIs above are verified against the pinned `pyqudt` 1.1.1 unit vocabulary (`qudt/ontology/resources/unit.rdf`).
 Unknown or miscased codes (e.g. `kw`, `KWH`, `MW`, `gco2/kwh`) raise `UnitMappingError`.
 
 ## SHACL Validation
@@ -118,22 +119,34 @@ assert report.conforms
 print(report.report_text)
 ```
 
-`validate_graph` loads the bundled ontology and shapes offline, runs `pyshacl`, and returns a `ValidationReport`. Supported inference levels:
-
-- `inference="rdfs"` (default) — expands subclass targets such as `WaitingJob` → `Job`
-- `inference=None` — validates only explicit types; `build_graph` emits both `rdf:type` triples so this still passes
+`validate_graph` loads the bundled ontology and shapes offline, runs `pyshacl`, and returns a `ValidationReport`. The default inference level is `None` because RDFS inference would expand `:WaitingJob` / `:RunningJob` targets to the superclass `:Job` and incorrectly validate completed jobs against `:JobShape`. Callers that genuinely require RDFS inference can pass `inference="rdfs"` explicitly.
 
 ### Shape highlights
 
 - `SiteShape` — exactly one background, PUE, slot-hours; PUE ≥ 1; site typed as `brick:Building`
-- `JobShape` / `WaitingJobShape` / `RunningJobShape` / `CompletedJobShape` — required slots, power, flexibility
+- `JobShape` — targets `:WaitingJob` and `:RunningJob`; requires arrival, duration, power, deadline, and flexibility
+- `WaitingJobShape` / `RunningJobShape` / `CompletedJobShape` — type-specific required slots, power, and flexibility
 - `CarbonForecastShape` — required value, slot, source, issued time, forecast kind, quality status, semantics
 - `ConstraintShape` — required type, limit, unit, source; type must be in the allowed set
 - `SourceShape` — path and redistribution status required
 - `EpisodeShape` — current slot, state version, snapshot ID
-- `CapacityEvidenceShape` — every site must have exactly one `capacity` constraint
+- `CapacityEvidenceShape` — every site must have exactly one `capacity` constraint; missing or duplicate capacity evidence is not accepted as a valid scheduling limit
 - `UnitConsistencyShape` — every `limitValue` and `carbonValue` must carry a `sched:unit` literal
 - `ConstraintSourceReferenceShape` / `ForecastSourceReferenceShape` — source IRIs must exist in the graph
+
+### Completed jobs
+
+Completed jobs are emitted as `:CompletedJob` nodes carrying only their completion interval (`startSlot`, `endSlot`) and label. They are **not** typed as `:Job`, `:WaitingJob`, or `:RunningJob`, and they do **not** receive fabricated arrival, duration, power, deadline, or flexibility properties. This prevents the waiting/running job shape from being applied to completed jobs while still allowing `:CompletedJobShape` to validate their actual properties.
+
+### Capacity evidence
+
+A site must have exactly one visible `capacity` constraint. SHACL rejects:
+
+- a site with no capacity constraint (`CapacityEvidenceShape` missing-capacity SPARQL constraint);
+- a site with more than one capacity constraint (`CapacityEvidenceShape` duplicate-capacity SPARQL constraint);
+- a capacity constraint whose unit is not `kW` (`UnitConsistencyShape`).
+
+Missing or ambiguous capacity evidence is never replaced by an invented default. Downstream consumers such as the scheduler and context builder fail closed (`MissingEvidenceError` / `ContractError`) when capacity is absent or multiple.
 
 ## Layer Separation
 
@@ -145,4 +158,5 @@ print(report.report_text)
 
 - The ontology does not yet model QUDT quantity kinds or full Brick equipment classes; it only links unit codes to QUDT/unit IRIs.
 - Provenance activities (`Decision`, `Check`) are declared but not yet emitted by `build_graph`.
-- SHACL shapes validate structure, not scheduling feasibility (deadline satisfiability, capacity sufficiency, etc.).
+- SHACL shapes validate structure and consistency, not scheduling feasibility (deadline satisfiability, capacity sufficiency, etc.). Passing SHACL is therefore not a certification of scientific validity or operational emissions accuracy.
+- Missing or ambiguous capacity evidence is rejected by SHACL and by the F02 `ConstraintSnapshot.capacity_kw` property, but a production gate must still ensure that any context used for scheduling was derived from an authoritative snapshot whose hash matches the expected value.
