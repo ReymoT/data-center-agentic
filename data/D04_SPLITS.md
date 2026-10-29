@@ -1,5 +1,11 @@
 # D04 reproducible provisional split tooling
 
+October 28: [Issue #102 concrete 40-episode development proposal](../docs/handoffs/D04_DEVELOPMENT_FOLD_MAP_102.md)
+now includes exact IDs, dates, development-only seeds and a P03-compatible fold map.
+Affected-owner adoption agreement remains outstanding; this is not scientific freeze.
+No actual episode contents or held-out allocation are generated. Earlier missing-map
+statements below describe the historical snapshot.
+
 Reimo owns D04; Nisha independently verifies the split/evaluation boundary.
 Reviewed fetched authoritative main `be87f581f39c1488ab429775b0d83fcff4b1e424`,
 instruction 1.27, F02 1.0.0, on October 26, 2026. Working task branch:

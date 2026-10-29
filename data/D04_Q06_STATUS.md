@@ -1,5 +1,11 @@
 # D04/Q06 inventory — separate from source evidence
 
+October 28: [Issue #102 concrete 40-episode development proposal](../docs/handoffs/D04_DEVELOPMENT_FOLD_MAP_102.md)
+now includes exact IDs, dates, development-only seeds and a P03-compatible fold map.
+Affected-owner adoption agreement remains outstanding; this is not scientific freeze.
+No actual episode contents or held-out allocation are generated. Earlier missing-map
+statements below describe the historical snapshot.
+
 October 26 local follow-up: [provisional D04 machinery and review gates](D04_SPLITS.md)
 now implements metadata allocation/folds/overlap tests. The inventory below is the
 October 24 historical missing-artifact snapshot; actual study selections, physical
