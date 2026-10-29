@@ -7,8 +7,10 @@ evaluator-side data; only the simulator and controller see it, never a policy.
 
 import hashlib
 import json
+import math
 import os
-from dataclasses import dataclass
+import re
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -73,6 +75,59 @@ def load_bundle(path: Path) -> EpisodeBundle:
 
 
 @dataclass(frozen=True)
+class ModelSettings:
+    """Frozen settings for the two model systems; part of the run identity.
+
+    There are no defaults: the per-decision deadline and the attempt budget wait on
+    the bounded-output measurement and a run authorization (#6), so a caller states
+    them. ``deployment`` holds the A01 ``Deployment`` pins except its local address.
+    ``max_total_attempts`` bounds every attempt in the run across all units and
+    processes; ``deployment["max_run_attempts"]`` bounds one unit's ledger.
+    """
+
+    seeds: tuple[tuple[int, int], ...]  # (trial, seed); Plain and Agent share a trial's seed
+    decision_seconds: float
+    max_total_attempts: int
+    deployment: dict = field(hash=False)
+    plain_prompt_sha256: str | None = None
+    agent_renderer_ref: str | None = None
+
+    def __post_init__(self):
+        trials = [t for t, _ in self.seeds]
+        if not self.seeds or len(set(trials)) != len(trials):
+            raise ValueError("each model trial needs exactly one seed")
+        if any(type(v) is not int or v < 0 for pair in self.seeds for v in pair):
+            raise ValueError("trials and seeds are nonnegative integers")
+        if (
+            type(self.decision_seconds) not in {int, float}
+            or not math.isfinite(self.decision_seconds)
+            or self.decision_seconds <= 0
+        ):
+            raise ValueError("the per-decision deadline must be a positive number of seconds")
+        if type(self.max_total_attempts) is not int or self.max_total_attempts <= 0:
+            raise ValueError("the run attempt budget must be a positive integer")
+        if "base_url" in self.deployment:
+            raise ValueError("the deployment address is not part of the run identity")
+        if self.plain_prompt_sha256 is not None and not re.fullmatch(
+            r"[0-9a-f]{64}", self.plain_prompt_sha256
+        ):
+            raise ValueError("plain_prompt_sha256 must be a SHA256 hex digest")
+
+    def seed(self, trial: int) -> int:
+        return dict(self.seeds)[trial]
+
+    def identity(self) -> dict:
+        return {
+            "seeds": [list(pair) for pair in sorted(self.seeds)],
+            "decision_seconds": self.decision_seconds,
+            "max_total_attempts": self.max_total_attempts,
+            "deployment": dict(sorted(self.deployment.items())),
+            "plain_prompt_sha256": self.plain_prompt_sha256,
+            "agent_renderer_ref": self.agent_renderer_ref,
+        }
+
+
+@dataclass(frozen=True)
 class RunConfig:
     name: str
     systems: tuple[str, ...]
@@ -80,6 +135,7 @@ class RunConfig:
     model_trials: tuple[int, ...] = (0, 1, 2)
     code_revision: str = "unrecorded"
     lock_sha256: str | None = None
+    model: ModelSettings | None = None
 
     def __post_init__(self):
         if not self.name.strip():
@@ -93,10 +149,20 @@ class RunConfig:
             raise ValueError("episodes must be listed once each")
         if not self.model_trials or len(set(self.model_trials)) != len(self.model_trials):
             raise ValueError("model trials must be distinct")
+        model_systems = {x for x in self.systems if registry.spec(x).trials}
+        if bool(model_systems) != (self.model is not None):
+            raise ValueError("model settings are given exactly when a model system is listed")
+        if self.model is not None:
+            if {t for t, _ in self.model.seeds} != set(self.model_trials):
+                raise ValueError("model settings need one seed for each model trial")
+            if "plain_llm" in model_systems and self.model.plain_prompt_sha256 is None:
+                raise ValueError("a plain_llm run records its prompt template hash")
+            if "agent" in model_systems and not (self.model.agent_renderer_ref or "").strip():
+                raise ValueError("an agent run records which reviewed renderers it uses")
 
     def identity(self) -> dict:
         """What the run is: everything that changes results, not where files live."""
-        return {
+        identity = {
             "config_version": CONFIG_VERSION,
             "name": self.name,
             "systems": list(self.systems),
@@ -105,6 +171,9 @@ class RunConfig:
             "code_revision": self.code_revision,
             "lock_sha256": self.lock_sha256,
         }
+        if self.model is not None:  # absent for A/B-only runs, so their hashes are unchanged
+            identity["model"] = self.model.identity()
+        return identity
 
     @property
     def config_hash(self) -> str:

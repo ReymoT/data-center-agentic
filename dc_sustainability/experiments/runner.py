@@ -10,6 +10,9 @@ written atomically.
 Resume works per unit: a completed unit is skipped, a failed unit is kept as failed,
 and a unit with traces but no result needs reconciliation. None of them is re-run or
 replaced silently. Private episode data stays in the run directory.
+
+Plain and Agent units (E02-b) run only with explicit ``ModelInputs``; see
+``experiments.models`` for their ledgers, attempt budget and unknown outcomes.
 """
 
 import json
@@ -18,6 +21,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from dc_sustainability import schemas as s
+from dc_sustainability.experiments import models as m
 from dc_sustainability.experiments import registry
 from dc_sustainability.experiments.config import (
     EpisodeBundle,
@@ -28,6 +32,7 @@ from dc_sustainability.experiments.config import (
     publish,
 )
 from dc_sustainability.knowledge import retrieve
+from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.policies import propose
 from dc_sustainability.runtime import (
     ExecutionController,
@@ -89,16 +94,27 @@ def unit_status(root: Path, unit: Unit) -> UnitStatus:
     if (folder / "failed.json").exists():
         detail = json.loads((folder / "failed.json").read_text(encoding="utf-8"))["error"]
         return UnitStatus(unit, "failed", detail)
+    if (folder / "unknown.json").exists():
+        detail = json.loads((folder / "unknown.json").read_text(encoding="utf-8"))["error"]
+        return UnitStatus(unit, "needs_reconciliation", detail)
     traces = folder / "traces"
     if traces.exists() and any(p.suffix == ".json" for p in traces.iterdir()):
         return UnitStatus(unit, "needs_reconciliation", "traces without a final result")
     return UnitStatus(unit, "pending")
 
 
-def run(config: RunConfig, out_dir: Path) -> list[UnitStatus]:
-    """Run every pending unit; return each unit's status after this call."""
-    for system in config.systems:
-        registry.require_available(system)  # refuse before touching anything
+def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -> list[UnitStatus]:
+    """Run every pending unit; return each unit's status after this call.
+
+    Model units start only while the run's attempt budget still covers their worst
+    case. After an unknown outcome no further model unit starts in this call.
+    """
+    for system in config.systems:  # refuse before touching anything
+        registry.require_available(system, model_inputs=models is not None)
+    if models is not None:
+        if config.model is None:
+            raise ValueError("model inputs were given for a run without model systems")
+        m.check_inputs(config.model, models, config.systems)
     bundles = {}
     for episode_id, path, digest in config.episodes:
         if lf_sha256(path) != digest:
@@ -109,20 +125,52 @@ def run(config: RunConfig, out_dir: Path) -> list[UnitStatus]:
         bundles[episode_id] = bundle
     root = run_directory(config, out_dir)
     results = []
+    # A model unit awaiting reconciliation, from this call or an earlier one, halts the rest.
+    halted = next(
+        (
+            st.detail
+            for st in (unit_status(root, u) for u in units(config))
+            if registry.spec(st.unit.system).trials and st.status == "needs_reconciliation"
+        ),
+        None,
+    )
     for unit in units(config):
         status = unit_status(root, unit)
-        if status.status == "pending":
-            status = _run_unit(config, root, unit, bundles[unit.episode_id])
+        model_unit = registry.spec(unit.system).trials
+        if status.status == "pending" and model_unit:
+            used = m.persisted_attempts(root)
+            need = m.worst_case_attempts(unit.system)
+            if halted is not None:
+                status = UnitStatus(unit, "pending", f"model units halted: {halted}")
+            elif used + need > config.model.max_total_attempts:
+                status = UnitStatus(
+                    unit,
+                    "pending",
+                    f"run attempt budget: {used} of {config.model.max_total_attempts} used, "
+                    f"unit may need {need}",
+                )
+        if status.status == "pending" and not status.detail:
+            status = _run_unit(config, root, unit, bundles[unit.episode_id], models)
+            if model_unit and status.status == "needs_reconciliation":
+                halted = status.detail
         results.append(status)
     return results
 
 
-def _run_unit(config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle) -> UnitStatus:
+def _run_unit(
+    config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle, models=None
+) -> UnitStatus:
     folder = root / "units" / unit.key
     folder.mkdir(parents=True, exist_ok=True)
     policy_errors: list[str] = []
+    attempts: list = []
     try:
-        result = _drive_episode(config, folder, unit, bundle, policy_errors)
+        result = _drive_episode(config, folder, unit, bundle, policy_errors, models, attempts)
+    except m.UncertainRequest as exc:
+        detail = str(exc)
+        record = {"unit": unit.__dict__, "error": detail, "attempts": m.attempt_summary(attempts)}
+        publish(folder / "unknown.json", json.dumps(record, indent=1) + "\n")
+        return UnitStatus(unit, "needs_reconciliation", detail)
     except IndeterminateExecution as exc:
         return UnitStatus(unit, "needs_reconciliation", str(exc))
     except Exception as exc:  # retained, counted and never silently re-run
@@ -130,24 +178,36 @@ def _run_unit(config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle) 
         publish(folder / "failed.json", json.dumps({"unit": unit.__dict__, "error": detail}))
         return UnitStatus(unit, "failed", detail)
     publish(folder / "result.json", result.to_json() + "\n")
+    if attempts:
+        summary = json.dumps(m.attempt_summary(attempts), indent=1) + "\n"
+        publish(folder / "attempts.json", summary)
     if policy_errors:
         publish(folder / "policy_errors.json", json.dumps(policy_errors, indent=1) + "\n")
     return UnitStatus(unit, "completed")
 
 
-def _drive_episode(config, folder, unit, bundle, policy_errors) -> s.EpisodeResult:
+def _drive_episode(
+    config, folder, unit, bundle, policy_errors, models=None, attempts=None
+) -> s.EpisodeResult:
     episode = bundle.episode
     simulator = SchedulingSimulator(allow_completion_starts=False)
     simulator.reset(episode, forecasts_by_slot=bundle.forecasts_by_slot)
     controller = ExecutionController(
         simulator, lambda: episode.snapshot, TraceStore(folder / "traces")
     )
+    step = None
+    if registry.spec(unit.system).trials:
+        step = _model_step(config, unit, models, controller, episode, policy_errors)
     for slot in range(TOTAL_SLOTS):
         view = simulator.state()
         if view.current_slot != slot:
             raise RuntimeError(f"simulator is at slot {view.current_slot}, expected {slot}")
         dec_id = decision_id(config, unit.system, unit.episode_id, unit.trial, slot)
-        if slot < DECISION_SLOTS:
+        if slot < DECISION_SLOTS and step is not None:
+            spent = step(view, dec_id)
+            attempts.extend(spent)
+            m.raise_if_unknown(slot, spent)
+        elif slot < DECISION_SLOTS:
             output = _policy_output(unit.system, view, episode, bundle, policy_errors)
             execute_policy_output(
                 controller,
@@ -192,6 +252,62 @@ def _policy_output(system, view, episode, bundle, policy_errors) -> s.PolicyOutp
     except Exception as exc:
         policy_errors.append(f"slot {view.current_slot}: {type(exc).__name__}: {exc}")
         return s.PolicyOutput(system=system, output_status="error")
+
+
+def _model_step(config, unit, models, controller, episode, policy_errors):
+    """The decision function for one model unit, over a fresh ledger for this unit."""
+    settings = config.model
+    provider = m.new_provider(settings, models)
+    common = dict(run_id=config.run_id, trial=unit.trial, seed=settings.seed(unit.trial))
+    if unit.system == "agent":
+        harness = m.new_harness(provider, controller, models.agent_renderers)
+
+        def agent(view, dec_id):
+            _, spent = m.agent_step(
+                harness,
+                view,
+                episode.snapshot,
+                decision_id=dec_id,
+                decision_deadline=m.deadline(settings),
+                **common,
+            )
+            return spent
+
+        return agent
+    policy = PlainLLMPolicy(provider)
+
+    def plain(view, dec_id):
+        try:
+            context = retrieve(view, episode.snapshot).context
+        except Exception as exc:  # a recorded blocked decision with no call
+            policy_errors.append(f"slot {view.current_slot}: {type(exc).__name__}: {exc}")
+            record = s.DecisionRecord(
+                decision_id=dec_id,
+                run_id=config.run_id,
+                trial=unit.trial,
+                system="plain_llm",
+                episode_id=view.episode_id,
+                slot=view.current_slot,
+                not_applicable_stages=("repaired", "fallback"),
+                final_status="blocked",
+                errors=(f"context retrieval failed: {exc}",),
+            )
+            controller.execute_step(record, stage=None, expected_state_version=view.state_version)
+            return ()
+        _, spent = m.plain_step(
+            controller,
+            policy,
+            provider,
+            view,
+            episode.snapshot,
+            context,
+            decision_id=dec_id,
+            decision_deadline=m.deadline(settings),
+            **common,
+        )
+        return spent
+
+    return plain
 
 
 def status(config: RunConfig, out_dir: Path) -> list[UnitStatus]:

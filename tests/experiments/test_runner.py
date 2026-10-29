@@ -171,8 +171,8 @@ def test_policy_exception_is_a_recorded_failed_decision(tmp_path, monkeypatch):
 # ----------------------------------------------------------------- config, IDs and custody
 def test_unavailable_system_is_refused_before_anything_is_written(tmp_path):
     ep, path = write_bundle(tmp_path)
-    cfg = config(path, ep, systems=("greedy_a", "plain_llm"))
-    with pytest.raises(NotImplementedError, match="plain_llm"):
+    cfg = config(path, ep, systems=("greedy_a", "decision_tree_c"))
+    with pytest.raises(NotImplementedError, match="decision_tree_c"):
         runner.run(cfg, tmp_path / "out")
     assert not (tmp_path / "out").exists()
 
