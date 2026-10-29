@@ -1,0 +1,202 @@
+"""E02 runner: drive whole episodes through the production execution path.
+
+One unit is one system × episode × trial. For slots 0-23 the policy sees only the
+simulator's ``VisibleState`` and the K02 context; its output goes through
+``execute_policy_output`` (the real checker, controller and trace store). Slots 24-29
+make no decision: a record with no selected stage takes the controller's refusal
+path, which advances the simulator exactly once. The final ``EpisodeResult`` is
+written atomically.
+
+Resume works per unit: a completed unit is skipped, a failed unit is kept as failed,
+and a unit with traces but no result needs reconciliation. None of them is re-run or
+replaced silently. Private episode data stays in the run directory.
+"""
+
+import json
+from dataclasses import dataclass
+from datetime import timedelta
+from pathlib import Path
+
+from dc_sustainability import schemas as s
+from dc_sustainability.experiments import registry
+from dc_sustainability.experiments.config import (
+    EpisodeBundle,
+    RunConfig,
+    decision_id,
+    lf_sha256,
+    load_bundle,
+    publish,
+)
+from dc_sustainability.knowledge import retrieve
+from dc_sustainability.policies import propose
+from dc_sustainability.runtime import (
+    ExecutionController,
+    IndeterminateExecution,
+    TraceStore,
+    execute_policy_output,
+)
+from dc_sustainability.simulator import SchedulingSimulator
+
+DECISION_SLOTS = s.PROPOSED_DECISION_SLOTS  # 24
+TOTAL_SLOTS = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS  # 30
+
+
+@dataclass(frozen=True)
+class Unit:
+    system: str
+    episode_id: str
+    trial: int | None
+
+    @property
+    def key(self) -> str:
+        return s.sha256_hex([self.system, self.episode_id, self.trial])[:16]
+
+
+@dataclass(frozen=True)
+class UnitStatus:
+    unit: Unit
+    status: str  # completed, failed, needs_reconciliation, pending
+    detail: str = ""
+
+
+def run_directory(config: RunConfig, out_dir: Path) -> Path:
+    """The run's directory, created with its manifest; a different config is refused."""
+    root = Path(out_dir) / config.run_id
+    root.mkdir(parents=True, exist_ok=True)
+    manifest = root / "manifest.json"
+    text = json.dumps(config.identity(), sort_keys=True, indent=1) + "\n"
+    try:
+        publish(manifest, text)
+    except FileExistsError:
+        if json.loads(manifest.read_text(encoding="utf-8")) != config.identity():
+            raise ValueError(f"{root} belongs to a different run configuration") from None
+    return root
+
+
+def units(config: RunConfig) -> list[Unit]:
+    out = []
+    for system in config.systems:
+        trials = config.model_trials if registry.spec(system).trials else (None,)
+        out += [Unit(system, e, t) for e, _, _ in config.episodes for t in trials]
+    return out
+
+
+def unit_status(root: Path, unit: Unit) -> UnitStatus:
+    folder = root / "units" / unit.key
+    if (folder / "result.json").exists():
+        s.EpisodeResult.from_json((folder / "result.json").read_text(encoding="utf-8"))
+        return UnitStatus(unit, "completed")
+    if (folder / "failed.json").exists():
+        detail = json.loads((folder / "failed.json").read_text(encoding="utf-8"))["error"]
+        return UnitStatus(unit, "failed", detail)
+    traces = folder / "traces"
+    if traces.exists() and any(p.suffix == ".json" for p in traces.iterdir()):
+        return UnitStatus(unit, "needs_reconciliation", "traces without a final result")
+    return UnitStatus(unit, "pending")
+
+
+def run(config: RunConfig, out_dir: Path) -> list[UnitStatus]:
+    """Run every pending unit; return each unit's status after this call."""
+    for system in config.systems:
+        registry.require_available(system)  # refuse before touching anything
+    bundles = {}
+    for episode_id, path, digest in config.episodes:
+        if lf_sha256(path) != digest:
+            raise ValueError(f"episode bundle {path} changed since the config was made")
+        bundle = load_bundle(path)
+        if bundle.episode.episode_id != episode_id:
+            raise ValueError(f"{path} holds {bundle.episode.episode_id}, not {episode_id}")
+        bundles[episode_id] = bundle
+    root = run_directory(config, out_dir)
+    results = []
+    for unit in units(config):
+        status = unit_status(root, unit)
+        if status.status == "pending":
+            status = _run_unit(config, root, unit, bundles[unit.episode_id])
+        results.append(status)
+    return results
+
+
+def _run_unit(config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle) -> UnitStatus:
+    folder = root / "units" / unit.key
+    folder.mkdir(parents=True, exist_ok=True)
+    policy_errors: list[str] = []
+    try:
+        result = _drive_episode(config, folder, unit, bundle, policy_errors)
+    except IndeterminateExecution as exc:
+        return UnitStatus(unit, "needs_reconciliation", str(exc))
+    except Exception as exc:  # retained, counted and never silently re-run
+        detail = f"{type(exc).__name__}: {exc}"
+        publish(folder / "failed.json", json.dumps({"unit": unit.__dict__, "error": detail}))
+        return UnitStatus(unit, "failed", detail)
+    publish(folder / "result.json", result.to_json() + "\n")
+    if policy_errors:
+        publish(folder / "policy_errors.json", json.dumps(policy_errors, indent=1) + "\n")
+    return UnitStatus(unit, "completed")
+
+
+def _drive_episode(config, folder, unit, bundle, policy_errors) -> s.EpisodeResult:
+    episode = bundle.episode
+    simulator = SchedulingSimulator(allow_completion_starts=False)
+    simulator.reset(episode, forecasts_by_slot=bundle.forecasts_by_slot)
+    controller = ExecutionController(
+        simulator, lambda: episode.snapshot, TraceStore(folder / "traces")
+    )
+    for slot in range(TOTAL_SLOTS):
+        view = simulator.state()
+        if view.current_slot != slot:
+            raise RuntimeError(f"simulator is at slot {view.current_slot}, expected {slot}")
+        dec_id = decision_id(config, unit.system, unit.episode_id, unit.trial, slot)
+        if slot < DECISION_SLOTS:
+            output = _policy_output(unit.system, view, episode, bundle, policy_errors)
+            execute_policy_output(
+                controller,
+                output,
+                view,
+                episode.snapshot,
+                requested_system=unit.system,
+                decision_id=dec_id,
+                run_id=config.run_id,
+                trial=unit.trial,
+            )
+        else:
+            record = s.DecisionRecord(
+                decision_id=dec_id,
+                run_id=config.run_id,
+                trial=unit.trial,
+                system=unit.system,
+                episode_id=unit.episode_id,
+                slot=slot,
+                not_applicable_stages=("initial", "repaired", "fallback"),
+                final_status="blocked",
+                errors=("completion slot: no decision",),
+            )
+            controller.execute_step(record, stage=None, expected_state_version=view.state_version)
+    result = simulator.result(run_id=config.run_id, system=unit.system)
+    data = result.model_dump(mode="python")
+    data["trial"] = unit.trial
+    return s.EpisodeResult.model_validate(data, strict=True)
+
+
+def _policy_output(system, view, episode, bundle, policy_errors) -> s.PolicyOutput:
+    """The policy's own output from visible inputs only; an exception is a failed output."""
+    try:
+        context = retrieve(view, episode.snapshot).context
+        decision_time = bundle.slot0_utc + timedelta(hours=view.current_slot)
+        return propose(
+            view,
+            context,
+            system=system,
+            decision_time_utc=decision_time if system == "greedy_b" else None,
+        )
+    except Exception as exc:
+        policy_errors.append(f"slot {view.current_slot}: {type(exc).__name__}: {exc}")
+        return s.PolicyOutput(system=system, output_status="error")
+
+
+def status(config: RunConfig, out_dir: Path) -> list[UnitStatus]:
+    root = Path(out_dir) / config.run_id
+    if not (root / "manifest.json").exists():
+        return [UnitStatus(u, "pending") for u in units(config)]
+    run_directory(config, out_dir)  # refuses a mismatched config
+    return [unit_status(root, u) for u in units(config)]
