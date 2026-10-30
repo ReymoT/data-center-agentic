@@ -49,6 +49,27 @@ def test_planned_matrix_is_300_runs_and_the_accepted_call_maxima():
     assert matrix["maximum_model_calls"] == {"plain_llm": 2160, "agent": 6480}
 
 
+def test_consistent_matrix_reduction_is_refused():
+    manifest = load()
+    matrix = manifest["run_matrix"]
+    matrix["episodes"] = {"core": 20, "missing_forecast": 4, "total": 24}
+    matrix["core_design"] = {"dates": 5, "scenarios": 4}
+    matrix["total_runs"] = 240
+    matrix["maximum_model_calls"] = {"plain_llm": 1728, "agent": 5184}
+    blockers = validate_manifest(manifest)
+    assert any("exact 24 core + 6" in item for item in blockers)
+    assert any("exact planned total is 300" in item for item in blockers)
+
+
+def test_required_item_cannot_be_removed_when_its_category_still_exists():
+    manifest = load()
+    manifest["items"] = [i for i in manifest["items"] if i["id"] != "development-episodes"]
+    assert any(
+        "required checklist items missing: development-episodes" in item
+        for item in validate_manifest(manifest)
+    )
+
+
 @pytest.mark.parametrize(
     "change, message",
     [

@@ -131,7 +131,7 @@
       "status": "blocked",
       "path": "docs/evidence/a01-bounded-validation-manifest-2026-10-30.json",
       "sha256": null,
-      "blocker": "#6: deadline agreement, bounded validation run and A01 acceptance are not complete"
+      "blocker": "#6: the 150/330 deadline agreement is recorded; the frozen bounded validation run and A01 acceptance are not complete"
     },
     {
       "id": "run-settings",
@@ -186,7 +186,7 @@
       "status": "blocked",
       "path": "docs/e04/EXTRACTION_RULE.md",
       "sha256": null,
-      "blocker": "#22: Ved's agreement on rule 11.6-11.8, then the 11.8 calibration"
+      "blocker": "#22: rule 11.6-11.8 agreement is recorded; the 11.8 calibration remains"
     },
     {
       "id": "held-out-sample-rule",

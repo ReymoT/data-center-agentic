@@ -25,6 +25,37 @@ CATEGORIES = (
 STATUSES = ("pending", "blocked", "frozen")
 OWNERS = ("Nisha", "Matty", "Reimo", "Ved", "Edison")
 ITEM_FIELDS = {"id", "category", "description", "owner", "task", "status", "path", "sha256"}
+REQUIRED_ITEM_IDS = {
+    "code-commit",
+    "dependency-lock",
+    "held-out-episodes",
+    "development-episodes",
+    "ontology-and-shapes",
+    "candidate-labels",
+    "trained-models-c-d",
+    "plain-prompts",
+    "agent-renderers",
+    "a01-deployment",
+    "run-settings",
+    "matrix-config",
+    "reference-pipeline",
+    "metrics-and-statistics",
+    "faithfulness-rubric",
+    "held-out-sample-rule",
+    "pre-freeze-acceptance",
+}
+EXPECTED_EPISODES = {"core": 24, "missing_forecast": 6, "total": 30}
+EXPECTED_DESIGN = {"dates": 6, "scenarios": 4}
+EXPECTED_TRIALS = {
+    "greedy_a": 1,
+    "greedy_b": 1,
+    "decision_tree_c": 1,
+    "random_forest_d": 1,
+    "plain_llm": 3,
+    "agent": 3,
+}
+EXPECTED_CAPS = {"plain_llm": 1, "agent": 3}
+EXPECTED_MAXIMUM_CALLS = {"plain_llm": 2160, "agent": 6480}
 SHA256 = re.compile(r"[0-9a-f]{64}")
 GIT_SHA = re.compile(r"[0-9a-f]{40}")
 
@@ -36,6 +67,20 @@ def _matrix_blockers(matrix: dict) -> list[str]:
     trials = matrix.get("trials_per_system", {})
     caps = matrix.get("call_cap_per_decision", {})
     slots = matrix.get("decision_slots")
+    if episodes != EXPECTED_EPISODES:
+        blockers.append("run_matrix: exact 24 core + 6 missing-forecast episodes are required")
+    if design != EXPECTED_DESIGN:
+        blockers.append("run_matrix: exact 6-date x 4-scenario core design is required")
+    if trials != EXPECTED_TRIALS:
+        blockers.append("run_matrix: exact 1/1/1/1/3/3 trial allocation is required")
+    if slots != 24:
+        blockers.append("run_matrix: exactly 24 decision slots are required")
+    if caps != EXPECTED_CAPS:
+        blockers.append("run_matrix: exact Plain 1 / Agent 3 per-decision caps are required")
+    if matrix.get("total_runs") != 300:
+        blockers.append("run_matrix: exact planned total is 300 runs")
+    if matrix.get("maximum_model_calls") != EXPECTED_MAXIMUM_CALLS:
+        blockers.append("run_matrix: exact planned Plain/Agent call maxima are required")
     if episodes.get("core") != design.get("dates", 0) * design.get("scenarios", 0):
         blockers.append("run_matrix: core episodes must be dates x scenarios")
     if episodes.get("total") != episodes.get("core", 0) + episodes.get("missing_forecast", 0):
@@ -102,6 +147,9 @@ def validate_manifest(manifest: dict, *, require_ready: bool = False) -> list[st
     missing = [c for c in CATEGORIES if c not in covered]
     if missing:
         blockers.append(f"no item covers {', '.join(missing)}")
+    missing_items = sorted(REQUIRED_ITEM_IDS - ids)
+    if missing_items:
+        blockers.append(f"required checklist items missing: {', '.join(missing_items)}")
 
     if require_ready:
         if commit is None:
