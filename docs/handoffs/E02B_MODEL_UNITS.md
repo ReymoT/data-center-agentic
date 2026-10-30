@@ -70,7 +70,7 @@ Owner decisions (Matty, #18 and the PR #113 review, 2026-10-29):
 Open note: a unit is admitted on its worst case (24 × the call cap), which is conservative because empty-queue decisions make no call.
 
 Limitations and next steps:
-- `decision_seconds`, `max_total_attempts` and the response bounds are not chosen. They wait on Matty's offline bounded-output measurement and affected-owner agreement (#6). Running needs an accepted A01 and a separate run authorization.
+- PR #116 now supplies the offline-tested request-local response bounds. `decision_seconds` and `max_total_attempts` are still not chosen: Matty's exact deadline proposal waits on affected-owner agreement in #6. Running needs accepted A01 settings and a separate run authorization.
 - No reviewed agent renderers are on main, and the plain prompts await review. Both are explicit inputs here.
 - Resume is per unit, not mid-episode, as in E02-a.
 - E02-c adds C and D after P04. The 300-run matrix config and the held-out custody loader follow for the I02 freeze.
