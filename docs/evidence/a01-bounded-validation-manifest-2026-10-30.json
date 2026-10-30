@@ -1,0 +1,120 @@
+{
+  "schema_version": "a01-bounded-validation-manifest-v1",
+  "evidence_kind": "offline_preparation_not_inference",
+  "status": "blocked_pending_agreement_and_authorization",
+  "prepared_from_main": "0067454db7be516ff8a7fd9e83f01d32b353869b",
+  "scope": "Two-request public-development A01 transport validation; not an experiment or complete A02 episode",
+  "preparation_model_calls": 0,
+  "preparation_runtime_requests": 0,
+  "accepted_identity": {
+    "runtime_version": "0.40.5",
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "316504eda9b907ddeaf5403f02da3b12d13e998162db42cbb917a1e095cf731a"
+  },
+  "accepted_generation_settings": {
+    "temperature": 0.2,
+    "top_p": 1,
+    "seed": 101,
+    "num_ctx": 16384,
+    "num_predict": 1536,
+    "stream": false,
+    "think": false
+  },
+  "required_host": {
+    "device": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "device_type": "iGPU",
+    "backend": "Vulkan",
+    "required_offloaded_layers": "37/37",
+    "environment": {
+      "OLLAMA_IGPU_ENABLE": "1",
+      "OLLAMA_VULKAN": "1",
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_MAX_LOADED_MODELS": "1",
+      "OLLAMA_NO_CLOUD": "1"
+    }
+  },
+  "response_bounds": {
+    "num_predict": 1536,
+    "largest_tokens": 1264,
+    "reserve_tokens": 272,
+    "measurements": {
+      "plain_policy_output": 1264,
+      "agent_plan": 931,
+      "agent_explanation": 298
+    },
+    "evidence_path": "docs/evidence/a01-response-bounds-2026-10-29.json",
+    "evidence_sha256": "4bdb4434ef3193db850c75272b3fd5c94c6d0af20382db855aa08e06d40b36aa",
+    "implementation_path": "dc_sustainability/llm/response_bounds.py",
+    "implementation_sha256": "f8ad321ffd79b6dc5ec9c375f2b02b87b8ab26ba2fe4d58f2cabc8efcff79c6a"
+  },
+  "bounded_sequence": {
+    "systems": [
+      "plain_llm",
+      "agent"
+    ],
+    "maximum_serial_requests": 2,
+    "retries": 0,
+    "warmup_calls": 0,
+    "tool_calls": 0,
+    "simulator_actions": 0,
+    "study_runs": 0,
+    "plain_entrypoint": "PlainLLMPolicy.propose",
+    "agent_output": "Plan only; no repair or explanation call",
+    "agent_gate": "only_after_valid_plain_stop_and_all_identity_count_offload_gates"
+  },
+  "deadline_proposal": {
+    "per_request_seconds": 150,
+    "paired_total_seconds": 330,
+    "status": "pending_affected_owner_agreement",
+    "proposal_reference": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6513423581",
+    "emergency_response_deadline": "2026-10-31T13:48:00-07:00"
+  },
+  "affected_owner_agreement": {
+    "nisha": {
+      "status": "pending",
+      "reference": null
+    },
+    "ved": {
+      "status": "pending",
+      "reference": null
+    }
+  },
+  "run_authorization": {
+    "status": "not_recorded",
+    "reference": null,
+    "authorized_by": null
+  },
+  "run_freeze": {
+    "exact_commit": null,
+    "plain_prompt_sha256": null,
+    "agent_renderer_ref": null
+  },
+  "required_stop_conditions": [
+    "runtime, model, template or parameter identity drift",
+    "wrong backend, CPU fallback or partial layer offload",
+    "offline/native prompt-count mismatch",
+    "Plain timeout, malformed output, non-stop completion or failed strict parse",
+    "response exceeds byte or token bound",
+    "uncertain outcome or failed attempt persistence",
+    "owned-process or listener cleanup failure",
+    "paired total deadline exhausted"
+  ],
+  "required_evidence": [
+    "exact commit, prompt hash, renderer reference and authorization reference",
+    "before/after runtime, model, template and parameter identities",
+    "effective generation settings and environment",
+    "actual Vulkan backend and offloaded layer count",
+    "offline and native prompt counts",
+    "raw request and response hashes, HTTP status, stop reason, usage and latency",
+    "attempt ledger including every failure and uncertain outcome",
+    "exact owned-process and loopback-listener cleanup result"
+  ],
+  "ready_for_dispatch": false,
+  "limitations": [
+    "This manifest is preparation only and cannot authorize or dispatch inference.",
+    "The proposed deadline is not an accepted setting until both affected owners agree.",
+    "A later successful transport validation is not a study result or complete A02 episode."
+  ]
+}
