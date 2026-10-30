@@ -251,7 +251,7 @@ def test_case_rejects_a_visible_constraint_absent_from_its_snapshot():
     [
         (lambda e: e["assertions"].pop(0), "every Claim record"),
         (lambda e: e["assertions"].append(copy.deepcopy(e["assertions"][2])), "share one ID"),
-        (lambda e: e["assertions"][2].update(assertion_id="X9"), "S1 or L1"),
+        (lambda e: e["assertions"][2].update(assertion_id="X9"), "S1, L1 or R1"),
         (lambda e: e["assertions"][2].update(cited_ids=["FACT-JOB-J1"]), "no citations"),
         (lambda e: e["assertions"][0].update(text="edited"), "Claim record"),
         (lambda e: e["assertions"][0].update(cited_ids=["FACT-JOB-J2"]), "evidence IDs"),
@@ -291,3 +291,57 @@ def test_case_file_refuses_unbound_or_inconsistent_outputs():
     bad["rubric_version"] = "other"
     with pytest.raises(ValueError, match="rubric version"):
         rv.load_cases(bad)
+
+
+# ----------------------------------------------------------------- draft 1 (rule §11.6-11.7)
+def raw_assertion(aid="R1", label="supported"):
+    return {
+        "assertion_id": aid,
+        "source": "raw",
+        "text": "J1 starts now.",
+        "label": label,
+        "cited_ids": [],
+        "supporting_cited_ids": [],
+    }
+
+
+def test_raw_text_assertions_are_scored_apart_from_structured_metrics():
+    case = small_case(explanation=False, status="malformed")
+    entry = rv.blank_annotation(case, "X")
+    entry["assertions"] = [raw_assertion("R1"), raw_assertion("R2", "contradicted")]
+    entry["completeness"] = dict.fromkeys(rv.COMPLETENESS, 0)
+    score = rv.score_annotation(case, entry)
+    assert (score.checkable, score.faithfulness, score.precision) == (0, None, None)
+    assert (score.coverage, score.completeness) == (0.0, 0.0)  # §5 unchanged by raw text
+    assert (score.raw_checkable, score.raw_supported, score.raw_faithfulness) == (2, 1, 0.5)
+
+
+@pytest.mark.parametrize(
+    "explanation, status, extra, message",
+    [
+        (True, "ok", [raw_assertion()], "need raw text and no explanation"),
+        (False, "malformed", [raw_assertion("S1")], "R1"),
+        (False, "malformed", [{**raw_assertion(), "source": "summary"}], "only raw"),
+        (False, "malformed", [{**raw_assertion(), "cited_ids": ["FACT-JOB-J1"]}], "citations"),
+    ],
+)
+def test_raw_text_assertion_rules_are_enforced(explanation, status, extra, message):
+    case = small_case(explanation=explanation, status=status)
+    entry = filled(case) if explanation else rv.blank_annotation(case, "X")
+    if not explanation:
+        entry["completeness"] = dict.fromkeys(rv.COMPLETENESS, 0)
+    entry["assertions"] += copy.deepcopy(extra)
+    with pytest.raises(ValueError, match=message):
+        rv.validate_annotation(case, entry, complete=True)
+
+
+def test_reference_kind_is_optional_and_from_the_closed_list():
+    case = small_case()
+    entry = filled(case)
+    rv.validate_annotation(case, entry, complete=True)  # draft-0 records stay valid
+    entry["assertions"][1]["reference_kind"] = "power_load_capacity"
+    entry["assertions"][2]["reference_kind"] = None
+    rv.validate_annotation(case, entry, complete=True)
+    entry["assertions"][1]["reference_kind"] = "energy"
+    with pytest.raises(ValueError, match="reference_kind"):
+        rv.validate_annotation(case, entry, complete=True)

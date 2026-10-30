@@ -10,7 +10,10 @@ label: the adjudication record starts empty.
 Claim assertions share their F02 claim IDs, so they match automatically. Summary and
 limitation assertions are numbered by each rater, so a match between them is a human
 judgement supplied as explicit ID pairs; without one they are reported as found by one
-rater only.
+rater only. Raw-text assertions (rule §11.7) match the same way; an output has either
+raw text or an explanation, so they only ever match each other, and their extraction and label agreement are reported separately from the structured
+explanation. Agreement on ``reference_kind`` (rule §11.6) is reported over matched
+assertions where both raters recorded a kind.
 """
 
 import hashlib
@@ -91,9 +94,11 @@ class Matched:
     key: Key
     a_id: str
     b_id: str
-    source: str  # "claim" or "extracted"
+    source: str  # "claim", "extracted" (summary/limitation) or "raw"
     a_label: str
     b_label: str
+    a_kind: str | None = None
+    b_kind: str | None = None
 
 
 @dataclass(frozen=True)
@@ -125,10 +130,13 @@ class Comparison:
     matched: tuple[Matched, ...]
     one_sided: tuple[OneSided, ...]
     extraction: Extraction
-    labels: Agreement  # every matched assertion
+    labels: Agreement  # every matched structured assertion (claim, summary, limitation)
     claim_labels: Agreement  # matched claim records only, reported separately
     completeness: Mapping[str, Agreement] = field(default_factory=dict)
     completeness_pairs: Mapping[Key, Mapping[str, tuple[int, int]]] = field(default_factory=dict)
+    raw_extraction: Extraction = Extraction(0, 0, 0)  # raw text, never mixed into the above
+    raw_labels: Agreement = Agreement(0, 0, None)
+    kinds: Agreement = Agreement(0, 0, None)  # matched assertions where both gave a kind
 
 
 def compare(
@@ -168,31 +176,55 @@ def compare(
             ):
                 raise ValueError(f"{key}: matches pair summary/limitation IDs that exist")
         for i, j in pairs + extracted:
-            source = "claim" if xa[i]["source"] == "claim" else "extracted"
-            matched.append(Matched(key, i, j, source, xa[i]["label"], xb[j]["label"]))
+            source = _source(xa[i])
+            matched.append(
+                Matched(
+                    key,
+                    i,
+                    j,
+                    source,
+                    xa[i]["label"],
+                    xb[j]["label"],
+                    xa[i].get("reference_kind"),
+                    xb[j].get("reference_kind"),
+                )
+            )
         one_sided += [OneSided(key, "a", xa[i]) for i in xa if i not in dict(pairs + extracted)]
         taken_b = {j for _, j in pairs + extracted}
         one_sided += [OneSided(key, "b", xb[j]) for j in xb if j not in taken_b]
 
+    def extraction(source: str) -> Extraction:
+        one = [o for o in one_sided if _source(o.assertion) == source]
+        return Extraction(
+            both=sum(m.source == source for m in matched),
+            only_a=sum(o.rater == "a" for o in one),
+            only_b=sum(o.rater == "b" for o in one),
+        )
+
+    structured = [m for m in matched if m.source != "raw"]
     return Comparison(
         a=a,
         b=b,
         not_applicable=not_applicable,
         matched=tuple(matched),
         one_sided=tuple(one_sided),
-        extraction=Extraction(
-            both=sum(m.source == "extracted" for m in matched),
-            only_a=sum(o.rater == "a" for o in one_sided),
-            only_b=sum(o.rater == "b" for o in one_sided),
-        ),
-        labels=_agreement([(m.a_label, m.b_label) for m in matched]),
+        extraction=extraction("extracted"),
+        labels=_agreement([(m.a_label, m.b_label) for m in structured]),
         claim_labels=_agreement([(m.a_label, m.b_label) for m in matched if m.source == "claim"]),
         completeness={
             part: _agreement([p[part] for p in completeness_pairs.values()])
             for part in review.COMPLETENESS
         },
         completeness_pairs=completeness_pairs,
+        raw_extraction=extraction("raw"),
+        raw_labels=_agreement([(m.a_label, m.b_label) for m in matched if m.source == "raw"]),
+        kinds=_agreement([(m.a_kind, m.b_kind) for m in matched if m.a_kind and m.b_kind]),
     )
+
+
+def _source(assertion: dict) -> str:
+    source = assertion["source"]
+    return source if source in ("claim", "raw") else "extracted"
 
 
 def summary(comparison: Comparison) -> dict:
@@ -207,12 +239,15 @@ def summary(comparison: Comparison) -> dict:
             **label_table(matched),
         }
 
+    def extraction(e: Extraction) -> dict:
+        return {"both": e.both, "only_a": e.only_a, "only_b": e.only_b, "agreement": e.agreement}
+
     e = comparison.extraction
     sources = Counter(
         (o.rater, "claim" if o.assertion["source"] == "claim" else o.assertion["source"])
         for o in comparison.one_sided
     )
-    return {
+    report = {
         "rubric_version": review.RUBRIC_VERSION,
         "originals": {
             "a": {"rater": comparison.a.rater, "sha256": comparison.a.sha256},
@@ -239,10 +274,34 @@ def summary(comparison: Comparison) -> dict:
             "only_b": e.only_b,
             "agreement": e.agreement,
         },
-        "labels_all_matched": labels(list(comparison.matched)),
+        "labels_all_matched": labels([m for m in comparison.matched if m.source != "raw"]),
         "labels_claims_only": labels([m for m in comparison.matched if m.source == "claim"]),
         "completeness": {k: agreement(v) for k, v in comparison.completeness.items()},
     }
+    # Draft-1 parts appear only when used, so a draft-0 report reproduces unchanged.
+    if _uses(comparison, "raw"):
+        raw = [m for m in comparison.matched if m.source == "raw"]
+        report["raw_text"] = {
+            "extraction": extraction(comparison.raw_extraction),
+            "labels": labels(raw),
+        }
+    if _uses(comparison, "reference_kind"):
+        kinds = [m for m in comparison.matched if m.a_kind or m.b_kind]
+        report["reference_kind"] = {
+            **agreement(comparison.kinds),
+            "only_a": sum(bool(m.a_kind) and not m.b_kind for m in kinds),
+            "only_b": sum(bool(m.b_kind) and not m.a_kind for m in kinds),
+        }
+    return report
+
+
+def _uses(comparison: Comparison, part: str) -> bool:
+    """Whether either original uses a draft-1 part: raw assertions or a reference kind."""
+    entries = [*comparison.a.entries.values(), *comparison.b.entries.values()]
+    found = (x for e in entries for x in e["assertions"])
+    if part == "raw":
+        return any(x["source"] == "raw" for x in found)
+    return any(x.get("reference_kind") for x in found)
 
 
 def _assertion_count(original: Original) -> int:

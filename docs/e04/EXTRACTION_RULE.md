@@ -2,7 +2,7 @@
 
 Status: draft for the development review, owned by Nisha (E04). It applies what Nisha and Matty agreed in [issue #22](https://github.com/ReymoT/data-center-agentic/issues/22): every checkable assertion is reviewed, summary included, and repeated assertions share one ID. It is frozen only after both raters have used it on the development cases and the Q10 record is complete. Ved's sampling and analysis agreement is still pending and does not affect this rule.
 
-Sections 1–10 are the draft 0 text both development originals were rated under; they are left unchanged so those ratings stay interpretable. Section 11 proposes the clarifications for draft 1, from the development reliability report and the #24 decisions. Draft 1 needs Matty's and Ved's agreement before it replaces draft 0 for the held-out review.
+Sections 1–10 are the draft 0 text both development originals were rated under; they are left unchanged so those ratings stay interpretable. Section 11 proposes the clarifications for draft 1, from the development reliability report and the #24 decisions. Matty and Ved agreed to 11.6–11.8 on October 30, 2026 ([#22](https://github.com/ReymoT/data-center-agentic/issues/22)). Draft 1 becomes the rule for the held-out review at the E04 freeze, after the 11.8 calibration.
 
 ## 1. What is a checkable assertion
 
@@ -87,7 +87,7 @@ This pilot scorer handles structured explanations. It preserves raw failed/malfo
 
 ## 11. Proposed clarifications for draft 1
 
-Status: proposed by Nisha on October 28, 2026, after the [development reliability report](ratings/agreement/E05_DEVELOPMENT_IRR.md). Extraction was the largest difference between the two development originals (0 of 64 summary/limitation assertions matched), so most of this section is about extraction. Agreed decisions from #24 (11.4, 11.5) are recorded here so the rule matches E01. Items marked **needs agreement** change the annotation format or the review protocol and are not adopted until Matty and Ved agree.
+Status: proposed by Nisha on October 28, 2026, after the [development reliability report](ratings/agreement/E05_DEVELOPMENT_IRR.md). Extraction was the largest difference between the two development originals (0 of 64 summary/limitation assertions matched), so most of this section is about extraction. Agreed decisions from #24 (11.4, 11.5) are recorded here so the rule matches E01. Items 11.6–11.8 change the annotation format or the review protocol; Matty and Ved agreed to them on October 30, 2026 (#22).
 
 ### 11.1 Read every summary sentence and every limitation
 
@@ -161,17 +161,17 @@ The pronoun "it" is not "IT". A PUE fact cited elsewhere in the output, not for 
 
 For each numeric assertion, raters decide which of these quantities it describes, and check it against that reference: job IT energy before PUE; job facility energy with PUE; job emissions; schedule emissions; savings versus a named baseline; carbon intensity at a slot; power, load or capacity at a slot; slot or duration. A savings assertion without a named baseline, or whose schedules don't complete the same jobs under the same inputs, is unsupported.
 
-**Needs agreement:** recording the kind per assertion, so agreement on kind can be reported as Ved asked. Proposed: an optional `reference_kind` field on numeric assertions in the annotation file (not F02), checked by `review.validate_annotation`. Until agreed, raters write the kind in `notes` when it is not obvious.
+**Agreed (#22, October 30):** raters may record the kind per numeric assertion in an optional, annotation-only `reference_kind` field (not F02), checked by `review.validate_annotation`. The values are, in the order above: `job_it_energy`, `job_facility_energy`, `job_emissions`, `schedule_emissions`, `savings_vs_baseline`, `carbon_intensity`, `power_load_capacity`, `slot_or_duration`. Agreement on kind is reported over matched assertions where both raters recorded one, with the counts recorded by only one rater.
 
-### 11.7 Malformed or raw-text outputs (needs agreement)
+### 11.7 Malformed or raw-text outputs (agreed in #22, October 30)
 
-Section 10 leaves open how checkable assertions in raw failed or malformed text are reviewed. Proposed:
+Section 10 leaves open how checkable assertions in raw failed or malformed text are reviewed. Agreed:
 
-- Raters extract checkable assertions from `raw_response` text as R1, R2, … with source `raw`, using sections 1–4, with no citations.
+- Raters extract checkable assertions from the `raw_response` text of an output without an explanation as R1, R2, … with source `raw`, using sections 1–4, with no citations.
 - Completeness for a failed or malformed output stays 0 (section 5).
 - Raw-text faithfulness is reported separately from structured-output faithfulness and is never mixed into it, with its own counts.
-- This needs a small annotation-format change (`source: "raw"` in `review.validate_annotation`) once agreed.
+- The annotation format accepts `source: "raw"` in `review.validate_annotation`. Raw-text extraction and label agreement are reported in their own `raw_text` section of the agreement report.
 
-### 11.8 Calibration before the held-out review (needs agreement)
+### 11.8 Calibration before the held-out review (agreed in #22, October 30)
 
-Before any held-out output is opened, both raters independently extract assertions on two or three new practice outputs, which are neither development nor held-out cases, and compare extraction only, using this section. Disagreements are resolved by changing the rule text, never by changing either development original. The held-out reliability report is then computed in the same way as the development report.
+Before any held-out output is opened, both raters independently extract assertions on two or three new practice outputs, which are neither development nor held-out cases, and compare extraction only, using this section. Disagreements are resolved by changing the rule text, never by changing either development original. The held-out reliability report is then computed in the same way as the development report. The practice outputs never enter the development or held-out sets, and calibration does not open any held-out output or freeze the evaluation sample.

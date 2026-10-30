@@ -10,9 +10,12 @@ Q10 is still partial, so this is development material under a draft rubric, not 
 frozen protocol. Metrics follow MASTER_NISHA E04: faithfulness = supported/checkable,
 coverage = assertions with a supporting citation/checkable, precision = supporting
 claim-citation pairs/all cited pairs; zero denominators stay undefined (None).
-This pilot scores structured explanations only; raw malformed text is preserved for
-review, not assertion-extracted here. Human extraction/deduplication, unresolved units
-and two independent original ratings remain gates before a frozen real-output review.
+Draft 1 (rule §11.6–11.7) adds two optional annotation-only parts, never F02 fields:
+a ``reference_kind`` from a closed list on an assertion, and raw-text assertions
+("R1", "R2", ...) extracted from the ``raw_response`` of an output without an
+explanation. Raw-text assertions are scored separately and never enter the structured
+metrics. Human extraction/deduplication, unresolved units and two independent original
+ratings remain gates before a frozen real-output review.
 """
 
 import re
@@ -27,7 +30,19 @@ OUTPUT_KEYS = ("X", "Y")
 _EXTRACTED_ID = {
     "summary": re.compile(r"^S[1-9][0-9]*$"),
     "limitation": re.compile(r"^L[1-9][0-9]*$"),
+    "raw": re.compile(r"^R[1-9][0-9]*$"),
 }
+# Rule §11.6, Ved's closed list (#24): the quantity a numeric assertion describes.
+REFERENCE_KINDS = (
+    "job_it_energy",  # job IT energy before PUE
+    "job_facility_energy",  # job facility energy with PUE
+    "job_emissions",
+    "schedule_emissions",
+    "savings_vs_baseline",
+    "carbon_intensity",  # at a slot
+    "power_load_capacity",  # at a slot
+    "slot_or_duration",
+)
 
 
 @dataclass(frozen=True)
@@ -156,8 +171,11 @@ def validate_annotation(case: ReviewCase, entry: dict, *, complete: bool) -> Non
     assertions = entry.get("assertions")
     if not isinstance(assertions, list):
         raise ValueError(f"{where}: assertions must be a list")
-    if output.explanation is None and assertions:
-        raise ValueError(f"{where}: an output without an explanation has no assertions")
+    raw = [a for a in assertions if a.get("source") == "raw"]
+    if raw and (output.explanation is not None or output.raw_response is None):
+        raise ValueError(f"{where}: raw-text assertions need raw text and no explanation")
+    if output.explanation is None and len(raw) != len(assertions):
+        raise ValueError(f"{where}: an output without an explanation has only raw assertions")
 
     claims = {c.claim_id: c for c in output.explanation.claims} if output.explanation else {}
     ids = [a.get("assertion_id") for a in assertions]
@@ -197,13 +215,15 @@ def _check_assertion(a: dict, claims: dict, complete: bool, where: str) -> None:
             raise ValueError(f"{where}: {aid} restated_in_summary must be true or false")
     elif source in _EXTRACTED_ID:
         if not isinstance(aid, str) or not _EXTRACTED_ID[source].match(aid):
-            raise ValueError(f"{where}: {source} assertion IDs look like S1 or L1")
+            raise ValueError(f"{where}: {source} assertion IDs look like S1, L1 or R1")
         if not isinstance(a.get("text"), str) or not a["text"].strip():
             raise ValueError(f"{where}: {aid} needs the extracted text")
         if a.get("cited_ids") != [] or "restated_in_summary" in a:
             raise ValueError(f"{where}: {aid} has no citations or restatement flag")
     else:
         raise ValueError(f"{where}: unknown assertion source {source!r}")
+    if "reference_kind" in a and a["reference_kind"] not in (None, *REFERENCE_KINDS):
+        raise ValueError(f"{where}: {aid} reference_kind must be one of {REFERENCE_KINDS}")
     label = a.get("label")
     if label not in LABELS and not (label is None and not complete):
         raise ValueError(f"{where}: {aid} label must be one of {', '.join(LABELS)}")
@@ -225,6 +245,13 @@ class OutputScore:
     coverage: float | None
     precision: float | None
     completeness: float | None
+    # Raw-text assertions (rule §11.7), kept apart from the structured metrics above.
+    raw_checkable: int = 0
+    raw_supported: int = 0
+
+    @property
+    def raw_faithfulness(self) -> float | None:
+        return self.raw_supported / self.raw_checkable if self.raw_checkable else None
 
 
 def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
@@ -232,7 +259,8 @@ def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
     validate_annotation(case, entry, complete=True)
     if entry["not_applicable"]:
         return None
-    assertions = entry["assertions"]
+    raw = [a for a in entry["assertions"] if a["source"] == "raw"]
+    assertions = [a for a in entry["assertions"] if a["source"] != "raw"]
     n = len(assertions)
     supported = sum(a["label"] == "supported" for a in assertions)
     covered = sum(bool(a["supporting_cited_ids"]) for a in assertions)
@@ -247,6 +275,8 @@ def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
         coverage=covered / n if n else (0.0 if not entry["explanation_present"] else None),
         precision=pairs / cited if cited else None,
         completeness=sum(parts.values()) / len(COMPLETENESS),
+        raw_checkable=len(raw),
+        raw_supported=sum(a["label"] == "supported" for a in raw),
     )
 
 
