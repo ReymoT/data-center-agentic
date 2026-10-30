@@ -17,6 +17,7 @@ from dc_sustainability.evaluation import validator as v
 from dc_sustainability.llm import plain
 from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.llm.provider import CallBlocked, Deployment, OllamaProvider
+from dc_sustainability.llm.response_bounds import bounded_response_schema
 from tests.contracts import fixtures as f
 
 DIGEST = "b" * 64  # synthetic artifact identity, not an installed model checksum
@@ -131,8 +132,7 @@ def test_request_uses_policy_output_schema_and_rendered_messages(server):
     state, context = state_and_context()
     decision = propose(PlainLLMPolicy(provider(server)), state, context)
     request = server.requests[0]
-    expected_format = s.PolicyOutput.model_json_schema()
-    expected_format["required"] += ["record_type", "schema_version"]
+    expected_format, _ = bounded_response_schema(s.PolicyOutput, state, system="plain_llm")
     assert request["format"] == expected_format
     assert request["messages"] == plain.render_messages(context)
     assert decision.messages_sha256 == plain.messages_sha256(request["messages"])
