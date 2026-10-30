@@ -17,6 +17,7 @@ from dc_sustainability.experiments import runner
 from dc_sustainability.experiments.config import ModelSettings, RunConfig, lf_sha256
 from dc_sustainability.llm.plain import prompt_template_sha256
 from dc_sustainability.llm.provider import OllamaProvider
+from dc_sustainability.runtime import ExecutionController
 from tests.experiments.test_runner import result, traces, write_bundle
 from tests.llm.test_ollama_provider import deployment, envelope
 from tests.llm.test_ollama_provider import server as server  # noqa: F401
@@ -215,6 +216,35 @@ def test_uncertain_agent_proposal_sends_nothing_more_and_needs_reconciliation(tm
     unknown = json.loads((root / st.unit.key / "unknown.json").read_text(encoding="utf-8"))
     assert [a["outcome"] for a in unknown["attempts"]] == ["unknown"]
     assert len(saved_attempts(root, st.unit)) == 1
+
+
+@pytest.mark.parametrize("system", ["plain_llm", "agent"])
+def test_unsaved_attempt_stops_the_unit_halts_model_units_and_keeps_budget(
+    tmp_path, model, monkeypatch, system
+):
+    def fail(self, attempt, **link):
+        raise OSError("synthetic attempt-storage failure")
+
+    monkeypatch.setattr(ExecutionController, "record_attempt", fail)
+    ep, path = write_bundle(tmp_path)
+    cfg = model_config(path, ep, model, systems=(system,), trials=(0, 1))
+    out = tmp_path / "out"
+    t0, t1 = runner.run(cfg, out, inputs(model))
+    assert t0.status == "needs_reconciliation" and "could not be saved" in t0.detail
+    assert t1.status == "pending" and "halted" in t1.detail
+    assert len(model.requests) == 1  # no later slot or unit dispatches
+    root = out / cfg.run_id / "units"
+    assert not (root / t0.unit.key / "result.json").exists()
+    assert [d.slot for d in traces(root, t0.unit)] in ([], [0])  # the agent traces slot 0
+    assert all(d.final_status == "blocked" for d in traces(root, t0.unit))
+    assert not saved_attempts(root, t0.unit)
+    unknown = json.loads((root / t0.unit.key / "unknown.json").read_text(encoding="utf-8"))
+    assert [(a["outcome"], a["saved"]) for a in unknown["attempts"]] == [("ok", False)]
+    assert m.spent_attempts(out / cfg.run_id) == 1  # the lost request still counts
+
+    again = runner.run(cfg, out, inputs(model))
+    assert [st.status for st in again] == ["needs_reconciliation", "pending"]
+    assert len(model.requests) == 1
 
 
 # ----------------------------------------------------------------- budget and refusals

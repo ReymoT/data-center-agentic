@@ -19,8 +19,12 @@ What it does:
 - **One ledger per unit.** The provider caps attempts per (system, episode, slot), and the harness pins one (run, trial, seed), neither keyed by trial. So each unit (system × episode × trial) gets a fresh `OllamaProvider` and, for the agent, a fresh `AgentHarness`. `deployment.max_run_attempts` therefore bounds one unit.
 - **Plain decision.** It uses the flat K02 context and one `PlainLLMPolicy.propose` call. Every new ledger attempt is persisted with `record_attempt` before execution. The output is checked once as the initial stage, then the controller decides. There is no repair or fallback (`not_applicable_stages` = repaired, fallback). The original response, explanation, call count, latency and tokens are recorded. An empty queue makes no call.
 - **Agent decision.** `AgentHarness.run_decision`, with the real Greedy A as its checked fallback. The harness persists its own attempts and calls the controller.
-- **Run attempt budget.** A model unit starts only if the attempts already persisted anywhere in the run directory, plus the unit's worst case (24 × 1 for Plain, 24 × 3 for Agent), fit `max_total_attempts`. Otherwise it stays pending with the reason. A restart counts saved attempts, so it cannot spend a fresh budget.
-- **Unknown outcomes.** If any attempt in a decision is uncertain (sent, with no reliable outcome), the decision is still traced as blocked. The unit then stops, `unknown.json` records the attempts with outcome `unknown`, and the unit is `needs_reconciliation`. While any model unit needs reconciliation, no model unit starts, in this call or later ones. Deterministic units still run. Nothing is retried.
+- **Run attempt budget.** A model unit starts only if the attempts already spent in the run directory, plus the unit's worst case (24 × 1 for Plain, 24 × 3 for Agent), fit `max_total_attempts`. Spent attempts are the saved artifacts plus the unsaved attempts listed in `unknown.json`. Otherwise the unit stays pending with the reason. A restart counts spent attempts, so neither a restart nor a lost artifact gives back budget.
+- **Unknown or unsaved attempts.** Each of these stops the unit as `needs_reconciliation`:
+  - an attempt that is uncertain (sent, with no reliable outcome);
+  - an attempt whose artifact could not be saved.
+
+  For the Agent, the harness treats either as fatal, so the decision is traced as blocked with no further dispatch. For Plain, a failed save raises before anything executes. `unknown.json` records each attempt's `outcome` and `saved`. While any model unit needs reconciliation, no model unit starts, in this call or later ones. Deterministic units still run. Nothing is retried. If the run directory itself can't be written, `unknown.json` can't be either: `run` then raises and stops, and the run must be reconciled by hand.
 - **Completion slots** 24–29 use the E02-a drain record with zero calls, as for A/B.
 - **On completion** a unit also publishes `attempts.json` (slot, trace ID, outcome `ok`/`failed`/`unknown`, error). The lossless attempt files stay in `traces/provider-attempts/`.
 
@@ -54,12 +58,14 @@ Exact reproduction commands:
 .venv\Scripts\python.exe scripts/validate_setup.py
 ```
 
-Tests actually run and observed results: Windows 11, Python 3.12.10, hashed lock. The full suite passed 1,546 tests and 19 subtests (after the fail-closed fix). Ruff check/format, setup validation and pip check passed. No model request was made.
+Tests actually run and observed results: Windows 11, Python 3.12.10, hashed lock. The full suite passed 1,548 tests and 19 subtests (after both fail-closed fixes). Ruff check/format, setup validation and pip check passed. No model request was made.
 
 Owner decisions (Matty, #18 and the PR #113 review, 2026-10-29):
 1. **Unit = A01 run: accepted.** One fresh provider ledger and Agent harness per unit (system × episode × trial).
 2. **Unknown outcome: stop the unit** as `needs_reconciliation`. It is not an ordinary failed decision followed by continued execution.
 3. **After an uncertain Agent attempt: fail closed.** Implemented in `AgentHarness._call`: a newly persisted attempt with `uncertain_outcome` makes the decision fatal, so no repair, explanation or further provider dispatch follows, the fallback is not run, its output is not used, and no stage is selected. The controller records the blocked decision and the runner then stops the unit. Regressions: `tests/agent/test_harness.py::test_uncertain_proposal_fails_closed_with_repair_fallback_and_explanation_configured` and `tests/experiments/test_model_units.py::test_uncertain_agent_proposal_sends_nothing_more_and_needs_reconciliation` (exactly one request, no selected stage, unit needs reconciliation). Both fail with the guard disabled.
+
+4. **Attempt-storage failure (PR #113 review): fail closed for both systems.** An attempt whose artifact could not be saved stops the unit for reconciliation, halts later model units and stays in the run budget (`saved: false` in `unknown.json`). Regression: `tests/experiments/test_model_units.py::test_unsaved_attempt_stops_the_unit_halts_model_units_and_keeps_budget[plain_llm|agent]` (exactly one request, no later slot or unit dispatch, no result, budget 1).
 
 Open note: a unit is admitted on its worst case (24 × the call cap), which is conservative because empty-queue decisions make no call.
 

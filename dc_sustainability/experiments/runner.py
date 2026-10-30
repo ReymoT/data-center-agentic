@@ -107,7 +107,8 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
     """Run every pending unit; return each unit's status after this call.
 
     Model units start only while the run's attempt budget still covers their worst
-    case. After an unknown outcome no further model unit starts in this call.
+    case. After an unknown or unsaved attempt no further model unit starts, in this
+    call or a later one, until that unit is reconciled.
     """
     for system in config.systems:  # refuse before touching anything
         registry.require_available(system, model_inputs=models is not None)
@@ -138,7 +139,7 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
         status = unit_status(root, unit)
         model_unit = registry.spec(unit.system).trials
         if status.status == "pending" and model_unit:
-            used = m.persisted_attempts(root)
+            used = m.spent_attempts(root)
             need = m.worst_case_attempts(unit.system)
             if halted is not None:
                 status = UnitStatus(unit, "pending", f"model units halted: {halted}")
@@ -168,7 +169,10 @@ def _run_unit(
         result = _drive_episode(config, folder, unit, bundle, policy_errors, models, attempts)
     except m.UncertainRequest as exc:
         detail = str(exc)
-        record = {"unit": unit.__dict__, "error": detail, "attempts": m.attempt_summary(attempts)}
+        seen = {a.client_trace_id for a in attempts}
+        spent = [*attempts, *(a for a in exc.attempts if a.client_trace_id not in seen)]
+        summary = m.attempt_summary(spent, exc.unsaved)
+        record = {"unit": unit.__dict__, "error": detail, "attempts": summary}
         publish(folder / "unknown.json", json.dumps(record, indent=1) + "\n")
         return UnitStatus(unit, "needs_reconciliation", detail)
     except IndeterminateExecution as exc:
@@ -206,7 +210,7 @@ def _drive_episode(
         if slot < DECISION_SLOTS and step is not None:
             spent = step(view, dec_id)
             attempts.extend(spent)
-            m.raise_if_unknown(slot, spent)
+            m.raise_if_unreconciled(slot, spent, folder / "traces" / "provider-attempts")
         elif slot < DECISION_SLOTS:
             output = _policy_output(unit.system, view, episode, bundle, policy_errors)
             execute_policy_output(

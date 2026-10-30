@@ -7,13 +7,16 @@ their per-decision caps by episode and slot, not by trial, so one ledger per uni
 what keeps trial 1 from being blocked by trial 0.
 
 Every attempt is persisted before the decision executes. A sent request whose outcome
-is uncertain is ``unknown``: the decision is traced as blocked, the unit stops and
-needs reconciliation, and no further model unit starts in that call. Nothing is
-retried. A run-wide attempt budget counts attempts already persisted in the run
-directory, so a restart cannot spend a fresh budget.
+is uncertain is ``unknown``, and a sent request whose artifact could not be saved is
+``unsaved``. Either stops the unit for reconciliation (``unknown.json``), and no
+further model unit starts until it is reconciled. Nothing is retried. A run-wide
+attempt budget counts every spent attempt in the run directory, saved artifacts and
+the unsaved ones listed in ``unknown.json``, so neither a restart nor a lost artifact
+gives back budget.
 """
 
 import dataclasses
+import json
 import time
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -32,7 +35,12 @@ CALL_CAP = {"plain_llm": 1, "agent": 3}  # per decision, as enforced by A01 and 
 
 
 class UncertainRequest(Exception):
-    """A sent model request has an unknown outcome; the unit needs reconciliation."""
+    """A sent model request is unknown or unsaved; the unit needs reconciliation."""
+
+    def __init__(self, message: str, attempts=(), unsaved=()):
+        super().__init__(message)
+        self.attempts = tuple(attempts)  # this decision's spent attempts
+        self.unsaved = frozenset(unsaved)  # trace IDs with no saved artifact
 
 
 @dataclass(frozen=True)
@@ -79,9 +87,14 @@ def new_provider(settings: ModelSettings, models: ModelInputs) -> OllamaProvider
     return provider
 
 
-def persisted_attempts(root: Path) -> int:
-    """Attempts already saved anywhere in this run directory."""
-    return sum(1 for _ in Path(root).glob("units/*/traces/provider-attempts/*.json"))
+def spent_attempts(root: Path) -> int:
+    """Attempts spent anywhere in this run: saved artifacts plus unsaved ones on record."""
+    saved = sum(1 for _ in Path(root).glob("units/*/traces/provider-attempts/*.json"))
+    unsaved = 0
+    for path in Path(root).glob("units/*/unknown.json"):
+        attempts = json.loads(path.read_text(encoding="utf-8"))["attempts"]
+        unsaved += sum(1 for a in attempts if not a["saved"])
+    return saved + unsaved
 
 
 def worst_case_attempts(system: str) -> int:
@@ -94,24 +107,37 @@ def outcome(attempt: Attempt) -> str:
     return "failed" if attempt.error is not None else "ok"
 
 
-def attempt_summary(attempts) -> list[dict]:
+def attempt_summary(attempts, unsaved=frozenset()) -> list[dict]:
     return [
         {
             "slot": a.slot,
             "client_trace_id": a.client_trace_id,
             "outcome": outcome(a),
+            "saved": a.client_trace_id not in unsaved,
             "error": a.error,
         }
         for a in attempts
     ]
 
 
-def raise_if_unknown(slot: int, attempts) -> None:
+def raise_if_unreconciled(slot: int, attempts, attempt_dir: Path) -> None:
+    """Stop the unit if a spent attempt is unknown or has no saved artifact."""
     unknown = [a.client_trace_id for a in attempts if a.uncertain_outcome]
+    unsaved = [
+        a.client_trace_id
+        for a in attempts
+        if not (Path(attempt_dir) / f"{a.client_trace_id}.json").exists()
+    ]
+    problems = []
     if unknown:
+        problems.append(f"sent request(s) {', '.join(unknown)} have an unknown outcome")
+    if unsaved:
+        problems.append(f"sent request(s) {', '.join(unsaved)} could not be saved")
+    if problems:
         raise UncertainRequest(
-            f"slot {slot}: sent request(s) {', '.join(unknown)} have an unknown outcome; "
-            "reconcile before continuing, never retry"
+            f"slot {slot}: {'; '.join(problems)}; reconcile before continuing, never retry",
+            attempts,
+            unsaved,
         )
 
 
@@ -142,8 +168,19 @@ def plain_step(
     except Exception as exc:
         errors.append(f"plain policy error: {type(exc).__name__}: {exc}")
     attempts = provider.attempts[before:]
-    for attempt in attempts:  # persisted before anything executes
-        controller.record_attempt(attempt, decision_id=decision_id, run_id=run_id, stage="propose")
+    for i, attempt in enumerate(attempts):  # persisted before anything executes
+        try:
+            controller.record_attempt(
+                attempt, decision_id=decision_id, run_id=run_id, stage="propose"
+            )
+        except Exception as exc:  # nothing executes; the unit stops for reconciliation
+            raise UncertainRequest(
+                f"slot {view.current_slot}: sent request {attempt.client_trace_id} could not "
+                f"be saved ({type(exc).__name__}: {exc}); reconcile before continuing, "
+                "never retry",
+                attempts,
+                {a.client_trace_id for a in attempts[i:]},
+            ) from exc
 
     output = decision.output if decision is not None else None
     if decision is not None and decision.blocked_reason:
