@@ -272,3 +272,42 @@ def test_matching_record_lists_every_pair_and_every_unmatched_assertion():
     assert [(u["rater"], u["assertion_id"]) for u in record["unmatched"]] == [("b", "S2")]
     assert record["originals"]["a"]["sha256"] == comparison.a.sha256
     assert record["confirmed_by"] == ["Nisha", "MattyAnd"]
+
+
+# ----------------------------------------------------------------- draft 1 (rule §11.6-11.7)
+def test_raw_text_agreement_is_reported_apart_from_structured_agreement():
+    a, b = ratings("A"), ratings("B")  # DEV10 X is malformed: raw text, no explanation
+    entry(a, "DEV10", "X")["assertions"] += [
+        extracted("R1", "J1 starts at slot 0.", "supported", source="raw"),
+        extracted("R2", "J2 is deferred.", "unsupported", source="raw"),
+    ]
+    entry(b, "DEV10", "X")["assertions"] += [
+        extracted("R1", "J1 starts now.", "contradicted", source="raw")
+    ]
+    result = g.compare(load(a), load(b), {("DEV10", "X"): [("R1", "R1")]})
+    assert (result.raw_extraction.both, result.raw_extraction.only_a) == (1, 1)
+    assert (result.raw_labels.n, result.raw_labels.agreed) == (1, 0)
+    assert result.extraction.agreement is None  # no summary/limitation assertions
+    assert (result.labels.n, result.labels.agreed) == (32, 32)  # raw never mixed in
+    report = g.summary(result)
+    assert report["raw_text"]["extraction"]["agreement"] == 0.5
+    assert report["raw_text"]["labels"]["confusion"]["supported"]["contradicted"] == 1
+    assert report["labels_all_matched"]["n"] == 32
+    unmatched = {(u["rater"], u["assertion_id"]) for u in g.matching_record(result)["unmatched"]}
+    assert unmatched == {("a", "R2")}
+
+
+def test_reference_kind_agreement_counts_pairs_where_both_recorded_a_kind():
+    a, b = ratings("A"), ratings("B")
+    report = g.summary(g.compare(load(a), load(b)))
+    assert "reference_kind" not in report and "raw_text" not in report  # draft-0 unchanged
+    xa, xb = entry(a, "DEV01", "X")["assertions"], entry(b, "DEV01", "X")["assertions"]
+    xa[0]["reference_kind"] = xb[0]["reference_kind"] = "job_emissions"
+    xa[1]["reference_kind"], xb[1]["reference_kind"] = "job_emissions", "job_facility_energy"
+    xa[2]["reference_kind"] = "power_load_capacity"  # b recorded no kind
+    result = g.compare(load(a), load(b))
+    assert (result.kinds.n, result.kinds.agreed) == (2, 1)
+    kind = g.summary(result)["reference_kind"]
+    assert (kind["n"], kind["agreed"], kind["percent"]) == (2, 1, 50.0)
+    assert (kind["only_a"], kind["only_b"]) == (1, 0)
+    assert result.labels == g.compare(load(ratings("A")), load(ratings("B"))).labels
