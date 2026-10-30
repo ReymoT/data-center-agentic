@@ -1,0 +1,219 @@
+{
+  "schema_version": "i02-freeze-manifest-v1",
+  "evidence_kind": "pre_freeze_checklist_not_frozen",
+  "status_as_of": "2026-10-30",
+  "target_freeze_date": "2026-11-13",
+  "owner": "Nisha",
+  "receiving_owner": "Matty",
+  "run_matrix": {
+    "episodes": {"core": 24, "missing_forecast": 6, "total": 30},
+    "core_design": {"dates": 6, "scenarios": 4},
+    "trials_per_system": {
+      "greedy_a": 1,
+      "greedy_b": 1,
+      "decision_tree_c": 1,
+      "random_forest_d": 1,
+      "plain_llm": 3,
+      "agent": 3
+    },
+    "decision_slots": 24,
+    "call_cap_per_decision": {"plain_llm": 1, "agent": 3},
+    "total_runs": 300,
+    "maximum_model_calls": {"plain_llm": 2160, "agent": 6480},
+    "reduction_rule": "any reduction is matched across systems and frozen before execution"
+  },
+  "items": [
+    {
+      "id": "code-commit",
+      "category": "code",
+      "description": "Exact repository commit for every held-out run",
+      "owner": "Nisha",
+      "task": "I02",
+      "status": "pending",
+      "path": null,
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "dependency-lock",
+      "category": "locks",
+      "description": "Hashed Windows Python 3.12 dependency lock",
+      "owner": "Matty",
+      "task": "F03",
+      "status": "pending",
+      "path": "requirements/requirements-windows-py312.lock.txt",
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "held-out-episodes",
+      "category": "fixtures",
+      "description": "30 held-out episodes (24 core and 6 missing-forecast) with custody and no overlapping source windows",
+      "owner": "Reimo",
+      "task": "D04",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "held-out allocation and episode contents are not published; D04 is provisional"
+    },
+    {
+      "id": "development-episodes",
+      "category": "fixtures",
+      "description": "40 materialized development episodes for d04-development-20261028-v1",
+      "owner": "Reimo",
+      "task": "D04",
+      "status": "blocked",
+      "path": "data/manifests/d04-development-20261028-v1/manifest.json",
+      "sha256": null,
+      "blocker": "#112: episode contents are not generated; P04 and O02 wait on them"
+    },
+    {
+      "id": "ontology-and-shapes",
+      "category": "ontology",
+      "description": "Ontology and SHACL shapes used by K01/K02 retrieval",
+      "owner": "Ved",
+      "task": "K01",
+      "status": "pending",
+      "path": "ontology/dc-sustainability.ttl",
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "candidate-labels",
+      "category": "models/features",
+      "description": "O02 certified visible-state labels for the development folds",
+      "owner": "Ved",
+      "task": "O02",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "#112: needs the materialized development episodes"
+    },
+    {
+      "id": "trained-models-c-d",
+      "category": "models/features",
+      "description": "Refit decision tree C and random forest D with feature contract, seeds and selection results",
+      "owner": "Edison",
+      "task": "P04",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "#112: needs development episodes and O02 labels"
+    },
+    {
+      "id": "plain-prompts",
+      "category": "prompts/provider",
+      "description": "Plain LLM prompt files, frozen by the prompt-template SHA256 in the run config",
+      "owner": "Nisha",
+      "task": "L01",
+      "status": "pending",
+      "path": "prompts/plain_llm",
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "agent-renderers",
+      "category": "prompts/provider",
+      "description": "Reviewed Agent proposal, repair and explanation renderers",
+      "owner": "Matty",
+      "task": "A02",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "no reviewed production renderers on main"
+    },
+    {
+      "id": "a01-deployment",
+      "category": "prompts/provider",
+      "description": "A01 runtime, model, template and parameter pins, generation settings, response bounds and per-request deadline",
+      "owner": "Matty",
+      "task": "A01",
+      "status": "blocked",
+      "path": "docs/evidence/a01-bounded-validation-manifest-2026-10-30.json",
+      "sha256": null,
+      "blocker": "#6: deadline agreement, bounded validation run and A01 acceptance are not complete"
+    },
+    {
+      "id": "run-settings",
+      "category": "seeds",
+      "description": "Model trial seeds, per-decision deadline and run attempt budget in the E02 run config",
+      "owner": "Nisha",
+      "task": "E02",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "per-decision deadline and attempt budget wait on A01 acceptance (#6)"
+    },
+    {
+      "id": "matrix-config",
+      "category": "seeds",
+      "description": "300-run matrix config with all six systems, including C/D units (E02-c)",
+      "owner": "Nisha",
+      "task": "E02",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "C/D runner units wait on P04 models"
+    },
+    {
+      "id": "reference-pipeline",
+      "category": "references",
+      "description": "O03 hindsight-bound and candidate-reference export pipeline, run on held-out only after inference",
+      "owner": "Ved",
+      "task": "O03",
+      "status": "pending",
+      "path": null,
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "metrics-and-statistics",
+      "category": "scoring/rubric",
+      "description": "E01/E03 quantities, metrics, validator and paired episode-resampling code",
+      "owner": "Nisha",
+      "task": "E03",
+      "status": "pending",
+      "path": "dc_sustainability/evaluation",
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "faithfulness-rubric",
+      "category": "scoring/rubric",
+      "description": "E04 extraction rule draft 1 and annotation format",
+      "owner": "Nisha",
+      "task": "E04",
+      "status": "blocked",
+      "path": "docs/e04/EXTRACTION_RULE.md",
+      "sha256": null,
+      "blocker": "#22: Ved's agreement on rule 11.6-11.8, then the 11.8 calibration"
+    },
+    {
+      "id": "held-out-sample-rule",
+      "category": "scoring/rubric",
+      "description": "Q10 held-out review sample rule, size and blinding, with the sampling map kept apart from rater material",
+      "owner": "Nisha",
+      "task": "E07",
+      "status": "pending",
+      "path": "dc_sustainability/evaluation/sampling.py",
+      "sha256": null,
+      "blocker": null
+    },
+    {
+      "id": "pre-freeze-acceptance",
+      "category": "code",
+      "description": "I01 pre-freeze end-to-end acceptance: all six systems on the real development pipeline",
+      "owner": "Matty",
+      "task": "I01",
+      "status": "blocked",
+      "path": null,
+      "sha256": null,
+      "blocker": "needs C/D models, accepted A01 and an authorized Agent development episode"
+    }
+  ],
+  "freeze": {
+    "commit": null,
+    "frozen_at": null,
+    "frozen_by": null
+  }
+}
