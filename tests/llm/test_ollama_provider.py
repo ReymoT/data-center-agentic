@@ -16,6 +16,7 @@ import pytest
 from dc_sustainability import schemas as s
 from dc_sustainability.llm.plain import PlainLLMPolicy
 from dc_sustainability.llm.provider import CallBlocked, Deployment, OllamaProvider
+from dc_sustainability.llm.response_bounds import bounded_response_schema
 from tests.contracts import fixtures as f
 from tests.llm.http_fixture import DrainingHTTPServer
 
@@ -139,8 +140,7 @@ def test_real_http_serialization_f02_parse_and_evidence_preservation(server):
     assert result.latency_ms > 0 and not result.uncertain_outcome
     assert result.model_digest == DIGEST and client.attempts == (result,)
     payload = server.requests[0]
-    expected_format = s.Plan.model_json_schema()
-    expected_format["required"] += ["record_type", "schema_version"]
+    expected_format, _ = bounded_response_schema(s.Plan, f.visible_state(), system="agent")
     assert payload["format"] == expected_format
     assert payload["stream"] is False and payload["think"] is False
     assert payload["keep_alive"] == "30m"
