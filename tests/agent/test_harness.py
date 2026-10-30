@@ -339,3 +339,32 @@ def test_failed_http_attempt_is_counted_and_never_replaced_with_success(server, 
         result.execution.record.initial is None
         and result.execution.record.final_status == "blocked"
     )
+
+
+def test_uncertain_proposal_fails_closed_with_repair_fallback_and_explanation_configured(
+    server, tmp_path
+):
+    ep, sim, _, controller, client = setup(server, tmp_path)
+    server.status = 500  # sent; the first request may still be running
+
+    def fixture_fallback(view, context):
+        return s.PolicyOutput(system="greedy_a", output_status="ok", plan=plan(view))
+
+    harness = AgentHarness(
+        client,
+        controller,
+        proposal_messages=messages,
+        repair_messages=messages,
+        explanation_messages=messages,
+        fallback=fixture_fallback,
+    )
+    result = decide(harness, sim, ep)
+    record = result.execution.record
+    assert len(server.requests) == len(client.attempts) == record.model_call_count == 1
+    assert result.attempts[0].uncertain_outcome and record.repair_count == 0
+    assert "repair" not in result.route and "explain" not in result.route
+    assert record.initial is None and record.repaired is None
+    assert record.fallback is None and record.explanation is None
+    assert record.final_status == "blocked" and not record.executed_starts
+    assert any("outcome unknown" in error for error in record.errors)
+    assert sim.state().current_slot == len(sim.history) == 1

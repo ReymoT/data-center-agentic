@@ -2,7 +2,9 @@
 
 Every system is registered so a run configuration can name it. A system that is not
 available refuses with its reason; the runner never substitutes another system or a
-placeholder output.
+placeholder output. The two model systems run only when the caller supplies explicit
+model inputs (a provider and, for the agent, reviewed renderers); nothing here builds
+them, so the CLI cannot reach a model.
 """
 
 from dataclasses import dataclass
@@ -37,10 +39,18 @@ SYSTEMS: dict[str, SystemSpec] = {
             "random_forest_d", "trained", "rf", False, "needs Edison's trained P04 artifact"
         ),
         SystemSpec(
-            "plain_llm", "model", "pl", False, "E02-b: needs accepted A01 and run authorization"
+            "plain_llm",
+            "model",
+            "pl",
+            False,
+            "needs explicit model inputs: accepted A01 and a run authorization",
         ),
         SystemSpec(
-            "agent", "model", "ag", False, "E02-b: needs accepted A01 and run authorization"
+            "agent",
+            "model",
+            "ag",
+            False,
+            "needs explicit model inputs: accepted A01 and a run authorization",
         ),
     )
 }
@@ -52,8 +62,10 @@ def spec(system: str) -> SystemSpec:
     return SYSTEMS[system]
 
 
-def require_available(system: str) -> SystemSpec:
+def require_available(system: str, *, model_inputs: bool = False) -> SystemSpec:
     found = spec(system)
+    if found.kind == "model" and model_inputs:
+        return found
     if not found.available:
         raise NotImplementedError(f"{system} is not available in this runner: {found.reason}")
     return found
