@@ -11,12 +11,6 @@ from dc_sustainability.training.folds import (
     blocked_fold_splits,
     refuse_held_out_episodes,
 )
-from dc_sustainability.training.pipeline import (
-    LabeledCorpus,
-    build_labeled_corpus,
-    freeze_selection,
-    run_selection,
-)
 from dc_sustainability.training.schedule import schedule_from_probabilities
 from dc_sustainability.training.select import RolloutMetrics, SelectionResult, select_and_refit
 from dc_sustainability.training.train import (
@@ -40,7 +34,6 @@ __all__ = [
     "FeatureRow",
     "FittedModel",
     "FoldSplit",
-    "LabeledCorpus",
     "LabeledRow",
     "ModelSpec",
     "RolloutMetrics",
@@ -50,17 +43,14 @@ __all__ = [
     "balanced_class_weights",
     "bind_classifier",
     "blocked_fold_splits",
-    "build_labeled_corpus",
     "candidate_features",
     "classifier_for_factory",
     "collect_decisions",
     "fit_model",
-    "freeze_selection",
     "grid_specs",
     "load_artifact",
     "refuse_held_out_episodes",
     "rows_from_labeled_decisions",
-    "run_selection",
     "save_artifact",
     "schedule_from_probabilities",
     "select_and_refit",
