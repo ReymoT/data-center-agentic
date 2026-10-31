@@ -70,9 +70,14 @@ Owner decisions (Matty, #18 and the PR #113 review, 2026-10-29):
 Open note: a unit is admitted on the strictest enforceable worst case (the smaller of 24 × the call cap and its matched ledger cap), which is conservative because empty-queue decisions make no call.
 
 Limitations and next steps:
-- PR #116 now supplies the offline-tested request-local response bounds. `decision_seconds` and `max_total_attempts` are still not chosen: Matty's exact deadline proposal waits on affected-owner agreement in #6. Running needs accepted A01 settings and a separate run authorization.
-- No reviewed agent renderers are on main, and the plain prompts await review. Both are explicit inputs here.
+- PR #116 supplies request-local response bounds. The single-use EP-HAND1 limits
+  are agreed and regression-tested, and the future full-matrix maxima are recorded
+  in `experiments/matrix.py`; neither record authorizes a model request. Every actual
+  exercise still needs accepted frozen inputs and a separate recorded authorization.
+- Reviewed proposal, repair and explanation renderers and the plain prompt are on
+  main and remain explicit run inputs pinned by hashes/references.
 - Resume is per unit, not mid-episode, as in E02-a.
-- E02-c adds C and D after P04. The 300-run matrix config and the held-out custody loader follow for the I02 freeze.
+- E02-c and the structural 300-run matrix checker are on main. Real P04 C/D
+  artifacts, the private held-out custody loader and the I02 scientific freeze remain.
 
 Receiving owner and consumer check: Matty, for the provider/harness/controller use and questions 1–3.
