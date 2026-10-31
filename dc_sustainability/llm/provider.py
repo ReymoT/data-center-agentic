@@ -38,6 +38,7 @@ class Deployment:
     max_response_bytes: int
     max_prompt_tokens: int
     context_policy_ref: str
+    request_timeout_seconds: int = 150
 
     def __post_init__(self):
         url = urlsplit(self.base_url)
@@ -57,9 +58,16 @@ class Deployment:
             raise ValueError("model_digest must be the full installed artifact SHA256")
         if not self.runtime_version.strip() or not self.context_policy_ref.strip():
             raise ValueError("runtime and validated context policy must be explicitly recorded")
-        for value in (self.max_run_attempts, self.max_response_bytes, self.max_prompt_tokens):
+        for value in (
+            self.max_run_attempts,
+            self.max_response_bytes,
+            self.max_prompt_tokens,
+            self.request_timeout_seconds,
+        ):
             if type(value) is not int or value <= 0:
                 raise ValueError("limits must be positive strict integers")
+        if self.request_timeout_seconds > 150:
+            raise ValueError("request timeout exceeds the accepted 150-second limit")
         if self.max_prompt_tokens > 16384 - 1536:
             raise ValueError("prompt limit must leave room for the accepted generation target")
 
@@ -281,7 +289,10 @@ class OllamaProvider:
         if type(count) is not int or count <= 0 or count > self.deployment.max_prompt_tokens:
             raise CallBlocked("prompt exceeds validated context budget or token count is invalid")
         request_json = json.dumps(payload, allow_nan=False, separators=(",", ":"))
-        deadline = min(float(decision_deadline), time.monotonic() + 120)
+        deadline = min(
+            float(decision_deadline),
+            time.monotonic() + self.deployment.request_timeout_seconds,
+        )
         if not self._lock.acquire(blocking=False):
             raise CallBlocked("one request at a time; concurrent dispatch is blocked")
         try:

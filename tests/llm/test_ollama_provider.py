@@ -153,6 +153,13 @@ def test_real_http_serialization_f02_parse_and_evidence_preservation(server):
     }
 
 
+def test_deployment_uses_accepted_request_timeout_and_refuses_extension(server):
+    client = provider(server)
+    assert client.deployment.request_timeout_seconds == 150
+    with pytest.raises(ValueError, match="accepted 150-second"):
+        replace(client.deployment, request_timeout_seconds=151)
+
+
 @pytest.mark.parametrize("protocol", ["HTTP/1.0", "HTTP/1.1"])
 def test_http_response_stream_is_closed_on_interrupted_body_read(server, monkeypatch, protocol):
     # HTTP/1.0 detaches the response from HTTPConnection before returning it. Keep
