@@ -22,13 +22,21 @@ from held-out episodes or future arrivals.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
-from typing import Optional
+from datetime import datetime, timedelta, timezone
+from typing import TYPE_CHECKING, Optional
 
 from dc_sustainability import schemas as s
+from dc_sustainability.reference import solver as solver_module
 from dc_sustainability.reference.solver import solve_visible
+
+if TYPE_CHECKING:
+    from dc_sustainability.reference.cache import LabelCache
 from dc_sustainability.training.collect import CollectedDecision
 from dc_sustainability.training.features import FeatureRow, candidate_features
+
+# Default simulated decision-time anchor.  This is the proposal hand-example slot-0 UTC;
+# callers should supply an explicit trusted decision_time_utc in production.
+_SLOT0_UTC = datetime(2022, 1, 1, 7, tzinfo=timezone.utc)
 
 
 @dataclass(frozen=True)
@@ -93,31 +101,37 @@ def _candidate_hash(state_hash: str, job_id: str, start_slot: int) -> str:
     )
 
 
-def label_decision(
-    collected: CollectedDecision,
-    *,
-    time_limit_s: float = 30.0,
-    tolerance: float = 1e-6,
-) -> LabeledDecision:
-    """Run the O01 reference solver on one collected decision and attach labels."""
-    result = solve_visible(
-        collected.state,
-        collected.context,
-        time_limit_s=time_limit_s,
-        tolerance=tolerance,
-    )
-    state_hash = collected.context.content_hash
-    labels: list[CandidateLabel] = []
+def _decision_time_utc(state: s.VisibleState, decision_time_utc: Optional[datetime]) -> datetime:
+    """Return an explicit trusted decision time, defaulting to the hand-example anchor."""
+    if decision_time_utc is not None:
+        return decision_time_utc
+    return _SLOT0_UTC + timedelta(hours=state.current_slot)
 
+
+def _attach_labels(
+    rows: tuple[FeatureRow, ...],
+    result: s.SolverResult,
+    *,
+    episode_id: str,
+    slot: int,
+    state_version: int,
+    state_hash: str,
+) -> tuple[CandidateLabel, ...]:
+    """Build CandidateLabels from a solver result and feature rows.
+
+    Only ``certified_optimal`` results produce definite positive/negative labels.  All
+    other statuses mark every candidate ``None`` so downstream training excludes them.
+    """
+    labels: list[CandidateLabel] = []
     if result.status == "certified_optimal":
         selected = {(ps.job_id, ps.start_slot) for ps in (result.schedule or ())}
-        for row in collected.rows:
+        for row in rows:
             key = (row.job_id, row.start_slot)
             labels.append(
                 CandidateLabel(
-                    episode_id=collected.episode_id,
-                    slot=collected.slot,
-                    state_version=collected.state_version,
+                    episode_id=episode_id,
+                    slot=slot,
+                    state_version=state_version,
                     job_id=row.job_id,
                     start_slot=row.start_slot,
                     label=key in selected,
@@ -129,12 +143,12 @@ def label_decision(
     else:
         # Infeasible, unresolved, or insufficient_evidence: every feasible candidate is
         # marked None so downstream training excludes the whole decision.
-        for row in collected.rows:
+        for row in rows:
             labels.append(
                 CandidateLabel(
-                    episode_id=collected.episode_id,
-                    slot=collected.slot,
-                    state_version=collected.state_version,
+                    episode_id=episode_id,
+                    slot=slot,
+                    state_version=state_version,
                     job_id=row.job_id,
                     start_slot=row.start_slot,
                     label=None,
@@ -143,11 +157,71 @@ def label_decision(
                     candidate_hash=_candidate_hash(state_hash, row.job_id, row.start_slot),
                 )
             )
+    return tuple(labels)
+
+
+def label_decision(
+    collected: CollectedDecision,
+    *,
+    time_limit_s: float = 30.0,
+    tolerance: float = 1e-6,
+    cache: Optional["LabelCache"] = None,
+) -> LabeledDecision:
+    """Run the O01 reference solver on one collected decision and attach labels.
+
+    If ``cache`` is supplied, the solver result is looked up first; on a miss the result is
+    computed, stored, and then used to label the decision.  Only ``certified_optimal``
+    cached results are accepted as label sources.
+    """
+    from dc_sustainability.reference.cache import make_cache_key
+
+    decision_time = _decision_time_utc(collected.state, collected.decision_time_utc)
+    rows = candidate_features(
+        collected.state, collected.context, decision_time_utc=decision_time
+    )
+    backend, backend_version = solver_module._BACKENDS[0], solver_module._BACKEND_VERSION
+    key = make_cache_key(
+        collected.state,
+        collected.context,
+        rows,
+        backend=backend,
+        backend_version=backend_version,
+        tolerance=tolerance,
+        time_limit_s=time_limit_s,
+    )
+
+    result: Optional[s.SolverResult] = None
+    if cache is not None:
+        result = cache.get(key)
+
+    if result is None:
+        result = solve_visible(
+            collected.state,
+            collected.context,
+            time_limit_s=time_limit_s,
+            tolerance=tolerance,
+        )
+
+    labels = _attach_labels(
+        rows,
+        result,
+        episode_id=collected.episode_id,
+        slot=collected.slot,
+        state_version=collected.state_version,
+        state_hash=collected.context.content_hash,
+    )
+
+    if cache is not None and result.status == "certified_optimal":
+        try:
+            cache.put(key, result, labels)
+        except FileExistsError:
+            # Immutable cache already holds an identical entry; ignore.
+            pass
 
     return LabeledDecision(
         collected=collected,
         solver_result=result,
-        labels=tuple(labels),
+        labels=labels,
     )
 
 
@@ -156,10 +230,11 @@ def label_episode(
     *,
     time_limit_s: float = 30.0,
     tolerance: float = 1e-6,
+    cache: Optional["LabelCache"] = None,
 ) -> tuple[LabeledDecision, ...]:
     """Label every collected decision in an episode."""
     return tuple(
-        label_decision(decision, time_limit_s=time_limit_s, tolerance=tolerance)
+        label_decision(decision, time_limit_s=time_limit_s, tolerance=tolerance, cache=cache)
         for decision in decisions
     )
 
@@ -176,43 +251,14 @@ def labels_from_solver_result(
     This is useful for replay/audit: the solver result may have been cached or produced by
     a different backend, but the label semantics stay identical.
     """
-    if decision_time_utc is None:
-        from tests.contracts.fixtures import SLOT0_UTC
-
-        decision_time_utc = SLOT0_UTC + timedelta(hours=state.current_slot)
-    rows = candidate_features(state, context, decision_time_utc=decision_time_utc)
+    decision_time = _decision_time_utc(state, decision_time_utc)
+    rows = candidate_features(state, context, decision_time_utc=decision_time)
     state_hash = context.content_hash
-    labels: list[CandidateLabel] = []
-    if result.status == "certified_optimal":
-        selected = {(ps.job_id, ps.start_slot) for ps in (result.schedule or ())}
-        for row in rows:
-            key = (row.job_id, row.start_slot)
-            labels.append(
-                CandidateLabel(
-                    episode_id=state.episode_id,
-                    slot=state.current_slot,
-                    state_version=state.state_version,
-                    job_id=row.job_id,
-                    start_slot=row.start_slot,
-                    label=key in selected,
-                    source_solver_result_id=result.solver_result_id,
-                    state_hash=state_hash,
-                    candidate_hash=_candidate_hash(state_hash, row.job_id, row.start_slot),
-                )
-            )
-    else:
-        for row in rows:
-            labels.append(
-                CandidateLabel(
-                    episode_id=state.episode_id,
-                    slot=state.current_slot,
-                    state_version=state.state_version,
-                    job_id=row.job_id,
-                    start_slot=row.start_slot,
-                    label=None,
-                    source_solver_result_id=result.solver_result_id,
-                    state_hash=state_hash,
-                    candidate_hash=_candidate_hash(state_hash, row.job_id, row.start_slot),
-                )
-            )
-    return tuple(labels)
+    return _attach_labels(
+        rows,
+        result,
+        episode_id=state.episode_id,
+        slot=state.current_slot,
+        state_version=state.state_version,
+        state_hash=state_hash,
+    )
