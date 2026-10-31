@@ -1,0 +1,72 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "rater": "",
+  "outputs": [
+    {
+      "case_id": "CAL01",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": false,
+      "assertions": [],
+      "completeness": {
+        "decision": null,
+        "reason": null,
+        "evidence": null,
+        "limitations": null
+      },
+      "notes": ""
+    },
+    {
+      "case_id": "CAL01",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 emits 22.0 kg.",
+          "label": null,
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 emits 26.4 kg.",
+          "label": null,
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        },
+        {
+          "assertion_id": "C3",
+          "source": "claim",
+          "text": "The slot 3 forecast is 250 g/kWh.",
+          "label": null,
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        }
+      ],
+      "completeness": {
+        "decision": null,
+        "reason": null,
+        "evidence": null,
+        "limitations": null
+      },
+      "notes": ""
+    }
+  ]
+}
