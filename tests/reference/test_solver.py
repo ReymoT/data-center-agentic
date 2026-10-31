@@ -152,6 +152,20 @@ def test_missing_forecast_is_insufficient_evidence():
     )
 
 
+def test_missing_freshness_constraint_is_insufficient_evidence():
+    """A forecast cannot be treated as fresh without an authoritative freshness limit."""
+    snap = f.snapshot()
+    constraints = tuple(
+        constraint for constraint in snap.constraints if constraint.constraint_type != "freshness"
+    )
+    no_freshness = snap.model_copy(update={"constraints": constraints})
+    state = f.visible_state(no_freshness)
+    ctx = s.Context.build(state, no_freshness, representation="flat")
+    result = solve_visible(state, ctx, decision_time_utc=_decision_time(state), time_limit_s=5.0)
+    assert result.status == "insufficient_evidence"
+    assert "missing or stale carbon forecasts" in result.unresolved_reason
+
+
 def test_physical_capacity_infeasibility_is_certified():
     """A job that cannot fit under capacity is certified_infeasible, not insufficient_evidence."""
     snap = f.snapshot(capacity_kw=10.0)

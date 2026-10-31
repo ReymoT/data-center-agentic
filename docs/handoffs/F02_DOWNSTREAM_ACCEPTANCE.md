@@ -1,6 +1,6 @@
 # F02 Downstream Interface Acceptance Handoff
 
-**Status:** Accepted (with solver/label receiving tests added)  
+**Status:** Bounded downstream acceptance (with solver/label receiving tests added)
 **Branch:** `ved/f02-downstream-acceptance`  
 **Date:** 2026-10-30  
 **Owner:** Ved  
@@ -52,7 +52,9 @@ Added 10 new receiving tests and extended 4 existing ones to exercise the F02 `S
 - `test_nonflexible_job_requires_arrival_start` — non-flexible job missing its arrival start is `certified_infeasible`.
 - `test_solver_populates_gap_and_bound` — `gap` and `bound_kg` are populated on optimal solves.
 - `test_solver_timeout_is_unresolved` — tiny time limit produces `unresolved`.
-- `test_tie_break_is_deterministic` — equal-cost schedules resolve deterministically.
+- `test_tie_break_is_deterministic` — the pinned backend and stable candidate order
+  repeat the same equal-cost schedule. This does not freeze the final Q08 scientific
+  tie-break rule.
 - `test_solver_input_hash_matches_context` — `input_hash` equals `context.content_hash`.
 
 Existing tests were updated to pass `decision_time_utc` and assert `backend_version`, `time_limit_s`, `elapsed_s`, `gap`, and `bound_kg`.
@@ -63,8 +65,14 @@ Updated 5 call sites to pass `decision_time_utc=_decision_time(state.current_slo
 
 ### 3.3 Production code touched
 
-- `dc_sustainability/reference/solver.py` — already contained the F02-compliant implementation on this branch (explicit `decision_time_utc`, freshness checks, deterministic tie-break, elapsed/gap/bound reporting).
-- `dc_sustainability/reference/labels.py` — already forwarded `decision_time_utc` to `solve_visible` and provided a fallback default.
+- `dc_sustainability/reference/solver.py` — requires explicit `decision_time_utc`,
+  distinguishes missing/stale evidence from physical infeasibility and reports
+  elapsed/gap/bound values. Missing freshness evidence fails closed. Stable candidate
+  order and the pinned backend are repeatable, but the final Q08 scientific tie-break
+  rule remains open.
+- `dc_sustainability/reference/labels.py` — forwards the collected decision time and
+  requires replay/audit callers to provide an explicit trusted UTC decision time. It
+  has no production dependency on test fixtures.
 
 No schema changes were made.
 
@@ -82,7 +90,8 @@ No schema changes were made.
 
 ## 5. Blockers / Follow-up
 
-- **None blocking.** The F02 downstream interface is accepted on this branch.
+- **No blocker for bounded development receiving.** The final Q08 scientific tie-break
+  and source/scientific acceptance remain freeze items and are not settled here.
 - **Note:** `docs/handoffs/D04_DEVELOPMENT_FOLD_MAP_102.md` and `data/D02_CALIBRATION.md` are flagged by `ruff format` as unformatted Markdown, but they are pre-existing and unrelated to F02.
 - **Future work:** If additional consumers (e.g., a new policy or renderer) begin calling `solve_visible` directly, they must pass an explicit `decision_time_utc`; the contract test `test_solver_requires_decision_time_utc` now enforces this.
 

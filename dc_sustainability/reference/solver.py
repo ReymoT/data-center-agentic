@@ -25,8 +25,9 @@ Design choices (Q08 stand-in until the team records them):
   2. Each job starts within its visible window (encoded by variable existence).
   3. Capacity per slot: background + running + newly started jobs <= capacity limit.
   4. Non-flexible jobs must start exactly at their arrival slot.
-* Tie-breaking: deterministic lexicographic ordering of candidates (job_id, start_slot)
-  implemented as a tiny secondary objective term so the MILP itself breaks ties.
+* Tie handling: candidates are built in stable ``(job_id, start_slot)`` order and the
+  pinned SciPy/HiGHS backend is deterministic for identical inputs. The final scientific
+  tie-break rule remains a Q08 freeze item; this implementation does not perturb emissions.
 * Tolerance: ``1e-6`` for integrality/objective reporting.
 """
 
@@ -54,7 +55,6 @@ _BACKENDS = ("scipy.optimize.milp",)
 _BACKEND_VERSION = f"scipy-{_scipy_version}"
 _TIME_LIMIT_S = 30.0
 _TOLERANCE = 1e-6
-_TIE_BREAK_EPS = 1e-7  # small enough to never flip primary objective decisions
 
 
 @dataclass(frozen=True)
@@ -135,11 +135,11 @@ class _MILPModel:
             self._job_has_physical_candidate[job.job_id] = has_physical
             self._job_has_fresh_candidate[job.job_id] = has_fresh
 
-    def _max_age_seconds(self) -> float:
+    def _max_age_seconds(self) -> Optional[float]:
         try:
             return _max_age_seconds(self.state, self.context)
         except s.MissingEvidenceError:
-            return float("inf")
+            return None
 
     def _fits(self, start: int, job: s.Job) -> bool:
         if self.capacity is None:
@@ -150,8 +150,10 @@ class _MILPModel:
         )
 
     def _fresh_carbon(
-        self, start: int, duration: int, max_age: float
+        self, start: int, duration: int, max_age: Optional[float]
     ) -> Optional[tuple[float, ...]]:
+        if max_age is None:
+            return None
         current = self.state.current_slot
         visible_end = min(current + s.PROPOSED_DECISION_SLOTS, self.horizon)
         values: list[float] = []
@@ -200,16 +202,13 @@ class _MILPModel:
         if not self.vars:
             # No waiting jobs and no candidates: trivially optimal empty schedule.
             elapsed = time.perf_counter() - start_time
-            return self._certified_optimal([], 0.0, "empty visible horizon", elapsed)
+            return self._certified_optimal([], "empty visible horizon", elapsed)
 
         n = len(self.vars)
-        # Primary objective: minimize emissions. Secondary tiny lexicographic tie-break
-        # so the solver itself prefers lower (job_id, start_slot) without changing the
-        # primary optimum. The perturbation is bounded by _TIE_BREAK_EPS * n < tolerance.
-        c = np.array(
-            [var.emissions_kg + _TIE_BREAK_EPS * (var.idx + 1) for var in self.vars],
-            dtype=float,
-        )
+        # Minimize the physical emissions objective without a numerical perturbation.
+        # Candidate construction is stable, so the pinned backend is repeatable for the
+        # same input. A formal scientific tie-break remains an explicit Q08 freeze item.
+        c = np.array([var.emissions_kg for var in self.vars], dtype=float)
 
         # Each arrived waiting job must start exactly once.
         job_ids = sorted({var.job_id for var in self.vars})
@@ -283,10 +282,8 @@ class _MILPModel:
         # 0 -> success, 1 -> timeout, 2 -> infeasible, 3 -> unbounded.
         if res.success and res.status == 0:
             selected = [var for var in self.vars if res.x[var.idx] > 0.5]
-            objective = float(res.fun)
             return self._certified_optimal(
                 selected,
-                objective,
                 res.message,
                 elapsed,
                 gap=getattr(res, "mip_gap", None),
@@ -309,14 +306,12 @@ class _MILPModel:
     def _certified_optimal(
         self,
         selected: list[CandidateVar],
-        objective_kg: float,
         termination: str,
         elapsed_s: float,
         *,
         gap: Optional[float] = None,
         bound_kg: Optional[float] = None,
     ) -> s.SolverResult:
-        # Remove the tie-break perturbation from the reported objective.
         primary_objective = sum(var.emissions_kg for var in selected)
         return s.SolverResult(
             solver_result_id=_new_solver_id(),
@@ -333,11 +328,13 @@ class _MILPModel:
             objective_kg=round(primary_objective, 6),
             bound_kg=round(bound_kg, 6) if bound_kg is not None else None,
             gap=round(gap, 6) if gap is not None else None,
-            tie_break="lexicographic (job_id, start_slot) via secondary objective",
+            tie_break=(
+                "stable candidate order (job_id, start_slot) with pinned scipy/HiGHS; "
+                "formal Q08 scientific tie-break not frozen"
+            ),
             certification_basis=(
                 "scipy.optimize.milp mixed-integer linear program; "
-                "minimize emissions; capacity + one-start + nonflexible constraints; "
-                "deterministic lexicographic tie-break"
+                "minimize emissions; capacity + one-start + nonflexible constraints"
             ),
             schedule=self._schedule_from(selected),
             matching_work_job_ids=tuple(sorted({var.job_id for var in selected})),
