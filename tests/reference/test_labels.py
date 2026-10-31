@@ -42,7 +42,9 @@ def test_optimal_labels_match_solver_schedule():
     snap = f.snapshot()
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
     labels = labels_from_solver_result(state, ctx, result)
     selected = {(label.job_id, label.start_slot) for label in labels if label.label is True}
     assert selected == {(ps.job_id, ps.start_slot) for ps in result.schedule}
@@ -59,7 +61,9 @@ def test_infeasible_state_labels_are_none():
         completed_job_ids=("J1", "J2"),
     )
     ctx = s.Context.build(state, snap, representation="flat")
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
     assert result.status == "certified_infeasible"
     labels = labels_from_solver_result(state, ctx, result)
     assert all(label.label is None for label in labels)
@@ -70,7 +74,9 @@ def test_missing_capacity_labels_are_none():
     snap = f.snapshot(include_capacity=False)
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
     assert result.status == "insufficient_evidence"
     labels = labels_from_solver_result(state, ctx, result)
     assert all(label.label is None for label in labels)
@@ -122,7 +128,9 @@ def test_candidate_label_hash_is_stable():
     snap = f.snapshot()
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
     labels = labels_from_solver_result(state, ctx, result)
     hashes = {label.candidate_hash for label in labels}
     assert len(hashes) == len(labels)
@@ -136,7 +144,9 @@ def test_labels_preserve_feature_row_order():
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
     rows = candidate_features(state, ctx, decision_time_utc=f.SLOT0_UTC)
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
     labels = labels_from_solver_result(state, ctx, result)
     label_keys = [(label.job_id, label.start_slot) for label in labels]
     row_keys = [(row.job_id, row.start_slot) for row in rows]

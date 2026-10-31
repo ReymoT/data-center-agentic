@@ -103,6 +103,7 @@ def label_decision(
     result = solve_visible(
         collected.state,
         collected.context,
+        decision_time_utc=collected.decision_time_utc,
         time_limit_s=time_limit_s,
         tolerance=tolerance,
     )
@@ -164,6 +165,13 @@ def label_episode(
     )
 
 
+def _default_decision_time_utc(state: s.VisibleState) -> datetime:
+    """Fallback decision time when an explicit timestamp is not supplied by the caller."""
+    from tests.contracts.fixtures import SLOT0_UTC
+
+    return SLOT0_UTC + timedelta(hours=state.current_slot)
+
+
 def labels_from_solver_result(
     state: s.VisibleState,
     context: s.Context,
@@ -177,9 +185,7 @@ def labels_from_solver_result(
     a different backend, but the label semantics stay identical.
     """
     if decision_time_utc is None:
-        from tests.contracts.fixtures import SLOT0_UTC
-
-        decision_time_utc = SLOT0_UTC + timedelta(hours=state.current_slot)
+        decision_time_utc = _default_decision_time_utc(state)
     rows = candidate_features(state, context, decision_time_utc=decision_time_utc)
     state_hash = context.content_hash
     labels: list[CandidateLabel] = []
