@@ -82,22 +82,23 @@ def messages(context, *args):
 RENDERERS = m.AgentRenderers(proposal=messages, repair=messages, explanation=messages)
 
 
-def settings(server, trials=(0,), max_total=1000, **pins):
+def settings(server, trials=(0,), max_total=1000, max_run_attempts=72, **pins):
     return ModelSettings(
         seeds=tuple((t, 100 + t) for t in trials),
         decision_seconds=10,
         max_total_attempts=max_total,
-        deployment=m.deployment_pins(deployment(server, max_run_attempts=72, **pins)),
+        deployment=m.deployment_pins(deployment(server, max_run_attempts=max_run_attempts, **pins)),
         plain_prompt_sha256=prompt_template_sha256(),
         agent_renderer_ref="synthetic-test-renderers",
     )
 
 
-def inputs(server, **pins):
+def inputs(server, max_run_attempts=72, **pins):
     def factory():
         # A synthetic counter belongs only to this test; no production tokenizer is implied.
         return OllamaProvider(
-            deployment(server, max_run_attempts=72, **pins), count_prompt_tokens=lambda _: 20
+            deployment(server, max_run_attempts=max_run_attempts, **pins),
+            count_prompt_tokens=lambda _: 20,
         )
 
     return m.ModelInputs(provider_factory=factory, agent_renderers=RENDERERS)
@@ -258,6 +259,21 @@ def test_run_attempt_budget_counts_persisted_attempts_across_calls(tmp_path, mod
     sent = len(model.requests)
     t0, t1 = runner.run(cfg, tmp_path / "out", inputs(model))  # a new process, same budget
     assert t1.status == "pending" and len(model.requests) == sent
+
+
+def test_admission_uses_stricter_per_unit_ledger_cap(tmp_path, model):
+    ep, path = write_bundle(tmp_path)
+    cfg = model_config(
+        path,
+        ep,
+        model,
+        systems=("plain_llm", "agent"),
+        max_total=24,
+        max_run_attempts=18,
+    )
+    statuses = runner.run(cfg, tmp_path / "out", inputs(model, max_run_attempts=18))
+    assert [status.status for status in statuses] == ["completed", "completed"]
+    assert len(model.requests) <= 24
 
 
 def test_model_systems_refuse_without_explicit_inputs_before_writing(tmp_path, model):

@@ -9,7 +9,7 @@
     "episode_id": "EP-HAND1",
     "source": "public repository hand-example fixture",
     "bundle_path": "docs/evidence/ep-hand1-episode-bundle.json",
-    "bundle_sha256": "c7f05743bbb3055f8ae15b0f18f2548bdd57bb7fbff0e05eef4ae3b1eb529db3",
+    "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
     "plain_and_agent_must_match": true
   },
   "renderer_freeze": {

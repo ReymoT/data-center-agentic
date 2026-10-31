@@ -140,7 +140,12 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
         model_unit = registry.spec(unit.system).trials
         if status.status == "pending" and model_unit:
             used = m.spent_attempts(root)
-            need = m.worst_case_attempts(unit.system)
+            # Admission must use the strictest enforceable per-unit ceiling. The
+            # provider ledger can be lower than the 24-slot call-cap maximum.
+            need = min(
+                m.worst_case_attempts(unit.system),
+                config.model.deployment["max_run_attempts"],
+            )
             if halted is not None:
                 status = UnitStatus(unit, "pending", f"model units halted: {halted}")
             elif used + need > config.model.max_total_attempts:

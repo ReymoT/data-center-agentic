@@ -1,6 +1,5 @@
 """Offline guardrails for the A02 episode-authorization preparation; no model calls."""
 
-import hashlib
 import json
 from pathlib import Path
 
@@ -8,6 +7,7 @@ from dc_sustainability.agent.renderers import (
     proposal_template_sha256,
     repair_template_sha256,
 )
+from dc_sustainability.experiments.config import lf_sha256
 from dc_sustainability.explanations.agent import explanation_template_sha256
 from dc_sustainability.llm.plain import prompt_template_sha256
 
@@ -37,7 +37,7 @@ def test_episode_and_all_renderers_are_frozen_without_inventing_bounds():
     assert data["episode"]["episode_id"] == "EP-HAND1"
     assert data["episode"]["plain_and_agent_must_match"] is True
     bundle = ROOT / data["episode"]["bundle_path"]
-    assert hashlib.sha256(bundle.read_bytes()).hexdigest() == data["episode"]["bundle_sha256"]
+    assert lf_sha256(bundle) == data["episode"]["bundle_sha256"]
     freeze = data["renderer_freeze"]
     assert freeze["status"] == "frozen_offline"
     assert freeze["exact_commit"] == "8a98996be6b497cf1065bdfaec8bbd1ce9f4b58b"
