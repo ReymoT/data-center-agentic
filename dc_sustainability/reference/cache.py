@@ -8,11 +8,13 @@ treated as misses so the caller can re-run the reference solver safely.
 The cache key covers every input that can change the reference label set:
 
 * visible state fingerprint (``VisibleState.canonical_hash``)
+* authoritative decision timestamp (``decision_time_utc``)
 * decision slot / state version / episode id
 * context content hash (constraints, forecasts, sources, evidence ids)
-* candidate set (job_id, start_slot) derived from the feature rows
+* candidate set (job_id, start_slot) and feature values derived from the rows
 * solver configuration (backend, backend_version, tolerance, time_limit_s)
 * reference solver implementation version
+* cache schema version
 * label schema version
 
 Only ``certified_optimal`` results are cached as usable label sources.  Other
@@ -24,6 +26,7 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
@@ -44,6 +47,7 @@ class CacheKey:
 
     state_hash: str
     context_hash: str
+    decision_time_utc: str
     candidate_hash: str
     backend: str
     backend_version: str
@@ -56,6 +60,7 @@ class CacheKey:
         return {
             "state_hash": self.state_hash,
             "context_hash": self.context_hash,
+            "decision_time_utc": self.decision_time_utc,
             "candidate_hash": self.candidate_hash,
             "backend": self.backend,
             "backend_version": self.backend_version,
@@ -70,8 +75,15 @@ class CacheKey:
 
 
 def _candidate_set_hash(rows: tuple[FeatureRow, ...]) -> str:
-    """Hash the ordered candidate keys that the solver labels."""
-    keys = tuple((row.job_id, row.start_slot) for row in rows)
+    """Hash the ordered candidate keys and their feature values that the solver labels."""
+    keys = tuple(
+        {
+            "job_id": row.job_id,
+            "start_slot": row.start_slot,
+            "features": row.values(),
+        }
+        for row in rows
+    )
     return s.sha256_hex({"candidates": keys})
 
 
@@ -80,15 +92,21 @@ def make_cache_key(
     context: s.Context,
     rows: tuple[FeatureRow, ...],
     *,
+    decision_time_utc: datetime,
     backend: str,
     backend_version: str,
     tolerance: Optional[float],
     time_limit_s: Optional[float],
 ) -> CacheKey:
     """Build a deterministic cache key from all label-relevant inputs."""
+    from datetime import timedelta
+
+    if not isinstance(decision_time_utc, datetime) or decision_time_utc.utcoffset() != timedelta(0):
+        raise ValueError("an explicit trusted UTC decision_time_utc is required")
     return CacheKey(
         state_hash=state.canonical_hash(),
         context_hash=context.content_hash,
+        decision_time_utc=decision_time_utc.isoformat().replace("+00:00", "Z"),
         candidate_hash=_candidate_set_hash(rows),
         backend=backend,
         backend_version=backend_version,
@@ -148,6 +166,11 @@ class LabelCache:
         """Return a cached certified result, or None on miss/invalidation."""
         entry = self._load_entry(self._entry_path(key))
         if entry is None:
+            return None
+        if entry.get("reference_solver_version") != _REFERENCE_SOLVER_VERSION:
+            return None
+        stored_key = entry.get("key")
+        if stored_key != key.canonical_dict():
             return None
         result_path = Path(entry["result_path"])
         if not result_path.exists():
@@ -224,6 +247,10 @@ class LabelCache:
         """Return cached labels for a key, or None on miss/invalidation."""
         entry = self._load_entry(self._entry_path(key))
         if entry is None:
+            return None
+        if entry.get("reference_solver_version") != _REFERENCE_SOLVER_VERSION:
+            return None
+        if entry.get("key") != key.canonical_dict():
             return None
         label_dicts = entry.get("labels")
         if not isinstance(label_dicts, list):

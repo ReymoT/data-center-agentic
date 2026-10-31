@@ -12,7 +12,7 @@ def _context(state: s.VisibleState) -> s.Context:
 def test_hand_example_is_certified_optimal():
     snap = f.snapshot()
     state = f.visible_state(snap)
-    result = solve_visible(state, _context(state), time_limit_s=5.0)
+    result = solve_visible(state, _context(state), decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     assert result.status == "certified_optimal"
     assert result.kind == "visible"
     assert result.uses_future_arrivals is False
@@ -33,7 +33,7 @@ def test_infeasible_job_is_certified_infeasible():
         waiting_job_ids=("J3",),
         completed_job_ids=("J1", "J2"),
     )
-    result = solve_visible(state, _context(state), time_limit_s=5.0)
+    result = solve_visible(state, _context(state), decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     assert result.status == "certified_infeasible"
     assert result.schedule is None
     assert result.objective_kg is None
@@ -44,7 +44,7 @@ def test_missing_capacity_is_insufficient_evidence():
     snap = f.snapshot(include_capacity=False)
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
-    result = solve_visible(state, ctx, time_limit_s=5.0)
+    result = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     assert result.status == "insufficient_evidence"
     assert result.schedule is None
     assert result.objective_kg is None
@@ -54,7 +54,7 @@ def test_missing_capacity_is_insufficient_evidence():
 def test_solver_result_schema_validates():
     snap = f.snapshot()
     state = f.visible_state(snap)
-    result = solve_visible(state, _context(state), time_limit_s=5.0)
+    result = solve_visible(state, _context(state), decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     # Round-trip through JSON to ensure strict schema compliance.
     s.SolverResult.from_json(result.to_json())
 
@@ -63,8 +63,8 @@ def test_solver_is_deterministic():
     snap = f.snapshot()
     state = f.visible_state(snap)
     ctx = _context(state)
-    first = solve_visible(state, ctx, time_limit_s=5.0)
-    second = solve_visible(state, ctx, time_limit_s=5.0)
+    first = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
+    second = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     assert first.schedule == second.schedule
     assert first.objective_kg == second.objective_kg
     assert first.input_hash == second.input_hash

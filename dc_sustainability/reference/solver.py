@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from typing import Optional
 
 import numpy as np
@@ -70,11 +71,13 @@ class _MILPModel:
         state: s.VisibleState,
         context: s.Context,
         *,
+        decision_time_utc: datetime,
         time_limit_s: float = _TIME_LIMIT_S,
         tolerance: float = _TOLERANCE,
     ) -> None:
         self.state = state
         self.context = context
+        self.decision_time_utc = decision_time_utc
         self.time_limit_s = time_limit_s
         self.tolerance = tolerance
         self.capacity: Optional[float] = _capacity_kw(context)
@@ -123,10 +126,14 @@ class _MILPModel:
     def _fresh_carbon(self, start: int, duration: int) -> Optional[tuple[float, ...]]:
         current = self.state.current_slot
         visible_end = min(current + s.PROPOSED_DECISION_SLOTS, self.horizon)
+        max_age = _max_age_seconds(self.state, self.context)
         values: list[float] = []
         for slot in range(start, start + duration):
             fact = self.facts.get(slot)
             if fact is None or not current <= slot < visible_end:
+                return None
+            age = (self.decision_time_utc - fact.issued_at_utc).total_seconds()
+            if age < 0 or age > max_age:
                 return None
             values.append(fact.value)
         return tuple(values)
@@ -139,6 +146,10 @@ class _MILPModel:
     def solve(self) -> s.SolverResult:
         if self.capacity is None:
             return self._insufficient_evidence("capacity constraint missing from context")
+        try:
+            _max_age_seconds(self.state, self.context)
+        except s.MissingEvidenceError as exc:
+            return self._insufficient_evidence(str(exc))
         if not self.vars:
             # No feasible candidates. If there are waiting jobs, the instance is infeasible.
             if self.state.waiting_jobs:
@@ -307,15 +318,41 @@ def _new_solver_id() -> str:
     return f"SOLVE-{uuid.uuid4().hex[:16].upper()}"
 
 
+def _max_age_seconds(state: s.VisibleState, context: s.Context) -> float:
+    limits = [
+        constraint.limit_value
+        for constraint in context.content.constraints
+        if constraint.constraint_type == "freshness"
+    ]
+    if not limits:
+        raise s.MissingEvidenceError("authoritative freshness constraint is missing")
+    return min(2, *limits) * state.site.slot_hours * 3600
+
+
 def solve_visible(
     state: s.VisibleState,
     context: s.Context,
     *,
+    decision_time_utc: datetime,
     time_limit_s: float = _TIME_LIMIT_S,
     tolerance: float = _TOLERANCE,
 ) -> s.SolverResult:
-    """Solve one visible decision and return a typed ``SolverResult``."""
+    """Solve one visible decision and return a typed ``SolverResult``.
+
+    ``decision_time_utc`` is the authoritative wall-clock time at which the
+    decision is made.  It is used to validate forecast freshness and is recorded
+    in the cache key so that labels from different decision instants never
+    collide.
+    """
     if state.constraint_snapshot_id != context.content.snapshot_id:
         raise s.ContractError("state and context snapshot ids differ")
-    model = _MILPModel(state, context, time_limit_s=time_limit_s, tolerance=tolerance)
+    if not isinstance(decision_time_utc, datetime) or decision_time_utc.utcoffset() != timedelta(0):
+        raise ValueError("an explicit trusted UTC decision_time_utc is required")
+    model = _MILPModel(
+        state,
+        context,
+        decision_time_utc=decision_time_utc,
+        time_limit_s=time_limit_s,
+        tolerance=tolerance,
+    )
     return model.solve()
