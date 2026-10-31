@@ -7,9 +7,12 @@ The original model response is kept for scoring. There are no tools, checker
 feedback, repair, retry or greedy-A fallback here; the runtime gate decides what may
 execute, and blocked or failed decisions still advance the simulator.
 
-Development preparation only. The flat presentation is the F02 ``ContextContent``
-JSON until K02 publishes the agreed projection. Prompts await Q01-Q04 and Matty's
-review, and nothing here has run against a real model.
+The flat presentation is the F02 ``ContextContent`` JSON from K02 ``retrieve``
+(representation "flat"). The prompt files are frozen by ``prompt_template_sha256``;
+A01's bounded validation on October 30, 2026 sent one real request through
+``propose`` with prompt hash ``ff550134...`` (``docs/handoffs/A01_BOUNDED_PAIRED_
+VALIDATION_2026-10-30.md``). That validates the shared provider path only: no Plain
+development episode or study run has been made.
 """
 
 import hashlib
