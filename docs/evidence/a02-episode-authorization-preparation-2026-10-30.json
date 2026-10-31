@@ -1,23 +1,37 @@
 {
   "schema_version": "a02-episode-authorization-preparation-v1",
   "evidence_kind": "offline_preparation_not_inference",
-  "status": "blocked_pending_freeze_and_authorization",
+  "status": "blocked_pending_episode_limits_and_authorization",
   "scope": "One paired Plain/Agent development receiving exercise on public EP-HAND1; not a study run",
   "preparation_model_calls": 0,
   "preparation_runtime_requests": 0,
   "episode": {
     "episode_id": "EP-HAND1",
     "source": "public repository hand-example fixture",
-    "bundle_path": null,
-    "bundle_sha256": null,
+    "bundle_path": "docs/evidence/ep-hand1-episode-bundle.json",
+    "bundle_sha256": "c7f05743bbb3055f8ae15b0f18f2548bdd57bb7fbff0e05eef4ae3b1eb529db3",
     "plain_and_agent_must_match": true
   },
   "renderer_freeze": {
-    "exact_commit": null,
-    "proposal_template_sha256": null,
-    "repair_template_sha256": null,
-    "explanation_renderer_ref": null,
-    "status": "not_frozen"
+    "exact_commit": "8a98996be6b497cf1065bdfaec8bbd1ce9f4b58b",
+    "plain_renderer_ref": "dc_sustainability.llm.plain:render_messages",
+    "plain_prompt_template_sha256": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
+    "proposal_renderer_ref": "dc_sustainability.agent.renderers:render_proposal",
+    "proposal_template_sha256": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
+    "repair_renderer_ref": "dc_sustainability.agent.renderers:render_repair",
+    "repair_template_sha256": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba",
+    "explanation_renderer_ref": "dc_sustainability.explanations.agent:render_explanation",
+    "explanation_template_sha256": "6524939914db0389104e96dc6d55a406234e1ed93624e1a58816ac6735947446",
+    "status": "frozen_offline"
+  },
+  "a01_prerequisite": {
+    "status": "passed_for_bounded_transport_only",
+    "evidence": "docs/handoffs/A01_BOUNDED_PAIRED_VALIDATION_2026-10-30.md",
+    "model_calls": 2,
+    "retries": 0,
+    "backend": "Vulkan",
+    "offloaded_layers": "37/37",
+    "limitations": "A01 evidence does not authorize an A02 episode or establish a study result."
   },
   "runtime_identity": {
     "accepted_runtime_version": "0.40.5",
@@ -60,7 +74,8 @@
   "limitations": [
     "This file prepares a future decision and cannot authorize inference.",
     "No request limits or deadlines are inferred from A01's consumed authorization.",
-    "The explanation renderer remains Nisha-owned and is not supplied here.",
+    "The Plain, proposal, repair and explanation renderers are frozen by reference and template hash; this is not authorization to call them.",
+    "Exact A02 episode request limits and deadlines remain undecided and must not be copied from A01 without an explicit A02 decision.",
     "D04 study episodes remain separate from this public receiving exercise."
   ]
 }
