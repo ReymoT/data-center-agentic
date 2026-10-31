@@ -128,6 +128,33 @@ class ModelSettings:
 
 
 @dataclass(frozen=True)
+class TrainedSettings:
+    """Frozen identity of the trained C/D systems: each artifact's SHA256.
+
+    Edison's P04 artifacts are explicit runner inputs; the run records which exact
+    artifact each trained system used, so a retrained model is a different run.
+    """
+
+    artifacts: tuple[tuple[str, str], ...]  # (system, artifact SHA256)
+
+    def __post_init__(self):
+        systems = [system for system, _ in self.artifacts]
+        if not systems or len(set(systems)) != len(systems):
+            raise ValueError("each trained system needs exactly one artifact hash")
+        for system, digest in self.artifacts:
+            if registry.spec(system).kind != "trained":
+                raise ValueError(f"{system} is not a trained system")
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                raise ValueError("trained artifact hashes are SHA256 hex digests")
+
+    def artifact(self, system: str) -> str:
+        return dict(self.artifacts)[system]
+
+    def identity(self) -> dict:
+        return {"artifacts": dict(sorted(self.artifacts))}
+
+
+@dataclass(frozen=True)
 class RunConfig:
     name: str
     systems: tuple[str, ...]
@@ -136,6 +163,7 @@ class RunConfig:
     code_revision: str = "unrecorded"
     lock_sha256: str | None = None
     model: ModelSettings | None = None
+    trained: TrainedSettings | None = None
 
     def __post_init__(self):
         if not self.name.strip():
@@ -159,6 +187,11 @@ class RunConfig:
                 raise ValueError("a plain_llm run records its prompt template hash")
             if "agent" in model_systems and not (self.model.agent_renderer_ref or "").strip():
                 raise ValueError("an agent run records which reviewed renderers it uses")
+        trained_systems = {x for x in self.systems if registry.spec(x).kind == "trained"}
+        if bool(trained_systems) != (self.trained is not None):
+            raise ValueError("trained settings are given exactly when a trained system is listed")
+        if self.trained is not None and {x for x, _ in self.trained.artifacts} != trained_systems:
+            raise ValueError("trained settings pin exactly the listed trained systems")
 
     def identity(self) -> dict:
         """What the run is: everything that changes results, not where files live."""
@@ -173,6 +206,8 @@ class RunConfig:
         }
         if self.model is not None:  # absent for A/B-only runs, so their hashes are unchanged
             identity["model"] = self.model.identity()
+        if self.trained is not None:  # likewise absent unless C or D is listed
+            identity["trained"] = self.trained.identity()
         return identity
 
     @property

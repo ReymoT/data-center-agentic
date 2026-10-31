@@ -1,7 +1,7 @@
 {
   "schema_version": "i02-freeze-manifest-v1",
   "evidence_kind": "pre_freeze_checklist_not_frozen",
-  "status_as_of": "2026-10-30",
+  "status_as_of": "2026-10-31",
   "target_freeze_date": "2026-11-13",
   "owner": "Nisha",
   "receiving_owner": "Matty",
@@ -54,7 +54,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "held-out allocation and episode contents are not published; D04 is provisional"
+      "blocker": "held-out allocation and episode contents are not published; D04 is provisional; held-out windows must not overlap the 40 development windows"
     },
     {
       "id": "development-episodes",
@@ -62,10 +62,10 @@
       "description": "40 materialized development episodes for d04-development-20261028-v1",
       "owner": "Reimo",
       "task": "D04",
-      "status": "blocked",
-      "path": "data/manifests/d04-development-20261028-v1/manifest.json",
+      "status": "pending",
+      "path": "data/manifests/d04-development-content-112-v2/receipt.json",
       "sha256": null,
-      "blocker": "#112: episode contents are not generated; P04 and O02 wait on them"
+      "blocker": null
     },
     {
       "id": "ontology-and-shapes",
@@ -87,7 +87,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: needs the materialized development episodes"
+      "blocker": "#112 is closed after bounded receiving produced 813 P03 rows and 30 O02 labels; the full private development corpus still needs collection and labeling for P04"
     },
     {
       "id": "trained-models-c-d",
@@ -98,7 +98,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: needs development episodes and O02 labels"
+      "blocker": "E02-c now accepts explicitly pinned trained inputs, but Edison still needs to produce the real P04 C/D artifacts from the full development folds"
     },
     {
       "id": "plain-prompts",
@@ -114,13 +114,13 @@
     {
       "id": "agent-renderers",
       "category": "prompts/provider",
-      "description": "Reviewed Agent proposal, repair and explanation renderers",
+      "description": "Reviewed Agent proposal and repair renderers (A02) and explanation renderer (L02, dc_sustainability/explanations/agent.py), frozen by their template SHA-256s",
       "owner": "Matty",
       "task": "A02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/agent/renderers.py",
       "sha256": null,
-      "blocker": "no reviewed production renderers on main"
+      "blocker": null
     },
     {
       "id": "a01-deployment",
@@ -128,10 +128,10 @@
       "description": "A01 runtime, model, template and parameter pins, generation settings, response bounds and per-request deadline",
       "owner": "Matty",
       "task": "A01",
-      "status": "blocked",
-      "path": "docs/evidence/a01-bounded-validation-manifest-2026-10-30.json",
+      "status": "pending",
+      "path": "docs/evidence/a01-bounded-paired-validation-2026-10-30.json",
       "sha256": null,
-      "blocker": "#6: the 150/330 deadline agreement is recorded; the frozen bounded validation run and A01 acceptance are not complete"
+      "blocker": null
     },
     {
       "id": "run-settings",
@@ -139,10 +139,10 @@
       "description": "Model trial seeds, per-decision deadline and run attempt budget in the E02 run config",
       "owner": "Nisha",
       "task": "E02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/experiments/matrix.py",
       "sha256": null,
-      "blocker": "per-decision deadline and attempt budget wait on A01 acceptance (#6)"
+      "blocker": null
     },
     {
       "id": "matrix-config",
@@ -150,10 +150,10 @@
       "description": "300-run matrix config with all six systems, including C/D units (E02-c)",
       "owner": "Nisha",
       "task": "E02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/experiments/matrix.py",
       "sha256": null,
-      "blocker": "C/D runner units wait on P04 models"
+      "blocker": null
     },
     {
       "id": "reference-pipeline",
@@ -186,7 +186,7 @@
       "status": "blocked",
       "path": "docs/e04/EXTRACTION_RULE.md",
       "sha256": null,
-      "blocker": "#22: rule 11.6-11.8 agreement is recorded; the 11.8 calibration remains"
+      "blocker": "#22: draft 1 format (#120) and practice packet (#123) are merged; both raters' 11.8 calibration extraction remains"
     },
     {
       "id": "held-out-sample-rule",
@@ -208,7 +208,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "needs C/D models, accepted A01 and an authorized Agent development episode"
+      "blocker": "A01 and the exact EP-HAND1 bounds are accepted; a fresh single-use authorization and actual bounded receiving evidence remain required, followed by real C/D artifacts"
     }
   ],
   "freeze": {

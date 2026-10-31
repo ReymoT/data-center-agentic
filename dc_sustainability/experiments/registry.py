@@ -4,7 +4,8 @@ Every system is registered so a run configuration can name it. A system that is 
 available refuses with its reason; the runner never substitutes another system or a
 placeholder output. The two model systems run only when the caller supplies explicit
 model inputs (a provider and, for the agent, reviewed renderers); nothing here builds
-them, so the CLI cannot reach a model.
+them, so the CLI cannot reach a model. The trained C/D systems likewise run only with
+explicit trained inputs built from Edison's P04 artifacts.
 """
 
 from dataclasses import dataclass
@@ -62,9 +63,13 @@ def spec(system: str) -> SystemSpec:
     return SYSTEMS[system]
 
 
-def require_available(system: str, *, model_inputs: bool = False) -> SystemSpec:
+def require_available(
+    system: str, *, model_inputs: bool = False, trained_inputs: bool = False
+) -> SystemSpec:
     found = spec(system)
     if found.kind == "model" and model_inputs:
+        return found
+    if found.kind == "trained" and trained_inputs:
         return found
     if not found.available:
         raise NotImplementedError(f"{system} is not available in this runner: {found.reason}")

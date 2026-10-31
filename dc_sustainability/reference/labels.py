@@ -22,7 +22,7 @@ from held-out episodes or future arrivals.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Optional
 
 from dc_sustainability import schemas as s
@@ -103,6 +103,7 @@ def label_decision(
     result = solve_visible(
         collected.state,
         collected.context,
+        decision_time_utc=collected.decision_time_utc,
         time_limit_s=time_limit_s,
         tolerance=tolerance,
     )
@@ -169,17 +170,13 @@ def labels_from_solver_result(
     context: s.Context,
     result: s.SolverResult,
     *,
-    decision_time_utc: Optional[datetime] = None,
+    decision_time_utc: datetime,
 ) -> tuple[CandidateLabel, ...]:
     """Attach labels to the Q07 feature rows of a state using an existing SolverResult.
 
     This is useful for replay/audit: the solver result may have been cached or produced by
     a different backend, but the label semantics stay identical.
     """
-    if decision_time_utc is None:
-        from tests.contracts.fixtures import SLOT0_UTC
-
-        decision_time_utc = SLOT0_UTC + timedelta(hours=state.current_slot)
     rows = candidate_features(state, context, decision_time_utc=decision_time_utc)
     state_hash = context.content_hash
     labels: list[CandidateLabel] = []

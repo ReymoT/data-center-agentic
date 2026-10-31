@@ -11,6 +11,12 @@ The manifest also states the planned run matrix, and the validator checks its ar
 
 A smaller matrix can't pass silently: any reduction must be matched across systems and frozen before execution.
 
+`dc_sustainability/experiments/matrix.py` now builds and checks this structural
+design. It rejects changed bundles, non-held-out inputs, missing cells, exposed
+forecasts in missing-forecast episodes and forecasts issued after their decision
+time. This is pre-freeze preparation only: actual held-out bundles, trained-model
+hashes, frozen item hashes and a separate model-run authorization remain required.
+
 ## Commands
 
 ```powershell
