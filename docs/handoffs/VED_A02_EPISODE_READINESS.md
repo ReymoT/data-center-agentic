@@ -1,11 +1,11 @@
 # Ved A02 Episode Readiness Handoff
 
-**Issue:** #18 — A02 model-driven Agent episode readiness  
-**Author:** Ved  
-**Date:** 2026-10-30  
-**Branch:** `ved/issue-18-agent-episode`  
-**Base commit:** `e69f0a8dbd1cf21f8efd9a0fdec7641e63aee6be` (origin/main)  
-**Status:** Blocked
+**Issue:** #18 — A02 model-driven Agent episode readiness
+**Author:** Ved
+**Date:** 2026-10-30
+**Branch:** `ved/issue-18-agent-episode`
+**Base commit:** `e69f0a8dbd1cf21f8efd9a0fdec7641e63aee6be` (origin/main)
+**Status:** Partially ready; live dispatch not authorized
 
 ---
 
@@ -19,14 +19,16 @@ Determine whether the project can safely execute one genuine model-driven Agent 
 
 ## 2. Verdict
 
-**Blocked.**
+**Partially ready.**
 
-The code path from `RunConfig` → `runner.run(..., models=ModelInputs(...))` → `agent_step` → `AgentHarness.run_decision` → `ExecutionController.execute_step` is implemented and passes offline tests with synthetic HTTP. However, two Reimo-owned inputs required for a genuine model-driven episode are missing:
+The code path from `RunConfig` → `runner.run(..., models=ModelInputs(...))` → `agent_step` → `AgentHarness.run_decision` → `ExecutionController.execute_step` is implemented and passes offline tests with synthetic HTTP. A public hand-example episode (`EP-HAND1`) is available for a paired Plain/Agent development receiving exercise, so D04 materialization is not a prerequisite for that bounded exercise. It remains a prerequisite for the later study run.
 
-1. **No materialized, approved development episode bundle.** The D04 manifest (`data/manifests/d04-development-20261028-v1/manifest.json`) allocates 40 development episode IDs, but `episode_contents_generated` is `false` and every `episode_content_sha256` is `null`. The runner's `RunConfig.episodes` requires a concrete `EpisodeBundle` (private `PrivateEpisode`, `slot0_utc`, and per-slot forecasts), and no such bundle file exists in the repository.
-2. **No reviewed production repair or explanation renderers.** Only `dc_sustainability/agent/renderers.py::render_proposal` exists. The harness accepts `repair_messages` and `explanation_messages`, but there are no committed, reviewed prompt files or renderers for those stages. A real Agent episode is expected to use the full retrieve→propose→verify→repair→verify→fallback→verify→explain→controller path.
+Two A02-owned/governance inputs still block live dispatch:
 
-Because these inputs are missing, the runner cannot be configured to run `system="agent"` against a real episode without inventing substitute private data or unreviewed prompts, which is explicitly out of scope.
+1. **No reviewed production repair or explanation renderers.** Only `dc_sustainability/agent/renderers.py::render_proposal` exists. The harness accepts `repair_messages` and `explanation_messages`, but there are no committed, reviewed prompt files or renderers for those stages.
+2. **No A02-specific bounded episode authorization.** A01's two-call transport authorization was consumed and does not authorize an Agent episode.
+
+The correct next step is offline renderer and authorization preparation. No model request should be sent until those artifacts, exact episode identity, limits and runtime identity are frozen.
 
 ---
 
@@ -80,13 +82,13 @@ $ /usr/bin/python3.12 -m pytest -q
 
 ## 4. What is missing for a genuine A02 episode
 
-### 4.1 Materialized development episode bundle
+### 4.1 Materialized study episode bundles
 
 - **Owner:** Reimo (D03/D04 data custody).
 - **Evidence:** `data/manifests/d04-development-20261028-v1/manifest.json` contains 40 allocation records, but:
   - `"episode_contents_generated": false`
   - every `"episode_content_sha256": null`
-- **Impact:** `RunConfig.episodes` requires a tuple of `(episode_id, bundle_path, bundle_sha256)`. `load_bundle` validates the bundle file and checks `lf_sha256(path) == digest`. No bundle file exists, so no `agent` unit can be scheduled.
+- **Impact:** The planned 40-episode development/study workload cannot run yet. This does not block a bounded receiving exercise on the repository's public `EP-HAND1` fixture.
 - **Action needed:** Generate and commit (or place in evaluator custody outside Git) an approved D03/D04 development episode bundle with `PrivateEpisode`, `slot0_utc`, and per-slot `CarbonForecast` facts, then update the run config to reference it.
 
 ### 4.2 Reviewed repair and explanation renderers
@@ -103,12 +105,12 @@ $ /usr/bin/python3.12 -m pytest -q
 - **Impact:** Even with a bundle and renderers, a separate run authorization is required before the first model dispatch.
 - **Action needed:** Obtain explicit A02 run authorization.
 
-### 4.4 Local Ollama deployment with pinned artifact
+### 4.4 Accepted Ollama deployment identity
 
 - **Owner:** Matty / runtime ops.
-- **Evidence:** `docs/decisions/Q09_OLLAMA_QWEN3.md` accepts Ollama 0.40.5 and qwen3:8b Q4_K_M. Local runtime observed at 0.40.11; the accepted pin is unchanged. `OllamaProvider._verify_pins` will reject a runtime/model digest mismatch.
-- **Impact:** A genuine episode cannot dispatch until the local deployment matches the accepted pins.
-- **Action needed:** Install the accepted Ollama version and model digest, or update the accepted pin through the decision process.
+- **Evidence:** `docs/decisions/Q09_OLLAMA_QWEN3.md` accepts Ollama 0.40.5 and qwen3:8b Q4_K_M, and A01's paired validation recorded an isolated host with that identity. `OllamaProvider._verify_pins` rejects a runtime/model digest mismatch.
+- **Impact:** A02 must target the accepted isolated host and re-check its exact identity before dispatch; a different local 0.40.11 installation is not evidence that the accepted pin must change.
+- **Action needed:** Record the accepted host and verified model/runtime identity in the A02 authorization manifest. Do not change the accepted pin merely to match another installation.
 
 ---
 
@@ -118,7 +120,7 @@ $ /usr/bin/python3.12 -m pytest -q
 2. Installed core dependencies from `requirements/requirements-core.in` into the user Python 3.12 environment.
 3. Verified the entire test suite passes offline.
 4. Confirmed `git diff --check` is clean.
-5. Audited the D04 manifest and confirmed no episode contents are materialized.
+5. Audited the D04 manifest and confirmed no study episode contents are materialized; the public `EP-HAND1` fixture remains available for bounded receiving work.
 6. Audited `dc_sustainability/agent/renderers.py` and confirmed only the proposal renderer exists.
 7. Did **not** create substitute private data or unreviewed prompts.
 8. Did **not** send any model request.
@@ -154,20 +156,21 @@ total records: 40
 
 ## 7. Risks if forced to run now
 
-- **No episode data:** `runner.run` would fail at `load_bundle` or `lf_sha256` mismatch because no bundle path exists.
+- **Unfrozen episode input:** dispatching before the public receiving episode is packaged and hashed in the authorization manifest would make the result non-reproducible.
 - **Unreviewed prompts:** Supplying ad-hoc repair/explanation renderers would bypass Matty's A02 ownership and could produce unbounded or unsafe model outputs.
 - **No authorization:** Running without A02 authorization violates the project's bounded-validation policy.
-- **Deployment pin mismatch:** Even if the above were resolved, the local Ollama runtime would likely fail `_verify_pins`.
+- **Deployment pin mismatch:** Any host other than the accepted isolated deployment, or any changed runtime/model digest, will fail `_verify_pins` and must not be substituted silently.
 
 ---
 
 ## 8. Recommended next steps
 
-1. **Reimo:** Materialize an approved D03/D04 development episode bundle and place it in evaluator custody.
-2. **Matty:** Provide reviewed `repair` and `explanation` prompt files and renderers; update `AgentRenderers` wiring.
-3. **Governance:** Issue an explicit A02 run authorization.
-4. **Runtime ops:** Align the local Ollama deployment with the accepted pin (0.40.5, qwen3:8b Q4_K_M, correct digest).
-5. **Ved (follow-up):** Re-run this readiness check once the above inputs are available, then attempt one genuine model-driven Agent episode and stop before the first dispatch to verify the offline pathway end-to-end.
+1. **Matty:** Prepare reviewed repair/explanation renderers and the A02 bounded authorization manifest offline.
+2. **Nisha and Matty:** Align the proposed L01 and A02 receiving exercises on the same public `EP-HAND1` episode and shared settings.
+3. **Governance:** Issue an explicit A02 run authorization only after exact hashes, limits and runtime identity are frozen.
+4. **Runtime ops:** Reuse and re-verify the accepted isolated Ollama 0.40.5 / qwen3:8b Q4_K_M deployment.
+5. **Reimo:** Materialize approved D03/D04 development episode bundles for the later study run.
+6. **Ved (follow-up):** Re-run downstream acceptance after the production renderers and bounded receiving result are committed.
 
 ---
 
@@ -178,4 +181,4 @@ total records: 40
 - No model request was sent.
 - A02 ownership remains with Matty; L02/E02 ownership remains with Nisha.
 
-**Readiness:** Blocked.
+**Readiness:** Partially ready; offline preparation can proceed, but live dispatch remains blocked pending frozen renderers and explicit authorization.
