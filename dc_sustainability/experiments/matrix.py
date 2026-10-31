@@ -87,6 +87,16 @@ def check(config: RunConfig) -> list[str]:
             problems.append(f"{b.episode.episode_id}: split is {b.episode.split}, not held_out")
     core = [b for b in bundles if b.episode.forecast_visibility != "withheld"]
     missing = [b for b in bundles if b.episode.forecast_visibility == "withheld"]
+    for b in core:
+        visible_facts = [
+            (slot, fact) for slot, facts in b.forecasts_by_slot.items() for fact in facts
+        ]
+        if not visible_facts:
+            problems.append(f"{b.episode.episode_id}: a core episode exposes no forecasts")
+        if any(
+            fact.issued_at_utc > b.slot0_utc + timedelta(hours=slot) for slot, fact in visible_facts
+        ):
+            problems.append(f"{b.episode.episode_id}: a forecast is issued after its decision time")
     cells = sorted((local_date(b), b.episode.scenario_id) for b in core)
     dates = sorted({d for d, _ in cells})
     expected = sorted((d, x) for d in dates for x in SCENARIOS)

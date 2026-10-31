@@ -23,7 +23,17 @@ from tests.contracts import fixtures as f
 DATES = [date(2022, m, 3) for m in (2, 4, 6, 8, 10, 12)]
 
 
-def bundle(tmp_path, episode_id, day, scenario, *, withheld=False, split="held_out", leak=False):
+def bundle(
+    tmp_path,
+    episode_id,
+    day,
+    scenario,
+    *,
+    withheld=False,
+    split="held_out",
+    leak=False,
+    future_issue=False,
+):
     base = f.private_episode().model_dump(mode="python")
     base.update(
         episode_id=episode_id,
@@ -37,7 +47,12 @@ def bundle(tmp_path, episode_id, day, scenario, *, withheld=False, split="held_o
     slot0 = datetime.combine(day, time(7), tzinfo=timezone.utc)
     forecasts = {
         slot: () if withheld and not leak else tuple(
-            x.model_copy(update={"issued_at_utc": slot0 + timedelta(hours=slot)})
+            x.model_copy(
+                update={
+                    "issued_at_utc": slot0
+                    + timedelta(hours=slot + (1 if future_issue else 0))
+                }
+            )
             for x in f.forecasts(issued_slot=slot) if x.valid_slot >= slot)
         for slot in range(30)
     }  # fmt: skip
@@ -104,6 +119,8 @@ def test_the_planned_matrix_is_300_runs_and_passes(tmp_path):
          "missing-forecast"),
         (lambda p, t: p[:4] + [bundle(t, "EP-X1", DATES[0], "normal", withheld=True, leak=True)]
          + p[5:], "exposes forecasts"),
+        (lambda p, t: [bundle(t, "EP-X1", DATES[0], "infeasible", future_issue=True)]
+         + p[1:], "after its decision time"),
     ],
 )  # fmt: skip
 def test_episode_design_deviations_are_refused(tmp_path, change, message):

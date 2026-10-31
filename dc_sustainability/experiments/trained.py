@@ -36,14 +36,22 @@ class TrainedInputs:
 
 def check_inputs(settings: TrainedSettings, inputs: TrainedInputs, systems) -> None:
     """Refuse trained inputs that do not match the frozen artifact hashes."""
+    expected = {system for system, _ in settings.artifacts if system in systems}
+    supplied = set(inputs.policies)
+    if supplied != expected:
+        missing = sorted(expected - supplied)
+        extra = sorted(supplied - expected)
+        raise ValueError(
+            f"trained inputs must match listed systems; missing={missing}, extra={extra}"
+        )
     for system, digest in settings.artifacts:
         if system not in systems:
             continue
         policy = inputs.policies.get(system)
-        if policy is None:
-            raise ValueError(f"{system} needs its trained input")
         if policy.artifact_sha256 != digest:
             raise ValueError(f"{system} artifact differs from the hash frozen in the run config")
+        if not callable(policy.classifier_for):
+            raise ValueError(f"{system} classifier_for must be callable")
 
 
 def propose(

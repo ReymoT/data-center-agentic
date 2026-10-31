@@ -19,7 +19,7 @@ What it does:
 - **One ledger per unit.** The provider caps attempts per (system, episode, slot), and the harness pins one (run, trial, seed), neither keyed by trial. So each unit (system × episode × trial) gets a fresh `OllamaProvider` and, for the agent, a fresh `AgentHarness`. `deployment.max_run_attempts` therefore bounds one unit.
 - **Plain decision.** It uses the flat K02 context and one `PlainLLMPolicy.propose` call. Every new ledger attempt is persisted with `record_attempt` before execution. The output is checked once as the initial stage, then the controller decides. There is no repair or fallback (`not_applicable_stages` = repaired, fallback). The original response, explanation, call count, latency and tokens are recorded. An empty queue makes no call.
 - **Agent decision.** `AgentHarness.run_decision`, with the real Greedy A as its checked fallback. The harness persists its own attempts and calls the controller.
-- **Run attempt budget.** A model unit starts only if the attempts already spent in the run directory, plus the unit's worst case (24 × 1 for Plain, 24 × 3 for Agent), fit `max_total_attempts`. Spent attempts are the saved artifacts plus the unsaved attempts listed in `unknown.json`. Otherwise the unit stays pending with the reason. A restart counts spent attempts, so neither a restart nor a lost artifact gives back budget.
+- **Run attempt budget.** A model unit starts only if the attempts already spent in the run directory, plus the smaller of its call-cap worst case (24 × 1 for Plain, 24 × 3 for Agent) and the matched per-unit provider ledger cap, fit `max_total_attempts`. Spent attempts are the saved artifacts plus the unsaved attempts listed in `unknown.json`. Otherwise the unit stays pending with the reason. A restart counts spent attempts, so neither a restart nor a lost artifact gives back budget.
 - **Unknown or unsaved attempts.** Each of these stops the unit as `needs_reconciliation`:
   - an attempt that is uncertain (sent, with no reliable outcome);
   - an attempt whose artifact could not be saved.
@@ -67,7 +67,7 @@ Owner decisions (Matty, #18 and the PR #113 review, 2026-10-29):
 
 4. **Attempt-storage failure (PR #113 review): fail closed for both systems.** An attempt whose artifact could not be saved stops the unit for reconciliation, halts later model units and stays in the run budget (`saved: false` in `unknown.json`). Regression: `tests/experiments/test_model_units.py::test_unsaved_attempt_stops_the_unit_halts_model_units_and_keeps_budget[plain_llm|agent]` (exactly one request, no later slot or unit dispatch, no result, budget 1).
 
-Open note: a unit is admitted on its worst case (24 × the call cap), which is conservative because empty-queue decisions make no call.
+Open note: a unit is admitted on the strictest enforceable worst case (the smaller of 24 × the call cap and its matched ledger cap), which is conservative because empty-queue decisions make no call.
 
 Limitations and next steps:
 - PR #116 now supplies the offline-tested request-local response bounds. `decision_seconds` and `max_total_attempts` are still not chosen: Matty's exact deadline proposal waits on affected-owner agreement in #6. Running needs accepted A01 settings and a separate run authorization.

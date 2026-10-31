@@ -62,10 +62,10 @@
       "description": "40 materialized development episodes for d04-development-20261028-v1",
       "owner": "Reimo",
       "task": "D04",
-      "status": "blocked",
-      "path": "data/manifests/d04-development-20261028-v1/manifest.json",
+      "status": "pending",
+      "path": "data/manifests/d04-development-content-112-v2/receipt.json",
       "sha256": null,
-      "blocker": "#130 open: 40 development episodes materialized in private custody with a checksum receipt; awaiting merge, a cross-machine verify fix and the agreed source-derived forecast issuance (#112)"
+      "blocker": null
     },
     {
       "id": "ontology-and-shapes",
@@ -87,7 +87,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: with no agreed forecast issuance, P03 yields 0 feature rows; O02 labels wait on it"
+      "blocker": "#112 is closed after bounded receiving produced 813 P03 rows and 30 O02 labels; the full private development corpus still needs collection and labeling for P04"
     },
     {
       "id": "trained-models-c-d",
@@ -98,7 +98,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: needs the forecast-issuance decision, P03 feature rows and O02 labels"
+      "blocker": "E02-c now accepts explicitly pinned trained inputs, but Edison still needs to produce the real P04 C/D artifacts from the full development folds"
     },
     {
       "id": "plain-prompts",
@@ -139,10 +139,10 @@
       "description": "Model trial seeds, per-decision deadline and run attempt budget in the E02 run config",
       "owner": "Nisha",
       "task": "E02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/experiments/matrix.py",
       "sha256": null,
-      "blocker": "#18: proposed 480 s per decision, 8,640 attempt budget, ledger cap 72 and seeds 101-103 await Matty and Ved; admission fix in #131"
+      "blocker": null
     },
     {
       "id": "matrix-config",
@@ -150,10 +150,10 @@
       "description": "300-run matrix config with all six systems, including C/D units (E02-c)",
       "owner": "Nisha",
       "task": "E02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/experiments/matrix.py",
       "sha256": null,
-      "blocker": "C/D runner units wait on P04 models"
+      "blocker": null
     },
     {
       "id": "reference-pipeline",
@@ -208,7 +208,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "A01 is accepted; needs C/D models and the authorized EP-HAND1 Agent development episode (#18)"
+      "blocker": "A01 and the exact EP-HAND1 bounds are accepted; a fresh single-use authorization and actual bounded receiving evidence remain required, followed by real C/D artifacts"
     }
   ],
   "freeze": {

@@ -33,7 +33,12 @@ class EarlierIsLikelier:
         return 1 / (1 + start_slot)
 
 
-def inputs(seen=None, classifier=EarlierIsLikelier, **hashes):
+def inputs(
+    seen=None,
+    classifier=EarlierIsLikelier,
+    systems=("decision_tree_c", "random_forest_d"),
+    **hashes,
+):
     def factory(state, context):
         if seen is not None:
             seen.append((state, context))
@@ -41,7 +46,7 @@ def inputs(seen=None, classifier=EarlierIsLikelier, **hashes):
 
     digests = {"decision_tree_c": DT, "random_forest_d": RF} | hashes
     return t.TrainedInputs(
-        {system: t.TrainedPolicy(digest, factory) for system, digest in digests.items()}
+        {system: t.TrainedPolicy(digests[system], factory) for system in systems}
     )
 
 
@@ -77,7 +82,11 @@ def test_trained_units_run_whole_episodes_through_the_controller(tmp_path):
 
 def test_classifier_sees_only_the_visible_state_and_flat_context(tmp_path):
     seen = []
-    runner.run(config(("decision_tree_c",)), tmp_path / "out", trained=inputs(seen))
+    runner.run(
+        config(("decision_tree_c",)),
+        tmp_path / "out",
+        trained=inputs(seen, systems=("decision_tree_c",)),
+    )
     assert seen and all(isinstance(state, s.VisibleState) for state, _ in seen)
     for state, context in seen:
         assert context.representation == "flat"
@@ -95,7 +104,11 @@ def test_classifier_failure_is_a_recorded_failed_output_not_a_fallback(tmp_path,
             return 1.5
 
     cfg = config(("decision_tree_c",))
-    [st] = runner.run(cfg, tmp_path / "out", trained=inputs(classifier=Broken))
+    [st] = runner.run(
+        cfg,
+        tmp_path / "out",
+        trained=inputs(classifier=Broken, systems=("decision_tree_c",)),
+    )
     assert st.status == "completed"
     root = tmp_path / "out" / cfg.run_id / "units"
     records = traces(root, st.unit)
@@ -115,8 +128,11 @@ def test_trained_systems_refuse_without_matching_inputs_before_writing(tmp_path)
     with pytest.raises(ValueError, match="artifact differs"):
         runner.run(cfg, out, trained=inputs(random_forest_d="0" * 64))
     missing = t.TrainedInputs({"decision_tree_c": inputs().policies["decision_tree_c"]})
-    with pytest.raises(ValueError, match="random_forest_d needs"):
+    with pytest.raises(ValueError, match="missing=.*random_forest_d"):
         runner.run(cfg, out, trained=missing)
+    extra = t.TrainedInputs(inputs().policies | {"unfrozen": inputs().policies["decision_tree_c"]})
+    with pytest.raises(ValueError, match="extra=.*unfrozen"):
+        runner.run(cfg, out, trained=extra)
     ab = RunConfig("test", ("greedy_a",), cfg.episodes, code_revision="test")
     with pytest.raises(ValueError, match="without trained systems"):
         runner.run(ab, out, trained=inputs())
