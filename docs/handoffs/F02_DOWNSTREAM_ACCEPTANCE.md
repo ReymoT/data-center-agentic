@@ -1,10 +1,10 @@
 # F02 Downstream Interface Acceptance Handoff
 
 **Status:** Bounded downstream acceptance (with solver/label receiving tests added)
-**Branch:** `ved/f02-downstream-acceptance`  
-**Date:** 2026-10-30  
-**Owner:** Ved  
-**Interface:** F02 — Policy-visible state, context, plan, and solver/label outputs  
+**Branch:** `ved/f02-downstream-acceptance`
+**Date:** 2026-10-30
+**Owner:** Ved
+**Interface:** F02 — Policy-visible state, context, plan, and solver/label outputs
 **Contract version:** v1.0.0 (see `docs/INTERFACES.md`)
 
 ## 1. Goal

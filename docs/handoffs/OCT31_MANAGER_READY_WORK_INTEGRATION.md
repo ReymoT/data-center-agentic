@@ -48,4 +48,3 @@ recorded authorization and accepted frozen inputs.
 - Held-out allocation, custody, no-overlap evidence and scientific freeze remain
   unavailable. No held-out content was opened or created here.
 - The exact EP-HAND1 bounds are agreed, but no model call is made by this change.
-
