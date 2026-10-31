@@ -1,0 +1,66 @@
+{
+  "schema_version": "a02-episode-authorization-preparation-v1",
+  "evidence_kind": "offline_preparation_not_inference",
+  "status": "blocked_pending_freeze_and_authorization",
+  "scope": "One paired Plain/Agent development receiving exercise on public EP-HAND1; not a study run",
+  "preparation_model_calls": 0,
+  "preparation_runtime_requests": 0,
+  "episode": {
+    "episode_id": "EP-HAND1",
+    "source": "public repository hand-example fixture",
+    "bundle_path": null,
+    "bundle_sha256": null,
+    "plain_and_agent_must_match": true
+  },
+  "renderer_freeze": {
+    "exact_commit": null,
+    "proposal_template_sha256": null,
+    "repair_template_sha256": null,
+    "explanation_renderer_ref": null,
+    "status": "not_frozen"
+  },
+  "runtime_identity": {
+    "accepted_runtime_version": "0.40.5",
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "host_reference": "docs/handoffs/A01_BOUNDED_PAIRED_VALIDATION_2026-10-30.md",
+    "must_be_reverified_before_dispatch": true
+  },
+  "generation_settings": {
+    "temperature": 0.2,
+    "top_p": 1,
+    "seed": 101,
+    "num_ctx": 16384,
+    "num_predict": 1536,
+    "stream": false,
+    "think": false
+  },
+  "bounds": {
+    "plain_maximum_requests": null,
+    "agent_maximum_requests": null,
+    "per_request_seconds": null,
+    "paired_total_seconds": null,
+    "retries": 0,
+    "status": "not_decided_for_episode"
+  },
+  "authorization": {
+    "status": "not_recorded",
+    "authorized_by": null,
+    "reference": null
+  },
+  "required_stop_conditions": [
+    "runtime, model, template, parameter or renderer identity drift",
+    "wrong backend, CPU fallback or partial layer offload",
+    "uncertain outcome or failed attempt persistence",
+    "response, request or paired deadline exhausted",
+    "attempt limit exhausted",
+    "owned-process or listener cleanup failure"
+  ],
+  "ready_for_dispatch": false,
+  "limitations": [
+    "This file prepares a future decision and cannot authorize inference.",
+    "No request limits or deadlines are inferred from A01's consumed authorization.",
+    "The explanation renderer remains Nisha-owned and is not supplied here.",
+    "D04 study episodes remain separate from this public receiving exercise."
+  ]
+}
