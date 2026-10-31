@@ -17,6 +17,7 @@ from dc_sustainability.experiments import runner
 from dc_sustainability.experiments.config import (
     EpisodeBundle,
     RunConfig,
+    TrainedSettings,
     bundle_to_json,
     decision_id,
     lf_sha256,
@@ -171,8 +172,13 @@ def test_policy_exception_is_a_recorded_failed_decision(tmp_path, monkeypatch):
 # ----------------------------------------------------------------- config, IDs and custody
 def test_unavailable_system_is_refused_before_anything_is_written(tmp_path):
     ep, path = write_bundle(tmp_path)
-    cfg = config(path, ep, systems=("greedy_a", "decision_tree_c"))
-    with pytest.raises(NotImplementedError, match="decision_tree_c"):
+    cfg = RunConfig(
+        "test",
+        ("greedy_a", "decision_tree_c"),
+        ((ep.episode_id, str(path), lf_sha256(path)),),
+        trained=TrainedSettings((("decision_tree_c", "a" * 64),)),
+    )
+    with pytest.raises(NotImplementedError, match="decision_tree_c"):  # no trained inputs
         runner.run(cfg, tmp_path / "out")
     assert not (tmp_path / "out").exists()
 
