@@ -22,7 +22,9 @@ from dc_sustainability.training.collect import collect_decisions
 @pytest.fixture
 def fake_source(monkeypatch, tmp_path):
     # Explicit diagnostic double to exercise serialization/IO without redistributing CSV.
-    observations = tuple((m.carbon.START + i * m.carbon.HOUR, 100.0) for i in range(8760))
+    # A distinct value per row makes leakage/off-by-one assertions identify the
+    # exact source row instead of passing accidentally with a constant series.
+    observations = tuple((m.carbon.START + i * m.carbon.HOUR, float(i)) for i in range(8760))
     monkeypatch.setattr(m.carbon, "load_source", lambda _: (observations, {}))
     return tmp_path / "diagnostic-double-not-a-source.csv"
 
