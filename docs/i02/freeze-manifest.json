@@ -1,7 +1,7 @@
 {
   "schema_version": "i02-freeze-manifest-v1",
   "evidence_kind": "pre_freeze_checklist_not_frozen",
-  "status_as_of": "2026-10-30",
+  "status_as_of": "2026-10-31",
   "target_freeze_date": "2026-11-13",
   "owner": "Nisha",
   "receiving_owner": "Matty",
@@ -54,7 +54,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "held-out allocation and episode contents are not published; D04 is provisional"
+      "blocker": "held-out allocation and episode contents are not published; D04 is provisional; held-out windows must not overlap the 40 development windows"
     },
     {
       "id": "development-episodes",
@@ -65,7 +65,7 @@
       "status": "blocked",
       "path": "data/manifests/d04-development-20261028-v1/manifest.json",
       "sha256": null,
-      "blocker": "#112: episode contents are not generated; P04 and O02 wait on them"
+      "blocker": "#130 open: 40 development episodes materialized in private custody with a checksum receipt; awaiting merge, a cross-machine verify fix and the agreed source-derived forecast issuance (#112)"
     },
     {
       "id": "ontology-and-shapes",
@@ -87,7 +87,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: needs the materialized development episodes"
+      "blocker": "#112: with no agreed forecast issuance, P03 yields 0 feature rows; O02 labels wait on it"
     },
     {
       "id": "trained-models-c-d",
@@ -98,7 +98,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#112: needs development episodes and O02 labels"
+      "blocker": "#112: needs the forecast-issuance decision, P03 feature rows and O02 labels"
     },
     {
       "id": "plain-prompts",
@@ -114,13 +114,13 @@
     {
       "id": "agent-renderers",
       "category": "prompts/provider",
-      "description": "Reviewed Agent proposal, repair and explanation renderers",
+      "description": "Reviewed Agent proposal and repair renderers (A02) and explanation renderer (L02, dc_sustainability/explanations/agent.py), frozen by their template SHA-256s",
       "owner": "Matty",
       "task": "A02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "dc_sustainability/agent/renderers.py",
       "sha256": null,
-      "blocker": "no reviewed production renderers on main"
+      "blocker": null
     },
     {
       "id": "a01-deployment",
@@ -128,10 +128,10 @@
       "description": "A01 runtime, model, template and parameter pins, generation settings, response bounds and per-request deadline",
       "owner": "Matty",
       "task": "A01",
-      "status": "blocked",
-      "path": "docs/evidence/a01-bounded-validation-manifest-2026-10-30.json",
+      "status": "pending",
+      "path": "docs/evidence/a01-bounded-paired-validation-2026-10-30.json",
       "sha256": null,
-      "blocker": "#6: the 150/330 deadline agreement is recorded; the frozen bounded validation run and A01 acceptance are not complete"
+      "blocker": null
     },
     {
       "id": "run-settings",
@@ -142,7 +142,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "per-decision deadline and attempt budget wait on A01 acceptance (#6)"
+      "blocker": "#18: proposed 480 s per decision, 8,640 attempt budget, ledger cap 72 and seeds 101-103 await Matty and Ved; admission fix in #131"
     },
     {
       "id": "matrix-config",
@@ -186,7 +186,7 @@
       "status": "blocked",
       "path": "docs/e04/EXTRACTION_RULE.md",
       "sha256": null,
-      "blocker": "#22: rule 11.6-11.8 agreement is recorded; the 11.8 calibration remains"
+      "blocker": "#22: draft 1 format (#120) and practice packet (#123) are merged; both raters' 11.8 calibration extraction remains"
     },
     {
       "id": "held-out-sample-rule",
@@ -208,7 +208,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "needs C/D models, accepted A01 and an authorized Agent development episode"
+      "blocker": "A01 is accepted; needs C/D models and the authorized EP-HAND1 Agent development episode (#18)"
     }
   ],
   "freeze": {
