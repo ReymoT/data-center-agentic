@@ -1,0 +1,950 @@
+{
+ "episode": {
+  "episode_id": "EP-HAND1",
+  "forecast_visibility": "perfect_foresight",
+  "jobs": [
+   {
+    "intentionally_infeasible": false,
+    "job": {
+     "arrival_slot": 0,
+     "deadline_slot": 6,
+     "duration_slots": 2,
+     "flexible": true,
+     "job_id": "J1",
+     "power_kw": 40.0,
+     "record_type": "Job",
+     "schema_version": "1.0.0"
+    },
+    "scenario_id": "hand-example",
+    "seed": 0,
+    "split": "development",
+    "synthetic": true
+   },
+   {
+    "intentionally_infeasible": false,
+    "job": {
+     "arrival_slot": 0,
+     "deadline_slot": 6,
+     "duration_slots": 2,
+     "flexible": true,
+     "job_id": "J2",
+     "power_kw": 30.0,
+     "record_type": "Job",
+     "schema_version": "1.0.0"
+    },
+    "scenario_id": "hand-example",
+    "seed": 0,
+    "split": "development",
+    "synthetic": true
+   },
+   {
+    "intentionally_infeasible": true,
+    "job": {
+     "arrival_slot": 4,
+     "deadline_slot": 6,
+     "duration_slots": 3,
+     "flexible": true,
+     "job_id": "J3",
+     "power_kw": 20.0,
+     "record_type": "Job",
+     "schema_version": "1.0.0"
+    },
+    "scenario_id": "hand-example",
+    "seed": 0,
+    "split": "development",
+    "synthetic": true
+   }
+  ],
+  "n_completion_slots": 6,
+  "n_decision_slots": 24,
+  "realized_carbon": [
+   {
+    "fact_id": "FACT-OBS-CI-s00",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 0,
+    "valid_to_utc": null,
+    "value": 500.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s01",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 1,
+    "valid_to_utc": null,
+    "value": 450.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s02",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 2,
+    "valid_to_utc": null,
+    "value": 300.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s03",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T10:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 3,
+    "valid_to_utc": null,
+    "value": 250.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s04",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T11:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s05",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T12:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-OBS-CI-s06",
+    "fact_kind": "observation",
+    "observed_at_utc": "2022-01-01T13:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonObservation",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "record_type": "PrivateEpisode",
+  "reference_refs": [],
+  "scenario_id": "hand-example",
+  "schema_version": "1.0.0",
+  "seed": 0,
+  "snapshot": {
+   "constraints": [
+    {
+     "applies_to_jobs": [],
+     "applies_to_site": "SITE1",
+     "constraint_id": "CON-CAP-01",
+     "constraint_type": "capacity",
+     "limit_value": 100.0,
+     "record_type": "Constraint",
+     "schema_version": "1.0.0",
+     "source_id": "SRC-HAND",
+     "source_version": null,
+     "unit": "kW"
+    },
+    {
+     "applies_to_jobs": [],
+     "applies_to_site": "SITE1",
+     "constraint_id": "CON-FRESH-01",
+     "constraint_type": "freshness",
+     "limit_value": 2.0,
+     "record_type": "Constraint",
+     "schema_version": "1.0.0",
+     "source_id": "SRC-HAND",
+     "source_version": null,
+     "unit": "slot"
+    },
+    {
+     "applies_to_jobs": [
+      "J1"
+     ],
+     "applies_to_site": null,
+     "constraint_id": "CON-DL-J1",
+     "constraint_type": "deadline",
+     "limit_value": 6.0,
+     "record_type": "Constraint",
+     "schema_version": "1.0.0",
+     "source_id": "SRC-HAND",
+     "source_version": null,
+     "unit": "slot"
+    },
+    {
+     "applies_to_jobs": [
+      "J3"
+     ],
+     "applies_to_site": null,
+     "constraint_id": "CON-DL-J3",
+     "constraint_type": "deadline",
+     "limit_value": 6.0,
+     "record_type": "Constraint",
+     "schema_version": "1.0.0",
+     "source_id": "SRC-HAND",
+     "source_version": null,
+     "unit": "slot"
+    }
+   ],
+   "record_type": "ConstraintSnapshot",
+   "schema_version": "1.0.0",
+   "site": {
+    "background_kw": 40.0,
+    "pue": 1.0,
+    "record_type": "SiteConfig",
+    "schema_version": "1.0.0",
+    "site_id": "SITE1",
+    "slot_hours": 1.0
+   },
+   "snapshot_id": "SNAP1",
+   "sources": [
+    {
+     "commit": null,
+     "path": "tests/contracts/fixtures.py",
+     "record_type": "SourceRef",
+     "redistribution_status": "permitted",
+     "schema_version": "1.0.0",
+     "sha256": null,
+     "source_id": "SRC-HAND"
+    }
+   ]
+  },
+  "split": "development"
+ },
+ "forecasts_by_slot": {
+  "0": [
+   {
+    "fact_id": "FACT-CI-s00",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 0,
+    "valid_to_utc": null,
+    "value": 500.0
+   },
+   {
+    "fact_id": "FACT-CI-s01",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 1,
+    "valid_to_utc": null,
+    "value": 450.0
+   },
+   {
+    "fact_id": "FACT-CI-s02",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 2,
+    "valid_to_utc": null,
+    "value": 300.0
+   },
+   {
+    "fact_id": "FACT-CI-s03",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 3,
+    "valid_to_utc": null,
+    "value": 250.0
+   },
+   {
+    "fact_id": "FACT-CI-s04",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T07:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "1": [
+   {
+    "fact_id": "FACT-CI-s01",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 1,
+    "valid_to_utc": null,
+    "value": 450.0
+   },
+   {
+    "fact_id": "FACT-CI-s02",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 2,
+    "valid_to_utc": null,
+    "value": 300.0
+   },
+   {
+    "fact_id": "FACT-CI-s03",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 3,
+    "valid_to_utc": null,
+    "value": 250.0
+   },
+   {
+    "fact_id": "FACT-CI-s04",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T08:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "10": [],
+  "11": [],
+  "12": [],
+  "13": [],
+  "14": [],
+  "15": [],
+  "16": [],
+  "17": [],
+  "18": [],
+  "19": [],
+  "2": [
+   {
+    "fact_id": "FACT-CI-s02",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 2,
+    "valid_to_utc": null,
+    "value": 300.0
+   },
+   {
+    "fact_id": "FACT-CI-s03",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 3,
+    "valid_to_utc": null,
+    "value": 250.0
+   },
+   {
+    "fact_id": "FACT-CI-s04",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T09:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "20": [],
+  "21": [],
+  "22": [],
+  "23": [],
+  "24": [],
+  "25": [],
+  "26": [],
+  "27": [],
+  "28": [],
+  "29": [],
+  "3": [
+   {
+    "fact_id": "FACT-CI-s03",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T10:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 3,
+    "valid_to_utc": null,
+    "value": 250.0
+   },
+   {
+    "fact_id": "FACT-CI-s04",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T10:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T10:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T10:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "4": [
+   {
+    "fact_id": "FACT-CI-s04",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T11:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 4,
+    "valid_to_utc": null,
+    "value": 400.0
+   },
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T11:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T11:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "5": [
+   {
+    "fact_id": "FACT-CI-s05",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T12:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 5,
+    "valid_to_utc": null,
+    "value": 480.0
+   },
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T12:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "6": [
+   {
+    "fact_id": "FACT-CI-s06",
+    "fact_kind": "forecast",
+    "forecast_kind": "perfect_foresight",
+    "issued_at_utc": "2022-01-01T13:00:00Z",
+    "quality_status": "unvalidated",
+    "record_type": "CarbonForecast",
+    "schema_version": "1.0.0",
+    "semantics": {
+     "emissions_factor_type": "average",
+     "interval_convention": "unresolved",
+     "pollutant_basis": "unresolved",
+     "slot_mapping_status": "provisional"
+    },
+    "source_id": "SRC-HAND",
+    "source_sha256": null,
+    "unit": "g/kWh",
+    "valid_from_utc": null,
+    "valid_slot": 6,
+    "valid_to_utc": null,
+    "value": 520.0
+   }
+  ],
+  "7": [],
+  "8": [],
+  "9": []
+ },
+ "slot0_utc": "2022-01-01T07:00:00+00:00"
+}
