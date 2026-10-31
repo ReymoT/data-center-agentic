@@ -13,6 +13,8 @@ replaced silently. Private episode data stays in the run directory.
 
 Plain and Agent units (E02-b) run only with explicit ``ModelInputs``; see
 ``experiments.models`` for their ledgers, attempt budget and unknown outcomes.
+Trained C/D units (E02-c) run only with explicit ``TrainedInputs`` whose artifact
+hashes match the run config; see ``experiments.trained``.
 """
 
 import json
@@ -23,6 +25,7 @@ from pathlib import Path
 from dc_sustainability import schemas as s
 from dc_sustainability.experiments import models as m
 from dc_sustainability.experiments import registry
+from dc_sustainability.experiments import trained as t
 from dc_sustainability.experiments.config import (
     EpisodeBundle,
     RunConfig,
@@ -103,7 +106,12 @@ def unit_status(root: Path, unit: Unit) -> UnitStatus:
     return UnitStatus(unit, "pending")
 
 
-def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -> list[UnitStatus]:
+def run(
+    config: RunConfig,
+    out_dir: Path,
+    models: m.ModelInputs | None = None,
+    trained: t.TrainedInputs | None = None,
+) -> list[UnitStatus]:
     """Run every pending unit; return each unit's status after this call.
 
     Model units start only while the run's attempt budget still covers their worst
@@ -111,11 +119,17 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
     call or a later one, until that unit is reconciled.
     """
     for system in config.systems:  # refuse before touching anything
-        registry.require_available(system, model_inputs=models is not None)
+        registry.require_available(
+            system, model_inputs=models is not None, trained_inputs=trained is not None
+        )
     if models is not None:
         if config.model is None:
             raise ValueError("model inputs were given for a run without model systems")
         m.check_inputs(config.model, models, config.systems)
+    if trained is not None:
+        if config.trained is None:
+            raise ValueError("trained inputs were given for a run without trained systems")
+        t.check_inputs(config.trained, trained, config.systems)
     bundles = {}
     for episode_id, path, digest in config.episodes:
         if lf_sha256(path) != digest:
@@ -151,7 +165,7 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
                     f"unit may need {need}",
                 )
         if status.status == "pending" and not status.detail:
-            status = _run_unit(config, root, unit, bundles[unit.episode_id], models)
+            status = _run_unit(config, root, unit, bundles[unit.episode_id], models, trained)
             if model_unit and status.status == "needs_reconciliation":
                 halted = status.detail
         results.append(status)
@@ -159,14 +173,16 @@ def run(config: RunConfig, out_dir: Path, models: m.ModelInputs | None = None) -
 
 
 def _run_unit(
-    config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle, models=None
+    config: RunConfig, root: Path, unit: Unit, bundle: EpisodeBundle, models=None, trained=None
 ) -> UnitStatus:
     folder = root / "units" / unit.key
     folder.mkdir(parents=True, exist_ok=True)
     policy_errors: list[str] = []
     attempts: list = []
     try:
-        result = _drive_episode(config, folder, unit, bundle, policy_errors, models, attempts)
+        result = _drive_episode(
+            config, folder, unit, bundle, policy_errors, models, attempts, trained
+        )
     except m.UncertainRequest as exc:
         detail = str(exc)
         seen = {a.client_trace_id for a in attempts}
@@ -191,7 +207,7 @@ def _run_unit(
 
 
 def _drive_episode(
-    config, folder, unit, bundle, policy_errors, models=None, attempts=None
+    config, folder, unit, bundle, policy_errors, models=None, attempts=None, trained=None
 ) -> s.EpisodeResult:
     episode = bundle.episode
     simulator = SchedulingSimulator(allow_completion_starts=False)
@@ -212,7 +228,7 @@ def _drive_episode(
             attempts.extend(spent)
             m.raise_if_unreconciled(slot, spent, folder / "traces" / "provider-attempts")
         elif slot < DECISION_SLOTS:
-            output = _policy_output(unit.system, view, episode, bundle, policy_errors)
+            output = _policy_output(unit.system, view, episode, bundle, policy_errors, trained)
             execute_policy_output(
                 controller,
                 output,
@@ -242,10 +258,12 @@ def _drive_episode(
     return s.EpisodeResult.model_validate(data, strict=True)
 
 
-def _policy_output(system, view, episode, bundle, policy_errors) -> s.PolicyOutput:
+def _policy_output(system, view, episode, bundle, policy_errors, trained=None) -> s.PolicyOutput:
     """The policy's own output from visible inputs only; an exception is a failed output."""
     try:
         context = retrieve(view, episode.snapshot).context
+        if registry.spec(system).kind == "trained":
+            return t.propose(system, trained, view, context)
         decision_time = bundle.slot0_utc + timedelta(hours=view.current_slot)
         return propose(
             view,
