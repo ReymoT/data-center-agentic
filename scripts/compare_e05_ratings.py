@@ -7,6 +7,7 @@ raters to fill in jointly; check it afterwards with --check-adjudication.
     python scripts/compare_e05_ratings.py --a RATINGS_A.json --b RATINGS_B.json --out-dir DIR
     python scripts/compare_e05_ratings.py --a ... --b ... --matches MATCHES.json --out-dir DIR
     python scripts/compare_e05_ratings.py --a ... --b ... --check-adjudication FILLED.json
+    python scripts/compare_e05_ratings.py --cases docs/e04/calibration/calibration_cases.json ...
 
 MATCHES.json maps "CASE/OUTPUT" to [a ID, b ID] pairs for summary or limitation
 assertions both raters agree describe the same fact, e.g. {"DEV02/X": [["S2", "S1"]]}.
@@ -35,9 +36,12 @@ def main() -> int:
         "--confirmed-by", action="append", default=[], help="a rater who agreed the matching"
     )
     parser.add_argument("--check-adjudication", type=Path, help="validate a filled record")
+    parser.add_argument(
+        "--cases", type=Path, default=CASES_FILE, help="case file (default: development cases)"
+    )
     args = parser.parse_args()
 
-    cases = review.load_cases(json.loads(CASES_FILE.read_text(encoding="utf-8")))
+    cases = review.load_cases(json.loads(args.cases.read_text(encoding="utf-8")))
     a = agreement.load_original(args.a.read_bytes(), cases)
     b = agreement.load_original(args.b.read_bytes(), cases)
     matches = {}
