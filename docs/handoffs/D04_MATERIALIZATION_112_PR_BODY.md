@@ -1,5 +1,11 @@
 ## Summary
 
+October 31 manager follow-up: this branch now also includes a causal
+development-only persistence adapter, cross-machine receipt verification, a v2
+public receipt, bounded P03/O02 receiving evidence, and the EP-HAND1 LF-hash and
+attempt-admission fixes described in
+`docs/handoffs/D04_A02_MANAGER_UNBLOCK_2026-10-31.md`.
+
 Implements deterministic materialization for all 40 development episodes in the
 accepted `d04-development-20261028-v1` allocation. **PARTIAL / BLOCKED for end-to-end
 P04/O02 readiness**; this is a bounded materialization deliverable for review.

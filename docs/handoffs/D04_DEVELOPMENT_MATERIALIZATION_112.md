@@ -1,5 +1,12 @@
 # D04 #112 — development materialization handoff
 
+Manager receiving update, October 31: the bounded materialization is preserved,
+and the urgent causal persistence, portable receipt-verification and A02
+portability/admission fixes are recorded in
+[the manager unblock handoff](D04_A02_MANAGER_UNBLOCK_2026-10-31.md). The text
+below is Reimo's original PR #130 handoff and remains historical evidence where
+the manager update supersedes its forecast/receipt blockers.
+
 **PARTIAL / BLOCKED for P04/O02 training readiness.** All 40 real development
 PrivateEpisodes and their 40 canonical content hashes / 40 serialized-file hashes
 are complete. The accepted IDs, dates, seeds, scenarios, windows and 16/12/12 folds

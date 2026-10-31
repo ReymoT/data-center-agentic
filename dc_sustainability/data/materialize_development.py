@@ -1,7 +1,9 @@
 """D04 #112: exact development-only materialization into authorized private custody.
 
-No allocation, forecast issuance, scientific freeze or policy export is performed.
-The historical #102 files remain immutable. A separate receipt binds actual content.
+No allocation, scientific freeze or held-out policy export is performed. The
+historical #102 files remain immutable. A separate receipt binds actual content.
+The development-only persistence forecast adapter is causal: every forecast is
+derived only from the immediately preceding source row.
 """
 
 from __future__ import annotations
@@ -39,7 +41,7 @@ LIMITATIONS = (
     "Q05 pollutant/system boundary, physical intervals, exporter lineage, rights, "
     "historical regeneration and site suitability remain unresolved.",
     "Q06 scientific freeze, calibration and private held-out union isolation are not certified.",
-    "No source-derived forecast issue-time/release protocol is established by this materializer.",
+    "The development persistence adapter is provisional and not a Q05/Q06 scientific freeze.",
 )
 CODE_PATHS = (
     "dc_sustainability/data/materialize_development.py",
@@ -179,12 +181,58 @@ def episodes(source: Path, *, directory: Path = ALLOCATION) -> tuple[s.PrivateEp
             episode_id=record["episode_id"],
             snapshot=site,
             realized_carbon=actuals,
-        )
+        ).model_copy(update={"forecast_visibility": "persistence"})
         # Exercise the actual F02 JSON boundary independently for every episode.
         if s.PrivateEpisode.from_jsonable(episode.to_jsonable()) != episode:
             raise ValueError("F02 round trip mismatch")
         result.append(episode)
     return tuple(result)
+
+
+def persistence_forecasts(
+    source: Path, episode_id: str, *, directory: Path = ALLOCATION
+) -> dict[int, tuple[s.CarbonForecast, ...]]:
+    """Build a causal development-only persistence forecast schedule.
+
+    At decision slot ``t``, the value is the source row immediately preceding
+    the row associated with slot ``t``. The issue time is the timestamp label of
+    the current row, so the input row is strictly earlier. The prior value is
+    projected across the current visible horizon. Realized values for slot ``t``
+    or later are never read to construct that decision's policy view.
+
+    This is a provisional development adapter, not evidence about the source's
+    interval semantics and not authorization for held-out or final study use.
+    """
+    manifest, _ = allocation(directory)
+    record = next((r for r in manifest["records"] if r["episode_id"] == episode_id), None)
+    if record is None:
+        raise ValueError("episode is not in the approved development allocation")
+    rows, _ = carbon.load_source(source)
+    indices = record["window"]["proposed_physical_indices"]
+    if len(indices) != 30 or any(index <= 0 for index in indices):
+        raise ValueError("persistence forecasts require a preceding source row")
+    result: dict[int, tuple[s.CarbonForecast, ...]] = {}
+    for issue_slot, current_index in enumerate(indices):
+        issued_at = rows[current_index][0]
+        prior_time, prior_value = rows[current_index - 1]
+        if not prior_time < issued_at:
+            raise ValueError("persistence source row must precede forecast issue time")
+        result[issue_slot] = tuple(
+            s.CarbonForecast(
+                fact_id=f"FACT-D01-PERSIST-{issue_slot}-{valid_slot}",
+                value=prior_value,
+                unit="g/kWh",
+                source_id="SRC-D01",
+                source_sha256=carbon.SHA256,
+                valid_slot=valid_slot,
+                issued_at_utc=issued_at,
+                forecast_kind="persistence",
+                semantics=SEMANTICS,
+                quality_status="unvalidated",
+            )
+            for valid_slot in range(issue_slot, min(issue_slot + s.PROPOSED_DECISION_SLOTS, 30))
+        )
+    return result
 
 
 def environment() -> dict:
@@ -306,7 +354,7 @@ def public_receipt(evidence: dict, *, custody_id: str) -> dict:
 
 
 def verify(source: Path, destination: Path, *, revision: str) -> tuple[s.PrivateEpisode, ...]:
-    """Reject missing/extra/corrupt content and compare to fresh pinned regeneration."""
+    """Reject changed content while reporting, not failing on, environment drift."""
     corpus = episodes(source)
     expected = receipt(corpus, revision=revision)
     names = {f"{e.episode_id}.json" for e in corpus} | {"content-receipt.json"}
@@ -319,8 +367,16 @@ def verify(source: Path, destination: Path, *, revision: str) -> tuple[s.Private
             raise ValueError(f"episode content mismatch: {episode.episode_id}")
         loaded.append(s.PrivateEpisode.from_jsonable(json.loads(path.read_bytes())))
     path = destination / "content-receipt.json"
-    if path.is_symlink() or path.read_bytes() != serialize(expected):
-        raise ValueError("content receipt mismatch (including environment/code)")
+    if path.is_symlink():
+        raise ValueError("content receipt must not be a symlink")
+    recorded = json.loads(path.read_bytes())
+    recorded_environment = recorded.pop("environment", None)
+    expected_without_environment = json.loads(serialize(expected))
+    expected_without_environment.pop("environment", None)
+    if recorded != expected_without_environment:
+        raise ValueError("content receipt mismatch (excluding environment)")
+    if not isinstance(recorded_environment, dict):
+        raise ValueError("content receipt environment record is missing")
     return tuple(loaded)
 
 
@@ -330,6 +386,12 @@ def main() -> None:
     parser.add_argument("destination", type=Path)
     parser.add_argument("--verify", action="store_true")
     parser.add_argument("--code-revision", help="recorded base revision for exact receipt replay")
+    parser.add_argument(
+        "--public-receipt",
+        type=Path,
+        help="exclusive checksum-only receipt output; valid only while materializing",
+    )
+    parser.add_argument("--custody-id", help="non-secret custody label for --public-receipt")
     args = parser.parse_args()
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if args.code_revision:
@@ -340,7 +402,14 @@ def main() -> None:
             raise ValueError("code revision must be a full existing commit SHA")
         revision = recorded
     operation = verify if args.verify else materialize
-    operation(args.source, args.destination, revision=revision)
+    evidence = operation(args.source, args.destination, revision=revision)
+    if args.public_receipt:
+        if args.verify or not args.custody_id:
+            raise ValueError("--public-receipt requires materialization and --custody-id")
+        _write(
+            args.public_receipt,
+            serialize(public_receipt(evidence, custody_id=args.custody_id)),
+        )
     print(f"PASS: 40 development episodes {'verified' if args.verify else 'materialized'}")
 
 

@@ -1,7 +1,8 @@
 """Verify the real pinned D04 corpus and bounded S01/P03/O02 consumers offline.
 
 Requires an explicitly authorized private source and corpus, never downloads data.
-Output is aggregate evidence only. Missing source-derived forecasts remain blocked.
+Output is aggregate evidence only. Forecasts use the development-only causal
+persistence adapter and remain provisional pending Q05/Q06 scientific acceptance.
 """
 
 import argparse
@@ -80,27 +81,35 @@ def check(source, directory, revision):
         # Use only the allocation's PROPOSED origin for diagnostic slot bookkeeping.
         # It is not a verified physical interval bound or a forecast issue time.
         start = episode.realized_carbon[0].observed_at_utc
+        forecasts = m.persistence_forecasts(source, episode.episode_id)
         decisions = collect_decisions(
             episode,
             decision_time_utc=lambda slot: start + timedelta(hours=slot),
             approve=approve_empty,
-            forecasts_by_slot={},
+            forecasts_by_slot=forecasts,
         )
-        assert len(decisions) == 30 and all(not d.rows for d in decisions)
+        assert len(decisions) == 30 and any(d.rows for d in decisions)
         collected_count += len(decisions)
         feature_rows += sum(len(d.rows) for d in decisions)
-        representative = next(d for d in decisions if d.state.waiting_jobs)
+        representative = next(d for d in decisions if d.rows)
         bounded = label_episode((representative,), time_limit_s=0.1)[0]
-        assert not bounded.training_rows()
+        training_rows = bounded.training_rows()
+        if bounded.solver_result.status == "certified_optimal":
+            assert training_rows
+        else:
+            assert not training_rows
         label_results.append(
             {
                 "scenario": scenario,
                 "status": bounded.solver_result.status,
                 "labels": len(bounded.labels),
+                "training_rows": len(training_rows),
             }
         )
+    if not any(result["training_rows"] for result in label_results):
+        raise AssertionError("bounded receiving produced no usable O02 training rows")
     return {
-        "status": "PARTIAL / BLOCKED",
+        "status": "BOUNDED DEVELOPMENT RECEIVING READY",
         "episodes": len(corpus),
         "valid_content_hashes": 40,
         "fold_counts": dict(Counter(folds.values())),
@@ -110,11 +119,10 @@ def check(source, directory, revision):
         "p03_collected_decisions": collected_count,
         "p03_feature_rows": feature_rows,
         "o02_bounded_results": label_results,
-        "forecast_blocker": "No agreed source-derived development forecast release/issue-time adapter. "
-        "EP-HAND1's explicit synthetic schedule is not authorization for D01 observations.",
-        "o02_limitation": "With no forecasts, current O01 can report certified_infeasible for "
-        "waiting jobs despite missing carbon evidence. Zero candidate rows/labels prove API "
-        "consumption only, not physical infeasibility or usable P04 training labels.",
+        "forecast_adapter": "causal persistence from the immediately preceding source row; "
+        "provisional development use only",
+        "o02_limitation": "Bounded labels remain development evidence only. Source semantics, "
+        "rights, held-out isolation and scientific freeze are unresolved.",
     }
 
 
@@ -123,11 +131,17 @@ def main():
     parser.add_argument("source", type=Path)
     parser.add_argument("corpus", type=Path)
     parser.add_argument("--code-revision", help="base revision from the content receipt")
+    parser.add_argument("--output", type=Path, help="exclusive aggregate JSON output")
     args = parser.parse_args()
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if args.code_revision:
         revision = args.code_revision
-    print(json.dumps(check(args.source, args.corpus, revision), sort_keys=True, indent=2))
+    payload = json.dumps(check(args.source, args.corpus, revision), sort_keys=True, indent=2) + "\n"
+    if args.output:
+        with args.output.open("x", encoding="utf-8", newline="\n") as stream:
+            stream.write(payload)
+    else:
+        print(payload, end="")
 
 
 if __name__ == "__main__":

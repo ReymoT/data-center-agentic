@@ -1,0 +1,43 @@
+{
+  "episodes": 40,
+  "f02_round_trips": 40,
+  "fold_counts": {
+    "0": 16,
+    "1": 12,
+    "2": 12
+  },
+  "forecast_adapter": "causal persistence from the immediately preceding source row; provisional development use only",
+  "o02_bounded_results": [
+    {
+      "labels": 10,
+      "scenario": "infeasible",
+      "status": "certified_optimal",
+      "training_rows": 10
+    },
+    {
+      "labels": 4,
+      "scenario": "limited",
+      "status": "certified_optimal",
+      "training_rows": 4
+    },
+    {
+      "labels": 15,
+      "scenario": "normal",
+      "status": "certified_optimal",
+      "training_rows": 15
+    },
+    {
+      "labels": 1,
+      "scenario": "spike",
+      "status": "certified_optimal",
+      "training_rows": 1
+    }
+  ],
+  "o02_limitation": "Bounded labels remain development evidence only. Source semantics, rights, held-out isolation and scientific freeze are unresolved.",
+  "p03_collected_decisions": 120,
+  "p03_feature_rows": 813,
+  "s01_full_30_slot_replays": 40,
+  "source_sha256": "e05789a1dbf940e0554b0e8db42d84ed5cc0279d0050206fb048ba832ef24ef4",
+  "status": "BOUNDED DEVELOPMENT RECEIVING READY",
+  "valid_content_hashes": 40
+}

@@ -44,6 +44,7 @@ def test_exact_allocation_round_trips_and_metadata(fake_source):
         assert all(o.source_sha256 == m.carbon.SHA256 for o in e.realized_carbon)
         assert all(o.valid_from_utc is o.valid_to_utc is None for o in e.realized_carbon)
         assert all(o.semantics == m.SEMANTICS for o in e.realized_carbon)
+        assert e.forecast_visibility == "persistence"
         assert not any(c.applies_to_jobs for c in e.snapshot.constraints)
         assert e.snapshot.capacity_kw == 100
         assert e.snapshot.site.background_kw == 40
@@ -71,6 +72,19 @@ def test_exclusive_deterministic_content_receipts_and_verifier(fake_source, tmp_
         expected_mode = 0o666 if os.name == "nt" else 0o600
         assert path.stat().st_mode & 0o777 == expected_mode
     assert len(m.verify(fake_source, first, revision="test-revision")) == 40
+    receipt_path = first / "content-receipt.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    receipt["environment"] = {
+        "python": "3.12.other",
+        "implementation": "CPython",
+        "dependencies": {"different-machine": "1"},
+    }
+    receipt_path.write_bytes(m.serialize(receipt))
+    assert len(m.verify(fake_source, first, revision="test-revision")) == 40
+    receipt["code_sha256"]["dc_sustainability/schemas.py"] = "0" * 64
+    receipt_path.write_bytes(m.serialize(receipt))
+    with pytest.raises(ValueError, match="excluding environment"):
+        m.verify(fake_source, first, revision="test-revision")
     with pytest.raises(FileExistsError):
         m.materialize(fake_source, first, revision="test-revision")
     for e in a["entries"]:
@@ -99,7 +113,10 @@ def test_corrupted_partial_or_unexpected_corpus_rejected(fake_source, tmp_path, 
     else:
         saved = tmp_path / "saved"
         target.rename(saved)
-        target.symlink_to(saved)
+        try:
+            target.symlink_to(saved)
+        except OSError as exc:
+            pytest.skip(f"symlinks are unavailable on this host: {exc}")
     with pytest.raises(ValueError):
         m.verify(fake_source, out, revision="test-revision")
 
@@ -174,28 +191,22 @@ def test_simulator_collection_and_missing_forecast_boundary(fake_source):
     assert len(result) == 1 and not result[0].training_rows()
 
 
-def test_valid_callback_forecast_interface_and_unknown_labels(fake_source, monkeypatch):
-    # TEST-ONLY forecasts demonstrate interface compatibility. This invented test
-    # schedule is deliberately not exported as the D01 development forecast protocol.
+def test_causal_persistence_forecast_adapter_and_unknown_labels(fake_source, monkeypatch):
     e = m.episodes(fake_source)[0]
     start = e.realized_carbon[0].observed_at_utc
-    forecasts = {
-        t: tuple(
-            s.CarbonForecast(
-                fact_id=f"FACT-TEST-{t}-{slot}",
-                value=100,
-                unit="g/kWh",
-                source_id="SRC-D01",
-                valid_slot=slot,
-                issued_at_utc=start + timedelta(hours=t),
-                forecast_kind="perfect_foresight",
-                semantics=m.SEMANTICS,
-                quality_status="unvalidated",
-            )
-            for slot in range(t, min(t + 24, 30))
+    forecasts = m.persistence_forecasts(fake_source, e.episode_id)
+    manifest, _ = m.allocation()
+    record = next(r for r in manifest["records"] if r["episode_id"] == e.episode_id)
+    rows, _ = m.carbon.load_source(fake_source)
+    for issue_slot, facts in forecasts.items():
+        current_index = record["window"]["proposed_physical_indices"][issue_slot]
+        assert facts
+        assert all(f.forecast_kind == "persistence" for f in facts)
+        assert all(f.value == rows[current_index - 1][1] for f in facts)
+        assert all(rows[current_index - 1][0] < f.issued_at_utc for f in facts)
+        assert [f.valid_slot for f in facts] == list(
+            range(issue_slot, min(issue_slot + s.PROPOSED_DECISION_SLOTS, 30))
         )
-        for t in range(30)
-    }
     decisions = collect_decisions(
         e,
         decision_time_utc=lambda t: start + timedelta(hours=t),
