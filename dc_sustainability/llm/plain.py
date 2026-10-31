@@ -171,6 +171,9 @@ class PlainLLMPolicy:
         context = s.Context.model_validate(
             context.model_dump(mode="python", warnings="none"), strict=True
         )
+        from dc_sustainability.reference.hindsight import reject_hindsight_in_context
+
+        reject_hindsight_in_context(context)
         _check_context(state, context)
         messages = render_messages(context)
         self._requested.add(key)

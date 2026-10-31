@@ -100,6 +100,9 @@ def label_decision(
     tolerance: float = 1e-6,
 ) -> LabeledDecision:
     """Run the O01 reference solver on one collected decision and attach labels."""
+    from dc_sustainability.reference.hindsight import reject_hindsight_in_context
+
+    reject_hindsight_in_context(collected.context)
     result = solve_visible(
         collected.state,
         collected.context,
@@ -176,6 +179,11 @@ def labels_from_solver_result(
     This is useful for replay/audit: the solver result may have been cached or produced by
     a different backend, but the label semantics stay identical.
     """
+    from dc_sustainability.reference.hindsight import reject_hindsight_in_context
+
+    reject_hindsight_in_context(context)
+    if result.kind == "hindsight" or result.uses_future_arrivals:
+        raise ValueError("hindsight solver results cannot produce visible-state labels")
     if decision_time_utc is None:
         from tests.contracts.fixtures import SLOT0_UTC
 
