@@ -4,6 +4,8 @@ The model test uses the synthetic loopback responder from test_model_units; it i
 inference and says nothing about model quality.
 """
 
+import pytest
+
 from dc_sustainability.evaluation import replay as r
 from dc_sustainability.evaluation.validator import Q03_OPTION_B
 from dc_sustainability.experiments import runner
@@ -66,3 +68,28 @@ def test_plain_and_agent_units_run_on_the_same_bundle(tmp_path, model):
     assert len(model.requests) == sum(
         d.model_call_count for st in statuses for d in traces(root, st.unit)
     )
+
+
+@pytest.mark.parametrize("overlap", [False, True])  # True drives the Agent through repair
+def test_receiving_bounds_admit_both_units_within_24_requests(tmp_path, model, overlap):
+    # #18: ledger cap 18 per unit and 24 in total. Admission reserves min(24 x cap, 18).
+    model.overlap = overlap
+    ep = load_bundle(BUNDLE).episode
+    config = model_config(BUNDLE, ep, model, max_total=24, max_run_attempts=18)
+    plain, agent = runner.run(config, tmp_path / "out", inputs(model, max_run_attempts=18))
+    assert (plain.status, agent.status) == ("completed", "completed"), agent.detail
+    root = tmp_path / "out" / config.run_id / "units"
+    calls = {
+        st.unit.system: sum(d.model_call_count for d in traces(root, st.unit))
+        for st in (plain, agent)
+    }
+    assert calls["plain_llm"] <= 5 and calls["agent"] <= 18  # 5 slots ever hold waiting jobs
+    assert len(model.requests) == sum(calls.values()) <= 24
+
+
+def test_a_smaller_total_still_refuses_the_agent_unit(tmp_path, model):
+    ep = load_bundle(BUNDLE).episode
+    config = model_config(BUNDLE, ep, model, max_total=20, max_run_attempts=18)
+    plain, agent = runner.run(config, tmp_path / "out", inputs(model, max_run_attempts=18))
+    assert plain.status == "completed"
+    assert agent.status == "pending" and "unit may need 18" in agent.detail

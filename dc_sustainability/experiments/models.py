@@ -97,8 +97,14 @@ def spent_attempts(root: Path) -> int:
     return saved + unsaved
 
 
-def worst_case_attempts(system: str) -> int:
-    return s.PROPOSED_DECISION_SLOTS * CALL_CAP[system]
+def worst_case_attempts(system: str, settings: ModelSettings) -> int:
+    """The most attempts one unit can spend: its call caps, or its ledger cap if lower.
+
+    ``check_inputs`` makes every provider's pins equal ``settings.deployment``, so the
+    unit's fresh ledger refuses dispatch past ``max_run_attempts``.
+    """
+    per_slot = s.PROPOSED_DECISION_SLOTS * CALL_CAP[system]
+    return min(per_slot, settings.deployment["max_run_attempts"])
 
 
 def outcome(attempt: Attempt) -> str:

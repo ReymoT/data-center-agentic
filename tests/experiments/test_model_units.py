@@ -87,7 +87,7 @@ def settings(server, trials=(0,), max_total=1000, **pins):
         seeds=tuple((t, 100 + t) for t in trials),
         decision_seconds=10,
         max_total_attempts=max_total,
-        deployment=m.deployment_pins(deployment(server, max_run_attempts=72, **pins)),
+        deployment=m.deployment_pins(deployment(server, **{"max_run_attempts": 72, **pins})),
         plain_prompt_sha256=prompt_template_sha256(),
         agent_renderer_ref="synthetic-test-renderers",
     )
@@ -97,7 +97,8 @@ def inputs(server, **pins):
     def factory():
         # A synthetic counter belongs only to this test; no production tokenizer is implied.
         return OllamaProvider(
-            deployment(server, max_run_attempts=72, **pins), count_prompt_tokens=lambda _: 20
+            deployment(server, **{"max_run_attempts": 72, **pins}),
+            count_prompt_tokens=lambda _: 20,
         )
 
     return m.ModelInputs(provider_factory=factory, agent_renderers=RENDERERS)
