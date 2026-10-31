@@ -1,0 +1,89 @@
+{
+  "evidence_kind": "bounded_public_development_validation_not_study_result",
+  "authorization_ref": "https://github.com/ReymoT/data-center-agentic/issues/6#issuecomment-6536340075",
+  "repo_commit": "e7775b75ce9666a05abcf134a26400ddc7092c6d",
+  "scope": "Plain-first paired A01 transport validation; no tools, simulator execution, repair, explanation, retry, warm-up or study run",
+  "bounds": {
+    "maximum_serial_requests": 2,
+    "per_request_seconds": 150,
+    "paired_total_seconds": 330,
+    "actual_requests": 2,
+    "retries": 0,
+    "warmups": 0
+  },
+  "runtime": {
+    "version": "0.40.5",
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "316504eda9b907ddeaf5403f02da3b12d13e998162db42cbb917a1e095cf731a",
+    "backend": "Vulkan",
+    "device": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "device_type": "iGPU",
+    "offloaded_layers": "37/37",
+    "context_length": 16384
+  },
+  "settings": {
+    "temperature": 0.2,
+    "top_p": 1,
+    "seed": 101,
+    "num_ctx": 16384,
+    "num_predict": 1536,
+    "stream": false,
+    "think": false
+  },
+  "attempts": [
+    {
+      "system": "plain_llm",
+      "request_sha256": "bca7056eae08522625bc2b8446900ead6561b70142d52e93e43f2d5eac94e862",
+      "response_sha256": "022983802a1407c18936ed9fa936e030527342382816acfabedf75e8b37038a6",
+      "http_status": 200,
+      "latency_ms": 25414.0716,
+      "offline_prompt_tokens": 2291,
+      "native_prompt_tokens": 2291,
+      "completion_tokens": 153,
+      "native_count_matches_offline": true,
+      "strict_parse_passed": true,
+      "done_reason": "stop",
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "request_sha256": "7ba7e652f2df3ece1414b162945a8601cfc9c7eda0df1dde9b44671dba15a234",
+      "response_sha256": "a91c3b905ef4964ff458e19938043f28a7c344c26fc66bfb882888b607818763",
+      "http_status": 200,
+      "latency_ms": 11929.2004,
+      "offline_prompt_tokens": 2146,
+      "native_prompt_tokens": 2146,
+      "completion_tokens": 78,
+      "native_count_matches_offline": true,
+      "strict_parse_passed": true,
+      "done_reason": "stop",
+      "error": null,
+      "uncertain_outcome": false
+    }
+  ],
+  "result": {
+    "status": "passed",
+    "paired_validation_passed": true,
+    "identity_unchanged_before_after": true,
+    "experiment_ready": false
+  },
+  "cleanup": {
+    "owned_process_exited": true,
+    "isolated_listener_remaining": false,
+    "verified": true
+  },
+  "retained_outside_git": {
+    "validation_record_sha256": "46e5a7eff015c81f69451142e4c9dd18cb880a7f2a229c9793f017c70aeaf568",
+    "runtime_stderr_sha256": "5f2bd42bb7233ef579539571801262de3c854fffe9f80905eab760246bf9dd3d",
+    "runtime_stdout_sha256": "355d0da56e087f1290b38217e6edf9e39d2ea1c9870399bb372d40e2b1e1754c",
+    "operational_wrapper_sha256": "77b82eb5bf17678033db3a742684ff4ff2ef2b7d7fe2fac0b3940f1ff1103962"
+  },
+  "limitations": [
+    "This is one public-development transport validation, not a study run or scientific result.",
+    "The Agent request produced a Plan only; no repair, checker, fallback, explanation or execution was exercised.",
+    "Runtime-reported integrated graphics memory is shared system memory, not dedicated VRAM."
+  ]
+}
