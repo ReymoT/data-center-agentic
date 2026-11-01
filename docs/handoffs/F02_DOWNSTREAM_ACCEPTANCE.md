@@ -66,6 +66,8 @@ Added an independent brute-force oracle and oracle-based tests:
 - `test_empty_waiting_jobs_matches_oracle` — empty schedule agreement.
 - `test_tie_break_prefers_lower_job_id_start_slot` — uniform carbon resolves to lexicographically earliest schedule.
 - `test_near_tie_prefers_lower_carbon` — schedules differing by < 1e-7 kg resolve to the lower-carbon schedule.
+- `test_adversarial_near_tie_carbon_beats_lexicographic` — schedules differing by ~4e-5 kg where the cheaper schedule is lexicographically later still resolve to the lower-carbon schedule.
+- `test_adversarial_tie_below_solver_resolution_falls_back_lexicographic` — honest limitation test: when the objective difference is below the HiGHS/SciPy MILP practical resolution floor (~3.95e-5 kg in this fixture), the solver correctly falls back to the lexicographically earliest schedule.
 - `test_missing_freshness_constraint_is_insufficient_evidence` — missing freshness evidence returns `insufficient_evidence`.
 - `test_stale_forecast_is_insufficient_evidence_oracle` — stale forecasts return `insufficient_evidence`.
 - `test_missing_forecast_is_insufficient_evidence_oracle` — missing forecasts return `insufficient_evidence`.
@@ -93,8 +95,8 @@ No schema changes were made.
 
 | Suite | Result |
 |-------|--------|
-| `tests/reference/test_solver.py` + `tests/reference/test_labels.py` | **34 passed** |
-| `tests/reference/` + `tests/contracts/` | **202 passed** |
+| `tests/reference/test_solver.py` + `tests/reference/test_labels.py` | **36 passed** |
+| `tests/reference/` + `tests/contracts/` | **204 passed** |
 | `ruff check dc_sustainability/reference tests/reference` | **passed** |
 | `ruff format --check dc_sustainability/reference tests/reference` | **passed** |
 
@@ -103,6 +105,7 @@ No schema changes were made.
 ## 5. Blockers / Follow-up
 
 - **None blocking.** The F02 downstream interface is accepted on this branch and the O01 reference-solver tie-break correctness gap is closed.
-- **Final audit commit:** `f64d91d` on `ved/f02-downstream-acceptance`.
+- **Final audit commit:** `3e9d090` on `ved/f02-downstream-acceptance`.
+- **Numerical resolution limitation:** The `scipy.optimize.milp`/HiGHS backend used by the reference solver cannot reliably distinguish carbon objective differences below ~3.95e-5 kg in the hand fixture. Consequently, the adversarial near-tie test uses a ~4e-5 kg difference where the cheaper schedule is lexicographically later, and a separate limitation test documents the fallback to lexicographic ordering below that floor. Sub-1e-7 kg adversarial ties are not resolvable with the current backend.
 - **Note:** `docs/handoffs/D04_DEVELOPMENT_FOLD_MAP_102.md` and `data/D02_CALIBRATION.md` are flagged by `ruff format` as unformatted Markdown, but they are pre-existing and unrelated to F02.
 - **Future work:** If additional consumers (e.g., a new policy or renderer) begin calling `solve_visible` directly, they must pass an explicit `decision_time_utc`; the contract test `test_solver_requires_decision_time_utc` now enforces this.
