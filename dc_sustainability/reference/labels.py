@@ -165,27 +165,27 @@ def label_episode(
     )
 
 
-def _default_decision_time_utc(state: s.VisibleState) -> datetime:
-    """Fallback decision time when an explicit timestamp is not supplied by the caller."""
-    from tests.contracts.fixtures import SLOT0_UTC
-
-    return SLOT0_UTC + timedelta(hours=state.current_slot)
-
-
 def labels_from_solver_result(
     state: s.VisibleState,
     context: s.Context,
     result: s.SolverResult,
     *,
-    decision_time_utc: Optional[datetime] = None,
+    decision_time_utc: datetime,
 ) -> tuple[CandidateLabel, ...]:
     """Attach labels to the Q07 feature rows of a state using an existing SolverResult.
 
     This is useful for replay/audit: the solver result may have been cached or produced by
     a different backend, but the label semantics stay identical.
+
+    Args:
+        state: policy-visible state at the decision slot.
+        context: hashed policy context built from the same state.
+        result: a previously computed solver result for this state.
+        decision_time_utc: explicit trusted UTC time used to evaluate forecast freshness.
+            Callers must supply this; there is no production fallback.
     """
-    if decision_time_utc is None:
-        decision_time_utc = _default_decision_time_utc(state)
+    if not isinstance(decision_time_utc, datetime) or decision_time_utc.utcoffset() != timedelta(0):
+        raise ValueError("an explicit trusted UTC decision time is required")
     rows = candidate_features(state, context, decision_time_utc=decision_time_utc)
     state_hash = context.content_hash
     labels: list[CandidateLabel] = []

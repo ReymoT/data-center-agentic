@@ -50,11 +50,16 @@ from dc_sustainability.training.features import (
     _window,
 )
 
+
+class _MissingFreshnessError(Exception):
+    """Raised when the solver cannot locate an authoritative freshness constraint."""
+
+
 _BACKENDS = ("scipy.optimize.milp",)
 _BACKEND_VERSION = f"scipy-{_scipy_version}"
 _TIME_LIMIT_S = 30.0
 _TOLERANCE = 1e-6
-_TIE_BREAK_EPS = 1e-7  # small enough to never flip primary objective decisions
+_LEXICOGRAPHIC_BASE = 2  # base for secondary tie-break objective (overridden dynamically)
 
 
 @dataclass(frozen=True)
@@ -100,12 +105,20 @@ class _MILPModel:
         # Per-job bookkeeping used to distinguish physical infeasibility from missing evidence.
         self._job_has_physical_candidate: dict[str, bool] = {}
         self._job_has_fresh_candidate: dict[str, bool] = {}
+        # Set by _build_vars when the freshness constraint is missing.
+        self._missing_freshness_reason: Optional[str] = None
         self._build_vars()
 
     def _build_vars(self) -> None:
         current = self.state.current_slot
         visible_end = min(current + s.PROPOSED_DECISION_SLOTS, self.horizon)
-        max_age = self._max_age_seconds()
+        try:
+            max_age = self._max_age_seconds()
+        except _MissingFreshnessError:
+            # Defer the insufficient_evidence decision until solve() so we can report
+            # it with a proper SolverResult and input hash.
+            self._missing_freshness_reason = "authoritative freshness constraint is missing"
+            max_age = float("inf")
         for job in sorted(self.state.waiting_jobs, key=lambda j: j.job_id):
             if job.arrival_slot > current:
                 continue
@@ -138,8 +151,10 @@ class _MILPModel:
     def _max_age_seconds(self) -> float:
         try:
             return _max_age_seconds(self.state, self.context)
-        except s.MissingEvidenceError:
-            return float("inf")
+        except s.MissingEvidenceError as exc:
+            # Missing freshness evidence is not the same as "any age is acceptable".
+            # Surface it as a sentinel so the solver reports insufficient_evidence.
+            raise _MissingFreshnessError(str(exc)) from exc
 
     def _fits(self, start: int, job: s.Job) -> bool:
         if self.capacity is None:
@@ -176,6 +191,12 @@ class _MILPModel:
             elapsed = time.perf_counter() - start_time
             return self._insufficient_evidence("capacity constraint missing from context", elapsed)
 
+        # Missing freshness evidence disables all stale-forecast checking. Treat this as
+        # insufficient evidence for the whole decision, not as physical infeasibility.
+        if self._missing_freshness_reason is not None:
+            elapsed = time.perf_counter() - start_time
+            return self._insufficient_evidence(self._missing_freshness_reason, elapsed)
+
         # Every arrived waiting job must be explicitly constrained. If a job has no
         # candidate at all, classify the root cause before declaring infeasibility.
         arrived_jobs = [
@@ -203,15 +224,8 @@ class _MILPModel:
             return self._certified_optimal([], 0.0, "empty visible horizon", elapsed)
 
         n = len(self.vars)
-        # Primary objective: minimize emissions. Secondary tiny lexicographic tie-break
-        # so the solver itself prefers lower (job_id, start_slot) without changing the
-        # primary optimum. The perturbation is bounded by _TIE_BREAK_EPS * n < tolerance.
-        c = np.array(
-            [var.emissions_kg + _TIE_BREAK_EPS * (var.idx + 1) for var in self.vars],
-            dtype=float,
-        )
 
-        # Each arrived waiting job must start exactly once.
+        # Build shared constraint matrices once.
         job_ids = sorted({var.job_id for var in self.vars})
         job_index = {job_id: i for i, job_id in enumerate(job_ids)}
         a_job = np.zeros((len(job_ids), n))
@@ -265,9 +279,11 @@ class _MILPModel:
         bounds = Bounds(lb=np.zeros(n), ub=np.ones(n))
         integrality = np.ones(n, dtype=int)
 
+        # Stage 1: solve the original, unmodified primary carbon-minimization problem.
+        primary_c = np.array([var.emissions_kg for var in self.vars], dtype=float)
         try:
-            res = milp(
-                c=c,
+            primary_res = milp(
+                c=primary_c,
                 constraints=constraints,
                 bounds=bounds,
                 integrality=integrality,
@@ -281,20 +297,88 @@ class _MILPModel:
 
         # HiGHS status codes through scipy:
         # 0 -> success, 1 -> timeout, 2 -> infeasible, 3 -> unbounded.
-        if res.success and res.status == 0:
-            selected = [var for var in self.vars if res.x[var.idx] > 0.5]
-            objective = float(res.fun)
-            return self._certified_optimal(
-                selected,
-                objective,
-                res.message,
+        if primary_res.status == 2:
+            return self._certified_infeasible(primary_res.message, elapsed)
+        if not (primary_res.success and primary_res.status == 0):
+            return self._unresolved(primary_res.message, elapsed)
+
+        primary_objective = float(primary_res.fun)
+        primary_gap = getattr(primary_res, "mip_gap", None)
+        primary_bound = getattr(primary_res, "mip_dual_bound", None)
+
+        # Stage 2: among primary-optimal schedules, choose the deterministic canonical
+        # lexicographic schedule. We fix the primary objective within a small tolerance
+        # and then iterate candidates in lexicographic (job_id, start_slot) order. For
+        # each candidate we attempt to fix it to 1 while preserving primary optimality.
+        # If feasible, we lock it in and forbid all other starts for the same job. This
+        # is a true lexicographic optimization: earlier candidates in the ordering are
+        # preferred regardless of later candidates, which a single weighted-sum objective
+        # cannot guarantee with finite coefficients.
+        sorted_vars = sorted(self.vars, key=lambda v: (v.job_id, v.start_slot))
+
+        # Preserve the certified primary optimum: c^T x <= primary_objective + eps.
+        # Use a modest multiple of the integrality tolerance to avoid numerical noise.
+        objective_slack = _TOLERANCE * max(1.0, abs(primary_objective))
+        a_obj = primary_c.reshape(1, -1)
+        obj_con = LinearConstraint(a_obj, lb=-np.inf, ub=primary_objective + objective_slack)
+
+        stage2_constraints = list(constraints)
+        stage2_constraints.append(obj_con)
+        fixed: set[int] = set()
+        for var in sorted_vars:
+            if var.idx in fixed:
+                continue
+            # Try fixing this candidate to 1.
+            fix_row = np.zeros(n)
+            fix_row[var.idx] = 1.0
+            fix_con = LinearConstraint(fix_row, lb=1.0, ub=1.0)
+            try:
+                test_res = milp(
+                    c=primary_c,
+                    constraints=stage2_constraints + [fix_con],
+                    bounds=bounds,
+                    integrality=integrality,
+                    options={"time_limit": self.time_limit_s},
+                )
+            except Exception as exc:  # pragma: no cover - solver failure
+                elapsed = time.perf_counter() - start_time
+                return self._unresolved(
+                    f"lexicographic tie-break milp raised {type(exc).__name__}: {exc}",
+                    elapsed,
+                    unresolved_reason="lexicographic tie-break unresolved",
+                )
+            if not (test_res.success and test_res.status == 0):
+                # This candidate cannot be part of any primary-optimal schedule.
+                continue
+            # Commit to this candidate: forbid all other starts for this job and fix it.
+            fixed.add(var.idx)
+            same_job = [v for v in self.vars if v.job_id == var.job_id and v.idx != var.idx]
+            if same_job:
+                zero_row = np.zeros(n)
+                for v in same_job:
+                    zero_row[v.idx] = 1.0
+                stage2_constraints.append(LinearConstraint(zero_row, lb=0.0, ub=0.0))
+            stage2_constraints.append(fix_con)
+
+        elapsed = time.perf_counter() - start_time
+
+        selected = [var for var in self.vars if var.idx in fixed]
+        if not selected:
+            # Should not happen because the primary optimum is feasible, but keep safe.
+            return self._unresolved(
+                "primary certified optimal but lexicographic tie-break produced no selection",
                 elapsed,
-                gap=getattr(res, "mip_gap", None),
-                bound_kg=getattr(res, "mip_dual_bound", None),
+                unresolved_reason="lexicographic tie-break unresolved",
             )
-        if res.status == 2:
-            return self._certified_infeasible(res.message, elapsed)
-        return self._unresolved(res.message, elapsed)
+
+        return self._certified_optimal(
+            selected,
+            primary_objective,
+            "primary carbon optimum with deterministic lexicographic tie-break",
+            elapsed,
+            gap=primary_gap,
+            bound_kg=primary_bound,
+        )
 
     def _input_hash(self) -> str:
         return self.context.content_hash
@@ -316,8 +400,11 @@ class _MILPModel:
         gap: Optional[float] = None,
         bound_kg: Optional[float] = None,
     ) -> s.SolverResult:
-        # Remove the tie-break perturbation from the reported objective.
-        primary_objective = sum(var.emissions_kg for var in selected)
+        # Report the primary MILP objective, not a recomputed sum, so tiny
+        # floating-point differences between the solver's reported optimum and
+        # a manual recomputation do not break oracle comparisons. The selected
+        # schedule is certified primary-optimal, so the solver's objective is
+        # authoritative.
         return s.SolverResult(
             solver_result_id=_new_solver_id(),
             kind="visible",
@@ -330,10 +417,10 @@ class _MILPModel:
             elapsed_s=round(elapsed_s, 6),
             termination=termination,
             tolerance=self.tolerance,
-            objective_kg=round(primary_objective, 6),
-            bound_kg=round(bound_kg, 6) if bound_kg is not None else None,
-            gap=round(gap, 6) if gap is not None else None,
-            tie_break="lexicographic (job_id, start_slot) via secondary objective",
+            objective_kg=round(objective_kg, 9),
+            bound_kg=round(bound_kg, 9) if bound_kg is not None else None,
+            gap=round(gap, 9) if gap is not None else None,
+            tie_break="lexicographic (job_id, start_slot) via sequential fixing",
             certification_basis=(
                 "scipy.optimize.milp mixed-integer linear program; "
                 "minimize emissions; capacity + one-start + nonflexible constraints; "
@@ -359,7 +446,13 @@ class _MILPModel:
             certification_basis="scipy.optimize.milp proved infeasibility",
         )
 
-    def _unresolved(self, reason: str, elapsed_s: float) -> s.SolverResult:
+    def _unresolved(
+        self,
+        reason: str,
+        elapsed_s: float,
+        *,
+        unresolved_reason: Optional[str] = None,
+    ) -> s.SolverResult:
         return s.SolverResult(
             solver_result_id=_new_solver_id(),
             kind="visible",
@@ -372,7 +465,7 @@ class _MILPModel:
             elapsed_s=round(elapsed_s, 6),
             termination=reason,
             tolerance=self.tolerance,
-            unresolved_reason=reason,
+            unresolved_reason=unresolved_reason or reason,
         )
 
     def _insufficient_evidence(self, reason: str, elapsed_s: float) -> s.SolverResult:

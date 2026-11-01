@@ -45,7 +45,9 @@ def test_optimal_labels_match_solver_schedule():
     result = solve_visible(
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
-    labels = labels_from_solver_result(state, ctx, result)
+    labels = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     selected = {(label.job_id, label.start_slot) for label in labels if label.label is True}
     assert selected == {(ps.job_id, ps.start_slot) for ps in result.schedule}
     assert all(label.source_solver_result_id == result.solver_result_id for label in labels)
@@ -65,7 +67,9 @@ def test_infeasible_state_labels_are_none():
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
     assert result.status == "certified_infeasible"
-    labels = labels_from_solver_result(state, ctx, result)
+    labels = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     assert all(label.label is None for label in labels)
     assert not any(label.is_training_row() for label in labels)
 
@@ -78,7 +82,9 @@ def test_missing_capacity_labels_are_none():
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
     assert result.status == "insufficient_evidence"
-    labels = labels_from_solver_result(state, ctx, result)
+    labels = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     assert all(label.label is None for label in labels)
 
 
@@ -131,11 +137,15 @@ def test_candidate_label_hash_is_stable():
     result = solve_visible(
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
-    labels = labels_from_solver_result(state, ctx, result)
+    labels = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     hashes = {label.candidate_hash for label in labels}
     assert len(hashes) == len(labels)
     # Recompute and verify stability.
-    recomputed = labels_from_solver_result(state, ctx, result)
+    recomputed = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     assert {label.candidate_hash for label in recomputed} == hashes
 
 
@@ -147,7 +157,9 @@ def test_labels_preserve_feature_row_order():
     result = solve_visible(
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
-    labels = labels_from_solver_result(state, ctx, result)
+    labels = labels_from_solver_result(
+        state, ctx, result, decision_time_utc=_decision_time(state.current_slot)
+    )
     label_keys = [(label.job_id, label.start_slot) for label in labels]
     row_keys = [(row.job_id, row.start_slot) for row in rows]
     assert label_keys == row_keys

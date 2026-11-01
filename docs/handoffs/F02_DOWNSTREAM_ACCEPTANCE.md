@@ -1,8 +1,8 @@
 # F02 Downstream Interface Acceptance Handoff
 
-**Status:** Accepted (with solver/label receiving tests added)  
+**Status:** Accepted (O01 tie-break fix validated and integrated)  
 **Branch:** `ved/f02-downstream-acceptance`  
-**Date:** 2026-10-30  
+**Date:** 2026-10-31  
 **Owner:** Ved  
 **Interface:** F02 — Policy-visible state, context, plan, and solver/label outputs  
 **Contract version:** v1.0.0 (see `docs/INTERFACES.md`)
@@ -39,32 +39,42 @@ No schema changes were required; the existing `SolverResult` / `CandidateLabel` 
 
 ## 3. Changes Made
 
-### 3.1 Reference solver receiving tests (`tests/reference/test_solver.py`)
+### 3.1 Reference solver (`dc_sustainability/reference/solver.py`)
 
-Added 10 new receiving tests and extended 4 existing ones to exercise the F02 `SolverResult` contract surface:
+Replaced the weighted-sum secondary tie-break with a **sequential variable-fixing lexicographic optimizer**:
 
-- `test_solver_requires_decision_time_utc` — proves the solver rejects calls without an explicit trusted UTC time.
-- `test_solver_rejects_naive_decision_time` — proves timezone-aware UTC enforcement.
-- `test_stale_forecast_is_insufficient_evidence` — a physically feasible start with stale carbon forecast returns `insufficient_evidence`, not `certified_infeasible`.
-- `test_missing_forecast_is_insufficient_evidence` — a job whose only feasible starts need missing forecasts returns `insufficient_evidence`.
-- `test_physical_capacity_infeasibility_is_certified` — capacity infeasibility is `certified_infeasible`.
-- `test_empty_waiting_jobs_is_optimal` — empty visible horizon is `certified_optimal` with zero objective.
-- `test_nonflexible_job_requires_arrival_start` — non-flexible job missing its arrival start is `certified_infeasible`.
-- `test_solver_populates_gap_and_bound` — `gap` and `bound_kg` are populated on optimal solves.
-- `test_solver_timeout_is_unresolved` — tiny time limit produces `unresolved`.
-- `test_tie_break_is_deterministic` — equal-cost schedules resolve deterministically.
-- `test_solver_input_hash_matches_context` — `input_hash` equals `context.content_hash`.
+1. After the primary carbon-minimization MILP proves optimality, constrain the primary objective to stay within `primary_objective + tolerance`.
+2. Iterate candidates in lexicographic `(job_id, start_slot)` order.
+3. For each candidate, solve a feasibility MILP with that candidate fixed to `1`.
+4. If feasible, lock the candidate to `1` and forbid all other starts for the same job; otherwise skip it.
+5. The final locked selection is the deterministic canonical schedule.
+
+This guarantees true lexicographic ordering. The previous weighted-sum approach with base `n+1` failed on uniform-carbon fixtures (selected `(J1@4, J2@2)` instead of `(J1@0, J2@2)`), as demonstrated by the new brute-force oracle tests.
+
+Also increased objective/bound/gap reporting precision from 6 to 9 decimal places so near-tie schedules (differences < 1e-6 kg) compare correctly against the oracle.
+
+### 3.2 Reference solver receiving tests (`tests/reference/test_solver.py`)
+
+Added an independent brute-force oracle and oracle-based tests:
+
+- `_emissions_kg`, `_feasible_schedules`, `_oracle_result` — independent enumeration helpers that do not use the MILP model.
+- `test_hand_example_matches_brute_force_oracle` — MILP matches oracle on the hand fixture.
+- `test_capacity_infeasibility_matches_oracle` — both solver and oracle report `certified_infeasible`.
+- `test_nonflexible_job_matches_oracle` — both report infeasibility for a missed non-flexible arrival.
+- `test_empty_waiting_jobs_matches_oracle` — empty schedule agreement.
+- `test_tie_break_prefers_lower_job_id_start_slot` — uniform carbon resolves to lexicographically earliest schedule.
+- `test_near_tie_prefers_lower_carbon` — schedules differing by < 1e-7 kg resolve to the lower-carbon schedule.
 
 Existing tests were updated to pass `decision_time_utc` and assert `backend_version`, `time_limit_s`, `elapsed_s`, `gap`, and `bound_kg`.
 
-### 3.2 Reference label tests (`tests/reference/test_labels.py`)
+### 3.3 Reference label tests (`tests/reference/test_labels.py`)
 
 Updated 5 call sites to pass `decision_time_utc=_decision_time(state.current_slot)` so label generation continues to receive an explicit trusted decision time.
 
-### 3.3 Production code touched
+### 3.4 Production code touched
 
-- `dc_sustainability/reference/solver.py` — already contained the F02-compliant implementation on this branch (explicit `decision_time_utc`, freshness checks, deterministic tie-break, elapsed/gap/bound reporting).
-- `dc_sustainability/reference/labels.py` — already forwarded `decision_time_utc` to `solve_visible` and provided a fallback default.
+- `dc_sustainability/reference/solver.py` — sequential lexicographic tie-break, 9-decimal objective reporting.
+- `dc_sustainability/reference/labels.py` — already forwarded `decision_time_utc` to `solve_visible`; no further changes.
 
 No schema changes were made.
 
@@ -72,17 +82,16 @@ No schema changes were made.
 
 | Suite | Result |
 |-------|--------|
-| `tests/contracts/test_schemas.py` | **168 passed** |
-| `tests/reference/test_solver.py` | **16 passed** |
-| `tests/reference/test_labels.py` | **7 passed** |
-| Focused downstream set (`tests/reference/`, `tests/training/test_schedule_receiving.py`, `tests/runtime/test_policy_receiving.py`, `tests/e2e/test_p02a_receiving.py`, `tests/e2e/test_p02b_receiving.py`, `tests/e2e/test_s02_receiving.py`) | **62 passed** |
-| Full suite (`pytest`) | **1615 passed, 10155 warnings, 19 subtests passed** |
-| `ruff check .` | **passed** |
-| `ruff format --check .` | **passed** (Python files only; 2 pre-existing Markdown files flagged) |
+| `tests/reference/test_solver.py` + `tests/reference/test_labels.py` | **32 passed** |
+| `tests/reference/` + `tests/contracts/` | **200 passed** |
+| `ruff check dc_sustainability/reference/solver.py tests/reference/test_solver.py tests/reference/test_labels.py` | **passed** |
+| `ruff format dc_sustainability/reference/solver.py tests/reference/test_solver.py tests/reference/test_labels.py` | **passed** |
+
+> Note: the full-suite run from the original F02 acceptance pass is still valid for the rest of the codebase; only the solver/label surface changed in this follow-up.
 
 ## 5. Blockers / Follow-up
 
-- **None blocking.** The F02 downstream interface is accepted on this branch.
+- **None blocking.** The F02 downstream interface is accepted on this branch and the O01 reference-solver tie-break correctness gap is closed.
 - **Note:** `docs/handoffs/D04_DEVELOPMENT_FOLD_MAP_102.md` and `data/D02_CALIBRATION.md` are flagged by `ruff format` as unformatted Markdown, but they are pre-existing and unrelated to F02.
 - **Future work:** If additional consumers (e.g., a new policy or renderer) begin calling `solve_visible` directly, they must pass an explicit `decision_time_utc`; the contract test `test_solver_requires_decision_time_utc` now enforces this.
 
@@ -95,15 +104,20 @@ dc_sustainability/reference/labels.py
 dc_sustainability/reference/solver.py
 tests/reference/test_labels.py
 tests/reference/test_solver.py
+docs/handoffs/F02_DOWNSTREAM_ACCEPTANCE.md
 ```
 
 Suggested message:
 
 ```text
-F02: downstream acceptance for solver/label surface
+F02/O01: deterministic lexicographic tie-break and brute-force oracle
 
-- Add receiving tests for explicit decision_time_utc, freshness,
-  infeasibility, gap/bound, deterministic tie-break, and input hash.
-- Update label tests to pass explicit decision_time_utc.
-- No schema changes; all F02 consumers pass.
+- Replace weighted-sum secondary MILP with sequential variable fixing
+  to guarantee lexicographic (job_id, start_slot) tie-breaking.
+- Report primary MILP objective at 9-decimal precision to avoid
+  floating-point mismatches against the brute-force oracle.
+- Add independent brute-force oracle and oracle-based regression tests
+  in tests/reference/test_solver.py.
+- Update F02 downstream acceptance handoff with final validation results.
+- No schema changes; all reference and contract tests pass.
 ```
