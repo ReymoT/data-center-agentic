@@ -163,8 +163,11 @@ def test_selection_aggregates_all_folds_and_refuses_missing_episode(monkeypatch)
     fold_map = _fold_map()
     episodes = {key: key for key in fold_map}
     origins = dict.fromkeys(fold_map, datetime(2022, 1, 1, tzinfo=timezone.utc))
-    specs = (ModelSpec("decision_tree_c", 3), ModelSpec("decision_tree_c", 5),
-             ModelSpec("random_forest_d", 5, 100))
+    specs = (
+        ModelSpec("decision_tree_c", 3),
+        ModelSpec("decision_tree_c", 5),
+        ModelSpec("random_forest_d", 5, 100),
+    )
     monkeypatch.setattr(select, "fit_model", lambda spec, rows, seed: spec)
 
     def metrics(episode, fitted, **kwargs):
@@ -174,15 +177,23 @@ def test_selection_aggregates_all_folds_and_refuses_missing_episode(monkeypatch)
 
     monkeypatch.setattr(select, "rollout_metrics", metrics)
     result = select.select_and_refit(
-        _rows(), fold_map, episodes, seed=1,
-        decision_origin_by_episode=origins, specs=specs,
+        _rows(),
+        fold_map,
+        episodes,
+        seed=1,
+        decision_origin_by_episode=origins,
+        specs=specs,
     )
     assert result.selected["decision_tree_c"].max_depth == 5
     del episodes["EP-F"]
     with pytest.raises(ValueError, match="missing evaluation episodes"):
         select.select_and_refit(
-            _rows(), fold_map, episodes, seed=1,
-            decision_origin_by_episode=origins, specs=specs,
+            _rows(),
+            fold_map,
+            episodes,
+            seed=1,
+            decision_origin_by_episode=origins,
+            specs=specs,
         )
 
 

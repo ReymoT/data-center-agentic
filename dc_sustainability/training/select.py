@@ -196,11 +196,7 @@ def select_and_refit(
             raise ValueError("each candidate requires complete blocked-fold coverage")
         key = _sum_metrics(parts).key()
         current = best_by_system.get(spec.system)
-        if (
-            current is None
-            or key < current[0]
-            or (key == current[0] and spec.key < current[1].key)
-        ):
+        if current is None or key < current[0] or (key == current[0] and spec.key < current[1].key):
             best_by_system[spec.system] = (key, spec)
 
     if set(best_by_system) != {"decision_tree_c", "random_forest_d"}:
