@@ -1,6 +1,10 @@
 # Demo runbook preparation
 
-No runnable experiment/demo exists yet. Nisha defines the CLI with module owners through F02/E02; this document does not invent commands or a successful transcript.
+The completed public EP-HAND1 receiving exercise supports a saved-evidence demo.
+Use the [R04 development section](R04_DEVELOPMENT_EVIDENCE.md) and
+[backup walkthrough](R04_BACKUP_DEMO.md). No new model request is needed.
+The full six-system scientific experiment and final demo acceptance remain pending.
+Nisha defines the CLI with module owners through F02/E02.
 
 Matty's integrated development demo must cover valid execution, invalid-plan rejection, one repair, failed repair, checked A fallback, missing evidence, a graph capacity change and abstention. It must include an actual model-driven episode under approved Q09 budget; mocks alone do not satisfy E4. Preserve initial, repair, fallback, final and executed trace stages and call counts.
 
