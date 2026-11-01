@@ -174,9 +174,7 @@ def label_decision(
     from dc_sustainability.reference.cache import make_cache_key
 
     decision_time = _require_decision_time_utc(collected.decision_time_utc)
-    rows = candidate_features(
-        collected.state, collected.context, decision_time_utc=decision_time
-    )
+    rows = candidate_features(collected.state, collected.context, decision_time_utc=decision_time)
     backend, backend_version = solver_module._BACKENDS[0], solver_module._BACKEND_VERSION
     key = make_cache_key(
         collected.state,

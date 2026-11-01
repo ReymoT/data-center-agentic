@@ -188,12 +188,12 @@ def test_cache_key_changes_with_forecast_values():
         time_limit_s=5.0,
     )
     # Different forecast values change the context hash and therefore the key.
-    uniform_facts = tuple(
-        fact.model_copy(update={"value": 100.0}) for fact in state.carbon_facts
-    )
+    uniform_facts = tuple(fact.model_copy(update={"value": 100.0}) for fact in state.carbon_facts)
     different_state = state.model_copy(update={"carbon_facts": uniform_facts})
     different_ctx = s.Context.build(different_state, snap, representation="flat")
-    different_rows = candidate_features(different_state, different_ctx, decision_time_utc=f.SLOT0_UTC)
+    different_rows = candidate_features(
+        different_state, different_ctx, decision_time_utc=f.SLOT0_UTC
+    )
     different_key = make_cache_key(
         different_state,
         different_ctx,
@@ -479,12 +479,12 @@ def test_labels_require_authoritative_decision_time():
     ctx = s.Context.build(state, snap, representation="flat")
     result = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     # Explicit decision time must be used; O02 must not invent a timestamp.
-    labels_explicit = labels_from_solver_result(
-        state, ctx, result, decision_time_utc=f.SLOT0_UTC
-    )
+    labels_explicit = labels_from_solver_result(state, ctx, result, decision_time_utc=f.SLOT0_UTC)
     with pytest.raises(ValueError, match="explicit trusted UTC decision_time_utc"):
         labels_from_solver_result(state, ctx, result)
-    assert labels_explicit == labels_from_solver_result(state, ctx, result, decision_time_utc=f.SLOT0_UTC)
+    assert labels_explicit == labels_from_solver_result(
+        state, ctx, result, decision_time_utc=f.SLOT0_UTC
+    )
 
 
 def test_label_decision_rejects_missing_decision_time():
@@ -638,9 +638,11 @@ def test_end_to_end_collect_label_cache_hit(tmp_path):
     assert second.labels == first.labels
 
     # Verify the persistent entry exists and is schema-current.
-    from dc_sustainability.reference.cache import _REFERENCE_SOLVER_VERSION, _CACHE_SCHEMA_VERSION
+    from dc_sustainability.reference.cache import _CACHE_SCHEMA_VERSION, _REFERENCE_SOLVER_VERSION
 
-    rows = candidate_features(sample.state, sample.context, decision_time_utc=sample.decision_time_utc)
+    rows = candidate_features(
+        sample.state, sample.context, decision_time_utc=sample.decision_time_utc
+    )
     key = make_cache_key(
         sample.state,
         sample.context,

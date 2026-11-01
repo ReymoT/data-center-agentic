@@ -141,9 +141,7 @@ def test_only_optimal_results_produce_training_labels():
     stale_time = f.SLOT0_UTC + timedelta(hours=3)
     stale_result = solve_visible(state, ctx, decision_time_utc=stale_time, time_limit_s=5.0)
     assert stale_result.status != "certified_optimal"
-    stale_labels = labels_from_solver_result(
-        state, ctx, stale_result, decision_time_utc=stale_time
-    )
+    stale_labels = labels_from_solver_result(state, ctx, stale_result, decision_time_utc=stale_time)
     assert all(label.label is None for label in stale_labels)
     assert not any(label.is_training_row() for label in stale_labels)
 
@@ -170,7 +168,6 @@ def test_labels_cannot_use_future_arrivals():
     # Slot 0: only J1 and J2 have arrived; J3 is still hidden.
     state = f.visible_state(snap, current_slot=0, waiting_job_ids=("J1", "J2"))
     ctx = s.Context.build(state, snap, representation="flat")
-    rows = candidate_features(state, ctx, decision_time_utc=f.SLOT0_UTC)
     result = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
     labels = labels_from_solver_result(state, ctx, result, decision_time_utc=f.SLOT0_UTC)
     labeled_jobs = {label.job_id for label in labels}
@@ -192,6 +189,7 @@ def test_labels_cannot_use_realized_future_carbon():
         assert label.source_solver_result_id == result.solver_result_id
     # Changing only realized observations (not in the visible state) leaves labels unchanged.
     from tests.contracts import fixtures as fixtures_module
+
     modified_obs = tuple(
         obs.model_copy(update={"value": obs.value + 1000.0})
         for obs in fixtures_module.observations()
