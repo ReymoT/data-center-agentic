@@ -114,11 +114,12 @@ class _MILPModel:
         visible_end = min(current + s.PROPOSED_DECISION_SLOTS, self.horizon)
         try:
             max_age = self._max_age_seconds()
-        except _MissingFreshnessError:
+        except _MissingFreshnessError as exc:
             # Defer the insufficient_evidence decision until solve() so we can report
-            # it with a proper SolverResult and input hash.
-            self._missing_freshness_reason = "authoritative freshness constraint is missing"
-            max_age = float("inf")
+            # it with a proper SolverResult and input hash. Do not use float("inf")
+            # as a working freshness bound; that would disable all stale-forecast checks.
+            self._missing_freshness_reason = str(exc)
+            max_age = None
         for job in sorted(self.state.waiting_jobs, key=lambda j: j.job_id):
             if job.arrival_slot > current:
                 continue
@@ -130,6 +131,9 @@ class _MILPModel:
                 if not self._fits(start, job):
                     continue
                 has_physical = True
+                if max_age is None:
+                    # Freshness evidence is missing; do not create candidates.
+                    continue
                 carbon = self._fresh_carbon(start, job.duration_slots, max_age)
                 if carbon is None:
                     continue

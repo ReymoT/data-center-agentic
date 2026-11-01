@@ -262,26 +262,38 @@ def _feasible_schedules(
 ) -> list[tuple[dict[str, int], float]]:
     """Brute-force enumerate all feasible schedules and their emissions.
 
-    Does not use the MILP model or any solver helper except the public
-    ``_window`` and ``_running_load`` utilities for feasibility checks.
+    Does not use the MILP model or any solver helper.  It independently
+    re-derives capacity from the context, running/background load from the
+    visible state, and per-job feasible windows from the public job fields.
     """
-    from dc_sustainability.training.features import _running_load, _window
-
     capacity = next(
         (c.limit_value for c in context.content.constraints if c.constraint_type == "capacity"),
         None,
     )
     if capacity is None:
         return []
-    occupancy = _running_load(state)
-    current = state.current_slot
+
+    # Independent running/background load computation (same formula as features.py
+    # but written out here so the oracle does not depend on solver internals).
     horizon = s.PROPOSED_DECISION_SLOTS + s.PROPOSED_COMPLETION_SLOTS
+    occupancy: dict[int, float] = {}
+    for slot in range(horizon):
+        occupancy[slot] = occupancy.get(slot, 0.0) + state.site.background_kw
+    for completed in state.completed_jobs:
+        for slot in range(completed.start_slot, completed.end_slot):
+            occupancy[slot] = occupancy.get(slot, 0.0) + completed.power_kw
+    for job in state.waiting_jobs:
+        if hasattr(job, "start_slot") and job.start_slot is not None:
+            for slot in range(job.start_slot, job.start_slot + job.duration_slots):
+                occupancy[slot] = occupancy.get(slot, 0.0) + job.power_kw
+
+    current = state.current_slot
     visible_end = min(current + s.PROPOSED_DECISION_SLOTS, horizon)
     arrived = [job for job in state.waiting_jobs if job.arrival_slot <= current]
     if not arrived:
         return [({}, 0.0)]
 
-    # Build per-job feasible starts.
+    # Build per-job feasible starts independently.
     job_starts: dict[str, tuple[int, ...]] = {}
     for job in arrived:
         if not job.flexible:
@@ -295,8 +307,14 @@ def _feasible_schedules(
                 return []
             job_starts[job.job_id] = (arrival,)
         else:
+            first = max(current, job.arrival_slot)
+            last = min(
+                s.PROPOSED_DECISION_SLOTS - 1,
+                job.deadline_slot - job.duration_slots,
+                horizon - job.duration_slots,
+            )
             feasible = []
-            for start in _window(job, current):
+            for start in range(first, last + 1):
                 if start + job.duration_slots > visible_end:
                     continue
                 if all(
@@ -437,24 +455,17 @@ def test_tie_break_prefers_lower_job_id_start_slot():
 
 
 def test_near_tie_prefers_lower_carbon():
-    """Schedules whose carbon costs differ by less than the old epsilon still resolve correctly."""
+    """Schedules whose carbon costs differ by < 1e-7 kg still resolve to the lower-carbon one."""
     snap = f.snapshot()
-    # Construct a near-tie where the two cheapest feasible schedules differ by < 1e-7 kg.
-    # J1 duration=2, J2 duration=2. We make J1@2 + J2@4 and J1@4 + J2@2 nearly identical,
-    # with J1@2 slightly cheaper, and verify the solver picks the cheaper one.
+    # J1@2 + J2@4 uses slots 2,3 (J1) and 4,5 (J2).
+    # J1@4 + J2@2 uses slots 4,5 (J1) and 2,3 (J2).
+    # Energy: J1=80 kWh, J2=60 kWh.
+    # Difference = 20*((c4+c5) - (c2+c3)).  Make c4+c5 just slightly above c2+c3
+    # so J1@2+J2@4 is genuinely cheaper by ~2.5e-8 kg, well under the old 1e-6 kg
+    # reporting tolerance but still a genuine objective difference.
     carbon = list(f.HAND_CARBON)
-    # Candidate schedules:
-    #   J1@2 uses slots 2,3; J2@4 uses slots 4,5.
-    #   J1@4 uses slots 4,5; J2@2 uses slots 2,3.
-    # Original values: 300, 250, 400, 480.
-    # J1@2+J2@4 = (300+250)*80 + (400+480)*60 = 44000 + 52800 = 96800 g = 96.8 kg.
-    # J1@4+J2@2 = (400+480)*80 + (300+250)*60 = 70400 + 33000 = 103400 g = 103.4 kg.
-    # We want J1@2+J2@4 to be cheaper by a tiny amount, so lower slots 4,5 slightly.
-    # Difference to overcome: 103400 - 96800 = 6600 g. Shared slots 4,5 total kWh = 80+60 = 140.
-    # Mean carbon reduction needed: 6600/140 = 47.1429 g/kWh.
-    # Set slot 4 = 352.8571, slot 5 = 432.8571 -> J1@4+J2@2 = 96800.004 g, just above 96800 g.
-    carbon[4] = 352.8571
-    carbon[5] = 432.8571
+    carbon[4] = 275.00000125
+    carbon[5] = 275.00000125
     facts = tuple(
         fact.model_copy(update={"value": carbon[fact.valid_slot]}) for fact in f.forecasts()
     )
@@ -465,7 +476,7 @@ def test_near_tie_prefers_lower_carbon():
     assert result.status == oracle_status == "certified_optimal"
     assert result.schedule == oracle_schedule
     assert result.objective_kg == pytest.approx(oracle_objective, abs=1e-9)
-    # The lower-carbon schedule is J1 starting at slot 2.
+    # The genuinely lower-carbon schedule is J1 starting at slot 2 in this fixture.
     assert {ps for ps in result.schedule if ps.job_id == "J1"} == {
         s.PlannedStart(job_id="J1", start_slot=2)
     }
@@ -473,6 +484,7 @@ def test_near_tie_prefers_lower_carbon():
     schedules = _feasible_schedules(state, ctx)
     sorted_objs = sorted({obj for _, obj in schedules})
     assert sorted_objs[0] < sorted_objs[1]
+    assert sorted_objs[1] - sorted_objs[0] < 1e-7
 
 
 def test_missing_freshness_constraint_is_insufficient_evidence():

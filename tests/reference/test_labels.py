@@ -2,6 +2,8 @@
 
 from datetime import timedelta
 
+import pytest
+
 from dc_sustainability import schemas as s
 from dc_sustainability.data.scenarios import hand_jobs
 from dc_sustainability.reference.labels import (
@@ -153,7 +155,7 @@ def test_labels_preserve_feature_row_order():
     snap = f.snapshot()
     state = f.visible_state(snap)
     ctx = s.Context.build(state, snap, representation="flat")
-    rows = candidate_features(state, ctx, decision_time_utc=f.SLOT0_UTC)
+    rows = candidate_features(state, ctx, decision_time_utc=_decision_time(state.current_slot))
     result = solve_visible(
         state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
     )
@@ -163,3 +165,35 @@ def test_labels_preserve_feature_row_order():
     label_keys = [(label.job_id, label.start_slot) for label in labels]
     row_keys = [(row.job_id, row.start_slot) for row in rows]
     assert label_keys == row_keys
+
+
+def test_labels_from_solver_result_rejects_missing_decision_time():
+    """labels_from_solver_result must reject a naive/missing decision_time_utc."""
+    snap = f.snapshot()
+    state = f.visible_state(snap)
+    ctx = s.Context.build(state, snap, representation="flat")
+    result = solve_visible(
+        state, ctx, decision_time_utc=_decision_time(state.current_slot), time_limit_s=5.0
+    )
+    with pytest.raises((ValueError, TypeError)):
+        labels_from_solver_result(state, ctx, result)
+    with pytest.raises(ValueError):
+        labels_from_solver_result(
+            state, ctx, result, decision_time_utc=f.SLOT0_UTC.replace(tzinfo=None)
+        )
+
+
+def test_label_decision_requires_collected_decision_time():
+    """label_decision must propagate an explicit collected decision_time_utc."""
+    samples = collect_decisions(
+        episode(hand_jobs()),
+        decision_time_utc=_decision_time,
+        approve=_empty_approve,
+        forecasts_by_slot=_forecast_map(),
+    )
+    sample = samples[0]
+    # Sanity: the collected decision carries an explicit UTC timestamp.
+    assert sample.decision_time_utc.utcoffset() == timedelta(0)
+    labeled = label_decision(sample, time_limit_s=5.0)
+    assert labeled.solver_result.status == "certified_optimal"
+    assert labeled.collected.decision_time_utc == sample.decision_time_utc
