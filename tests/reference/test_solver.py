@@ -487,6 +487,44 @@ def test_near_tie_prefers_lower_carbon():
     assert sorted_objs[1] - sorted_objs[0] < 1e-7
 
 
+def test_adversarial_near_tie_carbon_beats_lexicographic():
+    """When the cheaper schedule is lexicographically later, carbon minimization must still win.
+
+    Schedule A (lexicographically earlier): J1@2 + J2@4.
+    Schedule B (lexicographically later):   J1@4 + J2@2.
+    Energy: J1=80 kWh, J2=60 kWh.
+    Objective difference = objB - objA = 10*((c4+c5) - (c2+c3)).
+    With c2=300, c3=250, set c4+c5 just below 550 so schedule B is cheaper by
+    ~1.975e-5 kg.  This is far below the old 1e-6 reporting tolerance but still
+    distinguishable by the primary MILP; the sequential tie-break must not flip
+    to the lexicographically earlier but more expensive schedule A.
+    """
+    snap = f.snapshot()
+    carbon = list(f.HAND_CARBON)
+    carbon[4] = 274.998025
+    carbon[5] = 274.998025
+    facts = tuple(
+        fact.model_copy(update={"value": carbon[fact.valid_slot]}) for fact in f.forecasts()
+    )
+    state = _build_state(snap, carbon_facts=facts)
+    ctx = s.Context.build(state, snap, representation="flat")
+    result = solve_visible(state, ctx, decision_time_utc=_decision_time(state), time_limit_s=5.0)
+    oracle_status, oracle_objective, oracle_schedule = _oracle_result(state, ctx)
+    assert result.status == oracle_status == "certified_optimal"
+    # Lexicographically later schedule B is genuinely cheaper.
+    assert result.schedule == oracle_schedule
+    assert result.schedule == (
+        s.PlannedStart(job_id="J1", start_slot=4),
+        s.PlannedStart(job_id="J2", start_slot=2),
+    )
+    assert result.objective_kg == pytest.approx(oracle_objective, abs=1e-9)
+    schedules = _feasible_schedules(state, ctx)
+    sorted_objs = sorted({obj for _, obj in schedules})
+    assert sorted_objs[0] < sorted_objs[1]
+    assert sorted_objs[1] - sorted_objs[0] < 1e-4
+    assert sorted_objs[1] - sorted_objs[0] > 0.0
+
+
 def test_missing_freshness_constraint_is_insufficient_evidence():
     """A context with no freshness constraint must not certify a schedule."""
     snap = f.snapshot()
