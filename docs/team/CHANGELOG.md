@@ -2,6 +2,12 @@
 
 Current deployment: 1.28 - 2026-10-27. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
 
+Factual readiness reconciliation after PR #140, no policy/version change: Matty
+authorized source acceptance audit, I01/P04 receiving preparation and documentation
+consistency cleanup. Added evidence matrices and distinguished older status snapshots
+from completed development materialization, calibration submission and paired
+receiving. Original task ownership, scientific gates and all task rows are preserved.
+
 2026-10-28 factual refresh, no instruction-version change: recorded PR #104, #7/#13 closure, #102 assignment and A01 timeout diagnosis; documented the real deterministic-policy receiving boundary while preserving E02 ownership, all 50 assignments, merge/authority rules and scientific gates.
 
 October 28 A01 paired-validation evidence: on exact current main after the request-local schema fix, the authorized Plain-first Arc/Vulkan sequence sent one Plain request. The accepted Ollama/model/settings identity, 37/37 offload and context 16384 were observed, but Plain timed out at 119.985 seconds without a response body or native usage. Agent was not called; no retry occurred. Before/after identity and exact cleanup passed. Full A01, production-counter adoption and experiment readiness remain open. [Handoff](../handoffs/A01_PAIRED_IGPU_VALIDATION_2026-10-28.md).

@@ -1,5 +1,11 @@
 # Architecture for the final scheduling study
 
+Next acceptance: [I01 and trained receiving](handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md).
+Source acceptance is [audited separately](handoffs/SOURCE_ACCEPTANCE_AUDIT.md).
+Older October 30 and instruction-1.28 implementation paragraphs below are historical
+snapshots, not current blockers. Development materialization and the public
+Plain/Agent receiving episode are complete; actual C/D artifacts and full I01 remain.
+
 Latest receiving status supersedes older dated status entries below: the shared
 provider, Plain path, bounded Agent, checker, controller and E02 runner completed
 paired EP-HAND1 episodes. Independent replay matches both 30-slot results.
