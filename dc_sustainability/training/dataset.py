@@ -1,9 +1,13 @@
 """Labeled training rows from O02-certified visible-state decisions."""
 
+from __future__ import annotations
+
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from dc_sustainability.reference.labels import LabeledDecision
+if TYPE_CHECKING:
+    from dc_sustainability.reference.labels import LabeledDecision
 from dc_sustainability.training.features import FEATURE_NAMES
 
 

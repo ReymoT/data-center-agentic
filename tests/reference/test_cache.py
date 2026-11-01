@@ -263,7 +263,7 @@ def test_cache_key_changes_with_solver_version():
         tolerance=1e-6,
         time_limit_s=5.0,
     )
-    assert key.reference_solver_version == "1.0.0"
+    assert key.reference_solver_version == "visible-main-preserved-v1"
     assert key.label_schema_version == s.SCHEMA_VERSION
 
 
@@ -293,6 +293,20 @@ def test_cache_miss_then_hit(tmp_path):
     assert hit.status == "certified_optimal"
     assert hit.schedule == result.schedule
     assert cache.labels_for(key) == labels
+
+    entry_path = cache._entry_path(key)
+    entry = json.loads(entry_path.read_text())
+    entry["result_path"] = str(tmp_path / "untrusted-external-result.json")
+    entry_path.write_text(json.dumps(entry))
+    assert cache.get(key) == hit  # lookup is derived from the key, never entry paths
+    entry["labels"][0]["label"] = not entry["labels"][0]["label"]
+    entry_path.write_text(json.dumps(entry))
+    assert cache.labels_for(key) is None
+    result_path = cache._path(key)
+    payload = json.loads(result_path.read_text())
+    payload["objective_kg"] += 1
+    result_path.write_text(json.dumps(payload))
+    assert cache.get(key) is None
 
 
 def test_cache_ignores_non_optimal_results(tmp_path):

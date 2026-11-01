@@ -1,5 +1,13 @@
 # Task handoff
 
+Manager integration corrections supersede older claims below: see
+[the review record](VED_REFERENCE_MANAGER_REVIEW.md). Exports are named
+`{artifact_id}.json` and `{artifact_id}.manifest.json`. The backend uses stable
+candidate ordering, not a proved lexicographic secondary optimization. Matching
+work excludes intrinsic timing infeasibility; capacity-blocked eligible jobs must
+not disappear. Actual elapsed time is recorded. Windows directory ACL privacy
+is the caller's prerequisite; POSIX chmod is not Windows ACL enforcement.
+
 Task ID / Issue: O03 offline hindsight reference generation/export infrastructure
 Human owner / technical contacts if needed: Ved
 Active assistant session / instruction version: ved/o03-hindsight-export worktree, F02 schema 1.0.0

@@ -2,6 +2,8 @@
 
 from datetime import timedelta
 
+import pytest
+
 from dc_sustainability import schemas as s
 from dc_sustainability.data.scenarios import hand_jobs
 from dc_sustainability.reference.labels import (
@@ -223,3 +225,16 @@ def test_labels_preserve_feature_row_order():
     label_keys = [(label.job_id, label.start_slot) for label in labels]
     row_keys = [(row.job_id, row.start_slot) for row in rows]
     assert label_keys == row_keys
+
+
+def test_visible_labels_reject_hindsight_and_wrong_context():
+    snap = f.snapshot()
+    state = f.visible_state(snap)
+    ctx = s.Context.build(state, snap, representation="flat")
+    result = solve_visible(state, ctx, decision_time_utc=f.SLOT0_UTC, time_limit_s=5.0)
+    for changed in (
+        result.model_copy(update={"kind": "hindsight", "uses_future_arrivals": True}),
+        result.model_copy(update={"input_hash": "0" * 64}),
+    ):
+        with pytest.raises(ValueError):
+            labels_from_solver_result(state, ctx, changed, decision_time_utc=f.SLOT0_UTC)

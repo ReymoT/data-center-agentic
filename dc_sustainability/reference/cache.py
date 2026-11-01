@@ -37,8 +37,8 @@ from dc_sustainability.reference.labels import CandidateLabel
 from dc_sustainability.training.features import FeatureRow
 
 _LABEL_SCHEMA_VERSION = s.SCHEMA_VERSION
-_REFERENCE_SOLVER_VERSION = "1.0.0"
-_CACHE_SCHEMA_VERSION = "1.0.0"
+_REFERENCE_SOLVER_VERSION = "visible-main-preserved-v1"
+_CACHE_SCHEMA_VERSION = "1.1.0"
 
 
 @dataclass(frozen=True)
@@ -172,7 +172,7 @@ class LabelCache:
         stored_key = entry.get("key")
         if stored_key != key.canonical_dict():
             return None
-        result_path = Path(entry["result_path"])
+        result_path = self._path(key)
         if not result_path.exists():
             return None
         try:
@@ -180,6 +180,10 @@ class LabelCache:
         except (s.ContractError, OSError, ValueError):
             return None
         if result.status != "certified_optimal":
+            return None
+        if result.kind != "visible" or result.uses_future_arrivals:
+            return None
+        if entry.get("result_sha256") != s.sha256_hex(result.to_json()):
             return None
         if result.input_hash != key.context_hash:
             return None
@@ -199,6 +203,13 @@ class LabelCache:
         result_path = self._path(key)
         entry_path = self._entry_path(key)
 
+        if (
+            result.kind != "visible"
+            or result.uses_future_arrivals
+            or result.input_hash != key.context_hash
+        ):
+            raise ValueError("cache requires a visible result bound to this context")
+
         result_text = result.to_json() + "\n"
         entry = {
             "cache_schema_version": _CACHE_SCHEMA_VERSION,
@@ -206,6 +217,7 @@ class LabelCache:
             "reference_solver_version": _REFERENCE_SOLVER_VERSION,
             "key": key.canonical_dict(),
             "result_path": str(result_path),
+            "result_sha256": s.sha256_hex(result.to_json()),
             "labels": [
                 {
                     "episode_id": label.episode_id,
@@ -221,6 +233,8 @@ class LabelCache:
                 for label in labels
             ],
         }
+        entry_text = json.dumps(entry, sort_keys=True, separators=(",", ":")) + "\n"
+        entry["labels_sha256"] = s.sha256_hex(entry["labels"])
         entry_text = json.dumps(entry, sort_keys=True, separators=(",", ":")) + "\n"
 
         if result_path.exists():
@@ -245,6 +259,8 @@ class LabelCache:
 
     def labels_for(self, key: CacheKey) -> Optional[tuple[CandidateLabel, ...]]:
         """Return cached labels for a key, or None on miss/invalidation."""
+        if self.get(key) is None:
+            return None
         entry = self._load_entry(self._entry_path(key))
         if entry is None:
             return None
@@ -255,11 +271,20 @@ class LabelCache:
         label_dicts = entry.get("labels")
         if not isinstance(label_dicts, list):
             return None
+        if entry.get("labels_sha256") != s.sha256_hex(label_dicts):
+            return None
         out: list[CandidateLabel] = []
         for d in label_dicts:
             if not isinstance(d, dict):
                 return None
             try:
+                if d["label"] is not None and type(d["label"]) is not bool:
+                    return None
+                result = self.get(key)
+                if d["source_solver_result_id"] != result.solver_result_id:
+                    return None
+                if d["state_hash"] != key.context_hash:
+                    return None
                 out.append(
                     CandidateLabel(
                         episode_id=d["episode_id"],

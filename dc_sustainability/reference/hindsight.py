@@ -32,6 +32,7 @@ import hashlib
 import json
 import os
 import tempfile
+import time
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -79,6 +80,7 @@ class _HindsightMILP:
         tolerance: float = _TOLERANCE,
     ) -> None:
         self.episode = episode
+        self.started = time.perf_counter()
         self.time_limit_s = time_limit_s
         self.tolerance = tolerance
         self.capacity = self._capacity_kw()
@@ -148,7 +150,8 @@ class _HindsightMILP:
         if self.capacity is None:
             return False
         return all(
-            job.power_kw <= self.capacity for slot in range(start, start + job.duration_slots)
+            job.power_kw + self.episode.snapshot.site.background_kw <= self.capacity
+            for slot in range(start, start + job.duration_slots)
         )
 
     def _fresh_carbon(self, start: int, duration: int) -> Optional[tuple[float, ...]]:
@@ -170,6 +173,9 @@ class _HindsightMILP:
         if len(self.carbon) != self.horizon:
             missing = sorted(set(range(self.horizon)) - self.carbon.keys())
             return self._insufficient_evidence(f"realized carbon missing for slots {missing}")
+        represented = {var.job_id for var in self.vars}
+        if represented != {pj.job.job_id for pj in self.episode.jobs if self._window(pj.job)}:
+            return self._certified_infeasible("at least one required job has no feasible candidate")
         if not self.vars:
             if self.episode.jobs:
                 return self._certified_infeasible("no feasible start satisfies capacity/carbon")
@@ -291,12 +297,13 @@ class _HindsightMILP:
             status="certified_optimal",
             backend=_BACKENDS[0],
             backend_version=_BACKEND_VERSION,
-            elapsed_s=0.0,
+            elapsed_s=time.perf_counter() - self.started,
+            time_limit_s=self.time_limit_s,
             termination=termination,
             tolerance=self.tolerance,
             objective_kg=objective_kg,
             schedule=self._schedule_from(selected),
-            tie_break="lexicographic (job_id, start_slot)",
+            tie_break="stable candidate order; scientific Q08 tie-break remains pending",
             certification_basis=(
                 "scipy.optimize.milp mixed-integer linear program; "
                 "minimize realized emissions over full episode; "
@@ -315,7 +322,8 @@ class _HindsightMILP:
             status="certified_infeasible",
             backend=_BACKENDS[0],
             backend_version=_BACKEND_VERSION,
-            elapsed_s=0.0,
+            elapsed_s=time.perf_counter() - self.started,
+            time_limit_s=self.time_limit_s,
             termination=reason,
             tolerance=self.tolerance,
             certification_basis="scipy.optimize.milp proved infeasibility over full episode",
@@ -330,7 +338,8 @@ class _HindsightMILP:
             status="unresolved",
             backend=_BACKENDS[0],
             backend_version=_BACKEND_VERSION,
-            elapsed_s=self.time_limit_s,
+            elapsed_s=time.perf_counter() - self.started,
+            time_limit_s=self.time_limit_s,
             termination=reason,
             tolerance=self.tolerance,
             unresolved_reason=reason,
@@ -345,7 +354,8 @@ class _HindsightMILP:
             status="insufficient_evidence",
             backend=_BACKENDS[0],
             backend_version=_BACKEND_VERSION,
-            elapsed_s=0.0,
+            elapsed_s=time.perf_counter() - self.started,
+            time_limit_s=self.time_limit_s,
             termination=reason,
             tolerance=self.tolerance,
             unresolved_reason=reason,
@@ -389,6 +399,11 @@ def solve_hindsight(
 ) -> s.SolverResult:
     """Solve one complete private episode offline and return a hindsight SolverResult."""
     _validate_episode(episode)
+    episode = s.PrivateEpisode.model_validate(episode.model_dump(mode="python"), strict=True)
+    if not np.isfinite(time_limit_s) or time_limit_s <= 0:
+        raise HindsightError("time_limit_s must be positive and finite")
+    if not np.isfinite(tolerance) or tolerance <= 0:
+        raise HindsightError("tolerance must be positive and finite")
     model = _HindsightMILP(episode, time_limit_s=time_limit_s, tolerance=tolerance)
     return model.solve()
 
@@ -479,6 +494,7 @@ def generate_hindsight_reference(
         pj.job.job_id
         for pj in episode.jobs
         if _job_has_feasible_window(pj.job, episode.n_decision_slots + episode.n_completion_slots)
+        and pj.job.arrival_slot <= 23
     }
     complete = result.status == "certified_optimal" and scheduled_ids == feasible_ids
     return HindsightReferenceArtifact(
@@ -533,8 +549,10 @@ def export_hindsight_reference(
             with os.fdopen(fd2, "w", encoding="utf-8") as stream:
                 stream.write(manifest_json + "\n")
             os.chmod(tmp_manifest, 0o600)
-            os.rename(tmp_artifact, artifact_path)
-            os.rename(tmp_manifest, manifest_path)
+            os.link(tmp_artifact, artifact_path)
+            os.link(tmp_manifest, manifest_path)
+            os.unlink(tmp_artifact)
+            os.unlink(tmp_manifest)
         except Exception:
             try:
                 os.unlink(tmp_manifest)

@@ -1,6 +1,7 @@
 """Regression tests for O03 offline hindsight reference generation/export."""
 
 import json
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -53,6 +54,25 @@ def test_hindsight_solver_is_certified_optimal():
     assert result.objective_kg == pytest.approx(48.4, abs=1e-6)
     assert result.matching_work_job_ids == ("J1", "J2")
     assert result.backend == "scipy.optimize.milp"
+
+
+def test_capacity_blocked_job_cannot_silently_disappear():
+    ep = _full_episode()
+    jobs = tuple(
+        pj.model_copy(update={"job": pj.job.model_copy(update={"power_kw": 80.0})})
+        if pj.job.job_id == "J1"
+        else pj
+        for pj in ep.jobs
+    )
+    result = solve_hindsight(ep.model_copy(update={"jobs": jobs}), time_limit_s=5.0)
+    assert result.status == "certified_infeasible"
+    assert result.schedule is None
+
+
+@pytest.mark.parametrize("limit", [0, -1, float("nan"), float("inf")])
+def test_hindsight_rejects_invalid_time_budget(limit):
+    with pytest.raises(HindsightError, match="positive and finite"):
+        solve_hindsight(_full_episode(), time_limit_s=limit)
 
 
 def test_hindsight_artifact_has_correct_markers():
@@ -138,8 +158,9 @@ def test_export_and_load_roundtrip(tmp_path: Path):
     artifact_path, manifest_path = export_hindsight_reference(artifact, tmp_path)
     assert artifact_path.exists()
     assert manifest_path.exists()
-    assert artifact_path.stat().st_mode & 0o777 == 0o600
-    assert manifest_path.stat().st_mode & 0o777 == 0o600
+    if os.name != "nt":
+        assert artifact_path.stat().st_mode & 0o777 == 0o600
+        assert manifest_path.stat().st_mode & 0o777 == 0o600
 
     loaded = load_hindsight_reference(artifact_path)
     assert loaded.artifact_id == artifact.artifact_id

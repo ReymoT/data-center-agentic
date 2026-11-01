@@ -120,6 +120,10 @@ def _attach_labels(
     Only ``certified_optimal`` results produce definite positive/negative labels.  All
     other statuses mark every candidate ``None`` so downstream training excludes them.
     """
+    if result.kind != "visible" or result.uses_future_arrivals:
+        raise ValueError("hindsight results cannot supply visible training labels")
+    if result.input_hash != state_hash:
+        raise ValueError("solver result does not match the visible context")
     labels: list[CandidateLabel] = []
     if result.status == "certified_optimal":
         selected = {(ps.job_id, ps.start_slot) for ps in (result.schedule or ())}
@@ -175,6 +179,10 @@ def label_decision(
 
     decision_time = _require_decision_time_utc(collected.decision_time_utc)
     rows = candidate_features(collected.state, collected.context, decision_time_utc=decision_time)
+    if [(r.job_id, r.start_slot, r.values()) for r in rows] != [
+        (r.job_id, r.start_slot, r.values()) for r in collected.rows
+    ]:
+        raise ValueError("collected feature rows differ from the current visible inputs")
     backend, backend_version = solver_module._BACKENDS[0], solver_module._BACKEND_VERSION
     key = make_cache_key(
         collected.state,
@@ -210,11 +218,7 @@ def label_decision(
     )
 
     if cache is not None and result.status == "certified_optimal":
-        try:
-            cache.put(key, result, labels)
-        except FileExistsError:
-            # Immutable cache already holds an identical entry; ignore.
-            pass
+        cache.put(key, result, labels)
 
     return LabeledDecision(
         collected=collected,
