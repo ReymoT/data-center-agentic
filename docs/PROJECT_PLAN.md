@@ -1,5 +1,12 @@
 # Project plan
 
+Active next sequence: source evidence audit and P04 artifact delivery, trained
+receiving, then six-system I01 acceptance. Use the
+[acceptance matrix](handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md) and
+[source gate audit](handoffs/SOURCE_ACCEPTANCE_AUDIT.md). Older dated paragraphs
+and the older numbered critical path below are retained historical snapshots;
+they do not reopen #112, #12 or #18. Full I01 is still pending trained artifacts.
+
 Latest receiving update supersedes older dated status entries: #112 development
 materialization, E02 C/D integration, P04 training code and Matty calibration are
 merged. Plain and Agent completed EP-HAND1 with 17 requests and matching independent

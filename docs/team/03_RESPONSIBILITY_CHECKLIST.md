@@ -1,5 +1,13 @@
 # Shared responsibility and coverage checklist
 
+Current evidence reconciliation: A01/A02 and L01 public-development receiving are
+recorded in [the paired handoff](../handoffs/EP_HAND1_RECEIVING_F04_F05.md), with
+#12/#18 closed. E05 development adjudication and Matty calibration are submitted;
+#22 comparison and #95 held-out reliability remain open. Task rows below retain
+their original ownership and broad acceptance scope. Empty boxes are not a claim
+that no component work exists. F04/F05 are continuing maintenance; I01 remains
+pending all six real systems. [Current receiving checklist](../handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md).
+
 Current evaluation update, instruction 1.28: [the professor's inter-rater-reliability feedback](../decisions/PROFESSOR_FEEDBACK_IRR.md) is accepted. Nisha is the sole accountable owner for the reliability report under E07/R05. Matty remains the independent second rater and joint adjudicator, not a second reporting owner. Existing task rows remain intact; the E07/R05 acceptance evidence now requires matched counts, label marginals, raw agreement, Cohen's kappa, undefined handling, interpretation and separate extraction agreement.
 
 Current workflow, instruction 1.28: [Matty's coder-owned decision rule](../decisions/Q11_CODER_OWNED_DECISIONS.md) remains in force. The implementer owns internal choices, shared confirmation is limited to affected owners, and unresolved shared questions escalate to Matty within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance.

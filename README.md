@@ -9,6 +9,10 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+Next acceptance work is tracked in the
+[six-system and trained-artifact checklist](docs/handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md)
+and [source acceptance audit](docs/handoffs/SOURCE_ACCEPTANCE_AUDIT.md).
+
 Latest receiving status: Plain and Agent completed paired public EP-HAND1
 episodes with 17 requests and matching independent 30-slot replay per system.
 Agent repairs and checked fallback occurred. Development materialization, C/D
@@ -18,6 +22,11 @@ This supersedes older implementation-status statements below. See
 [the receiving record](docs/handoffs/EP_HAND1_RECEIVING_F04_F05.md).
 
 FSE 598, Arizona State University.
+
+The following course attribution and older implementation paragraphs retain their
+historical context. Current implementation status is the receiving summary above
+and its linked handoff; #112 is closed, C/D runner support and P04 code are merged,
+and the complete public-fixture Plain/Agent episodes passed replay.
 
 Nisha reports Group 15 presents in class November 16, 2026, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Timezone, rubrics/formats and separate code/release requirements remain unconfirmed. See [the plan](docs/PROJECT_PLAN.md) and [attributed course record](docs/decisions/Q13_PRESENTATION_DEADLINE.md).
 
