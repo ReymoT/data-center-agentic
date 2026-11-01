@@ -7,6 +7,10 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from dc_sustainability.reference.cache import LabelCache
 
 from dc_sustainability import schemas as s
 from dc_sustainability.data import materialize_development as materialize
@@ -42,6 +46,7 @@ def build_labeled_corpus(
     source: Path,
     *,
     label_time_limit_s: float = 5.0,
+    cache: LabelCache | None = None,
     approve: Callable[[s.VisibleState, s.Context], s.ApprovedActions] = _empty_approve,
 ) -> LabeledCorpus:
     """Materialize the published allocation, collect features, and attach O02 labels."""
@@ -63,7 +68,7 @@ def build_labeled_corpus(
         candidate_decisions = tuple(decision for decision in decisions if decision.rows)
         if not candidate_decisions:
             continue
-        labeled = label_episode(candidate_decisions, time_limit_s=label_time_limit_s)
+        labeled = label_episode(candidate_decisions, time_limit_s=label_time_limit_s, cache=cache)
         labeled_rows.extend(rows_from_labeled_decisions(labeled))
     if not labeled_rows:
         raise ValueError("O02 produced no definite training rows on the development corpus")
