@@ -1,5 +1,12 @@
 # Project plan
 
+Latest receiving update supersedes older dated status entries: #112 development
+materialization, E02 C/D integration, P04 training code and Matty calibration are
+merged. Plain and Agent completed EP-HAND1 with 17 requests and matching independent
+30-slot replay. Actual trained artifacts, calibration comparison, source acceptance
+and the scientific study remain open. See
+[the receiving record](handoffs/EP_HAND1_RECEIVING_F04_F05.md).
+
 Latest October 28 evaluation update, instruction 1.28: the professor asked the team to report inter-rater reliability for human faithfulness annotations. [The accepted requirement](decisions/PROFESSOR_FEEDBACK_IRR.md) assigns the reporting task only to Nisha under E07/R05. PR #104 retains the development matching and report over unchanged originals: 32 matched claims, 75% raw agreement and Cohen's kappa 0.00 with the documented single-label prevalence interpretation. Joint adjudication of 77 open items and the held-out repeat remain. Matty remains the independent second rater, not a co-owner of the reliability report.
 
 Current implementation: S01 Option B/Q01, Q07 feature/collection/fold helpers, both E05 development originals, development reliability/adjudication artifacts, provisional D04 splits, the primary Q10 sampler and E02 A/B plus offline Plain/Agent units are merged. Issue #112 still requires materialized contents for the allocated 40 development episodes and blocks P04/O02. Nisha and Ved accepted the 150-second request and 330-second paired A01 limits. One freshly authorized Plain-first public-development validation passed both Plain and Agent Plan requests with exact native/offline prompt-count agreement and full Arc/Vulkan offload. Trained C/D, a complete model-driven Agent episode, held-out reliability and full integration remain open. No successful model study or held-out result is claimed.

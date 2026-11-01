@@ -1,5 +1,12 @@
 # Architecture for the final scheduling study
 
+Latest receiving status supersedes older dated status entries below: the shared
+provider, Plain path, bounded Agent, checker, controller and E02 runner completed
+paired EP-HAND1 episodes. Independent replay matches both 30-slot results.
+Repairs and checked fallback occurred. Development contents, C/D runner support
+and P04 training code are merged. Actual trained artifacts and scientific
+acceptance remain open. See [the record](handoffs/EP_HAND1_RECEIVING_F04_F05.md).
+
 Latest October 30 status: Q07 feature/collection/fold helpers, provisional D04 splits, both E05 originals, development reliability/adjudication artifacts and the primary Q10 sampler are merged. E02 now runs complete A/B episodes and includes offline Plain/Agent units through the shared provider, bounded agent and controller. PR #113 makes an unknown or unsaved model attempt fail closed, count against the run budget and halt later model units. The CLI still has no model inputs and makes no model request. Reimo's allocated 40 development episodes still lack materialized contents under #112, so P04/O02 cannot proceed. No trained C/D artifact, frozen sample or study result exists. [Current handoff](handoffs/OCT30_A01_E02B_F04_F05_REFRESH.md).
 
 Current implementation, instruction 1.28: A03 physical checks, A04 execution/traces, A02 bounded orchestration, S01 Option B, P02 A/B, the E02 A/B runner and offline Plain/Agent units, the P03 helpers, provisional D04 splits and primary Q10 sampling code are merged. A01 has finite offline-tested response bounds, but its proposed 150-second request and 330-second paired deadlines remain unresolved; no fresh inference is authorized. Valid paired output, trained C/D, E02 C/D units and full integration remain open. The development reliability calculation and adjudication record are retained; the held-out repeat remains open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged.
