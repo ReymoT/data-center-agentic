@@ -157,6 +157,35 @@ def test_matrix_helper_rejects_empty_rows():
         matrix_and_labels(())
 
 
+def test_selection_aggregates_all_folds_and_refuses_missing_episode(monkeypatch):
+    from dc_sustainability.training import select
+
+    fold_map = _fold_map()
+    episodes = {key: key for key in fold_map}
+    origins = dict.fromkeys(fold_map, datetime(2022, 1, 1, tzinfo=timezone.utc))
+    specs = (ModelSpec("decision_tree_c", 3), ModelSpec("decision_tree_c", 5),
+             ModelSpec("random_forest_d", 5, 100))
+    monkeypatch.setattr(select, "fit_model", lambda spec, rows, seed: spec)
+
+    def metrics(episode, fitted, **kwargs):
+        # Depth 3 wins one fold, but depth 5 wins across the complete corpus.
+        completed = (10 if fold_map[episode] == 0 else 0) if fitted.max_depth == 3 else 5
+        return select.RolloutMetrics(completed, 0, 1.0)
+
+    monkeypatch.setattr(select, "rollout_metrics", metrics)
+    result = select.select_and_refit(
+        _rows(), fold_map, episodes, seed=1,
+        decision_origin_by_episode=origins, specs=specs,
+    )
+    assert result.selected["decision_tree_c"].max_depth == 5
+    del episodes["EP-F"]
+    with pytest.raises(ValueError, match="missing evaluation episodes"):
+        select.select_and_refit(
+            _rows(), fold_map, episodes, seed=1,
+            decision_origin_by_episode=origins, specs=specs,
+        )
+
+
 def test_rollout_metrics_are_finite_on_contract_episode():
     rows = rows_for_episodes(_rows(), ("EP-A", "EP-B", "EP-C", "EP-D"))
     fitted = fit_model(ModelSpec("decision_tree_c", 3), rows, seed=5)

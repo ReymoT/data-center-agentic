@@ -162,15 +162,17 @@ def select_and_refit(
     candidates = tuple(specs) if specs is not None else grid_specs()
     fold_results: list[FoldConfigResult] = []
     best_by_system: dict[str, tuple[tuple[int, int, float], ModelSpec]] = {}
+    missing = set(fold_of_episode) - (set(episodes) & set(decision_origin_by_episode))
+    if missing:
+        raise ValueError(f"missing evaluation episodes or decision origins: {sorted(missing)}")
+    if any(row.episode_id not in fold_of_episode for row in rows):
+        raise ValueError("training rows must belong to the development fold map")
 
     for split in splits:
         train_rows = rows_for_episodes(rows, split.train_episode_ids)
         eval_ids = sorted(split.eval_episode_ids)
         for spec in candidates:
-            try:
-                fitted = fit_model(spec, train_rows, seed=seed)
-            except ValueError:
-                continue
+            fitted = fit_model(spec, train_rows, seed=seed)
             metrics = _sum_metrics(
                 tuple(
                     rollout_metrics(
@@ -182,20 +184,24 @@ def select_and_refit(
                         else forecasts_for(episode_id),
                     )
                     for episode_id in eval_ids
-                    if episode_id in episodes
                 )
             )
             fold_results.append(
                 FoldConfigResult(fold=split.fold, spec=spec, metrics=metrics, fitted=fitted)
             )
-            key = metrics.key()
-            current = best_by_system.get(spec.system)
-            if (
-                current is None
-                or key < current[0]
-                or (key == current[0] and spec.key < current[1].key)
-            ):
-                best_by_system[spec.system] = (key, spec)
+
+    for spec in candidates:
+        parts = [result.metrics for result in fold_results if result.spec == spec]
+        if len(parts) != len(splits):
+            raise ValueError("each candidate requires complete blocked-fold coverage")
+        key = _sum_metrics(parts).key()
+        current = best_by_system.get(spec.system)
+        if (
+            current is None
+            or key < current[0]
+            or (key == current[0] and spec.key < current[1].key)
+        ):
+            best_by_system[spec.system] = (key, spec)
 
     if set(best_by_system) != {"decision_tree_c", "random_forest_d"}:
         raise ValueError("selection requires winners for both decision_tree_c and random_forest_d")
