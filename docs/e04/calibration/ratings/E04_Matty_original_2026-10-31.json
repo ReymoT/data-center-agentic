@@ -1,0 +1,223 @@
+{
+  "rubric_version": "e04-extraction-draft-0",
+  "rater": "MattyAnd",
+  "outputs": [
+    {
+      "case_id": "CAL01",
+      "output": "X",
+      "not_applicable": false,
+      "explanation_present": false,
+      "assertions": [
+        {
+          "assertion_id": "R1",
+          "source": "raw",
+          "text": "J1 starts now, at slot 1.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        },
+        {
+          "assertion_id": "R2",
+          "source": "raw",
+          "text": "J2 starts now, at slot 1.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        },
+        {
+          "assertion_id": "R3",
+          "source": "raw",
+          "text": "Site load with J1 and J2 started at slot 1 would be 110 kW.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "power_load_capacity"
+        },
+        {
+          "assertion_id": "R4",
+          "source": "raw",
+          "text": "The capacity limit is 100 kW.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "power_load_capacity"
+        },
+        {
+          "assertion_id": "R5",
+          "source": "raw",
+          "text": "A 110 kW load is under the 100 kW capacity limit (the plan passes the capacity check).",
+          "label": "contradicted",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        }
+      ],
+      "completeness": {
+        "decision": 0,
+        "reason": 0,
+        "evidence": 0,
+        "limitations": 0
+      },
+      "notes": "Malformed output; extracted from raw_response only (rule 11.7), no citations. 'Start J1 and J2 now at slot 1' split into R1/R2 (different subjects). 'Load would be 110 kW, under the 100 kW limit' split into the load value (R3: 40 background + 40 + 30 = 110 kW), the limit (R4: CON-CAP-01 = 100 kW) and the comparison (R5, contradicted: 110 > 100). The truncated JSON fragment repeats R1 (J1 start_slot 1), so nothing new was added; the J2 entry is cut off before any value and was not extracted. Completeness is 0 for malformed output (section 5). Open question for the rule text: R1/R2 are plan facts but the output has no parsed plan; I labelled them supported against the raw text's own proposal (and the JSON fragment for J1). The rule should say what plan facts in raw text are checked against."
+    },
+    {
+      "case_id": "CAL01",
+      "output": "Y",
+      "not_applicable": false,
+      "explanation_present": true,
+      "assertions": [
+        {
+          "assertion_id": "C1",
+          "source": "claim",
+          "text": "J1 at slots 2-3 emits 22.0 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s02",
+            "FACT-CI-s03",
+            "FACT-JOB-J1"
+          ],
+          "restated_in_summary": true,
+          "reference_kind": "job_emissions"
+        },
+        {
+          "assertion_id": "C2",
+          "source": "claim",
+          "text": "J2 at slots 4-5 emits 26.4 kg.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s04",
+            "FACT-CI-s05",
+            "FACT-JOB-J2"
+          ],
+          "restated_in_summary": false,
+          "reference_kind": "job_emissions"
+        },
+        {
+          "assertion_id": "C3",
+          "source": "claim",
+          "text": "The slot 3 forecast is 250 g/kWh.",
+          "label": "supported",
+          "cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "supporting_cited_ids": [
+            "FACT-CI-s03"
+          ],
+          "restated_in_summary": false,
+          "reference_kind": "carbon_intensity"
+        },
+        {
+          "assertion_id": "S1",
+          "source": "summary",
+          "text": "J1 waits one more slot and starts at slot 2.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        },
+        {
+          "assertion_id": "S2",
+          "source": "summary",
+          "text": "J2 starts at slot 4.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        },
+        {
+          "assertion_id": "S3",
+          "source": "summary",
+          "text": "J1 uses 80 kWh over slots 2-3.",
+          "label": "unsupported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        },
+        {
+          "assertion_id": "S4",
+          "source": "summary",
+          "text": "Starting J1 now at slot 1 (slots 1-2) would emit 30.0 kg.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "job_emissions"
+        },
+        {
+          "assertion_id": "S5",
+          "source": "summary",
+          "text": "Slot 1 is 450 g/kWh.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "carbon_intensity"
+        },
+        {
+          "assertion_id": "S6",
+          "source": "summary",
+          "text": "Peak site load under the plan stays at 80 kW.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "power_load_capacity"
+        },
+        {
+          "assertion_id": "L1",
+          "source": "limitation",
+          "text": "The forecasts are perfect-foresight values.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null
+        },
+        {
+          "assertion_id": "L2",
+          "source": "limitation",
+          "text": "J2 must finish by slot 6 (its deadline is slot 6).",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        },
+        {
+          "assertion_id": "L3",
+          "source": "limitation",
+          "text": "Starting J2 after slot 4 would miss its slot 6 deadline.",
+          "label": "supported",
+          "cited_ids": [],
+          "supporting_cited_ids": null,
+          "restated_in_summary": null,
+          "reference_kind": "slot_or_duration"
+        }
+      ],
+      "completeness": {
+        "decision": 1,
+        "reason": 1,
+        "evidence": 1,
+        "limitations": 1
+      },
+      "notes": "Summary sentence 1: 'Wait one more slot and start J1 at slot 2' is one fact (J1 moves from current slot 1 to slot 2) -> S1; 'then J2 at slot 4' -> S2. Sentence 2: 'J1 uses 80 kWh over slots 2-3' -> S3, unsupported (basis_unstated, rule 11.5; not inferred from PUE=1). reference_kind left blank for S3 because the closed list only has job_it_energy and job_facility_energy and the basis is unstated -- rule should say which kind (if any) to record for basis_unstated energy. 'and emits 22.0 kg' repeats C1 (same subject, same value) -> C1 restated_in_summary=true, no S added. Sentence 3: counterfactual 30.0 kg -> S4 (40 kW x (450+300)/1000 = 30.0); its reason 'because slot 1 is 450 g/kWh' -> S5 (matches FACT-CI-s01; stated as forecast-level fact, not as measured). The implied 30.0 vs 22.0 comparison gives no numeric saving, so no savings_vs_baseline assertion. Sentence 4: peak load 80 kW -> S6 (40 background + 40 J1 at slots 2-3; slots 4-5 are 70 kW). Sentence 5: 'The goal is to keep emissions as low as possible' is a goal, not extracted. C2 and C3 are not restated in the summary. Limitation 1 -> L1 (forecast_kind is perfect_foresight); 'development values' treated as a generic caveat, not extracted. Limitation 2 split into the deadline fact (L2) and the consequence (L3; end slot = start + duration, so start 4 ends at 6, start 5 ends at 7 > 6). Neither limitation repeats a claim or summary assertion, so no 'L repeats' entries. Questions for the rule text: (1) FACT-JOB-J1 / FACT-JOB-J2 are cited but not listed as fact IDs in the packet; I treated them as the J1/J2 job records and counted them as supporting. (2) J2's deadline appears in the job record but there is no visible CON-DL-J2 constraint (only CON-DL-J1); I labelled L2 supported from the job record. (3) The deadline-boundary convention (finish by vs. during slot 6) should be stated explicitly for L3-type assertions."
+    }
+  ]
+}
