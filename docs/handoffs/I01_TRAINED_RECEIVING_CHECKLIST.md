@@ -1,5 +1,12 @@
 # I01 and trained-artifact receiving checklist
 
+Current manager-host results supersede the original pending inventory below:
+[real P04 handoff](P04_REAL_DEVELOPMENT_ARTIFACTS.md) records exact source/content
+verification, all 15 fold/configuration results, refit binaries, hashes, reload
+checks and A/B/C/D runner/replay receiving. Earlier Plain/Agent receiving covers
+the other two paths on the same public bundle. Independent final I01 approval,
+scientific freeze and protected remote access are not inferred from these runs.
+
 Prepared from main `6c288c0978597fb7fd5b5dd01bea70fed3f4879e`, instruction 1.28.
 This checklist records required evidence; blank results are not passes.
 Use existing contracts, seeds and scientific rules. No new model run is authorized.

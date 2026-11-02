@@ -1,5 +1,11 @@
 # Project plan
 
+Latest P04 update: Matty resolved #150 locally, verified exact source and all 40
+development contents, trained/refitted actual C/D binaries and passed offline
+A/B/C/D public-fixture receiving with independent replay. The missing-artifact
+blocker is superseded by [the handoff](handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md).
+Remote access, source acceptance and final scientific/I01/I04 gates remain distinct.
+
 Latest calibration/custody status: both originals are available; Matty approved
 the six clarifications and prospective text-coverage validation. Synthetic custody
 receiving passed. Earlier missing-file/tooling descriptions are historical;
