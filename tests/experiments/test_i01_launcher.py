@@ -158,3 +158,25 @@ def test_saved_result_must_match_independent_replay_before_success(tmp_path):
     result_path.write_text(json.dumps(data))
     with pytest.raises(launch.StopRun, match="replay"):
         launch.verify_units(cfg, tmp_path / "runs", statuses, episode)
+
+
+def test_committed_template_is_unapproved_and_matches_exact_text_pins():
+    import json
+
+    from dc_sustainability.experiments.config import lf_sha256
+
+    root = launch.ROOT
+    template = json.loads(
+        (root / "docs/evidence/i01-authorization-template-2026-11-02.json").read_text()
+    )
+    candidate = json.loads((root / "docs/evidence/i01-offline-config-2026-11-02.json").read_text())
+    assert template["status"] == "pending_fresh_user_approval"
+    assert template["approved_by"] is None and template["approval_ref"] is None
+    assert template["launcher_sha256"] == lf_sha256(root / "scripts/run_i01_public_receiving.py")
+    assert template["readiness_sha256"] == lf_sha256(
+        root / "docs/evidence/i01-unified-readiness-2026-11-02.json"
+    )
+    with pytest.raises(RuntimeError, match="fresh approval"):
+        launch.validate_authorization(
+            template, candidate, template["readiness_sha256"], template["launcher_sha256"]
+        )

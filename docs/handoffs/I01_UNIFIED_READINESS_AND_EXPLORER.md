@@ -48,6 +48,15 @@ The [actual launcher dry-run record](../evidence/i01-launcher-dry-run-2026-11-02
 is separate from the offline pin report. Neither is a spent model request or a
 fresh human approval. No new model request was authorized or executed.
 
+The launcher is Windows/Arc development tooling, not cross-platform deployment
+certification. Supply explicit runtime, model-store, isolated tokenizer/package,
+accepted-inventory, C/D artifact, candidate, readiness and fresh output paths;
+use `--dry-run` for local checks without starting a service. Live mode additionally
+requires the exact approved receipt. Neither the pending template nor an old
+approval can be reused; consumption is recorded exclusively by single-use ID
+in the manager workspace before startup. The no-startup dry run creates no run
+output directory and consumes no approval.
+
 ## Explorer and report
 
 [The working explorer and report section](../report/UI_VISUALIZATION.md) use only
