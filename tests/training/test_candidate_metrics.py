@@ -1,6 +1,3 @@
-"""Q07 candidate scores and the public development card."""
-
-import importlib.util
 import json
 import re
 from pathlib import Path
@@ -20,7 +17,12 @@ from dc_sustainability.training.metrics import (
     score_fitted_rows,
     sum_candidate_scores,
 )
-from dc_sustainability.training.train import ARTIFACT_SCHEMA, ModelSpec, fit_model
+from dc_sustainability.training.train import (
+    ARTIFACT_SCHEMA,
+    DEVELOPMENT_SEED,
+    ModelSpec,
+    fit_model,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 HANDOFF = ROOT / "docs" / "handoffs" / "P04_REAL_DEVELOPMENT_ARTIFACTS.md"
@@ -188,7 +190,7 @@ def test_card_locks_handoff_counts_and_hashes():
     facts = development_card_facts()
     assert facts.definite_positive == 1411
     assert facts.definite_negative == 4635
-    assert facts.seed == _script_default_seed()
+    assert facts.seed == DEVELOPMENT_SEED
     assert facts.total_time_seconds == 101.375
     assert facts.artifact_schema == ARTIFACT_SCHEMA
     assert facts.feature_names == FEATURE_NAMES
@@ -280,12 +282,3 @@ def _keys(value: object):
     elif isinstance(value, list):
         for item in value:
             yield from _keys(item)
-
-
-def _script_default_seed() -> int:
-    path = ROOT / "scripts" / "train_p04_development.py"
-    spec = importlib.util.spec_from_file_location("train_p04_development_seed", path)
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.DEFAULT_SEED

@@ -26,7 +26,6 @@ _SYSTEMS: tuple[SystemKind, ...] = ("decision_tree_c", "random_forest_d")
 
 
 def main() -> None:
-    """Score caller-supplied rows with a published-digest artifact."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--artifact", type=Path, required=True)
     parser.add_argument("--rows", type=Path, required=True)
@@ -59,7 +58,7 @@ def main() -> None:
 
 
 def _labeled_rows(payload: object) -> tuple[LabeledRow, ...]:
-    """Parse Edison-local row JSON into LabeledRow. Metrics never sees a dict."""
+    """Parse row JSON into LabeledRow."""
     if not isinstance(payload, list):
         raise ValueError("rows JSON must be a list")
     rows: list[LabeledRow] = []

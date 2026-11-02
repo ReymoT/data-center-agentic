@@ -19,8 +19,7 @@ from dc_sustainability.training.pipeline import (  # noqa: E402
     freeze_selection,
     run_selection,
 )
-
-DEFAULT_SEED = 20261031
+from dc_sustainability.training.train import DEVELOPMENT_SEED as DEFAULT_SEED  # noqa: E402
 
 
 def main() -> None:

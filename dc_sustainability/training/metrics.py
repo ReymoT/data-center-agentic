@@ -1,22 +1,24 @@
 """Q07 candidate precision, recall, and F1.
 
 Rates are properties of confusion counts. An undefined denominator is None.
-This module does not select models and does not read a private artifact path.
 """
 
 from __future__ import annotations
 
-import ast
 import json
 from collections.abc import Sequence
 from dataclasses import dataclass
-from pathlib import Path
 
 from dc_sustainability.training.dataset import LabeledRow
 from dc_sustainability.training.features import FEATURE_NAMES
-from dc_sustainability.training.train import ARTIFACT_SCHEMA, FittedModel, ModelSpec, SystemKind
+from dc_sustainability.training.train import (
+    ARTIFACT_SCHEMA,
+    DEVELOPMENT_SEED,
+    FittedModel,
+    ModelSpec,
+    SystemKind,
+)
 
-# Frozen Q07 positive rule. Not a caller argument.
 POSITIVE_THRESHOLD = 0.5
 
 CALLER_ROWS_NOTE = (
@@ -31,7 +33,6 @@ _UNPUBLISHED_METRICS = (
 )
 
 # Transcribed from docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md.
-# Held-out cells are definite totals minus these training counts.
 _DEFINITE_POSITIVE = 1411
 _DEFINITE_NEGATIVE = 4635
 _FOLD_TRAINING: tuple[tuple[int, int], ...] = (
@@ -50,12 +51,7 @@ _SELECTED: tuple[tuple[SystemKind, int, int | None], ...] = (
 
 @dataclass(frozen=True)
 class CandidateScore:
-    """Confusion cells for one scoring call.
-
-    Stored fields are the four cells plus excluded rows. Support, predicted
-    totals, and rates are derived so they cannot drift from the cells.
-    `basis` is always caller_rows. This type has no fold-F1 state.
-    """
+    """Confusion cells for one scoring call. Support and rates are derived."""
 
     true_positive: int
     false_positive: int
@@ -77,7 +73,6 @@ class CandidateScore:
 
     @property
     def basis(self) -> str:
-        """The only basis this type can report."""
         return "caller_rows"
 
     @property
@@ -109,22 +104,14 @@ class CandidateScore:
 
     @property
     def recall(self) -> float | None:
-        """tp / actual positives. None when no scored row has a positive label.
-
-        Q07's "true positives exist" means support_positive > 0. When that
-        support exists and the model predicted nothing positive, recall is 0.0.
-        """
+        """tp / actual positives. None when support_positive is 0; else 0.0 when no positives are predicted."""
         if self.support_positive == 0:
             return None
         return self.true_positive / self.support_positive
 
     @property
     def f1(self) -> float | None:
-        """Harmonic mean when both rates exist. None when either rate is None.
-
-        Both rates defined and both zero yields 0.0, because both denominators
-        exist. A missing denominator stays None and is not coerced to 0.0.
-        """
+        """Harmonic mean when both rates exist. None when either rate is None. Both defined zeros yield 0.0."""
         precision = self.precision
         recall = self.recall
         if precision is None or recall is None:
@@ -208,12 +195,7 @@ def score_fitted_rows(
 
 
 def sum_candidate_scores(scores: Sequence[CandidateScore]) -> CandidateScore:
-    """Add cells and excluded counts. Rates come back from the sums.
-
-    An empty sequence returns zero cells. A fold whose rates are None
-    contributes its cells only. This function does not divide by the number
-    of scores and does not replace None with 0.0.
-    """
+    """Add cells and excluded counts. Rates come back from the sums."""
     if not scores:
         return CandidateScore(0, 0, 0, 0, 0)
     return CandidateScore(
@@ -227,7 +209,7 @@ def sum_candidate_scores(scores: Sequence[CandidateScore]) -> CandidateScore:
 
 @dataclass(frozen=True)
 class FoldSupport:
-    """One blocked development fold. Counts only."""
+    """One blocked development fold."""
 
     fold: int
     training_positive: int
@@ -238,7 +220,7 @@ class FoldSupport:
 
 @dataclass(frozen=True)
 class PublishedSelection:
-    """One selected full-data refit. Hash is copied from the learned-policy constant."""
+    """One selected full-data refit."""
 
     system: SystemKind
     max_depth: int
@@ -248,12 +230,7 @@ class PublishedSelection:
 
 @dataclass(frozen=True)
 class DevelopmentCardFacts:
-    """Public card payload.
-
-    No precision, recall, or f1 attribute. Held-out fold counts are
-    definite totals minus the published training-fold counts. That
-    subtraction is support arithmetic.
-    """
+    """Public card payload. Held-out fold counts are definite totals minus published training counts."""
 
     definite_positive: int
     definite_negative: int
@@ -270,18 +247,10 @@ class DevelopmentCardFacts:
 
 
 def development_card_facts() -> DevelopmentCardFacts:
-    """Assemble the public card from one transcribed count table plus existing constants.
+    """Assemble the public card from the handoff count table plus existing constants.
 
-    Transcribed from docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md only:
-    definite 1411 / 4635; fold training (840, 2765), (1009, 3363), (973, 3142);
-    total time 101.375; receipt d04-development-content-112-v2;
-    custody label P04_Private_2026-11-02; C depth 8; D 100 trees at depth 10.
-
-    Held-out support is (571, 1870), (402, 1272), (438, 1493).
-    Hashes, feature names, artifact schema, carbon digest, seed, and threshold
-    are read from the modules that already own them. Each selection must
-    construct a legal ModelSpec. Every PUBLISHED_DEVELOPMENT_SHA256 key must
-    appear once.
+    Each selection must construct a legal ModelSpec. Every PUBLISHED_DEVELOPMENT_SHA256
+    key must appear once.
     """
     from dc_sustainability.data.carbon_source import SHA256 as carbon_sha256
     from dc_sustainability.policies.learned import PUBLISHED_DEVELOPMENT_SHA256
@@ -325,7 +294,7 @@ def development_card_facts() -> DevelopmentCardFacts:
         definite_negative=_DEFINITE_NEGATIVE,
         folds=tuple(folds),
         selection=tuple(selection),
-        seed=_development_seed(),
+        seed=DEVELOPMENT_SEED,
         total_time_seconds=_TOTAL_TIME_SECONDS,
         content_receipt=_CONTENT_RECEIPT,
         custody_label=_CUSTODY_LABEL,
@@ -337,21 +306,7 @@ def development_card_facts() -> DevelopmentCardFacts:
 
 
 def render_development_card() -> str:
-    """Markdown for models/development_candidate_card.md.
-
-    Cite docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md and
-    docs/decisions/Q07_TRAINING_OCT27.md. Include feature names, schema,
-    threshold, selection table, support table, derived held-out support,
-    seed, 101.375 seconds, carbon digest, content receipt, and the custody
-    label as a label for manager-local storage.
-
-    The candidate-metric section says validation-fold precision, recall, and
-    F1 are unpublished because the fifteen fold models were not serialized
-    and the frozen joblib is the full-data refit. The section contains no
-    numeric precision, recall, or F1. Rendering does not call score_candidates
-    or score_fitted_rows. Output is stable across runs: fixed section order,
-    folds in fold-id order, no timestamp.
-    """
+    """Markdown for models/development_candidate_card.md."""
     facts = development_card_facts()
     definite = facts.definite_positive + facts.definite_negative
     support_rows = [
@@ -425,11 +380,7 @@ def render_development_card() -> str:
 
 
 def development_card_json() -> str:
-    """Serialize the public card facts for a machine reader.
-
-    The document has no precision, recall, or F1 field. Each selection row
-    has measured null. Fold objects carry support counts only.
-    """
+    """Serialize the public card facts for a machine reader."""
     facts = development_card_facts()
     payload = {
         "artifact_schema": facts.artifact_schema,
@@ -469,22 +420,3 @@ def development_card_json() -> str:
         "unpublished_reason": _UNPUBLISHED_METRICS,
     }
     return json.dumps(payload, indent=2, sort_keys=True) + "\n"
-
-
-def _development_seed() -> int:
-    """Read DEFAULT_SEED from the training script without executing it.
-
-    Importing that script inserts the repo root on sys.path.
-    """
-    path = Path(__file__).resolve().parents[2] / "scripts" / "train_p04_development.py"
-    module = ast.parse(path.read_text(encoding="utf-8"))
-    for node in module.body:
-        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
-            continue
-        target = node.targets[0]
-        if isinstance(target, ast.Name) and target.id == "DEFAULT_SEED":
-            value = ast.literal_eval(node.value)
-            if type(value) is not int:
-                raise ValueError("DEFAULT_SEED must be an int")
-            return value
-    raise ValueError("DEFAULT_SEED is missing from scripts/train_p04_development.py")

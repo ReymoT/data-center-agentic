@@ -27,4 +27,4 @@ files are ignored by default. Record permitted artifact access under Q13; do not
 commit a binary merely because a loader can read it.
 
 Public development facts for Nisha are in `development_candidate_card.md` and
-`development_card.json`. Binaries stay ignored under `artifacts/`.
+`development_card.json`.
