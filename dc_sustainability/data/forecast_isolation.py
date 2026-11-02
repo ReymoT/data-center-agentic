@@ -18,10 +18,10 @@ def footprint(day: date, *, history_hours: int, convention: str) -> tuple[set[in
     start = datetime(day.year, day.month, day.day, 7, tzinfo=timezone.utc)
     origin = datetime(2022, 1, 1, tzinfo=timezone.utc)
     first = int((start - origin).total_seconds() // 3600) + (convention == "end")
+    if first - history_hours < 0 or first + 29 >= 8760:
+        raise ValueError("source footprint exceeds available year; never wrap")
     scoring = set(range(first, first + 30))
     reads = set(range(first - history_hours, first + 30))
-    if min(reads) < 0 or max(reads) >= 8760:
-        raise ValueError("source footprint exceeds available year; never wrap")
     return scoring, reads
 
 
