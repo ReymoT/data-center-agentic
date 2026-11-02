@@ -1,0 +1,1095 @@
+{
+  "dates": {
+    "2022-01-01": [
+      {
+        "end_label_utc": "2022-01-01T08:00:00+00:00",
+        "end_row": 8,
+        "physical_end_utc": "2022-01-01T08:00:00+00:00",
+        "physical_start_utc": "2022-01-01T07:00:00+00:00",
+        "slot": 0,
+        "start_label_utc": "2022-01-01T07:00:00+00:00",
+        "start_row": 7
+      },
+      {
+        "end_label_utc": "2022-01-01T09:00:00+00:00",
+        "end_row": 9,
+        "physical_end_utc": "2022-01-01T09:00:00+00:00",
+        "physical_start_utc": "2022-01-01T08:00:00+00:00",
+        "slot": 1,
+        "start_label_utc": "2022-01-01T08:00:00+00:00",
+        "start_row": 8
+      },
+      {
+        "end_label_utc": "2022-01-01T10:00:00+00:00",
+        "end_row": 10,
+        "physical_end_utc": "2022-01-01T10:00:00+00:00",
+        "physical_start_utc": "2022-01-01T09:00:00+00:00",
+        "slot": 2,
+        "start_label_utc": "2022-01-01T09:00:00+00:00",
+        "start_row": 9
+      },
+      {
+        "end_label_utc": "2022-01-01T11:00:00+00:00",
+        "end_row": 11,
+        "physical_end_utc": "2022-01-01T11:00:00+00:00",
+        "physical_start_utc": "2022-01-01T10:00:00+00:00",
+        "slot": 3,
+        "start_label_utc": "2022-01-01T10:00:00+00:00",
+        "start_row": 10
+      },
+      {
+        "end_label_utc": "2022-01-01T12:00:00+00:00",
+        "end_row": 12,
+        "physical_end_utc": "2022-01-01T12:00:00+00:00",
+        "physical_start_utc": "2022-01-01T11:00:00+00:00",
+        "slot": 4,
+        "start_label_utc": "2022-01-01T11:00:00+00:00",
+        "start_row": 11
+      },
+      {
+        "end_label_utc": "2022-01-01T13:00:00+00:00",
+        "end_row": 13,
+        "physical_end_utc": "2022-01-01T13:00:00+00:00",
+        "physical_start_utc": "2022-01-01T12:00:00+00:00",
+        "slot": 5,
+        "start_label_utc": "2022-01-01T12:00:00+00:00",
+        "start_row": 12
+      },
+      {
+        "end_label_utc": "2022-01-01T14:00:00+00:00",
+        "end_row": 14,
+        "physical_end_utc": "2022-01-01T14:00:00+00:00",
+        "physical_start_utc": "2022-01-01T13:00:00+00:00",
+        "slot": 6,
+        "start_label_utc": "2022-01-01T13:00:00+00:00",
+        "start_row": 13
+      },
+      {
+        "end_label_utc": "2022-01-01T15:00:00+00:00",
+        "end_row": 15,
+        "physical_end_utc": "2022-01-01T15:00:00+00:00",
+        "physical_start_utc": "2022-01-01T14:00:00+00:00",
+        "slot": 7,
+        "start_label_utc": "2022-01-01T14:00:00+00:00",
+        "start_row": 14
+      },
+      {
+        "end_label_utc": "2022-01-01T16:00:00+00:00",
+        "end_row": 16,
+        "physical_end_utc": "2022-01-01T16:00:00+00:00",
+        "physical_start_utc": "2022-01-01T15:00:00+00:00",
+        "slot": 8,
+        "start_label_utc": "2022-01-01T15:00:00+00:00",
+        "start_row": 15
+      },
+      {
+        "end_label_utc": "2022-01-01T17:00:00+00:00",
+        "end_row": 17,
+        "physical_end_utc": "2022-01-01T17:00:00+00:00",
+        "physical_start_utc": "2022-01-01T16:00:00+00:00",
+        "slot": 9,
+        "start_label_utc": "2022-01-01T16:00:00+00:00",
+        "start_row": 16
+      },
+      {
+        "end_label_utc": "2022-01-01T18:00:00+00:00",
+        "end_row": 18,
+        "physical_end_utc": "2022-01-01T18:00:00+00:00",
+        "physical_start_utc": "2022-01-01T17:00:00+00:00",
+        "slot": 10,
+        "start_label_utc": "2022-01-01T17:00:00+00:00",
+        "start_row": 17
+      },
+      {
+        "end_label_utc": "2022-01-01T19:00:00+00:00",
+        "end_row": 19,
+        "physical_end_utc": "2022-01-01T19:00:00+00:00",
+        "physical_start_utc": "2022-01-01T18:00:00+00:00",
+        "slot": 11,
+        "start_label_utc": "2022-01-01T18:00:00+00:00",
+        "start_row": 18
+      },
+      {
+        "end_label_utc": "2022-01-01T20:00:00+00:00",
+        "end_row": 20,
+        "physical_end_utc": "2022-01-01T20:00:00+00:00",
+        "physical_start_utc": "2022-01-01T19:00:00+00:00",
+        "slot": 12,
+        "start_label_utc": "2022-01-01T19:00:00+00:00",
+        "start_row": 19
+      },
+      {
+        "end_label_utc": "2022-01-01T21:00:00+00:00",
+        "end_row": 21,
+        "physical_end_utc": "2022-01-01T21:00:00+00:00",
+        "physical_start_utc": "2022-01-01T20:00:00+00:00",
+        "slot": 13,
+        "start_label_utc": "2022-01-01T20:00:00+00:00",
+        "start_row": 20
+      },
+      {
+        "end_label_utc": "2022-01-01T22:00:00+00:00",
+        "end_row": 22,
+        "physical_end_utc": "2022-01-01T22:00:00+00:00",
+        "physical_start_utc": "2022-01-01T21:00:00+00:00",
+        "slot": 14,
+        "start_label_utc": "2022-01-01T21:00:00+00:00",
+        "start_row": 21
+      },
+      {
+        "end_label_utc": "2022-01-01T23:00:00+00:00",
+        "end_row": 23,
+        "physical_end_utc": "2022-01-01T23:00:00+00:00",
+        "physical_start_utc": "2022-01-01T22:00:00+00:00",
+        "slot": 15,
+        "start_label_utc": "2022-01-01T22:00:00+00:00",
+        "start_row": 22
+      },
+      {
+        "end_label_utc": "2022-01-02T00:00:00+00:00",
+        "end_row": 24,
+        "physical_end_utc": "2022-01-02T00:00:00+00:00",
+        "physical_start_utc": "2022-01-01T23:00:00+00:00",
+        "slot": 16,
+        "start_label_utc": "2022-01-01T23:00:00+00:00",
+        "start_row": 23
+      },
+      {
+        "end_label_utc": "2022-01-02T01:00:00+00:00",
+        "end_row": 25,
+        "physical_end_utc": "2022-01-02T01:00:00+00:00",
+        "physical_start_utc": "2022-01-02T00:00:00+00:00",
+        "slot": 17,
+        "start_label_utc": "2022-01-02T00:00:00+00:00",
+        "start_row": 24
+      },
+      {
+        "end_label_utc": "2022-01-02T02:00:00+00:00",
+        "end_row": 26,
+        "physical_end_utc": "2022-01-02T02:00:00+00:00",
+        "physical_start_utc": "2022-01-02T01:00:00+00:00",
+        "slot": 18,
+        "start_label_utc": "2022-01-02T01:00:00+00:00",
+        "start_row": 25
+      },
+      {
+        "end_label_utc": "2022-01-02T03:00:00+00:00",
+        "end_row": 27,
+        "physical_end_utc": "2022-01-02T03:00:00+00:00",
+        "physical_start_utc": "2022-01-02T02:00:00+00:00",
+        "slot": 19,
+        "start_label_utc": "2022-01-02T02:00:00+00:00",
+        "start_row": 26
+      },
+      {
+        "end_label_utc": "2022-01-02T04:00:00+00:00",
+        "end_row": 28,
+        "physical_end_utc": "2022-01-02T04:00:00+00:00",
+        "physical_start_utc": "2022-01-02T03:00:00+00:00",
+        "slot": 20,
+        "start_label_utc": "2022-01-02T03:00:00+00:00",
+        "start_row": 27
+      },
+      {
+        "end_label_utc": "2022-01-02T05:00:00+00:00",
+        "end_row": 29,
+        "physical_end_utc": "2022-01-02T05:00:00+00:00",
+        "physical_start_utc": "2022-01-02T04:00:00+00:00",
+        "slot": 21,
+        "start_label_utc": "2022-01-02T04:00:00+00:00",
+        "start_row": 28
+      },
+      {
+        "end_label_utc": "2022-01-02T06:00:00+00:00",
+        "end_row": 30,
+        "physical_end_utc": "2022-01-02T06:00:00+00:00",
+        "physical_start_utc": "2022-01-02T05:00:00+00:00",
+        "slot": 22,
+        "start_label_utc": "2022-01-02T05:00:00+00:00",
+        "start_row": 29
+      },
+      {
+        "end_label_utc": "2022-01-02T07:00:00+00:00",
+        "end_row": 31,
+        "physical_end_utc": "2022-01-02T07:00:00+00:00",
+        "physical_start_utc": "2022-01-02T06:00:00+00:00",
+        "slot": 23,
+        "start_label_utc": "2022-01-02T06:00:00+00:00",
+        "start_row": 30
+      },
+      {
+        "end_label_utc": "2022-01-02T08:00:00+00:00",
+        "end_row": 32,
+        "physical_end_utc": "2022-01-02T08:00:00+00:00",
+        "physical_start_utc": "2022-01-02T07:00:00+00:00",
+        "slot": 24,
+        "start_label_utc": "2022-01-02T07:00:00+00:00",
+        "start_row": 31
+      },
+      {
+        "end_label_utc": "2022-01-02T09:00:00+00:00",
+        "end_row": 33,
+        "physical_end_utc": "2022-01-02T09:00:00+00:00",
+        "physical_start_utc": "2022-01-02T08:00:00+00:00",
+        "slot": 25,
+        "start_label_utc": "2022-01-02T08:00:00+00:00",
+        "start_row": 32
+      },
+      {
+        "end_label_utc": "2022-01-02T10:00:00+00:00",
+        "end_row": 34,
+        "physical_end_utc": "2022-01-02T10:00:00+00:00",
+        "physical_start_utc": "2022-01-02T09:00:00+00:00",
+        "slot": 26,
+        "start_label_utc": "2022-01-02T09:00:00+00:00",
+        "start_row": 33
+      },
+      {
+        "end_label_utc": "2022-01-02T11:00:00+00:00",
+        "end_row": 35,
+        "physical_end_utc": "2022-01-02T11:00:00+00:00",
+        "physical_start_utc": "2022-01-02T10:00:00+00:00",
+        "slot": 27,
+        "start_label_utc": "2022-01-02T10:00:00+00:00",
+        "start_row": 34
+      },
+      {
+        "end_label_utc": "2022-01-02T12:00:00+00:00",
+        "end_row": 36,
+        "physical_end_utc": "2022-01-02T12:00:00+00:00",
+        "physical_start_utc": "2022-01-02T11:00:00+00:00",
+        "slot": 28,
+        "start_label_utc": "2022-01-02T11:00:00+00:00",
+        "start_row": 35
+      },
+      {
+        "end_label_utc": "2022-01-02T13:00:00+00:00",
+        "end_row": 37,
+        "physical_end_utc": "2022-01-02T13:00:00+00:00",
+        "physical_start_utc": "2022-01-02T12:00:00+00:00",
+        "slot": 29,
+        "start_label_utc": "2022-01-02T12:00:00+00:00",
+        "start_row": 36
+      }
+    ],
+    "2022-01-31": [
+      {
+        "end_label_utc": "2022-01-31T08:00:00+00:00",
+        "end_row": 728,
+        "physical_end_utc": "2022-01-31T08:00:00+00:00",
+        "physical_start_utc": "2022-01-31T07:00:00+00:00",
+        "slot": 0,
+        "start_label_utc": "2022-01-31T07:00:00+00:00",
+        "start_row": 727
+      },
+      {
+        "end_label_utc": "2022-01-31T09:00:00+00:00",
+        "end_row": 729,
+        "physical_end_utc": "2022-01-31T09:00:00+00:00",
+        "physical_start_utc": "2022-01-31T08:00:00+00:00",
+        "slot": 1,
+        "start_label_utc": "2022-01-31T08:00:00+00:00",
+        "start_row": 728
+      },
+      {
+        "end_label_utc": "2022-01-31T10:00:00+00:00",
+        "end_row": 730,
+        "physical_end_utc": "2022-01-31T10:00:00+00:00",
+        "physical_start_utc": "2022-01-31T09:00:00+00:00",
+        "slot": 2,
+        "start_label_utc": "2022-01-31T09:00:00+00:00",
+        "start_row": 729
+      },
+      {
+        "end_label_utc": "2022-01-31T11:00:00+00:00",
+        "end_row": 731,
+        "physical_end_utc": "2022-01-31T11:00:00+00:00",
+        "physical_start_utc": "2022-01-31T10:00:00+00:00",
+        "slot": 3,
+        "start_label_utc": "2022-01-31T10:00:00+00:00",
+        "start_row": 730
+      },
+      {
+        "end_label_utc": "2022-01-31T12:00:00+00:00",
+        "end_row": 732,
+        "physical_end_utc": "2022-01-31T12:00:00+00:00",
+        "physical_start_utc": "2022-01-31T11:00:00+00:00",
+        "slot": 4,
+        "start_label_utc": "2022-01-31T11:00:00+00:00",
+        "start_row": 731
+      },
+      {
+        "end_label_utc": "2022-01-31T13:00:00+00:00",
+        "end_row": 733,
+        "physical_end_utc": "2022-01-31T13:00:00+00:00",
+        "physical_start_utc": "2022-01-31T12:00:00+00:00",
+        "slot": 5,
+        "start_label_utc": "2022-01-31T12:00:00+00:00",
+        "start_row": 732
+      },
+      {
+        "end_label_utc": "2022-01-31T14:00:00+00:00",
+        "end_row": 734,
+        "physical_end_utc": "2022-01-31T14:00:00+00:00",
+        "physical_start_utc": "2022-01-31T13:00:00+00:00",
+        "slot": 6,
+        "start_label_utc": "2022-01-31T13:00:00+00:00",
+        "start_row": 733
+      },
+      {
+        "end_label_utc": "2022-01-31T15:00:00+00:00",
+        "end_row": 735,
+        "physical_end_utc": "2022-01-31T15:00:00+00:00",
+        "physical_start_utc": "2022-01-31T14:00:00+00:00",
+        "slot": 7,
+        "start_label_utc": "2022-01-31T14:00:00+00:00",
+        "start_row": 734
+      },
+      {
+        "end_label_utc": "2022-01-31T16:00:00+00:00",
+        "end_row": 736,
+        "physical_end_utc": "2022-01-31T16:00:00+00:00",
+        "physical_start_utc": "2022-01-31T15:00:00+00:00",
+        "slot": 8,
+        "start_label_utc": "2022-01-31T15:00:00+00:00",
+        "start_row": 735
+      },
+      {
+        "end_label_utc": "2022-01-31T17:00:00+00:00",
+        "end_row": 737,
+        "physical_end_utc": "2022-01-31T17:00:00+00:00",
+        "physical_start_utc": "2022-01-31T16:00:00+00:00",
+        "slot": 9,
+        "start_label_utc": "2022-01-31T16:00:00+00:00",
+        "start_row": 736
+      },
+      {
+        "end_label_utc": "2022-01-31T18:00:00+00:00",
+        "end_row": 738,
+        "physical_end_utc": "2022-01-31T18:00:00+00:00",
+        "physical_start_utc": "2022-01-31T17:00:00+00:00",
+        "slot": 10,
+        "start_label_utc": "2022-01-31T17:00:00+00:00",
+        "start_row": 737
+      },
+      {
+        "end_label_utc": "2022-01-31T19:00:00+00:00",
+        "end_row": 739,
+        "physical_end_utc": "2022-01-31T19:00:00+00:00",
+        "physical_start_utc": "2022-01-31T18:00:00+00:00",
+        "slot": 11,
+        "start_label_utc": "2022-01-31T18:00:00+00:00",
+        "start_row": 738
+      },
+      {
+        "end_label_utc": "2022-01-31T20:00:00+00:00",
+        "end_row": 740,
+        "physical_end_utc": "2022-01-31T20:00:00+00:00",
+        "physical_start_utc": "2022-01-31T19:00:00+00:00",
+        "slot": 12,
+        "start_label_utc": "2022-01-31T19:00:00+00:00",
+        "start_row": 739
+      },
+      {
+        "end_label_utc": "2022-01-31T21:00:00+00:00",
+        "end_row": 741,
+        "physical_end_utc": "2022-01-31T21:00:00+00:00",
+        "physical_start_utc": "2022-01-31T20:00:00+00:00",
+        "slot": 13,
+        "start_label_utc": "2022-01-31T20:00:00+00:00",
+        "start_row": 740
+      },
+      {
+        "end_label_utc": "2022-01-31T22:00:00+00:00",
+        "end_row": 742,
+        "physical_end_utc": "2022-01-31T22:00:00+00:00",
+        "physical_start_utc": "2022-01-31T21:00:00+00:00",
+        "slot": 14,
+        "start_label_utc": "2022-01-31T21:00:00+00:00",
+        "start_row": 741
+      },
+      {
+        "end_label_utc": "2022-01-31T23:00:00+00:00",
+        "end_row": 743,
+        "physical_end_utc": "2022-01-31T23:00:00+00:00",
+        "physical_start_utc": "2022-01-31T22:00:00+00:00",
+        "slot": 15,
+        "start_label_utc": "2022-01-31T22:00:00+00:00",
+        "start_row": 742
+      },
+      {
+        "end_label_utc": "2022-02-01T00:00:00+00:00",
+        "end_row": 744,
+        "physical_end_utc": "2022-02-01T00:00:00+00:00",
+        "physical_start_utc": "2022-01-31T23:00:00+00:00",
+        "slot": 16,
+        "start_label_utc": "2022-01-31T23:00:00+00:00",
+        "start_row": 743
+      },
+      {
+        "end_label_utc": "2022-02-01T01:00:00+00:00",
+        "end_row": 745,
+        "physical_end_utc": "2022-02-01T01:00:00+00:00",
+        "physical_start_utc": "2022-02-01T00:00:00+00:00",
+        "slot": 17,
+        "start_label_utc": "2022-02-01T00:00:00+00:00",
+        "start_row": 744
+      },
+      {
+        "end_label_utc": "2022-02-01T02:00:00+00:00",
+        "end_row": 746,
+        "physical_end_utc": "2022-02-01T02:00:00+00:00",
+        "physical_start_utc": "2022-02-01T01:00:00+00:00",
+        "slot": 18,
+        "start_label_utc": "2022-02-01T01:00:00+00:00",
+        "start_row": 745
+      },
+      {
+        "end_label_utc": "2022-02-01T03:00:00+00:00",
+        "end_row": 747,
+        "physical_end_utc": "2022-02-01T03:00:00+00:00",
+        "physical_start_utc": "2022-02-01T02:00:00+00:00",
+        "slot": 19,
+        "start_label_utc": "2022-02-01T02:00:00+00:00",
+        "start_row": 746
+      },
+      {
+        "end_label_utc": "2022-02-01T04:00:00+00:00",
+        "end_row": 748,
+        "physical_end_utc": "2022-02-01T04:00:00+00:00",
+        "physical_start_utc": "2022-02-01T03:00:00+00:00",
+        "slot": 20,
+        "start_label_utc": "2022-02-01T03:00:00+00:00",
+        "start_row": 747
+      },
+      {
+        "end_label_utc": "2022-02-01T05:00:00+00:00",
+        "end_row": 749,
+        "physical_end_utc": "2022-02-01T05:00:00+00:00",
+        "physical_start_utc": "2022-02-01T04:00:00+00:00",
+        "slot": 21,
+        "start_label_utc": "2022-02-01T04:00:00+00:00",
+        "start_row": 748
+      },
+      {
+        "end_label_utc": "2022-02-01T06:00:00+00:00",
+        "end_row": 750,
+        "physical_end_utc": "2022-02-01T06:00:00+00:00",
+        "physical_start_utc": "2022-02-01T05:00:00+00:00",
+        "slot": 22,
+        "start_label_utc": "2022-02-01T05:00:00+00:00",
+        "start_row": 749
+      },
+      {
+        "end_label_utc": "2022-02-01T07:00:00+00:00",
+        "end_row": 751,
+        "physical_end_utc": "2022-02-01T07:00:00+00:00",
+        "physical_start_utc": "2022-02-01T06:00:00+00:00",
+        "slot": 23,
+        "start_label_utc": "2022-02-01T06:00:00+00:00",
+        "start_row": 750
+      },
+      {
+        "end_label_utc": "2022-02-01T08:00:00+00:00",
+        "end_row": 752,
+        "physical_end_utc": "2022-02-01T08:00:00+00:00",
+        "physical_start_utc": "2022-02-01T07:00:00+00:00",
+        "slot": 24,
+        "start_label_utc": "2022-02-01T07:00:00+00:00",
+        "start_row": 751
+      },
+      {
+        "end_label_utc": "2022-02-01T09:00:00+00:00",
+        "end_row": 753,
+        "physical_end_utc": "2022-02-01T09:00:00+00:00",
+        "physical_start_utc": "2022-02-01T08:00:00+00:00",
+        "slot": 25,
+        "start_label_utc": "2022-02-01T08:00:00+00:00",
+        "start_row": 752
+      },
+      {
+        "end_label_utc": "2022-02-01T10:00:00+00:00",
+        "end_row": 754,
+        "physical_end_utc": "2022-02-01T10:00:00+00:00",
+        "physical_start_utc": "2022-02-01T09:00:00+00:00",
+        "slot": 26,
+        "start_label_utc": "2022-02-01T09:00:00+00:00",
+        "start_row": 753
+      },
+      {
+        "end_label_utc": "2022-02-01T11:00:00+00:00",
+        "end_row": 755,
+        "physical_end_utc": "2022-02-01T11:00:00+00:00",
+        "physical_start_utc": "2022-02-01T10:00:00+00:00",
+        "slot": 27,
+        "start_label_utc": "2022-02-01T10:00:00+00:00",
+        "start_row": 754
+      },
+      {
+        "end_label_utc": "2022-02-01T12:00:00+00:00",
+        "end_row": 756,
+        "physical_end_utc": "2022-02-01T12:00:00+00:00",
+        "physical_start_utc": "2022-02-01T11:00:00+00:00",
+        "slot": 28,
+        "start_label_utc": "2022-02-01T11:00:00+00:00",
+        "start_row": 755
+      },
+      {
+        "end_label_utc": "2022-02-01T13:00:00+00:00",
+        "end_row": 757,
+        "physical_end_utc": "2022-02-01T13:00:00+00:00",
+        "physical_start_utc": "2022-02-01T12:00:00+00:00",
+        "slot": 29,
+        "start_label_utc": "2022-02-01T12:00:00+00:00",
+        "start_row": 756
+      }
+    ],
+    "2022-12-30": [
+      {
+        "end_label_utc": "2022-12-30T08:00:00+00:00",
+        "end_row": 8720,
+        "physical_end_utc": "2022-12-30T08:00:00+00:00",
+        "physical_start_utc": "2022-12-30T07:00:00+00:00",
+        "slot": 0,
+        "start_label_utc": "2022-12-30T07:00:00+00:00",
+        "start_row": 8719
+      },
+      {
+        "end_label_utc": "2022-12-30T09:00:00+00:00",
+        "end_row": 8721,
+        "physical_end_utc": "2022-12-30T09:00:00+00:00",
+        "physical_start_utc": "2022-12-30T08:00:00+00:00",
+        "slot": 1,
+        "start_label_utc": "2022-12-30T08:00:00+00:00",
+        "start_row": 8720
+      },
+      {
+        "end_label_utc": "2022-12-30T10:00:00+00:00",
+        "end_row": 8722,
+        "physical_end_utc": "2022-12-30T10:00:00+00:00",
+        "physical_start_utc": "2022-12-30T09:00:00+00:00",
+        "slot": 2,
+        "start_label_utc": "2022-12-30T09:00:00+00:00",
+        "start_row": 8721
+      },
+      {
+        "end_label_utc": "2022-12-30T11:00:00+00:00",
+        "end_row": 8723,
+        "physical_end_utc": "2022-12-30T11:00:00+00:00",
+        "physical_start_utc": "2022-12-30T10:00:00+00:00",
+        "slot": 3,
+        "start_label_utc": "2022-12-30T10:00:00+00:00",
+        "start_row": 8722
+      },
+      {
+        "end_label_utc": "2022-12-30T12:00:00+00:00",
+        "end_row": 8724,
+        "physical_end_utc": "2022-12-30T12:00:00+00:00",
+        "physical_start_utc": "2022-12-30T11:00:00+00:00",
+        "slot": 4,
+        "start_label_utc": "2022-12-30T11:00:00+00:00",
+        "start_row": 8723
+      },
+      {
+        "end_label_utc": "2022-12-30T13:00:00+00:00",
+        "end_row": 8725,
+        "physical_end_utc": "2022-12-30T13:00:00+00:00",
+        "physical_start_utc": "2022-12-30T12:00:00+00:00",
+        "slot": 5,
+        "start_label_utc": "2022-12-30T12:00:00+00:00",
+        "start_row": 8724
+      },
+      {
+        "end_label_utc": "2022-12-30T14:00:00+00:00",
+        "end_row": 8726,
+        "physical_end_utc": "2022-12-30T14:00:00+00:00",
+        "physical_start_utc": "2022-12-30T13:00:00+00:00",
+        "slot": 6,
+        "start_label_utc": "2022-12-30T13:00:00+00:00",
+        "start_row": 8725
+      },
+      {
+        "end_label_utc": "2022-12-30T15:00:00+00:00",
+        "end_row": 8727,
+        "physical_end_utc": "2022-12-30T15:00:00+00:00",
+        "physical_start_utc": "2022-12-30T14:00:00+00:00",
+        "slot": 7,
+        "start_label_utc": "2022-12-30T14:00:00+00:00",
+        "start_row": 8726
+      },
+      {
+        "end_label_utc": "2022-12-30T16:00:00+00:00",
+        "end_row": 8728,
+        "physical_end_utc": "2022-12-30T16:00:00+00:00",
+        "physical_start_utc": "2022-12-30T15:00:00+00:00",
+        "slot": 8,
+        "start_label_utc": "2022-12-30T15:00:00+00:00",
+        "start_row": 8727
+      },
+      {
+        "end_label_utc": "2022-12-30T17:00:00+00:00",
+        "end_row": 8729,
+        "physical_end_utc": "2022-12-30T17:00:00+00:00",
+        "physical_start_utc": "2022-12-30T16:00:00+00:00",
+        "slot": 9,
+        "start_label_utc": "2022-12-30T16:00:00+00:00",
+        "start_row": 8728
+      },
+      {
+        "end_label_utc": "2022-12-30T18:00:00+00:00",
+        "end_row": 8730,
+        "physical_end_utc": "2022-12-30T18:00:00+00:00",
+        "physical_start_utc": "2022-12-30T17:00:00+00:00",
+        "slot": 10,
+        "start_label_utc": "2022-12-30T17:00:00+00:00",
+        "start_row": 8729
+      },
+      {
+        "end_label_utc": "2022-12-30T19:00:00+00:00",
+        "end_row": 8731,
+        "physical_end_utc": "2022-12-30T19:00:00+00:00",
+        "physical_start_utc": "2022-12-30T18:00:00+00:00",
+        "slot": 11,
+        "start_label_utc": "2022-12-30T18:00:00+00:00",
+        "start_row": 8730
+      },
+      {
+        "end_label_utc": "2022-12-30T20:00:00+00:00",
+        "end_row": 8732,
+        "physical_end_utc": "2022-12-30T20:00:00+00:00",
+        "physical_start_utc": "2022-12-30T19:00:00+00:00",
+        "slot": 12,
+        "start_label_utc": "2022-12-30T19:00:00+00:00",
+        "start_row": 8731
+      },
+      {
+        "end_label_utc": "2022-12-30T21:00:00+00:00",
+        "end_row": 8733,
+        "physical_end_utc": "2022-12-30T21:00:00+00:00",
+        "physical_start_utc": "2022-12-30T20:00:00+00:00",
+        "slot": 13,
+        "start_label_utc": "2022-12-30T20:00:00+00:00",
+        "start_row": 8732
+      },
+      {
+        "end_label_utc": "2022-12-30T22:00:00+00:00",
+        "end_row": 8734,
+        "physical_end_utc": "2022-12-30T22:00:00+00:00",
+        "physical_start_utc": "2022-12-30T21:00:00+00:00",
+        "slot": 14,
+        "start_label_utc": "2022-12-30T21:00:00+00:00",
+        "start_row": 8733
+      },
+      {
+        "end_label_utc": "2022-12-30T23:00:00+00:00",
+        "end_row": 8735,
+        "physical_end_utc": "2022-12-30T23:00:00+00:00",
+        "physical_start_utc": "2022-12-30T22:00:00+00:00",
+        "slot": 15,
+        "start_label_utc": "2022-12-30T22:00:00+00:00",
+        "start_row": 8734
+      },
+      {
+        "end_label_utc": "2022-12-31T00:00:00+00:00",
+        "end_row": 8736,
+        "physical_end_utc": "2022-12-31T00:00:00+00:00",
+        "physical_start_utc": "2022-12-30T23:00:00+00:00",
+        "slot": 16,
+        "start_label_utc": "2022-12-30T23:00:00+00:00",
+        "start_row": 8735
+      },
+      {
+        "end_label_utc": "2022-12-31T01:00:00+00:00",
+        "end_row": 8737,
+        "physical_end_utc": "2022-12-31T01:00:00+00:00",
+        "physical_start_utc": "2022-12-31T00:00:00+00:00",
+        "slot": 17,
+        "start_label_utc": "2022-12-31T00:00:00+00:00",
+        "start_row": 8736
+      },
+      {
+        "end_label_utc": "2022-12-31T02:00:00+00:00",
+        "end_row": 8738,
+        "physical_end_utc": "2022-12-31T02:00:00+00:00",
+        "physical_start_utc": "2022-12-31T01:00:00+00:00",
+        "slot": 18,
+        "start_label_utc": "2022-12-31T01:00:00+00:00",
+        "start_row": 8737
+      },
+      {
+        "end_label_utc": "2022-12-31T03:00:00+00:00",
+        "end_row": 8739,
+        "physical_end_utc": "2022-12-31T03:00:00+00:00",
+        "physical_start_utc": "2022-12-31T02:00:00+00:00",
+        "slot": 19,
+        "start_label_utc": "2022-12-31T02:00:00+00:00",
+        "start_row": 8738
+      },
+      {
+        "end_label_utc": "2022-12-31T04:00:00+00:00",
+        "end_row": 8740,
+        "physical_end_utc": "2022-12-31T04:00:00+00:00",
+        "physical_start_utc": "2022-12-31T03:00:00+00:00",
+        "slot": 20,
+        "start_label_utc": "2022-12-31T03:00:00+00:00",
+        "start_row": 8739
+      },
+      {
+        "end_label_utc": "2022-12-31T05:00:00+00:00",
+        "end_row": 8741,
+        "physical_end_utc": "2022-12-31T05:00:00+00:00",
+        "physical_start_utc": "2022-12-31T04:00:00+00:00",
+        "slot": 21,
+        "start_label_utc": "2022-12-31T04:00:00+00:00",
+        "start_row": 8740
+      },
+      {
+        "end_label_utc": "2022-12-31T06:00:00+00:00",
+        "end_row": 8742,
+        "physical_end_utc": "2022-12-31T06:00:00+00:00",
+        "physical_start_utc": "2022-12-31T05:00:00+00:00",
+        "slot": 22,
+        "start_label_utc": "2022-12-31T05:00:00+00:00",
+        "start_row": 8741
+      },
+      {
+        "end_label_utc": "2022-12-31T07:00:00+00:00",
+        "end_row": 8743,
+        "physical_end_utc": "2022-12-31T07:00:00+00:00",
+        "physical_start_utc": "2022-12-31T06:00:00+00:00",
+        "slot": 23,
+        "start_label_utc": "2022-12-31T06:00:00+00:00",
+        "start_row": 8742
+      },
+      {
+        "end_label_utc": "2022-12-31T08:00:00+00:00",
+        "end_row": 8744,
+        "physical_end_utc": "2022-12-31T08:00:00+00:00",
+        "physical_start_utc": "2022-12-31T07:00:00+00:00",
+        "slot": 24,
+        "start_label_utc": "2022-12-31T07:00:00+00:00",
+        "start_row": 8743
+      },
+      {
+        "end_label_utc": "2022-12-31T09:00:00+00:00",
+        "end_row": 8745,
+        "physical_end_utc": "2022-12-31T09:00:00+00:00",
+        "physical_start_utc": "2022-12-31T08:00:00+00:00",
+        "slot": 25,
+        "start_label_utc": "2022-12-31T08:00:00+00:00",
+        "start_row": 8744
+      },
+      {
+        "end_label_utc": "2022-12-31T10:00:00+00:00",
+        "end_row": 8746,
+        "physical_end_utc": "2022-12-31T10:00:00+00:00",
+        "physical_start_utc": "2022-12-31T09:00:00+00:00",
+        "slot": 26,
+        "start_label_utc": "2022-12-31T09:00:00+00:00",
+        "start_row": 8745
+      },
+      {
+        "end_label_utc": "2022-12-31T11:00:00+00:00",
+        "end_row": 8747,
+        "physical_end_utc": "2022-12-31T11:00:00+00:00",
+        "physical_start_utc": "2022-12-31T10:00:00+00:00",
+        "slot": 27,
+        "start_label_utc": "2022-12-31T10:00:00+00:00",
+        "start_row": 8746
+      },
+      {
+        "end_label_utc": "2022-12-31T12:00:00+00:00",
+        "end_row": 8748,
+        "physical_end_utc": "2022-12-31T12:00:00+00:00",
+        "physical_start_utc": "2022-12-31T11:00:00+00:00",
+        "slot": 28,
+        "start_label_utc": "2022-12-31T11:00:00+00:00",
+        "start_row": 8747
+      },
+      {
+        "end_label_utc": "2022-12-31T13:00:00+00:00",
+        "end_row": 8749,
+        "physical_end_utc": "2022-12-31T13:00:00+00:00",
+        "physical_start_utc": "2022-12-31T12:00:00+00:00",
+        "slot": 29,
+        "start_label_utc": "2022-12-31T12:00:00+00:00",
+        "start_row": 8748
+      }
+    ],
+    "2022-12-31": [
+      {
+        "end_label_utc": "2022-12-31T08:00:00+00:00",
+        "end_row": 8744,
+        "physical_end_utc": "2022-12-31T08:00:00+00:00",
+        "physical_start_utc": "2022-12-31T07:00:00+00:00",
+        "slot": 0,
+        "start_label_utc": "2022-12-31T07:00:00+00:00",
+        "start_row": 8743
+      },
+      {
+        "end_label_utc": "2022-12-31T09:00:00+00:00",
+        "end_row": 8745,
+        "physical_end_utc": "2022-12-31T09:00:00+00:00",
+        "physical_start_utc": "2022-12-31T08:00:00+00:00",
+        "slot": 1,
+        "start_label_utc": "2022-12-31T08:00:00+00:00",
+        "start_row": 8744
+      },
+      {
+        "end_label_utc": "2022-12-31T10:00:00+00:00",
+        "end_row": 8746,
+        "physical_end_utc": "2022-12-31T10:00:00+00:00",
+        "physical_start_utc": "2022-12-31T09:00:00+00:00",
+        "slot": 2,
+        "start_label_utc": "2022-12-31T09:00:00+00:00",
+        "start_row": 8745
+      },
+      {
+        "end_label_utc": "2022-12-31T11:00:00+00:00",
+        "end_row": 8747,
+        "physical_end_utc": "2022-12-31T11:00:00+00:00",
+        "physical_start_utc": "2022-12-31T10:00:00+00:00",
+        "slot": 3,
+        "start_label_utc": "2022-12-31T10:00:00+00:00",
+        "start_row": 8746
+      },
+      {
+        "end_label_utc": "2022-12-31T12:00:00+00:00",
+        "end_row": 8748,
+        "physical_end_utc": "2022-12-31T12:00:00+00:00",
+        "physical_start_utc": "2022-12-31T11:00:00+00:00",
+        "slot": 4,
+        "start_label_utc": "2022-12-31T11:00:00+00:00",
+        "start_row": 8747
+      },
+      {
+        "end_label_utc": "2022-12-31T13:00:00+00:00",
+        "end_row": 8749,
+        "physical_end_utc": "2022-12-31T13:00:00+00:00",
+        "physical_start_utc": "2022-12-31T12:00:00+00:00",
+        "slot": 5,
+        "start_label_utc": "2022-12-31T12:00:00+00:00",
+        "start_row": 8748
+      },
+      {
+        "end_label_utc": "2022-12-31T14:00:00+00:00",
+        "end_row": 8750,
+        "physical_end_utc": "2022-12-31T14:00:00+00:00",
+        "physical_start_utc": "2022-12-31T13:00:00+00:00",
+        "slot": 6,
+        "start_label_utc": "2022-12-31T13:00:00+00:00",
+        "start_row": 8749
+      },
+      {
+        "end_label_utc": "2022-12-31T15:00:00+00:00",
+        "end_row": 8751,
+        "physical_end_utc": "2022-12-31T15:00:00+00:00",
+        "physical_start_utc": "2022-12-31T14:00:00+00:00",
+        "slot": 7,
+        "start_label_utc": "2022-12-31T14:00:00+00:00",
+        "start_row": 8750
+      },
+      {
+        "end_label_utc": "2022-12-31T16:00:00+00:00",
+        "end_row": 8752,
+        "physical_end_utc": "2022-12-31T16:00:00+00:00",
+        "physical_start_utc": "2022-12-31T15:00:00+00:00",
+        "slot": 8,
+        "start_label_utc": "2022-12-31T15:00:00+00:00",
+        "start_row": 8751
+      },
+      {
+        "end_label_utc": "2022-12-31T17:00:00+00:00",
+        "end_row": 8753,
+        "physical_end_utc": "2022-12-31T17:00:00+00:00",
+        "physical_start_utc": "2022-12-31T16:00:00+00:00",
+        "slot": 9,
+        "start_label_utc": "2022-12-31T16:00:00+00:00",
+        "start_row": 8752
+      },
+      {
+        "end_label_utc": "2022-12-31T18:00:00+00:00",
+        "end_row": 8754,
+        "physical_end_utc": "2022-12-31T18:00:00+00:00",
+        "physical_start_utc": "2022-12-31T17:00:00+00:00",
+        "slot": 10,
+        "start_label_utc": "2022-12-31T17:00:00+00:00",
+        "start_row": 8753
+      },
+      {
+        "end_label_utc": "2022-12-31T19:00:00+00:00",
+        "end_row": 8755,
+        "physical_end_utc": "2022-12-31T19:00:00+00:00",
+        "physical_start_utc": "2022-12-31T18:00:00+00:00",
+        "slot": 11,
+        "start_label_utc": "2022-12-31T18:00:00+00:00",
+        "start_row": 8754
+      },
+      {
+        "end_label_utc": "2022-12-31T20:00:00+00:00",
+        "end_row": 8756,
+        "physical_end_utc": "2022-12-31T20:00:00+00:00",
+        "physical_start_utc": "2022-12-31T19:00:00+00:00",
+        "slot": 12,
+        "start_label_utc": "2022-12-31T19:00:00+00:00",
+        "start_row": 8755
+      },
+      {
+        "end_label_utc": "2022-12-31T21:00:00+00:00",
+        "end_row": 8757,
+        "physical_end_utc": "2022-12-31T21:00:00+00:00",
+        "physical_start_utc": "2022-12-31T20:00:00+00:00",
+        "slot": 13,
+        "start_label_utc": "2022-12-31T20:00:00+00:00",
+        "start_row": 8756
+      },
+      {
+        "end_label_utc": "2022-12-31T22:00:00+00:00",
+        "end_row": 8758,
+        "physical_end_utc": "2022-12-31T22:00:00+00:00",
+        "physical_start_utc": "2022-12-31T21:00:00+00:00",
+        "slot": 14,
+        "start_label_utc": "2022-12-31T21:00:00+00:00",
+        "start_row": 8757
+      },
+      {
+        "end_label_utc": "2022-12-31T23:00:00+00:00",
+        "end_row": 8759,
+        "physical_end_utc": "2022-12-31T23:00:00+00:00",
+        "physical_start_utc": "2022-12-31T22:00:00+00:00",
+        "slot": 15,
+        "start_label_utc": "2022-12-31T22:00:00+00:00",
+        "start_row": 8758
+      },
+      {
+        "end_label_utc": "2023-01-01T00:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T00:00:00+00:00",
+        "physical_start_utc": "2022-12-31T23:00:00+00:00",
+        "slot": 16,
+        "start_label_utc": "2022-12-31T23:00:00+00:00",
+        "start_row": 8759
+      },
+      {
+        "end_label_utc": "2023-01-01T01:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T01:00:00+00:00",
+        "physical_start_utc": "2023-01-01T00:00:00+00:00",
+        "slot": 17,
+        "start_label_utc": "2023-01-01T00:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T02:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T02:00:00+00:00",
+        "physical_start_utc": "2023-01-01T01:00:00+00:00",
+        "slot": 18,
+        "start_label_utc": "2023-01-01T01:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T03:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T03:00:00+00:00",
+        "physical_start_utc": "2023-01-01T02:00:00+00:00",
+        "slot": 19,
+        "start_label_utc": "2023-01-01T02:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T04:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T04:00:00+00:00",
+        "physical_start_utc": "2023-01-01T03:00:00+00:00",
+        "slot": 20,
+        "start_label_utc": "2023-01-01T03:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T05:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T05:00:00+00:00",
+        "physical_start_utc": "2023-01-01T04:00:00+00:00",
+        "slot": 21,
+        "start_label_utc": "2023-01-01T04:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T06:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T06:00:00+00:00",
+        "physical_start_utc": "2023-01-01T05:00:00+00:00",
+        "slot": 22,
+        "start_label_utc": "2023-01-01T05:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T07:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T07:00:00+00:00",
+        "physical_start_utc": "2023-01-01T06:00:00+00:00",
+        "slot": 23,
+        "start_label_utc": "2023-01-01T06:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T08:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T08:00:00+00:00",
+        "physical_start_utc": "2023-01-01T07:00:00+00:00",
+        "slot": 24,
+        "start_label_utc": "2023-01-01T07:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T09:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T09:00:00+00:00",
+        "physical_start_utc": "2023-01-01T08:00:00+00:00",
+        "slot": 25,
+        "start_label_utc": "2023-01-01T08:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T10:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T10:00:00+00:00",
+        "physical_start_utc": "2023-01-01T09:00:00+00:00",
+        "slot": 26,
+        "start_label_utc": "2023-01-01T09:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T11:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T11:00:00+00:00",
+        "physical_start_utc": "2023-01-01T10:00:00+00:00",
+        "slot": 27,
+        "start_label_utc": "2023-01-01T10:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T12:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T12:00:00+00:00",
+        "physical_start_utc": "2023-01-01T11:00:00+00:00",
+        "slot": 28,
+        "start_label_utc": "2023-01-01T11:00:00+00:00",
+        "start_row": null
+      },
+      {
+        "end_label_utc": "2023-01-01T13:00:00+00:00",
+        "end_row": null,
+        "physical_end_utc": "2023-01-01T13:00:00+00:00",
+        "physical_start_utc": "2023-01-01T12:00:00+00:00",
+        "slot": 29,
+        "start_label_utc": "2023-01-01T12:00:00+00:00",
+        "start_row": null
+      }
+    ]
+  },
+  "index_basis": "zero-based data row excluding CSV header",
+  "source_values_read": false,
+  "status": "conditional_comparison_not_source_evidence_or_study_selection"
+}

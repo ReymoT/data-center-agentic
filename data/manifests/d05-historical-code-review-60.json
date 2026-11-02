@@ -1,0 +1,196 @@
+{
+  "reviewed_main": "6e653e85c0432ffc135d11194914dade6173e6db",
+  "instruction_version": "1.28",
+  "upstream_commit": "a92b4755aca560e34a98d14028dda629eb968482",
+  "tree_url": "https://api.github.com/repos/HewlettPackard/dc-rl/git/trees/a92b4755aca560e34a98d14028dda629eb968482?recursive=1",
+  "tree_truncated": false,
+  "method": "Read all non-HARL, non-Sphinx Python source files plus two CI documentation pages at pinned tree; case-sensitive textual search for EBA., EBA.zip, extractBARange, avg_CI, CarbonExplorer, carbon_intensity =. No upstream execution or raw CSV retrieval. This bounded search is not proof no exporter ever existed.",
+  "files": [
+    {
+      "path": "data/CarbonIntensity/__init__.py",
+      "git_blob": "6cf1b21915d8dc638e7b19f8aa173a91d8f3425a",
+      "matching_lines": []
+    },
+    {
+      "path": "data/Weather/__init__.py",
+      "git_blob": "6783283365238323a680488bfd787d9c62ad8071",
+      "matching_lines": []
+    },
+    {
+      "path": "data/Workload/__init__.py",
+      "git_blob": "972c5d34753e4fdc67342e3e22b2dee7629aaeea",
+      "matching_lines": []
+    },
+    {
+      "path": "data/__init__.py",
+      "git_blob": "8ad03c94e9882e06b68dda46079712191cf59050",
+      "matching_lines": []
+    },
+    {
+      "path": "envs/__init__.py",
+      "git_blob": "1952707a925f4504547136f5ec57d8c04dc8c770",
+      "matching_lines": []
+    },
+    {
+      "path": "envs/bat_env_fwd_view.py",
+      "git_blob": "ce025cea63e83c8e34b5b7ba126068b2fc20eedc",
+      "matching_lines": [
+        79,
+        115
+      ]
+    },
+    {
+      "path": "envs/battery_model.py",
+      "git_blob": "3433a597f8fd83823e9becefaacbf34caa2464e0",
+      "matching_lines": []
+    },
+    {
+      "path": "envs/carbon_ls.py",
+      "git_blob": "d448795aff145aa49ad37a3f9a61b6f22edd8aac",
+      "matching_lines": []
+    },
+    {
+      "path": "envs/datacenter.py",
+      "git_blob": "6bdeaebad4b1f126dff149ca7f19bab7120c7e50",
+      "matching_lines": []
+    },
+    {
+      "path": "envs/dc_gym.py",
+      "git_blob": "16b84142b885ec8fbf7741dc2ff0e9c87f7e2d6d",
+      "matching_lines": []
+    },
+    {
+      "path": "eval_sustaindc.py",
+      "git_blob": "a85b81e3d9d1fe81964688168cb4dee25303a339",
+      "matching_lines": [
+        141
+      ]
+    },
+    {
+      "path": "evaluate_harl.py",
+      "git_blob": "5a0dc79ad42f61852af841da0bc580c885580e6c",
+      "matching_lines": []
+    },
+    {
+      "path": "explore_ci.py",
+      "git_blob": "2f5793bca2a8ee33f26ea66c06fee99491cbc4ef",
+      "matching_lines": [
+        13,
+        19
+      ]
+    },
+    {
+      "path": "sphinx/overview/externaldata.rst",
+      "git_blob": "73fb42e1f6e5c81cf08412d18de500b7c9c68a47",
+      "matching_lines": [
+        39
+      ]
+    },
+    {
+      "path": "sphinx/usage/customci.rst",
+      "git_blob": "9ba1eabe4d67379a27a3ef3556a3250ead9e156b",
+      "matching_lines": [
+        12,
+        28,
+        35
+      ]
+    },
+    {
+      "path": "sustaindc_env.py",
+      "git_blob": "12d2078b56a75487a59647201dcb689c221e8d4d",
+      "matching_lines": [
+        848
+      ]
+    },
+    {
+      "path": "train_sustaindc.py",
+      "git_blob": "13731e5756698a02d8e1d68168baf4c4ecf2dd8d",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/__init__.py",
+      "git_blob": "02d51b4a0e187a5ca5b53693a94e8b853b6b6a94",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/base_agents.py",
+      "git_blob": "7f4138eddfaefe348fa9ac66e1d9bcd4a6cf98e3",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/checkpoint_finder.py",
+      "git_blob": "584880f9bf0ef4ae1314d3d2da303f4fdcfc5dbe",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/dc_config.py",
+      "git_blob": "6379eb81766fa99c0a2c6140020660983a7a03a4",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/dc_config_reader.py",
+      "git_blob": "e608b7ccc596b48b69c143273351ae2482aa70cb",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/helper_methods.py",
+      "git_blob": "2ee4d2015f0898cb10d8931074e6b3a1a8098ef5",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/make_envs_pyenv.py",
+      "git_blob": "553d6748f3825bb4dd2452f4ec9b160228e75f5f",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/managers.py",
+      "git_blob": "ea9c67936db29ae94051cda352ac82065a44f1c0",
+      "matching_lines": [
+        345,
+        347
+      ]
+    },
+    {
+      "path": "utils/rbc_agents.py",
+      "git_blob": "08255418a62520f8c366986de1aab6c9ecf4c18a",
+      "matching_lines": [
+        34,
+        37,
+        51,
+        54
+      ]
+    },
+    {
+      "path": "utils/reward_creator.py",
+      "git_blob": "282ed9e58cb33ad8c0c84c88137ccfde729b2890",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/rllib_callbacks.py",
+      "git_blob": "d2eeca86e5b0aa82f8e3b983db11f3cab15372a0",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/trim_and_respond.py",
+      "git_blob": "11ca5bf4097ec9b6f7ad6b6cd47aea2ab4b71e1f",
+      "matching_lines": []
+    },
+    {
+      "path": "utils/utils_cf.py",
+      "git_blob": "987f7dc8f1b79c384bee33c36dae4fc7e7fe3d52",
+      "matching_lines": []
+    }
+  ],
+  "new_observation": {
+    "paths": [
+      "data/CarbonIntensity/AZPS_NG_&_avgCI.csv",
+      "data/CarbonIntensity/AZ_NG_&_avgCI.csv"
+    ],
+    "same_git_blob": "d5337a654e77c938d0909e76d56efdf3ad491e83",
+    "size": 601730,
+    "meaning": "Byte alias in the pinned tree, not evidence of state-wide suitability or exporter lineage"
+  },
+  "historical_archive_sha256": null,
+  "original_exporter_authenticated": false,
+  "scientific_acceptance": false
+}

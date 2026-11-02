@@ -29,3 +29,12 @@ changed use/claims require the existing evidence and affected-owner process.
 Next source deliverable is one evidence-or-unavailable entry per row above,
 with exact document locator, applicability to the pinned bytes, and verifier result.
 No new evidence in this repository resolves B1-B4, so #60 remains open.
+
+## Issue #60 producer evidence follow-up
+
+[The B1–B4 evidence-or-unavailable companion](ISSUE60_SOURCE_EVIDENCE.md) records
+the refreshed main/issue review, bounded historical code search, all-slot conditional
+comparison, data-rights boundaries and unsent maintainer questions. B1–B3 remain
+UNRESOLVED and B4 PROVISIONAL. B5 remains separate under the existing matrix;
+this source-only draft does not claim held-out custody or scientific freeze.
+The historical audit is retained.
