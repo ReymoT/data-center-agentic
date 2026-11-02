@@ -1,5 +1,12 @@
 # I02 freeze manifest (pre-freeze checklist)
 
+For prospective held-out annotation use the approved text-review intake in
+[the extraction rule](../e04/EXTRACTION_RULE.md): generate workfiles with
+`blank_annotation(..., text_review=True)` and compare with `--require-text-review`.
+Legacy originals must not be rewritten. Calibration clarification and synthetic
+custody receiving are [recorded](../handoffs/Q22_CUSTODY_COMBINED_STATUS.md);
+they do not freeze this manifest or approve actual cohort/storage/run parameters.
+
 Task: I02. Owner: Nisha. Receiving owner: Matty. Target freeze: **November 13, 2026** ([PROJECT_PLAN](../PROJECT_PLAN.md), MASTER_NISHA item 7).
 
 [`freeze-manifest.json`](freeze-manifest.json) lists everything the held-out runs must freeze: code, locks, fixtures, ontology, models/features, prompts/provider, seeds, references and scoring/rubric. Each item has an owner, a status (`pending`, `blocked` or `frozen`) and, when blocked, the reason. **It is a checklist, not a freeze.** No item is frozen yet, and nothing here authorizes a run.

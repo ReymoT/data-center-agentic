@@ -1,5 +1,47 @@
 # E04 statement extraction and labelling rule (draft 0)
 
+## Accepted post-calibration clarification (controls new annotations)
+
+Matty explicitly approved Nisha's six proposals after reviewing her submission.
+Both original calibration/development ratings and their historical rules remain
+unchanged. This resolves the calibration clarification, not final sampling,
+scientific freeze, source acceptance or held-out opening.
+
+1. Raw plan facts are compared with the output's own stated proposal and readable
+   fragments. This does not establish feasibility or actual execution.
+2. Energy with unstated basis retains `basis_unstated` in notes; reference_kind
+   is omitted or null. Do not infer a basis from PUE=1.
+3. Review-packet job rows supply `FACT-JOB-<job id>` as evidence identities.
+   This mapping does not authorize inventing runtime facts.
+4. Job deadlines are evidence without requiring separate CON-DL records. Conflicts
+   between supplied records must be flagged, not silently resolved.
+5. Occupancy is [start,start+duration); finish by deadline means
+   start+duration <= deadline. Duration 2 starting at 4 meets deadline 6.
+6. New annotations record an explicit decision for every summary sentence and
+   whole limitation; the implementation also supports each raw-response sentence.
+
+Create prospective workfiles with `blank_annotation(case, key, text_review=True)`.
+The new `text_review` object has `summary`, `limitation`, `raw` lists in source
+order. Each row has exact `text`, `decision`, and `assertion_ids`. `extracted`
+links S/L/R facts from that source and can include repeated facts in the same
+sentence; `repeats` links existing C/S/L/R IDs; `not_checkable` has no IDs.
+Sentence units split at punctuation followed by whitespace, not decimal points.
+Blank decisions are allowed only in incomplete workfiles. Duplicates keep their
+existing IDs and precedence. No judgment is prefilled.
+
+Completed prospective intake must use `validate_annotation(..., complete=True,
+require_text_review=True)` or `load_original(..., require_text_review=True)`.
+The comparison CLI uses `--require-text-review` for new held-out originals.
+Missing/undecided units, altered text, unknown/duplicate IDs and extracted facts
+not linked to any reviewed unit are refused. This validates recorded coverage,
+not the correctness of extraction; review and adjudication remain required.
+The default legacy path exists to reproduce unchanged old originals/reports.
+
+Calibration retained 9 S/L and 5 raw assertions only in Matty's file; three shared
+claims agreed with undefined kappa. The rule addresses that coverage failure;
+it does not demonstrate improved agreement. Earlier sections below are historical
+where this accepted clarification supersedes them.
+
 Status: draft for the development review, owned by Nisha (E04). It applies what Nisha and Matty agreed in [issue #22](https://github.com/ReymoT/data-center-agentic/issues/22): every checkable assertion is reviewed, summary included, and repeated assertions share one ID. It is frozen only after both raters have used it on the development cases and the Q10 record is complete. Ved's sampling and analysis agreement is still pending and does not affect this rule.
 
 Sections 1–10 are the draft 0 text both development originals were rated under; they are left unchanged so those ratings stay interpretable. Section 11 proposes the clarifications for draft 1, from the development reliability report and the #24 decisions. Matty and Ved agreed to 11.6–11.8 on October 30, 2026 ([#22](https://github.com/ReymoT/data-center-agentic/issues/22)). Draft 1 becomes the rule for the held-out review at the E04 freeze, after the 11.8 calibration.

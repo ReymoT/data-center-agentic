@@ -31,6 +31,11 @@ def main() -> int:
     parser.add_argument("--a", type=Path, required=True, help="first original ratings file")
     parser.add_argument("--b", type=Path, required=True, help="second original ratings file")
     parser.add_argument("--matches", type=Path, help="agreed summary/limitation ID pairs")
+    parser.add_argument(
+        "--require-text-review",
+        action="store_true",
+        help="require prospective text decisions; omit only for legacy originals",
+    )
     parser.add_argument("--out-dir", type=Path, help="where to write the output files")
     parser.add_argument(
         "--confirmed-by", action="append", default=[], help="a rater who agreed the matching"
@@ -42,8 +47,12 @@ def main() -> int:
     args = parser.parse_args()
 
     cases = review.load_cases(json.loads(args.cases.read_text(encoding="utf-8")))
-    a = agreement.load_original(args.a.read_bytes(), cases)
-    b = agreement.load_original(args.b.read_bytes(), cases)
+    a = agreement.load_original(
+        args.a.read_bytes(), cases, require_text_review=args.require_text_review
+    )
+    b = agreement.load_original(
+        args.b.read_bytes(), cases, require_text_review=args.require_text_review
+    )
     matches = {}
     if args.matches:
         raw = json.loads(args.matches.read_text(encoding="utf-8"))
