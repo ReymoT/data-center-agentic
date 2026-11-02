@@ -35,6 +35,15 @@ Do not invent dialogue, missing fields or a successful repair.
    Show request counts (5 Plain, 12 Agent), recorded repair/fallback stages and
    cleanup confirmation. End with the remaining experiment and source gates.
 
+## Optional classical-policy evidence
+
+Use the existing manager-local `P04_Private_2026-11-02` receiving summary for
+`RUN-1f6e4c4c2afb`: A/B/C/D each have 30 traces, two completed jobs and zero replay
+findings/result mismatches. Show the published model hashes and selection/counts
+from the P04 handoff, not private source values, joblib bytes or training rows.
+Label this as a separate development run from the LLM receiving. Do not present
+the two exercises as one matched six-system experiment or a measured advantage.
+
 ## Screenshot checklist
 
 - Public scenario and visible evidence IDs, without private oracle fields.
@@ -53,6 +62,7 @@ that summary. Do not call it a live demo.
 Why an independent evaluator? It avoids simply reusing the production checker
 as the only judge. Why fallback? It provides a checked alternative when a candidate
 fails; its effectiveness still needs evaluation. Is the agent better? The full
-paired study is pending. Are C/D trained? The code is merged; the real artifact
-handoff is pending. Does zero replay findings prove faithfulness? No; explanation
+paired study is pending. Are C/D trained? Yes: real development binaries were trained, saved, reloaded and received.
+See the [P04 handoff](handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md); final scientific
+selection and acceptance remain pending. Does zero replay findings prove faithfulness? No; explanation
 support is evaluated separately, including the human annotation protocol.

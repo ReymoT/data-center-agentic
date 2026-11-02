@@ -1,72 +1,31 @@
 # Project plan
 
-Latest P04 update: Matty resolved #150 locally, verified exact source and all 40
-development contents, trained/refitted actual C/D binaries and passed offline
-A/B/C/D public-fixture receiving with independent replay. The missing-artifact
-blocker is superseded by [the handoff](handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md).
-Remote access, source acceptance and final scientific/I01/I04 gates remain distinct.
+Current development status, November 2: all 40 development episodes are
+materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
+EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier
+authorized run. Independent replay has zero findings/result mismatches in those
+receiving records. These separate runs are not one frozen six-system experiment.
+I01 is partial; source acceptance, actual held-out custody/freeze, full experiments
+and final I04 acceptance remain open. Calibration #22 is closed; originals and
+the approved prospective clarifications are retained. Held-out reliability #95
+and official course requirements #16 remain open.
 
-Latest calibration/custody status: both originals are available; Matty approved
-the six clarifications and prospective text-coverage validation. Synthetic custody
-receiving passed. Earlier missing-file/tooling descriptions are historical;
-actual storage, scientific source/freeze and real C/D artifacts remain pending.
-[Combined record](handoffs/Q22_CUSTODY_COMBINED_STATUS.md).
+## Current next sequence
 
-Active next sequence: source evidence audit and P04 artifact delivery, trained
-receiving, then six-system I01 acceptance. Use the
-[acceptance matrix](handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md) and
-[source gate audit](handoffs/SOURCE_ACCEPTANCE_AUDIT.md). Older dated paragraphs
-and the older numbered critical path below are retained historical snapshots;
-they do not reopen #112, #12 or #18. Full I01 is still pending trained artifacts.
+1. Complete the [I01 acceptance reconciliation](handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md)
+   and offline common-protocol evidence/configuration index. Actual C/D artifacts
+   exist locally; another missing-artifact request is unnecessary.
+2. Resolve authoritative source and actual custody/freeze gates in #60. Preserve
+   private inputs; do not substitute synthetic custody tests for real acceptance.
+3. Prepare any fresh model run with exact frozen inputs and bounded authorization.
+4. After authorized experiments, produce held-out references, scoring, independent
+   ratings/reliability, reproduction, I04 acceptance and final report/demo.
 
-Latest receiving update supersedes older dated status entries: #112 development
-materialization, E02 C/D integration, P04 training code and Matty calibration are
-merged. Plain and Agent completed EP-HAND1 with 17 requests and matching independent
-30-slot replay. Actual trained artifacts, calibration comparison, source acceptance
-and the scientific study remain open. See
-[the receiving record](handoffs/EP_HAND1_RECEIVING_F04_F05.md).
-
-Latest October 28 evaluation update, instruction 1.28: the professor asked the team to report inter-rater reliability for human faithfulness annotations. [The accepted requirement](decisions/PROFESSOR_FEEDBACK_IRR.md) assigns the reporting task only to Nisha under E07/R05. PR #104 retains the development matching and report over unchanged originals: 32 matched claims, 75% raw agreement and Cohen's kappa 0.00 with the documented single-label prevalence interpretation. Joint adjudication of 77 open items and the held-out repeat remain. Matty remains the independent second rater, not a co-owner of the reliability report.
-
-Current implementation: S01 Option B/Q01, Q07 feature/collection/fold helpers, both E05 development originals, development reliability/adjudication artifacts, provisional D04 splits, the primary Q10 sampler and E02 A/B plus offline Plain/Agent units are merged. Issue #112 still requires materialized contents for the allocated 40 development episodes and blocks P04/O02. Nisha and Ved accepted the 150-second request and 330-second paired A01 limits. One freshly authorized Plain-first public-development validation passed both Plain and Agent Plan requests with exact native/offline prompt-count agreement and full Arc/Vulkan offload. Trained C/D, a complete model-driven Agent episode, held-out reliability and full integration remain open. No successful model study or held-out result is claimed.
-
-Current workflow: [Matty's coder-owned decision rule](decisions/Q11_CODER_OWNED_DECISIONS.md), introduced in instruction 1.27 and retained under instruction 1.28, gives the implementer internal decision authority, limits shared confirmation to affected owners and escalates unresolved shared questions within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance. Existing scope, task ownership and scientific agreements remain unchanged.
-
-Earlier October 24 intake (historical): [approved decision intake and A01 evidence](handoffs/OCT24_DECISION_INTAKE_AND_A01.md). Ved's tokenizer/runtime validation direction and Q12 confirmation are received. Nisha's exact sampling agreement, E01 October 27 checkpoint and K02/L01 receiving checks are received; sampling implementation is due October 30. Reimo's exact arrival/simulator decisions remain pending. Keep completed_work=None and defer optional scalar precision; keep the strict S02 savings guard pending affected-owner agreement. Read-only inventory observes Ollama 0.40.10; accepted pin remains 0.40.5. Four fixed synthetic TCP-state observations complete before snapshots, so no stalled state or timeout fix is demonstrated. Nisha's original ratings are due October 24; Edison P02 October 25. Full A01, integration and freeze remain open. No task ownership, shared format/setting, production code or original rating changes. Earlier dated entries are historical where superseded.
-
-Fresh A01 deployment fact, October 24: [read-only inventory](evidence/ollama-qwen3-8b-2026-10-24.json) observes 0.40.10. Model/template identities match October 22, but parameter-text hash differs; effective settings and runtime equivalence are not established. Accepted 0.40.5 remains pinned. Ved/Nisha direction on the earlier candidate and validation gates is received; the newly observed version has been referred to them for exact revalidation direction. Actual counter/native/effective-setting/context/service/resource evidence and separately authorized inference remain gates. [Listener/resource metadata](evidence/a01-service-resources-2026-10-24.json) is an observation, not successful GPU offload or a validated run environment.
-
-Current A01 verification, October 23: [PR #52](https://github.com/ReymoT/data-center-agentic/pull/52) reproduced the same missing tail from an exact-wire native server, with local/PR/main 1137 tests and 19 subtests passing separately. [The six fixed pairs](handoffs/A01_SIX_CLOSE_PAIRS_2026-10-23.md) retained 5/6 original-close timeouts, 6/6 complete wait-for-client observations and a separate reference timeout. That October 23 ordinary local suite retained 1,136 passes/19 subtests plus one existing plain-object timeout; the October 24 single suite passes 1,137/19 separately and does not erase that failure. This supports a close-timing association on one machine, not an exact cause or adopted fix. Original provider/tests and shared settings remain unchanged; owner agreement and actual runtime/counter/context/resources/service/separate inference gates still block full A01. Earlier dated deferral/resume entries below are historical where superseded.
-
-Current E05/Q10 update, October 27: both independent development originals are retained through PR #91 and the tested comparison/adjudication tooling is merged through PR #92. The professor-requested reliability report remains Nisha's task; human assertion matching, retained results, interpretation and adjudication are unfinished. PR #88 delivers only the agreed primary input-only Q10 sampler. No held-out map is frozen, and the separate Option-B abstention-boundary proposal remains non-executable pending agreement.
-
-October 22 update: [reviewed P01 and actions](handoffs/OCT22_ACTIONS.md). P01 arithmetic is merged with bounded review fixes; Reimo can integrate S02 once its calling convention is agreed and tested. Edison supplied Q01-Q04/Q12 replies, with a new Q04 required-window question answered by Matty as a recommendation pending affected-owner agreement. P02 checkpoint is October 25. Actual K02/P02/S02 and runtime/evaluation gates still block full integration.
-
-October 21 action update: [today's handoff](handoffs/OCT21_ACTIONS.md) records actual diagnostics and owner requests. Resolve [the arrival-visibility proposal](decisions/Q03_INFEASIBLE_ARRIVAL_PROPOSAL.md) before changing S01/E01/A03 behavior or claiming runtime abstention evidence. Matty has since deferred A01 diagnostics; F04/F05 intake remains available; A02/A04/I01, annotation and freeze still require real agreed dependencies. The course planning dates below are unchanged and attributed.
-
-Current planning update, October 20, 2026. Matty accepted [Nisha's Canvas-reported Group 15 schedule](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6283757221). [Q13](decisions/Q13_PRESENTATION_DEADLINE.md) records attribution and missing requirements. Matty's assistant has not independently inspected Canvas or an instructor document. Timezone remains unconfirmed; do not convert the reported times.
-
-| Course milestone reported by Nisha | Planning action and owner |
-|---|---|
-| November 16: Group 15 first class presentation | Be presentation-ready for this class; Nisha coordinates assembly, all authors provide actual verified contributions. Rehearsal before November 16, exact date still to agree. |
-| November 18, 11:59 pm: presentation submission | Nisha coordinates submission; timezone, duration, format/rubric and destination still to confirm. |
-| December 2: Group 15 second round/demo; DEMO Submission 11:59 pm | Prepare a truthful working-demo path against this reported milestone; demo expectations still to confirm. Matty's runbook/final acceptance and all module owners' dependencies remain required. |
-| December 9, 11:59 pm: final report | Nisha coordinates R05 assembly, all authors provide evidence-backed sections. Length/format/rubric and separate code/repository submission details remain unknown. |
-
-This task updates the plan only; it does not create slides or run experiments. November 23 analysis, December 2 rehearsal and December 4 delivery were earlier internal estimates and are superseded as course scheduling guidance. December 2 is now a reported demo day, not a rehearsal date. A separate code/release deadline is still unknown. Historical entries below are retained as context, not alternate active deadlines.
-
-## Current critical path
-
-1. PR #64 and Nisha's corrected Option-B replay are merged. Ved still supplies the independent S01 reproduction; do not treat the reviewed merge as scientific acceptance.
-2. PRs #110/#113 now provide the E02 A/B runner and explicit-input Plain/Agent units over merged A03/A04/A02 and P02 A/B. Unknown or unsaved model attempts fail closed and remain in the run budget. This is offline preparation, not a model run. Reviewed production renderers, accepted A01 deadlines, development episodes, C/D units and valid paired evidence remain.
-3. A01 preserves the October 28 120-second Plain timeout as a spent uncertain request. PR #116 bounds the largest valid request shape at 1,264 tokens. Nisha and Ved accepted 150 seconds per request and 330 seconds for the pair. Matty's fresh single-use validation then passed exactly one Plain and one Agent Plan request with no retry. [Result](handoffs/A01_BOUNDED_PAIRED_VALIDATION_2026-10-30.md).
-4. PRs #77/#86/#90/#97/#101 supply the deterministic probability-to-schedule boundary, feature rows, unlabeled collection, blocked-training helpers and O02 certified development-label code, not trained policies. [Q07](decisions/Q07_TRAINING_OCT27.md) is accepted for feature/order/fold/metric behavior. Edison proceeds to actual P04 training only after Reimo publishes the materialized development episodes requested in #112; held-out data stays outside development folds and training choices.
-5. Reimo's D05/D04 inventory was delivered and published early through PR #65; the six document hashes/sizes match. Ved independently reviews actual source applicability in #13. Historical EIA/export regeneration, data-specific rights, pollutant/interval/suitability and split/freeze evidence remain gates. Do not repeat completed D06 structural work.
-6. Reimo and Ved's conditional savings agreements are received in #61; Nisha implements the independent comparison/tests, keeping strict S02/P01 unchanged. Reimo's full Q12 confirmation is received and #21 is closed for that scope only. Q13 course/release positions still need targeted answers. Ved owns #71 K01 corrections and #72's real graph-to-checker receiving proof; merged code/tests do not establish complete acceptance.
-
-Matty's [reviewed-merge handoff](handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md), [decision index](team/04_OPEN_DECISIONS.md) and [dated coordination snapshot](COORDINATION.md) link evidence and outstanding inputs. The [50-task checklist](team/03_RESPONSIBILITY_CHECKLIST.md) remains authoritative for ownership/dependencies. Q11 coordination-role acceptance does not remove scientific agreement or independent evaluation.
-
-The study still requires source/fixture acceptance, reference certification, trained C/D, successful matched LLM evidence, reviewed renderers, the common runner, development integration and failure tests, independent blinded review, freeze, held-out runs, scoring/reproduction and final E2E/release. A/B, impact, retrieval, checker/controller and bounded-agent components now exist, but there are no held-out results. If only development evidence exists at the presentation, label it that way; if less exists, state that honestly. Course dates do not waive acceptance or silently narrow the protocol.
+The [50-task checklist](team/03_RESPONSIBILITY_CHECKLIST.md) retains ownership.
+F04/F05 continue throughout. The [R04 draft](R04_DEVELOPMENT_EVIDENCE.md) and
+[backup demo](R04_BACKUP_DEMO.md) contain bounded development evidence only.
+Official requirements remain attributed and incomplete in #16. Older schedule
+estimates below are historical, not new deadlines or current missing-work lists.
 
 ## Historical dated entries and estimates
 
