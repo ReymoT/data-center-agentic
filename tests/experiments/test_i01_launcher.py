@@ -16,6 +16,7 @@ def approval():
         "proposed_outer_controls_not_enforced_by_identity_alone": {"test": "SYNTHETIC ONLY"},
     }
     receipt = {
+        "status": "approved",  # synthetic unit-test receipt, never a live approval
         "approved_by": "MattyAnd",
         "candidate_config_hash": "c" * 64,
         "bounds": candidate["proposed_outer_controls_not_enforced_by_identity_alone"],
@@ -30,6 +31,7 @@ def approval():
 @pytest.mark.parametrize(
     "field",
     [
+        "status",
         "approved_by",
         "candidate_config_hash",
         "bounds",
@@ -98,3 +100,61 @@ def test_watchdog_terminates_only_its_retained_process():
     event = threading.Event()
     launch.terminate_owned_at_deadline(owned, event)
     assert event.is_set() and stopped == ["owned"]
+
+
+def test_missing_fresh_approval_stops_before_any_runtime_start(tmp_path, monkeypatch):
+    fake = tmp_path / "input-file"
+    fake.write_text("test-only placeholder; never loaded")
+    out = tmp_path / "must-not-exist"
+    root = launch.ROOT
+    argv = [
+        "launcher",
+        "--runtime",
+        str(fake),
+        "--models",
+        str(tmp_path),
+        "--tokenizer",
+        str(fake),
+        "--tokenizer-packages",
+        str(tmp_path),
+        "--accepted-inventory",
+        str(fake),
+        "--candidate",
+        str(root / "docs/evidence/i01-offline-config-2026-11-02.json"),
+        "--readiness",
+        str(root / "docs/evidence/i01-unified-readiness-2026-11-02.json"),
+        "--tree",
+        str(fake),
+        "--forest",
+        str(fake),
+        "--out",
+        str(out),
+    ]
+    monkeypatch.setattr(launch.sys, "argv", argv)
+    monkeypatch.setattr(launch, "command", lambda *args: "")
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("must not start runtime without approval")
+
+    monkeypatch.setattr(launch.subprocess, "Popen", forbidden)
+    with pytest.raises(RuntimeError, match="fresh Matty"):
+        launch.main()
+    assert not out.exists()
+
+
+def test_saved_result_must_match_independent_replay_before_success(tmp_path):
+    import json
+
+    from dc_sustainability.experiments import runner
+    from tests.experiments.test_runner import config, write_bundle
+
+    episode, path = write_bundle(tmp_path)
+    cfg = config(path, episode, systems=("greedy_a",))
+    statuses = runner.run(cfg, tmp_path / "runs")
+    assert launch.verify_units(cfg, tmp_path / "runs", statuses, episode)[0]["traces"] == 30
+    result_path = tmp_path / "runs" / cfg.run_id / "units" / statuses[0].unit.key / "result.json"
+    data = json.loads(result_path.read_text())
+    data["completed_job_ids"] = []
+    result_path.write_text(json.dumps(data))
+    with pytest.raises(launch.StopRun, match="replay"):
+        launch.verify_units(cfg, tmp_path / "runs", statuses, episode)

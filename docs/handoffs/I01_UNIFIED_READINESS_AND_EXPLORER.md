@@ -31,10 +31,22 @@ the config identity alone. This is not the 300-run held-out experiment.
 
 Before any live dispatch, obtain fresh Matty authorization for the exact candidate,
 revalidate accepted runtime/model/template/native counting and Arc/Vulkan identity,
-review the launcher against the new artifact API and enforce per-system caps and
-the outer watchdog, stop on uncertain/unsaved attempts or failed identity, persist
-all failures, and verify owned-process/port cleanup. None is silently marked done
-by this offline record. No new model request was authorized or executed.
+and use the prepared `scripts/run_i01_public_receiving.py` launcher with matching
+LF readiness/launcher hashes. It enforces the Plain cap and provider/run ceilings,
+requires an approved single-use receipt before startup, consumes its ID exclusively,
+stops on uncertain/error attempts, retains failures, checks all six saved units
+with independent replay, and publishes success only after cleanup/deadline checks.
+Its outer watchdog terminates only the retained owned process. These controls are
+unit-tested; the actual local `--dry-run` checks pins/models/tokenizer without
+starting the runtime. Fresh live identity, cleanup and model results are not
+silently inferred from that dry run.
+
+The [unapproved authorization template](../evidence/i01-authorization-template-2026-11-02.json)
+binds the exact candidate, bounds, readiness and launcher hashes. Its status and
+approval fields are deliberately pending/empty; it cannot authorize a run.
+The [actual launcher dry-run record](../evidence/i01-launcher-dry-run-2026-11-02.json)
+is separate from the offline pin report. Neither is a spent model request or a
+fresh human approval. No new model request was authorized or executed.
 
 ## Explorer and report
 

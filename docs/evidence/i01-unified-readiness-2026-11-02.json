@@ -76,6 +76,8 @@
   },
   "held_out_access": false,
   "independent_content_acceptance": false,
+  "launcher_lf_sha256": "31c97040deb333d92df19f26bc6ac24091d8c254653c32abcb0f08b1ff537844",
+  "launcher_path": "scripts/run_i01_public_receiving.py",
   "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
   "model_requests": 0,
   "note": "One public development episode/trial; not a held-out freeze or study authorization.",
@@ -93,7 +95,6 @@
   "remaining_dispatch_gates": [
     "fresh Matty single-use authorization for exact candidate and bounds",
     "fresh runtime/model/template/native-counter and Arc/Vulkan identity checks",
-    "reviewed launcher enforces Plain 6/Agent 18/total 24 and 3900-second outer watchdog",
     "stop on unknown/unsaved attempt or failed identity; persist failures; verify owned-process cleanup"
   ],
   "renderer_sha256": {

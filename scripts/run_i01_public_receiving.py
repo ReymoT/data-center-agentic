@@ -22,12 +22,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from dc_sustainability import schemas as s  # noqa: E402
 from dc_sustainability.agent.renderers import (  # noqa: E402
     proposal_template_sha256,
     render_proposal,
     render_repair,
     repair_template_sha256,
 )
+from dc_sustainability.evaluation.replay import compare_result, executed_starts, replay_episode  # noqa: E402
+from dc_sustainability.evaluation.validator import Q03_OPTION_B  # noqa: E402
 from dc_sustainability.experiments import models, runner, trained  # noqa: E402
 from dc_sustainability.experiments.config import (  # noqa: E402
     ModelSettings,
@@ -65,7 +68,8 @@ TOTAL_SECONDS = 3900
 
 def validate_authorization(approval, candidate, readiness_hash, launcher_hash):
     if (
-        approval.get("approved_by") != "MattyAnd"
+        approval.get("status") != "approved"
+        or approval.get("approved_by") != "MattyAnd"
         or approval.get("candidate_config_hash") != candidate["candidate_config_hash"]
         or approval.get("bounds")
         != candidate["proposed_outer_controls_not_enforced_by_identity_alone"]
@@ -96,6 +100,50 @@ def terminate_owned_at_deadline(process, triggered):
     triggered.set()
     if process is not None and process.poll() is None:
         process.terminate()
+
+
+def verify_units(config, private_runs, statuses, episode):
+    rows = []
+    for status in statuses:
+        folder = private_runs / config.run_id / "units" / status.unit.key
+        if (folder / "policy_errors.json").exists():
+            raise StopRun("policy errors retained; receiving is not a pass")
+        result = s.EpisodeResult.from_json((folder / "result.json").read_text(encoding="utf-8"))
+        if (result.system, result.run_id, result.episode_id, result.trial) != (
+            status.unit.system,
+            config.run_id,
+            episode.episode_id,
+            status.unit.trial,
+        ):
+            raise StopRun("saved result identity mismatch")
+        records = sorted(
+            (
+                s.DecisionRecord.from_json(path.read_text(encoding="utf-8"))
+                for path in (folder / "traces").glob("*.json")
+            ),
+            key=lambda record: record.slot,
+        )
+        if [record.slot for record in records] != list(range(30)):
+            raise StopRun("receiving requires all 30 distinct slot records")
+        if any(
+            (record.system, record.run_id, record.episode_id, record.trial)
+            != (status.unit.system, config.run_id, episode.episode_id, status.unit.trial)
+            for record in records
+        ):
+            raise StopRun("saved trace identity mismatch")
+        replay = replay_episode(episode, executed_starts(records, episode.episode_id), Q03_OPTION_B)
+        if not replay.valid or compare_result(replay, result):
+            raise StopRun("independent replay or result comparison failed")
+        rows.append(
+            {
+                "system": status.unit.system,
+                "traces": len(records),
+                "replay_findings": 0,
+                "result_mismatches": 0,
+                "recorded_model_calls": sum(record.model_call_count for record in records),
+            }
+        )
+    return rows
 
 
 class StopRun(BaseException):
@@ -194,6 +242,8 @@ def main() -> int:
 
     candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
     ready = json.loads(args.readiness.read_text(encoding="utf-8"))
+    if ready.get("launcher_lf_sha256") != lf_sha256(Path(__file__)):
+        raise RuntimeError("launcher differs from the prepared LF pin")
     if (
         candidate["candidate_config_identity"]["code_revision"] != HEAD
         or ready["candidate_config_hash"] != candidate["candidate_config_hash"]
@@ -439,7 +489,10 @@ def main() -> int:
                     proposal=render_proposal, repair=render_repair, explanation=render_explanation
                 ),
             )
-            timer = threading.Timer(TOTAL_SECONDS, stop_at_deadline)
+            remaining = TOTAL_SECONDS - (time.monotonic() - started)
+            if remaining <= 0:
+                raise StopRun("overall deadline exhausted before the first model unit")
+            timer = threading.Timer(remaining, stop_at_deadline)
             timer.daemon = True
             timer.start()
             statuses = runner.run(config, private_runs, model_inputs, trained=trained_inputs)
@@ -447,6 +500,7 @@ def main() -> int:
                 raise StopRun("paired total deadline exhausted")
             if len(statuses) != 6 or any(s.status != "completed" for s in statuses):
                 raise StopRun(f"six units did not all complete: {statuses}")
+            unit_replay = verify_units(config, private_runs, statuses, episode)
             attempts = [a for p in providers for a in p.attempts]
             by_system = {
                 system: sum(a.system == system for a in attempts)
@@ -499,6 +553,7 @@ def main() -> int:
                 "requests": {**by_system, "total": len(attempts)},
                 "attempts": attempt_rows,
                 "stage_counts": stage_counts,
+                "unit_replay": unit_replay,
                 "identity_before": inventory_before,
                 "identity_after": inventory_after,
                 "compute": compute,
@@ -518,9 +573,6 @@ def main() -> int:
                     "Raw requests, responses, traces and results remain outside Git.",
                 ],
             }
-            with summary_path.open("x", encoding="utf-8", newline="\n") as handle:
-                json.dump(summary, handle, indent=2, allow_nan=False)
-                handle.write("\n")
     except BaseException as exc:
         failure = {
             **static,
@@ -547,14 +599,35 @@ def main() -> int:
                 process.wait(timeout=10)
         cleanup["owned_process_exited"] = process is None or process.poll() is not None
         cleanup["listener_remaining"] = not _port_is_free(args.port)
+        cleanup["overall_deadline_exceeded"] = time.monotonic() - started > TOTAL_SECONDS
         cleanup_path = out / "cleanup.json" if out.exists() else None
         if cleanup_path is not None:
             with cleanup_path.open("x", encoding="utf-8", newline="\n") as handle:
                 json.dump(cleanup, handle, indent=2)
                 handle.write("\n")
-    if not cleanup["owned_process_exited"] or cleanup["listener_remaining"]:
-        print("exact-process cleanup verification failed", file=sys.stderr)
+    if (
+        not cleanup["owned_process_exited"]
+        or cleanup["listener_remaining"]
+        or cleanup["overall_deadline_exceeded"]
+    ):
+        with failure_path.open("x", encoding="utf-8", newline="\n") as handle:
+            json.dump(
+                {
+                    **static,
+                    "status": "failed",
+                    "error": "cleanup or overall deadline gate failed",
+                    "cleanup": cleanup,
+                },
+                handle,
+                indent=2,
+            )
+        print("exact-process cleanup or overall deadline verification failed", file=sys.stderr)
         return 3
+    summary["cleanup"] = cleanup
+    summary["elapsed_seconds"] = time.monotonic() - started
+    with summary_path.open("x", encoding="utf-8", newline="\n") as handle:
+        json.dump(summary, handle, indent=2, allow_nan=False)
+        handle.write("\n")
     print(f"I01 six-system receiving passed; sanitized evidence: {summary_path}")
     return 0
 

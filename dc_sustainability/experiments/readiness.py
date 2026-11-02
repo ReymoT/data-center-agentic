@@ -118,13 +118,14 @@ def prepare(candidate: dict, artifact_paths: dict[str, Path], root: Path) -> dic
             system: policy.artifact_sha256 for system, policy in bound.policies.items()
         },
         "execution_file_lf_sha256": execution_files,
+        "launcher_path": "scripts/run_i01_public_receiving.py",
+        "launcher_lf_sha256": lf_sha256(root / "scripts/run_i01_public_receiving.py"),
         "model_requests": 0,
         "held_out_access": False,
         "proposed_bounds": candidate["proposed_outer_controls_not_enforced_by_identity_alone"],
         "remaining_dispatch_gates": [
             "fresh Matty single-use authorization for exact candidate and bounds",
             "fresh runtime/model/template/native-counter and Arc/Vulkan identity checks",
-            "reviewed launcher enforces Plain 6/Agent 18/total 24 and 3900-second outer watchdog",
             "stop on unknown/unsaved attempt or failed identity; persist failures; verify owned-process cleanup",
         ],
         "independent_content_acceptance": False,
