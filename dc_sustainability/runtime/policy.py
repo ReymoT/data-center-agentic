@@ -9,6 +9,12 @@ from dc_sustainability.verification.checker import check_schedule
 
 from .controller import ExecutionController, ExecutionOutcome
 
+_CHECKED_A_FALLBACK_REQUESTS = frozenset({"greedy_b", "decision_tree_c", "random_forest_d"})
+
+
+def _checked_a_fallback(requested_system: s.SystemId, output_system: s.SystemId) -> bool:
+    return requested_system in _CHECKED_A_FALLBACK_REQUESTS and output_system == "greedy_a"
+
 
 def execute_policy_output(
     controller: ExecutionController,
@@ -23,10 +29,10 @@ def execute_policy_output(
 ) -> ExecutionOutcome:
     """Check and execute one already-produced deterministic policy output.
 
-    ``requested_system`` remains the comparison-system identity.  The only
-    different effective output currently allowed is Greedy A as Greedy B's
-    explicit checked fallback.  Unsuccessful policy output is still recorded
-    and advances the simulator once through the controller's refusal path.
+    ``requested_system`` remains the comparison-system identity.  Greedy A may
+    appear as the checked fallback for Greedy B and for learned C/D when the
+    policy itself selected that fallback.  Unsuccessful policy output is still
+    recorded and advances the simulator once through the controller's refusal path.
     """
     if not isinstance(controller, ExecutionController):
         raise TypeError("the production execution controller is required")
@@ -35,8 +41,8 @@ def execute_policy_output(
     snapshot = s.ConstraintSnapshot.model_validate(snapshot.model_dump(mode="python"), strict=True)
     if requested_system in {"agent", "plain_llm"}:
         raise ValueError("model systems require their own bounded policy adapters")
-    if output.system != requested_system and not (
-        requested_system == "greedy_b" and output.system == "greedy_a"
+    if output.system != requested_system and not _checked_a_fallback(
+        requested_system, output.system
     ):
         raise ValueError("effective policy output does not match the requested system")
 
@@ -47,7 +53,7 @@ def execute_policy_output(
     if output.output_status == "ok":
         check = check_schedule(output.plan, view, snapshot)
         selected = s.StageRecord(plan=output.plan, check=check)
-        if requested_system == "greedy_b" and output.system == "greedy_a":
+        if _checked_a_fallback(requested_system, output.system):
             stage, fallback = "fallback", selected
         else:
             stage, initial = "initial", selected
