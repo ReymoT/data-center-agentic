@@ -9,29 +9,19 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
-Real C/D development artifacts are now produced and reloaded on the manager host.
-All 40 episode contents match the v2 receipt; training used 6,046 certified rows.
-A/B/C/D public-fixture runner outputs pass independent replay. See the
-[artifact handoff](docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) for hashes,
-custody and limits. Earlier pending-artifact descriptions below are historical;
-full scientific freeze and final integrated acceptance remain open.
+Current development status, November 2: all 40 development episodes are
+materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
+EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier
+authorized run. Independent replay has zero findings/result mismatches in those
+receiving records. These separate runs are not one frozen six-system experiment.
+I01 is partial; source acceptance, actual held-out custody/freeze, full experiments
+and final I04 acceptance remain open. Calibration #22 is closed; originals and
+the approved prospective clarifications are retained. Held-out reliability #95
+and official course requirements #16 remain open.
 
-Calibration update: both originals are submitted and the six post-calibration
-clarifications are approved and implemented for prospective intake. Synthetic
-custody receiving is complete; actual storage/selection and source acceptance
-remain gated. See [the combined status](docs/handoffs/Q22_CUSTODY_COMBINED_STATUS.md).
-
-Next acceptance work is tracked in the
-[six-system and trained-artifact checklist](docs/handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md)
-and [source acceptance audit](docs/handoffs/SOURCE_ACCEPTANCE_AUDIT.md).
-
-Latest receiving status: Plain and Agent completed paired public EP-HAND1
-episodes with 17 requests and matching independent 30-slot replay per system.
-Agent repairs and checked fallback occurred. Development materialization, C/D
-runner support and P04 training code are merged. Actual trained artifacts,
-calibration comparison, source acceptance and the scientific study remain open.
-This supersedes older implementation-status statements below. See
-[the receiving record](docs/handoffs/EP_HAND1_RECEIVING_F04_F05.md).
+See the [current acceptance audit](docs/handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md),
+[real artifact handoff](docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) and
+[source audit](docs/handoffs/SOURCE_ACCEPTANCE_AUDIT.md).
 
 FSE 598, Arizona State University.
 
@@ -48,7 +38,10 @@ For human faithfulness annotations, two reviewers first retain independent origi
 
 We test this question through workload scheduling at one simulated data center. The main comparison is `agent` versus `plain_llm`, using equivalent visible information. The four additional scheduling policies provide reference results. Scheduling is the experimental setting; conclusions will be limited to the evaluated scenarios.
 
-This repository contains implemented F02 records, data/simulator/retrieval/impact tooling, plain/evaluator preparation and the production checker, controller and bounded agent core. Greedy A and B are delivered with real checked-fallback receiving through PRs #75 and #81. The E02 runner now drives complete A/B episodes and has offline-tested Plain and Agent units through the shared provider, harness and controller after PR #113. Those model units still require explicit runtime inputs and cannot be called from the CLI. P03 includes the probability-driven constructor, visible-input features, unlabeled collection, blocked-fold construction, training-only scaling and training-only balanced class weights. No trained C/D artifact or scientific result exists. Reimo's 40 allocated development episodes still need materialized contents under #112 and block P04/O02. The bounded Plain/Agent transport path now has one valid paired development validation; C/D runner units, a complete model-driven Agent episode, held-out results and the final demonstration remain unfinished. [A01 validation handoff](docs/handoffs/A01_BOUNDED_PAIRED_VALIDATION_2026-10-30.md).
+The implementation includes the shared contracts, simulator, impact calculations,
+retrieval, six policy paths, verification/controller, runner, training and evaluation
+tooling. Current acceptance and limitations are in the audit above; implemented
+components and passing development receiving do not establish final study results.
 
 Current workflow update, October 24: [Matty's announcement](https://github.com/ReymoT/data-center-agentic/issues/57) and the coder-owned rule introduced in [instruction 1.27](docs/decisions/Q11_CODER_OWNED_DECISIONS.md) make the coder responsible for internal implementation choices. Shared changes need only directly affected owners; unresolved shared questions escalate within 24 elapsed hours. Ready coding continues while disputed behavior waits. The rule remains in force under instruction 1.28; the implementation/research status and existing scientific gates are unchanged.
 

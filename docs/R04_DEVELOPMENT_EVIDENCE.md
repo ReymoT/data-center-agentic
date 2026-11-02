@@ -1,7 +1,7 @@
 # Agent and verification: development-evidence draft
 
 Owner: Matty. Prepared against main
-`d711d5d79960a17aaa1f3349e1d4e7dc9d580a60` for later report assembly with Nisha.
+`227d2ebabd863d58f0a1b7bf2e56b6acdb02e1d4` for later report assembly with Nisha.
 This section describes implemented mechanisms and one public development episode.
 Final experimental findings, held-out results and release acceptance remain pending.
 
@@ -75,6 +75,26 @@ no-op execution; they are not 23 job starts. Thirty traces are not thirty model
 requests. Combined elapsed time includes orchestration and cannot be presented as
 per-system inference latency or measured energy use.
 
+## Real learned-policy development receiving
+
+Matty subsequently produced actual C/D models from all 40 verified development
+episodes, with 6,046 certified rows (1,411 positive and 4,635 negative). All 15
+candidate/fold cells were evaluated. Selected models were a depth-8 decision tree
+and a 100-tree depth-10 random forest. Both refits were saved and reloaded;
+probabilities matched over 100 rows. Seed 20261031 is the recorded development
+script setting, not a newly accepted scientific seed.
+
+On the same public EP-HAND1 bundle, A/B and the actual C/D binaries each produced
+30 traces, completed two jobs and had zero independent replay findings or result
+mismatches. This run used no model requests. Actual binary/source/summary hashes
+and private custody are in the [P04 handoff](handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md).
+
+The LLM and classical receiving exercises used different run identities and code
+commits. They demonstrate six implemented paths, not one frozen six-system
+comparison. They provide no measured improvement, held-out estimate or final I01
+approval. The [acceptance audit](handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md)
+retains that distinction. Private raw/derived contents and binaries stay out of Git.
+
 ## Interpretation and limitations
 
 This exercise demonstrates that the implemented paths can run through the provider,
@@ -85,8 +105,9 @@ protocol, not comprehensive safety or explanation faithfulness.
 
 One public episode and one seed do not support statistical inference. Source
 semantics, interval mapping, rights and scientific suitability remain gated by #60.
-Actual trained artifacts and six-system I01 acceptance are pending. Calibration
-comparison (#22), scientific freeze, full experiments, held-out annotations,
+Actual trained artifacts exist; full I01 acceptance remains pending. Calibration
+#22 is closed with originals preserved and prospective clarifications approved.
+Scientific freeze, full experiments, held-out annotations,
 reliability repeat (#95), final reproduction and I04 acceptance remain unfinished.
 Earlier timeout and zero-dispatch wrapper failures remain retained in their dated
 records; this successful run does not erase them.
