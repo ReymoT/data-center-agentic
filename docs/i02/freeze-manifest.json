@@ -206,9 +206,9 @@
       "owner": "Matty",
       "task": "I01",
       "status": "blocked",
-      "path": "docs/handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md",
+      "path": "docs/handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md",
       "sha256": null,
-      "blocker": "I01 is partial (#152 audit): all six paths have EP-HAND1 receiving evidence, but not as one same-protocol run; needs a same-protocol configuration and artifact/trace index and Nisha's independent receiving sign-off"
+      "blocker": "I01 is partial: the same-protocol candidate configuration and six-unit/180-trace index are prepared offline; existing receiving remains separate runs, and actual unified receiving and independent acceptance are not recorded. No fresh model run is authorized."
     }
   ],
   "freeze": {
