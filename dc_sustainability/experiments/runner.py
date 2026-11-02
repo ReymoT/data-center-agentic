@@ -13,8 +13,8 @@ replaced silently. Private episode data stays in the run directory.
 
 Plain and Agent units (E02-b) run only with explicit ``ModelInputs``; see
 ``experiments.models`` for their ledgers, attempt budget and unknown outcomes.
-Trained C/D units (E02-c) run only with explicit ``TrainedInputs`` whose artifact
-hashes match the run config; see ``experiments.trained``.
+Trained C/D units (E02-c) run only with explicit ``TrainedInputs``: verified P05
+artifacts whose measured hashes match the run config; see ``experiments.trained``.
 """
 
 import json
@@ -267,9 +267,9 @@ def _policy_output(system, view, episode, bundle, policy_errors, trained=None) -
     """The policy's own output from visible inputs only; an exception is a failed output."""
     try:
         context = retrieve(view, episode.snapshot).context
-        if registry.spec(system).kind == "trained":
-            return t.propose(system, trained, view, context)
         decision_time = bundle.slot0_utc + timedelta(hours=view.current_slot)
+        if registry.spec(system).kind == "trained":
+            return t.propose(system, trained, view, context, decision_time_utc=decision_time)
         return propose(
             view,
             context,

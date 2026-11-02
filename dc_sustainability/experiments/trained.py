@@ -1,32 +1,34 @@
-"""E02-c: the trained C/D systems inside the runner, from explicit trained inputs.
+"""E02-c: the trained C/D systems inside the runner, through P05 learned inference.
 
-Nothing here loads or trains a model. The caller supplies, for each trained system,
-the SHA256 of Edison's P04 artifact and a function that returns that model's P03
-classifier for one decision. The runner checks the hash against the frozen run
-config, then proposes through P03's ``schedule_from_probabilities`` and executes
-through the same ``execute_policy_output`` path as Greedy A/B: the real checker and
-controller decide. A classifier error is a recorded failed output, never a fallback.
+Nothing here trains a model. The caller loads each of Edison's P04 artifacts with
+``policies.learned.load_verified`` (which hashes the exact bytes it deserializes)
+and passes the resulting ``LearnedArtifact``. The runner checks that measured hash
+and the artifact's own system against the frozen run config, then proposes through
+``policies.learned.propose`` with the trusted slot-to-UTC decision time. That is the
+one definition of C/D: P03 probabilities when forecasts cover the decision, or a
+checked Greedy A plan, which ``execute_policy_output`` records as the fallback stage.
+A policy error is a recorded failed output, never a silent substitute.
 """
 
-from collections.abc import Callable, Mapping
+from collections.abc import Mapping
 from dataclasses import dataclass
+from datetime import datetime
 
 from dc_sustainability import schemas as s
 from dc_sustainability.experiments.config import TrainedSettings
-from dc_sustainability.training import schedule_from_probabilities
+from dc_sustainability.policies import learned
 
 
 @dataclass(frozen=True)
 class TrainedPolicy:
-    """One trained system: its artifact hash and a per-decision classifier factory.
+    """One trained system: the verified artifact loaded by P05."""
 
-    ``classifier_for(state, context)`` returns an object with
-    ``selection_probability(job, start_slot) -> float in [0, 1]`` (the P03 contract).
-    It sees only the policy-visible state and flat context.
-    """
+    artifact: learned.LearnedArtifact
 
-    artifact_sha256: str
-    classifier_for: Callable[[s.VisibleState, s.Context], object]
+    @property
+    def artifact_sha256(self) -> str:
+        """The SHA256 measured over the bytes that were deserialized."""
+        return self.artifact.artifact_sha256
 
 
 @dataclass(frozen=True)
@@ -35,7 +37,7 @@ class TrainedInputs:
 
 
 def check_inputs(settings: TrainedSettings, inputs: TrainedInputs, systems) -> None:
-    """Refuse trained inputs that do not match the frozen artifact hashes."""
+    """Refuse trained inputs that do not match the frozen artifact hashes and systems."""
     expected = {system for system, _ in settings.artifacts if system in systems}
     supplied = set(inputs.policies)
     if supplied != expected:
@@ -47,16 +49,30 @@ def check_inputs(settings: TrainedSettings, inputs: TrainedInputs, systems) -> N
     for system, digest in settings.artifacts:
         if system not in systems:
             continue
-        policy = inputs.policies.get(system)
+        policy = inputs.policies[system]
+        if not isinstance(policy, TrainedPolicy) or not isinstance(
+            policy.artifact, learned.LearnedArtifact
+        ):
+            raise ValueError(f"{system} needs a verified P05 LearnedArtifact")
+        if policy.artifact.system != system:
+            raise ValueError(f"{system} input holds a {policy.artifact.system} artifact")
         if policy.artifact_sha256 != digest:
             raise ValueError(f"{system} artifact differs from the hash frozen in the run config")
-        if not callable(policy.classifier_for):
-            raise ValueError(f"{system} classifier_for must be callable")
 
 
 def propose(
-    system: str, inputs: TrainedInputs, state: s.VisibleState, context: s.Context
+    system: str,
+    inputs: TrainedInputs,
+    state: s.VisibleState,
+    context: s.Context,
+    *,
+    decision_time_utc: datetime,
 ) -> s.PolicyOutput:
     """The trained system's own output for one decision; errors propagate to the caller."""
-    classifier = inputs.policies[system].classifier_for(state, context)
-    return schedule_from_probabilities(state, context, classifier, system=system)
+    return learned.propose(
+        state,
+        context,
+        system=system,
+        artifact=inputs.policies[system].artifact,
+        decision_time_utc=decision_time_utc,
+    )

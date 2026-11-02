@@ -35,7 +35,28 @@ Six deliberate bugs each made tests fail:
 5. the registry refuses trained inputs;
 6. trained settings aren't required.
 
+## P05 alignment (November 2)
+
+After #155 merged Edison's P05 learned inference, the runner's C/D units use it, so the study has **one definition of C and D**:
+
+- **Inputs.** `TrainedPolicy` now carries a `LearnedArtifact` from `policies.learned.load_verified`, which hashes the exact bytes it deserializes. It replaces the claimed hash plus classifier factory. `check_inputs` compares that **measured** hash, and the artifact's own system, with the run config. A wrong system, an unverified object, a hash mismatch, or a missing or extra input is refused before anything is written.
+- **Decisions.** Each decision calls `learned.propose` with the trusted slot clock (`slot0_utc + slot hours`, as for Greedy B). When forecasts cover the decision, P03 probabilities choose; when they don't (missing, stale, partial, future or beyond horizon), P05 returns a checked Greedy A plan. `execute_policy_output` records it as the **fallback stage** under the C/D identity, the same as Greedy B. A policy error is still a recorded failed output, not a substitute.
+- **Tests** (`test_trained_units.py`, 6), using small real tree and forest artifacts built the way the P05 tests build them:
+  - C and D on EP-HAND1, choosing from probabilities, with E01 replay agreeing;
+  - a withheld-forecast bundle where both take the checked Greedy A fallback stage, keep their identity, and replay agrees;
+  - the policy sees only the visible state and flat context, with the trusted clock;
+  - a policy failure blocks the decision, with recorded errors and no fallback;
+  - the refusals above;
+  - the settings and run identity.
+
+  Five deliberate bugs each made a test fail:
+  1. the measured hash isn't checked;
+  2. the artifact's system isn't checked;
+  3. the old path without P05 fallback;
+  4. a wrong decision clock;
+  5. an unverified artifact accepted.
+
 ## Open
 
-- **Edison's P04 artifact format** and how it becomes `classifier_for` (loading, features, refit per fold) are Edison's interface. This only fixes the runner's side of it. The P04 artifact hashes then go into `TrainedSettings` and the I02 manifest.
+- **Done (P05 alignment above):** the runner now loads Edison's P04 artifacts through P05. The real development hashes (`7e9e5769…` for C, `37149e53…` for D) go into `TrainedSettings` and the I02 manifest at the freeze.
 - The 300-run matrix config and the held-out custody loader follow for the I02 freeze.
