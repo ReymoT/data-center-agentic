@@ -1,6 +1,13 @@
 # Nisha calibration submission
 
-Nisha saved her CAL01 X/Y calibration on October 31, 2026 for #22, independently and before seeing Matty's file. The original is `E04_Nisha_original_2026-10-31.json`, unchanged. Its SHA-256 (also its LF-normalized hash) is `525bb4a5748b374d31adbdbd07756320e9c1dd91b90168c30dfc21d3b55ddee8`, the value posted on #22. It passes `agreement.load_original` with the calibration cases as it is, so there's no normalized copy.
+Nisha reports saving her CAL01 X/Y calibration on October 31, 2026 for #22,
+independently and before seeing Matty's file. The original is
+`E04_Nisha_original_2026-10-31.json`, unchanged. Its LF-normalized SHA-256 is
+`525bb4a5748b374d31adbdbd07756320e9c1dd91b90168c30dfc21d3b55ddee8`,
+matching the value posted on #22. A Windows CRLF checkout has a different raw-byte
+hash; comparison tooling consistently uses LF. It passes `agreement.load_original`
+structurally, so no separate normalized annotation copy is needed. Structural
+validation does not establish that every required assertion was extracted.
 
 Disclosure: Nisha prepared the packet (#123), so her extraction was not blind to how the outputs were written.
 
@@ -34,3 +41,19 @@ There are no S/L/R matches to agree: Nisha's file has no summary, limitation or 
 6. **Making 11.1 checkable (new, from this comparison).** The annotation records one decision per summary sentence and per limitation: `extracted` (with its S/L IDs), `repeats C<n>` or `not checkable` (goal, intention or generic caveat). `review.validate_annotation` then refuses a complete original that leaves a sentence undecided. Optionally, raw text gets the same treatment, one decision per sentence.
 
 Both originals stay unchanged. Agreed answers go into the rule text, never into either extraction. #22 stays open until the clarifications are recorded.
+
+## Matty technical review
+
+Reproduced the comparison from both retained files. The extracted-assertion gap is
+9 summary/limitation assertions and 5 raw assertions, all present only in Matty's
+file. The three shared claims have 100% label agreement, but Cohen's kappa is
+undefined because both marginals contain only supported. Raw-text label agreement
+and reference-kind agreement are undefined with zero matched rated pairs. This
+is extraction-only calibration evidence, not a held-out reliability result or
+evidence that the rubric has been applied consistently.
+
+No empty extraction has been filled automatically and no original judgment changed.
+Proposals 1-5 remain explicit until adopted in the rule; proposal 6 changes the
+annotation format/validator and requires the existing affected-owner agreement
+before implementation. Merging this submission supplies the missing original;
+it does not close #22, freeze the rubric or authorize opening held-out outputs.
