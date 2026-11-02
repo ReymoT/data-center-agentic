@@ -2,6 +2,7 @@
 
 import copy
 import json
+import os
 from dataclasses import replace
 from datetime import date
 from pathlib import Path
@@ -368,3 +369,37 @@ def test_year_boundary_has_no_end_label_for_final_source_hour():
     assert boundary[16]["start_row"] == 8759
     assert boundary[16]["end_row"] is None
     assert boundary[17]["start_row"] is None
+
+
+def test_junction_parent_rejected_before_output(authorization, monkeypatch):
+    parent = Path(authorization["destination"]).parent
+    monkeypatch.setattr(Path, "is_junction", lambda p: p == parent)
+    with pytest.raises(ValueError, match="custody path rejected"):
+        build(authorization)
+    assert not Path(authorization["destination"]).exists()
+
+
+def test_hardlinked_custody_file_rejected(authorization):
+    checksum = custody.prepare(
+        authorization, authorization_sha256=splits.digest(authorization), revision=REVISION
+    )
+    root = Path(authorization["destination"])
+    os.link(root / "metadata.json", root.parent / "other-name.json")
+    with pytest.raises(ValueError, match="custody files rejected"):
+        custody.verify(
+            authorization,
+            authorization_sha256=splits.digest(authorization),
+            revision=REVISION,
+            external_sha256=checksum,
+        )
+
+
+def test_committed_generic_interval_comparison_matches_all_rows():
+    artifact = (
+        Path(__file__).resolve().parents[2] / "docs/handoffs/ISSUE60_INTERVAL_COMPARISON.json"
+    )
+    data = json.loads(artifact.read_text())
+    assert data["source_values_read"] is False
+    assert set(data["dates"]) == {"2022-01-01", "2022-01-31", "2022-12-30", "2022-12-31"}
+    for day, rows in data["dates"].items():
+        assert rows == list(custody.interval_comparison(date.fromisoformat(day)))

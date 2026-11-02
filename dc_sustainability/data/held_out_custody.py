@@ -61,7 +61,7 @@ def _hash_string(value: str, length: int = 64) -> None:
 def _private_path(path: Path) -> Path:
     # Refuse aliases before resolution, including symlinked parent components.
     path = path.absolute()
-    if any(p.is_symlink() for p in (path, *path.parents)):
+    if any(p.is_symlink() or p.is_junction() for p in (path, *path.parents)):
         raise ValueError("custody path rejected")
     resolved = path.resolve()
     if any(
@@ -256,6 +256,8 @@ def prepare(receipt: dict, *, authorization_sha256: str, revision: str) -> str:
     with (destination / "complete.sha256").open("x", encoding="ascii", newline="\n") as stream:
         os.chmod(destination / "complete.sha256", 0o600)
         stream.write(checksum + "\n")
+        stream.flush()
+        os.fsync(stream.fileno())
     return checksum
 
 
@@ -272,7 +274,10 @@ def verify(
     destination = _private_path(Path(receipt["destination"]))
     if {p.name for p in destination.iterdir()} != {"metadata.json", "complete.sha256"}:
         raise ValueError("incomplete or unexpected custody files")
-    if any(p.is_symlink() or not p.is_file() for p in destination.iterdir()):
+    if any(
+        p.is_symlink() or p.is_junction() or not p.is_file() or p.stat().st_nlink != 1
+        for p in destination.iterdir()
+    ):
         raise ValueError("custody files rejected")
     payload = (destination / "metadata.json").read_bytes()
     if (
