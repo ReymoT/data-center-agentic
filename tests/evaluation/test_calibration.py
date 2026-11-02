@@ -21,6 +21,22 @@ def cases():
     return rv.load_cases(json.loads(committed("calibration_cases.json")))
 
 
+def test_frozen_original_submission_and_extraction_gap():
+    a = g.load_original((CAL / "ratings/E04_Nisha_original_2026-10-31.json").read_bytes(), cases())
+    b = g.load_original(
+        (CAL / "ratings/E04_Matty_normalized_2026-10-31.json").read_bytes(), cases()
+    )
+    assert a.sha256 == "525bb4a5748b374d31adbdbd07756320e9c1dd91b90168c30dfc21d3b55ddee8"
+    assert b.sha256 == "190afa623ecd236dd222d8c519d86588a300b4014a14c8eeee4cfe278c55ddc9"
+    report = g.summary(g.compare(a, b, {}))
+    assert report["extraction"] == {"both": 0, "only_a": 0, "only_b": 9, "agreement": 0.0}
+    assert report["raw_text"]["extraction"]["only_b"] == 5
+    assert report["labels_all_matched"]["n"] == 3
+    assert report["labels_all_matched"]["agreed"] == 3
+    assert report["labels_all_matched"]["kappa"] is None
+    assert report["reference_kind"]["n"] == 0
+
+
 def test_committed_files_match_the_generator():
     for name, text in build.build().items():
         assert committed(name) == text, f"{name} is stale; run scripts/build_e04_calibration.py"
