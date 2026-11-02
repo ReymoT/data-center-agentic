@@ -137,6 +137,20 @@ def validate_manifest(manifest: dict, *, require_ready: bool = False) -> list[st
         if status == "blocked" and not str(item.get("blocker") or "").strip():
             blockers.append(f"{name}: a blocked item names its blocker")
         if status == "frozen":
+            # A handoff document pins its text, never the private bytes it describes.
+            if name == "candidate-labels" and sha is None:
+                blockers.append(f"{name}: frozen labels require their actual artifact sha256")
+            if name == "trained-models-c-d":
+                artifacts = item.get("artifact_sha256")
+                if (
+                    not isinstance(artifacts, dict)
+                    or set(artifacts) != {"decision_tree_c", "random_forest_d"}
+                    or any(
+                        not isinstance(value, str) or not SHA256.fullmatch(value)
+                        for value in artifacts.values()
+                    )
+                ):
+                    blockers.append(f"{name}: frozen models require both actual binary hashes")
             # A file is pinned by its own hash, or by the freeze commit when it is in the repo.
             if sha is None and not (item["path"] and commit):
                 blockers.append(f"{name}: frozen without a sha256 or an in-repo path and commit")

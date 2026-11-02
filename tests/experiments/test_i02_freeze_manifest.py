@@ -18,6 +18,11 @@ def all_frozen(manifest):
     manifest = copy.deepcopy(manifest)
     for item in manifest["items"]:
         item.update(status="frozen", sha256="a" * 64, blocker=None)
+        if item["id"] == "trained-models-c-d":
+            item["artifact_sha256"] = {
+                "decision_tree_c": "c" * 64,
+                "random_forest_d": "d" * 64,
+            }
     manifest["freeze"] = {"commit": "b" * 40, "frozen_at": "2026-11-13", "frozen_by": "Nisha"}
     return manifest
 
@@ -115,3 +120,26 @@ def test_command_line_exit_codes(tmp_path, capsys):
     ready = tmp_path / "ready.json"
     ready.write_text(json.dumps(all_frozen(load())), encoding="utf-8")
     assert main([str(ready), "--require-ready"]) == 0
+
+
+def test_document_path_cannot_replace_private_label_hash():
+    manifest = all_frozen(load())
+    labels = next(i for i in manifest["items"] if i["id"] == "candidate-labels")
+    labels.update(path="docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md", sha256=None)
+    assert any("actual artifact sha256" in b for b in validate_manifest(manifest))
+
+
+@pytest.mark.parametrize(
+    "pins",
+    [
+        None,
+        {},
+        {"decision_tree_c": "c" * 64},
+        {"decision_tree_c": "bad", "random_forest_d": "d" * 64},
+    ],
+)
+def test_document_hash_or_commit_cannot_replace_both_model_binary_hashes(pins):
+    manifest = all_frozen(load())
+    models = next(i for i in manifest["items"] if i["id"] == "trained-models-c-d")
+    models["artifact_sha256"] = pins
+    assert any("both actual binary hashes" in b for b in validate_manifest(manifest))
