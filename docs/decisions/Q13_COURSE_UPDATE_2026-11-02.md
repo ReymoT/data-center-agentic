@@ -1,0 +1,34 @@
+# Q13 course update reported by Nisha
+
+Source: [Nisha's consolidated November 2 record](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6585731402),
+attributing the instructor's Canvas announcement and latest class email. Matty's
+assistant has not independently accessed those private course sources. This
+record uses Nisha's public report, not Matty's previously supplied private email.
+
+| Requirement | Reported current information |
+|---|---|
+| Group 15 presentation | November 16, during class 1:30–2:45 pm Arizona time; individual team slot not specified |
+| Duration | 15 minutes plus approximately 5 minutes Q&A |
+| Location | Course Zoom; private link remains on Canvas/email |
+| Submission | Email instructor at least two days before presentation; upload once per group under Canvas Assignments > Group Project Presentations |
+| Filename | Group#-Project#-FA26-Group-Project-Presentation, PDF/PPT/PPTX; project number 21 remains unconfirmed |
+| Presentation weight | Reported 10% |
+| December 2 demo | Live, recording or screenshots; repository link on last slide |
+| Software | GitHub repository with README and separate code/data/evaluations directories; evaluations index is already present |
+| Final report | 15–20 pages plus supplementary data/code; identify each member's contributions and distinguish original from third-party work; check third-party licenses |
+
+Matty accepts the proposed internal targets: team deck review November 9–11,
+rehearsal by November 13, and email/Canvas submission by November 14. These are
+planning targets, not a newly verified exact Canvas deadline or timezone. Nisha
+offered to make the single upload; this update acknowledges her offer, creates
+no new assignment and claims no upload occurred.
+
+Still unresolved: project-number confirmation; timezone and exact applicability
+of 11:59 pm submission times; additional presentation rubric; final report's
+detailed instructions/deadline confirmation; repository release/license rules.
+Nisha's stated checkpoint is newly published instructions or November 20,
+whichever comes first. #16 stays open only for missing authoritative fields.
+Do not infer public-release permission or assume all submission times are MST.
+
+This updates course planning only. Source acceptance, private inputs, independent
+ratings, scientific freeze and actual experiment/release acceptance stay separate.

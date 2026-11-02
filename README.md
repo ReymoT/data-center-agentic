@@ -30,7 +30,18 @@ historical context. Current implementation status is the receiving summary above
 and its linked handoff; #112 is closed, C/D runner support and P04 code are merged,
 and the complete public-fixture Plain/Agent episodes passed replay.
 
-Nisha reports Group 15 presents in class November 16, 2026, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Timezone, rubrics/formats and separate code/release requirements remain unconfirmed. See [the plan](docs/PROJECT_PLAN.md) and [attributed course record](docs/decisions/Q13_PRESENTATION_DEADLINE.md).
+Nisha's [November 2 course report](docs/decisions/Q13_COURSE_UPDATE_2026-11-02.md)
+places Group 15's presentation on November 16, with 15 minutes plus Q&A, and
+requires email submission at least two days earlier and one Canvas upload.
+Internal targets are deck review November 9–11, rehearsal by November 13 and
+submission by November 14. The December 2 demo permits live, recorded or screenshot
+delivery. Final report length is reported as 15–20 pages plus supplements.
+Project number, exact submission timezone, additional rubric/report instructions
+and release requirements remain unresolved. These are attributed course reports.
+
+The [offline I01 preparation](docs/handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md)
+now includes a six-system candidate configuration and the existing result/trace
+hash index. It authorizes no model calls and is not a scientific freeze.
 
 Our research question: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
