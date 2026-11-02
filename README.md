@@ -9,6 +9,11 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+Calibration update: both originals are submitted and the six post-calibration
+clarifications are approved and implemented for prospective intake. Synthetic
+custody receiving is complete; actual storage/selection and source acceptance
+remain gated. See [the combined status](docs/handoffs/Q22_CUSTODY_COMBINED_STATUS.md).
+
 Next acceptance work is tracked in the
 [six-system and trained-artifact checklist](docs/handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md)
 and [source acceptance audit](docs/handoffs/SOURCE_ACCEPTANCE_AUDIT.md).

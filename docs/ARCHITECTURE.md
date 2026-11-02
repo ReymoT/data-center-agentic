@@ -1,5 +1,10 @@
 # Architecture for the final scheduling study
 
+Evaluation intake now supports strict prospective per-text-unit coverage after
+the approved calibration clarification. Legacy ratings remain unchanged. Synthetic
+custody receiving passed; actual custody/scientific freeze is not established.
+[Current record](handoffs/Q22_CUSTODY_COMBINED_STATUS.md).
+
 Next acceptance: [I01 and trained receiving](handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md).
 Source acceptance is [audited separately](handoffs/SOURCE_ACCEPTANCE_AUDIT.md).
 Older October 30 and instruction-1.28 implementation paragraphs below are historical

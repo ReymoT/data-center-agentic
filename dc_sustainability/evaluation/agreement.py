@@ -34,7 +34,9 @@ class Original:
     entries: Mapping[Key, dict]
 
 
-def load_original(raw: bytes, cases: Iterable[review.ReviewCase]) -> Original:
+def load_original(
+    raw: bytes, cases: Iterable[review.ReviewCase], *, require_text_review: bool = False
+) -> Original:
     """Parse one original ratings file and refuse anything incomplete or inconsistent.
 
     The SHA256 is taken over LF line endings, which is how the originals are committed:
@@ -52,7 +54,12 @@ def load_original(raw: bytes, cases: Iterable[review.ReviewCase]) -> Original:
         key = (entry["case_id"], entry["output"])
         if key in entries or entry["case_id"] not in by_id:
             raise ValueError(f"unexpected or repeated output {key}")
-        review.validate_annotation(by_id[entry["case_id"]], entry, complete=True)
+        review.validate_annotation(
+            by_id[entry["case_id"]],
+            entry,
+            complete=True,
+            require_text_review=require_text_review,
+        )
         entries[key] = entry
     expected = {(c, k) for c in by_id for k in review.OUTPUT_KEYS}
     if set(entries) != expected:

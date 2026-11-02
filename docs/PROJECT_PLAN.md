@@ -1,5 +1,11 @@
 # Project plan
 
+Latest calibration/custody status: both originals are available; Matty approved
+the six clarifications and prospective text-coverage validation. Synthetic custody
+receiving passed. Earlier missing-file/tooling descriptions are historical;
+actual storage, scientific source/freeze and real C/D artifacts remain pending.
+[Combined record](handoffs/Q22_CUSTODY_COMBINED_STATUS.md).
+
 Active next sequence: source evidence audit and P04 artifact delivery, trained
 receiving, then six-system I01 acceptance. Use the
 [acceptance matrix](handoffs/I01_TRAINED_RECEIVING_CHECKLIST.md) and

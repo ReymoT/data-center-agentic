@@ -127,11 +127,11 @@ def load_cases(data: dict) -> tuple[ReviewCase, ...]:
     return tuple(cases)
 
 
-def blank_annotation(case: ReviewCase, key: str) -> dict:
+def blank_annotation(case: ReviewCase, key: str, *, text_review: bool = False) -> dict:
     """The rater's starting record: Claim assertions pre-listed, every judgement empty."""
     output = case.outputs[key]
     claims = output.explanation.claims if output.explanation else ()
-    return {
+    entry = {
         "case_id": case.case_id,
         "output": key,
         "not_applicable": case.not_applicable(key),
@@ -151,9 +151,67 @@ def blank_annotation(case: ReviewCase, key: str) -> dict:
         "completeness": None if case.not_applicable(key) else dict.fromkeys(COMPLETENESS),
         "notes": "",
     }
+    if text_review:
+        entry["text_review"] = {
+            source: [{"text": text, "decision": None, "assertion_ids": []} for text in texts]
+            for source, texts in review_units(output).items()
+        }
+    return entry
 
 
-def validate_annotation(case: ReviewCase, entry: dict, *, complete: bool) -> None:
+def review_units(output: BlindOutput) -> dict[str, list[str]]:
+    """Stable review units: summary/raw sentences and each whole limitation."""
+
+    def sentences(text):
+        return [part for part in re.split(r"(?<=[.!?])\s+", text.strip()) if part]
+
+    explanation = output.explanation
+    return {
+        "summary": sentences(explanation.summary) if explanation else [],
+        "limitation": list(explanation.limitations) if explanation else [],
+        "raw": sentences(output.raw_response) if output.raw_response and not explanation else [],
+    }
+
+
+def _validate_text_review(output: BlindOutput, entry: dict, complete: bool) -> None:
+    audit = entry["text_review"]
+    units = review_units(output)
+    if not isinstance(audit, dict) or set(audit) != set(units):
+        raise ValueError("text_review must cover summary, limitation and raw units")
+    assertions = {a["assertion_id"]: a for a in entry["assertions"]}
+    referenced = set()
+    for source, texts in units.items():
+        rows = audit[source]
+        if not isinstance(rows, list) or len(rows) != len(texts):
+            raise ValueError("every text unit needs a recorded decision")
+        for row, text in zip(rows, texts):
+            if not isinstance(row, dict) or set(row) != {"text", "decision", "assertion_ids"}:
+                raise ValueError("invalid text-review record")
+            if row["text"] != text:
+                raise ValueError("text-review units must preserve exact source text")
+            decision, ids = row["decision"], row["assertion_ids"]
+            if not isinstance(ids, list) or any(not isinstance(i, str) for i in ids):
+                raise ValueError("assertion_ids must be a list of IDs")
+            if len(ids) != len(set(ids)) or any(i not in assertions for i in ids):
+                raise ValueError("unknown or duplicate text-review assertion ID")
+            if decision is None and not complete and not ids:
+                continue
+            if decision not in {"extracted", "repeats", "not_checkable"}:
+                raise ValueError("every text unit needs an explicit review decision")
+            if (decision == "not_checkable") != (not ids):
+                raise ValueError("extracted/repeated facts need IDs; non-checkable text has none")
+            if decision == "extracted" and not any(assertions[i]["source"] == source for i in ids):
+                raise ValueError("extracted unit must reference an assertion from its source")
+            referenced.update(ids)
+    if complete and any(
+        a["source"] != "claim" and aid not in referenced for aid, a in assertions.items()
+    ):
+        raise ValueError("every extracted assertion must link to a reviewed text unit")
+
+
+def validate_annotation(
+    case: ReviewCase, entry: dict, *, complete: bool, require_text_review: bool = False
+) -> None:
     """Refuse an annotation that breaks the extraction rule; ``complete`` requires judgements.
 
     Raises ValueError with the first problem found. It checks structure only and never
@@ -186,6 +244,10 @@ def validate_annotation(case: ReviewCase, entry: dict, *, complete: bool) -> Non
         raise ValueError(f"{where}: every Claim record is exactly one assertion")
     for a in assertions:
         _check_assertion(a, claims, complete, where)
+    if require_text_review and "text_review" not in entry:
+        raise ValueError("prospective review requires text_review decisions")
+    if "text_review" in entry:
+        _validate_text_review(output, entry, complete)
 
     completeness = entry.get("completeness")
     if case.not_applicable(key):
