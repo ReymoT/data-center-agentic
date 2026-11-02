@@ -1,7 +1,7 @@
 {
-  "candidate_config_hash": "3d6ec9e7027903f716c10043bb9a65d69566b056fd69ba2b21e7357de4d6983c",
+  "candidate_config_hash": "92d1438321b94b730138a4c3233e858f0a335ead86b57ae8e5b658035681c8f8",
   "candidate_config_identity": {
-    "code_revision": "f309256be966107d6dd4ae3297ba66a409012920",
+    "code_revision": "c1ad13aec1aa35edb0994a6ed956d00bbb098d03",
     "config_version": "e02-run-config-v1",
     "episodes": [
       {
@@ -50,7 +50,21 @@
       }
     }
   },
-  "candidate_run_id": "RUN-3d6ec9e70279",
+  "candidate_history": [
+    {
+      "code_revision": "c363ef7518ff2d6e7be12e40e67eb92798cc0e18",
+      "config_hash": "7806c94f563e07171ba39960263cf372ad34229a576ee4180c64523268bde19b",
+      "lock_sha256": "ea912edd99927b6bf9d1b9623f5c61d5aa2378e149a929e14ea22b6673254d25",
+      "run_id": "RUN-7806c94f563e"
+    },
+    {
+      "code_revision": "f309256be966107d6dd4ae3297ba66a409012920",
+      "config_hash": "3d6ec9e7027903f716c10043bb9a65d69566b056fd69ba2b21e7357de4d6983c",
+      "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+      "run_id": "RUN-3d6ec9e70279"
+    }
+  ],
+  "candidate_run_id": "RUN-92d1438321b9",
   "dispatch_authorized": false,
   "evidence_kind": "offline_candidate_not_authorization_or_freeze",
   "lock_hash_convention": "LF-normalized bytes, same as runner CLI; historical run identities unchanged",
@@ -74,10 +88,10 @@
   ],
   "runtime_requests": 0,
   "superseded_offline_candidate": {
-    "code_revision": "c363ef7518ff2d6e7be12e40e67eb92798cc0e18",
-    "config_hash": "7806c94f563e07171ba39960263cf372ad34229a576ee4180c64523268bde19b",
-    "lock_sha256": "ea912edd99927b6bf9d1b9623f5c61d5aa2378e149a929e14ea22b6673254d25",
-    "run_id": "RUN-7806c94f563e"
+    "code_revision": "f309256be966107d6dd4ae3297ba66a409012920",
+    "config_hash": "3d6ec9e7027903f716c10043bb9a65d69566b056fd69ba2b21e7357de4d6983c",
+    "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "run_id": "RUN-3d6ec9e70279"
   },
   "total_wall_seconds_proposed": 3900
 }
