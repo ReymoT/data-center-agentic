@@ -209,7 +209,7 @@ def main() -> int:
             raise RuntimeError("fresh Matty single-use authorization required before startup")
         approval = json.loads(args.authorization.read_text(encoding="utf-8"))
         authorization_ref = validate_authorization(
-            approval, candidate, sha256(args.readiness), sha256(Path(__file__))
+            approval, candidate, lf_sha256(args.readiness), lf_sha256(Path(__file__))
         )
     if command("git", "status", "--porcelain"):
         raise RuntimeError("tracked repository worktree is not clean")
@@ -307,8 +307,9 @@ def main() -> int:
         "authorization_ref": authorization_ref,
         "repo_commit": HEAD,
         "checkout_commit": command("git", "rev-parse", "HEAD"),
-        "readiness_sha256": sha256(args.readiness),
-        "launcher_sha256": sha256(Path(__file__)),
+        "readiness_sha256": lf_sha256(args.readiness),
+        "launcher_sha256": lf_sha256(Path(__file__)),
+        "text_pin_convention": "LF-normalized readiness and launcher; raw binary/tokenizer hashes",
         "bundle_sha256": BUNDLE_SHA256,
         "config_identity": config.identity(),
         "config_hash": config.config_hash,
