@@ -35,7 +35,10 @@ places Group 15's presentation on November 16, with 15 minutes plus Q&A, and
 requires email submission at least two days earlier and one Canvas upload.
 Internal targets are deck review November 9–11, rehearsal by November 13 and
 submission by November 14. The December 2 demo permits live, recorded or screenshot
-delivery. Final report length is reported as 15–20 pages plus supplements.
+delivery. The newer [official report update](docs/decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
+requires 5–10 IEEE conference pages and one PDF, superseding the earlier 15–20-page
+plan. The reported December 9 "midnight" interpretation/timezone and project
+number remain unconfirmed; December 7 is the internal report submission target.
 Project number, exact submission timezone, additional rubric/report instructions
 and release requirements remain unresolved. These are attributed course reports.
 

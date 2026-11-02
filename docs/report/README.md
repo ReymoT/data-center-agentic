@@ -2,12 +2,16 @@
 
 Assembler: Nisha (R05); release package: Matty (R06).
 
-**Official instructions** (instructor announcement, recorded on #16):
+**Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
 - **Due December 9, 2026, at midnight.** 20% of the course grade.
 - **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
 - **One PDF per group**, uploaded to Canvas under Assignments › Final Project Report, named `Group15-Project21-F26-Final Project Report.PDF` (project number 21 to be confirmed on Canvas).
 - The detailed contributions of each team member are required.
 - The earlier course outline also asks for supplemental material (data, code) and a statement of which parts are ours versus third-party. The repository and the disclosure section below cover these.
+
+The exact interpretation/timezone of "midnight" and project number 21 remain
+unconfirmed. December 7 is Matty's conservative internal submission target,
+not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
 **Ground rules for every section:**
 - Every number cites saved evidence: a file, trace, receipt or PR.
@@ -28,13 +32,15 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft exists |
 | F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Not started |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
-| H | UI / visualization interface designs | **4** | **To be decided** | 1 | Demo and backup walkthrough ([DEMO](../DEMO.md), [R04 backup demo](../R04_BACKUP_DEMO.md)) | **Gap: no UI exists yet** |
+| H | UI / visualization interface designs | **4** | Matty | 1 | Demo and backup walkthrough ([DEMO](../DEMO.md), [R04 backup demo](../R04_BACKUP_DEMO.md)) | Read-only saved-development-trace explorer authorized; implementation pending |
 | I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Not started |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | — | Not started |
 | | **Total** | **20** | | **~9.5** | | |
 
-**Section H is the largest open risk.** It's worth as much as Evaluations, and the project has no user interface yet. A team decision is needed on what to build (for example, a read-only explorer over saved traces that also serves the December 2 demo) and who owns it.
+Matty owns the authorized read-only saved-trace explorer for section H and the
+demo. It will show actual retained development records; it will not dispatch
+policies/models, modify traces or turn development evidence into study findings.
 
 ## Contributions and third-party disclosure
 
@@ -57,4 +63,5 @@ These are draft report-production targets. Presentation preparation (November 9�
 | November 27 | Section drafts C–F and H due from owners (earlier if you're away over Thanksgiving) |
 | December 2 | Demo; evaluation findings and reliability drafts complete |
 | December 6 | Full IEEE draft for team review |
-| December 9 (midnight) | PDF submitted on Canvas |
+| December 7 | Internal PDF submission target; confirm official fields before upload |
+| December 9 (midnight, interpretation unconfirmed) | Instructor-reported deadline, not an assumed end-of-day timestamp |
