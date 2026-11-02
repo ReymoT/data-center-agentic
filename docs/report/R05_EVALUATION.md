@@ -1,6 +1,9 @@
 # Evaluation design and reliability (R05 draft)
 
-Owner: Nisha. **Status: development draft.** The design is frozen at I02. Results in §3 are development evidence. Held-out results replace or extend them after the frozen runs and the reliability repeat (#95).
+Owner: Nisha. **Status: development draft.** The design must be frozen before
+I02; it is not frozen yet. Results in §3 are retained development evidence.
+Report held-out results separately after frozen runs and the reliability repeat
+(#95), preserving the originals and development findings.
 
 ## 1. Evaluation design
 
@@ -12,7 +15,9 @@ Owner: Nisha. **Status: development draft.** The design is frozen at I02. Result
 **Matrix (I02, [checked by `experiments/matrix.py`](../i02/README.md)).**
 - 30 held-out episodes: 24 core, covering 6 Phoenix dates × 4 demand scenarios (normal, limited, spike, infeasible) once each, plus 6 normal-demand episodes with withheld forecasts.
 - Greedy A/B and C/D run once per episode; the two LLM systems run three trials each, which gives **300 runs**.
-- The run attempt budget equals the planned maxima: 2,160 Plain and 6,480 Agent calls.
+- The design's theoretical call ceilings are 2,160 Plain and 6,480 Agent calls.
+  These are not authorized runtime budgets; actual runs require exact bounded
+  authorization and frozen settings. Receiving calls are separate evidence.
 - Any reduction must be matched across systems and frozen before execution.
 
 **Accuracy.** Measured against saved execution records and independently replayed (E01):
@@ -22,6 +27,11 @@ Owner: Nisha. **Status: development draft.** The design is frozen at I02. Result
 - emissions against hindsight and visible-state references (O03/O04).
 
 Savings are reported only between schedules that complete the same work under the same inputs.
+
+Source lineage, pollutant/system boundary, physical intervals, rights and actual
+private custody/freeze remain gated by #60. Until accepted, carbon quantities are
+development proxy arithmetic, not verified site emissions or causal savings.
+The six systems have separate receiving records, not one completed frozen study.
 
 **Safety:**
 - constraint violations in proposed and executed plans;
@@ -73,7 +83,10 @@ Source: [E05 development IRR](../e04/ratings/agreement/E05_DEVELOPMENT_IRR.md).
 | Extraction agreement (summary/limitation) | 0.00: 64 assertions found by the second rater only |
 | Completeness κ (decision / reason / evidence / limitations) | 1.00 / 0.44 / 0.46 / 0.90 |
 
-- **κ is 0 even though raw agreement is 75%.** One rater labeled every claim supported, so chance agreement equals observed agreement: a prevalence effect, not random labeling.
+- **κ is 0 even though raw agreement is 75%.** One rater labeled every claim
+  supported, so expected chance agreement equals observed agreement. The label
+  marginals explain the calculation; neither statistic alone establishes reliable
+  annotation or determines the raters' underlying labeling process.
 - **All 8 label disagreements go the same way.** Each is a claim the second rater found contradicted (4) or unsupported (4).
 - **Adjudication.** The joint adjudication ([record](../e04/ratings/agreement/E05_DEVELOPMENT_ADJUDICATION_2026-10-29.json)) decided all 77 items. It resolved all 8 label items and all 5 completeness items to the second rater's original, and kept 63 of the 64 extraction items.
 
@@ -88,11 +101,19 @@ Source: [calibration ratings](../e04/calibration/ratings/NISHA_SUBMISSION.md).
 | Summary/limitation extraction | 0 of 9 (one-sided) |
 | Raw-text extraction | 0 of 5 (one-sided) |
 
-**What the two rounds show together:** where both raters judged the same item, they agreed, except on the 8 development claims above. The consistent gap was **extraction**: one rater extracted far fewer assertions from summaries, limitations and raw text. The six rule clarifications from calibration (#149), including the required per-sentence decision record, target exactly that gap before the held-out review.
+**What the two rounds show together:** calibration's three matched claim labels
+and eight completeness decisions agree. Development includes eight claim-label
+disagreements and five completeness adjudication items. Extraction also differs:
+one original contains fewer summary, limitation and raw-text assertions. The six
+approved clarifications (#149), including per-text-unit decisions, address that
+gap prospectively; their effectiveness still needs held-out evaluation.
 
 ### 3.3 Limitations of this evidence
 
-- **Small samples:** 32 matched claims, and 3 claims in calibration. One disagreement moves a percentage by 3–5 points or more, so no confidence intervals are given.
+- **Small samples:** one changed agreement among 32 pairs shifts raw agreement
+  by 3.125 percentage points; among three calibration pairs it shifts it by about
+  33.3 points. No confidence intervals are reported in these development records;
+  this is a reporting limitation, not a claim that intervals cannot be calculated.
 - **Synthetic cases.** The first rater wrote both the development cases and the calibration packet, which is disclosed.
 - **Not a study result.** The held-out reliability report (#95) is the result for the study.
 

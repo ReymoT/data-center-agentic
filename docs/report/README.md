@@ -1,6 +1,9 @@
 # Final report: assembly outline (R05)
 
-Due **December 9, 2026, 11:59 pm**. Assembler: Nisha (R05); release package: Matty (R06).
+Previously reported report target: December 9, 2026, 11:59 pm; exact official
+deadline/timezone and final instructions remain unconfirmed in
+[the current course record](../decisions/Q13_COURSE_UPDATE_2026-11-02.md).
+Assembler: Nisha (R05); release package: Matty (R06).
 
 Course requirements (#16):
 - 15–20 pages, written like a paper for a good venue, plus all supplemental material (data, code, etc.);
@@ -26,13 +29,13 @@ The proposal outline the report extends: problem definition, data sets, state of
 | 5 | Classical policies: Greedy A/B, decision tree C, random forest D | Edison (R03) | 1.5 | [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | Not started |
 | 6 | Agent, plain LLM and verification | Matty (R04) | 2.5 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md) | **Draft exists** |
 | 7 | Evaluation design | Nisha (R05) | 2 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md) | **Draft started** |
-| 8 | Results | Nisha with Edison (R05, R03) | 3 | Held-out runs (pending) | Waits for I02 |
+| 8 | Results | Nisha with Edison (R05, R03) | 2 | Held-out runs (pending) | Waits for I02 |
 | 9 | Faithfulness and inter-rater reliability | Nisha (R05) | 1.5 | [R05 evaluation draft](R05_EVALUATION.md) §3 | **Development part drafted** |
 | 10 | Limitations and threats to validity | Nisha with all | 1 | Each section's limits; source gates #60 | Not started |
 | 11 | Conclusion and future work | Nisha | 0.5 | — | To write last |
 | — | Contributions of each team member | All (Nisha assembles) | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Not started |
 | — | Own code vs. third-party code and data | Matty (R06), Nisha | 0.5 | [requirements](../../requirements/README.md); data source licenses | Not started |
-| — | References | All | 1 | — | Not started |
+| — | References | All | 0.5 | — | Not started |
 | | **Total** | | **~20** | | |
 
 ## Contributions and third-party disclosure
@@ -40,13 +43,24 @@ The proposal outline the report extends: problem definition, data sets, state of
 The professor asks for "detailed contributions of each team member" and a statement of "which parts are written by you and which are from the 3rd-party."
 
 - **Contributions:** each owner writes 3–5 lines on what they built and owned, in task IDs (for example R01, D04, S01), with representative PRs. Nisha merges them into one table.
-- **Third-party:** list libraries (LangGraph, rdflib/pySHACL, scikit-learn, Ollama and Qwen3 8B, and others), datasets (SustainDC carbon, the Frontier job table, EPA eGRID) and their licenses. The source-rights questions still open on #60 are stated as open, not assumed.
+- **Third-party:** distinguish libraries/runtime, model weights, data actually used,
+  comparators and proposed sources. Record applicable terms and notices separately
+  for LangGraph, rdflib/pySHACL, scikit-learn, Ollama and Qwen3 8B. SustainDC is the
+  pinned carbon proxy; EPA eGRID is a plausibility comparator. Frontier empirical
+  calibration has not been established and must not be listed as an observed
+  training-data source. Source-rights questions in #60 remain open, not assumed.
 
 ## Supplemental material
 
 The repository (code, `data/` manifests, `evaluations/`) is the supplement. Restricted or private inputs stay out of Git, under the Q13 boundary. The supplement index is assembled with R06.
 
 ## Schedule
+
+These are draft report-production targets, not newly accepted scientific or
+course deadlines. The accepted presentation preparation targets are November
+9–11 review, November 13 rehearsal and November 14 email/Canvas submission,
+based on Nisha's attributed course update. The November 13 scientific freeze
+target below is conditional on acceptance gates and must not imply it passed.
 
 | Date | Milestone |
 |---|---|
