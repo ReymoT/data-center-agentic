@@ -16,6 +16,7 @@ from dc_sustainability.experiments import trained as t
 from dc_sustainability.experiments.config import (
     RunConfig,
     TrainedSettings,
+    bundle_to_json,
     lf_sha256,
     load_bundle,
 )
@@ -160,3 +161,40 @@ def test_trained_settings_are_required_validated_and_in_the_run_identity():
     assert a.run_id == b.run_id != other.run_id  # a retrained model is a different run
     assert a.identity()["trained"] == {"artifacts": {"decision_tree_c": DT, "random_forest_d": RF}}
     assert "trained" not in RunConfig("test", ("greedy_a",), episodes).identity()
+
+
+@pytest.mark.parametrize("system", ["decision_tree_c", "random_forest_d"])
+def test_reloaded_model_missing_forecast_fallback_is_recorded_by_real_runner(tmp_path, system):
+    from dataclasses import replace
+
+    from dc_sustainability.policies import learned
+    from tests.policies.test_learned import _fit_tree
+
+    path, digest, _ = _fit_tree(tmp_path, system)
+    artifact = learned.load_verified(path, expected_sha256=digest)
+    original = load_bundle(BUNDLE)
+    bundle = replace(original, forecasts_by_slot={})
+    bundle_path = tmp_path / "withheld.json"
+    bundle_path.write_text(bundle_to_json(bundle), encoding="utf-8")
+    cfg = RunConfig(
+        "p05-reloaded-withheld-test",
+        (system,),
+        ((bundle.episode.episode_id, str(bundle_path), lf_sha256(bundle_path)),),
+        code_revision="synthetic-regression-not-study",
+        trained=TrainedSettings(((system, digest),)),
+    )
+    policy = t.TrainedPolicy(
+        digest, learned.classifier_for(artifact, decision_origin_utc=bundle.slot0_utc)
+    )
+    [status] = runner.run(cfg, tmp_path / "out", trained=t.TrainedInputs({system: policy}))
+    assert status.status == "completed"
+    root = tmp_path / "out" / cfg.run_id / "units"
+    records = traces(root, status.unit)
+    fallback = [d for d in records if d.fallback is not None]
+    assert fallback and all(d.system == system for d in records)
+    assert all(d.fallback.check.status == "pass" for d in fallback)
+    assert all(d.model_call_count == 0 for d in records)
+    replay = r.replay_episode(
+        bundle.episode, r.executed_starts(records, bundle.episode.episode_id), Q03_OPTION_B
+    )
+    assert replay.valid and r.compare_result(replay, result(root, status.unit)) == ()

@@ -267,9 +267,9 @@ def _policy_output(system, view, episode, bundle, policy_errors, trained=None) -
     """The policy's own output from visible inputs only; an exception is a failed output."""
     try:
         context = retrieve(view, episode.snapshot).context
-        if registry.spec(system).kind == "trained":
-            return t.propose(system, trained, view, context)
         decision_time = bundle.slot0_utc + timedelta(hours=view.current_slot)
+        if registry.spec(system).kind == "trained":
+            return t.propose(system, trained, view, context, decision_time_utc=decision_time)
         return propose(
             view,
             context,
