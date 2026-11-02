@@ -95,13 +95,15 @@ def test_mismatched_effective_policy_is_refused_before_mutation(tmp_path):
     ep, sim, _, controller = setup(tmp_path)
     view = sim.state()
     output = propose(view, retrieve(view, ep.snapshot).context)
+    # Greedy A may fall back for B/C/D, but C output is never valid for requested A.
+    mismatched = output.model_copy(update={"system": "decision_tree_c"})
     with pytest.raises(ValueError, match="does not match"):
         execute_policy_output(
             controller,
-            output,
+            mismatched,
             view,
             ep.snapshot,
-            requested_system="decision_tree_c",
+            requested_system="greedy_a",
             decision_id="DEC-MISMATCH-0",
             run_id="RUN-MISMATCH",
         )
