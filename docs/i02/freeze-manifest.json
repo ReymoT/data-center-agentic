@@ -1,7 +1,7 @@
 {
   "schema_version": "i02-freeze-manifest-v1",
   "evidence_kind": "pre_freeze_checklist_not_frozen",
-  "status_as_of": "2026-10-31",
+  "status_as_of": "2026-11-02",
   "target_freeze_date": "2026-11-13",
   "owner": "Nisha",
   "receiving_owner": "Matty",
@@ -54,7 +54,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "held-out allocation and episode contents are not published; D04 is provisional; held-out windows must not overlap the 40 development windows"
+      "blocker": "#60: custody tooling is merged and tested on synthetic data only (#147-#149); the actual private held-out allocation, contents and no-overlap evidence are not produced, and source gates B1-B3 remain unresolved"
     },
     {
       "id": "development-episodes",
@@ -84,10 +84,10 @@
       "description": "O02 certified visible-state labels for the development folds",
       "owner": "Ved",
       "task": "O02",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md",
       "sha256": null,
-      "blocker": "#112 is closed after bounded receiving produced 813 P03 rows and 30 O02 labels; the full private development corpus still needs collection and labeling for P04"
+      "blocker": null
     },
     {
       "id": "trained-models-c-d",
@@ -95,10 +95,10 @@
       "description": "Refit decision tree C and random forest D with feature contract, seeds and selection results",
       "owner": "Edison",
       "task": "P04",
-      "status": "blocked",
-      "path": null,
+      "status": "pending",
+      "path": "docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md",
       "sha256": null,
-      "blocker": "E02-c now accepts explicitly pinned trained inputs, but Edison still needs to produce the real P04 C/D artifacts from the full development folds"
+      "blocker": null
     },
     {
       "id": "plain-prompts",
@@ -183,10 +183,10 @@
       "description": "E04 extraction rule draft 1 and annotation format",
       "owner": "Nisha",
       "task": "E04",
-      "status": "blocked",
+      "status": "pending",
       "path": "docs/e04/EXTRACTION_RULE.md",
       "sha256": null,
-      "blocker": "#22: draft 1 format (#120) and practice packet (#123) are merged; both raters' 11.8 calibration extraction remains"
+      "blocker": null
     },
     {
       "id": "held-out-sample-rule",
@@ -206,9 +206,9 @@
       "owner": "Matty",
       "task": "I01",
       "status": "blocked",
-      "path": null,
+      "path": "docs/handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md",
       "sha256": null,
-      "blocker": "A01 and the exact EP-HAND1 bounds are accepted; a fresh single-use authorization and actual bounded receiving evidence remain required, followed by real C/D artifacts"
+      "blocker": "I01 is partial (#152 audit): all six paths have EP-HAND1 receiving evidence, but not as one same-protocol run; needs a same-protocol configuration and artifact/trace index and Nisha's independent receiving sign-off"
     }
   ],
   "freeze": {

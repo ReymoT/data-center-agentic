@@ -35,7 +35,7 @@ def test_readiness_names_every_unfrozen_item_and_the_missing_commit():
     blockers = validate_manifest(manifest, require_ready=True)
     for item in manifest["items"]:
         assert any(b.startswith(f"{item['id']}: ") for b in blockers)
-    assert any("#112" in b for b in blockers)  # blockers carry their reason
+    assert any("#60" in b for b in blockers)  # blockers carry their reason
     assert "freeze.commit is not recorded" in blockers
 
 
@@ -99,9 +99,10 @@ def test_integrity_problems_are_refused(change, message):
 
 def test_frozen_item_needs_a_hash_or_an_in_repo_path_with_the_freeze_commit():
     manifest = all_frozen(load())
-    model = next(i for i in manifest["items"] if i["id"] == "trained-models-c-d")
-    model["sha256"] = None  # no path: only its own hash can pin it
-    assert any("trained-models-c-d: frozen" in b for b in validate_manifest(manifest))
+    held_out = next(i for i in manifest["items"] if i["id"] == "held-out-episodes")
+    assert held_out["path"] is None
+    held_out["sha256"] = None  # no path: only its own hash can pin it
+    assert any("held-out-episodes: frozen" in b for b in validate_manifest(manifest))
     prompts = next(i for i in manifest["items"] if i["id"] == "plain-prompts")
     prompts["sha256"] = None  # in the repo: the freeze commit pins it
     assert not any("plain-prompts" in b for b in validate_manifest(manifest))
