@@ -9,6 +9,13 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+Real C/D development artifacts are now produced and reloaded on the manager host.
+All 40 episode contents match the v2 receipt; training used 6,046 certified rows.
+A/B/C/D public-fixture runner outputs pass independent replay. See the
+[artifact handoff](docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) for hashes,
+custody and limits. Earlier pending-artifact descriptions below are historical;
+full scientific freeze and final integrated acceptance remain open.
+
 Calibration update: both originals are submitted and the six post-calibration
 clarifications are approved and implemented for prospective intake. Synthetic
 custody receiving is complete; actual storage/selection and source acceptance
