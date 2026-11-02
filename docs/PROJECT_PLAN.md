@@ -12,6 +12,12 @@ and official course requirements #16 remain open.
 
 ## Current next sequence
 
+The [official report update](decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
+supersedes the 15–20-page plan with 5–10 IEEE conference pages. The outline totals
+9.5 pages and 20 rubric points. Matty owns the read-only development-trace explorer.
+December 7 is the internal report submission target; December 9 "midnight"
+interpretation/timezone, project number and release fields remain unconfirmed.
+
 The [I01 follow-up](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md) applies Nisha's
 LF lock-pin correction, connects real C/D fallback to E02, verifies public
 fresh/missing-forecast receiving, and prepares the original six-result replay

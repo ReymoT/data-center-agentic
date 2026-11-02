@@ -13,8 +13,8 @@ replaced silently. Private episode data stays in the run directory.
 
 Plain and Agent units (E02-b) run only with explicit ``ModelInputs``; see
 ``experiments.models`` for their ledgers, attempt budget and unknown outcomes.
-Trained C/D units (E02-c) run only with explicit ``TrainedInputs`` whose artifact
-hashes match the run config; see ``experiments.trained``.
+Trained C/D units (E02-c) run only with explicit ``TrainedInputs``: verified P05
+artifacts whose measured hashes match the run config; see ``experiments.trained``.
 """
 
 import json
@@ -129,7 +129,7 @@ def run(
     if trained is not None:
         if config.trained is None:
             raise ValueError("trained inputs were given for a run without trained systems")
-        t.check_inputs(config.trained, trained, config.systems)
+        trained = t.check_inputs(config.trained, trained, config.systems)
     bundles = {}
     for episode_id, path, digest in config.episodes:
         if lf_sha256(path) != digest:

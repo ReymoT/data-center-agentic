@@ -1,73 +1,67 @@
 # Final report: assembly outline (R05)
 
-Previously reported report target: December 9, 2026, 11:59 pm; exact official
-deadline/timezone and final instructions remain unconfirmed in
-[the current course record](../decisions/Q13_COURSE_UPDATE_2026-11-02.md).
 Assembler: Nisha (R05); release package: Matty (R06).
 
-Course requirements (#16):
-- 15–20 pages, written like a paper for a good venue, plus all supplemental material (data, code, etc.);
-- the detailed contributions of each team member;
-- a clear statement of which parts we wrote and which come from third parties.
+**Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
+- **Due December 9, 2026, at midnight.** 20% of the course grade.
+- **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
+- **One PDF per group**, uploaded to Canvas under Assignments › Final Project Report, named `Group15-Project21-F26-Final Project Report.PDF` (project number 21 to be confirmed on Canvas).
+- The detailed contributions of each team member are required.
+- The earlier course outline also asks for supplemental material (data, code) and a statement of which parts are ours versus third-party. The repository and the disclosure section below cover these.
 
-The proposal outline the report extends: problem definition, data sets, state of the art, research plan (classical DM/ML baselines **and** modern AI), evaluation plan, timeline, division of work, references.
+The exact interpretation/timezone of "midnight" and project number 21 remain
+unconfirmed. December 7 is Matty's conservative internal submission target,
+not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
 **Ground rules for every section:**
 - Every number cites saved evidence: a file, trace, receipt or PR.
 - Development evidence is labeled as development. Held-out results appear only after the frozen runs (I02), the held-out references (O04) and the reliability repeat (#95).
 - A claim the evidence doesn't support is left out, not softened.
 
-## Sections, owners and budget
+## Sections, owners and budget (official sections and points)
 
-| # | Section | Owner (task) | Pages | Source to build from | Status |
-|---|---|---|---:|---|---|
-| — | Title, abstract, keywords | Nisha | 0.5 | Proposal; research question | To write last |
-| 1 | Introduction and research question | Nisha | 1.5 | [README](../../README.md), [architecture](../ARCHITECTURE.md) | Not started |
-| 2 | State of the art and related systems | Matty, Nisha | 1.5 | [source review](../SOURCE_REVIEW.md) | Not started |
-| 3 | Problem, data and simulator | Reimo (R01) | 2 | D01–D06 docs in [data/](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Not started |
-| 4 | Knowledge graph, retrieval and reference schedules | Ved (R02) | 2 | [ontology README](../../ontology/README.md); [O03 export](../handoffs/O03_HINDSIGHT_EXPORT.md) | Not started |
-| 5 | Classical policies: Greedy A/B, decision tree C, random forest D | Edison (R03) | 1.5 | [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | Not started |
-| 6 | Agent, plain LLM and verification | Matty (R04) | 2.5 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md) | **Draft exists** |
-| 7 | Evaluation design | Nisha (R05) | 2 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md) | **Draft started** |
-| 8 | Results | Nisha with Edison (R05, R03) | 2 | Held-out runs (pending) | Waits for I02 |
-| 9 | Faithfulness and inter-rater reliability | Nisha (R05) | 1.5 | [R05 evaluation draft](R05_EVALUATION.md) §3 | **Development part drafted** |
-| 10 | Limitations and threats to validity | Nisha with all | 1 | Each section's limits; source gates #60 | Not started |
-| 11 | Conclusion and future work | Nisha | 0.5 | — | To write last |
-| — | Contributions of each team member | All (Nisha assembles) | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Not started |
-| — | Own code vs. third-party code and data | Matty (R06), Nisha | 0.5 | [requirements](../../requirements/README.md); data source licenses | Not started |
-| — | References | All | 0.5 | — | Not started |
-| | **Total** | | **~20** | | |
+IEEE two-column pages are dense, so the budget below is about 9.5 pages, under the 10-page limit.
+
+| § | Section | Points | Owner | Pages | Source to build from | Status |
+|---|---|---:|---|---:|---|---|
+| — | Title | — | Nisha | — | Proposal | — |
+| A | Abstract | 1 | Nisha | 0.25 | Research question; findings | Write last |
+| B | Introduction | 2 | Nisha | 0.75 | [README](../../README.md); research question | Not started |
+| C | Problem statement | 1 | Nisha with Reimo | 0.5 | Site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Not started |
+| D | Related works | 1 | Matty, Nisha | 0.5 | [source review](../SOURCE_REVIEW.md) | Not started |
+| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft exists |
+| F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Not started |
+| G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
+| H | UI / visualization interface designs | **4** | Matty | 1 | Demo and backup walkthrough ([DEMO](../DEMO.md), [R04 backup demo](../R04_BACKUP_DEMO.md)) | Read-only saved-development-trace explorer authorized; implementation pending |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Not started |
+| J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
+| K | References | 1 | All | 0.5 | — | Not started |
+| | **Total** | **20** | | **~9.5** | | |
+
+Matty owns the authorized read-only saved-trace explorer for section H and the
+demo. It will show actual retained development records; it will not dispatch
+policies/models, modify traces or turn development evidence into study findings.
 
 ## Contributions and third-party disclosure
 
-The professor asks for "detailed contributions of each team member" and a statement of "which parts are written by you and which are from the 3rd-party."
+- **Contributions (§I):** each owner writes 3–5 lines on what they built and owned, in task IDs (for example R01, D04, S01), with representative PRs. Nisha merges them into one table.
+- **Third-party:** distinguish libraries and runtime, model weights, data actually used, comparators and proposed sources. Record applicable terms and notices separately for LangGraph, rdflib/pySHACL, scikit-learn, Ollama and Qwen3 8B. SustainDC is the pinned carbon proxy; EPA eGRID is a plausibility comparator. Frontier empirical calibration has not been established and must not be listed as an observed training-data source. Source-rights questions in #60 remain open, not assumed.
 
-- **Contributions:** each owner writes 3–5 lines on what they built and owned, in task IDs (for example R01, D04, S01), with representative PRs. Nisha merges them into one table.
-- **Third-party:** distinguish libraries/runtime, model weights, data actually used,
-  comparators and proposed sources. Record applicable terms and notices separately
-  for LangGraph, rdflib/pySHACL, scikit-learn, Ollama and Qwen3 8B. SustainDC is the
-  pinned carbon proxy; EPA eGRID is a plausibility comparator. Frontier empirical
-  calibration has not been established and must not be listed as an observed
-  training-data source. Source-rights questions in #60 remain open, not assumed.
+## Where the report is written
 
-## Supplemental material
-
-The repository (code, `data/` manifests, `evaluations/`) is the supplement. Restricted or private inputs stay out of Git, under the Q13 boundary. The supplement index is assembled with R06.
+Drafts of each section live in this folder (or are linked here) as their source of truth, so every claim stays reviewable next to its evidence. The final PDF is set in the IEEE conference template on a shared Overleaf project that Nisha creates and links here. The repository is the supplemental material; restricted or private inputs stay out of Git under the Q13 boundary.
 
 ## Schedule
 
-These are draft report-production targets, not newly accepted scientific or
-course deadlines. The accepted presentation preparation targets are November
-9–11 review, November 13 rehearsal and November 14 email/Canvas submission,
-based on Nisha's attributed course update. The November 13 scientific freeze
-target below is conditional on acceptance gates and must not imply it passed.
+These are draft report-production targets. Presentation preparation (November 9–11 review, November 13 rehearsal, November 14 email and Canvas submission) is recorded separately. The November 13 scientific freeze target is conditional on its acceptance gates.
 
 | Date | Milestone |
 |---|---|
-| November 13 | I02 freeze |
-| November 16 | Class presentation (uses sections 1–7 at outline level) |
+| November 13 | I02 freeze (conditional) |
+| November 16 | Class presentation |
 | November 23 | Held-out runs, references and annotations complete (plan) |
-| November 27 | Section drafts 3–6 due from owners (earlier if you're away over Thanksgiving) |
-| December 2 | Demo; results and reliability drafts complete |
-| December 6 | Full draft for team review |
-| December 9 | Submission |
+| November 27 | Section drafts C–F and H due from owners (earlier if you're away over Thanksgiving) |
+| December 2 | Demo; evaluation findings and reliability drafts complete |
+| December 6 | Full IEEE draft for team review |
+| December 7 | Internal PDF submission target; confirm official fields before upload |
+| December 9 (midnight, interpretation unconfirmed) | Instructor-reported deadline, not an assumed end-of-day timestamp |
