@@ -1,6 +1,6 @@
 # Development candidate card
 
-Public facts for the development decision-tree and random-forest refits. Counts, hashes, and the recorded time come from [Real development C/D artifacts and receiving](docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md). The positive rule comes from [Q07 training decision](docs/decisions/Q07_TRAINING_OCT27.md).
+Public facts for the development decision-tree and random-forest refits. Counts, hashes, and the recorded time come from [Real development C/D artifacts and receiving](../docs/handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md). The positive rule comes from [Q07 training decision](../docs/decisions/Q07_TRAINING_OCT27.md).
 
 ## Support
 
