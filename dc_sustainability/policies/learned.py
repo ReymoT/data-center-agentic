@@ -18,8 +18,9 @@ from dc_sustainability.training.schedule import schedule_from_probabilities
 from dc_sustainability.training.train import (
     FittedModel,
     SystemKind,
+    bind_classifier,
     classifier_for_factory,
-    load_artifact,
+    load_artifact_bytes,
 )
 from dc_sustainability.verification.rules import assess_forecasts
 
@@ -60,10 +61,11 @@ def file_sha256(path: Path) -> str:
 
 def load_verified(path: Path, *, expected_sha256: str) -> LearnedArtifact:
     """Reload a joblib artifact only when its bytes match the expected digest."""
-    digest = file_sha256(path)
+    data = Path(path).read_bytes()
+    digest = sha256(data).hexdigest()
     if digest != expected_sha256:
         raise ValueError(f"artifact digest mismatch: got {digest}, expected {expected_sha256}")
-    fitted = load_artifact(path)
+    fitted = load_artifact_bytes(data)
     return LearnedArtifact(
         path=path,
         system=fitted.spec.system,
@@ -103,6 +105,29 @@ def propose(
     if not isinstance(decision_time_utc, datetime) or decision_time_utc.utcoffset() != timedelta(0):
         raise ValueError("an explicit trusted UTC decision time is required")
 
+    visible_state = s.VisibleState.model_validate(
+        visible_state.model_dump(mode="python"), strict=True
+    )
+    context = s.Context.model_validate(context.model_dump(mode="python"), strict=True)
+    content = context.content
+    snapshot = s.ConstraintSnapshot(
+        snapshot_id=content.snapshot_id,
+        site=content.site,
+        constraints=content.constraints,
+        sources=content.sources,
+    )
+    expected = s.Context.build(visible_state, snapshot, context.representation)
+    if expected.content_hash != context.content_hash:
+        raise ValueError("context does not match the visible decision state")
+    offset = timedelta(hours=visible_state.current_slot * visible_state.site.slot_hours)
+    origin = decision_origin_utc if decision_origin_utc is not None else decision_time_utc - offset
+    if (
+        not isinstance(origin, datetime)
+        or origin.utcoffset() != timedelta(0)
+        or origin + offset != decision_time_utc
+    ):
+        raise ValueError("decision origin must match the trusted slot-to-UTC mapping")
+
     reason = _forecast_gap_reason(visible_state, context, decision_time_utc)
     if reason is not None:
         base = greedy.propose(visible_state, context, system="greedy_a")
@@ -115,8 +140,9 @@ def propose(
             }
         )
 
-    origin = decision_origin_utc if decision_origin_utc is not None else decision_time_utc
-    bound = classifier_for(artifact, decision_origin_utc=origin)(visible_state, context)
+    bound = bind_classifier(
+        artifact.fitted, visible_state, context, decision_time_utc=decision_time_utc
+    )
     return schedule_from_probabilities(visible_state, context, bound, system=system)
 
 

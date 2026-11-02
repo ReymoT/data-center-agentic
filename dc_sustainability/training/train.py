@@ -199,7 +199,12 @@ def save_artifact(fitted: FittedModel, path: Path, *, manifest: Mapping[str, Any
 
 def load_artifact(path: Path) -> FittedModel:
     """Reload a frozen artifact and check feature order."""
-    payload = joblib.load(io.BytesIO(path.read_bytes()))
+    return load_artifact_bytes(path.read_bytes())
+
+
+def load_artifact_bytes(data: bytes) -> FittedModel:
+    """Deserialize trusted artifact bytes already acquired by the caller."""
+    payload = joblib.load(io.BytesIO(data))
     if payload.get("schema") != ARTIFACT_SCHEMA:
         raise ValueError("unsupported P04 artifact schema")
     if tuple(payload["feature_names"]) != FEATURE_NAMES:

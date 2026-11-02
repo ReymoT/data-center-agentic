@@ -1,5 +1,6 @@
 """Observable P05 reload, hash refusal, schedule, and checked A fallback."""
 
+from datetime import timedelta
 from hashlib import sha256
 from pathlib import Path
 
@@ -42,10 +43,11 @@ def _rows() -> tuple[LabeledRow, ...]:
     return tuple(rows)
 
 
-def _fit_tree(tmp_path: Path):
+def _fit_tree(tmp_path: Path, system="decision_tree_c"):
     rows = rows_for_episodes(_rows(), ("EP-A", "EP-B", "EP-C", "EP-D"))
-    fitted = fit_model(ModelSpec("decision_tree_c", 3), rows, seed=11)
-    path = tmp_path / "decision_tree_c.joblib"
+    spec = ModelSpec(system, 5, 100) if system == "random_forest_d" else ModelSpec(system, 3)
+    fitted = fit_model(spec, rows, seed=11)
+    path = tmp_path / f"{system}.joblib"
     digest = save_artifact(fitted, path, manifest={"seed": 11})
     return path, digest, fitted
 
@@ -187,3 +189,94 @@ def test_module_does_not_import_reference_solver():
     source = Path("dc_sustainability/policies/learned.py").read_text(encoding="utf-8")
     assert "reference.solver" not in source
     assert "from dc_sustainability.reference" not in source
+
+
+def test_verified_loader_deserializes_the_same_bytes_it_hashed(tmp_path, monkeypatch):
+    path, digest, _ = _fit_tree(tmp_path)
+    original_read = Path.read_bytes
+    reads = []
+
+    def changing_read(candidate):
+        if candidate == path:
+            reads.append(candidate)
+            if len(reads) > 1:
+                return b"replaced after verification"
+        return original_read(candidate)
+
+    monkeypatch.setattr(Path, "read_bytes", changing_read)
+    assert learned.load_verified(path, expected_sha256=digest).system == "decision_tree_c"
+    assert len(reads) == 1
+
+
+def test_nonzero_slot_uses_current_time_once(tmp_path):
+    path, digest, _ = _fit_tree(tmp_path)
+    artifact = learned.load_verified(path, expected_sha256=digest)
+    # At slot 3, these facts are fresh. Adding slot 3 a second time makes them stale.
+    now = f.SLOT0_UTC + timedelta(hours=3)
+    job = _flex_job().model_copy(update={"deadline_slot": 7})
+    facts = tuple(
+        fact for fact in _carbon_series((400,) * 7, issued_at=now) if fact.valid_slot >= 3
+    )
+    state = _state((job,), facts).model_copy(update={"current_slot": 3, "state_version": 3})
+    context = s.Context.build(state, f.snapshot(), "flat")
+    result = learned.propose(
+        state, context, system="decision_tree_c", artifact=artifact, decision_time_utc=now
+    )
+    assert result.system == "decision_tree_c"
+    assert result.plan.starts
+
+
+def test_inconsistent_explicit_origin_is_refused_before_fallback(tmp_path):
+    path, digest, _ = _fit_tree(tmp_path)
+    artifact = learned.load_verified(path, expected_sha256=digest)
+    state = _state((_flex_job(),)).model_copy(update={"current_slot": 1})
+    context = s.Context.build(state, f.snapshot(), "flat")
+    with pytest.raises(ValueError, match="slot-to-UTC"):
+        learned.propose(
+            state,
+            context,
+            system="decision_tree_c",
+            artifact=artifact,
+            decision_time_utc=f.SLOT0_UTC + timedelta(hours=1),
+            decision_origin_utc=f.SLOT0_UTC + timedelta(hours=1),
+        )
+
+
+def test_stale_context_is_refused_before_fallback(tmp_path):
+    path, digest, _ = _fit_tree(tmp_path)
+    artifact = learned.load_verified(path, expected_sha256=digest)
+    state = _state((_flex_job(),))
+    context = s.Context.build(state, f.snapshot(), "flat")
+    changed = state.model_copy(update={"state_version": 1})
+    with pytest.raises(ValueError, match="context does not match"):
+        learned.propose(
+            changed,
+            context,
+            system="decision_tree_c",
+            artifact=artifact,
+            decision_time_utc=f.SLOT0_UTC,
+        )
+
+
+@pytest.mark.parametrize("system", ["decision_tree_c", "random_forest_d"])
+@pytest.mark.parametrize("gap", ["fresh", "missing", "partial", "stale", "future"])
+def test_both_learned_systems_obey_forecast_coverage(tmp_path, system, gap):
+    path, digest, _ = _fit_tree(tmp_path, system)
+    artifact = learned.load_verified(path, expected_sha256=digest)
+    issued = f.SLOT0_UTC + timedelta(hours={"stale": -3, "future": 1}.get(gap, 0))
+    facts = _carbon_series((400,) * 4, issued_at=issued)
+    if gap == "missing":
+        facts = ()
+    elif gap == "partial":
+        facts = facts[:1]
+    state = _state((_flex_job(),), facts)
+    output = learned.propose(
+        state,
+        s.Context.build(state, f.snapshot(), "flat"),
+        system=system,
+        artifact=artifact,
+        decision_time_utc=f.SLOT0_UTC,
+    )
+    assert output.system == (system if gap == "fresh" else "greedy_a")
+    if gap != "fresh":
+        assert output.explanation.summary == f"learned_fallback:{gap}"
