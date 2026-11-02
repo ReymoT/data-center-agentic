@@ -1,5 +1,9 @@
 # I01 lock, P05 integration and private replay preparation
 
+Later follow-up: [measured artifact bindings, explorer and refreshed candidate](I01_UNIFIED_READINESS_AND_EXPLORER.md).
+The candidate identity in this dated record is historical; its actual receiving
+results and private packet remain retained unchanged.
+
 Matty implemented Nisha's [independent review correction](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6588937100)
 and prepared the remaining independent work without another teammate assignment.
 

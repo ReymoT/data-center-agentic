@@ -1,7 +1,9 @@
 # I01 common-protocol preparation
 
-Current follow-up: [LF lock correction, P05 runner receiving and private packet](I01_LOCK_P05_PRIVATE_RECEIVING.md).
-The current candidate is `RUN-3d6ec9e70279`; the original candidate and completed
+Current follow-up: [artifact bindings, explorer and offline readiness](I01_UNIFIED_READINESS_AND_EXPLORER.md).
+The current candidate is `RUN-92d1438321b9`. The earlier
+[LF correction and P05 receiving](I01_LOCK_P05_PRIVATE_RECEIVING.md) used
+`RUN-3d6ec9e70279`; that earlier candidate and completed
 run identities remain retained. Nisha's independent structural review is received,
 with its lock correction applied; private content replay is not yet independently received.
 

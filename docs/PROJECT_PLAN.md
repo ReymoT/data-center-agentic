@@ -12,6 +12,12 @@ and official course requirements #16 remain open.
 
 ## Current next sequence
 
+The [saved-trace explorer and offline readiness](handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
+are implemented. The current candidate includes measured artifact bindings and
+the offline pin checks use real manager-host models. Live authorization/runtime/
+launcher checks, independent receiving and actual source/custody/freeze remain
+open; do not describe these as another missing UI or missing model implementation.
+
 The [official report update](decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
 supersedes the 15–20-page plan with 5–10 IEEE conference pages. The outline totals
 9.5 pages and 20 rubric points. Matty owns the read-only development-trace explorer.
