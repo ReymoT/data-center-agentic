@@ -12,9 +12,19 @@ and official course requirements #16 remain open.
 
 ## Current next sequence
 
-1. Complete the [I01 acceptance reconciliation](handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md)
-   and offline common-protocol evidence/configuration index. Actual C/D artifacts
-   exist locally; another missing-artifact request is unnecessary.
+Offline I01 configuration and the six-unit/180-trace evidence index are now
+prepared. See [the preparation](handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md).
+It does not authorize dispatch or establish final independent acceptance.
+
+Nisha's [November 2 course update](decisions/Q13_COURSE_UPDATE_2026-11-02.md)
+is received. Accepted internal targets are deck review November 9–11, rehearsal
+by November 13 and email/Canvas submission by November 14 for the reported
+November 16 presentation. Project number, exact submission timezone and remaining
+official report/release fields stay unresolved; do not use older estimates instead.
+
+1. Receive the prepared I01 configuration/evidence index independently and prepare
+   exact authorization if a fresh unified receiving run is needed. Actual C/D
+   artifacts exist locally; another missing-artifact request is unnecessary.
 2. Resolve authoritative source and actual custody/freeze gates in #60. Preserve
    private inputs; do not substitute synthetic custody tests for real acceptance.
 3. Prepare any fresh model run with exact frozen inputs and bounded authorization.

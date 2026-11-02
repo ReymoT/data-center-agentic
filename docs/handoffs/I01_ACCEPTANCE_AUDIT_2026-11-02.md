@@ -1,5 +1,10 @@
 # I01 development acceptance audit
 
+Follow-up: the [offline configuration and evidence index](I01_OFFLINE_CONFIGURATION_2026-11-02.md)
+are now prepared; the source/private-custody and independent acceptance limits
+below remain. [Nisha's new course report](../decisions/Q13_COURSE_UPDATE_2026-11-02.md)
+supersedes the earlier partial-course investigation at the end of this audit.
+
 Matty audited published evidence and manager-local P04 summaries at main
 `227d2ebabd863d58f0a1b7bf2e56b6acdb02e1d4`. This is an evidence reconciliation,
 not a fresh model run, new scientific setting or independent final approval.
