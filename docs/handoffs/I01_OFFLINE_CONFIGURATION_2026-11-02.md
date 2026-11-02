@@ -1,5 +1,10 @@
 # I01 common-protocol preparation
 
+Current follow-up: [LF lock correction, P05 runner receiving and private packet](I01_LOCK_P05_PRIVATE_RECEIVING.md).
+The current candidate is `RUN-3d6ec9e70279`; the original candidate and completed
+run identities remain retained. Nisha's independent structural review is received,
+with its lock correction applied; private content replay is not yet independently received.
+
 Matty prepared a validated six-system RunConfig identity offline using existing
 EP-HAND1, the actual C/D binary hashes and the earlier Plain/Agent deployment,
 prompt, renderer, seed and budget pins. No provider was constructed or called.

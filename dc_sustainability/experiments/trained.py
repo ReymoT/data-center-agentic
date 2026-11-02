@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 from dc_sustainability import schemas as s
 from dc_sustainability.experiments.config import TrainedSettings
-from dc_sustainability.training import schedule_from_probabilities
+from dc_sustainability.policies.learned import propose_from_factory
 
 
 @dataclass(frozen=True)
@@ -55,8 +55,18 @@ def check_inputs(settings: TrainedSettings, inputs: TrainedInputs, systems) -> N
 
 
 def propose(
-    system: str, inputs: TrainedInputs, state: s.VisibleState, context: s.Context
+    system: str,
+    inputs: TrainedInputs,
+    state: s.VisibleState,
+    context: s.Context,
+    *,
+    decision_time_utc,
 ) -> s.PolicyOutput:
     """The trained system's own output for one decision; errors propagate to the caller."""
-    classifier = inputs.policies[system].classifier_for(state, context)
-    return schedule_from_probabilities(state, context, classifier, system=system)
+    return propose_from_factory(
+        state,
+        context,
+        system=system,
+        decision_time_utc=decision_time_utc,
+        classifier_factory=inputs.policies[system].classifier_for,
+    )

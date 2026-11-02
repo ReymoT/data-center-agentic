@@ -5,6 +5,13 @@ Owner: Matty. Prepared against main
 This section describes implemented mechanisms and one public development episode.
 Final experimental findings, held-out results and release acceptance remain pending.
 
+Follow-up: [the I01/P05 receiving record](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md)
+corrects the LF lock pin, connects P05 fallback to E02 and records actual C/D
+public fresh/missing-forecast receiving. All four units replay without findings
+or result mismatches; missing-forecast units have three checked fallback records
+each. No new LLM or held-out run is implied. [Matty's contribution statement](report/MATTY_CONTRIBUTIONS.md)
+is available for report assembly, with ownership and completion limits stated.
+
 ## Research question and design
 
 We investigate whether an ontology-grounded, tool-verified agent improves accuracy,

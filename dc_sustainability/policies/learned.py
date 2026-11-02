@@ -102,6 +102,36 @@ def propose(
         raise ValueError(f"unsupported learned system: {system}")
     if artifact.system != system:
         raise ValueError("artifact system does not match the requested learned system")
+    if decision_origin_utc is not None:
+        offset = timedelta(hours=visible_state.current_slot * visible_state.site.slot_hours)
+        if (
+            not isinstance(decision_origin_utc, datetime)
+            or decision_origin_utc.utcoffset() != timedelta(0)
+            or decision_origin_utc + offset != decision_time_utc
+        ):
+            raise ValueError("decision origin must match the trusted slot-to-UTC mapping")
+    return propose_from_factory(
+        visible_state,
+        context,
+        system=system,
+        decision_time_utc=decision_time_utc,
+        classifier_factory=lambda state, ctx: bind_classifier(
+            artifact.fitted, state, ctx, decision_time_utc=decision_time_utc
+        ),
+    )
+
+
+def propose_from_factory(
+    visible_state: s.VisibleState,
+    context: s.Context,
+    *,
+    system: SystemKind,
+    decision_time_utc: datetime,
+    classifier_factory,
+) -> s.PolicyOutput:
+    """Shared P05/E02 path; coverage fallback precedes scoring, errors propagate."""
+    if system not in _LEARNED_SYSTEMS:
+        raise ValueError(f"unsupported learned system: {system}")
     if not isinstance(decision_time_utc, datetime) or decision_time_utc.utcoffset() != timedelta(0):
         raise ValueError("an explicit trusted UTC decision time is required")
 
@@ -119,15 +149,6 @@ def propose(
     expected = s.Context.build(visible_state, snapshot, context.representation)
     if expected.content_hash != context.content_hash:
         raise ValueError("context does not match the visible decision state")
-    offset = timedelta(hours=visible_state.current_slot * visible_state.site.slot_hours)
-    origin = decision_origin_utc if decision_origin_utc is not None else decision_time_utc - offset
-    if (
-        not isinstance(origin, datetime)
-        or origin.utcoffset() != timedelta(0)
-        or origin + offset != decision_time_utc
-    ):
-        raise ValueError("decision origin must match the trusted slot-to-UTC mapping")
-
     reason = _forecast_gap_reason(visible_state, context, decision_time_utc)
     if reason is not None:
         base = greedy.propose(visible_state, context, system="greedy_a")
@@ -140,9 +161,7 @@ def propose(
             }
         )
 
-    bound = bind_classifier(
-        artifact.fitted, visible_state, context, decision_time_utc=decision_time_utc
-    )
+    bound = classifier_factory(visible_state, context)
     return schedule_from_probabilities(visible_state, context, bound, system=system)
 
 

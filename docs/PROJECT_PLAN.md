@@ -12,6 +12,13 @@ and official course requirements #16 remain open.
 
 ## Current next sequence
 
+The [I01 follow-up](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md) applies Nisha's
+LF lock-pin correction, connects real C/D fallback to E02, verifies public
+fresh/missing-forecast receiving, and prepares the original six-result replay
+packet privately. Transfer and independent content acceptance remain uncompleted;
+do not request the already received structural review again. Exact model-run
+authorization and real source/custody/freeze gates remain separate.
+
 Offline I01 configuration and the six-unit/180-trace evidence index are now
 prepared. See [the preparation](handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md).
 It does not authorize dispatch or establish final independent acceptance.
