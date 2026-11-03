@@ -11,10 +11,10 @@
     "warmups": 0
   },
   "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
-  "checkout_commit": "3a9e3d681a615b9e41d7360f81cffd1369e4f178",
-  "config_hash": "92d1438321b94b730138a4c3233e858f0a335ead86b57ae8e5b658035681c8f8",
+  "checkout_commit": "2b37bdfb9cdd45d1c2e7507ae3f097b6e73d9f27",
+  "config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
   "config_identity": {
-    "code_revision": "c1ad13aec1aa35edb0994a6ed956d00bbb098d03",
+    "code_revision": "5773295700c3792afe4eec2de48572ccb1aa0a66",
     "config_version": "e02-run-config-v1",
     "episodes": [
       {
@@ -65,7 +65,7 @@
   },
   "evidence_kind": "actual_offline_launcher_dry_run_not_inference",
   "held_out_access": false,
-  "launcher_sha256": "31c97040deb333d92df19f26bc6ac24091d8c254653c32abcb0f08b1ff537844",
+  "launcher_sha256": "3c9c6355eca8c69400d690cd6873203cbb599b7747026db8e8636b0856117363",
   "model_requests": 0,
   "output_directory_created": false,
   "prompt_hashes": {
@@ -74,8 +74,8 @@
     "proposal": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
     "repair": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba"
   },
-  "readiness_sha256": "acb3eae3aeeaf08641e2892249c19069bd4a6932b38d567b71651f026a1a666f",
-  "repo_commit": "c1ad13aec1aa35edb0994a6ed956d00bbb098d03",
+  "readiness_sha256": "ceaec69790e76513aa6415945259ffa4ce28a924c9ec08fcb8685816ef5ef1ce",
+  "repo_commit": "5773295700c3792afe4eec2de48572ccb1aa0a66",
   "runtime_executable_sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
   "runtime_started": false,
   "status": "dry_run_passed",

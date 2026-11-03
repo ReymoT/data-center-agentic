@@ -48,3 +48,6 @@ development metrics do not establish final study accuracy, faithfulness or safet
 Readiness, dry-run and pending approval records are refreshed separately with
 historical snapshots retained. A general instruction to complete these tasks is
 not the fresh exact single-use authorization required to dispatch model requests.
+Candidate `RUN-0f7d9498db6f` passed actual local offline launcher validation against
+the pinned runtime, tokenizer and C/D files. The runtime was not started, the
+proposed run output directory was not created and no model request was made.
