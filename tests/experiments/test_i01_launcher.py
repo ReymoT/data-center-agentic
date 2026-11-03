@@ -1,6 +1,7 @@
 """Single-use authorization and fail-closed launcher controls; no live model calls."""
 
 import copy
+import json
 import threading
 from types import SimpleNamespace
 
@@ -102,11 +103,22 @@ def test_watchdog_terminates_only_its_retained_process():
     assert event.is_set() and stopped == ["owned"]
 
 
-def test_missing_fresh_approval_stops_before_any_runtime_start(tmp_path, monkeypatch):
+@pytest.mark.parametrize("stale_code", [False, True])
+def test_code_and_missing_approval_stop_before_any_runtime_start(tmp_path, monkeypatch, stale_code):
     fake = tmp_path / "input-file"
     fake.write_text("test-only placeholder; never loaded")
     out = tmp_path / "must-not-exist"
     root = launch.ROOT
+    # Isolate the authorization gate from historical execution snapshots. This
+    # temporary synthetic readiness is never an approved receipt or live evidence.
+    ready = json.loads((root / "docs/evidence/i01-unified-readiness-2026-11-02.json").read_text())
+    ready["execution_file_lf_sha256"] = {
+        rel: launch.lf_sha256(root / rel) for rel in ready["execution_file_lf_sha256"]
+    }
+    if stale_code:
+        ready["execution_file_lf_sha256"]["dc_sustainability/training/train.py"] = "0" * 64
+    readiness_path = tmp_path / "synthetic-readiness.json"
+    readiness_path.write_text(json.dumps(ready), encoding="utf-8")
     argv = [
         "launcher",
         "--runtime",
@@ -122,7 +134,7 @@ def test_missing_fresh_approval_stops_before_any_runtime_start(tmp_path, monkeyp
         "--candidate",
         str(root / "docs/evidence/i01-offline-config-2026-11-02.json"),
         "--readiness",
-        str(root / "docs/evidence/i01-unified-readiness-2026-11-02.json"),
+        str(readiness_path),
         "--tree",
         str(fake),
         "--forest",
@@ -137,7 +149,9 @@ def test_missing_fresh_approval_stops_before_any_runtime_start(tmp_path, monkeyp
         raise AssertionError("must not start runtime without approval")
 
     monkeypatch.setattr(launch.subprocess, "Popen", forbidden)
-    with pytest.raises(RuntimeError, match="fresh Matty"):
+    with pytest.raises(
+        RuntimeError, match="execution code changed" if stale_code else "fresh Matty"
+    ):
         launch.main()
     assert not out.exists()
 

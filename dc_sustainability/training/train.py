@@ -25,6 +25,7 @@ TREE_DEPTHS = (3, 5, 8)
 FOREST_DEPTHS = (5, 10)
 FOREST_TREES = 100
 ARTIFACT_SCHEMA = "p04-artifact-v1"
+DEVELOPMENT_SEED = 20261031
 
 
 @dataclass(frozen=True)

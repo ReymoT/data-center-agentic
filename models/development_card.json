@@ -1,0 +1,65 @@
+{
+  "artifact_schema": "p04-artifact-v1",
+  "binary_in_checkout": false,
+  "carbon_sha256": "e05789a1dbf940e0554b0e8db42d84ed5cc0279d0050206fb048ba832ef24ef4",
+  "content_receipt": "d04-development-content-112-v2",
+  "custody_label": "P04_Private_2026-11-02",
+  "definite_negative": 4635,
+  "definite_positive": 1411,
+  "feature_names": [
+    "delay_slots",
+    "deadline_margin_slots",
+    "duration_slots",
+    "power_kw",
+    "available_capacity_kw",
+    "queue_load_count",
+    "carbon_mean_g_per_kwh",
+    "carbon_min_g_per_kwh"
+  ],
+  "folds": [
+    {
+      "fold": 0,
+      "held_out_negative": 1870,
+      "held_out_positive": 571,
+      "training_negative": 2765,
+      "training_positive": 840
+    },
+    {
+      "fold": 1,
+      "held_out_negative": 1272,
+      "held_out_positive": 402,
+      "training_negative": 3363,
+      "training_positive": 1009
+    },
+    {
+      "fold": 2,
+      "held_out_negative": 1493,
+      "held_out_positive": 438,
+      "training_negative": 3142,
+      "training_positive": 973
+    }
+  ],
+  "measured_state": "public_only",
+  "record_type": "p06-development-card",
+  "schema_version": "1",
+  "seed": 20261031,
+  "selection": [
+    {
+      "artifact_sha256": "7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b",
+      "max_depth": 8,
+      "measured": null,
+      "n_estimators": null,
+      "system": "decision_tree_c"
+    },
+    {
+      "artifact_sha256": "37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a",
+      "max_depth": 10,
+      "measured": null,
+      "n_estimators": 100,
+      "system": "random_forest_d"
+    }
+  ],
+  "threshold": 0.5,
+  "total_time_seconds": 101.375,
+  "unpublished_reason": "Validation-fold precision, recall, and F1 are unpublished because the fifteen fold models were not serialized and the frozen joblib is the full-data refit."
+}

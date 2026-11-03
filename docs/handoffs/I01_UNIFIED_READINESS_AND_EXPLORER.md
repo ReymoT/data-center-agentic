@@ -1,6 +1,12 @@
 # Unified receiving readiness and saved-trace explorer
 
 Both requested branch histories (#157 and #159) are integrated through #160.
+The later P06 metrics work (#162) adds training source files and changes the
+training seed constant location. The saved readiness source hashes describe the
+pre-P06 checkout; regenerate the offline readiness and approval pins on the exact
+intended execution checkout before requesting authorization. The existing pending
+template is not an authorization for this changed checkout. Historical evidence
+and candidate identities are preserved.
 The report refresh and measured-artifact audit are complete. The runner now
 reloads each pinned artifact at its input boundary and uses that verified model,
 rejecting changed bytes and ignoring a forged caller-side fitted object. The
