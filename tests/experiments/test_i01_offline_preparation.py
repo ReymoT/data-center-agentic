@@ -20,4 +20,7 @@ def test_candidate_pins_cli_normalized_lock_and_keeps_its_identity_consistent():
     assert candidate["candidate_run_id"] == "RUN-" + digest[:12]
     assert candidate["dispatch_authorized"] is False
     assert candidate["model_calls"] == candidate["runtime_requests"] == 0
-    assert candidate["superseded_offline_candidate"]["run_id"] == "RUN-7806c94f563e"
+    assert {entry["run_id"] for entry in candidate["candidate_history"]} >= {
+        "RUN-7806c94f563e",
+        "RUN-3d6ec9e70279",
+    }

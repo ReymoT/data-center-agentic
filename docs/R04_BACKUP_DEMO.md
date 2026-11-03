@@ -1,5 +1,10 @@
 # R04 backup demo walkthrough
 
+The [working saved-trace explorer](report/UI_VISUALIZATION.md) supplies the actual
+UI for this walkthrough. Select the Agent run and recorded fallback filter to show
+initial/repair checks, checked fallback and actual starts. It reads saved evidence;
+do not call it a live inference demo.
+
 Owner: Matty. Use the saved public EP-HAND1 receiving evidence. This walkthrough
 does not dispatch a new request. Prepare screenshots locally after inspecting the
 saved artifacts; no screenshot or video is claimed to exist in this document.

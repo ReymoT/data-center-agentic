@@ -9,6 +9,12 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+The [read-only trace explorer](docs/report/UI_VISUALIZATION.md) now presents saved
+public-development stages and execution with filters and original file hashes.
+It makes no model calls. [Unified receiving readiness](docs/handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
+records the updated candidate and actual offline pin checks; live dispatch remains
+blocked pending fresh authorization and runtime/launcher checks.
+
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
 EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier
