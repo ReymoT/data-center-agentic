@@ -1,5 +1,12 @@
 # Project plan
 
+November 2 follow-up: [measured P06 development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
+are available for all five grid configurations and three folds; selection and
+frozen policy binaries are unchanged. [Manager decisions and blockers](handoffs/NOV02_MANAGER_FOLLOWUP.md)
+record custody conditions, private receiving and course gaps. I01 offline pins
+are refreshed after P06; fresh live authorization, independent content receiving
+and source/custody/freeze acceptance remain separate unfinished gates.
+
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
 EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier

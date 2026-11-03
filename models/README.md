@@ -3,6 +3,11 @@
 Owner: Edison. P04 development training lives in `dc_sustainability.training`
 (`train`, `select`, `pipeline`) and `scripts/train_p04_development.py`.
 
+The initial development cards are historical publication snapshots. Later
+[recomputed fold metrics](DEVELOPMENT_FOLD_METRICS.md) supply measured
+classification confusion counts, precision, recall, F1 and timings for all five
+grid configurations, without changing the selected/frozen policy binaries.
+
 Mandatory C/D need certified visible-state labels (O02), blocked development folds
 (D04 fold map), validated features (Q07), and frozen seeds/settings under Q06-Q08.
 
