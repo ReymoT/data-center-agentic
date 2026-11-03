@@ -7,6 +7,7 @@ Public facts for the development decision-tree and random-forest refits. Counts,
 There are 6046 definite rows. 1411 are positive and 4635 are negative.
 
 Held-out support subtracts each fold's published training count from those definite totals. Those counts are not a measured confusion table.
+Here held-out means a blocked development validation partition, not the private final held-out cohort.
 
 | Fold | Training positive | Training negative | Held-out positive | Held-out negative |
 | --- | ---: | ---: | ---: | ---: |
@@ -47,3 +48,7 @@ Manager-local custody label `P04_Private_2026-11-02`. The label names storage ou
 ## Candidate metrics
 
 Validation-fold precision, recall, and F1 are unpublished because the fifteen fold models were not serialized and the frozen joblib is the full-data refit.
+
+## Intended use and limitations
+
+These full-data refits support development receiving only. Candidate classification scores are separate from scheduling outcomes and do not establish accuracy, faithfulness, safety or superiority in the final study. Source rights and physical semantics remain unresolved in issue #60. No final held-out study acceptance or redistribution permission is implied.

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -76,14 +77,20 @@ def _labeled_rows(payload: object) -> tuple[LabeledRow, ...]:
             raise ValueError(f"row {index} is missing {exc.args[0]}") from exc
         if type(episode_id) is not str or type(job_id) is not str:
             raise ValueError(f"row {index} episode_id and job_id must be strings")
+        if not episode_id.strip() or not job_id.strip():
+            raise ValueError(f"row {index} episode_id and job_id must be nonempty")
         if type(slot) is not int or type(start_slot) is not int:
             raise ValueError(f"row {index} slot and start_slot must be ints")
+        if slot < 0 or start_slot < 0:
+            raise ValueError(f"row {index} slots must be nonnegative")
         if type(label) is not bool:
             raise ValueError(f"row {index} label must be bool")
         if not isinstance(features, list) or any(
             isinstance(value, bool) or not isinstance(value, (int, float)) for value in features
         ):
             raise ValueError(f"row {index} features must be numbers")
+        if any(not math.isfinite(value) for value in features):
+            raise ValueError(f"row {index} features must be finite")
         rows.append(
             LabeledRow(
                 episode_id=episode_id,

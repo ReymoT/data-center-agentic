@@ -345,6 +345,8 @@ def render_development_card() -> str:
         "",
         "Held-out support subtracts each fold's published training count from those "
         "definite totals. Those counts are not a measured confusion table.",
+        "Here held-out means a blocked development validation partition, not the "
+        "private final held-out cohort.",
         "",
         "\n".join(support_rows),
         "",
@@ -374,6 +376,14 @@ def render_development_card() -> str:
         "## Candidate metrics",
         "",
         _UNPUBLISHED_METRICS,
+        "",
+        "## Intended use and limitations",
+        "",
+        "These full-data refits support development receiving only. Candidate "
+        "classification scores are separate from scheduling outcomes and do not "
+        "establish accuracy, faithfulness, safety or superiority in the final study. "
+        "Source rights and physical semantics remain unresolved in issue #60. "
+        "No final held-out study acceptance or redistribution permission is implied.",
         "",
     ]
     return "\n".join(lines)
