@@ -1,5 +1,11 @@
 # Agent and verification: development-evidence draft
 
+Current follow-up: [development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
+now accompany the C/D references, and the [manager follow-up](handoffs/NOV02_MANAGER_FOLLOWUP.md)
+records offline pin refresh, accepted custody safeguards and remaining receiving
+and official-information gaps. These additions are development evidence, not
+another model-driven run or final study result.
+
 Owner: Matty. Prepared against main
 `227d2ebabd863d58f0a1b7bf2e56b6acdb02e1d4` for later report assembly with Nisha.
 This section describes implemented mechanisms and one public development episode.

@@ -5,6 +5,13 @@ I02; it is not frozen yet. Results in §3 are retained development evidence.
 Report held-out results separately after frozen runs and the reliability repeat
 (#95), preserving the originals and development findings.
 
+Later development addition: [P06 blocked-fold candidate metrics](../../models/DEVELOPMENT_FOLD_METRICS.md)
+provide measured confusion cells, support, precision/recall/F1 and timings for five
+configurations across the three fixed development folds. These are post-selection
+descriptive classification scores on saved definite rows, not final study findings
+or a change to rollout-based selection. Original exclusion counts are unavailable
+from that corpus and remain explicitly unknown. No held-out rating is added here.
+
 ## 1. Evaluation design
 
 **Comparison.**

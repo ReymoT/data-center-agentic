@@ -1,5 +1,10 @@
 # Architecture for the final scheduling study
 
+The [P06 fold-scoring follow-up](../models/DEVELOPMENT_FOLD_METRICS.md) measures
+candidate classification on the fixed development partitions. It does not change
+the runtime architecture or rollout-based C/D selection, and does not replace
+the research comparison of Agent versus Plain on accuracy, faithfulness and safety.
+
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
 EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier

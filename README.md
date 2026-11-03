@@ -9,6 +9,12 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+[Recomputed development-fold classification metrics](models/DEVELOPMENT_FOLD_METRICS.md)
+now cover all five C/D grid configurations and three fixed folds. These are
+descriptive development scores; frozen models and rollout-based selection are
+unchanged. [The manager follow-up](docs/handoffs/NOV02_MANAGER_FOLLOWUP.md)
+records receiving/custody limits and the remaining official-information gaps.
+
 The [read-only trace explorer](docs/report/UI_VISUALIZATION.md) now presents saved
 public-development stages and execution with filters and original file hashes.
 It makes no model calls. [Unified receiving readiness](docs/handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)

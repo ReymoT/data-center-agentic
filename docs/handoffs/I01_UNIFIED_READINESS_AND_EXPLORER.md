@@ -1,12 +1,10 @@
 # Unified receiving readiness and saved-trace explorer
 
 Both requested branch histories (#157 and #159) are integrated through #160.
-The later P06 metrics work (#162) adds training source files and changes the
-training seed constant location. The saved readiness source hashes describe the
-pre-P06 checkout; regenerate the offline readiness and approval pins on the exact
-intended execution checkout before requesting authorization. The existing pending
-template is not an authorization for this changed checkout. Historical evidence
-and candidate identities are preserved.
+The post-P06 refresh includes the changed training source and a new pending
+approval template. The [pre-P06 records](../evidence/i01-pre-p06-2026-11-02/i01-unified-readiness-2026-11-02.json)
+are preserved, including the earlier actual dry-run evidence. No previous or
+current pending template is dispatch authorization.
 The report refresh and measured-artifact audit are complete. The runner now
 reloads each pinned artifact at its input boundary and uses that verified model,
 rejecting changed bytes and ignoring a forged caller-side fitted object. The
@@ -14,8 +12,8 @@ original classifier-factory API is superseded; callers supply
 `TrainedPolicy(learned.load_verified(path, expected_sha256=...))`.
 
 The [current candidate](../evidence/i01-offline-config-2026-11-02.json) pins merged
-main `c1ad13aec1aa35edb0994a6ed956d00bbb098d03`, including these bindings, and has
-identity `RUN-92d1438321b9`. Both earlier offline candidates remain in its history.
+source commit `5773295700c3792afe4eec2de48572ccb1aa0a66`, including P06, and has
+identity `RUN-0f7d9498db6f`. All earlier offline candidates remain in its history.
 All historical completed-run identities, source files and the 180-trace index
 remain unchanged.
 
