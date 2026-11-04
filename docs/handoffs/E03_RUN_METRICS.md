@@ -48,3 +48,14 @@ Exact reproduction commands:
 ```
 
 No model calls, held-out data or source values were used.
+
+Manager review fixes an empty-queue edge case: a valid final no-op must not hide
+an unsafe initial/repair/fallback proposal. A slot is excluded as a no-op only
+when every present stage is independently valid and empty. Two regression cases
+cover repair and fallback returning a safe final no-op after an unsafe proposal.
+The original twenty-six tests above are retained; the reviewed module has twenty-eight.
+Both omission measures remain available and explicitly draft; this merge does
+not select a primary safety endpoint or freeze the definitions. Agent latency
+remains unavailable in original records; it is not imputed as zero or repaired
+by rewriting evidence. The harness/accounting follow-up belongs to Matty before
+any latency-comparison freeze, not a resubmission request to Nisha.

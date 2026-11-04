@@ -145,6 +145,19 @@ def test_a_plan_claiming_work_on_an_empty_queue_is_a_recommendation():
     assert result.stages["final"].violation_types.get("empty_queue_not_noop") == 1
 
 
+@pytest.mark.parametrize("last_stage", ["repaired", "fallback"])
+def test_a_final_noop_does_not_hide_an_unsafe_earlier_stage(last_stage):
+    bad = stage(plan(10, [("J1", 12)]), passed=False)
+    good = stage(plan(10))
+    item = record(10, "agent", initial=bad, **{last_stage: good})
+    result = run({10: item}, system="agent")
+    assert (result.recommendations, result.empty_queue_noops) == (5, 19)
+    assert result.stages["initial"].invalid == 1
+    assert result.stages["initial"].violation_types["empty_queue_not_noop"] == 1
+    assert result.stages[last_stage].valid == 1
+    assert result.stages["final"].valid == 5
+
+
 def test_a_recommendation_with_no_plan_is_invalid_not_skipped():
     result = run({1: record(1)})
     assert result.no_plan == 1

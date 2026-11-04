@@ -212,6 +212,11 @@ def run_metrics(
         state = replay.state_at(record.slot)
         facts = facts_from_state(state, episode.snapshot)
         final = _final_stage(record)
+        stage_results = {
+            name: validate_plan(stage.plan, facts, protocol)
+            for name in RECORDED_STAGES
+            if (stage := getattr(record, name)) is not None
+        }
         if final is None:
             result = validate_output(None, facts, protocol)
             if result.empty_queue:
@@ -220,7 +225,11 @@ def run_metrics(
             no_plan += 1
         else:
             result = validate_plan(final.plan, facts, protocol)
-            if result.empty_queue and result.valid:
+            if (
+                result.empty_queue
+                and result.valid
+                and all(verdict.empty_queue and verdict.valid for verdict in stage_results.values())
+            ):
                 noops += 1
                 continue
             whole = any(item.job_id is None for item in final.plan.abstentions)
@@ -232,7 +241,7 @@ def run_metrics(
         for name in RECORDED_STAGES:
             stage = getattr(record, name)
             if stage is not None:
-                tallies[name].add(validate_plan(stage.plan, facts, protocol), stage)
+                tallies[name].add(stage_results[name], stage)
         repair_opportunities += "repaired" not in record.not_applicable_stages
         fallback_opportunities += "fallback" not in record.not_applicable_stages
         repairs += record.repaired is not None
