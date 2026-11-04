@@ -26,8 +26,8 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 |---|---|---:|---|---:|---|---|
 | — | Title | — | Nisha | — | Proposal | — |
 | A | Abstract | 1 | Nisha | 0.25 | Research question; findings | Write last |
-| B | Introduction | 2 | Nisha | 0.75 | [README](../../README.md); research question | Not started |
-| C | Problem statement | 1 | Nisha with Reimo | 0.5 | Site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Not started |
+| B | Introduction | 2 | Nisha | 0.75 | [Draft](R05_INTRODUCTION_PROBLEM.md); research question | Drafted; findings wait for I02 |
+| C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; Reimo's review pending |
 | D | Related works | 1 | Matty, Nisha | 0.5 | [source review](../SOURCE_REVIEW.md) | Not started |
 | E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft exists |
 | F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Not started |
