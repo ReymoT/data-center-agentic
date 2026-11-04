@@ -42,8 +42,10 @@ open; do not describe these as another missing UI or missing model implementatio
 The [official report update](decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
 supersedes the 15–20-page plan with 5–10 IEEE conference pages. The outline totals
 9.5 pages and 20 rubric points. Matty owns the read-only development-trace explorer.
-December 7 is the internal report submission target; December 9 "midnight"
-interpretation/timezone, project number and release fields remain unconfirmed.
+December 7 is the internal report submission target. Nisha's
+[November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
+reports project number 21 and December 9 at 11:59 pm. Arizona timezone is her
+working assumption; official timezone and release/license requirements remain open.
 
 The [I01 follow-up](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md) applies Nisha's
 LF lock-pin correction, connects real C/D fallback to E02, verifies public
@@ -59,8 +61,9 @@ It does not authorize dispatch or establish final independent acceptance.
 Nisha's [November 2 course update](decisions/Q13_COURSE_UPDATE_2026-11-02.md)
 is received. Accepted internal targets are deck review November 9–11, rehearsal
 by November 13 and email/Canvas submission by November 14 for the reported
-November 16 presentation. Project number, exact submission timezone and remaining
-official report/release fields stay unresolved; do not use older estimates instead.
+November 16 presentation. The November 4 confirmation above supersedes earlier
+project-number/end-of-day uncertainty; exact official timezone and release fields
+stay unresolved. Do not use older estimates instead.
 
 1. Review the refreshed exact authorization packet for a fresh unified public
    receiving run. Existing-record receiving and the no-startup dry run are complete. Actual C/D

@@ -1,5 +1,9 @@
 # Q13: reported course dates and remaining delivery requirements
 
+November 4: [Nisha reports project number 21 and a December 9, 11:59 pm report deadline](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165).
+Arizona timezone remains her working assumption. Official timezone and release/
+license requirements remain open; dated earlier unknowns below are historical.
+
 Current planning is in the [November 2 course record](Q13_COURSE_UPDATE_2026-11-02.md).
 It records Nisha's new consolidated report and accepted November 9–14 preparation
 targets. Older entries below are historical where superseded; they do not mean
