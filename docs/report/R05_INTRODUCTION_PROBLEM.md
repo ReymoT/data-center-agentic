@@ -4,19 +4,19 @@ Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B
 
 ## I. Introduction
 
-Data centers can run some compute work at different times, and the carbon intensity of electricity changes from hour to hour. Moving flexible work toward cleaner hours can therefore lower emissions without changing the energy the work needs. Language models are a natural interface for this kind of decision support, because they can read operating facts and explain a recommendation. But a sustainability recommendation that sounds reasonable can still be wrong. It can overload a site, miss a deadline, or claim savings that the evidence doesn't support, and fluent text gives an operator no way to tell.
+Flexible compute work can be scheduled at different times. In our fixed-power, fixed-PUE simulation, moving the same work to a slot with lower carbon intensity can reduce modeled emissions without changing that work's energy. Language models offer an interface for reading operating facts and explaining recommendations. But a sustainability recommendation that sounds reasonable can still overload a site, miss a deadline, or claim savings that the evidence does not support. Fluency alone does not establish correctness.
 
-Recent systems point toward ways of containing that risk. Typed knowledge graphs connect industrial assets to exact facts [AssetOpsBench]. Simulation tests decisions before they are applied [LC-Opt]. Checks and fallbacks protect execution in autonomous cooling [DeepMind], and sustainability assistants link answers to their sources [Resource Advisor]. These systems motivated our design, but they don't measure how much such safeguards change an LLM's recommendations when it is compared with the same model without them.
+The source review identifies ideas that motivate our architecture: typed relationships and retrieval [AssetOpsBench], simulation before application [LC-Opt], checks and fallbacks [DeepMind], and evidence-linked sustainability decision support [Resource Advisor]. We use these ideas to design a controlled comparison with the same underlying LLM. This review motivates design choices; it is not an audit of deployed systems or evidence of our agent's superiority.
 
 We ask: *does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?* We study this in one bounded setting: scheduling flexible jobs at a single simulated site. Scheduling is the test setting rather than the goal, because it gives each recommendation a checkable outcome.
 
-Both LLM systems use the same local model and receive equivalent visible facts. The agent reads them from a knowledge graph, has each plan checked, may repair it once, and falls back to a checked greedy plan. The plain LLM makes one call and its output is kept uncorrected. Two greedy heuristics, a decision tree and a random forest give classical reference points. All six systems run through the same execution gate, and an evaluator that is independent of the production checker replays what actually ran.
+Both LLM systems use the same local model and receive equivalent visible facts. The agent reads them from a knowledge graph, has each plan checked, may repair it once, and may use a checked greedy fallback or abstain. The plain LLM makes one call per required decision and its output is kept uncorrected; deterministic empty-queue no-ops make no call. Two greedy heuristics, a decision tree and a random forest give classical reference points. All six systems use the same execution gate, and an evaluator implemented separately from the production checker replays saved executions. These paths have development receiving evidence; the frozen comparative study is not complete.
 
-Our contributions are:
+Our implemented infrastructure and planned study provide:
 
-1. A paired six-system comparison in which the agent and the plain LLM differ in grounding, checking and repair, not in the model or the facts it sees.
+1. A design for a paired six-system comparison in which the agent and the plain LLM differ in grounding, checking and repair, with matched underlying model and visible facts. The agent may use more calls within its recorded budget.
 2. An execution design in which no model output can run without passing a checker and a controller, with every stage and request saved.
-3. An evaluation that separates schedule accuracy, safety and explanation faithfulness, using independent replay and blinded human claim review with a reported inter-rater reliability.
+3. Evaluation tooling that separates schedule accuracy, safety and explanation faithfulness, with independent replay and retained development annotation/reliability records. Frozen held-out review and its reliability report remain pending.
 4. [Held-out findings, added after the frozen runs.]
 
 Our conclusions are limited to the scenarios we evaluate. [State here whether the frozen forecast allows conclusions about carbon-aware timing; see §G.]
@@ -29,7 +29,7 @@ Our conclusions are limited to the scenarios we evaluate. [State here whether th
 
 **Decision.** At each slot with waiting work, a system proposes a plan that starts, defers or abstains from each waiting job. Only starts for the current slot can execute, and only after the plan passes the checks against the latest state.
 
-**Impact.** Energy per slot is PUE × IT power × one hour, and emissions are energy × carbon intensity ÷ 1,000 kg. We use a PUE of 1.2 as a design assumption. For the same completed work, timing changes emissions but not energy. Savings are therefore reported only between schedules that completed the same work under the same inputs.
+**Impact.** Energy per slot is PUE × IT power × one hour. With energy in kWh and carbon intensity in g/kWh, modeled emissions in kg are energy × carbon intensity ÷ 1,000. We use PUE 1.2 as a design assumption. Under these fixed-power/PUE assumptions, timing can change emissions for the same completed work without changing its energy. Savings are reported only between schedules that completed the same work under the same inputs, and remain development proxy arithmetic until source acceptance.
 
 **Feasible schedules.** A schedule must respect arrivals, deadlines, the nonflexible rule, the 100 kW capacity limit in every slot and the start window. Each waiting job must be started, deferred or abstained from. Abstention is credited only when a job is verifiably infeasible or required evidence is unavailable.
 
