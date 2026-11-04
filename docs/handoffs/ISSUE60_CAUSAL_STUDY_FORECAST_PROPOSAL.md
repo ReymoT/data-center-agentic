@@ -1,5 +1,22 @@
 # Issue #60 causal study forecast proposal
 
+## Current publication and receiving status
+
+Matty authorized review, necessary fixes, publication and merged-branch cleanup
+in this chat on November 3. Merging this proposal publishes its specification
+and synthetic proofs; scientific adoption and production implementation remain
+pending the affected-owner responses and acceptance gates below.
+
+Reimo posted the actual request at 2026-11-03T23:22:02Z, before the manager's
+deliverable deadline. [Matty's technical review and parameter response](https://github.com/ReymoT/data-center-agentic/pull/168#issuecomment-6620949015)
+is recorded. Ved, Nisha and Edison still owe exact acceptance or corrections;
+the response boundary is November 4 at 4:22 PM Phoenix time (23:22Z).
+The review found no causality defect in the conditional equations. It corrected
+stale publication wording and a branch-dependent link before deletion. Tests
+are synthetic specifications, not an implemented production forecast broker or
+independent custody acceptance. The dated preparation/publication logs below
+retain their original scope and do not override this current status.
+
 Proposal **CF60-v1**, 2026-11-03. Producer/coding decision owner: Reimo.
 **Proposed, conditional, not adopted.** Reviewed fetched main and clean starting tree
 `87621d879ea48b02ecf8b6306516a4bcc774cf83`, instruction 1.28, F02 1.0.0.
@@ -241,7 +258,7 @@ appear in the inventory. Neither permission nor external contact is inferred.
 ## Affected-owner decision request and freeze impact
 
 Reimo owns the specification and later adapter implementation. Request time is
-**pending human posting**; record its actual UTC timestamp in #60. The response/
+**2026-11-03T23:22:02Z**, recorded in [the posted response](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6618029295). The response/
 escalation deadline is that timestamp plus 24 elapsed hours, without resetting
 Matty's November 3 21:01 Phoenix deliverable deadline (Nov 4 04:01Z).
 
@@ -356,3 +373,16 @@ B1–B3 remain UNRESOLVED, B4 PROVISIONAL and B5 custody/scientific freeze PENDI
 The review requests above are proposals for affected-owner receiving, not recorded
 acceptances. Record the actual request time when the human posts the Issue reply;
 publication of this draft does not reset the historical manager deadline.
+
+### Manager publication validation
+
+Matty rebased no history: merged current main `31487bf0167849e8868f4b0d40ff3d7ab98a6c4f`
+into the proposal branch, preserving Reimo's commits. The corrected documentation
+uses a relative handoff link that survives branch deletion and records the actual
+request timestamp. The manager-host focused proof/isolation/custody/P03/reference/
+P05/E02 run passed **205 tests, with two custody symlink tests skipped** because
+the host could not create symlinks. The skips do not establish access-control
+acceptance. Setup/local-link validation, lint, formatting and whitespace passed.
+Exact updated PR and merged-main CI must pass before final branch cleanup.
+No production adapter, source mapping, forecast default, model or shared scientific
+setting was changed. The pending owner responses and adoption gates remain explicit.

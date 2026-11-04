@@ -1,5 +1,11 @@
 # PR title
 
+Historical publication draft. The actual request and current review status are
+recorded in [the proposal](ISSUE60_CAUSAL_STUDY_FORECAST_PROPOSAL.md).
+Matty subsequently authorized review/fixes and publication with branch cleanup.
+This retained draft does not establish scientific adoption or restrict that
+later publication authorization.
+
 D05 #60: propose causal CF60-v1 study forecast and isolation contract
 
 # PR description
