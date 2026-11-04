@@ -47,8 +47,9 @@ forecast does. Under a flat forecast every start has the same forecast emissions
 for a given job, so Greedy B's `(emissions, start)` key always resolves to the
 earliest feasible start, the same rule as Greedy A. No system then receives a
 signal about which future hour is cleaner. If a flat forecast is frozen, this
-evaluation cannot show that any system times work to lower carbon, and emissions
-differences must not be attributed to forecast-driven timing. A shaped same-hour
+evaluation cannot test selection of cleaner hours from forecast variation.
+Realized emissions may still differ, but those differences must not be attributed
+to forecast-driven selection of cleaner hours. A shaped same-hour
 alternative is an [open team question](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6622770964).
 Any comparison of forecast methods uses development dates only.
 
@@ -139,8 +140,11 @@ gap prospectively; their effectiveness still needs held-out evaluation.
 
 ### 3.4 Execution receiving (public EP-HAND1, two separate runs)
 
-Source: [receiving result](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6623003586)
-and [manager acceptance](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6635822337).
+Source: [unchanged receiving report](../evidence/I01_RECEIVING_NISHA_2026-11-03.txt),
+[scoped manager acceptance](../handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
+and [manager corroboration](../evidence/I01_RECEIVING_MANAGER_CORROBORATION_2026-11-04.json).
+The receiver's [public confirmation](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6623003586)
+is retained separately.
 
 Nisha received the six original results and 180 traces, verified the committed
 archive digest and all 186 evidence files, and replayed the executed starts with
@@ -162,7 +166,8 @@ What this does and does not show:
 - **Consistency, not quality.** Zero findings means the saved executions and
   results agree with an independent reconstruction. It says nothing about
   explanation faithfulness, and it isn't a safety finding.
-- **No comparison.** This is one episode and one seed, across two runs with
+- **No comparison.** This is one episode, with one trial (trial 0) per LLM and
+  one deterministic execution per classical system, across two runs with
   different identities and code revisions. The table can't rank systems, and the
   Plain outcome is not an estimate of Plain's performance.
 - **Forecast differs from the study.** EP-HAND1 uses a shaped perfect-foresight
@@ -188,8 +193,9 @@ aren't scheduling outcomes or final performance, and they don't show that either
 model improves a research endpoint. Selection used rollouts, so a shallower
 candidate with a higher F1 isn't a new selection criterion. Both models were
 trained on the flat development forecast, so `carbon_mean_g_per_kwh` and
-`carbon_min_g_per_kwh` were equal in every row and didn't differ between candidate starts at a decision. Their
-compatibility with the adopted study forecast must be assessed before freeze.
+`carbon_min_g_per_kwh` were equal in every row and didn't differ between candidate
+starts at a decision. Compatibility with whichever study forecast is eventually
+adopted must be assessed before freeze.
 
 ## 4. Held-out results
 
