@@ -1,11 +1,20 @@
 # Project plan
 
+Current receiving update, November 4: [Nisha's supplied PASS is accepted](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
+for the six existing public-development units/180 traces. That private-transfer
+and independent content-review dependency is complete. The next public-validation
+step is exact fresh authorization review; no new run or final I01 acceptance is
+claimed. [The I02 manifest](i02/freeze-manifest.json) retains forecast/source/custody
+and forecast-compatibility blockers, with no frozen item or run authorization.
+Older dated entries below retain their original preparation status where superseded.
+
 November 2 follow-up: [measured P06 development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
 are available for all five grid configurations and three folds; selection and
 frozen policy binaries are unchanged. [Manager decisions and blockers](handoffs/NOV02_MANAGER_FOLLOWUP.md)
 record custody conditions, private receiving and course gaps. I01 offline pins
-are refreshed after P06; fresh live authorization, independent content receiving
-and source/custody/freeze acceptance remain separate unfinished gates.
+are refreshed after P06; fresh live authorization and source/custody/freeze
+acceptance remain unfinished gates. Existing-run independent content receiving
+is accepted by the November 4 update above.
 
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
@@ -22,7 +31,7 @@ and official course requirements #16 remain open.
 The [saved-trace explorer and offline readiness](handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
 are implemented. The current candidate includes measured artifact bindings and
 the offline pin checks use real manager-host models. Live authorization/runtime/
-launcher checks, independent receiving and actual source/custody/freeze remain
+launcher checks, any new unified-run receiving and actual source/custody/freeze remain
 open; do not describe these as another missing UI or missing model implementation.
 
 The [official report update](decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)

@@ -29,6 +29,7 @@ REQUIRED_ITEM_IDS = {
     "code-commit",
     "dependency-lock",
     "held-out-episodes",
+    "study-forecast",
     "development-episodes",
     "ontology-and-shapes",
     "candidate-labels",

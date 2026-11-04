@@ -1,5 +1,10 @@
 # November 2 manager follow-up
 
+Superseding receiving update, November 4: [Nisha's report is accepted](I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md).
+The private-transfer/independent content-review gap described below was the
+November 2 state and is resolved for the existing six public-development units.
+Other source, actual held-out custody and scientific freeze gates remain open.
+
 Matty authorized the recommended follow-ups in this chat. This records bounded
 management decisions and actual work; it does not invent another owner's approval.
 

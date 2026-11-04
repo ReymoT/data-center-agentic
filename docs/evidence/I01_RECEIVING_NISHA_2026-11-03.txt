@@ -1,0 +1,68 @@
+I01 DEVELOPMENT REPLAY RECEIVING REPORT
+Receiver: Nisha Mahadev Kolekar
+Date: November 3, 2026, Phoenix time
+Overall result: PASS
+
+Scope: public EP-HAND1 development receiving only. This doesn't establish source rights, scientific freeze, I01 final acceptance, explanation faithfulness or any comparison between systems. No policy or model was run, and no record was changed.
+
+ENVIRONMENT
+- Checkout: 41e1040c7e9f122b8ad645f2b8f3db7094421aaf (matches reviewed main; clean)
+- OS: Windows-11-10.0.26300-SP0
+- Python: 3.12.10
+- Dependency lock (LF SHA-256): 38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c (matches)
+- Installed packages: all 74 match the lock exactly
+- pip check: no broken requirements
+- scripts/validate_setup.py: passed
+- tests/evaluation: 268 passed
+
+ARCHIVE AND FILES
+- Archive SHA-256: 2434b3a0fb8d595f1e864755ba1172a230e17101fbae580d9960cbc32d7ff12f
+  Matches the guide and the digest committed in docs/handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md.
+- ZIP entries: 187, all JSON; no unsafe paths or links; ZIP integrity test passed
+- Evidence files: 186 of 186 match transfer-inventory.json
+- Results: 6. Unique traces: 180.
+- transfer-inventory.json left unchanged; this report is the separate receipt.
+- Public bundle LF SHA-256: 8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6 (matches)
+
+METHOD
+- Each result and trace hash checked against docs/evidence/i01-existing-evidence-index-2026-11-02.json.
+- Each trace filename checked against its decision ID.
+- Run, system, episode and trial identity checked across each unit's records and result.
+- Slots 0-29 checked as covered exactly once.
+- Executed starts replayed with executed_starts, replay_episode and compare_result under Q03_OPTION_B, using the public bundle.
+- Review script SHA-256: 866b2d12632c15bdbd19bbd69c46658aab77ca961e0250c3638b1aa1a8b1c17f
+- Machine-readable report SHA-256: b8074263122836085579cd672af84761ffc9c9ea390f082de84f6af65039ff68
+- Command: python -I -X utf8 i01_receive.py <repo> <zip> <new extract folder> <report.json>
+
+PER SYSTEM (episode EP-HAND1)
+System           Run               Unit              Traces Slots  Findings Mismatches Result
+greedy_a         RUN-1f6e4c4c2afb  14650330b6f799b5  30     0-29   0        0          PASS
+greedy_b         RUN-1f6e4c4c2afb  48e67840bc6e5f40  30     0-29   0        0          PASS
+decision_tree_c  RUN-1f6e4c4c2afb  398315c682a0f2bc  30     0-29   0        0          PASS
+random_forest_d  RUN-1f6e4c4c2afb  557ceae6fe3ca636  30     0-29   0        0          PASS
+agent            RUN-646ddd3a1142  9fb63635b4ff3cf2  30     0-29   0        0          PASS
+plain_llm        RUN-646ddd3a1142  dcbd5bbb334a30c0  30     0-29   0        0          PASS
+
+Observed in the replay (descriptive only):
+System           Executed starts         Completed  Missed/unfinished  Model calls  Repair  Fallback
+greedy_a         J1@0, J2@2              J1, J2     J3                 0            0       0
+greedy_b         J1@2, J2@4              J1, J2     J3                 0            0       0
+decision_tree_c  J1@0, J2@4              J1, J2     J3                 0            0       0
+random_forest_d  J1@2, J2@4              J1, J2     J3                 0            0       0
+agent            J1@0, J2@2              J1, J2     J3                 12           4       4
+plain_llm        none                    none       J1, J2, J3         5            0       0
+
+The Plain 5 / Agent 12 calls and the 4 repair / 4 fallback stage counts match docs/R04_DEVELOPMENT_EVIDENCE.md.
+Missed and unfinished jobs overlap here, so they are one column, not added counts. No-op records aren't counted as starts.
+
+FIRST RUN, DISCLOSED
+The first run reported FAIL with 180 problems, all from a defect in my review script: it hashed the raw decision ID, while runtime/traces.py names each file with sha256_hex(decision_id), the hash of the canonical JSON form. Every other check passed in that run. I fixed that one line, kept the first report, and reran into a fresh folder. The two extractions are identical. Nothing in the evidence was changed to get this result.
+
+LIMITATIONS
+- completed_work is absent from the original results, so compare_completed_work returned status "absent". Completed work was derived (140.0 kWh for the five systems with two completed jobs, 0.0 for plain_llm) but not compared to a recorded value.
+- manifest_sha256 in the index wasn't checked, because the run manifests aren't in the packet.
+- The trial field is empty for the four classical units; the index has no trial field to compare it against.
+- Replay uses the repository's E01 code, which I wrote. It is separate from the production simulator and checker, but it isn't a second implementation.
+- The two runs have separate identities and code revisions. This isn't a unified six-system comparison.
+- Zero replay findings says nothing about explanation faithfulness.
+- The files arrived over Slack; the digest was confirmed against the committed handoff, not through a separate message.
