@@ -1,5 +1,11 @@
 # Unified receiving readiness and saved-trace explorer
 
+Current update, November 4: [Nisha's independent receiving of the existing six
+development units is accepted](I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md).
+This resolves the private packet transfer/content-review dependency described
+below. Earlier offline preparation records retain their historical flags; they
+are not new claims that receiving is still absent. No new model run is authorized.
+
 Both requested branch histories (#157 and #159) are integrated through #160.
 The post-P06 refresh includes the changed training source and a new pending
 approval template. The [pre-P06 records](../evidence/i01-pre-p06-2026-11-02/i01-unified-readiness-2026-11-02.json)
@@ -69,7 +75,7 @@ tests and actual browser interaction verify filters, stage details and completio
 slots. The generated six-unit HTML stays manager-local; only the field-filtered
 actual screenshot and implementation are published for report assembly.
 
-Source B1-B3, actual B5 custody/forecast acceptance, private replay transfer and
-independent content receiving remain separate open gates in #60. The private packet
-is prepared, not sent. Course midnight/project-number/release fields remain open
+Source B1-B3 and actual B5 held-out custody/forecast acceptance remain open in #60.
+The existing development packet was received and reviewed by Nisha; its scoped
+acceptance is recorded above. Course midnight/project-number/release fields remain open
 in #16. #95 remains open for actual held-out reliability.

@@ -1,5 +1,11 @@
 # I02 freeze manifest (pre-freeze checklist)
 
+November 4 receiving update: [Nisha's existing-run content PASS is accepted](../handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md).
+The manifest still blocks full I01/pre-freeze acceptance and the study forecast,
+source/custody and forecast-dependent label/model compatibility gates. Conditional
+acceptance of a proposal and integrity checks do not freeze the study or authorize
+a model request. The planned 300-run matrix is unchanged.
+
 For prospective held-out annotation use the approved text-review intake in
 [the extraction rule](../e04/EXTRACTION_RULE.md): generate workfiles with
 `blank_annotation(..., text_review=True)` and compare with `--require-text-review`.
