@@ -2,7 +2,8 @@
 
 Superseding report-only update: [official 5–10-page IEEE requirements](Q13_OFFICIAL_REPORT_2026-11-02.md).
 The earlier 15–20-page entry below is historical. Presentation planning remains
-unchanged; final report midnight/project-number/release fields remain unresolved.
+unchanged. The linked record includes Nisha's November 4 project-number/end-of-day
+confirmation; official timezone and release/license fields remain unresolved.
 
 Source: [Nisha's consolidated November 2 record](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6585731402),
 attributing the instructor's Canvas announcement and latest class email. Matty's

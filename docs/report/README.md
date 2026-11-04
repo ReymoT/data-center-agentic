@@ -9,7 +9,10 @@ Assembler: Nisha (R05); release package: Matty (R06).
 - The detailed contributions of each team member are required.
 - The earlier course outline also asks for supplemental material (data, code) and a statement of which parts are ours versus third-party. The repository and the disclosure section below cover these.
 
-Nisha confirmed that "midnight" means 11:59 pm on December 9 ([#16](https://github.com/ReymoT/data-center-agentic/issues/16)); the timezone is taken as Arizona time, matching class. December 7 is Matty's conservative internal submission target,
+Nisha reports project number 21 and an end-of-day deadline of 11:59 pm on December 9
+in her [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165).
+Arizona timezone is her working assumption, not separately confirmed official guidance.
+December 7 is Matty's conservative internal submission target,
 not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
 **Ground rules for every section:**
@@ -63,4 +66,4 @@ These are draft report-production targets. Presentation preparation (November 9â
 | December 2 | Demo; evaluation findings and reliability drafts complete |
 | December 6 | Full IEEE draft for team review |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
-| December 9, 11:59 pm | Official deadline |
+| December 9, 11:59 pm | Deadline reported by Nisha; official timezone unconfirmed |
