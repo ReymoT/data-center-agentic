@@ -80,3 +80,12 @@ Reason: a flat forecast gives every start of a job the same forecast emissions, 
 Tests: 15 in `tests/evaluation/test_forecast_ties.py`, including a real Greedy B plan matching Greedy A under a flat forecast. Mutation check: eight deliberate bugs each made tests fail, and the code was restored. On the public EP-HAND1 forecast with Greedy B's J1@2, J2@4 schedule, the summary is 9 job decisions, 6 distinct, 3 no choice and 0 tied.
 
 Not wired into a report or the runner yet; that happens with E06 once the study forecast is decided.
+
+Manager review: the helper now refuses a protocol name that differs from the
+replay's recorded protocol. Forecast sums use `math.fsum` and exact equality;
+small real differences are not rounded into ties. Two regression tests cover
+these cases. This is a diagnostic for individual-job choices before waiting-job
+contention, not a reconstruction of Greedy B's sequential ranking or floating-point
+tie-break behavior. It does not establish that a forecast caused an execution.
+The original fifteen-test and mutation-check claims above describe Nisha's branch;
+the reviewed helper has seventeen focused tests.

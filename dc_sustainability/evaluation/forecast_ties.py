@@ -2,8 +2,8 @@
 
 A flat forecast gives every start of a job the same forecast emissions, so a policy that
 ranks starts by emissions has no reason to prefer one hour. This counts those decisions
-from a run's E01 replay and the forecasts its policy saw, so the report can state how much
-of a schedule any forecast could have influenced. Read Greedy B's run for the reported
+from a run's E01 replay and the forecasts its policy saw, so the report can describe
+whether forecasts distinguish individual-job starts. Read Greedy B's run for the reported
 rate. Nothing here calls a policy, the simulator or the production checker.
 
 One job decision is one waiting job at one decision slot, so a job that waits three slots
@@ -34,9 +34,6 @@ Status = Literal[
     "uncovered",  # a feasible start occupies a slot with no forecast
     "unverifiable",  # capacity evidence is missing, so feasibility is unknown
 ]
-
-# Forecast sums of equal values can differ in the last float bits by summation order.
-_REL_TOLERANCE = 1e-9
 
 
 @dataclass(frozen=True)
@@ -77,7 +74,9 @@ def _classify(job: s.Job, starts: tuple[int, ...], carbon: Mapping[int, float]) 
     # Power and energy per slot are fixed for one job, so summed carbon ranks its starts.
     sums = [math.fsum(carbon[slot] for slot in slots) for slots in occupied]
     first = sums[0]
-    same = all(math.isclose(value, first, rel_tol=_REL_TOLERANCE) for value in sums)
+    # Do not turn a small but real forecast difference into an all-starts tie.
+    # fsum gives stable sums; this diagnostic uses exact equality, not a near-tie threshold.
+    same = all(value == first for value in sums)
     return "tied" if same else "distinct"
 
 
@@ -87,6 +86,8 @@ def job_decisions(
     protocol: Protocol,
 ) -> tuple[JobDecision, ...]:
     """Classify every waiting job at every decision slot of one replayed run."""
+    if replay.protocol != protocol.name:
+        raise ValueError("forecast-tie protocol must match the replay protocol")
     decisions: list[JobDecision] = []
     for slot in range(s.PROPOSED_DECISION_SLOTS):
         visible = tuple(forecasts_by_slot.get(slot, ()))

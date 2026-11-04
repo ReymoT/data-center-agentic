@@ -13,7 +13,7 @@ import pytest
 from dc_sustainability import schemas as s
 from dc_sustainability.evaluation import forecast_ties as t
 from dc_sustainability.evaluation import replay as r
-from dc_sustainability.evaluation.validator import Q03_OPTION_B
+from dc_sustainability.evaluation.validator import Q03_DRAFT, Q03_OPTION_B
 from dc_sustainability.policies.greedy import propose
 from tests.contracts import fixtures as f
 from tests.evaluation.test_replay import starts
@@ -75,6 +75,20 @@ def test_equal_sums_from_different_values_are_a_tie():
         fact.model_copy(update={"value": values[fact.valid_slot]}) for fact in forecasts[0]
     )
     assert at(decisions(forecasts), 0, "J1").status == "tied"
+
+
+def test_small_real_differences_are_not_rounded_into_ties():
+    forecasts = flat()
+    forecasts[0] = tuple(
+        fact.model_copy(update={"value": 400.0000001}) if fact.valid_slot == 5 else fact
+        for fact in forecasts[0]
+    )
+    assert at(decisions(forecasts), 0, "J1").status == "distinct"
+
+
+def test_a_different_protocol_cannot_reinterpret_the_replay():
+    with pytest.raises(ValueError, match="must match the replay protocol"):
+        t.job_decisions(replay(), flat(), Q03_DRAFT)
 
 
 def test_a_missing_forecast_is_uncovered_and_gives_no_rate_rather_than_zero():
