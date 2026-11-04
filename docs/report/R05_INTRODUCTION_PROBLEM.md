@@ -1,12 +1,12 @@
 # Introduction and problem statement (R05 draft)
 
-Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the source review](../SOURCE_REVIEW.md); full references are pending.
+Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the reference list](REFERENCES.md).
 
 ## I. Introduction
 
 Flexible compute work can be scheduled at different times. In our fixed-power, fixed-PUE simulation, moving the same work to a slot with lower carbon intensity can reduce modeled emissions without changing that work's energy. Language models offer an interface for reading operating facts and explaining recommendations. But a sustainability recommendation that sounds reasonable can still overload a site, miss a deadline, or claim savings that the evidence does not support. Fluency alone does not establish correctness.
 
-The source review identifies ideas that motivate our architecture: typed relationships and retrieval [AssetOpsBench], simulation before application [LC-Opt], checks and fallbacks [DeepMind], and evidence-linked sustainability decision support [Resource Advisor]. We use these ideas to design a controlled comparison with the same underlying LLM. This review motivates design choices; it is not an audit of deployed systems or evidence of our agent's superiority.
+The source review identifies ideas that motivate our architecture: industrial-agent benchmarking [AssetOpsBench], typed graphs and retrieval [KG-Assets], simulation before application [SustainDC], [LC-Opt], checks and fallbacks [DeepMind], and conversational sustainability decision support [ResourceAdvisor]. We use these ideas to design a controlled comparison with the same underlying LLM. This review motivates design choices; it is not an audit of deployed systems, a systematic novelty search or evidence of our agent's superiority.
 
 We ask: *does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?* We study this in one bounded setting: scheduling flexible jobs at a single simulated site. Scheduling is the test setting rather than the goal, because it gives each recommendation a checkable outcome.
 
