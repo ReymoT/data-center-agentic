@@ -89,3 +89,30 @@ contention, not a reconstruction of Greedy B's sequential ranking or floating-po
 tie-break behavior. It does not establish that a forecast caused an execution.
 The original fifteen-test and mutation-check claims above describe Nisha's branch;
 the reviewed helper has seventeen focused tests.
+
+## Paired statistics (November 4)
+
+Reason: E03's acceptance evidence requires paired episode-resampling code, and R05 promises paired differences with intervals resampled by episode, a date-cluster sensitivity check and scenario summaries.
+
+- `dc_sustainability/evaluation/paired.py` (new): `paired_sample`, `savings_sample`, `interval`, `scenario_summary` and the `Resampling` settings.
+- The episode is the unit. An LLM's trials are averaged inside their episode, so resampling keeps them together.
+- An episode enters a sample only when every expected trial of both systems has a value. Anything else is excluded and counted as `run_missing`, `value_unavailable` or `comparison_blocked`. The planned episodes and trials are required inputs, so an episode with no runs still appears in the denominator.
+- `savings_sample` applies the equal-work rule per episode: one blocked trial excludes the episode, because averaging only comparable trials would hide the runs that did different work.
+- `interval` gives a percentile interval. With fewer than two units the interval is `None`, and with no episodes the estimate is `None`, never 0. `by="date"` resamples whole dates; with six dates it qualifies the episode interval rather than replacing it.
+- `scenario_summary` is run-level description, so an LLM's trials count as separate runs there and not in intervals.
+
+Proposed settings, to freeze with I02 before any held-out value is seen: 10,000 resamples, 95% confidence, seed 20261113.
+
+Manager review adds expected-trial validation to both pairing paths: trial IDs
+must be unique non-negative integers or `None`, with Boolean/float aliases refused.
+This prevents repeated trial IDs from silently reweighting episode means. Five
+regression cases cover duplicate, aliased and invalid IDs. Publishing this helper
+does not freeze the proposed resampling settings or change the equal-work rule.
+
+Tests: 41 in `tests/evaluation/test_paired.py`, including exact enumeration of small resamples. Mutation check: fourteen deliberate bugs each made tests fail, after one survivor (unweighted date means) led to a stronger test.
+
+Not wired to saved runs yet: building `Observation`s from runs needs the metric definitions below.
+
+Open:
+- `compare_savings` blocks unequal trial values as `inputs_differ`. Classical runs have trial `None` and LLM runs have trials 0-2, so Agent-against-Greedy savings would always be blocked unless the caller aligns them. Agent against Plain isn't affected.
+- E03 still lacks run-level metrics: decision accuracy, stage-specific unsafe-proposal rates, repair/fallback/abstention rates, and latency, token and cost summaries.
