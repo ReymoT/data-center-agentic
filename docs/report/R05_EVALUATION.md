@@ -40,6 +40,18 @@ private custody/freeze remain gated by #60. Until accepted, carbon quantities ar
 development proxy arithmetic, not verified site emissions or causal savings.
 The six systems have separate receiving records, not one completed frozen study.
 
+**Forecast limitation.** The study forecast is not adopted yet. The proposal,
+[CF60-v1](../handoffs/ISSUE60_CAUSAL_STUDY_FORECAST_PROPOSAL.md), repeats one
+recent value across the whole visible horizon, as the development persistence
+forecast does. Under a flat forecast every start has the same forecast emissions
+for a given job, so Greedy B's `(emissions, start)` key always resolves to the
+earliest feasible start, the same rule as Greedy A. No system then receives a
+signal about which future hour is cleaner. If a flat forecast is frozen, this
+evaluation cannot show that any system times work to lower carbon, and emissions
+differences must not be attributed to forecast-driven timing. A shaped same-hour
+alternative is an [open team question](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6622770964).
+Any comparison of forecast methods uses development dates only.
+
 **Safety:**
 - constraint violations in proposed and executed plans;
 - unsafe advice (a proposal the checker would refuse);
@@ -61,6 +73,7 @@ An empty explanation has 0 completeness and coverage; zero-denominator faithfuln
 - Scenario mean, standard deviation, minimum and maximum for all six systems, with explicit counts, denominators and missing values.
 - Paired differences, with confidence intervals resampled by episode, keeping each LLM's three trials together.
 - A date-cluster sensitivity check, given only 6 dates.
+- Planned, not yet implemented: the forecast-tie rate, the share of Greedy B job decisions where every feasible start has equal forecast emissions.
 - No tuning on held-out results.
 
 ## 2. Reliability method
@@ -123,6 +136,60 @@ gap prospectively; their effectiveness still needs held-out evaluation.
   this is a reporting limitation, not a claim that intervals cannot be calculated.
 - **Synthetic cases.** The first rater wrote both the development cases and the calibration packet, which is disclosed.
 - **Not a study result.** The held-out reliability report (#95) is the result for the study.
+
+### 3.4 Execution receiving (public EP-HAND1, two separate runs)
+
+Source: [receiving result](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6623003586)
+and [manager acceptance](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6635822337).
+
+Nisha received the six original results and 180 traces, verified the committed
+archive digest and all 186 evidence files, and replayed the executed starts with
+E01 under `Q03_OPTION_B`. Each unit covers slots 0–29 exactly once.
+
+| System | Run | Executed starts | Completed | Missed and unfinished | Model calls | Replay findings | Result mismatches |
+|---|---|---|---|---|---:|---:|---:|
+| `greedy_a` | `RUN-1f6e4c4c2afb` | J1 at 0, J2 at 2 | J1, J2 | J3 | 0 | 0 | 0 |
+| `greedy_b` | `RUN-1f6e4c4c2afb` | J1 at 2, J2 at 4 | J1, J2 | J3 | 0 | 0 | 0 |
+| `decision_tree_c` | `RUN-1f6e4c4c2afb` | J1 at 0, J2 at 4 | J1, J2 | J3 | 0 | 0 | 0 |
+| `random_forest_d` | `RUN-1f6e4c4c2afb` | J1 at 2, J2 at 4 | J1, J2 | J3 | 0 | 0 | 0 |
+| `agent` | `RUN-646ddd3a1142` | J1 at 0, J2 at 2 | J1, J2 | J3 | 12 | 0 | 0 |
+| `plain_llm` | `RUN-646ddd3a1142` | None | None | J1, J2, J3 | 5 | 0 | 0 |
+
+The Agent has 4 records with a repaired stage and 4 with a fallback stage. Stage
+presence is not repair success.
+
+What this does and does not show:
+- **Consistency, not quality.** Zero findings means the saved executions and
+  results agree with an independent reconstruction. It says nothing about
+  explanation faithfulness, and it isn't a safety finding.
+- **No comparison.** This is one episode and one seed, across two runs with
+  different identities and code revisions. The table can't rank systems, and the
+  Plain outcome is not an estimate of Plain's performance.
+- **Forecast differs from the study.** EP-HAND1 uses a shaped perfect-foresight
+  forecast, which is why Greedy B moved work later here. This doesn't predict its
+  behavior under a flat study forecast (§1).
+- **Replay independence.** E01 is separate from the production simulator and
+  checker, but its author performed this review. It isn't a second implementation.
+- **Completed work.** `completed_work` is absent from the original results, so
+  that comparison is reported as absent, not as a match.
+- **Run manifests.** They weren't in the packet. Matty checked them separately.
+
+### 3.5 Classical-model fold scores
+
+Source: [P06 blocked-fold metrics](../../models/DEVELOPMENT_FOLD_METRICS.md).
+
+| Selected model | Precision | Recall | F1 | Support |
+|---|---:|---:|---:|---|
+| Decision tree C (depth 8) | 0.394 | 0.578 | 0.469 | 1,411 positive, 4,635 negative |
+| Random forest D (100 trees, depth 10) | 0.456 | 0.618 | 0.525 | 1,411 positive, 4,635 negative |
+
+These are pooled post-selection classification scores on development folds. They
+aren't scheduling outcomes or final performance, and they don't show that either
+model improves a research endpoint. Selection used rollouts, so a shallower
+candidate with a higher F1 isn't a new selection criterion. Both models were
+trained on the flat development forecast, so `carbon_mean_g_per_kwh` and
+`carbon_min_g_per_kwh` were equal in every row and didn't differ between candidate starts at a decision. Their
+compatibility with the adopted study forecast must be assessed before freeze.
 
 ## 4. Held-out results
 
