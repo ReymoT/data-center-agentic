@@ -5,10 +5,12 @@ records a separate person's E01 replay review of all six existing public-develop
 units. This resolves their content-receiving dependency, with no change to the
 architecture, original records or pending full I01/scientific acceptance.
 
-The [November 4 refresh](handoffs/NOV04_READINESS_AND_STATUS.md) rechecks the
+The [November 4 latency refresh](handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md) rechecks the
 exact public receiving candidate without runtime startup. The independent
 forecast-tie helper uses E01 replay and visible forecasts, outside the production
 policy/checker path; it does not choose a forecast method or prove causal savings.
+Agent request-latency totals are now saved before immutable trace persistence;
+wall-clock decision duration remains separate, and old records are not rewritten.
 
 The [P06 fold-scoring follow-up](../models/DEVELOPMENT_FOLD_METRICS.md) measures
 candidate classification on the fixed development partitions. It does not change

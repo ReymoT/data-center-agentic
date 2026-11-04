@@ -8,10 +8,15 @@ claimed. [The I02 manifest](i02/freeze-manifest.json) retains forecast/source/cu
 and forecast-compatibility blockers, with no frozen item or run authorization.
 Older dated entries below retain their original preparation status where superseded.
 
-The [November 4 offline refresh](handoffs/NOV04_READINESS_AND_STATUS.md) passed
-the actual no-startup launcher dry run for `RUN-3225d3a29153`, preserving prior
+The [November 4 latency refresh](handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md) passed
+the actual no-startup launcher dry run for `RUN-e670485639c9`, preserving prior
 records. PRs #169–#171 publish receiving acceptance, the R05 development evidence
 and the independent forecast-tie helper. No new inference or study rate is claimed.
+
+The later follow-up fixes future Agent request-latency persistence, records the
+manager analysis response and audits legacy labels read-only. Original traces,
+labels and models are unchanged. Affected confirmations and final freeze remain
+open; exact global-optimum tie frequency is not present in the saved cache.
 
 November 2 follow-up: [measured P06 development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
 are available for all five grid configurations and three folds; selection and

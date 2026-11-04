@@ -134,8 +134,15 @@ signal, so realized emissions differences cannot be attributed to forecast-drive
 selection of cleaner hours. The shaped alternative remains unadopted; C/D
 forecast compatibility, source facts and custody must be resolved before freeze.
 
-The [new offline authorization packet](handoffs/NOV04_READINESS_AND_STATUS.md)
+The [new offline authorization packet](handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md)
 passed no-startup dry-run checks. It is not another inference result.
+
+Future Agent traces now sum recorded model-request latency before persistence,
+matching Plain. This fixes missing new-run accounting; it does not fill old
+missing latency or convert whole-run elapsed time into inference cost. The
+[legacy-label audit](handoffs/LEGACY_LABEL_AUDIT_2026-11-04.md) separately confirms
+flat historical forecasts and solver-selected labels while leaving exact global
+tie multiplicity and CF60 compatibility unresolved.
 
 This exercise demonstrates that the implemented paths can run through the provider,
 checker, controller, durable traces and independent replay on this fixture, with

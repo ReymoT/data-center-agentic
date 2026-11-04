@@ -65,7 +65,7 @@
       "status": "blocked",
       "path": "docs/handoffs/ISSUE60_CAUSAL_STUDY_FORECAST_PROPOSAL.md",
       "sha256": null,
-      "blocker": "#60/#168: CF60-v1 is published, not adopted. Nisha conditionally accepts her scope with three custody clarifications: recorded-index plus both interval hypotheses; legacy plus CF60 footprints for all development episodes; merged/pinned new selector version before nonce. Other affected-owner responses, exact method decision and production broker/receiving remain pending. Her shaped same-hour option is an additional evaluation question, not a condition on her acceptance"
+      "blocker": "#60/#168: CF60-v1 is published, not adopted. Nisha conditionally accepts her scope with three custody clarifications: recorded-index plus both interval hypotheses; legacy plus CF60 footprints for all development episodes; merged/pinned new selector version before nonce. Ved's conditional mechanics acceptance is received, but O02/C/D compatibility is not certified. Edison's response, exact method decision and production broker/receiving remain pending. Her shaped same-hour option is an additional evaluation question, not a condition on her acceptance"
     },
     {
       "id": "development-episodes",
@@ -186,7 +186,7 @@
       "status": "pending",
       "path": "dc_sustainability/evaluation",
       "sha256": null,
-      "blocker": null
+      "blocker": "Matty's November 4 analysis response is recorded in docs/decisions/E03_ANALYSIS_MANAGER_2026-11-04.md: broad unsafe primary with both measures; 10000/0.95/20261113 percentile resampling; 24 core primary plus 6 withheld separate; genuine no-ops excluded and pending uncredited. Requested affected-consumer confirmations, E06 integration and final hashed analysis freeze remain pending; no held-out values read."
     },
     {
       "id": "faithfulness-rubric",
@@ -219,7 +219,7 @@
       "status": "blocked",
       "path": "docs/handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md",
       "sha256": null,
-      "blocker": "I01 remains partial. Nisha's supplied receiving PASS for the two existing separate public runs (six results, 180 traces) is accepted with original report and manager corroboration retained. That transfer/content-receiving dependency is resolved. Candidate RUN-3225d3a29153 passed November 4 no-startup dry-run checks and can proceed to exact fresh authorization review; no unified six-system run or its independent receiving is claimed. Full source/custody/forecast acceptance and common-protocol coverage remain pending."
+      "blocker": "I01 remains partial. Nisha's supplied receiving PASS for the two existing separate public runs (six results, 180 traces) is accepted with original report and manager corroboration retained. That transfer/content-receiving dependency is resolved. Candidate RUN-e670485639c9 binds the Agent latency fix and passed November 4 no-startup dry-run checks; exact fresh authorization is still required. Previous candidates are preserved. No unified six-system run or its independent receiving is claimed. Full source/custody/forecast acceptance and common-protocol coverage remain pending."
     }
   ],
   "freeze": {

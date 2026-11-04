@@ -18,8 +18,10 @@ original classifier-factory API is superseded; callers supply
 `TrainedPolicy(learned.load_verified(path, expected_sha256=...))`.
 
 The [current candidate](../evidence/i01-offline-config-2026-11-02.json) pins merged
-source commit `bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c`, including P06 and the
-reviewed E03 helper, and has identity `RUN-3225d3a29153`.
+source commit `40dcd800babf0964e718a8a538548e454d9c0e3c`, including P06, reviewed
+E03 helpers and the Agent latency fix, and has identity `RUN-e670485639c9`.
+[The later latency refresh](NOV04_LATENCY_LABELS_AND_READINESS.md) records its
+actual no-startup dry run and preserves `RUN-3225d3a29153` before replacement.
 [November 4 verification](NOV04_READINESS_AND_STATUS.md) preserves all four
 [pre-refresh records](../evidence/i01-pre-nov04-2026-11-04/i01-offline-config-2026-11-02.json).
 All earlier offline candidates remain in its history.
