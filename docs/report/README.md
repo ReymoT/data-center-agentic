@@ -3,13 +3,13 @@
 Assembler: Nisha (R05); release package: Matty (R06).
 
 **Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
-- **Due December 9, 2026, at midnight.** 20% of the course grade.
+- **Due December 9, 2026, at 11:59 pm.** 20% of the course grade.
 - **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
 - **One PDF per group**, uploaded to Canvas under Assignments › Final Project Report, named `Group15-Project21-F26-Final Project Report.PDF` (project number 21 confirmed by Nisha, [#16](https://github.com/ReymoT/data-center-agentic/issues/16)).
 - The detailed contributions of each team member are required.
 - The earlier course outline also asks for supplemental material (data, code) and a statement of which parts are ours versus third-party. The repository and the disclosure section below cover these.
 
-The exact interpretation/timezone of "midnight" remains unconfirmed. December 7 is Matty's conservative internal submission target,
+Nisha confirmed that "midnight" means 11:59 pm on December 9 ([#16](https://github.com/ReymoT/data-center-agentic/issues/16)); the timezone is taken as Arizona time, matching class. December 7 is Matty's conservative internal submission target,
 not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
 **Ground rules for every section:**
@@ -63,4 +63,4 @@ These are draft report-production targets. Presentation preparation (November 9�
 | December 2 | Demo; evaluation findings and reliability drafts complete |
 | December 6 | Full IEEE draft for team review |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
-| December 9 (midnight, interpretation unconfirmed) | Instructor-reported deadline, not an assumed end-of-day timestamp |
+| December 9, 11:59 pm | Official deadline |
