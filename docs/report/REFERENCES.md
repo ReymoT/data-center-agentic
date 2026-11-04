@@ -2,6 +2,14 @@
 
 Assembler: Nisha. Titles, authors and years below were checked online on November 4, 2026. Convert to IEEE style and number by first citation when moving to Overleaf. Add owners' references as sections arrive.
 
+Manager verification checked the linked arXiv metadata/abstracts and primary
+DeepMind/Schneider posts. Publisher DOI retrieval returned access errors for the
+two ACM entries; their matching primary preprints are
+[Wiesner et al.](https://arxiv.org/abs/2110.13234) and
+[Acun et al.](https://arxiv.org/abs/2201.10036). The latter preprint uses "Approach"
+where the publication below uses "Framework". Publication-specific page metadata
+is retained from Nisha's check, not represented as a new publisher-page inspection.
+
 | Key | Reference | Status |
 |---|---|---|
 | Wiesner | P. Wiesner, I. Behnke, D. Scheinert, K. Gontarska and L. Thamsen, "Let's Wait Awhile: How Temporal Workload Shifting Can Reduce Carbon Emissions in the Cloud," in *Proc. 22nd Int. Middleware Conf.*, 2021, doi: [10.1145/3464298.3493399](https://doi.org/10.1145/3464298.3493399). | Verified |
@@ -15,7 +23,7 @@ Assembler: Nisha. Titles, authors and years below were checked online on Novembe
 | KG-Assets | M. Mandarapu and S. Kunkunuru, "Knowledge Graphs as the Missing Data Layer for LLM-Based Industrial Asset Operations," [arXiv:2605.26874](https://arxiv.org/abs/2605.26874), 2026. | Preprint verified |
 | DeepMind | C. Gamble and J. Gao, "Safety-first AI for autonomous data centre cooling and industrial control," Google DeepMind blog, Aug. 17, 2018. [Link](https://deepmind.google/blog/safety-first-ai-for-autonomous-data-centre-cooling-and-industrial-control/). | Verified |
 | ResourceAdvisor | Schneider Electric, "Building Sustainability's Digital Future with EcoStruxure Resource Advisor Copilot, Schneider Electric's Latest AI Advancement," press release, Aug. 30, 2023. [Link](https://www.businesswire.com/news/home/20230830982435/en/Building-Sustainabilitys-Digital-Future-with-EcoStruxure-Resource-Advisor-Copilot-Schneider-Electrics-Latest-AI-Advancement). | Verified |
-| Qwen3 | Qwen Team, "Qwen3 Technical Report," [arXiv:2505.09388](https://arxiv.org/abs/2505.09388), 2025. | Verified |
+| Qwen3 | A. Yang et al. (Qwen Team), "Qwen3 Technical Report," [arXiv:2505.09388](https://arxiv.org/abs/2505.09388), 2025. | Author list and title checked against arXiv |
 
 ## Still to add
 
