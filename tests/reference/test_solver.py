@@ -198,6 +198,27 @@ def exhaustive_oracle(
                 "reason": "infeasible",
             }
 
+    # Physical feasibility and evidence availability are different questions.
+    # Enumerate only candidate starts whose complete occupied window has fresh
+    # forecasts, while keeping the physical-start check above independent.
+    for job_id in job_ids:
+        job = jobs[job_id]
+        allowed[job_id] = tuple(
+            start
+            for start in allowed[job_id]
+            if all(
+                _carbon_for_slot(state, context, slot, decision_time_utc) is not None
+                for slot in range(start, start + job.duration_slots)
+            )
+        )
+        if not allowed[job_id]:
+            return {
+                "feasible": False,
+                "objective_kg": None,
+                "optimal_schedules": (),
+                "reason": "insufficient_evidence",
+            }
+
     # Enumerate all combinations of one start per job.
     best_objective: Optional[float] = None
     best_schedules: list[dict[str, int]] = []
@@ -207,14 +228,7 @@ def exhaustive_oracle(
         if any(load.get(slot, 0.0) > capacity for slot in range(state.current_slot, horizon)):
             continue
         emissions = _schedule_emissions_kg(schedule, jobs, state, context, decision_time_utc)
-        if emissions is None:
-            # Missing/stale carbon on at least one occupied slot.
-            return {
-                "feasible": False,
-                "objective_kg": None,
-                "optimal_schedules": (),
-                "reason": "insufficient_evidence",
-            }
+        assert emissions is not None  # all enumerated windows have complete evidence
         if best_objective is None or emissions < best_objective - 1e-9:
             best_objective = emissions
             best_schedules = [schedule]
@@ -565,13 +579,32 @@ def _make_state_with_jobs(
 
 def test_oracle_rejects_overlapping_capacity():
     """B. Overlapping jobs and capacity: oracle independently rejects invalid overlaps."""
-    snap = f.snapshot()
+    snap = f.snapshot(capacity_kw=100.0)
     jobs = f.jobs()
-    # Two 2-slot, 70 kW jobs cannot both run in a 100 kW site with 40 kW background.
-    big_a = jobs["J1"].model_copy(update={"job_id": "JA", "power_kw": 70, "duration_slots": 2})
-    big_b = jobs["J2"].model_copy(update={"job_id": "JB", "power_kw": 70, "duration_slots": 2})
+    # Each 40 kW job fits individually above the 40 kW background, but both
+    # require the same two slots and jointly exceed the 100 kW capacity.
+    big_a = jobs["J1"].model_copy(
+        update={
+            "job_id": "JA",
+            "power_kw": 40,
+            "duration_slots": 2,
+            "arrival_slot": 0,
+            "deadline_slot": 2,
+        }
+    )
+    big_b = jobs["J2"].model_copy(
+        update={
+            "job_id": "JB",
+            "power_kw": 40,
+            "duration_slots": 2,
+            "arrival_slot": 0,
+            "deadline_slot": 2,
+        }
+    )
     state = _make_state_with_jobs(snap, current_slot=0, jobs=(big_a, big_b))
     ctx = s.Context.build(state, snap, representation="flat")
+    for job in (big_a, big_b):
+        assert _allowed_starts(job, 0, _visible_end(state), 100.0, {0: 40.0, 1: 40.0}) == (0,)
     oracle = _assert_oracle_matches_production(state, ctx, _decision_time(state))
     assert not oracle["feasible"]
 
@@ -678,15 +711,39 @@ def test_oracle_equal_cost_optima_without_imposing_tie_break():
     assert scheduled in oracle["optimal_schedules"]
 
 
-def test_oracle_independence_from_production_solver():
+def test_oracle_independence_from_production_solver(monkeypatch):
     """Validate the oracle: its expected objective does not come from solve_visible."""
     snap = f.snapshot()
     state = f.visible_state(snap)
     ctx = _context(state)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("the exhaustive oracle must not call the production solver")
+
+    monkeypatch.setattr("tests.reference.test_solver.solve_visible", forbidden)
+    monkeypatch.setattr("dc_sustainability.reference.solver.solve_visible", forbidden)
     oracle = exhaustive_oracle(state, ctx, decision_time_utc=_decision_time(state))
-    production = solve_visible(
-        state, ctx, decision_time_utc=_decision_time(state), time_limit_s=5.0
-    )
-    # Oracle and production agree on the minimum, but the oracle computed it independently.
-    assert oracle["objective_kg"] == pytest.approx(production.objective_kg, abs=1e-6)
     assert oracle["objective_kg"] == pytest.approx(48.4, abs=1e-6)
+
+
+def test_oracle_can_use_a_later_start_when_first_start_lacks_carbon():
+    snap = f.snapshot()
+    job = f.jobs()["J1"].model_copy(
+        update={"job_id": "JONE", "duration_slots": 1, "arrival_slot": 0, "deadline_slot": 3}
+    )
+    facts = tuple(fact for fact in f.forecasts() if fact.valid_slot != 0)
+    state = _make_state_with_jobs(snap, 0, (job,), carbon_facts=facts)
+    oracle = _assert_oracle_matches_production(
+        state, s.Context.build(state, snap, representation="flat"), _decision_time(state)
+    )
+    assert oracle["feasible"]
+    assert all(schedule["JONE"] > 0 for schedule in oracle["optimal_schedules"])
+
+
+def test_oracle_missing_all_carbon_is_evidence_failure():
+    snap = f.snapshot()
+    state = _make_state_with_jobs(snap, 0, (f.jobs()["J1"],), carbon_facts=())
+    oracle = _assert_oracle_matches_production(
+        state, s.Context.build(state, snap, representation="flat"), _decision_time(state)
+    )
+    assert oracle["reason"] == "insufficient_evidence"
