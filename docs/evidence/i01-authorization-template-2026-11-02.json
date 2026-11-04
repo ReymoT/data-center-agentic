@@ -12,11 +12,11 @@
     "single_use_authorization_required": true,
     "warmups": 0
   },
-  "candidate_config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
-  "launcher_sha256": "3c9c6355eca8c69400d690cd6873203cbb599b7747026db8e8636b0856117363",
+  "candidate_config_hash": "3225d3a2915396d7cdfcd35cd77544d90dc2eab90cb35ccadbb13c7572ff424e",
+  "launcher_sha256": "cb4c690a3adfd7699e9a613ee08b00785dc77efc179a13c740f75699db045499",
   "note": "Unapproved template. It is not permission to start the runtime or dispatch requests.",
-  "readiness_sha256": "ceaec69790e76513aa6415945259ffa4ce28a924c9ec08fcb8685816ef5ef1ce",
-  "single_use_id": "I01-EPHAND1-0f7d9498db6f-20261102-v1",
+  "readiness_sha256": "b390f75ddf5e9144d6d55e7459c802f6212561492a3d167f993636c1cc7b0beb",
+  "single_use_id": "I01-EPHAND1-3225d3a29153-20261104-v1",
   "status": "pending_fresh_user_approval",
   "text_pin_convention": "LF-normalized readiness and launcher"
 }

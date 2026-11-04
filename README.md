@@ -27,6 +27,11 @@ It makes no model calls. [Unified receiving readiness](docs/handoffs/I01_UNIFIED
 records the updated candidate and actual offline pin checks; live dispatch remains
 blocked pending fresh authorization and runtime/launcher checks.
 
+The [November 4 readiness refresh](docs/handoffs/NOV04_READINESS_AND_STATUS.md)
+records a passed no-startup dry run and a new, unapproved exact authorization
+packet. The forecast-tie diagnostic is implemented offline; measured study rates
+and E06 integration remain pending.
+
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public
 EP-HAND1 receiving. Plain and Agent completed the same public bundle in an earlier

@@ -18,8 +18,11 @@ original classifier-factory API is superseded; callers supply
 `TrainedPolicy(learned.load_verified(path, expected_sha256=...))`.
 
 The [current candidate](../evidence/i01-offline-config-2026-11-02.json) pins merged
-source commit `5773295700c3792afe4eec2de48572ccb1aa0a66`, including P06, and has
-identity `RUN-0f7d9498db6f`. All earlier offline candidates remain in its history.
+source commit `bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c`, including P06 and the
+reviewed E03 helper, and has identity `RUN-3225d3a29153`.
+[November 4 verification](NOV04_READINESS_AND_STATUS.md) preserves all four
+[pre-refresh records](../evidence/i01-pre-nov04-2026-11-04/i01-offline-config-2026-11-02.json).
+All earlier offline candidates remain in its history.
 All historical completed-run identities, source files and the 180-trace index
 remain unchanged.
 

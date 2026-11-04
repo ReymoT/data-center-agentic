@@ -62,6 +62,9 @@ its exact pending single-use authorization. The accepted receiving report resolv
 that preparatory dependency; it does not itself authorize another model request.
 The candidate remains one public episode/trial with at most six Plain/eighteen
 Agent/twenty-four combined requests and the existing time/stop limits.
+The [later November 4 offline refresh](NOV04_READINESS_AND_STATUS.md) supersedes
+that preparation identity with `RUN-3225d3a29153`, preserving the earlier records
+and the same bounds. It passed the no-startup dry run, with approval still pending.
 
 Full I01/pre-freeze acceptance remains partial: no fresh unified six-system run
 or its independent receiving is claimed. Source B1–B3, B4 suitability, actual

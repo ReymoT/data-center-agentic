@@ -8,7 +8,7 @@ explanation faithfulness or a unified comparative study.
 
 Current follow-up: [development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
 now accompany the C/D references, and the [manager follow-up](handoffs/NOV02_MANAGER_FOLLOWUP.md)
-records offline pin refresh, accepted custody safeguards and remaining receiving
+records offline pin refresh, accepted custody safeguards and remaining unified-run
 and official-information gaps. These additions are development evidence, not
 another model-driven run or final study result.
 
@@ -16,6 +16,9 @@ Owner: Matty. Prepared against main
 `227d2ebabd863d58f0a1b7bf2e56b6acdb02e1d4` for later report assembly with Nisha.
 This section describes implemented mechanisms and one public development episode.
 Final experimental findings, held-out results and release acceptance remain pending.
+The November 4 additions below are reviewed against main
+`bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c`; the original preparation base above
+is retained as history.
 
 Follow-up: [the I01/P05 receiving record](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md)
 corrects the LF lock pin, connects P05 fallback to E02 and records actual C/D
@@ -115,6 +118,24 @@ approval. The [acceptance audit](handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md)
 retains that distinction. Private raw/derived contents and binaries stay out of Git.
 
 ## Interpretation and limitations
+
+The [reviewed E03 forecast-tie diagnostic](handoffs/E03_EQUAL_WORK_COMPARISON.md#forecast-tie-rate-november-4)
+is implemented independently of production policies/checks. It classifies
+individual-job choices from replay and visible forecasts, before contention
+between waiting jobs. Tied and distinct decisions form its denominator;
+no-choice, uncovered and unverifiable decisions are separate counts. An empty
+denominator is undefined. On the public Greedy B EP-HAND1 schedule, an actual
+November 4 calculation reproduced nine decisions: six distinct, three no choice,
+zero tied, with no uncovered or unverifiable cases. This is a fixture diagnostic,
+not a study rate or evidence of carbon savings. E06 integration remains pending.
+
+CF60-v1 is still a proposal. A flat forecast supplies no relative cleaner-hour
+signal, so realized emissions differences cannot be attributed to forecast-driven
+selection of cleaner hours. The shaped alternative remains unadopted; C/D
+forecast compatibility, source facts and custody must be resolved before freeze.
+
+The [new offline authorization packet](handoffs/NOV04_READINESS_AND_STATUS.md)
+passed no-startup dry-run checks. It is not another inference result.
 
 This exercise demonstrates that the implemented paths can run through the provider,
 checker, controller, durable traces and independent replay on this fixture, with

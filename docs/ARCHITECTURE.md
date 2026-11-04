@@ -5,6 +5,11 @@ records a separate person's E01 replay review of all six existing public-develop
 units. This resolves their content-receiving dependency, with no change to the
 architecture, original records or pending full I01/scientific acceptance.
 
+The [November 4 refresh](handoffs/NOV04_READINESS_AND_STATUS.md) rechecks the
+exact public receiving candidate without runtime startup. The independent
+forecast-tie helper uses E01 replay and visible forecasts, outside the production
+policy/checker path; it does not choose a forecast method or prove causal savings.
+
 The [P06 fold-scoring follow-up](../models/DEVELOPMENT_FOLD_METRICS.md) measures
 candidate classification on the fixed development partitions. It does not change
 the runtime architecture or rollout-based C/D selection, and does not replace
