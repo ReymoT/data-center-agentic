@@ -1,12 +1,12 @@
 # Introduction and problem statement (R05 draft)
 
-Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the source review](../SOURCE_REVIEW.md); full references are pending.
+Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the reference list](REFERENCES.md).
 
 ## I. Introduction
 
 Data centers can run some compute work at different times, and the carbon intensity of electricity changes from hour to hour. Moving flexible work toward cleaner hours can therefore lower emissions without changing the energy the work needs. Language models are a natural interface for this kind of decision support, because they can read operating facts and explain a recommendation. But a sustainability recommendation that sounds reasonable can still be wrong. It can overload a site, miss a deadline, or claim savings that the evidence doesn't support, and fluent text gives an operator no way to tell.
 
-Recent systems point toward ways of containing that risk. Typed knowledge graphs connect industrial assets to exact facts [AssetOpsBench]. Simulation tests decisions before they are applied [LC-Opt]. Checks and fallbacks protect execution in autonomous cooling [DeepMind], and sustainability assistants link answers to their sources [Resource Advisor]. These systems motivated our design, but they don't measure how much such safeguards change an LLM's recommendations when it is compared with the same model without them.
+Recent work points toward ways of containing that risk. Benchmarks now evaluate language-model agents on industrial operations [AssetOpsBench], and typed knowledge graphs can supply such agents with exact facts [KG-Assets]. Simulation tests decisions before they are applied [SustainDC], [LC-Opt], and constraint checks with fallbacks protect execution in autonomous cooling [DeepMind]. These systems motivated our design, but we aren't aware of work that measures how much such safeguards change an LLM's recommendations when it is compared with the same model without them.
 
 We ask: *does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?* We study this in one bounded setting: scheduling flexible jobs at a single simulated site. Scheduling is the test setting rather than the goal, because it gives each recommendation a checkable outcome.
 
