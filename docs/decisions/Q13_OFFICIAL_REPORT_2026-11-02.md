@@ -1,5 +1,12 @@
 # Q13 final report requirements — November 2 update
 
+November 4: [Nisha confirms](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
+project number 21 and December 9, 2026, at 11:59 pm, at the end of that day.
+The filename is `Group15-Project21-F26-Final Project Report.PDF`. Arizona timezone
+is her working assumption; independent official timezone confirmation and release/
+license requirements remain open. December 7 remains the internal target.
+The November 2 source record below is retained historically where superseded.
+
 Source: [Nisha's reported official Canvas announcement](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278).
 The assistant has not directly accessed Canvas. This supersedes the earlier
 15–20-page course-outline plan. No private email supplied by Matty is forwarded.
