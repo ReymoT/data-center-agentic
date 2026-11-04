@@ -26,6 +26,10 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
   These are not authorized runtime budgets; actual runs require exact bounded
   authorization and frozen settings. Receiving calls are separate evidence.
 - Any reduction must be matched across systems and frozen before execution.
+- Matty's [November 4 analysis response](../decisions/E03_ANALYSIS_MANAGER_2026-11-04.md)
+  selects the 24 core episodes for the primary comparison and the six withheld
+  variants for separate reporting. The matrix remains 30 episodes/300 runs;
+  affected-consumer confirmation and I02 freeze are not inferred from this choice.
 
 **Accuracy.** Measured against saved execution records and independently replayed (E01):
 - executed-schedule validity;
@@ -59,6 +63,12 @@ Any comparison of forecast methods uses development dates only.
 - appropriate abstention;
 - reliance on the checked fallback.
 
+Matty retains the broad `unsafe_rate` as primary and requires the narrower
+`unsafe_rate_without_omissions`, omission-only counts and violation types alongside
+it at each stage. The narrower measure excludes only omission-only invalidity;
+it is not purely physical/timing harm. This is a disclosed development-informed
+manager decision, with affected confirmations/final freeze still pending.
+
 **Faithfulness** (blinded human claim review, under the frozen E04 extraction rule):
 
 | Measure | Definition |
@@ -76,7 +86,11 @@ The [paired statistics helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#paired-s
 and [run-metrics helper](../handoffs/E03_RUN_METRICS.md) are implemented offline.
 Their proposed settings/definitions still need acceptance before I02; publishing
 the code does not freeze the analysis or produce held-out findings. E06 report
-integration and Agent latency accounting remain separate unfinished work.
+integration and final analysis acceptance remain unfinished. New Agent traces
+now sum recorded request latencies consistently with Plain; historical missing
+latency remains missing. End-to-end elapsed decision time is a different quantity.
+- Matty accepts 10,000 percentile resamples, confidence 0.95 and seed 20261113,
+  with no post-result changes; see the linked decision for pending confirmations.
 - Scenario mean, standard deviation, minimum and maximum for all six systems, with explicit counts, denominators and missing values.
 - Paired differences, with confidence intervals resampled by episode, keeping each LLM's three trials together.
 - A date-cluster sensitivity check, given only 6 dates.
@@ -202,9 +216,12 @@ These are pooled post-selection classification scores on development folds. They
 aren't scheduling outcomes or final performance, and they don't show that either
 model improves a research endpoint. Selection used rollouts, so a shallower
 candidate with a higher F1 isn't a new selection criterion. Both models were
-trained on the flat development forecast, so `carbon_mean_g_per_kwh` and
-`carbon_min_g_per_kwh` were equal in every row and didn't differ between candidate
-starts at a decision. Compatibility with whichever study forecast is eventually
+trained on the flat development forecast. The [saved-label audit](../handoffs/LEGACY_LABEL_AUDIT_2026-11-04.md)
+finds that carbon features are constant across each job's candidates. Mean and
+minimum are exactly equal in 5,974/6,046 rows; all agree within relative tolerance
+10^-12, with 72 roundoff differences. Labels reflect one solver-selected schedule,
+not all alternative optima, whose multiplicity was not recorded.
+Compatibility with whichever study forecast is eventually
 adopted must be assessed before freeze.
 
 ## 4. Held-out results

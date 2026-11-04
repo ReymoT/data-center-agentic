@@ -57,7 +57,7 @@ from scripts.a01_igpu_preflight import (  # noqa: E402
 )
 from scripts.inspect_ollama import compare_inventory, inspect  # noqa: E402
 
-HEAD = "bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c"
+HEAD = "40dcd800babf0964e718a8a538548e454d9c0e3c"
 AUTHORIZATION = "PENDING_FRESH_MATTY_AUTHORIZATION"
 BUNDLE_SHA256 = "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6"
 MODEL_DIGEST = "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
