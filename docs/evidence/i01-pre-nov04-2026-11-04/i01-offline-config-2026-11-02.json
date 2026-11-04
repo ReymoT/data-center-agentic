@@ -1,0 +1,103 @@
+{
+  "candidate_config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
+  "candidate_config_identity": {
+    "code_revision": "5773295700c3792afe4eec2de48572ccb1aa0a66",
+    "config_version": "e02-run-config-v1",
+    "episodes": [
+      {
+        "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
+        "episode_id": "EP-HAND1"
+      }
+    ],
+    "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "model": {
+      "agent_renderer_ref": "dc_sustainability.agent.renderers:render_proposal,render_repair;dc_sustainability.explanations.agent:render_explanation",
+      "decision_seconds": 480,
+      "deployment": {
+        "context_policy_ref": "qwen3-legacy-template-tokenizers-0.23.3-native-count-validated-a01",
+        "max_prompt_tokens": 14848,
+        "max_response_bytes": 2097152,
+        "max_run_attempts": 18,
+        "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "request_timeout_seconds": 150,
+        "runtime_version": "0.40.5"
+      },
+      "max_total_attempts": 24,
+      "plain_prompt_sha256": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
+      "seeds": [
+        [
+          0,
+          101
+        ]
+      ]
+    },
+    "model_trials": [
+      0
+    ],
+    "name": "i01-six-path-offline-candidate-20261102",
+    "systems": [
+      "greedy_a",
+      "greedy_b",
+      "decision_tree_c",
+      "random_forest_d",
+      "plain_llm",
+      "agent"
+    ],
+    "trained": {
+      "artifacts": {
+        "decision_tree_c": "7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b",
+        "random_forest_d": "37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a"
+      }
+    }
+  },
+  "candidate_history": [
+    {
+      "code_revision": "c363ef7518ff2d6e7be12e40e67eb92798cc0e18",
+      "config_hash": "7806c94f563e07171ba39960263cf372ad34229a576ee4180c64523268bde19b",
+      "lock_sha256": "ea912edd99927b6bf9d1b9623f5c61d5aa2378e149a929e14ea22b6673254d25",
+      "run_id": "RUN-7806c94f563e"
+    },
+    {
+      "code_revision": "f309256be966107d6dd4ae3297ba66a409012920",
+      "config_hash": "3d6ec9e7027903f716c10043bb9a65d69566b056fd69ba2b21e7357de4d6983c",
+      "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+      "run_id": "RUN-3d6ec9e70279"
+    },
+    {
+      "code_revision": "c1ad13aec1aa35edb0994a6ed956d00bbb098d03",
+      "config_hash": "92d1438321b94b730138a4c3233e858f0a335ead86b57ae8e5b658035681c8f8",
+      "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+      "run_id": "RUN-92d1438321b9"
+    }
+  ],
+  "candidate_run_id": "RUN-0f7d9498db6f",
+  "dispatch_authorized": false,
+  "evidence_kind": "offline_candidate_not_authorization_or_freeze",
+  "lock_hash_convention": "LF-normalized bytes, same as runner CLI; historical run identities unchanged",
+  "model_calls": 0,
+  "note": "One public development episode/trial; not the 300-run held-out design. Existing outputs remain separate.",
+  "proposed_outer_controls_not_enforced_by_identity_alone": {
+    "maximum_total_attempts": 24,
+    "maximum_total_wall_seconds": 3900,
+    "maximum_unit_attempts": {
+      "agent": 18,
+      "plain_llm": 6
+    },
+    "retries": 0,
+    "single_use_authorization_required": true,
+    "warmups": 0
+  },
+  "requires": [
+    "fresh exact single-use authorization",
+    "runtime identity revalidation",
+    "independent receiving"
+  ],
+  "runtime_requests": 0,
+  "superseded_offline_candidate": {
+    "code_revision": "c1ad13aec1aa35edb0994a6ed956d00bbb098d03",
+    "config_hash": "92d1438321b94b730138a4c3233e858f0a335ead86b57ae8e5b658035681c8f8",
+    "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "run_id": "RUN-92d1438321b9"
+  },
+  "total_wall_seconds_proposed": 3900
+}
