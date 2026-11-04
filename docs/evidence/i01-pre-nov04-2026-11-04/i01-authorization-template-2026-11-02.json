@@ -1,0 +1,22 @@
+{
+  "approval_ref": null,
+  "approved_by": null,
+  "bounds": {
+    "maximum_total_attempts": 24,
+    "maximum_total_wall_seconds": 3900,
+    "maximum_unit_attempts": {
+      "agent": 18,
+      "plain_llm": 6
+    },
+    "retries": 0,
+    "single_use_authorization_required": true,
+    "warmups": 0
+  },
+  "candidate_config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
+  "launcher_sha256": "3c9c6355eca8c69400d690cd6873203cbb599b7747026db8e8636b0856117363",
+  "note": "Unapproved template. It is not permission to start the runtime or dispatch requests.",
+  "readiness_sha256": "ceaec69790e76513aa6415945259ffa4ce28a924c9ec08fcb8685816ef5ef1ce",
+  "single_use_id": "I01-EPHAND1-0f7d9498db6f-20261102-v1",
+  "status": "pending_fresh_user_approval",
+  "text_pin_convention": "LF-normalized readiness and launcher"
+}

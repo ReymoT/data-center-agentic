@@ -8,6 +8,11 @@ claimed. [The I02 manifest](i02/freeze-manifest.json) retains forecast/source/cu
 and forecast-compatibility blockers, with no frozen item or run authorization.
 Older dated entries below retain their original preparation status where superseded.
 
+The [November 4 offline refresh](handoffs/NOV04_READINESS_AND_STATUS.md) passed
+the actual no-startup launcher dry run for `RUN-3225d3a29153`, preserving prior
+records. PRs #169–#171 publish receiving acceptance, the R05 development evidence
+and the independent forecast-tie helper. No new inference or study rate is claimed.
+
 November 2 follow-up: [measured P06 development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
 are available for all five grid configurations and three folds; selection and
 frozen policy binaries are unchanged. [Manager decisions and blockers](handoffs/NOV02_MANAGER_FOLLOWUP.md)
@@ -43,8 +48,8 @@ interpretation/timezone, project number and release fields remain unconfirmed.
 The [I01 follow-up](handoffs/I01_LOCK_P05_PRIVATE_RECEIVING.md) applies Nisha's
 LF lock-pin correction, connects real C/D fallback to E02, verifies public
 fresh/missing-forecast receiving, and prepares the original six-result replay
-packet privately. Transfer and independent content acceptance remain uncompleted;
-do not request the already received structural review again. Exact model-run
+packet privately. Transfer and independent content acceptance are now complete
+for those existing records; do not request that review again. Exact model-run
 authorization and real source/custody/freeze gates remain separate.
 
 Offline I01 configuration and the six-unit/180-trace evidence index are now
@@ -57,8 +62,8 @@ by November 13 and email/Canvas submission by November 14 for the reported
 November 16 presentation. Project number, exact submission timezone and remaining
 official report/release fields stay unresolved; do not use older estimates instead.
 
-1. Receive the prepared I01 configuration/evidence index independently and prepare
-   exact authorization if a fresh unified receiving run is needed. Actual C/D
+1. Review the refreshed exact authorization packet for a fresh unified public
+   receiving run. Existing-record receiving and the no-startup dry run are complete. Actual C/D
    artifacts exist locally; another missing-artifact request is unnecessary.
 2. Resolve authoritative source and actual custody/freeze gates in #60. Preserve
    private inputs; do not substitute synthetic custody tests for real acceptance.
