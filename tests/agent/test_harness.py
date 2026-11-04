@@ -84,10 +84,12 @@ def test_real_plan_is_checked_executed_and_saved_losslessly(server, tmp_path):
     )
     assert "CON-DL-J3" not in json.dumps(server.requests)
     assert store.read(record.decision_id) == record
+    assert record.latency_ms == pytest.approx(result.attempts[0].latency_ms)
+    assert record.latency_ms > 0
 
 
 def test_one_actual_successful_repair(server, tmp_path):
-    ep, sim, _, controller, client = setup(server, tmp_path)
+    ep, sim, store, controller, client = setup(server, tmp_path)
     good = plan(sim.state())
     response(server, plan(sim.state(), overlap=True))
 
@@ -106,6 +108,9 @@ def test_one_actual_successful_repair(server, tmp_path):
     assert record.initial.check.status == "fail" and record.repaired.check.status == "pass"
     assert record.final_status == "executed" and record.execution_check.plan_hash == good.plan_hash
     assert result.route.count("repair") == 1
+    assert store.read(record.decision_id).latency_ms == pytest.approx(
+        sum(attempt.latency_ms for attempt in result.attempts)
+    )
 
 
 def test_failed_repair_has_no_fake_p02(server, tmp_path):
@@ -179,6 +184,30 @@ def test_runtime_mismatch_does_not_spend_or_retry(server, tmp_path):
     )
     assert result.execution.record.model_call_count == result.execution.record.repair_count == 0
     assert not server.requests and not client.attempts and "repair" not in result.route
+    assert result.execution.record.latency_ms is None
+
+
+def test_missing_attempt_latency_is_not_reported_as_a_partial_total(server, tmp_path, monkeypatch):
+    ep, sim, store, controller, client = setup(server, tmp_path)
+    response(server, plan(sim.state(), overlap=True))
+    generate = client.generate
+
+    def missing_latency(**kwargs):
+        result = generate(**kwargs)
+        if len(client.attempts) == 2:
+            client._attempts[-1] = replace(client._attempts[-1], latency_ms=None)
+        return result
+
+    monkeypatch.setattr(client, "generate", missing_latency)
+    result = decide(
+        AgentHarness(client, controller, proposal_messages=messages, repair_messages=messages),
+        sim,
+        ep,
+    )
+    assert result.execution.record.model_call_count == 2
+    assert result.attempts[0].latency_ms is not None
+    assert result.attempts[1].latency_ms is None
+    assert store.read(result.execution.record.decision_id).latency_ms is None
 
 
 def test_run_cap_is_not_reset_for_repair(server, tmp_path):
