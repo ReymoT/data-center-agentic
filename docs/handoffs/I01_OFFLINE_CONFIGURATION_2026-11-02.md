@@ -1,8 +1,8 @@
 # I01 common-protocol preparation
 
 Current follow-up: [artifact bindings, explorer and offline readiness](I01_UNIFIED_READINESS_AND_EXPLORER.md).
-The current candidate is `RUN-3225d3a29153`, revalidated on November 4 in the
-[offline refresh](NOV04_READINESS_AND_STATUS.md). `RUN-92d1438321b9` and
+The current candidate is `RUN-e670485639c9`, revalidated on November 4 in the
+[latency refresh](NOV04_LATENCY_LABELS_AND_READINESS.md). `RUN-3225d3a29153`, `RUN-92d1438321b9` and
 `RUN-0f7d9498db6f` are earlier preparation identities. The earlier
 [LF correction and P05 receiving](I01_LOCK_P05_PRIVATE_RECEIVING.md) used
 `RUN-3d6ec9e70279`; that earlier candidate and completed

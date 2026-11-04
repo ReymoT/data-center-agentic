@@ -1,5 +1,10 @@
 # November 4 offline readiness and manager status
 
+Superseded for the current candidate by the later
+[latency/label/readiness follow-up](NOV04_LATENCY_LABELS_AND_READINESS.md).
+`RUN-3225d3a29153` and its checks below remain historical; the current candidate
+is `RUN-e670485639c9`, with its own pending exact authorization.
+
 Matty authorized the recommended offline preparation, factual documentation and
 issue follow-ups. No model execution or scientific freeze is authorized here.
 

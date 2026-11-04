@@ -27,10 +27,15 @@ It makes no model calls. [Unified receiving readiness](docs/handoffs/I01_UNIFIED
 records the updated candidate and actual offline pin checks; live dispatch remains
 blocked pending fresh authorization and runtime/launcher checks.
 
-The [November 4 readiness refresh](docs/handoffs/NOV04_READINESS_AND_STATUS.md)
+The [November 4 latency/readiness refresh](docs/handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md)
 records a passed no-startup dry run and a new, unapproved exact authorization
 packet. The forecast-tie diagnostic is implemented offline; measured study rates
 and E06 integration remain pending.
+
+Future Agent traces now retain summed request latency consistently with Plain;
+historical missing values stay missing. The read-only legacy-label audit confirms
+flat forecasts and selected-schedule labels, without claiming an exact count of
+alternate global optima or changing the original models.
 
 Current development status, November 2: all 40 development episodes are
 materialized. Real C/D models are trained and reloaded; A/B/C/D completed public

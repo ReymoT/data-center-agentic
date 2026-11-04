@@ -397,6 +397,7 @@ class AgentHarness:
                 explanation=final["explanation"],
                 model_call_count=len(attempts),
                 repair_count=final["repair_count"],
+                latency_ms=usage("latency_ms") if attempts else None,
                 prompt_tokens=usage("prompt_tokens"),
                 completion_tokens=usage("completion_tokens"),
                 errors=tuple(final["errors"]),

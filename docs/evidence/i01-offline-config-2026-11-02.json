@@ -1,7 +1,7 @@
 {
-  "candidate_config_hash": "3225d3a2915396d7cdfcd35cd77544d90dc2eab90cb35ccadbb13c7572ff424e",
+  "candidate_config_hash": "e670485639c93d0bf1b539f0c9aa04220b35c166ed04812eca03a4a65a12b30b",
   "candidate_config_identity": {
-    "code_revision": "bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c",
+    "code_revision": "40dcd800babf0964e718a8a538548e454d9c0e3c",
     "config_version": "e02-run-config-v1",
     "episodes": [
       {
@@ -74,9 +74,15 @@
       "config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
       "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
       "run_id": "RUN-0f7d9498db6f"
+    },
+    {
+      "code_revision": "bb9bf3ea5bdc83e9779e5c0e8c26ddb81c98ab7c",
+      "config_hash": "3225d3a2915396d7cdfcd35cd77544d90dc2eab90cb35ccadbb13c7572ff424e",
+      "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+      "run_id": "RUN-3225d3a29153"
     }
   ],
-  "candidate_run_id": "RUN-3225d3a29153",
+  "candidate_run_id": "RUN-e670485639c9",
   "dispatch_authorized": false,
   "evidence_kind": "offline_candidate_not_authorization_or_freeze",
   "lock_hash_convention": "LF-normalized bytes, same as runner CLI; historical run identities unchanged",

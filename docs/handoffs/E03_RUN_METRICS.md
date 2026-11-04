@@ -1,5 +1,12 @@
 # E03 run-level metrics
 
+November 4 follow-up: the Agent harness now persists the sum of its recorded
+request latencies, with a missing total if any attempt lacks latency. Original
+traces are unchanged. The earlier missing-harness description below is historical;
+new-run validation remains separate. [Matty's analysis response](../decisions/E03_ANALYSIS_MANAGER_2026-11-04.md)
+retains broad unsafe rate as primary, with both measures reported and final
+affected-consumer acceptance/freeze still pending.
+
 Task ID / Issue: E03. Owner: Nisha. Technical contact: Edison.
 Objective: score one saved run for accuracy, safety, completion, impact and cost, judged by E01 rather than by the run's own checks.
 
