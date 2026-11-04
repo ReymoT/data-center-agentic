@@ -1,0 +1,139 @@
+{
+  "archive_sha256": "2434b3a0fb8d595f1e864755ba1172a230e17101fbae580d9960cbc32d7ff12f",
+  "bundle_lf_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
+  "canonical_filename_rule": "sha256_hex(decision_id), canonical JSON string bytes; not raw ID bytes",
+  "evidence_files_verified": 186,
+  "held_out_access": false,
+  "historical_first_fail": "Nisha reports retained initial filename-check failure; not erased or represented as a trace defect",
+  "human_report_raw_sha256": "900e67598cdb9c4e8aab6f927d94a4407980a55bc21d52780e1ca890c6c9d588",
+  "model_requests": 0,
+  "nisha_machine_report": "hash attested in supplied report; JSON not supplied to manager",
+  "nisha_review_script": "hash attested in supplied report; script not supplied to manager",
+  "originals_modified": false,
+  "receiver": "Nisha Mahadev Kolekar",
+  "scope": "manager_corroboration_of_independent_development_receipt_not_study_freeze",
+  "supplement_script_sha256": "f2fd443d9456300d6589469bc70289a873911a9524ffc93c0aa2a1dd534e28ce",
+  "units": [
+    {
+      "completed_work": {
+        "derived_kwh": 140.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "d97b5a9f9cfcaeb9a9d4afc32045d65d2d784016a6c1d83426109bbbbf291cde",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-1f6e4c4c2afb",
+      "system": "greedy_a",
+      "traces": 30,
+      "trial": null,
+      "unit_id": "14650330b6f799b5"
+    },
+    {
+      "completed_work": {
+        "derived_kwh": 140.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "d97b5a9f9cfcaeb9a9d4afc32045d65d2d784016a6c1d83426109bbbbf291cde",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-1f6e4c4c2afb",
+      "system": "decision_tree_c",
+      "traces": 30,
+      "trial": null,
+      "unit_id": "398315c682a0f2bc"
+    },
+    {
+      "completed_work": {
+        "derived_kwh": 140.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "d97b5a9f9cfcaeb9a9d4afc32045d65d2d784016a6c1d83426109bbbbf291cde",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-1f6e4c4c2afb",
+      "system": "greedy_b",
+      "traces": 30,
+      "trial": null,
+      "unit_id": "48e67840bc6e5f40"
+    },
+    {
+      "completed_work": {
+        "derived_kwh": 140.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "d97b5a9f9cfcaeb9a9d4afc32045d65d2d784016a6c1d83426109bbbbf291cde",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-1f6e4c4c2afb",
+      "system": "random_forest_d",
+      "traces": 30,
+      "trial": null,
+      "unit_id": "557ceae6fe3ca636"
+    },
+    {
+      "completed_work": {
+        "derived_kwh": 140.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "faefb34cb5608e7a9ee297a08d1159d7972ccbfe86e0958fa80c54abec1af8c2",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 12,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-646ddd3a1142",
+      "system": "agent",
+      "traces": 30,
+      "trial": 0,
+      "unit_id": "9fb63635b4ff3cf2"
+    },
+    {
+      "completed_work": {
+        "derived_kwh": 0.0,
+        "difference_kwh": null,
+        "reason": "",
+        "recorded": null,
+        "status": "absent"
+      },
+      "manager_manifest_hash_check": "pass",
+      "manifest_sha256": "faefb34cb5608e7a9ee297a08d1159d7972ccbfe86e0958fa80c54abec1af8c2",
+      "nisha_manifest_hash_check": "not_performed_packet_omitted_manifests",
+      "recorded_model_calls": 5,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "run_id": "RUN-646ddd3a1142",
+      "system": "plain_llm",
+      "traces": 30,
+      "trial": 0,
+      "unit_id": "dcbd5bbb334a30c0"
+    }
+  ],
+  "zip_entries": 187
+}

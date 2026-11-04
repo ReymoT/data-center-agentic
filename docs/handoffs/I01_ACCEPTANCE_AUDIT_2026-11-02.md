@@ -1,5 +1,10 @@
 # I01 development acceptance audit
 
+Later factual update, November 4: [Nisha's scoped independent content receiving
+is now accepted](I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md). The table and verdict
+below are the retained November 2 audit; their then-missing existing-run receiving
+has been supplied. Full I01/unified execution and scientific acceptance stay pending.
+
 Follow-up: the [offline configuration and evidence index](I01_OFFLINE_CONFIGURATION_2026-11-02.md)
 are now prepared; the source/private-custody and independent acceptance limits
 below remain. [Nisha's new course report](../decisions/Q13_COURSE_UPDATE_2026-11-02.md)

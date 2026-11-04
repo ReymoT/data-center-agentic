@@ -1,5 +1,10 @@
 # Architecture for the final scheduling study
 
+[November 4 receiving acceptance](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
+records a separate person's E01 replay review of all six existing public-development
+units. This resolves their content-receiving dependency, with no change to the
+architecture, original records or pending full I01/scientific acceptance.
+
 The [P06 fold-scoring follow-up](../models/DEVELOPMENT_FOLD_METRICS.md) measures
 candidate classification on the fixed development partitions. It does not change
 the runtime architecture or rollout-based C/D selection, and does not replace

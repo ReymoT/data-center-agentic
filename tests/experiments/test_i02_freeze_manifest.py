@@ -66,11 +66,12 @@ def test_consistent_matrix_reduction_is_refused():
     assert any("exact planned total is 300" in item for item in blockers)
 
 
-def test_required_item_cannot_be_removed_when_its_category_still_exists():
+@pytest.mark.parametrize("item_id", ["development-episodes", "study-forecast"])
+def test_required_item_cannot_be_removed_when_its_category_still_exists(item_id):
     manifest = load()
-    manifest["items"] = [i for i in manifest["items"] if i["id"] != "development-episodes"]
+    manifest["items"] = [i for i in manifest["items"] if i["id"] != item_id]
     assert any(
-        "required checklist items missing: development-episodes" in item
+        f"required checklist items missing: {item_id}" in item
         for item in validate_manifest(manifest)
     )
 

@@ -1,5 +1,11 @@
 # Agent and verification: development-evidence draft
 
+November 4: [Nisha's independent content receiving is accepted](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
+for the six original public-development units. Her unchanged report and a manager
+corroboration supplement retain zero replay findings/result mismatches and all
+scope limits. This resolves receiving of those existing records, not final I01,
+explanation faithfulness or a unified comparative study.
+
 Current follow-up: [development-fold metrics](../models/DEVELOPMENT_FOLD_METRICS.md)
 now accompany the C/D references, and the [manager follow-up](handoffs/NOV02_MANAGER_FOLLOWUP.md)
 records offline pin refresh, accepted custody safeguards and remaining receiving
