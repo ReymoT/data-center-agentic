@@ -115,4 +115,6 @@ Not wired to saved runs yet: building `Observation`s from runs needs the metric 
 
 Open:
 - `compare_savings` blocks unequal trial values as `inputs_differ`. Classical runs have trial `None` and LLM runs have trials 0-2, so Agent-against-Greedy savings would always be blocked unless the caller aligns them. Agent against Plain isn't affected.
-- E03 still lacks run-level metrics: decision accuracy, stage-specific unsafe-proposal rates, repair/fallback/abstention rates, and latency, token and cost summaries.
+- The [run-metrics helper](E03_RUN_METRICS.md) is now published through #175.
+  E06 integration, metric-definition freeze and complete Agent latency evidence
+  remain pending; the earlier missing-helper status is superseded.
