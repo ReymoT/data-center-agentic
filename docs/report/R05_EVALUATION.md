@@ -71,6 +71,12 @@ Any comparison of forecast methods uses development dates only.
 An empty explanation has 0 completeness and coverage; zero-denominator faithfulness and precision stay undefined. Raw-text assertions from malformed outputs are reported separately (rule 11.7).
 
 **Statistics.**
+
+The [paired statistics helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#paired-statistics-november-4)
+and [run-metrics helper](../handoffs/E03_RUN_METRICS.md) are implemented offline.
+Their proposed settings/definitions still need acceptance before I02; publishing
+the code does not freeze the analysis or produce held-out findings. E06 report
+integration and Agent latency accounting remain separate unfinished work.
 - Scenario mean, standard deviation, minimum and maximum for all six systems, with explicit counts, denominators and missing values.
 - Paired differences, with confidence intervals resampled by episode, keeping each LLM's three trials together.
 - A date-cluster sensitivity check, given only 6 dates.
