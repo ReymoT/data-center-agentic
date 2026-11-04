@@ -1,0 +1,84 @@
+{
+  "authorization_ref": "PENDING_FRESH_MATTY_AUTHORIZATION",
+  "bounds": {
+    "agent": 18,
+    "agent_decision_seconds": 480,
+    "combined": 24,
+    "plain": 6,
+    "request_seconds": 150,
+    "retries": 0,
+    "total_seconds": 3900,
+    "warmups": 0
+  },
+  "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
+  "checkout_commit": "2b37bdfb9cdd45d1c2e7507ae3f097b6e73d9f27",
+  "config_hash": "0f7d9498db6f7a21d84e67d9b7fc9f6c9fbeafff6bfa1576d21234ec1ffbb2a2",
+  "config_identity": {
+    "code_revision": "5773295700c3792afe4eec2de48572ccb1aa0a66",
+    "config_version": "e02-run-config-v1",
+    "episodes": [
+      {
+        "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
+        "episode_id": "EP-HAND1"
+      }
+    ],
+    "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "model": {
+      "agent_renderer_ref": "dc_sustainability.agent.renderers:render_proposal,render_repair;dc_sustainability.explanations.agent:render_explanation",
+      "decision_seconds": 480,
+      "deployment": {
+        "context_policy_ref": "qwen3-legacy-template-tokenizers-0.23.3-native-count-validated-a01",
+        "max_prompt_tokens": 14848,
+        "max_response_bytes": 2097152,
+        "max_run_attempts": 18,
+        "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "request_timeout_seconds": 150,
+        "runtime_version": "0.40.5"
+      },
+      "max_total_attempts": 24,
+      "plain_prompt_sha256": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
+      "seeds": [
+        [
+          0,
+          101
+        ]
+      ]
+    },
+    "model_trials": [
+      0
+    ],
+    "name": "i01-six-path-offline-candidate-20261102",
+    "systems": [
+      "greedy_a",
+      "greedy_b",
+      "decision_tree_c",
+      "random_forest_d",
+      "plain_llm",
+      "agent"
+    ],
+    "trained": {
+      "artifacts": {
+        "decision_tree_c": "7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b",
+        "random_forest_d": "37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a"
+      }
+    }
+  },
+  "evidence_kind": "actual_offline_launcher_dry_run_not_inference",
+  "held_out_access": false,
+  "launcher_sha256": "3c9c6355eca8c69400d690cd6873203cbb599b7747026db8e8636b0856117363",
+  "model_requests": 0,
+  "output_directory_created": false,
+  "prompt_hashes": {
+    "explanation": "6524939914db0389104e96dc6d55a406234e1ed93624e1a58816ac6735947446",
+    "plain": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
+    "proposal": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
+    "repair": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba"
+  },
+  "readiness_sha256": "ceaec69790e76513aa6415945259ffa4ce28a924c9ec08fcb8685816ef5ef1ce",
+  "repo_commit": "5773295700c3792afe4eec2de48572ccb1aa0a66",
+  "runtime_executable_sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
+  "runtime_started": false,
+  "status": "dry_run_passed",
+  "text_pin_convention": "LF-normalized readiness and launcher; raw binary/tokenizer hashes",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+}

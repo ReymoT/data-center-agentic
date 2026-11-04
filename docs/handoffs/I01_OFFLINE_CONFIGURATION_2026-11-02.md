@@ -1,11 +1,14 @@
 # I01 common-protocol preparation
 
 Current follow-up: [artifact bindings, explorer and offline readiness](I01_UNIFIED_READINESS_AND_EXPLORER.md).
-The current candidate is `RUN-92d1438321b9`. The earlier
+The current candidate is `RUN-3225d3a29153`, revalidated on November 4 in the
+[offline refresh](NOV04_READINESS_AND_STATUS.md). `RUN-92d1438321b9` and
+`RUN-0f7d9498db6f` are earlier preparation identities. The earlier
 [LF correction and P05 receiving](I01_LOCK_P05_PRIVATE_RECEIVING.md) used
 `RUN-3d6ec9e70279`; that earlier candidate and completed
 run identities remain retained. Nisha's independent structural review is received,
-with its lock correction applied; private content replay is not yet independently received.
+with its lock correction applied; [Nisha's later private content receiving is
+accepted](I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md) for the existing two runs.
 
 Matty prepared a validated six-system RunConfig identity offline using existing
 EP-HAND1, the actual C/D binary hashes and the earlier Plain/Agent deployment,
