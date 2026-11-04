@@ -74,7 +74,11 @@ An empty explanation has 0 completeness and coverage; zero-denominator faithfuln
 - Scenario mean, standard deviation, minimum and maximum for all six systems, with explicit counts, denominators and missing values.
 - Paired differences, with confidence intervals resampled by episode, keeping each LLM's three trials together.
 - A date-cluster sensitivity check, given only 6 dates.
-- Planned, not yet implemented: the forecast-tie rate, the share of Greedy B job decisions where every feasible start has equal forecast emissions.
+- The [forecast-tie helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#forecast-tie-rate-november-4)
+  is implemented offline: tied / comparable individual-job decisions from Greedy B's
+  replay and visible forecasts. Feasibility excludes contention between waiting jobs;
+  no-choice, uncovered and unverifiable decisions are counted separately. Integration
+  into E06 reporting and measured study rates remain pending.
 - No tuning on held-out results.
 
 ## 2. Reliability method

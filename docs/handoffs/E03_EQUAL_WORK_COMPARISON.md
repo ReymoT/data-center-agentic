@@ -66,3 +66,26 @@ Tests (10 new, 22 in `tests/evaluation/test_comparison.py`): each invalidating c
 Results: full suite 1,498 tests and 19 subtests on this branch (based on main `726e2e9`); Ruff check/format, setup validation and pip check passed.
 
 Open for #61: whether `capacity_unverifiable` should also block. It is non-blocking here because it marks missing evidence rather than invalid execution; the inputs check already catches a capacity record that differs between the two runs.
+
+## Forecast-tie rate (November 4)
+
+Reason: a flat forecast gives every start of a job the same forecast emissions, so Greedy B's `(emissions, start)` key resolves to the earliest feasible start. Issue [#60](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6622770964) records the commitment to report how often this happens.
+
+- `dc_sustainability/evaluation/forecast_ties.py` (new): `job_decisions(replay, forecasts_by_slot, protocol)` classifies each waiting job at each decision slot, and `summarize` pools the counts. Read Greedy B's run for the reported rate.
+- Statuses: `tied` and `distinct` are the comparable decisions; `no_choice`, `uncovered` and `unverifiable` are counted but left out of the rate.
+- `tie_rate` is tied / comparable. With no comparable decisions it is `None`, never 0. Pooling sums counts, so a rate is never an average of rates.
+- Feasibility is for a job alone with background and running work. Forecast freshness isn't judged. A job that waits several slots counts once per slot.
+- The module doesn't import a policy, the simulator or the production checker (a test enforces this).
+
+Tests: 15 in `tests/evaluation/test_forecast_ties.py`, including a real Greedy B plan matching Greedy A under a flat forecast. Mutation check: eight deliberate bugs each made tests fail, and the code was restored. On the public EP-HAND1 forecast with Greedy B's J1@2, J2@4 schedule, the summary is 9 job decisions, 6 distinct, 3 no choice and 0 tied.
+
+Not wired into a report or the runner yet; that happens with E06 once the study forecast is decided.
+
+Manager review: the helper now refuses a protocol name that differs from the
+replay's recorded protocol. Forecast sums use `math.fsum` and exact equality;
+small real differences are not rounded into ties. Two regression tests cover
+these cases. This is a diagnostic for individual-job choices before waiting-job
+contention, not a reconstruction of Greedy B's sequential ranking or floating-point
+tie-break behavior. It does not establish that a forecast caused an execution.
+The original fifteen-test and mutation-check claims above describe Nisha's branch;
+the reviewed helper has seventeen focused tests.
