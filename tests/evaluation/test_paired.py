@@ -72,6 +72,17 @@ def test_a_missing_trial_excludes_the_episode_and_is_counted():
     assert result.excluded == {"E1": "run_missing"}
 
 
+@pytest.mark.parametrize("expected", [(0, 1, 1), (None, None), (True,), (-1,), (0.0,)])
+def test_invalid_expected_trials_cannot_reweight_or_alias_observations(expected):
+    observations = llm_pair("E1", (1, 2, 3), (4, 6, 8))
+    with pytest.raises(ValueError, match="expected trials"):
+        p.paired_sample(
+            observations, "plain_llm", "agent", {**TRIALS, "agent": expected}, planned(observations)
+        )
+    with pytest.raises(ValueError, match="expected trials"):
+        p.savings_sample([comparison("E1", 0, 1.0)], LABELS, expected)
+
+
 def test_an_unavailable_value_excludes_the_episode_and_is_not_zero():
     result = pair(llm_pair("E1", (1, None, 3), (4, 6, 8)))
     assert result.differences == ()

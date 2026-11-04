@@ -103,6 +103,12 @@ Reason: E03's acceptance evidence requires paired episode-resampling code, and R
 
 Proposed settings, to freeze with I02 before any held-out value is seen: 10,000 resamples, 95% confidence, seed 20261113.
 
+Manager review adds expected-trial validation to both pairing paths: trial IDs
+must be unique non-negative integers or `None`, with Boolean/float aliases refused.
+This prevents repeated trial IDs from silently reweighting episode means. Five
+regression cases cover duplicate, aliased and invalid IDs. Publishing this helper
+does not freeze the proposed resampling settings or change the equal-work rule.
+
 Tests: 41 in `tests/evaluation/test_paired.py`, including exact enumeration of small resamples. Mutation check: fourteen deliberate bugs each made tests fail, after one survivor (unweighted date means) led to a stronger test.
 
 Not wired to saved runs yet: building `Observation`s from runs needs the metric definitions below.

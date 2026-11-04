@@ -138,6 +138,15 @@ def _episode_mean(
     return math.fsum(item.value for item in found) / len(found)
 
 
+def _validate_trials(trials: tuple[int | None, ...]) -> None:
+    if not trials:
+        raise ValueError("expected trials are required")
+    if any(trial is not None and (type(trial) is not int or trial < 0) for trial in trials):
+        raise ValueError("expected trials must be non-negative integers or None")
+    if len(set(trials)) != len(trials):
+        raise ValueError("expected trials must be unique")
+
+
 def paired_sample(
     observations: Iterable[Observation],
     baseline: str,
@@ -155,6 +164,8 @@ def paired_sample(
         raise ValueError("a paired comparison needs two systems")
     if not trials.get(baseline) or not trials.get(candidate):
         raise ValueError("expected trials are required for both systems")
+    _validate_trials(trials[baseline])
+    _validate_trials(trials[candidate])
     runs = _index(observations)
     for (system, episode_id, trial), item in runs.items():
         if system not in (baseline, candidate):
@@ -188,8 +199,7 @@ def savings_sample(
     keep the runs that did the same work and hide the ones that did not. Positive
     differences mean the candidate emitted less, the opposite sign to ``paired_sample``.
     """
-    if not trials:
-        raise ValueError("expected trials are required")
+    _validate_trials(trials)
     by_episode: dict[str, dict] = defaultdict(dict)
     pair = None
     for item in comparisons:
