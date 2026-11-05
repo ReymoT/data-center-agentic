@@ -1,5 +1,14 @@
 # Architecture for the final scheduling study
 
+Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
+for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
+findings/result mismatches and successful cleanup. New-run independent receiving
+by Nisha is pending. This supersedes older preparation-only status below without
+changing historical records, scientific gates or task ownership. The
+[offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
+is preparation only; no source read, relabeling, training or held-out work occurred.
+
+
 [November 4 receiving acceptance](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
 records a separate person's E01 replay review of all six existing public-development
 units. This resolves their content-receiving dependency, with no change to the
@@ -57,7 +66,7 @@ We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the cr
 | Plain LLM | Shared provider, equivalent flat facts, one combined request per required decision; no repair/fallback | Actual authorized EP-HAND1 receiving exists; one fixture/seed is insufficient for inference |
 | Bounded Agent | Grounded context, proposal/check, at most one repair, checked fallback and explanation within a three-call decision bound | Actual receiving includes repair/fallback stages; stage presence does not establish successful repair or faithfulness |
 | A03/A04 gate and traces | Physical validation, latest-state execution checks and immutable stage/attempt records | Physical feasibility and explanation support are distinct; regression cases do not prove exhaustive safety |
-| E01/E02 evaluation and runner | Common policy execution, durable outputs and independent replay | Six paths received in separate runs; consolidated I01 acceptance is partial |
+| E01/E02 evaluation and runner | Common policy execution, durable outputs and independent replay | Unified public validation passed; new independent receiving and full I01 remain pending |
 | E04/E05/E07 human review | Both development originals, pre-adjudication reliability and separate joint adjudication retained; prospective calibration clarifications approved | #22 is closed; frozen held-out independent ratings/reliability #95 remain future work |
 | F03 runtime | Hashed Windows environment and offline CI; actual accepted Ollama/Qwen Arc/Vulkan receiving | No untested cross-platform or field-deployment claim; fresh requests require authorization |
 
