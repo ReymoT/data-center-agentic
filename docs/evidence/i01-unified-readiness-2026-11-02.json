@@ -1,7 +1,7 @@
 {
-  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
-  "candidate_run_id": "RUN-15e69e6129b7",
-  "code_revision": "d82a23807635117a39761e2ebf62233ee7fb7d3f",
+  "candidate_config_hash": "fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506",
+  "candidate_run_id": "RUN-fd87c6c8a9cb",
+  "code_revision": "18f2cba0252e215e94ae7c2b54de0b3df8b810d5",
   "execution_file_lf_sha256": {
     "dc_sustainability/__init__.py": "989d647cf9f9de086d38573aeaa5b786d5417ca85b130dbd75a9b3f357223b74",
     "dc_sustainability/agent/__init__.py": "722e2b30dd21d8ac391e54c1a6407b3e1cbc897047e6847c444052780ccb7615",
@@ -81,7 +81,7 @@
   },
   "held_out_access": false,
   "independent_content_acceptance": false,
-  "launcher_lf_sha256": "e63290a89804b607f0421dafce9ec629e709669ff799855beeb24943bfc69a09",
+  "launcher_lf_sha256": "f9650c75bac9446d662e290b30cb2ad0f36a0e8353415c338e4e402ab5990a04",
   "launcher_path": "scripts/run_i01_public_receiving.py",
   "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
   "model_requests": 0,
@@ -103,9 +103,9 @@
     "stop on unknown/unsaved attempt or failed identity; persist failures; verify owned-process cleanup"
   ],
   "renderer_sha256": {
-    "explanation_template_sha256": "6524939914db0389104e96dc6d55a406234e1ed93624e1a58816ac6735947446",
-    "proposal_template_sha256": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
-    "repair_template_sha256": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba"
+    "explanation_template_sha256": "4dfdd9921a7a13d5834a7e56496b5d05643583a2270faba20e230aa29b11db39",
+    "proposal_template_sha256": "1e40d51c96ec1ce4cea5a54183229fadc36ed33a29204722c1914b09ae7ec442",
+    "repair_template_sha256": "1b46b6dd9a11ec6d564133b752013e828ce1ec432b06640775a4fff067443dc1"
   },
   "status": "offline_pins_verified_dispatch_blocked",
   "verified_artifact_sha256": {

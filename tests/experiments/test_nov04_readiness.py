@@ -66,9 +66,10 @@ def test_no_startup_dry_run_and_previous_candidate_are_retained():
         old["candidate_config_identity"]["trained"]
         == candidate["candidate_config_identity"]["trained"]
     )
-    assert (
-        old["candidate_config_identity"]["model"] == candidate["candidate_config_identity"]["model"]
-    )
+    old_model = dict(old["candidate_config_identity"]["model"])
+    current_model = dict(candidate["candidate_config_identity"]["model"])
+    assert old_model.pop("plain_prompt_sha256") != current_model.pop("plain_prompt_sha256")
+    assert old_model == current_model  # only the explicitly revised prompt pin changed
     assert (
         "dc_sustainability/evaluation/forecast_ties.py"
         in read("i01-unified-readiness-2026-11-02.json")["execution_file_lf_sha256"]

@@ -9,6 +9,11 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+The [offline action-conflict follow-up](docs/handoffs/ACTION_CHOICE_OFFLINE_FOLLOWUP.md)
+clarifies one job in one action category for Plain and Agent, with unchanged F02
+checks and original evidence. Candidate RUN-fd87c6c8a9cb is prepared for review,
+not authorized or validated by a model run; prompt/schema freeze remains blocked.
+
 November 4: [the authorized unified public validation passed](docs/handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md).
 All six systems completed EP-HAND1: 180 traces, 17 model requests and 326.125 seconds,
 with zero replay findings/result mismatches and successful cleanup. Nisha's scoped
