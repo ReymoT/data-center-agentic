@@ -1,16 +1,22 @@
 # Project plan
 
-Current receiving update, November 4: [Nisha's supplied PASS is accepted](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
-for the six existing public-development units/180 traces. That private-transfer
-and independent content-review dependency is complete. The next public-validation
-step is exact fresh authorization review; no new run or final I01 acceptance is
-claimed. [The I02 manifest](i02/freeze-manifest.json) retains forecast/source/custody
-and forecast-compatibility blockers, with no frozen item or run authorization.
-Older dated entries below retain their original preparation status where superseded.
+Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
+for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
+findings/result mismatches and successful cleanup. New-run independent receiving
+by Nisha is pending. This supersedes older preparation-only status below without
+changing historical records, scientific gates or task ownership. The
+[offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
+is preparation only; no source read, relabeling, training or held-out work occurred.
+
+
+Earlier November 4: Nisha's receipt for the two separate public runs was
+accepted. The later unified validation is now complete as described above; its
+new independent receiving remains pending. I02 remains pre-freeze with source,
+forecast, custody and compatibility blockers. Older dated entries retain history.
 
 The [November 4 latency refresh](handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md) passed
 the actual no-startup launcher dry run for `RUN-e670485639c9`, preserving prior
-records. PRs #169–#171 publish receiving acceptance, the R05 development evidence
+records. PRs #169â€“#171 publish receiving acceptance, the R05 development evidence
 and the independent forecast-tie helper. No new inference or study rate is claimed.
 
 The later follow-up fixes future Agent request-latency persistence, records the
@@ -40,12 +46,11 @@ and official course requirements #16 remain open.
 
 The [saved-trace explorer and offline readiness](handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
 are implemented. The current candidate includes measured artifact bindings and
-the offline pin checks use real manager-host models. Live authorization/runtime/
-launcher checks, any new unified-run receiving and actual source/custody/freeze remain
-open; do not describe these as another missing UI or missing model implementation.
+the offline pin checks use real manager-host models. The exact authorized public run and launcher checks have passed. Its independent
+receiving and actual source/custody/freeze remain open; do not describe these as another missing UI or missing model implementation.
 
 The [official report update](decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
-supersedes the 15–20-page plan with 5–10 IEEE conference pages. The outline totals
+supersedes the 15â€“20-page plan with 5â€“10 IEEE conference pages. The outline totals
 9.5 pages and 20 rubric points. Matty owns the read-only development-trace explorer.
 December 7 is the internal report submission target. Nisha's
 [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
@@ -64,7 +69,7 @@ prepared. See [the preparation](handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md
 It does not authorize dispatch or establish final independent acceptance.
 
 Nisha's [November 2 course update](decisions/Q13_COURSE_UPDATE_2026-11-02.md)
-is received. Accepted internal targets are deck review November 9–11, rehearsal
+is received. Accepted internal targets are deck review November 9â€“11, rehearsal
 by November 13 and email/Canvas submission by November 14 for the reported
 November 16 presentation. The November 4 confirmation above supersedes earlier
 project-number/end-of-day uncertainty; exact official timezone and release fields

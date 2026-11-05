@@ -1,5 +1,14 @@
 # Agent and verification: development-evidence draft
 
+Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
+for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
+findings/result mismatches and successful cleanup. New-run independent receiving
+by Nisha is pending. This supersedes older preparation-only status below without
+changing historical records, scientific gates or task ownership. The
+[offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
+is preparation only; no source read, relabeling, training or held-out work occurred.
+
+
 November 4: [Nisha's independent content receiving is accepted](handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md)
 for the six original public-development units. Her unchanged report and a manager
 corroboration supplement retain zero replay findings/result mismatches and all

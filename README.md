@@ -9,11 +9,20 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
-November 4: [Nisha's independent development content receiving is accepted](docs/handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md).
+November 4: [the authorized unified public validation passed](docs/handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md).
+All six systems completed EP-HAND1: 180 traces, 17 model requests and 326.125 seconds,
+with zero replay findings/result mismatches and successful cleanup. Nisha's separate
+receiving review for this new run is pending; her earlier receipt is unchanged.
+This is integration evidence, not a held-out study or final acceptance. The
+[CF60 compatibility plan](docs/handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
+prepares development comparisons without changing forecasts, labels or models.
+
+Earlier November 4: [Nisha's independent development content receiving is accepted](docs/handoffs/I01_NISHA_RECEIVING_ACCEPTANCE_2026-11-04.md).
 All six original units and 180 traces passed her scoped replay review, with the
 supplied report preserved unchanged and manager corroboration recorded. The
 private transfer/content-receiving dependency is resolved. Full I01, source and
-forecast acceptance, scientific freeze and new model-run authorization remain open.
+forecast acceptance and scientific freeze remain open. The later authorized public
+validation below does not authorize further requests.
 
 [Recomputed development-fold classification metrics](models/DEVELOPMENT_FOLD_METRICS.md)
 now cover all five C/D grid configurations and three fixed folds. These are
@@ -24,12 +33,12 @@ records receiving/custody limits and the remaining official-information gaps.
 The [read-only trace explorer](docs/report/UI_VISUALIZATION.md) now presents saved
 public-development stages and execution with filters and original file hashes.
 It makes no model calls. [Unified receiving readiness](docs/handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
-records the updated candidate and actual offline pin checks; live dispatch remains
-blocked pending fresh authorization and runtime/launcher checks.
+records the historical candidate preparation and offline pin checks. The later
+validation receipt below records the actual authorized execution.
 
 The [November 4 latency/readiness refresh](docs/handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md)
-records a passed no-startup dry run and a new, unapproved exact authorization
-packet. The forecast-tie diagnostic is implemented offline; measured study rates
+records the passed no-startup dry run and original pending authorization template.
+Matty later approved that exact single-use run; the template remains unchanged. The forecast-tie diagnostic is implemented offline; measured study rates
 and E06 integration remain pending.
 
 Future Agent traces now retain summed request latency consistently with Plain;
@@ -61,10 +70,10 @@ and the complete public-fixture Plain/Agent episodes passed replay.
 Nisha's [November 2 course report](docs/decisions/Q13_COURSE_UPDATE_2026-11-02.md)
 places Group 15's presentation on November 16, with 15 minutes plus Q&A, and
 requires email submission at least two days earlier and one Canvas upload.
-Internal targets are deck review November 9–11, rehearsal by November 13 and
+Internal targets are deck review November 9â€“11, rehearsal by November 13 and
 submission by November 14. The December 2 demo permits live, recorded or screenshot
 delivery. The newer [official report update](docs/decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
-requires 5–10 IEEE conference pages and one PDF, superseding the earlier 15–20-page
+requires 5â€“10 IEEE conference pages and one PDF, superseding the earlier 15â€“20-page
 plan. Nisha's [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
 reports project number 21 and December 9 at 11:59 pm. Arizona timezone is her
 working assumption; official timezone and release/license requirements remain
