@@ -1,0 +1,12 @@
+{
+  "evidence_kind": "offline_prompt_pins_not_scientific_freeze",
+  "historical_pin_source": "docs/evidence/a02-episode-authorization-preparation-2026-10-30.json",
+  "reason": "Shared one-job/one-category clarification and replacement-not-addition repair after failed public validation. No model run or scientific freeze.",
+  "renderer_hashes": {
+    "explanation_template_sha256": "4dfdd9921a7a13d5834a7e56496b5d05643583a2270faba20e230aa29b11db39",
+    "plain_prompt_template_sha256": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
+    "proposal_template_sha256": "1e40d51c96ec1ce4cea5a54183229fadc36ed33a29204722c1914b09ae7ec442",
+    "repair_template_sha256": "1b46b6dd9a11ec6d564133b752013e828ce1ec432b06640775a4fff067443dc1"
+  },
+  "status": "prepared_offline_unapproved"
+}

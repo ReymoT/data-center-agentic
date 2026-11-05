@@ -53,16 +53,23 @@ def prepare(candidate: dict, artifact_paths: dict[str, Path], root: Path) -> dic
         raise ValueError("candidate differs from the exact bounded public receiving proposal")
     if pins["plain_prompt_sha256"] != prompt_template_sha256():
         raise ValueError("Plain prompt pin changed")
-    freeze = json.loads(
-        (root / "docs/evidence/a02-episode-authorization-preparation-2026-10-30.json").read_text()
-    )["renderer_freeze"]
+    # Current development pins are separate from the immutable October preparation.
+    # Pinning an offline draft is not scientific freeze or model-call authorization.
+    pin_record = json.loads(
+        (root / "docs/evidence/i01-renderer-pins-2026-11-04.json").read_text(encoding="utf-8")
+    )
+    if pin_record.get("evidence_kind") != "offline_prompt_pins_not_scientific_freeze":
+        raise ValueError("renderer pin record must declare its offline, unfrozen scope")
+    freeze = pin_record["renderer_hashes"]
+    if freeze["plain_prompt_template_sha256"] != pins["plain_prompt_sha256"]:
+        raise ValueError("Plain renderer pin record disagrees with candidate")
     actual_renderers = {
         "proposal_template_sha256": renderers.proposal_template_sha256(),
         "repair_template_sha256": renderers.repair_template_sha256(),
         "explanation_template_sha256": explanation_template_sha256(),
     }
     if any(value != freeze[name] for name, value in actual_renderers.items()):
-        raise ValueError("Agent renderer differs from reviewed template freeze")
+        raise ValueError("Agent renderer differs from the current offline prompt pins")
     settings = ModelSettings(
         seeds=tuple(map(tuple, pins["seeds"])),
         decision_seconds=pins["decision_seconds"],

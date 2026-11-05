@@ -270,10 +270,10 @@ def main() -> int:
     if sha256(tokenizer_path) != TOKENIZER_SHA256:
         raise RuntimeError("tokenizer artifact differs from the validated reference")
     expected_prompts = {
-        "plain": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
-        "proposal": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
-        "repair": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba",
-        "explanation": "6524939914db0389104e96dc6d55a406234e1ed93624e1a58816ac6735947446",
+        "plain": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
+        "proposal": "1e40d51c96ec1ce4cea5a54183229fadc36ed33a29204722c1914b09ae7ec442",
+        "repair": "1b46b6dd9a11ec6d564133b752013e828ce1ec432b06640775a4fff067443dc1",
+        "explanation": "4dfdd9921a7a13d5834a7e56496b5d05643583a2270faba20e230aa29b11db39",
     }
     actual_prompts = {
         "plain": prompt_template_sha256(),

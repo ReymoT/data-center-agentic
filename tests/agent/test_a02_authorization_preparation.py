@@ -1,15 +1,21 @@
 """Offline guardrails for the A02 episode-authorization preparation; no model calls."""
 
+import hashlib
 import json
 from pathlib import Path
 
 from dc_sustainability.agent.renderers import (
+    PROPOSAL_PROMPT_FILES,
+    REPAIR_PROMPT_FILES,
     proposal_template_sha256,
     repair_template_sha256,
 )
 from dc_sustainability.experiments.config import lf_sha256
-from dc_sustainability.explanations.agent import explanation_template_sha256
-from dc_sustainability.llm.plain import prompt_template_sha256
+from dc_sustainability.explanations.agent import (
+    EXPLANATION_PROMPT_FILES,
+    explanation_template_sha256,
+)
+from dc_sustainability.llm.plain import PROMPT_FILES, prompt_template_sha256
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "docs/evidence/a02-episode-authorization-preparation-2026-10-30.json"
@@ -17,6 +23,15 @@ MANIFEST = ROOT / "docs/evidence/a02-episode-authorization-preparation-2026-10-3
 
 def load_manifest():
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
+
+
+def preserved_prompt_hash(names):
+    snapshot = ROOT / "docs/evidence/i01-pre-action-choice-2026-11-04/prompts"
+    digest = hashlib.sha256()
+    for name in names:
+        text = (snapshot / name).read_text(encoding="utf-8").replace("\r\n", "\n").strip()
+        digest.update(name.encode() + b"\0" + text.encode() + b"\0")
+    return digest.hexdigest()
 
 
 def test_preparation_is_explicitly_offline_and_not_authorized():
@@ -41,10 +56,11 @@ def test_episode_and_all_renderers_are_frozen_without_inventing_bounds():
     freeze = data["renderer_freeze"]
     assert freeze["status"] == "frozen_offline"
     assert freeze["exact_commit"] == "8a98996be6b497cf1065bdfaec8bbd1ce9f4b58b"
-    assert freeze["plain_prompt_template_sha256"] == prompt_template_sha256()
-    assert freeze["proposal_template_sha256"] == proposal_template_sha256()
-    assert freeze["repair_template_sha256"] == repair_template_sha256()
-    assert freeze["explanation_template_sha256"] == explanation_template_sha256()
+    # This dated preparation binds its original prompt sources, not later drafts.
+    assert freeze["plain_prompt_template_sha256"] == preserved_prompt_hash(PROMPT_FILES)
+    assert freeze["proposal_template_sha256"] == preserved_prompt_hash(PROPOSAL_PROMPT_FILES)
+    assert freeze["repair_template_sha256"] == preserved_prompt_hash(REPAIR_PROMPT_FILES)
+    assert freeze["explanation_template_sha256"] == preserved_prompt_hash(EXPLANATION_PROMPT_FILES)
     for field in (
         "plain_maximum_requests",
         "agent_maximum_requests",
@@ -53,6 +69,14 @@ def test_episode_and_all_renderers_are_frozen_without_inventing_bounds():
     ):
         assert data["bounds"][field] is None
     assert data["bounds"]["retries"] == 0
+
+
+def test_current_prompt_draft_does_not_rewrite_the_historical_freeze():
+    old = load_manifest()["renderer_freeze"]
+    assert old["plain_prompt_template_sha256"] != prompt_template_sha256()
+    assert old["proposal_template_sha256"] != proposal_template_sha256()
+    assert old["repair_template_sha256"] != repair_template_sha256()
+    assert old["explanation_template_sha256"] != explanation_template_sha256()
 
 
 def test_a01_transport_evidence_does_not_authorize_a02():
