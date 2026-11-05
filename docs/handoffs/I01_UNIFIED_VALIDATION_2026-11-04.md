@@ -1,5 +1,9 @@
 # I01 bounded public validation — November 4
 
+Later receiving update: [Nisha's scoped evidence PASS is now accepted](I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).
+Her confirmed empty-plan finding and the offline fix remain separate from this
+original run result. The preparation/delivery status below is retained as history.
+
 Matty explicitly approved the exact single-use validation in the project chat
 after the repeated offline check passed: “I approve it.” The separate approved
 receipt records that actual message; the original pending template is unchanged.

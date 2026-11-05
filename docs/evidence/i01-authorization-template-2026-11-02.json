@@ -12,11 +12,11 @@
     "single_use_authorization_required": true,
     "warmups": 0
   },
-  "candidate_config_hash": "e670485639c93d0bf1b539f0c9aa04220b35c166ed04812eca03a4a65a12b30b",
-  "launcher_sha256": "d5ac4ab0d3f3ad6190843d1e5175e2113a0fdb22a5c1f16437283b4ebc362152",
-  "note": "Unapproved template. It is not permission to start the runtime or dispatch requests.",
-  "readiness_sha256": "97bfe6a30b21f3fcf434712055d244a526ed382805ea26298778b7335f244adc",
-  "single_use_id": "I01-EPHAND1-e670485639c9-20261104-v1",
+  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+  "launcher_sha256": "e63290a89804b607f0421dafce9ec629e709669ff799855beeb24943bfc69a09",
+  "note": "Unapproved action-field validation template. Prior approval was consumed by RUN-e670485639c9 and cannot authorize this run.",
+  "readiness_sha256": "0c95030508d07faefb4f383a2c17e5fd9357a21b2aacc824fa9399d4e6a485c7",
+  "single_use_id": "I01-EPHAND1-15e69e6129b7-20261104-actions-v2",
   "status": "pending_fresh_user_approval",
   "text_pin_convention": "LF-normalized readiness and launcher"
 }

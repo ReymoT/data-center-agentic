@@ -125,7 +125,7 @@ def bounded_response_schema(
     if plan is not None:
         props = plan["properties"]
         required = list(plan.get("required", ()))
-        for name in ("record_type", "schema_version"):
+        for name in ("record_type", "schema_version", "starts", "deferrals", "abstentions"):
             if name not in required:
                 required.append(name)
         plan["required"] = required
@@ -176,5 +176,31 @@ def bounded_response_schema(
         props["system"] = {"const": system, "type": "string"}
         props["output_status"] = {"const": "ok", "type": "string"}
         props["raw_response"] = {"const": None, "type": "null"}
+        # A successful model output must explicitly carry its plan. F02's optional
+        # field remains useful for non-model failure records and is unchanged.
+        props["plan"] = {"$ref": "#/$defs/Plan"}
+        if "plan" not in schema["required"]:
+            schema["required"].append("plan")
 
     return schema, limits
+
+
+def validate_explicit_actions(content: str, response_model: type[s.Record]) -> None:
+    """Reject omitted model action fields before F02 can supply empty defaults.
+
+    This checks shape only, never action quality or a nonempty schedule. The raw
+    provider response is retained by the caller even when this validation fails.
+    """
+    if response_model is s.Explanation:
+        return
+    import json
+
+    value = json.loads(content)
+    plan = (
+        value.get("plan") if response_model is s.PolicyOutput and isinstance(value, dict) else value
+    )
+    if not isinstance(plan, dict):
+        raise ValueError("model output requires an explicit plan object")
+    for name in ("starts", "deferrals", "abstentions"):
+        if name not in plan or not isinstance(plan[name], list):
+            raise ValueError(f"model plan requires an explicit {name} array")

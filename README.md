@@ -11,8 +11,11 @@ All teammates contribute their technical sections, interface coordination and re
 
 November 4: [the authorized unified public validation passed](docs/handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md).
 All six systems completed EP-HAND1: 180 traces, 17 model requests and 326.125 seconds,
-with zero replay findings/result mismatches and successful cleanup. Nisha's separate
-receiving review for this new run is pending; her earlier receipt is unchanged.
+with zero replay findings/result mismatches and successful cleanup. Nisha's scoped
+[evidence receiving PASS is accepted](docs/handoffs/I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).
+Her high-priority empty-plan finding is confirmed; the request-local action-field
+fix is offline tested. Its new candidate RUN-15e69e6129b7 needs fresh approval
+and live validation before prompt/schema freeze; no improvement is claimed.
 This is integration evidence, not a held-out study or final acceptance. The
 [CF60 compatibility plan](docs/handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 prepares development comparisons without changing forecasts, labels or models.

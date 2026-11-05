@@ -129,6 +129,24 @@ def generate(client, **changes):
     return client.generate(**args)
 
 
+@pytest.mark.parametrize("system,model", [("agent", s.Plan), ("plain_llm", s.PolicyOutput)])
+def test_missing_raw_actions_are_spent_failed_attempt_not_defaulted_or_retried(
+    server, system, model
+):
+    plan = json.loads(f.plan().to_json())
+    for name in ("starts", "deferrals", "abstentions"):
+        plan.pop(name)
+    content = {"plan": plan} if model is s.PolicyOutput else plan
+    server.body["message"]["content"] = json.dumps(content)
+    client = provider(server)
+    attempt = generate(client, system=system, response_model=model)
+    assert attempt.output is None
+    assert "explicit starts array" in attempt.error
+    assert attempt.http_status == 200 and attempt.raw_response
+    assert not attempt.uncertain_outcome
+    assert len(client.attempts) == len(server.requests) == 1
+
+
 def test_real_http_serialization_f02_parse_and_evidence_preservation(server):
     client = provider(server)
     result = generate(client)

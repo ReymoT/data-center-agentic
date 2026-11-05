@@ -1,7 +1,7 @@
 {
-  "candidate_config_hash": "e670485639c93d0bf1b539f0c9aa04220b35c166ed04812eca03a4a65a12b30b",
-  "candidate_run_id": "RUN-e670485639c9",
-  "code_revision": "40dcd800babf0964e718a8a538548e454d9c0e3c",
+  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+  "candidate_run_id": "RUN-15e69e6129b7",
+  "code_revision": "d82a23807635117a39761e2ebf62233ee7fb7d3f",
   "execution_file_lf_sha256": {
     "dc_sustainability/__init__.py": "989d647cf9f9de086d38573aeaa5b786d5417ca85b130dbd75a9b3f357223b74",
     "dc_sustainability/agent/__init__.py": "722e2b30dd21d8ac391e54c1a6407b3e1cbc897047e6847c444052780ccb7615",
@@ -26,6 +26,7 @@
     "dc_sustainability/evaluation/review.py": "5d6ef8f650430ab5ba8c79a38b3271486c55f117174c5e67426d60808167f8a9",
     "dc_sustainability/evaluation/run_metrics.py": "8233af1d56508d8026e206dce8b6529ba81ac45207c3666079268f3388ba78b1",
     "dc_sustainability/evaluation/sampling.py": "658b3aa9d8706ede2ae06442004cfa2378b561e55ca62026aab6e2314bab165c",
+    "dc_sustainability/evaluation/study_tables.py": "0b1d91125633490a5dd1a5be79c07c90f0817b219a2e3442bb4bef0a392c71fe",
     "dc_sustainability/evaluation/validator.py": "79d4061ea858d873f0e80f35d302d4c6f86e786b327011a0021874909e5de0cf",
     "dc_sustainability/experiments/__init__.py": "32c51f991da182702152f28672371dcfeccaa34e02028be4c615433ffc2608fc",
     "dc_sustainability/experiments/__main__.py": "02d4f6da31ec32bc1c2c23c4628d18a224dd12e511d4e6151ac043a09a02f3c4",
@@ -43,9 +44,9 @@
     "dc_sustainability/knowledge/retrieval.py": "d5ebd5f4b298ec3d78994ac24dd26c5232b3371c91d78294416868f54a5921d0",
     "dc_sustainability/llm/__init__.py": "ab256fb557a5187580ebab8d8572067cb8bd58c4e4245ea214fd1f4be1caf918",
     "dc_sustainability/llm/plain.py": "047434325db62e67f1aa512139392a39146e1ad6454e01db168bd9d8bbabed6a",
-    "dc_sustainability/llm/provider.py": "510117e159d60c34d013cc7b5912995a16eb2b2eac8a5f010cea6143cd20eb9b",
+    "dc_sustainability/llm/provider.py": "72895d70b2390abeed3d69acd1dd6aba609e75682fecb9addf1bed19ffd13755",
     "dc_sustainability/llm/rendering_research.py": "b7042d9abb69f2b2e713bb6dff8a16a4f86ed7893a2c4d17df86e87ec765bd2a",
-    "dc_sustainability/llm/response_bounds.py": "c81f6554de036192023e1203dd4d931159c67e7d274fc8dbf3d9c0ebf1a8e820",
+    "dc_sustainability/llm/response_bounds.py": "ff3066b9d31e3937954ef2ab9392efa73b183681a5bf1398751d5c1dacac4ddb",
     "dc_sustainability/metrics/__init__.py": "d35af167dadc64292bb5fa6eafa9edfaaa935b483ef152d4f4343bbd6806db2c",
     "dc_sustainability/metrics/impact.py": "4cec6ae43dbbeffad2d8cebe84843af7295134a8cf3ac6eef59c72921f5f3f7c",
     "dc_sustainability/policies/__init__.py": "39aadfb55250b251ae490856cd1fec87001dc184b52cd8fc864ad7e37899143e",
@@ -80,7 +81,7 @@
   },
   "held_out_access": false,
   "independent_content_acceptance": false,
-  "launcher_lf_sha256": "d5ac4ab0d3f3ad6190843d1e5175e2113a0fdb22a5c1f16437283b4ebc362152",
+  "launcher_lf_sha256": "e63290a89804b607f0421dafce9ec629e709669ff799855beeb24943bfc69a09",
   "launcher_path": "scripts/run_i01_public_receiving.py",
   "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
   "model_requests": 0,
@@ -110,5 +111,6 @@
   "verified_artifact_sha256": {
     "decision_tree_c": "7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b",
     "random_forest_d": "37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a"
-  }
+  },
+  "verified_on": "2026-11-04"
 }

@@ -1,5 +1,6 @@
 """Offline A01 request-local response-bound tests; no provider or model calls."""
 
+import json
 from copy import deepcopy
 
 import pytest
@@ -9,6 +10,7 @@ from dc_sustainability.llm.response_bounds import (
     ResponseBounds,
     bounded_response_schema,
     response_bounds,
+    validate_explicit_actions,
 )
 from tests.contracts import fixtures as f
 
@@ -94,3 +96,38 @@ def test_empty_queue_schema_has_zero_plan_entries_while_policy_remains_no_call()
         schema["properties"][name]["maxItems"] == 0
         for name in ("starts", "deferrals", "abstentions")
     )
+
+
+@pytest.mark.parametrize("model,system", [(s.Plan, "agent"), (s.PolicyOutput, "plain_llm")])
+def test_request_requires_all_action_arrays_without_changing_f02(model, system):
+    before = deepcopy(model.model_json_schema())
+    schema, _ = bounded_response_schema(model, state_with_waiting(3), system=system)
+    assert {"starts", "deferrals", "abstentions"} <= set(definition(schema, "Plan")["required"])
+    assert model.model_json_schema() == before
+    if model is s.PolicyOutput:
+        assert "plan" in schema["required"]
+        assert schema["properties"]["plan"] == {"$ref": "#/$defs/Plan"}
+
+
+@pytest.mark.parametrize("model", [s.Plan, s.PolicyOutput])
+@pytest.mark.parametrize("missing", ["starts", "deferrals", "abstentions"])
+def test_raw_missing_action_is_rejected_before_f02_defaults(model, missing):
+    plan = json.loads(f.plan().to_json())
+    del plan[missing]
+    raw = {"plan": plan} if model is s.PolicyOutput else plan
+    with pytest.raises(ValueError, match=f"explicit {missing}"):
+        validate_explicit_actions(json.dumps(raw), model)
+
+
+@pytest.mark.parametrize("model", [s.Plan, s.PolicyOutput])
+def test_explicit_empty_actions_remain_valid(model):
+    plan = {"starts": [], "deferrals": [], "abstentions": []}
+    validate_explicit_actions(
+        json.dumps({"plan": plan} if model is s.PolicyOutput else plan), model
+    )
+
+
+@pytest.mark.parametrize("raw", [{}, {"plan": None}])
+def test_plain_requires_explicit_plan_object(raw):
+    with pytest.raises(ValueError, match="explicit plan object"):
+        validate_explicit_actions(json.dumps(raw), s.PolicyOutput)

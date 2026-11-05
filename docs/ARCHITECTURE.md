@@ -2,8 +2,10 @@
 
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
 for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
-findings/result mismatches and successful cleanup. New-run independent receiving
-by Nisha is pending. This supersedes older preparation-only status below without
+findings/result mismatches and successful cleanup. Nisha's [scoped new-run receiving PASS is accepted](handoffs/I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).
+The confirmed empty-plan finding has an offline-tested request-local grammar and
+raw-response fix; candidate RUN-15e69e6129b7 still requires fresh approval and
+new live validation before prompt/schema freeze. This supersedes older preparation-only status below without
 changing historical records, scientific gates or task ownership. The
 [offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 is preparation only; no source read, relabeling, training or held-out work occurred.

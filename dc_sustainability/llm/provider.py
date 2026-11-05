@@ -20,7 +20,7 @@ from urllib.parse import urlsplit
 from uuid import uuid4
 
 from dc_sustainability import schemas as s
-from dc_sustainability.llm.response_bounds import bounded_response_schema
+from dc_sustainability.llm.response_bounds import bounded_response_schema, validate_explicit_actions
 
 
 class CallBlocked(ValueError):
@@ -342,6 +342,7 @@ class OllamaProvider:
                     or message.get("thinking")
                 ):
                     raise ValueError("unexpected role, tool calls or thinking response")
+                validate_explicit_actions(message["content"], response_model)
                 output = response_model.from_json(message["content"])
                 if isinstance(output, s.PolicyOutput) and output.system != system:
                     raise ValueError("policy output names a different system")
