@@ -1,2 +1,4 @@
 # Preserve the supplied receiving report's exact original bytes on every platform.
 docs/evidence/I01_RECEIVING_NISHA_2026-11-03.txt -text
+# Keep the published raw summary digest stable across Windows/Unix checkouts.
+docs/evidence/i01-unified-validation-2026-11-04.json -text
