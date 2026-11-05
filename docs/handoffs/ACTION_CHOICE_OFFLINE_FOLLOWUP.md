@@ -1,5 +1,11 @@
 # Offline action-conflict investigation and prompt clarification
 
+Later execution update: Matty approved this exact candidate and the
+[completed public validation passed](I01_ACTION_CHOICE_VALIDATION_RESULT.md).
+Its new independent receiving remains pending. The single-use ID is consumed;
+the original offline pin/template status below is historical, not authorization
+for another execution or scientific freeze.
+
 Matty authorized this offline follow-up after the failed `RUN-15e69e6129b7`
 validation. No model, runtime or source-CSV request is part of this investigation.
 The original responses, traces, failed outcome and receiving records are unchanged.

@@ -1,9 +1,11 @@
 # Project plan
 
-The [offline action-conflict follow-up](handoffs/ACTION_CHOICE_OFFLINE_FOLLOWUP.md)
-clarifies one job in one action category for Plain and Agent, with unchanged F02
-checks and original evidence. Candidate RUN-fd87c6c8a9cb is prepared for review,
-not authorized or validated by a model run; prompt/schema freeze remains blocked.
+Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
+for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
+zero replay findings/result mismatches and successful cleanup. Agent completed
+J1/J2 using one model-initial start and one fallback start; Plain completed no
+jobs. Both Agent repairs failed their checks. New independent receiving is pending;
+this is public development evidence, not a study result or scientific freeze.
 
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
 for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
