@@ -186,7 +186,7 @@
       "status": "pending",
       "path": "dc_sustainability/evaluation",
       "sha256": null,
-      "blocker": "Matty's November 4 analysis response is recorded in docs/decisions/E03_ANALYSIS_MANAGER_2026-11-04.md: broad unsafe primary with both measures; 10000/0.95/20261113 percentile resampling; 24 core primary plus 6 withheld separate; genuine no-ops excluded and pending uncredited. Requested affected-consumer confirmations, E06 integration and final hashed analysis freeze remain pending; no held-out values read."
+      "blocker": "Matty's November 4 analysis response is recorded in docs/decisions/E03_ANALYSIS_MANAGER_2026-11-04.md: broad unsafe primary with both measures; 10000/0.95/20261113 percentile resampling; 24 core primary plus 6 withheld separate; genuine no-ops excluded and pending uncredited. The E06 table builder joins these helpers (docs/handoffs/E06_STUDY_TABLES.md). Requested affected-consumer confirmations and the final hashed analysis freeze remain pending; no held-out values read."
     },
     {
       "id": "faithfulness-rubric",

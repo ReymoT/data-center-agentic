@@ -85,8 +85,11 @@ An empty explanation has 0 completeness and coverage; zero-denominator faithfuln
 The [paired statistics helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#paired-statistics-november-4)
 and [run-metrics helper](../handoffs/E03_RUN_METRICS.md) are implemented offline.
 Their proposed settings/definitions still need acceptance before I02; publishing
-the code does not freeze the analysis or produce held-out findings. E06 report
-integration and final analysis acceptance remain unfinished. New Agent traces
+the code does not freeze the analysis or produce held-out findings. The
+[E06 table builder](../handoffs/E06_STUDY_TABLES.md) now joins these helpers, keeps
+core and withheld episodes apart and pairs emissions only through equal-work savings.
+Reference gaps, faithfulness scores and final analysis acceptance remain unfinished.
+New Agent traces
 now sum recorded request latencies consistently with Plain; historical missing
 latency remains missing. End-to-end elapsed decision time is a different quantity.
 - Matty accepts 10,000 percentile resamples, confidence 0.95 and seed 20261113,
@@ -97,8 +100,8 @@ latency remains missing. End-to-end elapsed decision time is a different quantit
 - The [forecast-tie helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#forecast-tie-rate-november-4)
   is implemented offline: tied / comparable individual-job decisions from Greedy B's
   replay and visible forecasts. Feasibility excludes contention between waiting jobs;
-  no-choice, uncovered and unverifiable decisions are counted separately. Integration
-  into E06 reporting and measured study rates remain pending.
+  no-choice, uncovered and unverifiable decisions are counted separately. The E06
+  table builder reports it by cohort; measured study rates remain pending.
 - No tuning on held-out results.
 
 ## 2. Reliability method
