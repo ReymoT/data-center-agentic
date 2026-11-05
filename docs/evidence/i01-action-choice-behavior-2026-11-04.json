@@ -1,0 +1,345 @@
+{
+  "scope": "One revised public development validation, not a study or causal effect estimate.",
+  "audit_script_sha256": "5f17ab81b07c889240a8535a9c5013713c514e866b97e7436386d4f433aeee60",
+  "run": {
+    "run_id": "RUN-fd87c6c8a9cb",
+    "config_hash": "fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506",
+    "status": "passed",
+    "outcome_file_sha256": "c1daedc2fadaebdfd5d934c807d3391f4e2f9f8ad685f42af3970d418a3f378f",
+    "elapsed_seconds": 445.1559999999881,
+    "requests": {
+      "agent": 12,
+      "plain_llm": 5,
+      "total": 17
+    },
+    "attempt_errors": 0,
+    "uncertain_attempts": 0,
+    "highest_request_ms": 59361.713299993426,
+    "total_saved_traces": 180,
+    "complete_results": 6,
+    "cleanup": {
+      "owned_process_exited": true,
+      "listener_remaining": false,
+      "overall_deadline_exceeded": false
+    },
+    "plan_responses": 12,
+    "plans_with_explicit_action_fields": 12,
+    "plans_with_actions": 11,
+    "raw_plan_rows": [
+      {
+        "system": "agent",
+        "slot": 0,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 0,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": false,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 4,
+        "stage": "repair",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 1,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 0,
+          "deferrals": 1,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 4,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 0,
+          "deferrals": 1,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 3,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 2,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 0,
+          "deferrals": 1,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "agent",
+        "slot": 0,
+        "stage": "repair",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 2,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "plain_llm",
+        "slot": 3,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "plain_llm",
+        "slot": 1,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 1
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "plain_llm",
+        "slot": 0,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 2,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "plain_llm",
+        "slot": 2,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 1
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      },
+      {
+        "system": "plain_llm",
+        "slot": 4,
+        "stage": "propose",
+        "action_fields_present": true,
+        "actions": {
+          "starts": 1,
+          "deferrals": 0,
+          "abstentions": 0
+        },
+        "any_actions": true,
+        "jobs_in_conflicting_action_categories": []
+      }
+    ],
+    "systems": {
+      "greedy_a": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [
+          "J1",
+          "J2"
+        ],
+        "missed_jobs": [
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {
+          "initial": 2
+        },
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_pass": 24
+        },
+        "recorded_model_calls": 0,
+        "executed_status_without_job_starts": 21
+      },
+      "decision_tree_c": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [
+          "J1",
+          "J2"
+        ],
+        "missed_jobs": [
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {
+          "initial": 2
+        },
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_pass": 24
+        },
+        "recorded_model_calls": 0,
+        "executed_status_without_job_starts": 22
+      },
+      "greedy_b": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [
+          "J1",
+          "J2"
+        ],
+        "missed_jobs": [
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {
+          "initial": 2
+        },
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_pass": 24
+        },
+        "recorded_model_calls": 0,
+        "executed_status_without_job_starts": 22
+      },
+      "random_forest_d": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [
+          "J1",
+          "J2"
+        ],
+        "missed_jobs": [
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {
+          "initial": 2
+        },
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_pass": 24
+        },
+        "recorded_model_calls": 0,
+        "executed_status_without_job_starts": 22
+      },
+      "agent": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [
+          "J1",
+          "J2"
+        ],
+        "missed_jobs": [
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {
+          "fallback": 1,
+          "initial": 1
+        },
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_fail": 2,
+          "repaired_present": 2,
+          "repaired_fail": 2,
+          "fallback_present": 2,
+          "fallback_pass": 2,
+          "initial_pass": 22
+        },
+        "recorded_model_calls": 12,
+        "executed_status_without_job_starts": 21
+      },
+      "plain_llm": {
+        "completed_result": true,
+        "saved_traces": 30,
+        "complete_result_replay_verified": true,
+        "completed_jobs": [],
+        "missed_jobs": [
+          "J1",
+          "J2",
+          "J3"
+        ],
+        "executed_job_starts_by_stage": {},
+        "stage_checks": {
+          "initial_present": 24,
+          "initial_fail": 5,
+          "initial_pass": 19
+        },
+        "recorded_model_calls": 5,
+        "executed_status_without_job_starts": 19
+      }
+    },
+    "agent_executed_schedule_equals_greedy_a": false
+  },
+  "all_category_overlap_rows": [],
+  "duplicate_category_entry_rows": [],
+  "executed_model_system_job_starts": [
+    {
+      "system": "agent",
+      "slot": 3,
+      "stage_matches": [
+        "initial"
+      ],
+      "job_ids": [
+        "J2"
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 0,
+      "stage_matches": [
+        "fallback"
+      ],
+      "job_ids": [
+        "J1"
+      ]
+    }
+  ],
+  "manager_summary_checks": "passed; full raw/action review remains distinct from independent receiving"
+}

@@ -1,0 +1,462 @@
+{
+  "evidence_kind": "bounded_public_development_receiving_not_study_result",
+  "authorization_ref": "Current project chat: Matty message \"Ok get it done\" directly following the exact RUN-fd87c6c8a9cb validation recommendation and its 24-request/150-second/480-second/3900-second, zero-retry/warmup limits.",
+  "repo_commit": "18f2cba0252e215e94ae7c2b54de0b3df8b810d5",
+  "checkout_commit": "1f32bdc7b46a8a0e03b338c9d318ff415cc28e84",
+  "readiness_sha256": "4caab5428c39e6fab721d9ee267aeff308325fd1b3b8fdcf16096987660d3cad",
+  "launcher_sha256": "f9650c75bac9446d662e290b30cb2ad0f36a0e8353415c338e4e402ab5990a04",
+  "text_pin_convention": "LF-normalized readiness and launcher; raw binary/tokenizer hashes",
+  "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6",
+  "config_identity": {
+    "config_version": "e02-run-config-v1",
+    "name": "i01-six-path-offline-candidate-20261102",
+    "systems": [
+      "greedy_a",
+      "greedy_b",
+      "decision_tree_c",
+      "random_forest_d",
+      "plain_llm",
+      "agent"
+    ],
+    "episodes": [
+      {
+        "episode_id": "EP-HAND1",
+        "bundle_sha256": "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6"
+      }
+    ],
+    "model_trials": [
+      0
+    ],
+    "code_revision": "18f2cba0252e215e94ae7c2b54de0b3df8b810d5",
+    "lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "model": {
+      "seeds": [
+        [
+          0,
+          101
+        ]
+      ],
+      "decision_seconds": 480,
+      "max_total_attempts": 24,
+      "deployment": {
+        "context_policy_ref": "qwen3-legacy-template-tokenizers-0.23.3-native-count-validated-a01",
+        "max_prompt_tokens": 14848,
+        "max_response_bytes": 2097152,
+        "max_run_attempts": 18,
+        "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "request_timeout_seconds": 150,
+        "runtime_version": "0.40.5"
+      },
+      "plain_prompt_sha256": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
+      "agent_renderer_ref": "dc_sustainability.agent.renderers:render_proposal,render_repair;dc_sustainability.explanations.agent:render_explanation"
+    },
+    "trained": {
+      "artifacts": {
+        "decision_tree_c": "7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b",
+        "random_forest_d": "37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a"
+      }
+    }
+  },
+  "config_hash": "fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506",
+  "prompt_hashes": {
+    "plain": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
+    "proposal": "1e40d51c96ec1ce4cea5a54183229fadc36ed33a29204722c1914b09ae7ec442",
+    "repair": "1b46b6dd9a11ec6d564133b752013e828ce1ec432b06640775a4fff067443dc1",
+    "explanation": "4dfdd9921a7a13d5834a7e56496b5d05643583a2270faba20e230aa29b11db39"
+  },
+  "runtime_executable_sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "bounds": {
+    "plain": 6,
+    "agent": 18,
+    "combined": 24,
+    "request_seconds": 150,
+    "agent_decision_seconds": 480,
+    "total_seconds": 3900,
+    "retries": 0,
+    "warmups": 0
+  },
+  "status": "passed",
+  "elapsed_seconds": 445.1559999999881,
+  "requests": {
+    "plain_llm": 5,
+    "agent": 12,
+    "total": 17
+  },
+  "attempts": [
+    {
+      "system": "plain_llm",
+      "slot": 0,
+      "request_sha256": "9fbafea19e7c29c3ebc1d7c9da4acdcd1280705310746d635d3384c18e9b3171",
+      "response_sha256": "d307f521d377440fa6ff1bbdeb7a09b1eb5106fd0b6d2227d675e1ba1b8dd394",
+      "http_status": 200,
+      "latency_ms": 59361.713299993426,
+      "offline_prompt_tokens": 2508,
+      "native_prompt_tokens": 2508,
+      "completion_tokens": 532,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 1,
+      "request_sha256": "cae2872d824c35e4e3ea7d4ccd192121553b1a2ef6261fac7cd6806c850bed26",
+      "response_sha256": "bc30d111c62a2732194e67b3ef720aaa836d2c2e77385220a0df6294cf92d9b4",
+      "http_status": 200,
+      "latency_ms": 47713.19579999545,
+      "offline_prompt_tokens": 2356,
+      "native_prompt_tokens": 2356,
+      "completion_tokens": 589,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 2,
+      "request_sha256": "8fdd5d295ba04d530e7cd65fb06f59e4ef6c544040920fee6b4c7c9083cc8920",
+      "response_sha256": "f8e77487c92e07712bc166ed8e0e54e1e68a3d6d1feacbbc7926414a88c61c3c",
+      "http_status": 200,
+      "latency_ms": 44428.284699999494,
+      "offline_prompt_tokens": 2204,
+      "native_prompt_tokens": 2204,
+      "completion_tokens": 556,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 3,
+      "request_sha256": "64382952a22407b11488056ec27108fb95a2bb6505e8afbdb367f3e6d776fd97",
+      "response_sha256": "72b34ee9da5cdec2dede3a5a8d289449e8e6ab34262644970e7b71724c5f0db1",
+      "http_status": 200,
+      "latency_ms": 40097.301500005415,
+      "offline_prompt_tokens": 2052,
+      "native_prompt_tokens": 2052,
+      "completion_tokens": 502,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 4,
+      "request_sha256": "fcbad5389ab38ab87df8efc82966d9de48101e62c795edb32ab82f9a64ce9360",
+      "response_sha256": "4c460ba3c1b4e89cc0d848ec60eace57f0d49336fc07673cc07bc3a503ce58d7",
+      "http_status": 200,
+      "latency_ms": 40297.251399984816,
+      "offline_prompt_tokens": 2026,
+      "native_prompt_tokens": 2026,
+      "completion_tokens": 508,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 0,
+      "request_sha256": "0fe17a797a90e42ed80faf2770a2d9ae50454aa501c11cea9e7e8a1e8040974b",
+      "response_sha256": "e1f98f1ae27806fa16d0e0351a7814013db18deab1b492e782f00de94fc34601",
+      "http_status": 200,
+      "latency_ms": 13869.189499993809,
+      "offline_prompt_tokens": 2363,
+      "native_prompt_tokens": 2363,
+      "completion_tokens": 97,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 0,
+      "request_sha256": "47bf4a684d1f6d9476fe3deda7fa68834142727aea1860255d9562eb5929a366",
+      "response_sha256": "95159cf3b88601ba84cd989f85121928714db2ede5965625bffa94ecfd046460",
+      "http_status": 200,
+      "latency_ms": 19373.964700003853,
+      "offline_prompt_tokens": 2976,
+      "native_prompt_tokens": 2976,
+      "completion_tokens": 145,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 0,
+      "request_sha256": "d44161548a04ffdb33ba14a59c556a500bcdd6705f6ea6b0c05562a7a8560351",
+      "response_sha256": "ff109149df982b005c3f922d20b750bf1b8a84a5e556f0396deb890dc9887666",
+      "http_status": 200,
+      "latency_ms": 30859.424099995522,
+      "offline_prompt_tokens": 3017,
+      "native_prompt_tokens": 3017,
+      "completion_tokens": 288,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 1,
+      "request_sha256": "b90d5fee60eb646219b55ebfdc6c8471ca9ecdf7641df9e5eda695c8dba6c6b3",
+      "response_sha256": "0e48c3a352986ca74b8486d23d1b9de5eb1d4f37ecb09f224e265752d77147b9",
+      "http_status": 200,
+      "latency_ms": 16188.813299988396,
+      "offline_prompt_tokens": 2218,
+      "native_prompt_tokens": 2218,
+      "completion_tokens": 124,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 1,
+      "request_sha256": "fa080d3af8e90b1b6d9a553c67487ec2ae506fd64ea49b3277908eaf2de89af9",
+      "response_sha256": "fcd2973b319f347ad63d66e60930e59ce6ed8ceaec7f233b3e192ec7193ac33d",
+      "http_status": 200,
+      "latency_ms": 12055.756099987775,
+      "offline_prompt_tokens": 2880,
+      "native_prompt_tokens": 2880,
+      "completion_tokens": 44,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 2,
+      "request_sha256": "7fcc646e9968ddbe51c7f8adfeeed2e8bc58f674afa2691101f39fa585b483a8",
+      "response_sha256": "113f82aca61afb9f6721294bf0245563b3eedc61672ebf91d49ac6a79b06fa6e",
+      "http_status": 200,
+      "latency_ms": 13946.342900017044,
+      "offline_prompt_tokens": 2027,
+      "native_prompt_tokens": 2027,
+      "completion_tokens": 117,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 2,
+      "request_sha256": "27410ec997bd24ef4a5048b5ab13130b1098d5898a7187034b479859b94b3132",
+      "response_sha256": "7cf5d50f0d520a118623fc85d180ac815679c7e73a613cb4f7f94bed3a67d10b",
+      "http_status": 200,
+      "latency_ms": 10934.59720001556,
+      "offline_prompt_tokens": 2671,
+      "native_prompt_tokens": 2671,
+      "completion_tokens": 44,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 3,
+      "request_sha256": "1c453129ff95cf9d39257020a9b0e836c8ba27bccc7a2012b05c143ea55eb785",
+      "response_sha256": "e3ea7cfaf34ff1d4c28eba7751c713d4e93d174e358240c21ffb0df3491b5222",
+      "http_status": 200,
+      "latency_ms": 13228.015800006688,
+      "offline_prompt_tokens": 1875,
+      "native_prompt_tokens": 1875,
+      "completion_tokens": 120,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 3,
+      "request_sha256": "c695e7416bc19f3eedb8e7583cd72064b129a884197b420be040ba600a2919da",
+      "response_sha256": "43f7ae555d87a8af5b1d2e13d247be507c2226ea1d52557e1c5d6278228f3e6f",
+      "http_status": 200,
+      "latency_ms": 30991.842399991583,
+      "offline_prompt_tokens": 2501,
+      "native_prompt_tokens": 2501,
+      "completion_tokens": 340,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 4,
+      "request_sha256": "579df38e49acf2fc0d82acf89bd23c30cb61aecf053911febd82263ecb17e6e1",
+      "response_sha256": "29563c8ad318b583a8a6aa2d3b98ca724049dd66a3f587f9e2df4cb69305734a",
+      "http_status": 200,
+      "latency_ms": 13584.779299999354,
+      "offline_prompt_tokens": 1856,
+      "native_prompt_tokens": 1856,
+      "completion_tokens": 117,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 4,
+      "request_sha256": "6023ff4a737e556e9ed7cbfeaacdae3f3457925f732fb828c0e8d6f1281d2bf8",
+      "response_sha256": "5332f802d99d126afe4af7a14b4c6969171a67ee97ea29a4906d5a632cca61e1",
+      "http_status": 200,
+      "latency_ms": 15431.57849999261,
+      "offline_prompt_tokens": 2464,
+      "native_prompt_tokens": 2464,
+      "completion_tokens": 124,
+      "error": null,
+      "uncertain_outcome": false
+    },
+    {
+      "system": "agent",
+      "slot": 4,
+      "request_sha256": "ed9818bd15bb3bb88ba765f9f39ef35c2e5a73055731d1afbb89830c66214bf9",
+      "response_sha256": "629a393fb43149baa9c77ab7ca2182f7ded1f94f6272009c72733dc7660159b0",
+      "http_status": 200,
+      "latency_ms": 10473.731900012353,
+      "offline_prompt_tokens": 2498,
+      "native_prompt_tokens": 2498,
+      "completion_tokens": 42,
+      "error": null,
+      "uncertain_outcome": false
+    }
+  ],
+  "stage_counts": {
+    "repair_present": 2,
+    "fallback_present": 2,
+    "executed": 23
+  },
+  "unit_replay": [
+    {
+      "system": "greedy_a",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 0
+    },
+    {
+      "system": "greedy_b",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 0
+    },
+    {
+      "system": "decision_tree_c",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 0
+    },
+    {
+      "system": "random_forest_d",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 0
+    },
+    {
+      "system": "plain_llm",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 5
+    },
+    {
+      "system": "agent",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "recorded_model_calls": 12
+    }
+  ],
+  "identity_before": {
+    "evidence_kind": "installed_model_inventory_not_run_configuration",
+    "captured_at_utc": "2026-11-05T04:33:28.391908+00:00",
+    "model": "qwen3:8b",
+    "runtime_version": "0.40.5",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "size_bytes": 5225388164,
+    "details": {
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "8.2B",
+      "quantization_level": "Q4_K_M"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ],
+    "model_info": {
+      "general.architecture": "qwen3",
+      "general.parameter_count": 8190735360,
+      "qwen3.context_length": 40960,
+      "qwen3.block_count": 36,
+      "qwen3.embedding_length": 4096
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "utf8_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "source": "local /api/show license field",
+      "upstream_model_card": "https://huggingface.co/Qwen/Qwen3-8B",
+      "packaged_model": "https://ollama.com/library/qwen3:8b"
+    },
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "d6b2700710ae824c6690a7b47383ea3836790cb59d52dc3018ad7b5530faf124",
+    "model_calls": 0,
+    "experiment_ready": false
+  },
+  "identity_after": {
+    "evidence_kind": "installed_model_inventory_not_run_configuration",
+    "captured_at_utc": "2026-11-05T04:40:49.284840+00:00",
+    "model": "qwen3:8b",
+    "runtime_version": "0.40.5",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "size_bytes": 5225388164,
+    "details": {
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "8.2B",
+      "quantization_level": "Q4_K_M"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ],
+    "model_info": {
+      "general.architecture": "qwen3",
+      "general.parameter_count": 8190735360,
+      "qwen3.context_length": 40960,
+      "qwen3.block_count": 36,
+      "qwen3.embedding_length": 4096
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "utf8_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "source": "local /api/show license field",
+      "upstream_model_card": "https://huggingface.co/Qwen/Qwen3-8B",
+      "packaged_model": "https://ollama.com/library/qwen3:8b"
+    },
+    "template_sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+    "parameters_sha256": "d6b2700710ae824c6690a7b47383ea3836790cb59d52dc3018ad7b5530faf124",
+    "model_calls": 0,
+    "experiment_ready": false
+  },
+  "compute": {
+    "library": "Vulkan",
+    "name": "Vulkan0",
+    "description": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "type": "iGPU",
+    "reported_total": "18.0 GiB",
+    "reported_available": "8.5 GiB",
+    "reported_driver": "0.0",
+    "reported_compute": "0.0"
+  },
+  "runtime_stdout_sha256": "c486f878f8f8be25c5b3d4eddb3b208a7637c4886551f5d6933a59bc2af4a32c",
+  "runtime_stderr_sha256": "61f190922480ff6404b4378670c88197914f23b980df66ce7c5586980c5c6ff5",
+  "private_run_root_sha256": "7c5e872ef3fe8ac97efc4f1a9817e98b8aa88bca32d7fff3080ff08d89d6ed4d",
+  "wrapper_sha256": "e25fc8b4d4547cb5daf5d9c51a22e182e5264a588b8894ac6327f74be46a4920",
+  "limitations": [
+    "One public development receiving exercise; not a study or held-out result.",
+    "Repair or fallback is reported only if present in the saved Agent decisions.",
+    "Raw requests, responses, traces and results remain outside Git."
+  ],
+  "cleanup": {
+    "owned_process_exited": true,
+    "listener_remaining": false,
+    "overall_deadline_exceeded": false
+  }
+}
