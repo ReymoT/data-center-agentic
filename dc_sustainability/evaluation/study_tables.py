@@ -243,11 +243,25 @@ def savings_rows(
     return rows
 
 
-def scenario_rows(scored: ScoredRuns, planned: Mapping[str, PlannedEpisode]) -> list[dict]:
+def scenario_rows(
+    scored: ScoredRuns,
+    planned: Mapping[str, PlannedEpisode],
+    trials: Mapping[str, tuple[int | None, ...]] | None = None,
+) -> list[dict]:
     rows = []
     for cohort in COHORTS:
         for metric in METRICS:
-            for row in paired.scenario_summary(observations(scored, planned, metric, cohort)):
+            values = list(observations(scored, planned, metric, cohort))
+            if trials is not None:
+                present = {(o.system, o.episode_id, o.trial) for o in values}
+                for episode_id, labels in _labels(planned, cohort).items():
+                    for system, expected in trials.items():
+                        for trial in expected:
+                            if (system, episode_id, trial) not in present:
+                                values.append(
+                                    paired.Observation(system, episode_id, trial, *labels, None)
+                                )
+            for row in paired.scenario_summary(values):
                 rows.append({"metric": metric, "cohort": cohort, **asdict(row)})
     return rows
 
@@ -296,6 +310,9 @@ def study_report(
     """Every table for one set of saved runs, as plain JSON-ready data."""
     split = _split(planned)
     scored = score_runs(runs, planned, protocol)
+    for system, episode_id, trial in (*scored.runs, *scored.unscored):
+        if system not in trials or trial not in trials[system]:
+            raise ValueError(f"unplanned system/trial: {(system, episode_id, trial)}")
     comparison_rows = []
     savings = []
     for baseline, candidate in comparisons:
@@ -303,6 +320,18 @@ def study_report(
         if tuple(trials[baseline]) == tuple(trials[candidate]):
             savings += savings_rows(
                 scored, planned, baseline, candidate, trials, protocol, settings
+            )
+        else:
+            savings.append(
+                {
+                    "metric": "savings_kg",
+                    "baseline": baseline,
+                    "candidate": candidate,
+                    "status": "blocked",
+                    "reason": "unequal_trial_rule_not_agreed",
+                    "by_episode": None,
+                    "by_date": None,
+                }
             )
     cohorts = Counter(item.cohort for item in planned.values())
     return {
@@ -318,6 +347,6 @@ def study_report(
         ],
         "comparisons": comparison_rows,
         "savings": savings,
-        "scenario_summaries": scenario_rows(scored, planned),
+        "scenario_summaries": scenario_rows(scored, planned, trials),
         "forecast_ties": tie_rows(scored, planned, protocol),
     }

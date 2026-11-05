@@ -336,7 +336,10 @@ def test_the_report_is_json_ready_and_lists_unscored_runs():
 def test_the_script_skips_unfinished_units_and_never_overwrites(tmp_path):
     finished = tmp_path / "unit"
     (finished / "traces").mkdir(parents=True)
-    (finished / "result.json").write_text("{}", encoding="utf-8")
+    result = f.episode_result().model_copy(
+        update={"episode_id": "EP-A", "run_id": "RUN-HAND", "system": "greedy_a", "trial": None}
+    )
+    (finished / "result.json").write_text(result.to_json(), encoding="utf-8")
     for index, item in enumerate(run("EP-A", "greedy_a")):
         (finished / "traces" / f"{index}.json").write_text(item.to_json(), encoding="utf-8")
     partial = tmp_path / "partial"
@@ -352,6 +355,85 @@ def test_the_script_skips_unfinished_units_and_never_overwrites(tmp_path):
     assert (written["scored_runs"], written["units_without_result"]) == (0, 1)
     with pytest.raises(FileExistsError):
         cli.main(arguments)
+
+
+def test_scenario_report_counts_absent_planned_trials():
+    result = report(pair_runs(episodes=("EP-A", "EP-W")))
+    row = next(
+        r
+        for r in result["scenario_summaries"]
+        if (r["metric"], r["cohort"], r["system"], r["scenario"])
+        == ("completed_jobs", "core", "agent", "spike")
+    )
+    assert (row["runs"], row["missing"], row["mean"]) == (2, 2, None)
+
+
+def test_report_explicitly_records_unequal_trial_savings_block():
+    result = t.study_report(
+        [],
+        PLANNED,
+        TRIALS,
+        Q03_OPTION_B,
+        comparisons=(("greedy_a", "agent"),),
+        settings=FAST,
+    )
+    assert result["savings"][0]["reason"] == "unequal_trial_rule_not_agreed"
+    assert result["savings"][0]["by_episode"] is None
+
+
+def test_cli_rejects_duplicate_episode_bundles_before_writing(tmp_path):
+    bundle = Path(__file__).resolve().parents[2] / "docs/evidence/ep-hand1-episode-bundle.json"
+    output = tmp_path / "report.json"
+    with pytest.raises(ValueError, match="duplicate episode bundle"):
+        cli.main(
+            [
+                "--bundle",
+                str(bundle),
+                "--bundle",
+                str(bundle),
+                "--unit-dir",
+                str(tmp_path / "absent"),
+                "--out",
+                str(output),
+            ]
+        )
+    assert not output.exists()
+
+
+def test_cli_rejects_corrupt_saved_result(tmp_path):
+    (tmp_path / "result.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError):
+        cli.load_unit(tmp_path)
+
+
+def test_cli_rejects_saved_result_trace_identity_mismatch(tmp_path):
+    (tmp_path / "traces").mkdir()
+    (tmp_path / "result.json").write_text(f.episode_result().to_json(), encoding="utf-8")
+    (tmp_path / "traces/0.json").write_text(run("EP-A", "agent", 0)[0].to_json(), encoding="utf-8")
+    with pytest.raises(ValueError, match="identity mismatch"):
+        cli.load_unit(tmp_path)
+
+
+def test_report_rejects_trials_outside_the_declared_matrix():
+    with pytest.raises(ValueError, match="unplanned system/trial"):
+        report([run("EP-A", "greedy_b", 9)])
+
+
+def test_cli_rejects_saved_result_that_disagrees_with_replay(tmp_path):
+    bundle = Path(__file__).resolve().parents[2] / "docs/evidence/ep-hand1-episode-bundle.json"
+    episode_id = cli.load_bundle(bundle).episode.episode_id
+    result = f.episode_result().model_copy(
+        update={"episode_id": episode_id, "completed_work": None, "job_count_total": 99}
+    )
+    unit = tmp_path / "unit"
+    (unit / "traces").mkdir(parents=True)
+    (unit / "result.json").write_text(result.to_json(), encoding="utf-8")
+    for i, record in enumerate(run(episode_id, "greedy_a")):
+        (unit / "traces" / f"{i}.json").write_text(record.to_json(), encoding="utf-8")
+    output = tmp_path / "report.json"
+    with pytest.raises(ValueError, match="does not match replay"):
+        cli.main(["--bundle", str(bundle), "--unit-dir", str(unit), "--out", str(output)])
+    assert not output.exists()
 
 
 def test_the_module_stays_independent_of_policies_and_production_checks():

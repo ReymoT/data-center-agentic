@@ -20,7 +20,7 @@ What it does:
 
 Limits:
 - The analysis decisions are a manager response awaiting affected-owner confirmation. This code follows them, but it doesn't freeze them.
-- The script treats a unit without `result.json` as missing, so `units_without_result` is a count and doesn't name the unit.
+- The script treats a unit without `result.json` as missing and lists its path alongside the count. Existing results are schema-checked, identity-bound to traces and compared with structural replay; an invalid result is refused before a report is written. Impact totals are not authenticated by structural replay. Supplied `completed_work` remains refused under the existing unresolved numeric-comparability contract.
 - References and exact gaps (O03/O04), claim scoring, faithfulness scores, figures and the failure analysis aren't part of these tables yet.
 
 Tests: 28, with hand values for 54.5 and 48.4 kg (savings 6.1 kg). Mutation check: fifteen deliberate bugs each made tests fail, and the code was restored. Review before testing also removed a paired raw-emissions row.
@@ -40,3 +40,20 @@ Exact reproduction commands:
 Repeat `--bundle` and `--unit-dir` as needed, and use `--model-trials` when a run has fewer than three LLM trials. Write the output to private storage until its contents are reviewed.
 
 No model calls, held-out data or source values were used.
+
+## Matty review fixes
+
+Matty merged current main into this branch so the new I01 validation status is
+preserved. The review fixed result-file existence being treated as sufficient
+completion evidence, duplicate episode bundles silently replacing inputs, scenario
+summaries omitting absent planned trials, and unequal-trial savings disappearing
+without a reason. Scenario rows now count planned missing/unscored runs as missing;
+unexpected system/trial identities are refused. Unequal-trial savings stay blocked
+with an explicit reason; no new scientific pairing rule is selected.
+
+Seven regression tests cover these boundaries (35 study-table tests total).
+Original traces, results, models, analysis settings and freeze gates are unchanged.
+Matty also ran the corrected CLI offline against the saved unified public I01
+packet: all six units scored, no unscored units, and equal-work savings remained
+blocked rather than zero for Plain versus Agent. The output remains outside Git;
+no model call, source acquisition or held-out access occurred.
