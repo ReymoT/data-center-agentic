@@ -1,0 +1,49 @@
+{
+  "status": "offline_checks_passed",
+  "units": [
+    {
+      "system": "greedy_a",
+      "traces": 30,
+      "model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    },
+    {
+      "system": "decision_tree_c",
+      "traces": 30,
+      "model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    },
+    {
+      "system": "greedy_b",
+      "traces": 30,
+      "model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    },
+    {
+      "system": "random_forest_d",
+      "traces": 30,
+      "model_calls": 0,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    },
+    {
+      "system": "agent",
+      "traces": 30,
+      "model_calls": 12,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    },
+    {
+      "system": "plain_llm",
+      "traces": 30,
+      "model_calls": 5,
+      "replay_findings": 0,
+      "result_mismatches": 0
+    }
+  ],
+  "model_requests_made_by_verifier": 0,
+  "limitations": "Automated evidence checks, not a completed reviewer report or scientific acceptance."
+}
