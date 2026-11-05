@@ -1,0 +1,60 @@
+{
+  "agent_completion": "incomplete; one saved slot-0 trace, no final result; two slot-1 attempts are outside final trace accounting",
+  "attempt_errors": 1,
+  "authorization_status": "fresh_user_authorization_consumed_once",
+  "bounds": {
+    "agent": 18,
+    "agent_decision_seconds": 480,
+    "combined": 24,
+    "plain": 6,
+    "request_seconds": 150,
+    "retries": 0,
+    "total_seconds": 3900,
+    "warmups": 0
+  },
+  "checkout_commit": "c0b96e41defd9945548fa84a62e022c739b404f0",
+  "cleanup": {
+    "listener_remaining": false,
+    "overall_deadline_exceeded": false,
+    "owned_process_exited": true
+  },
+  "complete_results": 5,
+  "complete_unit_replay_findings": 0,
+  "complete_unit_result_mismatches": 0,
+  "config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+  "elapsed_seconds": 240.625,
+  "evidence_kind": "failed_bounded_public_development_validation_not_study_result",
+  "execution_source_base": "d82a23807635117a39761e2ebf62233ee7fb7d3f",
+  "highest_request_ms": 41267.00819999678,
+  "independent_receiving": "not_yet_recorded_for_this_failed_run",
+  "limitations": [
+    "No complete Agent result, no six-system pass and no study comparison.",
+    "Explicit action keys remove the observed omission path; semantic validity remains unproven.",
+    "No outcome-driven retry, checkpoint resume, source access or held-out execution.",
+    "Post-run model identity comparison did not complete because the wrapper aborted; cleanup is recorded separately."
+  ],
+  "original_cleanup_sha256": "3f1e9ea915800520731c77080da4590dcb2763a379b1e5b40925bbb1fce67490",
+  "original_failure_sha256": "c17c3464ff93d4f29763842b5b1fa942954497227b7c5f5a751fb2c52a66f490",
+  "raw_plan_responses": 9,
+  "raw_plans_with_explicit_action_fields": 9,
+  "raw_plans_with_nonempty_actions": 9,
+  "reason": "F02 Plan validation rejected J2 in both starts and abstentions; strict wrapper stopped and retained the spent invalid response.",
+  "requests": {
+    "agent": 5,
+    "plain_llm": 5,
+    "total": 10
+  },
+  "retries": 0,
+  "run_id": "RUN-15e69e6129b7",
+  "runtime_log_sha256": {
+    "stderr": "9c82c5372092cefd0c0e8179280aea8a05d7fdea0b02233a0f6e1623256d48e2",
+    "stdout": "06aa68af2f8bdb732d66471d31974f77402f1deade98e0b115b36b1971e9d31c"
+  },
+  "single_use_id": "I01-EPHAND1-15e69e6129b7-20261104-actions-v2",
+  "status": "failed",
+  "stop_slot": 1,
+  "stop_system": "agent",
+  "total_saved_traces": 151,
+  "uncertain_attempts": 0,
+  "warmups": 0
+}

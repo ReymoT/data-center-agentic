@@ -1,5 +1,10 @@
 # November 4 latency, label-audit and readiness follow-up
 
+Later status: [E06 table integration](E06_STUDY_TABLES.md) is implemented through
+PR #179. Final scoring/analysis acceptance remains pending. The [later action-field
+validation outcome](I01_ACTION_FIELDS_VALIDATION_OUTCOME.md) records the actual
+failed attempt; preparation-only statements below retain their historical scope.
+
 Matty approved the recommended analysis response, Agent latency fix, read-only
 legacy-label audit and offline readiness refresh. This does not approve a live
 model request, another owner's acceptance, or the scientific freeze.

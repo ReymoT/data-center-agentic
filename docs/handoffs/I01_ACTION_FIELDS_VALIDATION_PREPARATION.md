@@ -1,5 +1,11 @@
 # Explicit action-field validation preparation
 
+Later execution update: Matty authorized this exact candidate. It stopped on an
+invalid conflicting-action response; the [retained outcome and offline behavior
+audit](I01_ACTION_FIELDS_VALIDATION_OUTCOME.md) supersede preparation-only status.
+The original template below remains pending as a preserved template, not a record
+of unused approval. Its single-use ID is consumed; no repeat run is authorized.
+
 Matty authorized the offline fix and preparation after Nisha's scoped receiving
 PASS exposed empty raw model plans. This is not fresh model-run approval.
 

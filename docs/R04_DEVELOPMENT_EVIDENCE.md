@@ -3,9 +3,11 @@
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
 for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
 findings/result mismatches and successful cleanup. Nisha's [scoped new-run receiving PASS is accepted](handoffs/I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).
-The confirmed empty-plan finding has an offline-tested request-local grammar and
-raw-response fix; candidate RUN-15e69e6129b7 still requires fresh approval and
-new live validation before prompt/schema freeze. This supersedes older preparation-only status below without
+The later authorized [action-field validation stopped on a semantic conflict](handoffs/I01_ACTION_FIELDS_VALIDATION_OUTCOME.md)
+in Agent slot 1: 10 requests, five complete results and one partial Agent trace.
+All nine raw plans had explicit nonempty actions; one put J2 in conflicting
+action categories. Cleanup passed, with no retry. Complete I01 and prompt/schema
+freeze remain blocked; the offline audit separates model actions from fallback. This supersedes older preparation-only status below without
 changing historical records, scientific gates or task ownership. The
 [offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 is preparation only; no source read, relabeling, training or held-out work occurred.
@@ -138,7 +140,9 @@ no-choice, uncovered and unverifiable decisions are separate counts. An empty
 denominator is undefined. On the public Greedy B EP-HAND1 schedule, an actual
 November 4 calculation reproduced nine decisions: six distinct, three no choice,
 zero tied, with no uncovered or unverifiable cases. This is a fixture diagnostic,
-not a study rate or evidence of carbon savings. E06 integration remains pending.
+not a study rate or evidence of carbon savings. The [E06 table builder](handoffs/E06_STUDY_TABLES.md)
+now integrates these counts by cohort; final analysis acceptance and held-out rates
+remain pending.
 
 CF60-v1 is still a proposal. A flat forecast supplies no relative cleaner-hour
 signal, so realized emissions differences cannot be attributed to forecast-driven

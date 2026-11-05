@@ -13,9 +13,13 @@ November 4: [the authorized unified public validation passed](docs/handoffs/I01_
 All six systems completed EP-HAND1: 180 traces, 17 model requests and 326.125 seconds,
 with zero replay findings/result mismatches and successful cleanup. Nisha's scoped
 [evidence receiving PASS is accepted](docs/handoffs/I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).
-Her high-priority empty-plan finding is confirmed; the request-local action-field
-fix is offline tested. Its new candidate RUN-15e69e6129b7 needs fresh approval
-and live validation before prompt/schema freeze; no improvement is claimed.
+The later authorized action-field validation RUN-15e69e6129b7
+[stopped on an invalid Agent response](docs/handoffs/I01_ACTION_FIELDS_VALIDATION_OUTCOME.md):
+10 requests, five complete results and one partial Agent trace. All nine raw plans
+contained explicit nonempty actions, but one both started and abstained from J2.
+Cleanup passed; no retry occurred. Complete I01 and prompt/schema freeze remain
+blocked. The linked offline audit distinguishes model actions from fallback; no
+study improvement is claimed.
 This is integration evidence, not a held-out study or final acceptance. The
 [CF60 compatibility plan](docs/handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 prepares development comparisons without changing forecasts, labels or models.
@@ -41,8 +45,10 @@ validation receipt below records the actual authorized execution.
 
 The [November 4 latency/readiness refresh](docs/handoffs/NOV04_LATENCY_LABELS_AND_READINESS.md)
 records the passed no-startup dry run and original pending authorization template.
-Matty later approved that exact single-use run; the template remains unchanged. The forecast-tie diagnostic is implemented offline; measured study rates
-and E06 integration remain pending.
+Matty later approved that exact single-use run; the template remains unchanged.
+The forecast-tie diagnostic and [E06 table integration](docs/handoffs/E06_STUDY_TABLES.md)
+are implemented offline. Final analysis acceptance and measured held-out study
+rates remain pending.
 
 Future Agent traces now retain summed request latency consistently with Plain;
 historical missing values stay missing. The read-only legacy-label audit confirms
