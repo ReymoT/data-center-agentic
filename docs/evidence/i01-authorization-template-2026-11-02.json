@@ -12,11 +12,11 @@
     "single_use_authorization_required": true,
     "warmups": 0
   },
-  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
-  "launcher_sha256": "e63290a89804b607f0421dafce9ec629e709669ff799855beeb24943bfc69a09",
-  "note": "Unapproved action-field validation template. Prior approval was consumed by RUN-e670485639c9 and cannot authorize this run.",
-  "readiness_sha256": "0c95030508d07faefb4f383a2c17e5fd9357a21b2aacc824fa9399d4e6a485c7",
-  "single_use_id": "I01-EPHAND1-15e69e6129b7-20261104-actions-v2",
+  "candidate_config_hash": "fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506",
+  "launcher_sha256": "f9650c75bac9446d662e290b30cb2ad0f36a0e8353415c338e4e402ab5990a04",
+  "note": "Unapproved shared action-choice prompt validation. Prior IDs were consumed; this packet makes no model request.",
+  "readiness_sha256": "4caab5428c39e6fab721d9ee267aeff308325fd1b3b8fdcf16096987660d3cad",
+  "single_use_id": "I01-EPHAND1-fd87c6c8a9cb-20261104-choices-v3",
   "status": "pending_fresh_user_approval",
   "text_pin_convention": "LF-normalized readiness and launcher"
 }

@@ -61,3 +61,24 @@ def test_invalid_readiness_is_refused_before_dispatch(inputs, problem):
         paths["decision_tree_c"].write_bytes(b"changed bytes")
     with pytest.raises(ValueError):
         prepare(candidate, paths, ROOT)
+
+
+@pytest.mark.parametrize("problem", ["scope", "plain_pin"])
+def test_offline_pin_record_cannot_claim_freeze_or_disagree_with_plain(
+    inputs, monkeypatch, problem
+):
+    original = Path.read_text
+    target = ROOT / "docs/evidence/i01-renderer-pins-2026-11-04.json"
+    record = json.loads(target.read_text(encoding="utf-8"))
+    if problem == "scope":
+        record["evidence_kind"] = "scientifically_frozen"
+    else:
+        record["renderer_hashes"]["plain_prompt_template_sha256"] = "0" * 64
+
+    def altered(path, *args, **kwargs):
+        return json.dumps(record) if path == target else original(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", altered)
+    candidate, paths = inputs
+    with pytest.raises(ValueError):
+        prepare(candidate, paths, ROOT)

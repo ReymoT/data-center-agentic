@@ -1,5 +1,10 @@
 # Project plan
 
+The [offline action-conflict follow-up](handoffs/ACTION_CHOICE_OFFLINE_FOLLOWUP.md)
+clarifies one job in one action category for Plain and Agent, with unchanged F02
+checks and original evidence. Candidate RUN-fd87c6c8a9cb is prepared for review,
+not authorized or validated by a model run; prompt/schema freeze remains blocked.
+
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
 for all six EP-HAND1 systems: 180 traces, 17 requests, 326.125 seconds, zero replay
 findings/result mismatches and successful cleanup. Nisha's [scoped new-run receiving PASS is accepted](handoffs/I01_NISHA_UNIFIED_RECEIVING_2026-11-04.md).

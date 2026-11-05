@@ -9,6 +9,13 @@ Scheduling rules:
 - In every occupied slot, background IT load plus the IT load of all running and planned jobs must not exceed the site capacity constraint. Capacity applies to IT load before PUE.
 - Only starts at the current slot can be executed now. Later starts are intentions and will be decided again at later slots.
 
+Action choices when returning a Plan or the plan inside PolicyOutput:
+- Return explicit starts, deferrals and abstentions arrays, using [] for an unused category.
+- For every visible waiting job, give exactly one action in exactly one category. A job ID must not appear in more than one of these arrays or more than once in a category.
+- A current or future start belongs only in starts. Do not also defer or abstain from that job; a future start is still a start intention.
+- If you choose deferral or abstention instead of a start, remove that job from starts. Changing a choice means replacing its entry, not adding a conflicting choice.
+- Before returning JSON, compare the job IDs across all three arrays and remove contradictory choices by selecting one disposition. Do not claim that this self-review is an independent check or execution.
+
 Impact rules:
 - Energy in one slot is PUE x total IT kW x slot length in hours, in kWh.
 - Emissions are kWh x carbon intensity in g/kWh / 1000, in kg.

@@ -1,5 +1,17 @@
 # Prompt preparation
 
+November 4 offline conflict follow-up: shared task rules now spell out one waiting
+job in one action category, including future start intentions. Repair must replace
+an invalid action rather than append an incompatible refusal. The clarification
+reaches Plain, Agent proposal and Agent repair equally; it does not change F02 or
+the checker, and it is not proof of improved model behavior. The shared file is
+also included in explanations, so all four prompt hashes change, while the
+explanation-only output contract stays unchanged. Historical sources/pins are
+preserved under `docs/evidence/i01-pre-action-choice-2026-11-04/`; current draft pins
+are in `docs/evidence/i01-renderer-pins-2026-11-04.json`, explicitly not scientific
+freeze or execution approval. A new candidate and fresh authorization are required
+before another model request.
+
 Owner: Nisha, with Matty reviewing agent prompts. Q09 fixes the shared provider settings in Matty's adapter; prompts never set model options. F02/L02 settle structured output and evidence requirements. The plain system has one call without feedback/repair/fallback. Agent explanations cannot modify approved actions. Freeze prompt hashes before held-out evaluation.
 
 | File | Used by | Purpose |

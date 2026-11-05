@@ -1,0 +1,22 @@
+{
+  "approval_ref": null,
+  "approved_by": null,
+  "bounds": {
+    "maximum_total_attempts": 24,
+    "maximum_total_wall_seconds": 3900,
+    "maximum_unit_attempts": {
+      "agent": 18,
+      "plain_llm": 6
+    },
+    "retries": 0,
+    "single_use_authorization_required": true,
+    "warmups": 0
+  },
+  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+  "launcher_sha256": "e63290a89804b607f0421dafce9ec629e709669ff799855beeb24943bfc69a09",
+  "note": "Unapproved action-field validation template. Prior approval was consumed by RUN-e670485639c9 and cannot authorize this run.",
+  "readiness_sha256": "0c95030508d07faefb4f383a2c17e5fd9357a21b2aacc824fa9399d4e6a485c7",
+  "single_use_id": "I01-EPHAND1-15e69e6129b7-20261104-actions-v2",
+  "status": "pending_fresh_user_approval",
+  "text_pin_convention": "LF-normalized readiness and launcher"
+}

@@ -57,7 +57,7 @@ from scripts.a01_igpu_preflight import (  # noqa: E402
 )
 from scripts.inspect_ollama import compare_inventory, inspect  # noqa: E402
 
-HEAD = "d82a23807635117a39761e2ebf62233ee7fb7d3f"
+HEAD = "18f2cba0252e215e94ae7c2b54de0b3df8b810d5"
 AUTHORIZATION = "PENDING_FRESH_MATTY_AUTHORIZATION"
 BUNDLE_SHA256 = "8bef36ace7bc4a3cf2debdce81c75edd87e175b20592a520a5449ec1fb0cddd6"
 MODEL_DIGEST = "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
@@ -270,10 +270,10 @@ def main() -> int:
     if sha256(tokenizer_path) != TOKENIZER_SHA256:
         raise RuntimeError("tokenizer artifact differs from the validated reference")
     expected_prompts = {
-        "plain": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
-        "proposal": "a2d52e38c42a699533e0608ad2aa39c65ac6871993d5f2ce04492d367e4f6e39",
-        "repair": "e928cd5eb9cf3fc1853ffe7332050554ce2e274031ce2c408544eaa3dbf807ba",
-        "explanation": "6524939914db0389104e96dc6d55a406234e1ed93624e1a58816ac6735947446",
+        "plain": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
+        "proposal": "1e40d51c96ec1ce4cea5a54183229fadc36ed33a29204722c1914b09ae7ec442",
+        "repair": "1b46b6dd9a11ec6d564133b752013e828ce1ec432b06640775a4fff067443dc1",
+        "explanation": "4dfdd9921a7a13d5834a7e56496b5d05643583a2270faba20e230aa29b11db39",
     }
     actual_prompts = {
         "plain": prompt_template_sha256(),

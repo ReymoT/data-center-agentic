@@ -1,7 +1,7 @@
 {
-  "candidate_config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+  "candidate_config_hash": "fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506",
   "candidate_config_identity": {
-    "code_revision": "d82a23807635117a39761e2ebf62233ee7fb7d3f",
+    "code_revision": "18f2cba0252e215e94ae7c2b54de0b3df8b810d5",
     "config_version": "e02-run-config-v1",
     "episodes": [
       {
@@ -23,7 +23,7 @@
         "runtime_version": "0.40.5"
       },
       "max_total_attempts": 24,
-      "plain_prompt_sha256": "ff5501341f4e9d14fbde2a12bf41f3d13c2be0d67a0f753dd3026f4c4be5586d",
+      "plain_prompt_sha256": "bcbb253eb37dd2fc4392ef2802175d933c6114d22ab7f950d190ac7a548db50b",
       "seeds": [
         [
           0,
@@ -87,15 +87,22 @@
       "reason": "Preserve actual received run; revised request-local action-field grammar needs a new identity and fresh approval.",
       "run_id": "RUN-e670485639c9",
       "snapshot": "docs/evidence/i01-pre-action-fields-2026-11-04"
+    },
+    {
+      "code_revision": "d82a23807635117a39761e2ebf62233ee7fb7d3f",
+      "config_hash": "15e69e6129b78db4a8c752f95ea97a2bc11822e376f186f13059264d2e98e2ad",
+      "reason": "Preserve failed explicit-action validation; shared action-choice and repair clarification changes all prompt hashes.",
+      "run_id": "RUN-15e69e6129b7",
+      "snapshot": "docs/evidence/i01-pre-action-choice-2026-11-04"
     }
   ],
-  "candidate_run_id": "RUN-15e69e6129b7",
+  "candidate_run_id": "RUN-fd87c6c8a9cb",
   "dispatch_authorized": false,
   "evidence_kind": "offline_candidate_not_authorization_or_freeze",
   "lock_hash_convention": "LF-normalized bytes, same as runner CLI; historical run identities unchanged",
   "model_calls": 0,
   "note": "One public development episode/trial; not the 300-run held-out design. Existing outputs remain separate.",
-  "preparation_note": "Post-receiving explicit action-field fix. Old run evidence is unchanged; no model request is authorized. Canonical filenames remain for consumers.",
+  "preparation_note": "Offline action-category clarification; prompt pins are prepared, not scientifically frozen or approved for inference. Original failures remain unchanged.",
   "proposed_outer_controls_not_enforced_by_identity_alone": {
     "maximum_total_attempts": 24,
     "maximum_total_wall_seconds": 3900,
