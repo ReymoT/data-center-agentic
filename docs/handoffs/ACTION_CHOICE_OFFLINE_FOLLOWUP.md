@@ -51,6 +51,10 @@ The prepared candidate is `RUN-fd87c6c8a9cb`, configuration SHA-256
 `fd87c6c8a9cbbc959fe0e047d54593db793787396945ff7d5daa0b13b8b2e506`,
 source base `18f2cba0252e215e94ae7c2b54de0b3df8b810d5`.
 Its pending ID is `I01-EPHAND1-fd87c6c8a9cb-20261104-choices-v3`.
+The actual manager-host no-startup dry run passed at clean checkpoint `0c1c197`,
+checking the revised execution/launcher/prompt pins and accepted local binary,
+tokenizer and C/D bindings. It started no runtime, sent zero model requests,
+consumed no authorization and created no proposed run directory.
 The current candidate/readiness/dry-run/template keep their canonical November 2
 filenames. The failed candidate's packet and all earlier sources are snapshotted.
 
