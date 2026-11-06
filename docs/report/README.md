@@ -51,7 +51,7 @@ policies/models, modify traces or turn development evidence into study findings.
 
 ## Where the report is written
 
-Drafts of each section live in this folder (or are linked here) as their source of truth, so every claim stays reviewable next to its evidence. The final PDF is set in the IEEE conference template on a shared Overleaf project that Nisha creates and links here. The repository is the supplemental material; restricted or private inputs stay out of Git under the Q13 boundary.
+Drafts of each section live in this folder (or are linked here) as their source of truth, so every claim stays reviewable next to its evidence. The final PDF is set in the IEEE conference template on a shared Overleaf project that Nisha created. Access is by email invitation, and its edit link stays out of this public repository. The repository is the supplemental material; restricted or private inputs stay out of Git under the Q13 boundary.
 
 ## Schedule
 
