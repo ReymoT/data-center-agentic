@@ -58,16 +58,12 @@ exercises are not a held-out comparison or a positive answer to the research que
 
 ## Receiving and remaining acceptance
 
-A new offline receiving package is prepared for Nisha with the original evidence,
-source references, verifier, instructions and a blank report. Manager checks are
-not her independent receiving judgment. Her accepted earlier receipt applies to
-`RUN-e670485639c9`, not this run. Delivery and a new report are not assumed.
-The package contains 491 files; ZIP SHA-256 is
-`e4d6b0bb487c0388d460c034f924b96c8502ae0a66f076606894e2bc1e349b84`.
-Its offline verifier passed locally, including raw request/response hashes,
-complete replay, prompt hashes, counts, latency/tokens and action-category checks.
-Archive integrity and every indexed file hash were verified. This is still a
-manager-side package check, not Nisha's receiving result.
+Nisha recorded a scoped receiving PASS on November 5. The supplied verifier
+output and 491-file ZIP hashes were checked. Her report corroborates the run
+counts, replay and saved-result checks and identifies the explanation length
+risk. The separate reviewer scripts were referenced by hash. See the
+[#60 receiving record](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6673363616)
+and the [offline explanation audit](I01_EXPLANATION_LENGTH_AUDIT.md).
 
 Full I01, prompt/schema scientific freeze, source/forecast compatibility, actual
 held-out custody, final evaluation/reliability and I03/I04 remain separate gates.

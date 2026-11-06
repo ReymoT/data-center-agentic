@@ -4,7 +4,7 @@ Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHO
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
 J1/J2 using one model-initial start and one fallback start; Plain completed no
-jobs. Both Agent repairs failed their checks. New independent receiving is pending;
+jobs. Both Agent repairs failed their checks. Nisha recorded a scoped receiving PASS;
 this is public development evidence, not a study result or scientific freeze.
 
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)
@@ -77,7 +77,7 @@ We reviewed AssetOps, LC-Opt, DeepMind cooling and Resource Advisor using the cr
 | Plain LLM | Shared provider, equivalent flat facts, one combined request per required decision; no repair/fallback | Actual authorized EP-HAND1 receiving exists; one fixture/seed is insufficient for inference |
 | Bounded Agent | Grounded context, proposal/check, at most one repair, checked fallback and explanation within a three-call decision bound | Actual receiving includes repair/fallback stages; stage presence does not establish successful repair or faithfulness |
 | A03/A04 gate and traces | Physical validation, latest-state execution checks and immutable stage/attempt records | Physical feasibility and explanation support are distinct; regression cases do not prove exhaustive safety |
-| E01/E02 evaluation and runner | Common policy execution, durable outputs and independent replay | Unified public validation passed; new independent receiving and full I01 remain pending |
+| E01/E02 evaluation and runner | Common policy execution, durable outputs and independent replay | Unified public validation passed; scoped receiving passed and full I01 remains pending |
 | E04/E05/E07 human review | Both development originals, pre-adjudication reliability and separate joint adjudication retained; prospective calibration clarifications approved | #22 is closed; frozen held-out independent ratings/reliability #95 remain future work |
 | F03 runtime | Hashed Windows environment and offline CI; actual accepted Ollama/Qwen Arc/Vulkan receiving | No untested cross-platform or field-deployment claim; fresh requests require authorization |
 
