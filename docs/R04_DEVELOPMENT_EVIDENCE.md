@@ -4,7 +4,7 @@ Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHO
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
 J1/J2 using one model-initial start and one fallback start; Plain completed no
-jobs. Both Agent repairs failed their checks. New independent receiving is pending;
+jobs. Both Agent repairs failed their checks. Nisha recorded a scoped receiving PASS;
 this is public development evidence, not a study result or scientific freeze.
 
 Current November 4 update: [one authorized unified public validation passed](handoffs/I01_UNIFIED_VALIDATION_2026-11-04.md)

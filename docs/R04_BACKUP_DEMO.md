@@ -24,6 +24,17 @@ systems' states can differ after earlier actions, so do not claim identical stat
 at every slot. Show actual IDs, slot/state versions and checks from those records.
 Do not invent dialogue, missing fields or a successful repair.
 
+## Latest validation update for deck review
+
+Keep the saved walkthrough tied to its original run. Show the separate
+[RUN-fd87c6c8a9cb result](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
+as development evidence. Six systems completed, with 180 traces and zero replay
+findings. Nisha passed evidence receiving. Agent executed J1 via checked fallback
+and J2 via its initial model proposal. Plain executed no starts. Both Agent repairs
+failed their checks. Seven of ten summaries hit the text cap, and
+[completeness scoring is under review](handoffs/I01_EXPLANATION_LENGTH_AUDIT.md).
+Study results are still pending.
+
 ## Suggested five-minute sequence
 
 1. State the research question and show the public scenario. Explain what the
