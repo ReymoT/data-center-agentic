@@ -2,8 +2,9 @@
 
 Matty authorized the offline driver preparation on November 8. The broker
 implementation from PR #187 is merged. Nisha recorded a scoped library
-receiving PASS for c09167451d66cf51018f8eb30278abd700286f57. Source access,
-OS custody, scientific adoption and compatibility remain separate gates.
+receiving PASS for c09167451d66cf51018f8eb30278abd700286f57. The [supplied receiving files and manager verification](CF60_NISHA_RECEIVING_FILES.md)
+are retained. Source access, OS custody, scientific adoption and compatibility
+remain separate gates.
 
 ## What the driver does
 
