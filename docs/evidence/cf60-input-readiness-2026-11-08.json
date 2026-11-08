@@ -1,0 +1,15 @@
+{
+  "scope": "metadata-only input readiness, not authorization",
+  "development_episode_count": 40,
+  "required_extract_rows": 340,
+  "permitted_indices_canonical_sha256": "61ab86cdc5024ecb188a377afba73b36be816fb5ea4660ff7f59bfd59de23967",
+  "pending_private_plan_sha256": "8b3bc53122abe569264feda022af474802a040c3465115a48cb6286b496a3f12",
+  "candidate_source_file_exists": true,
+  "source_csv_read": false,
+  "extract_ready": false,
+  "saved_states_ready": false,
+  "saved_states_missing": 1200,
+  "comparison_executed": false,
+  "model_calls": 0,
+  "pending_draft_rejected_before_extract_access": true
+}
