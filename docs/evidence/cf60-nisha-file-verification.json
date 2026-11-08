@@ -1,0 +1,20 @@
+{
+  "reviewed_broker_commit": "c09167451d66cf51018f8eb30278abd700286f57",
+  "original_sha256": {
+    "cf60-nisha-receiving.json": "e4e4fd472947e81c1e1ef56ae9278c5853b80196b2a4fb7320fe53faaa56f704",
+    "cf60_independent.py": "73ff81dfd32dd7e7e3f142305d8c0863f2aeb0c31aab4dfdc61ef80e6e886e03",
+    "cf60-commands-output.txt": "1e2f143925a0efd29f653b79964a063f6c3a843bdd5f0effc3ddef0ec83ca58d",
+    "cf60-independent-report.json": "f5c8bfff443fbb4345ec89830a7eb39407e08652f833a3ff07505e3399cef76a"
+  },
+  "supplied_harness_matches_published_receipt": true,
+  "manager_replayed_report_matches_supplied_report": true,
+  "manager_replayed_checks": 66,
+  "direct_interval_footprints_matched_episodes": 40,
+  "real_source_csv_opened": false,
+  "model_calls": 0,
+  "limits": [
+    "The report commit is a literal in the reviewer script; manager replay used the separately pinned archive.",
+    "The script reuses broker candidates for footprint history; manager direct interval arithmetic corroborates both hypotheses.",
+    "Library receiving does not establish real-source access, OS custody, compatibility or scientific adoption."
+  ]
+}
