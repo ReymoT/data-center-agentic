@@ -1,5 +1,13 @@
 # Project plan
 
+November 8 update: PR #187 merged the CF60 broker after Nisha's scoped receiving
+PASS and green CI. The [comparison driver](handoffs/CF60_COMPARISON_DRIVER.md)
+is prepared for an explicitly authorized extract and saved visible states.
+Source acquisition and compatibility execution remain pending.
+The [explanation-budget assessment](handoffs/EXPLANATION_LIMIT_ASSESSMENT.md)
+records measured candidates and the remaining shared-setting decision.
+
+
 Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
@@ -18,8 +26,8 @@ freeze remain blocked; the offline audit separates model actions from fallback. 
 changing historical records, scientific gates or task ownership. The
 [offline CF60 compatibility plan](handoffs/CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 is preparation only; no source read, relabeling, training or held-out work occurred.
-Edison accepted the CF60-v1 parameters for consumer review. Reimo's pinned broker
-with restricted source reads and independent receiving is the next handoff.
+Edison accepted the CF60-v1 parameters for consumer review. The broker and independent library receiving
+are delivered through PR #187. An authorized private extract is the next input.
 Source acceptance and C/D compatibility remain open. Existing C/D artifacts
 use the legacy forecast. See [Edison's response](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6673065635).
 

@@ -65,7 +65,7 @@
       "status": "blocked",
       "path": "docs/handoffs/ISSUE60_CAUSAL_STUDY_FORECAST_PROPOSAL.md",
       "sha256": null,
-      "blocker": "#60/#168: CF60-v1 is published, not adopted. Nisha conditionally accepts her scope with three custody clarifications: recorded-index plus both interval hypotheses; legacy plus CF60 footprints for all development episodes; merged/pinned new selector version before nonce. Ved's conditional mechanics acceptance is received, but O02/C/D compatibility is not certified. Edison accepted the parameters for consumer review. The exact method decision and restricted-read production broker with receiving remain pending. Existing C/D artifacts use the legacy forecast. Her shaped same-hour option is an additional evaluation question, not a condition on her acceptance"
+      "blocker": "#60/#168: CF60-v1 is published, not adopted. Nisha conditionally accepts her scope with three custody clarifications: recorded-index plus both interval hypotheses; legacy plus CF60 footprints for all development episodes; merged/pinned new selector version before nonce. Ved's conditional mechanics acceptance is received, but O02/C/D compatibility is not certified. Edison accepted the parameters for consumer review. PR #187 merged the restricted-read broker; Nisha passed independent library receiving for c09167451d66cf51018f8eb30278abd700286f57. The exact method decision, authorized real extract, compatibility and OS custody remain pending. Existing C/D artifacts use the legacy forecast. Her shaped same-hour option is an additional evaluation question, not a condition on her acceptance"
     },
     {
       "id": "development-episodes",

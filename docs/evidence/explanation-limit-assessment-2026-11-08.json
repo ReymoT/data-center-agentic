@@ -1,0 +1,125 @@
+{
+  "scope": "synthetic candidate response measurement, not a worst-case bound",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "tokenizers_version": "0.23.3",
+  "rows": [
+    {
+      "limit": 96,
+      "fixture": "complete sentence",
+      "shape": "plain_policy_output",
+      "tokens": 1338,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 96,
+      "fixture": "complete sentence",
+      "shape": "agent_explanation",
+      "tokens": 352,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 96,
+      "fixture": "dense text",
+      "shape": "plain_policy_output",
+      "tokens": 1563,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 96,
+      "fixture": "dense text",
+      "shape": "agent_explanation",
+      "tokens": 577,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 192,
+      "fixture": "complete sentence",
+      "shape": "plain_policy_output",
+      "tokens": 1473,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 192,
+      "fixture": "complete sentence",
+      "shape": "agent_explanation",
+      "tokens": 487,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 192,
+      "fixture": "dense text",
+      "shape": "plain_policy_output",
+      "tokens": 1824,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 192,
+      "fixture": "dense text",
+      "shape": "agent_explanation",
+      "tokens": 838,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 256,
+      "fixture": "complete sentence",
+      "shape": "plain_policy_output",
+      "tokens": 1581,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 256,
+      "fixture": "complete sentence",
+      "shape": "agent_explanation",
+      "tokens": 595,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 256,
+      "fixture": "dense text",
+      "shape": "plain_policy_output",
+      "tokens": 2067,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 256,
+      "fixture": "dense text",
+      "shape": "agent_explanation",
+      "tokens": 1081,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 384,
+      "fixture": "complete sentence",
+      "shape": "plain_policy_output",
+      "tokens": 1753,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 384,
+      "fixture": "complete sentence",
+      "shape": "agent_explanation",
+      "tokens": 767,
+      "fits_current_1536_output": true
+    },
+    {
+      "limit": 384,
+      "fixture": "dense text",
+      "shape": "plain_policy_output",
+      "tokens": 2445,
+      "fits_current_1536_output": false
+    },
+    {
+      "limit": 384,
+      "fixture": "dense text",
+      "shape": "agent_explanation",
+      "tokens": 1459,
+      "fits_current_1536_output": true
+    }
+  ],
+  "model_calls": 0,
+  "limitations": [
+    "Character limits alone do not bound tokenizer costs for all text.",
+    "Prompt plus schema plus output must also fit the context before adoption.",
+    "No candidate grammar, runtime setting or response pin is adopted here."
+  ]
+}
