@@ -33,6 +33,8 @@ their existing F02 JSON representations. Unknown episodes and duplicate slots fa
 Authenticate the manager approval separately. A file saying approved is evidence
 linkage, not proof of human permission. The approval JSON must include:
 
+- A nonempty authorization_id, used once.
+- Absolute extract_path and output_path, plus states_path when supplied.
 - status set to approved and scope set to cf60-development-forecast-features-only.
 - source_sha256, extract_sha256 and the explicit permitted_indices.
 - code_sha256 with canonical LF hashes for scripts/compare_cf60_development.py,
@@ -42,7 +44,10 @@ linkage, not proof of human permission. The approval JSON must include:
 
 The final approval must also bind the exact extract/state paths, new private output
 directory and code commit. Outputs include comparison.json and checksums.json.
-The output directory must be new. A failure after its creation leaves failure.json.
+The output directory must be new. An exclusive consumption record under its
+parent is created before any extract is read. Repeated or concurrent use of the
+same authorization ID fails, including when the requested output name changes.
+A failure after output creation leaves failure.json.
 Never reuse a failed output directory under the same single-use approval.
 
 Use the project interpreter from the repository root:

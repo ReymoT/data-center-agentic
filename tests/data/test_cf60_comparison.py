@@ -88,6 +88,7 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
         )
     }
     approval = {
+        "authorization_id": "synthetic-first",
         "status": "approved",
         "scope": "cf60-development-forecast-features-only",
         "source_sha256": SHA256,
@@ -95,13 +96,22 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
         "extract_sha256": hashlib.sha256(extract.read_bytes()).hexdigest(),
         "permitted_indices": sorted(rows),
         "time_limit_s": 1800,
+        "extract_path": str(extract),
+        "output_path": str(tmp_path / "out"),
     }
     auth = tmp_path / "synthetic-approval.json"
     auth.write_text(json.dumps(approval))
     output = tmp_path / "out"
+    with pytest.raises(ValueError, match="path mismatch"):
+        run(extract, auth, tmp_path / "wrong-path")
     assert run(extract, auth, output)["issue_hypothesis_count"] == 2400
     with pytest.raises(FileExistsError):
         run(extract, auth, output)
+    # Changing the output in a copied record cannot reuse its consumed ID.
+    approval["output_path"] = str(tmp_path / "retry")
+    auth.write_text(json.dumps(approval))
+    with pytest.raises(FileExistsError):
+        run(extract, auth, tmp_path / "retry")
     approval["code_sha256"]["dc_sustainability/data/cf60_broker.py"] = "0" * 64
     auth.write_text(json.dumps(approval))
     with pytest.raises(ValueError, match="code pin mismatch"):
@@ -113,6 +123,8 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
     damaged["rows"][0]["value"] = -1
     extract.write_text(json.dumps(damaged))
     approval["extract_sha256"] = hashlib.sha256(extract.read_bytes()).hexdigest()
+    approval["authorization_id"] = "synthetic-failure"
+    approval["output_path"] = str(tmp_path / "failed")
     auth.write_text(json.dumps(approval))
     failed = tmp_path / "failed"
     with pytest.raises(ValueError, match="invalid extract value"):
@@ -120,5 +132,8 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
     assert (failed / "failure.json").is_file()
     assert not (failed / "comparison.json").exists()
     extract.write_text("{}")
+    approval["authorization_id"] = "synthetic-checksum"
+    approval["output_path"] = str(tmp_path / "unused")
+    auth.write_text(json.dumps(approval))
     with pytest.raises(ValueError, match="checksum mismatch"):
         run(extract, auth, tmp_path / "unused")

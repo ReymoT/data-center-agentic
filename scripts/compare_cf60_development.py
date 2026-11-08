@@ -40,25 +40,57 @@ def run(extract_path, authorization_path, output, states_path=None):
         actual = hashlib.sha256((ROOT / name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
         if approval["code_sha256"].get(name) != actual:
             raise ValueError(f"authorized code pin mismatch: {name}")
-    extract = pinned_json(extract_path, approval["extract_sha256"])
-    if extract["source_sha256"] != SHA256:
-        raise ValueError("extract source mismatch")
-    rows = {}
-    permitted = set(approval["permitted_indices"])
-    for row in extract["rows"]:
-        index = row["index"]
-        if type(index) is not int or index not in permitted or index in rows:
-            raise ValueError("duplicate or unauthorized extract row")
-        rows[index] = row["value"]
-    states = []
-    if states_path is not None:
-        states = pinned_json(states_path, approval["states_sha256"])
-    elif approval.get("states_sha256") is not None:
-        raise ValueError("authorized saved states were not supplied")
-    manifest, _ = allocation()
-    # Never overwrite a previous attempt. Failure records retain the stop reason.
+    for key, actual_path in (
+        ("extract_path", extract_path),
+        ("states_path", states_path),
+        ("output_path", output),
+    ):
+        expected_path = approval.get(key)
+        if actual_path is None and expected_path is None:
+            continue
+        if (
+            actual_path is None
+            or not isinstance(expected_path, str)
+            or not Path(expected_path).is_absolute()
+            or actual_path.resolve() != Path(expected_path).resolve()
+        ):
+            raise ValueError(f"authorized path mismatch: {key}")
+    authorization_id = approval["authorization_id"]
+    if not isinstance(authorization_id, str) or not authorization_id.strip():
+        raise ValueError("nonempty single-use authorization ID required")
+    ledger = output.parent / ".cf60-consumed-authorizations"
+    ledger.mkdir(exist_ok=True)
+    key = hashlib.sha256(authorization_id.encode()).hexdigest()
+    # Exclusive creation prevents concurrent or repeated use before reading inputs.
+    with (ledger / (key + ".json")).open("x", encoding="utf-8") as handle:
+        handle.write(
+            json.dumps(
+                {
+                    "authorization_id": authorization_id,
+                    "authorization_sha256": hashlib.sha256(approval_bytes).hexdigest(),
+                    "output_path": str(output.resolve()),
+                }
+            )
+            + "\n"
+        )
     output.mkdir(parents=False, exist_ok=False)
     try:
+        extract = pinned_json(extract_path, approval["extract_sha256"])
+        if extract["source_sha256"] != SHA256:
+            raise ValueError("extract source mismatch")
+        rows = {}
+        permitted = set(approval["permitted_indices"])
+        for row in extract["rows"]:
+            index = row["index"]
+            if type(index) is not int or index not in permitted or index in rows:
+                raise ValueError("duplicate or unauthorized extract row")
+            rows[index] = row["value"]
+        states = []
+        if states_path is not None:
+            states = pinned_json(states_path, approval["states_sha256"])
+        elif approval.get("states_sha256") is not None:
+            raise ValueError("authorized saved states were not supplied")
+        manifest, _ = allocation()
         result = compare(
             manifest["records"],
             rows,
