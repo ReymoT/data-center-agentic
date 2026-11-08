@@ -1,5 +1,13 @@
 # Architecture for the final scheduling study
 
+November 8 update: PR #187 merged the CF60 broker after Nisha's scoped receiving
+PASS and green CI. The [comparison driver](handoffs/CF60_COMPARISON_DRIVER.md)
+is prepared for an explicitly authorized extract and saved visible states.
+Source acquisition and compatibility execution remain pending.
+The [explanation-budget assessment](handoffs/EXPLANATION_LIMIT_ASSESSMENT.md)
+records measured candidates and the remaining shared-setting decision.
+
+
 Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
