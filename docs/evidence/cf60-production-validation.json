@@ -1,0 +1,209 @@
+{
+  "algorithm": "CF60-v1",
+  "base_main": "74383b7ae25391e0e9db2f3fb7fe52572efae2b3",
+  "branch": "reimo/issue60-cf60-production-broker",
+  "broker_code_sha256": "832e6cfe27a41e457e0775ca825b6ec8debea3b2c6d34d5dfb5310d330b5ce56",
+  "bundle_commitment_sha256": "94589949848068b7bd8aa8cb30ed7e64dc3fa2c0c8af9f77e6f6c2e52b8c68d3",
+  "bundle_hashes": {
+    "dc_sustainability/data/carbon_source.py": "1a4ce5124962bb4efa1b705d0184c79ad2c5c76f9011df25f01652b015ad87a8",
+    "dc_sustainability/data/cf60_acquisition.py": "1b062dc694397c01640dd2e8d1bb235fc57ac58b8fc80de1c1fa8052b324baea",
+    "dc_sustainability/data/cf60_broker.py": "832e6cfe27a41e457e0775ca825b6ec8debea3b2c6d34d5dfb5310d330b5ce56",
+    "dc_sustainability/data/cf60_receiving.py": "01fc9e52012988cea91fc80e8d0585ca230568cb1cbc515127460bac41eff595",
+    "dc_sustainability/schemas.py": "a3ebde01f7e3930a3c14ad0795eac28204d084ef3866171982af8a5da6d2591d"
+  },
+  "commands": [
+    {
+      "command": "python -m pytest tests/data/test_cf60_broker.py -q",
+      "result": "18 passed in 1.54s"
+    },
+    {
+      "command": "python -m pytest tests/data/test_cf60_broker.py tests/data/test_issue60_causal_forecast_proof.py tests/data/test_forecast_isolation.py tests/data/test_held_out_custody.py tests/training/test_features.py tests/reference/test_labels.py tests/policies/test_learned.py tests/experiments/test_runner.py -q",
+      "result": "155 passed in 9.63s"
+    },
+    {
+      "command": "python -m pytest tests -q --tb=short",
+      "result": "2102 passed, 19 subtests passed in 42.08s; authorized localhost synthetic fixtures"
+    },
+    {
+      "command": "python -m ruff check dc_sustainability scripts tests",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m ruff format --check dc_sustainability scripts tests",
+      "result": "PASS; 224 files"
+    },
+    {
+      "command": "python scripts/validate_setup.py",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m compileall -q dc_sustainability scripts tests",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m pip check",
+      "result": "No broken requirements found"
+    },
+    {
+      "command": "python scripts/smoke_dependencies.py",
+      "result": "PASS imports, SHACL/SPARQL, tiny synthetic integer program, synthetic classifier roundtrips, bounded mock graph"
+    },
+    {
+      "command": "python -m dc_sustainability.data.cf60_receiving",
+      "result": "PASS; 60 checks; 525600 actual access probes"
+    },
+    {
+      "command": "git diff --check; git status --short; git rev-parse HEAD origin/main",
+      "result": "PASS before commit; tracked files unchanged; HEAD equals fetched main; eight reviewed broker-related files"
+    }
+  ],
+  "development_metadata_sha256": "47dd59b64d07902154b3cb92e4fb11e534f250f2d979fe5fd87c17a98f32d8b6",
+  "environment": {
+    "dependencies": {
+      "langgraph": "1.2.14",
+      "numpy": "2.5.4",
+      "pydantic": "2.14.0",
+      "pytest": "9.1.1",
+      "ruff": "0.17.0",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "python": "3.12.15"
+  },
+  "files_sha256": {
+    "dc_sustainability/data/cf60_acquisition.py": "1b062dc694397c01640dd2e8d1bb235fc57ac58b8fc80de1c1fa8052b324baea",
+    "dc_sustainability/data/cf60_broker.py": "832e6cfe27a41e457e0775ca825b6ec8debea3b2c6d34d5dfb5310d330b5ce56",
+    "dc_sustainability/data/cf60_receiving.py": "01fc9e52012988cea91fc80e8d0585ca230568cb1cbc515127460bac41eff595",
+    "docs/evidence/cf60-synthetic-receiving.json": "d6a06bb66419792089ea762c51320909aad569aa7c597f1ed45bdd4cf9f7da43",
+    "tests/data/test_cf60_broker.py": "b72e4801328f34715a46040af68d32223fe0f5399499f13013e122260a663513"
+  },
+  "held_out_selection_or_access": false,
+  "historical_prepublication_validation": {
+    "algorithm": "CF60-v1",
+    "base_main": "74383b7ae25391e0e9db2f3fb7fe52572efae2b3",
+    "branch": "reimo/issue60-cf60-production-broker",
+    "broker_code_sha256": "4ddadb0733025af981119c4f84d9b41e3a51d62dc5f1ffa83226a2caf731bc77",
+    "bundle_commitment_sha256": "c08b8cec57b7cd6ab55ccee4257b92b6b15e8a5493f979d05678c25c99ecf6b2",
+    "bundle_hashes": {
+      "dc_sustainability/data/carbon_source.py": "1a4ce5124962bb4efa1b705d0184c79ad2c5c76f9011df25f01652b015ad87a8",
+      "dc_sustainability/data/cf60_acquisition.py": "1b062dc694397c01640dd2e8d1bb235fc57ac58b8fc80de1c1fa8052b324baea",
+      "dc_sustainability/data/cf60_broker.py": "4ddadb0733025af981119c4f84d9b41e3a51d62dc5f1ffa83226a2caf731bc77",
+      "dc_sustainability/data/cf60_receiving.py": "01fc9e52012988cea91fc80e8d0585ca230568cb1cbc515127460bac41eff595",
+      "dc_sustainability/schemas.py": "a3ebde01f7e3930a3c14ad0795eac28204d084ef3866171982af8a5da6d2591d"
+    },
+    "commands": [
+      {
+        "command": "python -m pytest tests/data/test_cf60_broker.py -q",
+        "result": "16 passed in 1.53s"
+      },
+      {
+        "command": "python -m pytest tests/data/test_cf60_broker.py tests/data/test_issue60_causal_forecast_proof.py tests/data/test_forecast_isolation.py tests/data/test_held_out_custody.py tests/training/test_features.py tests/reference/test_labels.py tests/policies/test_learned.py tests/experiments/test_runner.py -q",
+        "result": "153 passed in 9.72s"
+      },
+      {
+        "authorized_rerun_result": "2100 passed, 19 subtests passed in 42.31s",
+        "command": "python -m pytest tests -q --tb=short",
+        "initial_sandbox_result": "1967 passed, 133 localhost bind setup errors, 19 subtests passed in 32.38s"
+      },
+      {
+        "command": "python -m ruff check dc_sustainability scripts tests",
+        "result": "PASS"
+      },
+      {
+        "command": "python -m ruff format --check dc_sustainability scripts tests",
+        "result": "PASS; 224 files"
+      },
+      {
+        "command": "python scripts/validate_setup.py",
+        "result": "PASS"
+      },
+      {
+        "command": "python -m compileall -q dc_sustainability scripts tests",
+        "result": "PASS"
+      },
+      {
+        "command": "python -m pip check",
+        "result": "No broken requirements found"
+      },
+      {
+        "command": "python scripts/smoke_dependencies.py",
+        "result": "PASS imports, SHACL/SPARQL, tiny synthetic integer program, synthetic classifier roundtrips, bounded mock graph"
+      },
+      {
+        "command": "python -m dc_sustainability.data.cf60_receiving",
+        "result": "PASS; 60 checks; 525600 actual access probes"
+      },
+      {
+        "command": "git diff --check; git status --short; git rev-parse HEAD origin/main",
+        "result": "PASS; tracked files unchanged; HEAD equals fetched main; only eight new deliverable files"
+      }
+    ],
+    "development_metadata_sha256": "47dd59b64d07902154b3cb92e4fb11e534f250f2d979fe5fd87c17a98f32d8b6",
+    "environment": {
+      "dependencies": {
+        "langgraph": "1.2.14",
+        "numpy": "2.5.4",
+        "pydantic": "2.14.0",
+        "pytest": "9.1.1",
+        "ruff": "0.17.0",
+        "scikit-learn": "1.9.1",
+        "scipy": "1.18.1"
+      },
+      "platform": "macOS-27.0.1-arm64-arm-64bit",
+      "python": "3.12.15"
+    },
+    "files_sha256": {
+      "dc_sustainability/data/cf60_acquisition.py": "1b062dc694397c01640dd2e8d1bb235fc57ac58b8fc80de1c1fa8052b324baea",
+      "dc_sustainability/data/cf60_broker.py": "4ddadb0733025af981119c4f84d9b41e3a51d62dc5f1ffa83226a2caf731bc77",
+      "dc_sustainability/data/cf60_receiving.py": "01fc9e52012988cea91fc80e8d0585ca230568cb1cbc515127460bac41eff595",
+      "docs/evidence/cf60-synthetic-receiving.json": "ec2b3c097c1f654aba23fd80354d9d049bb47de5d2a852b9445316a9452a3e14",
+      "tests/data/test_cf60_broker.py": "99404751fbda9f62f6927c8d2ee42b5242399cf8f2b47db38275fac2ec725c37"
+    },
+    "held_out_selection_or_access": false,
+    "implementation": "cf60-restricted-broker-v1",
+    "independent_receiving": "pending Nisha",
+    "instruction_version": "1.28",
+    "limitations": [
+      "Library capability is not a hostile same-process or OS security sandbox.",
+      "Acquisition parses full source; real execution needs separately authenticated authorization.",
+      "No custody selector amendment, scientific adoption or C/D compatibility certification."
+    ],
+    "model_calls": 0,
+    "preserved_forty_content_receipt_sha256": "33c8dce514cdbcba53f9ed03399219be8a511d628ab61def694eedaac894b319",
+    "publication": "not authorized; no commit, push, merge, PR or comment",
+    "real_source_acquisition": false,
+    "receiving_checks_sha256": "44da8cc5e780fa98fb25e554c7ce7a807ddd7c3fe603655835158f0512976a9b",
+    "schema_version": "1.0.0",
+    "scope": "producer-side synthetic implementation validation; not independent acceptance",
+    "source_dependent_solver_comparison": false
+  },
+  "implementation": "cf60-restricted-broker-v1",
+  "independent_receiving": "pending Nisha",
+  "instruction_version": "1.28",
+  "limitations": [
+    "Library capability is not a hostile same-process or OS security sandbox.",
+    "Acquisition parses full source; real execution needs separately authenticated authorization.",
+    "No custody selector amendment, scientific adoption or C/D compatibility certification."
+  ],
+  "model_calls": 0,
+  "preserved_forty_content_receipt_sha256": "33c8dce514cdbcba53f9ed03399219be8a511d628ab61def694eedaac894b319",
+  "publication": "User authorized commit, push and draft PR; no merge or automatic comments. Exact commit is recorded in PR description.",
+  "publication_audit": {
+    "fixes": [
+      "Reject deletion of immutable capability metadata",
+      "Require exact F02 SourceRef type; reject arbitrary source objects/subclasses with privileged handles"
+    ],
+    "identity": "GitHub ReymoT (52417582), repository-local Reimo Tamme <52417582+ReymoT@users.noreply.github.com>",
+    "independent_hash_verification": "stdlib SHA256 of raw broker bytes equals canonical LF SHA256 and regenerated receiving pin",
+    "main_reconciliation": "Fetched main unchanged at base_main; no reconciliation required",
+    "original_preservation": "All eight original draft files backed up outside repository before review edits; original validation retained below",
+    "preservation": "Tracked data, models, labels, legacy adapter, contracts, custody code and instructions unchanged versus fetched main",
+    "public_audit": "Only synthetic values and already-public development metadata; no source-derived values, held-out contents, credentials or confidential custody paths"
+  },
+  "real_source_acquisition": false,
+  "receiving_checks_sha256": "a629263d0ce5bfdf20601f4206dd4eb427ca7f2b5954345ecb126d31cf401e5b",
+  "schema_version": "1.0.0",
+  "scope": "producer-side synthetic implementation validation; not independent acceptance",
+  "source_dependent_solver_comparison": false
+}
