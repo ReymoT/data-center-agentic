@@ -26,7 +26,11 @@ def candidate_schema(original):
     if explanation is not None:
         explanation["properties"]["summary"]["maxLength"] = 256
         explanation["properties"]["limitations"]["items"]["maxLength"] = 256
-        schema["$defs"]["Claim"]["properties"]["text"]["maxLength"] = 256
+        claim = schema["$defs"]["Claim"]
+        # Saved November 4 requests carry one Claim object; current requests carry
+        # the paired value/unit branches.  Both receive the same text bound.
+        for branch in claim.get("anyOf", [claim]):
+            branch["properties"]["text"]["maxLength"] = 256
     return schema
 
 
