@@ -127,3 +127,28 @@ def test_cli_writes_the_report(tmp_path):
         capture_output=True,
     )
     assert out.read_text(encoding="utf-8") == development()
+
+
+def test_cli_refuses_to_overwrite_its_input_report(tmp_path):
+    source = tmp_path / "agreement_report.json"
+    original = (AGREEMENT / "agreement_report.json").read_bytes()
+    source.write_bytes(original)
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts/render_irr_report.py"),
+            "--report",
+            str(source),
+            "--a-original",
+            "a.json",
+            "--b-original",
+            "b.json",
+            "--scope",
+            "synthetic regression",
+            "--out",
+            str(source),
+        ],
+        capture_output=True,
+    )
+    assert result.returncode != 0
+    assert source.read_bytes() == original

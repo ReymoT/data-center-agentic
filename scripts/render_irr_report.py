@@ -45,7 +45,8 @@ def main() -> int:
         artifact_dir=args.report.parent,
     )
     if args.out:
-        args.out.write_text(text, encoding="utf-8", newline="\n")
+        with args.out.open("x", encoding="utf-8", newline="\n") as handle:
+            handle.write(text)
         print(f"wrote {args.out}")
     else:
         print(text, end="")
