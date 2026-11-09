@@ -88,12 +88,13 @@ An empty explanation has 0 completeness and coverage; zero-denominator faithfuln
 - completeness is scored as written;
 - cap-hit and unfinished counts are reported by system and field, with completeness for outputs with and without a cap hit, and a separate sensitivity check that never replaces the main measure.
 
-A 256-character limit is the agreed candidate for the held-out runs; it is not adopted until its validation passes ([#185](https://github.com/ReymoT/data-center-agentic/issues/185)).
+A 256-character limit is the agreed validation candidate, not an adopted held-out setting ([#185](https://github.com/ReymoT/data-center-agentic/issues/185)). Its November 9 public validation RUN-bc420d3e8d72 stopped at Agent slot 2 because three claim units lacked numeric values. It used 12 requests; all 12 native/offline prompt counts matched and cleanup passed. Five completed systems passed replay, but Agent remains partial. The [preserved outcome](../handoffs/A01_EXPLANATION_VALIDATION_OUTCOME_2026-11-09.md) is a failed validation, not an improvement result or permission to retry.
 
-**Review sample** (Q10, [`sampling.py`](../../dc_sustainability/evaluation/sampling.py)). Chosen from the frozen episode list before any held-out output is opened, using job timing only (never capacity, forecasts, queues or outputs):
+**Review sample** (Q10, [`sampling.py`](../../dc_sustainability/evaluation/sampling.py)). Chosen from the frozen episode list before any held-out output is opened. Slot eligibility uses job timing only, never capacity, forecast values, queue states or policy outputs. Trial balancing uses the manifest's scenario/forecast-condition strata:
 - **Main sample:** two decision slots per episode, 60 pairs in total, seed 20261019, spread evenly over the three trials within each scenario/forecast group. A shortfall is reported, never topped up.
 - **Abstention-boundary group** ([#195](https://github.com/ReymoT/data-center-agentic/pull/195)): every slot where a job arrives with no way to finish on time, or 30 drawn with the separate seed 20261021 when more qualify. It never replaces main pairs and is reported separately.
-- Every selected pair is kept, including failures and one-sided no-ops, which are counted as not applicable rather than dropped.
+- Every selected pair is kept, including failures and one-sided no-ops. `pair_record` marks only the system entries with an empty waiting queue as not applicable; the other side remains reviewable. Failed/malformed outputs are not automatically not applicable: raw-text assertions are reviewed separately under rule 11.7, and missing outputs remain explicit missing records.
+- Boundary trials rotate within scenario/forecast-condition strata using seed 20261021. Matty and Ved accepted this implementation in #195. Reproduction records CPython version, seeds, manifest and ordering; no held-out sample is frozen yet.
 
 **Statistics.**
 
@@ -132,7 +133,7 @@ The professor asked for an inter-rater reliability report (#95).
 3. Disagreements are then decided jointly, with a rationale each. Adjudicated labels are a separate record and never recompute reliability.
 4. For held-out work, each annotation records a decision for every summary sentence, limitation and raw-text unit (`text_review`). Comparisons run with `--require-text-review`, so an original can't skip extraction silently.
 5. Each annotation also records the rule 11.9 "visibly unfinished" decision on every cap hit (`--cap-limit`). Agreement on it is reported separately, and disagreements are adjudicated.
-6. The numeric part of the report is generated from the saved agreement file by `scripts/render_irr_report.py` ([#193](https://github.com/ReymoT/data-center-agentic/pull/193)), which reproduces the development report below. The interpretation is written by hand.
+6. The numeric part of the report is generated from the saved agreement file by `scripts/render_irr_report.py` ([#193](https://github.com/ReymoT/data-center-agentic/pull/193)), which reproduces the development report below. The interpretation explains the recorded counts, prevalence limitations and undefined cases; it is not inferred from kappa alone.
 
 ## 3. Development evidence
 
