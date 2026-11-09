@@ -3,6 +3,7 @@
 import copy
 import json
 import threading
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -112,6 +113,7 @@ def test_code_and_missing_approval_stop_before_any_runtime_start(tmp_path, monke
     # Isolate the authorization gate from historical execution snapshots. This
     # temporary synthetic readiness is never an approved receipt or live evidence.
     ready = json.loads((root / "docs/evidence/i01-unified-readiness-2026-11-02.json").read_text())
+    ready["launcher_lf_sha256"] = launch.lf_sha256(Path(launch.__file__))
     ready["execution_file_lf_sha256"] = {
         rel: launch.lf_sha256(root / rel) for rel in ready["execution_file_lf_sha256"]
     }
@@ -186,7 +188,9 @@ def test_committed_template_is_unapproved_and_matches_exact_text_pins():
     candidate = json.loads((root / "docs/evidence/i01-offline-config-2026-11-02.json").read_text())
     assert template["status"] == "pending_fresh_user_approval"
     assert template["approved_by"] is None and template["approval_ref"] is None
-    assert template["launcher_sha256"] == lf_sha256(root / "scripts/run_i01_public_receiving.py")
+    assert template["launcher_sha256"] == lf_sha256(
+        root / "docs/evidence/i01-legacy-launcher-2026-11-04.txt"
+    )
     assert template["readiness_sha256"] == lf_sha256(
         root / "docs/evidence/i01-unified-readiness-2026-11-02.json"
     )

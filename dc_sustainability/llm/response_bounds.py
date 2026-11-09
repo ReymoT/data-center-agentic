@@ -22,9 +22,10 @@ class ResponseBounds:
     limitations: int = 4
     text_characters: int = 96
     evidence_ids: int = 2
+    explanation_characters: int = 96
 
 
-def response_bounds(state: s.VisibleState) -> ResponseBounds:
+def response_bounds(state: s.VisibleState, *, explanation_characters: int = 96) -> ResponseBounds:
     """Return bounds for a visible decision without consulting results.
 
     The policy layers retain the accepted empty-queue no-call rule.  A zero-entry
@@ -35,7 +36,11 @@ def response_bounds(state: s.VisibleState) -> ResponseBounds:
     state = s.VisibleState.model_validate(
         state.model_dump(mode="python", warnings="none"), strict=True
     )
-    return ResponseBounds(plan_entries=len(state.waiting_jobs))
+    if type(explanation_characters) is not int or explanation_characters not in (96, 256):
+        raise ValueError("explanation length must be 96 or the explicit 256-character candidate")
+    return ResponseBounds(
+        plan_entries=len(state.waiting_jobs), explanation_characters=explanation_characters
+    )
 
 
 def _visible_evidence_ids(state: s.VisibleState) -> tuple[str, ...]:
@@ -89,6 +94,7 @@ def bounded_response_schema(
     state: s.VisibleState,
     *,
     system: str,
+    explanation_characters: int = 96,
 ) -> tuple[dict, ResponseBounds]:
     """Build the one bounded grammar used by both LLM systems.
 
@@ -106,7 +112,7 @@ def bounded_response_schema(
         raise ValueError("response bounds apply only to the two LLM systems")
     if response_model not in {s.Plan, s.PolicyOutput, s.Explanation}:
         raise ValueError("response bounds require Plan, PolicyOutput or Explanation")
-    limits = response_bounds(state)
+    limits = response_bounds(state, explanation_characters=explanation_characters)
     schema = deepcopy(response_model.model_json_schema())
 
     if issubclass(response_model, s.Versioned):
@@ -160,14 +166,14 @@ def bounded_response_schema(
     if explanation is not None:
         props = explanation["properties"]
         props["source"] = {"const": "llm", "type": "string"}
-        _bound_text(props["summary"], limits.text_characters)
+        _bound_text(props["summary"], limits.explanation_characters)
         props["claims"]["maxItems"] = limits.claims
         props["limitations"]["maxItems"] = limits.limitations
-        _bound_text(props["limitations"]["items"], limits.text_characters)
+        _bound_text(props["limitations"]["items"], limits.explanation_characters)
         claim = schema.get("$defs", {}).get("Claim")
         if claim is None:
             raise ValueError("Explanation schema lacks Claim")
-        _bound_text(claim["properties"]["text"], limits.text_characters)
+        _bound_text(claim["properties"]["text"], limits.explanation_characters)
         claim["properties"]["claim_id"]["maxLength"] = 16
         _bound_ids(claim["properties"]["evidence_ids"], evidence_ids, limits.evidence_ids)
 

@@ -215,6 +215,21 @@ class StrictProvider(OllamaProvider):
         return attempt
 
 
+def candidate_deployment(identity: dict, port: int) -> Deployment:
+    """Use explicitly pinned settings, retaining the fixed public receiving envelope."""
+    pins = dict(identity["model"]["deployment"])
+    deployment = Deployment(base_url=f"http://127.0.0.1:{port}", **pins)
+    if (
+        deployment.runtime_version,
+        deployment.model_digest,
+        deployment.max_run_attempts,
+        deployment.max_response_bytes,
+        deployment.request_timeout_seconds,
+    ) != ("0.40.5", MODEL_DIGEST, 18, 2 * 1024 * 1024, 150):
+        raise ValueError("candidate changes the fixed receiving envelope")
+    return deployment
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runtime", required=True, type=Path)
@@ -230,7 +245,9 @@ def main() -> int:
     parser.add_argument("--tree", required=True, type=Path)
     parser.add_argument("--forest", required=True, type=Path)
     parser.add_argument("--authorization", type=Path)
+    parser.add_argument("--code-revision", default=HEAD)
     args = parser.parse_args()
+    code_revision = args.code_revision
 
     runtime = args.runtime.resolve(strict=True)
     model_store = args.models.resolve(strict=True)
@@ -245,11 +262,11 @@ def main() -> int:
     if ready.get("launcher_lf_sha256") != lf_sha256(Path(__file__)):
         raise RuntimeError("launcher differs from the prepared LF pin")
     if (
-        candidate["candidate_config_identity"]["code_revision"] != HEAD
+        candidate["candidate_config_identity"]["code_revision"] != code_revision
         or ready["candidate_config_hash"] != candidate["candidate_config_hash"]
     ):
         raise RuntimeError("candidate/readiness identities differ")
-    command("git", "merge-base", "--is-ancestor", HEAD, "HEAD")
+    command("git", "merge-base", "--is-ancestor", code_revision, "HEAD")
     for rel, digest in ready["execution_file_lf_sha256"].items():
         if lf_sha256(ROOT / rel) != digest:
             raise RuntimeError(f"execution code changed: {rel}")
@@ -296,16 +313,7 @@ def main() -> int:
     tokenizer = tokenizers.Tokenizer.from_str(tokenizer_path.read_text(encoding="utf-8"))
     episode = load_bundle(bundle_path).episode
     lock_path = ROOT / "requirements/requirements-windows-py312.lock.txt"
-    deployment = Deployment(
-        base_url=f"http://127.0.0.1:{args.port}",
-        runtime_version="0.40.5",
-        model_digest=MODEL_DIGEST,
-        max_run_attempts=18,
-        max_response_bytes=2 * 1024 * 1024,
-        max_prompt_tokens=16384 - 1536,
-        context_policy_ref="qwen3-legacy-template-tokenizers-0.23.3-native-count-validated-a01",
-        request_timeout_seconds=150,
-    )
+    deployment = candidate_deployment(candidate["candidate_config_identity"], args.port)
     settings = ModelSettings(
         seeds=((0, 101),),
         decision_seconds=480,
@@ -322,7 +330,7 @@ def main() -> int:
         tuple(candidate["candidate_config_identity"]["systems"]),
         ((episode.episode_id, str(bundle_path), BUNDLE_SHA256),),
         model_trials=(0,),
-        code_revision=HEAD,
+        code_revision=code_revision,
         lock_sha256=lf_sha256(lock_path),
         model=settings,
         trained=TrainedSettings(
@@ -355,7 +363,7 @@ def main() -> int:
     )
     static = {
         "authorization_ref": authorization_ref,
-        "repo_commit": HEAD,
+        "repo_commit": code_revision,
         "checkout_commit": command("git", "rev-parse", "HEAD"),
         "readiness_sha256": lf_sha256(args.readiness),
         "launcher_sha256": lf_sha256(Path(__file__)),

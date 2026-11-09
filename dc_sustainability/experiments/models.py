@@ -64,6 +64,10 @@ def deployment_pins(deployment) -> dict:
     """The A01 deployment fields that belong in the run identity (not the address)."""
     pins = dataclasses.asdict(deployment)
     pins.pop("base_url")
+    # Omit new optional defaults so existing stored configuration identities match.
+    if (pins["explanation_characters"], pins["output_tokens"]) == (96, 1536):
+        pins.pop("explanation_characters")
+        pins.pop("output_tokens")
     return pins
 
 
@@ -82,7 +86,14 @@ def new_provider(settings: ModelSettings, models: ModelInputs) -> OllamaProvider
         raise TypeError("the shared A01 OllamaProvider is required")
     if provider.attempts:
         raise ValueError("each unit needs a fresh provider ledger")
-    if deployment_pins(provider.deployment) != settings.deployment:
+    expected = dict(settings.deployment)
+    if (expected.get("explanation_characters", 96), expected.get("output_tokens", 1536)) == (
+        96,
+        1536,
+    ):
+        expected.pop("explanation_characters", None)
+        expected.pop("output_tokens", None)
+    if deployment_pins(provider.deployment) != expected:
         raise ValueError("provider deployment differs from the pins frozen in the run config")
     return provider
 
