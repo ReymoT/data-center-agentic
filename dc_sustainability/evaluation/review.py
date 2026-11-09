@@ -16,9 +16,16 @@ a ``reference_kind`` from a closed list on an assertion, and raw-text assertions
 explanation. Raw-text assertions are scored separately and never enter the structured
 metrics. Human extraction/deduplication, unresolved units and two independent original
 ratings remain gates before a frozen real-output review.
+
+Rule §11.9 (#185) adds an optional ``cap_review``: the code lists every summary,
+limitation and claim text that reached the request's length limit (a cap hit), and
+raters decide only whether each one is visibly unfinished, recording the cut-off tail.
+A summary sentence or limitation that is only that tail takes the ``cut_off`` text
+decision, never an assertion. The limit is an input, never assumed.
 """
 
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 
 from dc_sustainability import schemas as s
@@ -127,8 +134,13 @@ def load_cases(data: dict) -> tuple[ReviewCase, ...]:
     return tuple(cases)
 
 
-def blank_annotation(case: ReviewCase, key: str, *, text_review: bool = False) -> dict:
-    """The rater's starting record: Claim assertions pre-listed, every judgement empty."""
+def blank_annotation(
+    case: ReviewCase, key: str, *, text_review: bool = False, cap_limit: int | None = None
+) -> dict:
+    """The rater's starting record: Claim assertions pre-listed, every judgement empty.
+
+    With ``cap_limit`` the computed cap hits are listed for the rater's §11.9 decision.
+    """
     output = case.outputs[key]
     claims = output.explanation.claims if output.explanation else ()
     entry = {
@@ -156,6 +168,14 @@ def blank_annotation(case: ReviewCase, key: str, *, text_review: bool = False) -
             source: [{"text": text, "decision": None, "assertion_ids": []} for text in texts]
             for source, texts in review_units(output).items()
         }
+    if cap_limit is not None:
+        entry["cap_review"] = {
+            "limit": cap_limit,
+            "units": [
+                {"field": f, "unit": u, "unfinished": None, "cut_off_text": None}
+                for f, u in cap_hits(output, cap_limit)
+            ],
+        }
     return entry
 
 
@@ -173,9 +193,81 @@ def review_units(output: BlindOutput) -> dict[str, list[str]]:
     }
 
 
+CAP_FIELDS = ("summary", "limitation", "claim")
+
+
+def cap_hits(output: BlindOutput, limit: int) -> list[tuple[str, str]]:
+    """Explanation texts whose length reached ``limit`` (rule §11.9), in source order.
+
+    Each hit is (field, unit): ("summary", "summary"), ("limitation", "<index from 0>")
+    or ("claim", "<claim ID>"). Computed by code, so both raters see the same list.
+    """
+    if type(limit) is not int or limit < 1:
+        raise ValueError("the length limit must be a positive integer")
+    e = output.explanation
+    if e is None:
+        return []
+    hits = [("summary", "summary")] if len(e.summary) == limit else []
+    hits += [("limitation", str(i)) for i, t in enumerate(e.limitations) if len(t) == limit]
+    hits += [("claim", c.claim_id) for c in e.claims if len(c.text) == limit]
+    return hits
+
+
+def _cap_text(output: BlindOutput, field: str, unit: str) -> str:
+    e = output.explanation
+    if field == "summary":
+        return e.summary
+    if field == "limitation":
+        return e.limitations[int(unit)]
+    return next(c.text for c in e.claims if c.claim_id == unit)
+
+
+def _validate_cap_review(output: BlindOutput, entry: dict, complete: bool) -> None:
+    record = entry["cap_review"]
+    if not isinstance(record, dict) or set(record) != {"limit", "units"}:
+        raise ValueError("cap_review has exactly limit and units")
+    hits = cap_hits(output, record["limit"])
+    units = record["units"]
+    if (
+        not isinstance(units, list)
+        or [(u.get("field"), u.get("unit")) if isinstance(u, dict) else None for u in units] != hits
+    ):
+        raise ValueError("cap_review units must be exactly the computed cap hits, in order")
+    for u in units:
+        if set(u) != {"field", "unit", "unfinished", "cut_off_text"}:
+            raise ValueError("invalid cap_review unit")
+        unfinished, tail = u["unfinished"], u["cut_off_text"]
+        if unfinished is None and not complete and tail is None:
+            continue
+        if type(unfinished) is not bool:
+            raise ValueError("every cap hit needs an unfinished decision (true or false)")
+        if not unfinished and tail is not None:
+            raise ValueError("a finished cap hit has no cut-off text")
+        text = _cap_text(output, u["field"], u["unit"])
+        if unfinished and not (isinstance(tail, str) and tail.strip() and text.endswith(tail)):
+            raise ValueError("cut_off_text must be the exact non-empty end of the capped text")
+
+
+def _cut_off_units(units: dict[str, list[str]], entry: dict) -> set[tuple[str, int]]:
+    """Text-review positions that may be decided ``cut_off``: the end of an unfinished text."""
+    allowed = set()
+    for u in entry.get("cap_review", {}).get("units", []):
+        if u.get("unfinished") is True:
+            if u["field"] == "summary":
+                position = len(units["summary"]) - 1
+                if units["summary"][position].strip() == u["cut_off_text"].strip():
+                    allowed.add(("summary", position))
+            elif u["field"] == "limitation":
+                position = int(u["unit"])
+                if units["limitation"][position].strip() == u["cut_off_text"].strip():
+                    allowed.add(("limitation", position))
+    return allowed
+
+
 def _validate_text_review(output: BlindOutput, entry: dict, complete: bool) -> None:
     audit = entry["text_review"]
     units = review_units(output)
+    cut_off = _cut_off_units(units, entry)
     if not isinstance(audit, dict) or set(audit) != set(units):
         raise ValueError("text_review must cover summary, limitation and raw units")
     assertions = {a["assertion_id"]: a for a in entry["assertions"]}
@@ -184,7 +276,7 @@ def _validate_text_review(output: BlindOutput, entry: dict, complete: bool) -> N
         rows = audit[source]
         if not isinstance(rows, list) or len(rows) != len(texts):
             raise ValueError("every text unit needs a recorded decision")
-        for row, text in zip(rows, texts):
+        for position, (row, text) in enumerate(zip(rows, texts)):
             if not isinstance(row, dict) or set(row) != {"text", "decision", "assertion_ids"}:
                 raise ValueError("invalid text-review record")
             if row["text"] != text:
@@ -196,9 +288,11 @@ def _validate_text_review(output: BlindOutput, entry: dict, complete: bool) -> N
                 raise ValueError("unknown or duplicate text-review assertion ID")
             if decision is None and not complete and not ids:
                 continue
-            if decision not in {"extracted", "repeats", "not_checkable"}:
+            if decision not in {"extracted", "repeats", "not_checkable", "cut_off"}:
                 raise ValueError("every text unit needs an explicit review decision")
-            if (decision == "not_checkable") != (not ids):
+            if decision == "cut_off" and (source, position) not in cut_off:
+                raise ValueError("cut_off is only for the end of a text marked unfinished")
+            if (decision in ("not_checkable", "cut_off")) != (not ids):
                 raise ValueError("extracted/repeated facts need IDs; non-checkable text has none")
             if decision == "extracted" and not any(assertions[i]["source"] == source for i in ids):
                 raise ValueError("extracted unit must reference an assertion from its source")
@@ -210,12 +304,18 @@ def _validate_text_review(output: BlindOutput, entry: dict, complete: bool) -> N
 
 
 def validate_annotation(
-    case: ReviewCase, entry: dict, *, complete: bool, require_text_review: bool = False
+    case: ReviewCase,
+    entry: dict,
+    *,
+    complete: bool,
+    require_text_review: bool = False,
+    cap_limit: int | None = None,
 ) -> None:
     """Refuse an annotation that breaks the extraction rule; ``complete`` requires judgements.
 
     Raises ValueError with the first problem found. It checks structure only and never
-    decides whether a label is right.
+    decides whether a label is right. ``cap_limit`` requires a rule §11.9 ``cap_review``
+    for that length limit.
     """
     key = entry.get("output")
     if entry.get("case_id") != case.case_id or key not in case.outputs:
@@ -239,9 +339,26 @@ def validate_annotation(
     ids = [a.get("assertion_id") for a in assertions]
     if len(ids) != len(set(ids)):
         raise ValueError(f"{where}: repeated assertions share one ID and appear once")
+    cap_record = entry.get("cap_review")
+    if cap_limit is not None and (
+        not isinstance(cap_record, dict) or cap_record.get("limit") != cap_limit
+    ):
+        raise ValueError(f"{where}: cap_review for the {cap_limit}-character limit is required")
+    if "cap_review" in entry:
+        _validate_cap_review(output, entry, complete)
+    cut_only_claims = {
+        u["unit"]
+        for u in entry.get("cap_review", {}).get("units", [])
+        if u["field"] == "claim"
+        and u["unfinished"] is True
+        and u["cut_off_text"] == claims[u["unit"]].text
+    }
     listed_claims = [a["assertion_id"] for a in assertions if a.get("source") == "claim"]
-    if sorted(listed_claims) != sorted(claims):
-        raise ValueError(f"{where}: every Claim record is exactly one assertion")
+    if sorted(listed_claims) != sorted(set(claims) - cut_only_claims):
+        raise ValueError(
+            f"{where}: every Claim record is exactly one assertion, "
+            "except a whole-text cut-off fragment, which has none"
+        )
     for a in assertions:
         _check_assertion(a, claims, complete, where)
     if require_text_review and "text_review" not in entry:
@@ -310,15 +427,23 @@ class OutputScore:
     # Raw-text assertions (rule §11.7), kept apart from the structured metrics above.
     raw_checkable: int = 0
     raw_supported: int = 0
+    # Rule §11.9 counts by field; None when the annotation has no cap_review.
+    cap_hits: dict[str, int] | None = None
+    unfinished: dict[str, int] | None = None
 
     @property
     def raw_faithfulness(self) -> float | None:
         return self.raw_supported / self.raw_checkable if self.raw_checkable else None
 
 
-def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
-    """Per-output metrics from one rater's complete annotation; None for a no-op."""
-    validate_annotation(case, entry, complete=True)
+def score_annotation(
+    case: ReviewCase, entry: dict, *, cap_limit: int | None = None
+) -> OutputScore | None:
+    """Per-output metrics from one rater's complete annotation; None for a no-op.
+
+    Completeness is scored as written (rule §11.9); cap counts are reported beside it.
+    """
+    validate_annotation(case, entry, complete=True, cap_limit=cap_limit)
     if entry["not_applicable"]:
         return None
     raw = [a for a in entry["assertions"] if a["source"] == "raw"]
@@ -329,6 +454,7 @@ def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
     cited = sum(len(a["cited_ids"]) for a in assertions)
     pairs = sum(len(a["supporting_cited_ids"]) for a in assertions)
     parts = entry["completeness"]
+    caps = entry.get("cap_review")
     return OutputScore(
         checkable=n,
         supported=supported,
@@ -339,7 +465,58 @@ def score_annotation(case: ReviewCase, entry: dict) -> OutputScore | None:
         completeness=sum(parts.values()) / len(COMPLETENESS),
         raw_checkable=len(raw),
         raw_supported=sum(a["label"] == "supported" for a in raw),
+        cap_hits=None if caps is None else _by_field(caps["units"]),
+        unfinished=None if caps is None else _by_field(u for u in caps["units"] if u["unfinished"]),
     )
+
+
+def _by_field(units: Iterable[dict]) -> dict[str, int]:
+    fields = [u["field"] for u in units]
+    return {f: fields.count(f) for f in CAP_FIELDS}
+
+
+def cap_report(scored: Iterable[tuple[str, OutputScore]]) -> dict:
+    """Rule §11.9 report by system, beside (never replacing) the main measures.
+
+    ``scored`` pairs each unblinded system name with an output's score; every score
+    must carry a cap review. Returns cap-hit and unfinished counts by field, mean
+    completeness for outputs with and without a cap hit, and the separate sensitivity
+    check: faithfulness over complete assertions, retaining outputs with cut-off fragments.
+    """
+    by_system: dict[str, list[OutputScore]] = {}
+    for system, score in scored:
+        if score.cap_hits is None or score.unfinished is None:
+            raise ValueError("every scored output needs a cap review")
+        by_system.setdefault(system, []).append(score)
+
+    def mean(values):
+        values = [v for v in values if v is not None]
+        return sum(values) / len(values) if values else None
+
+    def pooled(scores):
+        n = sum(x.checkable for x in scores)
+        return sum(x.supported for x in scores) / n if n else None
+
+    report = {}
+    for system, scores in sorted(by_system.items()):
+        hit = [x for x in scores if sum(x.cap_hits.values())]
+        no_hit = [x for x in scores if not sum(x.cap_hits.values())]
+        report[system] = {
+            "outputs": len(scores),
+            "outputs_with_cap_hit": len(hit),
+            "cap_hits": {f: sum(x.cap_hits[f] for x in scores) for f in CAP_FIELDS},
+            "unfinished": {f: sum(x.unfinished[f] for x in scores) for f in CAP_FIELDS},
+            "completeness_with_cap_hit": mean(x.completeness for x in hit),
+            "completeness_without_cap_hit": mean(x.completeness for x in no_hit),
+            "sensitivity": {
+                "faithfulness_all": pooled(scores),
+                "faithfulness_excluding_cut_off_fragments": pooled(scores),
+                "outputs_retained": len(scores),
+                "complete_assertions": sum(x.checkable for x in scores),
+                "cut_off_fragments_excluded": sum(sum(x.unfinished.values()) for x in scores),
+            },
+        }
+    return report
 
 
 def render_packet(cases: tuple[ReviewCase, ...]) -> str:
