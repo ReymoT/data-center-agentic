@@ -33,3 +33,14 @@ The [run-metrics](../handoffs/E03_RUN_METRICS.md) and
 are implemented. E06 integration and accepted, hashed final metric/statistics
 artifacts remain unfinished. Source/forecast/custody, O02 compatibility and Q08
 tie semantics are separate gates; these decisions do not resolve them.
+
+## Affected-owner confirmations
+
+Both confirmations requested above are received, each confirming all four directions
+without correction. They confirm the analysis settings only: not the I02 scientific
+freeze, CF60/O02/C/D compatibility or held-out scoring.
+
+| Owner | Date | Record |
+|---|---|---|
+| Ved (O02/O04 references) | November 5, 2026 | [#60 comment](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6667103300) |
+| Edison (P01, classical policies, impact metrics) | November 9, 2026 | [#60 comment](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6749251810) |
