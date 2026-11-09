@@ -28,8 +28,10 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
 - Any reduction must be matched across systems and frozen before execution.
 - Matty's [November 4 analysis response](../decisions/E03_ANALYSIS_MANAGER_2026-11-04.md)
   selects the 24 core episodes for the primary comparison and the six withheld
-  variants for separate reporting. The matrix remains 30 episodes/300 runs;
-  affected-consumer confirmation and I02 freeze are not inferred from this choice.
+  variants for separate reporting. The matrix remains 30 episodes/300 runs.
+  Ved (November 5) and Edison (November 9) confirmed these analysis settings
+  without correction ([#194](https://github.com/ReymoT/data-center-agentic/pull/194));
+  this is not the I02 freeze.
 
 **Accuracy.** Measured against saved execution records and independently replayed (E01):
 - executed-schedule validity;
@@ -67,7 +69,7 @@ Matty retains the broad `unsafe_rate` as primary and requires the narrower
 `unsafe_rate_without_omissions`, omission-only counts and violation types alongside
 it at each stage. The narrower measure excludes only omission-only invalidity;
 it is not purely physical/timing harm. This is a disclosed development-informed
-manager decision, with affected confirmations/final freeze still pending.
+manager decision, confirmed by the affected owners; the final freeze is pending.
 
 **Faithfulness** (blinded human claim review, under the frozen E04 extraction rule):
 
@@ -79,6 +81,19 @@ manager decision, with affected confirmations/final freeze still pending.
 | Completeness | decision, reason, evidence, limitations (0/1 each) |
 
 An empty explanation has 0 completeness and coverage; zero-denominator faithfulness and precision stay undefined. Raw-text assertions from malformed outputs are reported separately (rule 11.7).
+
+**Text cut off at the length limit** (rule 11.9, [#185](https://github.com/ReymoT/data-center-agentic/issues/185)). Explanation fields are generated under a character limit, and text at the limit can stop mid-sentence. In the development run RUN-fd87c6c8a9cb, 7 of 10 summaries reached the 96-character limit, unevenly: all 5 Agent summaries and 2 of 5 Plain ([audit](../handoffs/I01_EXPLANATION_LENGTH_AUDIT.md)). The same rule applies to both systems:
+- code marks every summary, limitation and claim text exactly at the limit (a cap hit); raters decide only whether each one is visibly unfinished, and their agreement on that is reported;
+- complete facts before the cut are rated as usual; the cut-off end is never an assertion and never labelled unsupported;
+- completeness is scored as written;
+- cap-hit and unfinished counts are reported by system and field, with completeness for outputs with and without a cap hit, and a separate sensitivity check that never replaces the main measure.
+
+A 256-character limit is the agreed candidate for the held-out runs; it is not adopted until its validation passes ([#185](https://github.com/ReymoT/data-center-agentic/issues/185)).
+
+**Review sample** (Q10, [`sampling.py`](../../dc_sustainability/evaluation/sampling.py)). Chosen from the frozen episode list before any held-out output is opened, using job timing only (never capacity, forecasts, queues or outputs):
+- **Main sample:** two decision slots per episode, 60 pairs in total, seed 20261019, spread evenly over the three trials within each scenario/forecast group. A shortfall is reported, never topped up.
+- **Abstention-boundary group** ([#195](https://github.com/ReymoT/data-center-agentic/pull/195)): every slot where a job arrives with no way to finish on time, or 30 drawn with the separate seed 20261021 when more qualify. It never replaces main pairs and is reported separately.
+- Every selected pair is kept, including failures and one-sided no-ops, which are counted as not applicable rather than dropped.
 
 **Statistics.**
 
@@ -92,8 +107,8 @@ Reference gaps, faithfulness scores and final analysis acceptance remain unfinis
 New Agent traces
 now sum recorded request latencies consistently with Plain; historical missing
 latency remains missing. End-to-end elapsed decision time is a different quantity.
-- Matty accepts 10,000 percentile resamples, confidence 0.95 and seed 20261113,
-  with no post-result changes; see the linked decision for pending confirmations.
+- 10,000 percentile resamples, confidence 0.95 and seed 20261113, with no
+  post-result changes (Matty's decision, confirmed by Ved and Edison).
 - Scenario mean, standard deviation, minimum and maximum for all six systems, with explicit counts, denominators and missing values.
 - Paired differences, with confidence intervals resampled by episode, keeping each LLM's three trials together.
 - A date-cluster sensitivity check, given only 6 dates.
@@ -116,6 +131,8 @@ The professor asked for an inter-rater reliability report (#95).
    - extraction agreement, separately.
 3. Disagreements are then decided jointly, with a rationale each. Adjudicated labels are a separate record and never recompute reliability.
 4. For held-out work, each annotation records a decision for every summary sentence, limitation and raw-text unit (`text_review`). Comparisons run with `--require-text-review`, so an original can't skip extraction silently.
+5. Each annotation also records the rule 11.9 "visibly unfinished" decision on every cap hit (`--cap-limit`). Agreement on it is reported separately, and disagreements are adjudicated.
+6. The numeric part of the report is generated from the saved agreement file by `scripts/render_irr_report.py` ([#193](https://github.com/ReymoT/data-center-agentic/pull/193)), which reproduces the development report below. The interpretation is written by hand.
 
 ## 3. Development evidence
 
