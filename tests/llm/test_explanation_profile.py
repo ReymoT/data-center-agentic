@@ -40,7 +40,8 @@ def test_candidate_reaches_normal_request_entry_point(server, system, model):
     if model is not s.Plan:
         definition = schema if model is s.Explanation else schema["$defs"]["Explanation"]
         assert definition["properties"]["summary"]["maxLength"] == 256
-        assert schema["$defs"]["Claim"]["properties"]["text"]["maxLength"] == 256
+        claim_branches = schema["$defs"]["Claim"]["anyOf"]
+        assert [b["properties"]["text"]["maxLength"] for b in claim_branches] == [256, 256]
     if model is not s.Explanation:
         detail = schema["$defs"]["Deferral"]["properties"]["detail"]
         assert next(x for x in detail["anyOf"] if x.get("type") == "string")["maxLength"] == 96

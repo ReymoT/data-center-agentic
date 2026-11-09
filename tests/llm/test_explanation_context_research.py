@@ -23,8 +23,24 @@ def test_candidate_changes_only_explanation_text_lengths(model):
     explanation = candidate if model is s.Explanation else candidate["$defs"]["Explanation"]
     assert explanation["properties"]["summary"]["maxLength"] == 256
     assert explanation["properties"]["limitations"]["items"]["maxLength"] == 256
-    assert candidate["$defs"]["Claim"]["properties"]["text"]["maxLength"] == 256
+    branches = candidate["$defs"]["Claim"]["anyOf"]
+    assert [branch["properties"]["text"]["maxLength"] for branch in branches] == [256, 256]
     explanation["properties"]["summary"]["maxLength"] = 96
     explanation["properties"]["limitations"]["items"]["maxLength"] = 96
-    candidate["$defs"]["Claim"]["properties"]["text"]["maxLength"] = 96
+    for branch in branches:
+        branch["properties"]["text"]["maxLength"] = 96
     assert candidate == original
+
+
+def test_candidate_schema_still_reads_saved_single_object_claims():
+    saved = {
+        "title": "Explanation",
+        "properties": {
+            "summary": {"maxLength": 96},
+            "limitations": {"items": {"maxLength": 96}},
+        },
+        "$defs": {"Claim": {"properties": {"text": {"maxLength": 96}}}},
+    }
+    candidate = candidate_schema(saved)
+    assert candidate["$defs"]["Claim"]["properties"]["text"]["maxLength"] == 256
+    assert saved["$defs"]["Claim"]["properties"]["text"]["maxLength"] == 96

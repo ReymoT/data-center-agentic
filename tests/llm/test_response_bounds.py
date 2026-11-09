@@ -69,9 +69,12 @@ def test_plain_and_agent_explanation_bounds_are_identical():
         assert explanation["properties"]["limitations"]["maxItems"] == 4
         assert explanation["properties"]["summary"]["maxLength"] == 96
         assert explanation["properties"]["limitations"]["items"]["maxLength"] == 96
-        assert claim["properties"]["text"]["maxLength"] == 96
-        assert claim["properties"]["claim_id"]["maxLength"] == 16
-        assert claim["properties"]["evidence_ids"]["maxItems"] == 2
+        assert len(claim["anyOf"]) == 2
+        for branch in claim["anyOf"]:
+            assert branch["properties"]["text"]["maxLength"] == 96
+            assert branch["properties"]["claim_id"]["maxLength"] == 16
+            assert branch["properties"]["evidence_ids"]["maxItems"] == 2
+    assert definition(plain, "Claim") == definition(agent, "Claim")
 
 
 def test_policy_output_is_one_valid_uncorrected_plain_shape():

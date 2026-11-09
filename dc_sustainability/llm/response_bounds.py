@@ -89,6 +89,56 @@ def _bound_job_id(node: dict, job_ids: tuple[str, ...], *, nullable: bool = Fals
     target.update({"enum": list(job_ids), "type": "string"})
 
 
+def _paired_claim(claim: dict) -> dict:
+    """Return the request-local Claim as two coherent object branches.
+
+    F02 ``Claim`` rejects a value without a unit and a unit without a value, but
+    that model validator is not part of the generated JSON schema.  Two independent
+    nullable fields therefore let constrained generation emit ``value: null`` with a
+    unit (RUN-bc420d3e8d72, Agent slot 2).  The union keeps the base field bounds
+    and allows only:
+
+    * nonnumeric: ``value`` and ``unit`` both null;
+    * numeric: a JSON number and an allowed unit.
+
+    Both branches require the same five keys, so the converter emits them in one
+    fixed order and the branch is chosen only at the ``value`` token; an optional
+    key would be moved after the required ones and could lock a claim into the
+    nonnumeric branch.  Generation therefore always writes explicit nulls and an
+    explicit (possibly empty) evidence list.  The stored F02 contract is unchanged:
+    omitted fields remain valid there.
+
+    Only ``anyOf``, ``type``, ``enum``, ``properties``, ``required`` and
+    ``additionalProperties`` are used.  The pinned Ollama 0.40.5 runtime converts
+    schemas with llama.cpp b11669, which compiles ``anyOf`` as a grammar alternation
+    and does not read ``if``/``then``, ``not`` or ``dependentRequired``.  F02
+    validation of the parsed response remains the final gate.
+    """
+
+    properties = claim["properties"]
+    number = next(item for item in properties["value"]["anyOf"] if item.get("type") == "number")
+    unit = next(item for item in properties["unit"]["anyOf"] if item.get("type") == "string")
+    base = {name: deepcopy(properties[name]) for name in ("claim_id", "text", "evidence_ids")}
+    base["evidence_ids"].pop("default", None)
+    keys = ["claim_id", "text", "evidence_ids", "value", "unit"]
+
+    def branch(value: dict, unit_schema: dict) -> dict:
+        return {
+            "additionalProperties": False,
+            "properties": {**deepcopy(base), "value": value, "unit": unit_schema},
+            "required": list(keys),
+            "type": "object",
+        }
+
+    return {
+        "anyOf": [
+            branch({"type": "null"}, {"type": "null"}),
+            branch(deepcopy(number), deepcopy(unit)),
+        ],
+        "title": claim.get("title", "Claim"),
+    }
+
+
 def bounded_response_schema(
     response_model: type[s.Record],
     state: s.VisibleState,
@@ -100,9 +150,9 @@ def bounded_response_schema(
 
     The returned object is a request-local copy.  It pins plan identity to the
     visible decision, permits one plan entry per waiting job in every action
-    category, applies identical explanation limits to Plain and Agent, and
-    prevents the model from filling ``raw_response`` (the caller retains the
-    actual original response separately).
+    category, applies identical explanation limits and the paired claim
+    value/unit rule to Plain and Agent, and prevents the model from filling
+    ``raw_response`` (the caller retains the actual original response separately).
     """
 
     state = s.VisibleState.model_validate(
@@ -176,6 +226,7 @@ def bounded_response_schema(
         _bound_text(claim["properties"]["text"], limits.explanation_characters)
         claim["properties"]["claim_id"]["maxLength"] = 16
         _bound_ids(claim["properties"]["evidence_ids"], evidence_ids, limits.evidence_ids)
+        schema["$defs"]["Claim"] = _paired_claim(claim)
 
     if response_model is s.PolicyOutput:
         props = schema["properties"]
