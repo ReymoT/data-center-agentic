@@ -9,7 +9,16 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
-Latest: [the authorized action-choice validation passed](docs/handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
+November 9: [the authorized explanation-settings validation stopped safely](docs/handoffs/A01_EXPLANATION_VALIDATION_OUTCOME_2026-11-09.md)
+at Agent slot 2 on an explanation whose three claim units lacked numeric values.
+RUN-bc420d3e8d72 used 12 requests; failure was recorded at 386.453 seconds. All 12 native/offline
+prompt counts matched. Five complete systems replay with zero findings/mismatches;
+Agent remains partial (152 saved decision records total). Cleanup passed, no retry
+occurred and the single-use authorization is consumed. This is not candidate
+adoption, a six-system pass or a held-out study result.
+
+
+Earlier: [the authorized action-choice validation passed](docs/handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
 J1/J2 using one model-initial start and one fallback start; Plain completed no

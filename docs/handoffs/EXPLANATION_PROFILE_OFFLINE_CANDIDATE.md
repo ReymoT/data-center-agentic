@@ -1,5 +1,7 @@
 # Explanation settings: offline candidate
 
+November 9 outcome: the explicitly authorized native validation failed closed on a value/unit claim inconsistency. Its ID is consumed; no retry occurred. See the [outcome](A01_EXPLANATION_VALIDATION_OUTCOME_2026-11-09.md). The preparation below is historical; candidate adoption remains pending.
+
 Nisha and Ved explicitly agreed in issue #185 to test a 256-character explanation limit and 4,096 output tokens. This implementation is opt-in. Existing runs retain 96 characters and 1,536 output tokens, including their existing configuration identities.
 
 The candidate bounds summary, each claim text and each limitation to 256 characters for both Plain and Agent. Plan deferral and abstention details remain at 96 characters. Claim, limitation, evidence and plan-entry counts are unchanged. Context remains 16,384 tokens; the candidate prompt ceiling is 12,288. The renderer is not changed to conceal earlier cap hits.

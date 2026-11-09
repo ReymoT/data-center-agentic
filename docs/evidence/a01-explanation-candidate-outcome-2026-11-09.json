@@ -1,0 +1,755 @@
+{
+  "status": "failed_closed_no_retry",
+  "run_id": "RUN-bc420d3e8d72",
+  "candidate_config_hash": "bc420d3e8d723b34b42eba559351604de2e67569196a0e72c3556e4337791fd1",
+  "readiness_sha256": "f00e4c2cc0e865bfec5bd4054222211ac812e9e2a8b39385274aecf2ddf79741",
+  "launcher_lf_sha256": "14f3a914fff9410431063ee38451ed4c4e002a756c6dac90e1f88a67cfb5d07c",
+  "checkout_commit": "f4ec2561c23d866ce7dc2b214b6a6b313eb29d50",
+  "candidate_code_commit": "6325398ae88a9c87537771a8d2d027ec2aab7427",
+  "single_use_id": "explanation-bc420d3e8d72-20261109",
+  "authorization_consumed": true,
+  "elapsed_seconds": 386.45299999999406,
+  "total_model_requests": 12,
+  "requests_by_system": {
+    "plain_llm": 5,
+    "agent": 7
+  },
+  "contract_valid_responses": 11,
+  "contract_invalid_responses": 1,
+  "native_offline_counts_matched": 12,
+  "maximum_request_seconds": 49.39966029999778,
+  "failure": {
+    "system": "agent",
+    "slot": 2,
+    "stage": "explanation",
+    "reason": "Three Claim records supplied unit while value was null; paired-value/unit F02 contract rejected the response.",
+    "http_status": 200,
+    "done_reason": "stop",
+    "uncertain_outcome": false
+  },
+  "completed_results": [
+    {
+      "system": "greedy_a",
+      "saved_traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "decision_tree_c",
+      "saved_traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "greedy_b",
+      "saved_traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "random_forest_d",
+      "saved_traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "saved_traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [],
+      "missed_job_ids": [
+        "J1",
+        "J2",
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J1",
+        "J2",
+        "J3"
+      ]
+    }
+  ],
+  "total_saved_decision_records": 152,
+  "agent_saved_decision_records": 2,
+  "agent_result_complete": false,
+  "cleanup": {
+    "owned_process_exited": true,
+    "listener_remaining": false,
+    "overall_deadline_exceeded": false
+  },
+  "port_11439_rechecked_free": true,
+  "full_37_of_37_gpu_offload_recorded": true,
+  "compute": {
+    "library": "Vulkan",
+    "name": "Vulkan0",
+    "description": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "type": "iGPU",
+    "reported_total": "18.0 GiB",
+    "reported_available": "17.2 GiB",
+    "reported_driver": "0.0",
+    "reported_compute": "0.0"
+  },
+  "request_audit": [
+    {
+      "client_trace_id": "57f4d0663fbe408193ae14acd4002cbc",
+      "system": "plain_llm",
+      "slot": 0,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:48:56.474764+00:00",
+      "latency_ms": 49399.66029999778,
+      "prompt_tokens": 2508,
+      "completion_tokens": 532,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2508,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "b9ba865d92667629d92e0d92e184a1e0be4df58d554993afcebd8c511e910f0e"
+    },
+    {
+      "client_trace_id": "150c6407595d4e858bac8505f6c91c8b",
+      "system": "plain_llm",
+      "slot": 1,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:49:45.930915+00:00",
+      "latency_ms": 45023.90519999608,
+      "prompt_tokens": 2356,
+      "completion_tokens": 589,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2356,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "165d9b2e95175719f42b2d368d0597f4e125c3d96a5e3b51f4b0791be3b2efa6"
+    },
+    {
+      "client_trace_id": "2739748bce8a489a8980fe1a18d5fcae",
+      "system": "plain_llm",
+      "slot": 2,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:50:31.012630+00:00",
+      "latency_ms": 43428.56609998853,
+      "prompt_tokens": 2204,
+      "completion_tokens": 576,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2204,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "6ffa623e75d4727bffaed43960f912a32349cda5385bbff6f28b177a238c77f7"
+    },
+    {
+      "client_trace_id": "9f4817513a1f43949d82e8dded23ba27",
+      "system": "plain_llm",
+      "slot": 3,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:51:14.515032+00:00",
+      "latency_ms": 37659.112100009224,
+      "prompt_tokens": 2052,
+      "completion_tokens": 502,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2052,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "67b4c7107d69365c97480113d107a0eab847d3c925d276366d589dd0ab67c7f9"
+    },
+    {
+      "client_trace_id": "3f748013f3ad48f587996654a7878b75",
+      "system": "plain_llm",
+      "slot": 4,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:51:52.265834+00:00",
+      "latency_ms": 38621.134100001655,
+      "prompt_tokens": 2026,
+      "completion_tokens": 523,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2026,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "e5d3eb1a92910694641fc3facde78d13eb4b2423db3658fceb406c6dee4f7d04"
+    },
+    {
+      "client_trace_id": "8907584a9f8c40d38e903953c8bca893",
+      "system": "agent",
+      "slot": 0,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:52:32.372858+00:00",
+      "latency_ms": 13589.458299989928,
+      "prompt_tokens": 2363,
+      "completion_tokens": 97,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2363,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "97934bbe7808b7bf2886cb68ee8fd3588ed4bb8e01484edea56e06f37ecca00a"
+    },
+    {
+      "client_trace_id": "1b18a90c241f49c58d7a0a1fc27f3519",
+      "system": "agent",
+      "slot": 0,
+      "stage": "repair",
+      "started_at_utc": "2026-11-09T20:52:45.989647+00:00",
+      "latency_ms": 19027.957099999185,
+      "prompt_tokens": 2974,
+      "completion_tokens": 145,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2974,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "8ba125c891c21fbb90cd75724fb8e06cce9b58fd7777d96961d1152a12412871"
+    },
+    {
+      "client_trace_id": "9ed7687ab7194d7da869ae7d4d1967ad",
+      "system": "agent",
+      "slot": 0,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T20:53:05.051108+00:00",
+      "latency_ms": 39448.67460000387,
+      "prompt_tokens": 3015,
+      "completion_tokens": 449,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 3015,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "810ad7fc26e1c6f53ca07f402463854c559eb96d31c9e66031b084c07b2c7b2e"
+    },
+    {
+      "client_trace_id": "24ecf933da3b487aa9c132fb1fc4427a",
+      "system": "agent",
+      "slot": 1,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:53:44.575132+00:00",
+      "latency_ms": 15635.20000000426,
+      "prompt_tokens": 2218,
+      "completion_tokens": 124,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2218,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "fbb99bd744615a39dde5cf408e76b6c9f8871fc6f7c9aa2a54364c95404bad6b"
+    },
+    {
+      "client_trace_id": "a08618ceb85e47419a9d4e3e867060de",
+      "system": "agent",
+      "slot": 1,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T20:54:00.252316+00:00",
+      "latency_ms": 32052.20440000994,
+      "prompt_tokens": 2880,
+      "completion_tokens": 361,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2880,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "836ba8580d9b77b52c9580687c91d3612f3035e0113404004e9410b2ed02ae7a"
+    },
+    {
+      "client_trace_id": "ddb2f23414dd4d84a54c9caaa0adcb02",
+      "system": "agent",
+      "slot": 2,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T20:54:32.386512+00:00",
+      "latency_ms": 14175.734299991746,
+      "prompt_tokens": 2027,
+      "completion_tokens": 117,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2027,
+      "done_reason": "stop",
+      "contract_valid": true,
+      "attempt_file_sha256": "c8bda75f2ef31918ee18265c7ec4997f9aa7ecf0e3b239aa90dbd4c5a335f81f"
+    },
+    {
+      "client_trace_id": "3909a0db7aea410eaabf0e189ba49e76",
+      "system": "agent",
+      "slot": 2,
+      "stage": null,
+      "started_at_utc": "2026-11-09T20:54:46.642333+00:00",
+      "latency_ms": 29297.245800000383,
+      "prompt_tokens": 2670,
+      "completion_tokens": 327,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2670,
+      "done_reason": "stop",
+      "contract_valid": false,
+      "attempt_file_sha256": "df7b1b557674aab71cc3737911a0eb397015a6c04db43d1b22b797d89e9c4af5"
+    }
+  ],
+  "explanation_length_inventory": [
+    {
+      "system": "agent",
+      "slot": 0,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 228,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 101,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 116,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 116,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 81,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:4",
+          "characters": 78,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 1,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 146,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 48,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 48,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 49,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 81,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 84,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 1,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 86,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-START-J1",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-DEFER-J2",
+          "characters": 74,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-EMISSIONS-FORECAST",
+          "characters": 72,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-CAPACITY-CONSUMPTION",
+          "characters": 73,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 86,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 89,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 2,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 119,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-01",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-02",
+          "characters": 59,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-03",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-04",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 101,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 89,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 4,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-01",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-02",
+          "characters": 67,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-03",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-04",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 99,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 83,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 0,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 96,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-001",
+          "characters": 65,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-002",
+          "characters": 65,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-003",
+          "characters": 74,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-004",
+          "characters": 77,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 95,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 3,
+      "contract_valid": true,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-001",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-002",
+          "characters": 59,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-003",
+          "characters": 60,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-004",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 56,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 2,
+      "contract_valid": false,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 206,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 84,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 100,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 104,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 100,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 80,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    }
+  ],
+  "new_model_calls_during_postrun_audit": 0,
+  "held_out_access": false,
+  "limitations": [
+    "One public development episode and one seed; stopped at Agent slot 2.",
+    "Five completed results independently replay with zero findings and structural mismatches; partial Agent trace is not a complete replay pass.",
+    "Native count parity and JSON structure do not establish cross-field F02 validity or explanation faithfulness.",
+    "No full six-system pass, scientific freeze, setting adoption or research superiority is established.",
+    "No retry, raw-output rewrite, source ingestion, solver, training or held-out execution occurred."
+  ],
+  "elapsed_seconds_scope": "time to failure record, before final cleanup; cleanup separately reports no overall deadline overrun"
+}

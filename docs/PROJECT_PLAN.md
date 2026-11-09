@@ -1,5 +1,14 @@
 # Project plan
 
+November 9: [the authorized explanation-settings validation stopped safely](handoffs/A01_EXPLANATION_VALIDATION_OUTCOME_2026-11-09.md)
+at Agent slot 2 on an explanation whose three claim units lacked numeric values.
+RUN-bc420d3e8d72 used 12 requests; failure was recorded at 386.453 seconds. All 12 native/offline
+prompt counts matched. Five complete systems replay with zero findings/mismatches;
+Agent remains partial (152 saved decision records total). Cleanup passed, no retry
+occurred and the single-use authorization is consumed. This is not candidate
+adoption, a six-system pass or a held-out study result.
+
+
 November 8 update: PR #187 merged the CF60 broker after Nisha's scoped receiving
 PASS and green CI. The [comparison driver](handoffs/CF60_COMPARISON_DRIVER.md)
 is prepared for an explicitly authorized extract and saved visible states.
