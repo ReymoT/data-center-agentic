@@ -39,6 +39,8 @@ class Deployment:
     max_prompt_tokens: int
     context_policy_ref: str
     request_timeout_seconds: int = 150
+    output_tokens: int = 1536
+    explanation_characters: int = 96
 
     def __post_init__(self):
         url = urlsplit(self.base_url)
@@ -68,7 +70,13 @@ class Deployment:
                 raise ValueError("limits must be positive strict integers")
         if self.request_timeout_seconds > 150:
             raise ValueError("request timeout exceeds the accepted 150-second limit")
-        if self.max_prompt_tokens > 16384 - 1536:
+        if (
+            type(self.output_tokens) is not int
+            or type(self.explanation_characters) is not int
+            or (self.explanation_characters, self.output_tokens) not in {(96, 1536), (256, 4096)}
+        ):
+            raise ValueError("use the legacy profile or the explicit 256/4096 candidate")
+        if self.max_prompt_tokens > 16384 - self.output_tokens:
             raise ValueError("prompt limit must leave room for the accepted generation target")
 
 
@@ -259,7 +267,12 @@ class OllamaProvider:
         ):
             raise CallBlocked("messages must be nonempty text with recognized roles")
         try:
-            response_schema, _ = bounded_response_schema(response_model, state, system=system)
+            response_schema, _ = bounded_response_schema(
+                response_model,
+                state,
+                system=system,
+                explanation_characters=self.deployment.explanation_characters,
+            )
         except ValueError as exc:
             raise CallBlocked(f"response-bound construction failed: {exc}") from exc
         payload = {
@@ -274,7 +287,7 @@ class OllamaProvider:
                 "top_p": 1,
                 "seed": seed,
                 "num_ctx": 16384,
-                "num_predict": 1536,
+                "num_predict": self.deployment.output_tokens,
             },
         }
         try:

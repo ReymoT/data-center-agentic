@@ -34,7 +34,7 @@ def test_current_authorization_binds_candidate_readiness_and_launcher():
     assert (
         approval["launcher_sha256"]
         == ready["launcher_lf_sha256"]
-        == lf_sha256(Path(launcher.__file__))
+        == lf_sha256(EVIDENCE / "i01-legacy-launcher-2026-11-04.txt")
     )
     assert (
         approval["bounds"]

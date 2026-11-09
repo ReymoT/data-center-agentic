@@ -89,6 +89,6 @@ def _validate_request(request: dict) -> None:
         or type(options["num_ctx"]) is not int
         or options["num_ctx"] != 16384
         or type(options["num_predict"]) is not int
-        or options["num_predict"] != 1536
+        or options["num_predict"] not in {1536, 4096}
     ):
         raise ValueError("unsupported research options; no hidden defaults")
