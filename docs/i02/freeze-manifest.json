@@ -186,7 +186,7 @@
       "status": "pending",
       "path": "dc_sustainability/evaluation",
       "sha256": null,
-      "blocker": "Matty's November 4 analysis response is recorded in docs/decisions/E03_ANALYSIS_MANAGER_2026-11-04.md: broad unsafe primary with both measures; 10000/0.95/20261113 percentile resampling; 24 core primary plus 6 withheld separate; genuine no-ops excluded and pending uncredited. The E06 table builder joins these helpers (docs/handoffs/E06_STUDY_TABLES.md). Both requested affected-owner confirmations are received: Ved on November 5 (#60) and Edison on November 9 (#60), each without correction (see the decision record). These confirm the analysis settings only, not the I02 freeze. PRs #192 (rule 11.9 cap review), #193 (reliability report renderer) and #195 (boundary sampling) are merged. The hashed analysis freeze remains pending, including Ved receiving confirmation of the boundary-stratum trial assignment and the remaining I02 gates; no held-out values read."
+      "blocker": "Matty's November 4 analysis response is recorded in docs/decisions/E03_ANALYSIS_MANAGER_2026-11-04.md: broad unsafe primary with both measures; 10000/0.95/20261113 percentile resampling; 24 core primary plus 6 withheld separate; genuine no-ops excluded and pending uncredited. The E06 table builder joins these helpers (docs/handoffs/E06_STUDY_TABLES.md). Both requested affected-owner confirmations are received: Ved on November 5 (#60) and Edison on November 9 (#60), each without correction (see the decision record). These confirm the analysis settings only, not the I02 freeze. PRs #192 (rule 11.9 cap review), #193 (reliability report renderer) and #195 (boundary sampling) are merged. The hashed analysis freeze remains pending on the remaining I02 gates. Ved's receiving confirmation of the boundary-stratum trial assignment followed on November 9 (#195); no held-out values read."
     },
     {
       "id": "faithfulness-rubric",
@@ -208,7 +208,7 @@
       "status": "pending",
       "path": "dc_sustainability/evaluation/sampling.py",
       "sha256": null,
-      "blocker": null
+      "blocker": "Implementation accepted: the primary sampler (#88) and the separate abstention-boundary stratum (#195), received by Matty and Ved on November 9 with the per-stratum trial rotation under seed 20261021. Reproduction uses the recorded CPython version, seeds, manifest and ordering. Freezing waits for the accepted D04 held-out manifest and the E04/I02 gates; no held-out selection has been made and no held-out output opened."
     },
     {
       "id": "pre-freeze-acceptance",

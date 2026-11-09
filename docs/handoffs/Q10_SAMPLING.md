@@ -61,6 +61,8 @@ Tests: 7 new in `tests/evaluation/test_sampling.py` (19 in total): impossible ar
 Matty accepted the proposed deterministic trial rotation within each scenario/forecast
 stratum, using boundary seed 20261021, in the project chat authorizing this review.
 The 19 sampling tests passed. No held-out input or output was opened and no
-selection was frozen. Ved's receiving confirmation of the implementation and trial
-assignment remains required before held-out sampling acceptance. This opt-in
-implementation does not alter the primary selector.
+selection was frozen. [Ved explicitly confirmed receiving of the implementation
+and trial assignment on November 9](https://github.com/ReymoT/data-center-agentic/pull/195#issuecomment-6750445151).
+That implementation-receiving gate is resolved; accepted D04 inputs and E04/I02
+freeze gates remain required before held-out selection. This opt-in implementation
+does not alter the primary selector.
