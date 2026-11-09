@@ -40,7 +40,7 @@ Limitations and open decisions:
 - Not a frozen sample. Freezing needs the final D04 held-out manifest (Reimo) and the E04 rule/adjudication gates. The abstention-boundary stratum is separate from `select()` and never changes it (November 9 update below).
 - The trial-rotation allocation and tie order are this implementation's choice under the coder-owned rule; they are recorded here and in the record so they can be frozen before any held-out output is opened.
 - The paired bootstrap (seed 20261020) is not implemented here; only its seed is recorded with the selection.
-- The generator is Python's `random.Random`; its sequence is stable across CPython versions for `sample` and `shuffle` on the same inputs, and the Python version is recorded in case it is not.
+- Reproduction uses the recorded CPython version, seed and input order. No cross-version guarantee is assumed for sample or shuffle.
 
 Receiving owner and consumer check: Ved and Matty, to confirm the implementation matches A3 and to agree the boundary stratum; Reimo, for the manifest format when D04 is published.
 Next checkpoint: run `select` on the frozen held-out manifest once it exists, save `to_jsonable()` privately with its hash, and only then open held-out outputs.
@@ -55,3 +55,12 @@ Agreement: [Nisha's proposal](https://github.com/ReymoT/data-center-agentic/issu
 - **Implementation choice for acceptance:** the agreement did not say which trial a boundary slot is reviewed in. Trials are rotated within each scenario/forecast stratum exactly as in the primary sample, using the stratum's own seed 20261021.
 
 Tests: 7 new in `tests/evaluation/test_sampling.py` (19 in total): impossible arrival in the stratum and not the primary frame; feasible, capacity-only and after-slot-23 arrivals excluded; nonflexible and boundary-30 cases; a slot in both frames only when it qualifies for both; census up to 30 with balanced trials; a 30-slot draw from 40 that is deterministic, order-independent and seed-specific; and the primary sample unchanged. No held-out manifest exists, so nothing is selected or frozen.
+
+## Manager review, November 9
+
+Matty accepted the proposed deterministic trial rotation within each scenario/forecast
+stratum, using boundary seed 20261021, in the project chat authorizing this review.
+The 19 sampling tests passed. No held-out input or output was opened and no
+selection was frozen. Ved's receiving confirmation of the implementation and trial
+assignment remains required before held-out sampling acceptance. This opt-in
+implementation does not alter the primary selector.
