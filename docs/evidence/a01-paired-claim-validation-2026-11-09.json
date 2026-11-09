@@ -1,0 +1,1143 @@
+{
+  "status": "public_development_technical_validation_passed",
+  "run_id": "RUN-cb85f5a3425c",
+  "single_use_id": "claim-pairing-cb85f5a3425c-20261109",
+  "authorization_consumed": true,
+  "candidate_config_hash": "cb85f5a3425cd41ae989906e6743560114f1c74e2ff7c99aaf35cc32de735301",
+  "candidate_code_commit": "6ed0fd30a2e139f0eb2c23fffdac258a2f3e12b0",
+  "checkout_commit": "44c889735d43f5aabcabdb0bd789d8b3f5ce5286",
+  "readiness_sha256": "e6cd6c99a0a3923fc9771a14229d79e3da011e6d54839a344f5fcdf746629983",
+  "launcher_lf_sha256": "14f3a914fff9410431063ee38451ed4c4e002a756c6dac90e1f88a67cfb5d07c",
+  "elapsed_seconds": 532.2189999999973,
+  "requests": {
+    "plain_llm": 5,
+    "agent": 12,
+    "total": 17
+  },
+  "maximum_request_seconds": 53.51267640000151,
+  "native_offline_counts_matched": 17,
+  "contract_valid_responses": 17,
+  "contract_invalid_responses": 0,
+  "claim_pair_counts": {
+    "plain_llm": {
+      "numeric": 20,
+      "null_pair": 0,
+      "invalid_pair": 0
+    },
+    "agent": {
+      "numeric": 19,
+      "null_pair": 0,
+      "invalid_pair": 0
+    }
+  },
+  "results": [
+    {
+      "system": "greedy_a",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "decision_tree_c",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "greedy_b",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "random_forest_d",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "agent",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [],
+      "missed_job_ids": [
+        "J1",
+        "J2",
+        "J3"
+      ],
+      "unfinished_job_ids": [
+        "J1",
+        "J2",
+        "J3"
+      ]
+    }
+  ],
+  "agent_executed_job_starts": [
+    {
+      "slot": 0,
+      "starts": [
+        {
+          "job_id": "J1",
+          "start_slot": 0
+        }
+      ],
+      "selected_stage_matches": [
+        "fallback"
+      ],
+      "impact_claim_support": "unsupported"
+    },
+    {
+      "slot": 3,
+      "starts": [
+        {
+          "job_id": "J2",
+          "start_slot": 3
+        }
+      ],
+      "selected_stage_matches": [
+        "initial"
+      ],
+      "impact_claim_support": "unsupported"
+    }
+  ],
+  "agent_stage_checks": [
+    {
+      "slot": 0,
+      "stage": "initial",
+      "check_status": "fail"
+    },
+    {
+      "slot": 0,
+      "stage": "repaired",
+      "check_status": "fail"
+    },
+    {
+      "slot": 0,
+      "stage": "fallback",
+      "check_status": "pass"
+    },
+    {
+      "slot": 1,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 2,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 3,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 4,
+      "stage": "initial",
+      "check_status": "fail"
+    },
+    {
+      "slot": 4,
+      "stage": "repaired",
+      "check_status": "fail"
+    },
+    {
+      "slot": 4,
+      "stage": "fallback",
+      "check_status": "pass"
+    },
+    {
+      "slot": 5,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 6,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 7,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 8,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 9,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 10,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 11,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 12,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 13,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 14,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 15,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 16,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 17,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 18,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 19,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 20,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 21,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 22,
+      "stage": "initial",
+      "check_status": "pass"
+    },
+    {
+      "slot": 23,
+      "stage": "initial",
+      "check_status": "pass"
+    }
+  ],
+  "skipped_execution_checks": [
+    {
+      "name": "freshness",
+      "reason": "Q04 routing requires a separately supplied trusted decision UTC"
+    }
+  ],
+  "cleanup": {
+    "owned_process_exited": true,
+    "listener_remaining": false,
+    "overall_deadline_exceeded": false
+  },
+  "port_11439_rechecked_free": true,
+  "compute": {
+    "library": "Vulkan",
+    "name": "Vulkan0",
+    "description": "Intel(R) Arc(TM) 140V GPU (16GB)",
+    "type": "iGPU",
+    "reported_total": "18.0 GiB",
+    "reported_available": "17.2 GiB",
+    "reported_driver": "0.0",
+    "reported_compute": "0.0"
+  },
+  "raw_summary_sha256": "38f6b5078418831458c6c09dea59ffdf2f532b1d725a263102a0cc00b6b6864f",
+  "request_audit": [
+    {
+      "client_trace_id": "d2157560415d4e7bb0c7abf0460d9348",
+      "system": "plain_llm",
+      "slot": 0,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:06:03.092107+00:00",
+      "latency_ms": 53512.67640000151,
+      "prompt_tokens": 2508,
+      "completion_tokens": 532,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2508,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "a8937af2aed9e2e448992a989b3e5f9f4e6cf66ddd244f839dfbe60818341abc",
+      "attempt_file_sha256": "756408a0d43a4645aef43ae998a02b78ab39742fe6a0f66aa927952aae9b2de3"
+    },
+    {
+      "client_trace_id": "65b71cd63c40418f9cd4518658313bef",
+      "system": "plain_llm",
+      "slot": 1,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:06:56.668541+00:00",
+      "latency_ms": 47238.560300000245,
+      "prompt_tokens": 2356,
+      "completion_tokens": 589,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2356,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "143c3f1a2dfc63fa6dad1c0632dbba35cf20e0057347bc3f267b99deddbb4e24",
+      "attempt_file_sha256": "2dccef7f62874dfa3b63fa22da63f92499b44fa16f1aa20b03e525bb5700b552"
+    },
+    {
+      "client_trace_id": "11044a86ae9845d18ef602f934df8f88",
+      "system": "plain_llm",
+      "slot": 2,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:07:43.967962+00:00",
+      "latency_ms": 45305.68279999716,
+      "prompt_tokens": 2204,
+      "completion_tokens": 576,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2204,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "e9c14e540faca8c7dceb8ee8867d4e8baed4faf5fb76f77ed7ed39690f1af5db",
+      "attempt_file_sha256": "923da0fde58fd55547604bbf7775f12edeee756da7590fb152d79525117ee87c"
+    },
+    {
+      "client_trace_id": "5f22a73d471940f2887b075cbbb81fb5",
+      "system": "plain_llm",
+      "slot": 3,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:08:29.357498+00:00",
+      "latency_ms": 39321.35220000055,
+      "prompt_tokens": 2052,
+      "completion_tokens": 502,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2052,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "c0497cecb3f9cb8562a3ab743a537d44463f552af23257a6419c0d475fb33278",
+      "attempt_file_sha256": "ae36bdf52742f929c806c7fe433a05fdc5409d2a142cdc662728f71b5a3dbc76"
+    },
+    {
+      "client_trace_id": "42265bcc2aea4ae49bcb413507281662",
+      "system": "plain_llm",
+      "slot": 4,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:09:08.753987+00:00",
+      "latency_ms": 40402.559900001506,
+      "prompt_tokens": 2026,
+      "completion_tokens": 523,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2026,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "4360c4f29307b4f33f8117267d10dc12b91b508c2ee194c707f1712eed394cfb",
+      "attempt_file_sha256": "b5305d6818c1d657c3a871d89935b4d45a834c7d22bceaf1ac4701c228855aee"
+    },
+    {
+      "client_trace_id": "565fc1ca690b4bc1a421a648c6237ab5",
+      "system": "agent",
+      "slot": 0,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:09:50.461542+00:00",
+      "latency_ms": 16105.242099991301,
+      "prompt_tokens": 2363,
+      "completion_tokens": 97,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2363,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "30858a427c894d1cfb14eaa461ffd53b4d012fc61dd33463e50842fc6b6b1f0c",
+      "attempt_file_sha256": "30c4a4ca4a497624c6b2308ce7c1bc615b34b724d966e709174c5398971228ba"
+    },
+    {
+      "client_trace_id": "637d9f23fa5141dfb74fa1458cc4d120",
+      "system": "agent",
+      "slot": 0,
+      "stage": "repair",
+      "started_at_utc": "2026-11-09T22:10:06.594188+00:00",
+      "latency_ms": 22475.958099996205,
+      "prompt_tokens": 2977,
+      "completion_tokens": 145,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2977,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "dd0ec37b8a465736dfe172bb891d95e1306f8f88405f14ac17a443a2aff7c317",
+      "attempt_file_sha256": "8c6a513a788268ef06a2564ac4777a41766e61a2a0607134b9b4d49b0339eb45"
+    },
+    {
+      "client_trace_id": "8eca14f22e204dbbb04e2bfbbae09352",
+      "system": "agent",
+      "slot": 0,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T22:10:29.114957+00:00",
+      "latency_ms": 40676.93299999519,
+      "prompt_tokens": 3021,
+      "completion_tokens": 406,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 3021,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "1ac92a467f087e3492f581ca275cb43e971c456183f8f317a8788e76e670a950",
+      "attempt_file_sha256": "484415c72c26cfac83fb719a5190fce32c79a010e36131106051e914eaf829c2"
+    },
+    {
+      "client_trace_id": "48bd15cbfe364018bcb4900180d5446c",
+      "system": "agent",
+      "slot": 1,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:11:09.849419+00:00",
+      "latency_ms": 17670.36069999449,
+      "prompt_tokens": 2218,
+      "completion_tokens": 124,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2218,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "12b7a31bb3621eb39a9b60b2cf807316361651aac218ee8326357cd4bce0f6e6",
+      "attempt_file_sha256": "943a4567ed1f1daef7afa123a0fde27c7c8188d1a017f7e2e6808e87a24ba699"
+    },
+    {
+      "client_trace_id": "f6b429f677334cb4874d5cb2b71c979d",
+      "system": "agent",
+      "slot": 1,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T22:11:27.562260+00:00",
+      "latency_ms": 35253.75970000459,
+      "prompt_tokens": 2880,
+      "completion_tokens": 361,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2880,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "18fc5119c175f0824d5deb9c6b5d0fff90e75a19422aec6d3f8232797c6cb299",
+      "attempt_file_sha256": "ef22519ef17ed68ec50628ddcf6e31bdc3811784596a1bdc1f324147b3549ca9"
+    },
+    {
+      "client_trace_id": "80cc4b7e265141e0962d41b21d33c135",
+      "system": "agent",
+      "slot": 2,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:12:02.872183+00:00",
+      "latency_ms": 16301.676000002772,
+      "prompt_tokens": 2027,
+      "completion_tokens": 117,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2027,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "4e5d15b97583427c477848ebdbabdd3b945af8b81cfe61e21761238a6e9140a7",
+      "attempt_file_sha256": "70e0385cd7a9af3b9a818bc68e7db7c6c5a18b2bcef67992509beed1ef9c73ae"
+    },
+    {
+      "client_trace_id": "18605e0e9031462b90b82340673af3d3",
+      "system": "agent",
+      "slot": 2,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T22:12:19.199370+00:00",
+      "latency_ms": 35251.72689999454,
+      "prompt_tokens": 2670,
+      "completion_tokens": 374,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2670,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "f58995b0bc42adc9fbcbb52db3fc9a0866b78ba57790d07e402f38716c272ef7",
+      "attempt_file_sha256": "da33dbc5d1e1afb197f09eb68c865adee15ff88c801c24567e53596f2be8bf3b"
+    },
+    {
+      "client_trace_id": "fa107a1f327549fa87f4a627dc09e08a",
+      "system": "agent",
+      "slot": 3,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:12:54.527124+00:00",
+      "latency_ms": 14893.038000009255,
+      "prompt_tokens": 1875,
+      "completion_tokens": 120,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 1875,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "93cf19453294f5137b0fb8401bd8d5e01d6b2099471c6626511956d5ab5d099e",
+      "attempt_file_sha256": "fbb58c1ee4699c0baeb34a853b23cb1440c4ec8f8770aa0b69197f8aaea036fa"
+    },
+    {
+      "client_trace_id": "f63d7f1887244a289b66567e72a8512b",
+      "system": "agent",
+      "slot": 3,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T22:13:09.458727+00:00",
+      "latency_ms": 29266.138300008606,
+      "prompt_tokens": 2501,
+      "completion_tokens": 312,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2501,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "b11f1ed86df2a1cc0ce39b142fbc5c56cf6db398b75f532b063f1e28988cde86",
+      "attempt_file_sha256": "27b2f7c58373f703248c8bf789f186b6a6cf04b02b171fbccf207b1f36b09a52"
+    },
+    {
+      "client_trace_id": "2384934f68b44f5aa0afc1015492e016",
+      "system": "agent",
+      "slot": 4,
+      "stage": "propose",
+      "started_at_utc": "2026-11-09T22:13:38.784528+00:00",
+      "latency_ms": 14458.460199995898,
+      "prompt_tokens": 1856,
+      "completion_tokens": 117,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 1856,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "cf916b5e6b21b1927963994e295f2cf24490122f003dd04204eaed76de38ca95",
+      "attempt_file_sha256": "fc8776eca10222b2950dcde37a5c9d3a8dcc40b0c915035da2a26a04b634451b"
+    },
+    {
+      "client_trace_id": "051d024c727942258d08bb5dfc51069f",
+      "system": "agent",
+      "slot": 4,
+      "stage": "repair",
+      "started_at_utc": "2026-11-09T22:13:53.276208+00:00",
+      "latency_ms": 16858.10670000501,
+      "prompt_tokens": 2466,
+      "completion_tokens": 119,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2466,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "26e444f05b2d79bde81352938fd46e108be31c035929928d2858119782b20ef5",
+      "attempt_file_sha256": "0cf41868c69422008febfa8b9670ee98d1d1364f49d526cdeaf78c28a36deb61"
+    },
+    {
+      "client_trace_id": "c91bc40c3ccf4c91adcb82e6dc413b75",
+      "system": "agent",
+      "slot": 4,
+      "stage": "explain",
+      "started_at_utc": "2026-11-09T22:14:10.194760+00:00",
+      "latency_ms": 37271.83149999473,
+      "prompt_tokens": 2496,
+      "completion_tokens": 427,
+      "http_status": 200,
+      "uncertain_outcome": false,
+      "native_count_matches": true,
+      "offline_prompt_tokens": 2496,
+      "contract_valid": true,
+      "done_reason": "stop",
+      "request_sha256": "b33a8f69d52f48535bcd871582c38ac0b197428c1650d04b5efd25cb3ebf3233",
+      "attempt_file_sha256": "7d0cc2df41f80f4a0b8c4732dad06484ca2e850f7805e510b3c7d33744a0664b"
+    }
+  ],
+  "explanation_length_inventory": [
+    {
+      "system": "agent",
+      "slot": 2,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 190,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 75,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 58,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 48,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 61,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 73,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 84,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 0,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 226,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 75,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 64,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 67,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 81,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 91,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 98,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 4,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 110,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 91,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 97,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 95,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 95,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 81,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 106,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 98,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:4",
+          "characters": 84,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 3,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 158,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 83,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 71,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 50,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 107,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "agent",
+      "slot": 1,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 146,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C1",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C2",
+          "characters": 48,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C3",
+          "characters": 48,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:C4",
+          "characters": 49,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 81,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 88,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:3",
+          "characters": 84,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 2,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 119,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-01",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-02",
+          "characters": 59,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-03",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-04",
+          "characters": 54,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 101,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 89,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 4,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-01",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-02",
+          "characters": 67,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-03",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-04",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 99,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 83,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 3,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 93,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-001",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-002",
+          "characters": 59,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-003",
+          "characters": 60,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-004",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 68,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 56,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 1,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 86,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-START-J1",
+          "characters": 53,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-DEFER-J2",
+          "characters": 74,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-EMISSIONS-FORECAST",
+          "characters": 72,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-CAPACITY-CONSUMPTION",
+          "characters": 73,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 86,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:2",
+          "characters": 89,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "slot": 0,
+      "fields": [
+        {
+          "field": "summary",
+          "characters": 96,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-001",
+          "characters": 65,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-002",
+          "characters": 65,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-003",
+          "characters": 74,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "claim:CLAIM-004",
+          "characters": 77,
+          "at_256_cap": false,
+          "over_256_cap": false
+        },
+        {
+          "field": "limitation:1",
+          "characters": 95,
+          "at_256_cap": false,
+          "over_256_cap": false
+        }
+      ]
+    }
+  ],
+  "new_model_calls_during_postrun_audit": 0,
+  "held_out_access": false,
+  "independent_person_receiving": "not yet recorded for this new run",
+  "limitations": [
+    "One public episode and one seed; not a held-out study or demonstrated research superiority.",
+    "Existing independent E01 replay/structural comparison rerun by the manager; not a separate-person receiving sign-off.",
+    "Successful numeric/unit pairing does not establish numeric correctness or human faithfulness.",
+    "Freshness checking still records its trusted-decision-UTC limitation; source/custody/CF60 and scientific freeze remain separate.",
+    "Earlier failed run remains preserved. No retry or extra model request occurred."
+  ]
+}
