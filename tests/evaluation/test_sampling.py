@@ -174,3 +174,86 @@ def test_selection_never_imports_outputs_runtime_or_policies():
             imported.add(node.module or "")
     for forbidden in ("policies", "runtime", "llm", "agent", "simulator", "verification"):
         assert not any(forbidden in module for module in imported), forbidden
+
+
+# ----------------------------------------------------------------- abstention boundary (#22)
+def test_impossible_arrival_is_in_the_boundary_stratum_not_the_primary_frame():
+    ep = episode([job("X1", 4, 3, 6), job("A1", 10, 1, 12)])  # X1: latest start 3 < 4
+    assert q.boundary_slots(ep) == (4,)
+    assert 4 not in q.eligible_slots(ep)
+    assert q.eligible_slots(ep) == (10, 11)
+
+
+def test_feasible_capacity_only_and_late_arrivals_are_not_boundary_slots():
+    feasible = job("F1", 3, 2, 8)
+    capacity_only = job("H1", 0, 1, 2, power=1000)  # timing is fine; capacity is not read
+    after_decisions = job("Z1", 25, 3, 26)  # impossible, but arrives after slot 23
+    assert q.boundary_slots(episode([feasible, capacity_only, after_decisions])) == ()
+    # Nonflexible: only the arrival slot is a legal start.
+    assert q.boundary_slots(episode([job("N1", 5, 2, 7, flexible=False)])) == ()
+    assert q.boundary_slots(episode([job("N2", 5, 3, 7, flexible=False)])) == (5,)
+    # Boundary 30 binds even with a later deadline; slot 23 is the last decision slot.
+    assert q.boundary_slots(episode([job("L2", 23, 8, 40)])) == (23,)
+    assert q.boundary_slots(episode([job("L3", 22, 8, 40)])) == ()
+
+
+def test_a_slot_is_in_both_only_when_it_qualifies_for_both():
+    ep = episode([job("X1", 4, 3, 6), job("A1", 2, 1, 10)])  # A1's window covers slot 4
+    assert 4 in q.boundary_slots(ep) and 4 in q.eligible_slots(ep)
+
+
+def boundary_manifest(n, impossible_per_episode=1):
+    return [
+        episode(
+            [job(f"X{k}", 2 * k + 1, 5, 2 * k + 3) for k in range(impossible_per_episode)]
+            + [job("A1", 0, 1, 30)],
+            f"EP-B{i:02d}",
+            scenario=("normal", "spike")[i % 2],
+        )
+        for i in range(n)
+    ]
+
+
+def test_boundary_is_a_census_up_to_thirty():
+    record = q.select_boundary(boundary_manifest(12, impossible_per_episode=2))
+    assert record.eligible_count == record.selected_count == 24
+    assert {(x.episode_id, x.slot) for x in record.selections} == {
+        (e, slot) for e, slots in record.eligible.items() for slot in slots
+    }
+    assert record.counts_by_trial == {0: 8, 1: 8, 2: 8}
+    assert record.seed == q.BOUNDARY_SEED == 20261021
+    assert record.seed not in (q.SAMPLING_SEED, q.ANALYSIS_SEED)
+
+
+def test_boundary_draws_thirty_with_its_own_seed_when_more_qualify():
+    episodes = boundary_manifest(20, impossible_per_episode=2)
+    record = q.select_boundary(episodes)
+    assert (record.eligible_count, record.selected_count) == (40, 30)
+    assert len({(x.episode_id, x.slot) for x in record.selections}) == 30
+    for x in record.selections:
+        assert x.slot in record.eligible[x.episode_id]
+    assert record.counts_by_trial == {0: 10, 1: 10, 2: 10}
+    data = record.to_jsonable()
+    assert (data["eligible_count"], data["selected_count"], data["cap"]) == (40, 30, 30)
+    # Deterministic and independent of input order; another seed draws differently.
+    again = q.select_boundary(list(reversed(episodes)))
+    assert again.selections == record.selections
+    other = q.select_boundary(episodes, seed=1)
+    assert {(x.episode_id, x.slot) for x in other.selections} != {
+        (x.episode_id, x.slot) for x in record.selections
+    }
+
+
+def test_boundary_never_changes_the_primary_sample():
+    episodes = manifest()
+    before = q.select(episodes)
+    q.select_boundary(episodes)
+    assert q.select(episodes) == before
+    assert q.select_boundary(episodes).selected_count == 0  # no impossible arrivals here
+
+
+def test_boundary_uses_the_same_manifest_checks():
+    with pytest.raises(ValueError, match="unique episode IDs"):
+        q.select_boundary([])
+    with pytest.raises(ValueError, match="trials must be distinct"):
+        q.select_boundary(boundary_manifest(2), trials=(0, 0))

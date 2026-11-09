@@ -7,9 +7,11 @@ made from the frozen manifest before any held-out output is opened, every select
 is kept (failures and one-sided no-ops included), and a shortfall is reported, never
 topped up.
 
-The proposed separate abstention-boundary stratum for impossible-on-arrival jobs
-(arrival option B) is not implemented here because affected-owner agreement is still
-pending in issue #22. This module exposes only the agreed primary sample.
+A separate abstention-boundary stratum covers impossible-on-arrival jobs (arrival
+option B), as proposed by Nisha and agreed by Matty and Ved in issue #22 (October 26-30):
+a slot qualifies when a job arrives there with no legal start by timing alone. Every
+qualifying slot is included, or 30 drawn with its own seed when there are more. It never
+replaces or tops up the primary sample and is reported separately (``select_boundary``).
 """
 
 import dataclasses
@@ -25,6 +27,9 @@ ALGORITHM = "q10-temporal-window-v1"
 GENERATOR = "python random.Random (MT19937)"
 SAMPLING_SEED = 20261019
 ANALYSIS_SEED = 20261020  # paired bootstrap; frozen with the selection, used later
+BOUNDARY_ALGORITHM = "q10-abstention-boundary-v1"
+BOUNDARY_SEED = 20261021  # separate from the primary sampling and analysis seeds
+BOUNDARY_CAP = 30
 SLOTS_PER_EPISODE = 2
 TRIALS = (0, 1, 2)
 LAST_DECISION_SLOT = s.PROPOSED_DECISION_SLOTS - 1  # 23
@@ -45,6 +50,24 @@ def eligible_slots(episode: s.PrivateEpisode) -> tuple[int, ...]:
         job = private.job
         slots.update(range(job.arrival_slot, min(latest_start(job), LAST_DECISION_SLOT) + 1))
     return tuple(sorted(slots))
+
+
+def has_legal_start(job: s.Job) -> bool:
+    """Some start s in [arrival, 23] finishes by min(deadline, 30); fixed jobs only at arrival."""
+    return job.arrival_slot <= min(latest_start(job), LAST_DECISION_SLOT)
+
+
+def boundary_slots(episode: s.PrivateEpisode) -> tuple[int, ...]:
+    """Decision slots 0-23 where a job arrives with no legal start by timing alone."""
+    return tuple(
+        sorted(
+            {
+                p.job.arrival_slot
+                for p in episode.jobs
+                if p.job.arrival_slot <= LAST_DECISION_SLOT and not has_legal_start(p.job)
+            }
+        )
+    )
 
 
 def stratum(episode: s.PrivateEpisode) -> str:
@@ -101,16 +124,7 @@ def _assign_trials(items: list[tuple[str, str, int]], rng, trials) -> list[Selec
     return sorted(out, key=lambda x: (x.episode_id, x.slot))
 
 
-def select(
-    episodes: Iterable[s.PrivateEpisode],
-    *,
-    seed: int = SAMPLING_SEED,
-    trials: tuple[int, ...] = TRIALS,
-) -> SamplingRecord:
-    """Select two eligible slots per episode and balance them over trials and strata.
-
-    Input order does not matter: episodes are processed by (stratum, episode ID).
-    """
+def _manifest(episodes: Iterable[s.PrivateEpisode], trials: tuple[int, ...]) -> list:
     episodes = [
         s.PrivateEpisode.model_validate(e.model_dump(mode="python", warnings="none"), strict=True)
         for e in episodes
@@ -128,7 +142,24 @@ def select(
         raise ValueError("selection requires the proposal's 24 decision and 6 completion slots")
     if not trials or len(set(trials)) != len(trials):
         raise ValueError("trials must be distinct")
+    return episodes
 
+
+def _manifest_hash(episodes: list[s.PrivateEpisode]) -> str:
+    return s.sha256_hex([e.canonical_hash() for e in sorted(episodes, key=lambda e: e.episode_id)])
+
+
+def select(
+    episodes: Iterable[s.PrivateEpisode],
+    *,
+    seed: int = SAMPLING_SEED,
+    trials: tuple[int, ...] = TRIALS,
+) -> SamplingRecord:
+    """Select two eligible slots per episode and balance them over trials and strata.
+
+    Input order does not matter: episodes are processed by (stratum, episode ID).
+    """
+    episodes = _manifest(episodes, trials)
     rng = random.Random(seed)
     episodes.sort(key=lambda e: (stratum(e), e.episode_id))
     eligible, shortfall, chosen = {}, {}, []
@@ -148,14 +179,82 @@ def select(
         python_version=platform.python_version(),
         seed=seed,
         analysis_seed=ANALYSIS_SEED,
-        manifest_hash=s.sha256_hex(
-            [e.canonical_hash() for e in sorted(episodes, key=lambda e: e.episode_id)]
-        ),
+        manifest_hash=_manifest_hash(episodes),
         split=episodes[0].split,
         target=SLOTS_PER_EPISODE * len(episodes),
         eligible=dict(sorted(eligible.items())),
         selections=tuple(selections),
         shortfall=dict(sorted(shortfall.items())),
+        counts_by_trial={t: sum(x.trial == t for x in selections) for t in trials},
+        counts_by_stratum=dict(sorted(Counter(x.stratum for x in selections).items())),
+    )
+
+
+@dataclass(frozen=True)
+class BoundaryRecord:
+    """The separate abstention-boundary stratum: a census, or 30 drawn when there are more."""
+
+    algorithm: str
+    generator: str
+    python_version: str
+    seed: int
+    manifest_hash: str
+    split: str
+    cap: int
+    eligible: Mapping[str, tuple[int, ...]]  # episode ID -> impossible-on-arrival slots
+    selections: tuple[Selection, ...]  # by episode ID then slot
+    counts_by_trial: Mapping[int, int]
+    counts_by_stratum: Mapping[str, int]
+
+    @property
+    def eligible_count(self) -> int:
+        return sum(len(v) for v in self.eligible.values())
+
+    @property
+    def selected_count(self) -> int:
+        return len(self.selections)
+
+    def to_jsonable(self) -> dict:
+        data = dataclasses.asdict(self)
+        data["counts_by_trial"] = {str(k): v for k, v in self.counts_by_trial.items()}
+        data["eligible_count"] = self.eligible_count
+        data["selected_count"] = self.selected_count
+        return data
+
+
+def select_boundary(
+    episodes: Iterable[s.PrivateEpisode],
+    *,
+    seed: int = BOUNDARY_SEED,
+    trials: tuple[int, ...] = TRIALS,
+) -> BoundaryRecord:
+    """Every impossible-on-arrival slot, or ``BOUNDARY_CAP`` of them drawn with ``seed``.
+
+    Independent of the primary sample: it reads only job timing, never replaces or tops
+    up primary pairs, and a slot is in both only if it qualifies for both. Trials are
+    rotated as in the primary sample, using this stratum's own seed.
+    """
+    episodes = _manifest(episodes, trials)
+    rng = random.Random(seed)
+    eligible = {e.episode_id: boundary_slots(e) for e in episodes}
+    candidates = sorted(
+        (e.episode_id, stratum(e), slot)
+        for e in sorted(episodes, key=lambda e: (stratum(e), e.episode_id))
+        for slot in eligible[e.episode_id]
+    )
+    if len(candidates) > BOUNDARY_CAP:
+        candidates = sorted(rng.sample(candidates, BOUNDARY_CAP))
+    selections = _assign_trials(candidates, rng, trials)
+    return BoundaryRecord(
+        algorithm=BOUNDARY_ALGORITHM,
+        generator=GENERATOR,
+        python_version=platform.python_version(),
+        seed=seed,
+        manifest_hash=_manifest_hash(episodes),
+        split=episodes[0].split,
+        cap=BOUNDARY_CAP,
+        eligible=dict(sorted(eligible.items())),
+        selections=tuple(selections),
         counts_by_trial={t: sum(x.trial == t for x in selections) for t in trials},
         counts_by_stratum=dict(sorted(Counter(x.stratum for x in selections).items())),
     )

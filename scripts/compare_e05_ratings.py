@@ -36,6 +36,11 @@ def main() -> int:
         action="store_true",
         help="require prospective text decisions; omit only for legacy originals",
     )
+    parser.add_argument(
+        "--cap-limit",
+        type=int,
+        help="require rule 11.9 cap reviews for this explanation length limit",
+    )
     parser.add_argument("--out-dir", type=Path, help="where to write the output files")
     parser.add_argument(
         "--confirmed-by", action="append", default=[], help="a rater who agreed the matching"
@@ -48,10 +53,16 @@ def main() -> int:
 
     cases = review.load_cases(json.loads(args.cases.read_text(encoding="utf-8")))
     a = agreement.load_original(
-        args.a.read_bytes(), cases, require_text_review=args.require_text_review
+        args.a.read_bytes(),
+        cases,
+        require_text_review=args.require_text_review,
+        cap_limit=args.cap_limit,
     )
     b = agreement.load_original(
-        args.b.read_bytes(), cases, require_text_review=args.require_text_review
+        args.b.read_bytes(),
+        cases,
+        require_text_review=args.require_text_review,
+        cap_limit=args.cap_limit,
     )
     matches = {}
     if args.matches:
