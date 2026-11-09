@@ -207,9 +207,9 @@ def cap_hits(output: BlindOutput, limit: int) -> list[tuple[str, str]]:
     e = output.explanation
     if e is None:
         return []
-    hits = [("summary", "summary")] if len(e.summary) >= limit else []
-    hits += [("limitation", str(i)) for i, t in enumerate(e.limitations) if len(t) >= limit]
-    hits += [("claim", c.claim_id) for c in e.claims if len(c.text) >= limit]
+    hits = [("summary", "summary")] if len(e.summary) == limit else []
+    hits += [("limitation", str(i)) for i, t in enumerate(e.limitations) if len(t) == limit]
+    hits += [("claim", c.claim_id) for c in e.claims if len(c.text) == limit]
     return hits
 
 
@@ -254,9 +254,13 @@ def _cut_off_units(units: dict[str, list[str]], entry: dict) -> set[tuple[str, i
     for u in entry.get("cap_review", {}).get("units", []):
         if u.get("unfinished") is True:
             if u["field"] == "summary":
-                allowed.add(("summary", len(units["summary"]) - 1))
+                position = len(units["summary"]) - 1
+                if units["summary"][position].strip() == u["cut_off_text"].strip():
+                    allowed.add(("summary", position))
             elif u["field"] == "limitation":
-                allowed.add(("limitation", int(u["unit"])))
+                position = int(u["unit"])
+                if units["limitation"][position].strip() == u["cut_off_text"].strip():
+                    allowed.add(("limitation", position))
     return allowed
 
 
@@ -335,15 +339,28 @@ def validate_annotation(
     ids = [a.get("assertion_id") for a in assertions]
     if len(ids) != len(set(ids)):
         raise ValueError(f"{where}: repeated assertions share one ID and appear once")
-    listed_claims = [a["assertion_id"] for a in assertions if a.get("source") == "claim"]
-    if sorted(listed_claims) != sorted(claims):
-        raise ValueError(f"{where}: every Claim record is exactly one assertion")
-    for a in assertions:
-        _check_assertion(a, claims, complete, where)
-    if cap_limit is not None and entry.get("cap_review", {}).get("limit") != cap_limit:
+    cap_record = entry.get("cap_review")
+    if cap_limit is not None and (
+        not isinstance(cap_record, dict) or cap_record.get("limit") != cap_limit
+    ):
         raise ValueError(f"{where}: cap_review for the {cap_limit}-character limit is required")
     if "cap_review" in entry:
         _validate_cap_review(output, entry, complete)
+    cut_only_claims = {
+        u["unit"]
+        for u in entry.get("cap_review", {}).get("units", [])
+        if u["field"] == "claim"
+        and u["unfinished"] is True
+        and u["cut_off_text"] == claims[u["unit"]].text
+    }
+    listed_claims = [a["assertion_id"] for a in assertions if a.get("source") == "claim"]
+    if sorted(listed_claims) != sorted(set(claims) - cut_only_claims):
+        raise ValueError(
+            f"{where}: every Claim record is exactly one assertion, "
+            "except a whole-text cut-off fragment, which has none"
+        )
+    for a in assertions:
+        _check_assertion(a, claims, complete, where)
     if require_text_review and "text_review" not in entry:
         raise ValueError("prospective review requires text_review decisions")
     if "text_review" in entry:
@@ -464,11 +481,11 @@ def cap_report(scored: Iterable[tuple[str, OutputScore]]) -> dict:
     ``scored`` pairs each unblinded system name with an output's score; every score
     must carry a cap review. Returns cap-hit and unfinished counts by field, mean
     completeness for outputs with and without a cap hit, and the separate sensitivity
-    check: faithfulness pooled over all outputs and over outputs with nothing unfinished.
+    check: faithfulness over complete assertions, retaining outputs with cut-off fragments.
     """
     by_system: dict[str, list[OutputScore]] = {}
     for system, score in scored:
-        if score.cap_hits is None:
+        if score.cap_hits is None or score.unfinished is None:
             raise ValueError("every scored output needs a cap review")
         by_system.setdefault(system, []).append(score)
 
@@ -484,7 +501,6 @@ def cap_report(scored: Iterable[tuple[str, OutputScore]]) -> dict:
     for system, scores in sorted(by_system.items()):
         hit = [x for x in scores if sum(x.cap_hits.values())]
         no_hit = [x for x in scores if not sum(x.cap_hits.values())]
-        clean = [x for x in scores if not sum(x.unfinished.values())]
         report[system] = {
             "outputs": len(scores),
             "outputs_with_cap_hit": len(hit),
@@ -494,8 +510,10 @@ def cap_report(scored: Iterable[tuple[str, OutputScore]]) -> dict:
             "completeness_without_cap_hit": mean(x.completeness for x in no_hit),
             "sensitivity": {
                 "faithfulness_all": pooled(scores),
-                "faithfulness_nothing_unfinished": pooled(clean),
-                "outputs_nothing_unfinished": len(clean),
+                "faithfulness_excluding_cut_off_fragments": pooled(scores),
+                "outputs_retained": len(scores),
+                "complete_assertions": sum(x.checkable for x in scores),
+                "cut_off_fragments_excluded": sum(sum(x.unfinished.values()) for x in scores),
             },
         }
     return report

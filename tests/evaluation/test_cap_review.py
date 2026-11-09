@@ -2,6 +2,7 @@
 
 import copy
 import json
+from dataclasses import replace
 
 import pytest
 
@@ -10,16 +11,41 @@ from dc_sustainability.evaluation import review
 from tests.evaluation.test_calibration import CAL, cases
 from tests.evaluation.test_text_review import example
 
-# The example summary is 274 characters and its second limitation exactly 78, so a
-# 78-character limit hits both; the claims (30-33 characters) stay below it.
+# Synthetic summary and second limitation are exactly 78 characters.
+# Overlong source text must not be confused with an exact cap hit.
 LIMIT = 78
 SUMMARY_TAIL = "The goal is to keep emissions as low as possible."
 LIMITATION_TAIL = "would miss its deadline."
 
 
+def cap_example():
+    case, entry = example()
+    tail = SUMMARY_TAIL
+    prefix = "One. Two. "
+    padding = LIMIT - len(prefix) - len(tail)
+    summary = prefix + "x" * (padding - 2) + ". " + tail
+    old = case.outputs["Y"]
+    explanation = old.explanation.model_copy(update={"summary": summary})
+    case = replace(case, outputs={**case.outputs, "Y": replace(old, explanation=explanation)})
+    audit = review.blank_annotation(case, "Y", text_review=True)["text_review"]
+    for source, units in audit.items():
+        ids = [a["assertion_id"] for a in entry["assertions"] if a["source"] == source]
+        for unit in units:
+            unit.update(decision="not_checkable", assertion_ids=[])
+        if ids:
+            units[0].update(decision="extracted", assertion_ids=ids)
+    entry["text_review"] = audit
+    return case, entry
+
+
+def cap_cases():
+    changed = cap_example()[0]
+    return tuple(changed if c.case_id == changed.case_id else c for c in cases())
+
+
 def capped(limit=LIMIT, unfinished=(True, False)):
     """The example output with a cap review; the summary decided per ``unfinished``."""
-    case, entry = example()
+    case, entry = cap_example()
     entry["cap_review"] = review.blank_annotation(case, "Y", cap_limit=limit)["cap_review"]
     for unit, flag in zip(entry["cap_review"]["units"], unfinished):
         tail = SUMMARY_TAIL if unit["field"] == "summary" else LIMITATION_TAIL
@@ -28,27 +54,21 @@ def capped(limit=LIMIT, unfinished=(True, False)):
 
 
 def test_cap_hits_are_computed_with_the_limit_as_input():
-    case = cases()[0]
+    case = cap_cases()[0]
     output = case.outputs["Y"]
     assert review.cap_hits(output, LIMIT) == [("summary", "summary"), ("limitation", "1")]
-    assert review.cap_hits(output, 30) == [
-        ("summary", "summary"),
-        ("limitation", "0"),
-        ("limitation", "1"),
-        ("claim", "C1"),
-        ("claim", "C2"),
-        ("claim", "C3"),
-    ]
-    assert review.cap_hits(output, 256) == [("summary", "summary")]
+    assert all(field == "claim" for field, _ in review.cap_hits(output, 30))
+    assert review.cap_hits(output, 256) == []
     assert review.cap_hits(output, 1000) == []
-    assert review.cap_hits(case.outputs["X"], 1) == []  # no explanation, nothing capped
+    # The legacy 274-character summary is over the limit, not an exact cap hit.
+    assert ("summary", "summary") not in review.cap_hits(cases()[0].outputs["Y"], LIMIT)
     for bad in (0, -1, 96.0, True, "96"):
         with pytest.raises(ValueError, match="positive integer"):
             review.cap_hits(output, bad)
 
 
 def test_blank_cap_review_is_incomplete_until_decided():
-    case, entry = example()
+    case, entry = cap_example()
     entry["cap_review"] = review.blank_annotation(case, "Y", cap_limit=LIMIT)["cap_review"]
     assert [u["unfinished"] for u in entry["cap_review"]["units"]] == [None, None]
     review.validate_annotation(case, entry, complete=False, cap_limit=LIMIT)
@@ -133,12 +153,48 @@ def test_cut_off_decision_only_at_the_end_of_an_unfinished_text():
 def test_unfinished_limitation_can_be_cut_off():
     case, entry = capped(unfinished=(False, True))
     entry["text_review"]["limitation"][1].update(decision="cut_off", assertion_ids=[])
+    with pytest.raises(ValueError, match="end of a text marked unfinished"):
+        review.validate_annotation(case, entry, complete=True, require_text_review=True)
+    entry["cap_review"]["units"][1]["cut_off_text"] = entry["text_review"]["limitation"][1]["text"]
     review.validate_annotation(case, entry, complete=True, require_text_review=True)
+
+
+def test_whole_claim_fragment_is_excluded_without_losing_other_assertions():
+    case, entry = capped()
+    old = case.outputs["Y"]
+    claim = old.explanation.claims[0].model_copy(update={"text": "x" * LIMIT})
+    explanation = old.explanation.model_copy(
+        update={"claims": (claim, *old.explanation.claims[1:])}
+    )
+    case = replace(case, outputs={**case.outputs, "Y": replace(old, explanation=explanation)})
+    kept = copy.deepcopy(entry)
+    kept["cap_review"]["units"].append(
+        {"field": "claim", "unit": claim.claim_id, "unfinished": False, "cut_off_text": None}
+    )
+    next(a for a in kept["assertions"] if a["assertion_id"] == claim.claim_id)["text"] = claim.text
+    dropped = copy.deepcopy(kept)
+    dropped["cap_review"]["units"][-1].update(unfinished=True, cut_off_text=claim.text)
+    with pytest.raises(ValueError, match="whole-text cut-off"):
+        review.validate_annotation(case, dropped, complete=True)
+    dropped["assertions"] = [
+        a for a in dropped["assertions"] if a["assertion_id"] != claim.claim_id
+    ]
+    review.validate_annotation(case, dropped, complete=True)
+    score = review.score_annotation(case, dropped)
+    assert score.checkable == len(dropped["assertions"])
+    assert score.unfinished["claim"] == 1
+    key = case.case_id, "Y"
+    comparison = g.compare(
+        g.Original("a", "a" * 64, {key: kept}),
+        g.Original("b", "b" * 64, {key: dropped}),
+    )
+    assert comparison.claim_labels.n == 2
+    assert any(o.assertion["assertion_id"] == claim.claim_id for o in comparison.one_sided)
 
 
 def test_scores_carry_cap_counts_and_completeness_stays_as_written():
     case, entry = capped()
-    plain = review.score_annotation(case, example()[1])
+    plain = review.score_annotation(case, cap_example()[1])
     score = review.score_annotation(case, entry, cap_limit=LIMIT)
     assert plain.cap_hits is None and plain.unfinished is None
     assert score.cap_hits == {"summary": 1, "limitation": 1, "claim": 0}
@@ -180,8 +236,10 @@ def test_cap_report_by_system_with_separate_sensitivity():
     assert agent["completeness_without_cap_hit"] == 1.0
     assert agent["sensitivity"] == {
         "faithfulness_all": 0.8,
-        "faithfulness_nothing_unfinished": 1.0,
-        "outputs_nothing_unfinished": 2,
+        "faithfulness_excluding_cut_off_fragments": 0.8,
+        "outputs_retained": 3,
+        "complete_assertions": 10,
+        "cut_off_fragments_excluded": 1,
     }
     assert report["Plain"]["completeness_with_cap_hit"] is None
     with pytest.raises(ValueError, match="needs a cap review"):
@@ -191,7 +249,7 @@ def test_cap_report_by_system_with_separate_sensitivity():
 def _original(decisions, *, cap=True):
     """Matty's normalized calibration file with a synthetic cap review per output."""
     data = json.loads((CAL / "ratings/E04_Matty_normalized_2026-10-31.json").read_text())
-    by_id = {c.case_id: c for c in cases()}
+    by_id = {c.case_id: c for c in cap_cases()}
     for entry in data["outputs"]:
         if not cap:
             continue
@@ -200,7 +258,7 @@ def _original(decisions, *, cap=True):
         for unit, flag in zip(entry["cap_review"]["units"], decisions):
             tail = SUMMARY_TAIL if unit["field"] == "summary" else LIMITATION_TAIL
             unit.update(unfinished=flag, cut_off_text=tail if flag else None)
-    return g.load_original(json.dumps(data).encode(), cases(), cap_limit=LIMIT if cap else None)
+    return g.load_original(json.dumps(data).encode(), cap_cases(), cap_limit=LIMIT if cap else None)
 
 
 def test_raters_unfinished_agreement_and_adjudication():

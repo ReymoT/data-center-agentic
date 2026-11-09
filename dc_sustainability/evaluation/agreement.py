@@ -201,7 +201,7 @@ def compare(
         }
         xa = {x["assertion_id"]: x for x in ea["assertions"]}
         xb = {x["assertion_id"]: x for x in eb["assertions"]}
-        pairs = [(i, i) for i in xa if xa[i]["source"] == "claim"]
+        pairs = [(i, i) for i in xa if xa[i]["source"] == "claim" and i in xb]
         extracted = matches.get(key, [])
         used_a, used_b = [i for i, _ in extracted], [j for _, j in extracted]
         if len(set(used_a)) != len(used_a) or len(set(used_b)) != len(used_b):
