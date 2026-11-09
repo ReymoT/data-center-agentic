@@ -217,3 +217,16 @@ Section 10 leaves open how checkable assertions in raw failed or malformed text 
 ### 11.8 Calibration before the held-out review (agreed in #22, October 30)
 
 Before any held-out output is opened, both raters independently extract assertions on two or three new practice outputs, which are neither development nor held-out cases, and compare extraction only, using this section. Disagreements are resolved by changing the rule text, never by changing either development original. The held-out reliability report is then computed in the same way as the development report. The practice outputs never enter the development or held-out sets, and calibration does not open any held-out output or freeze the evaluation sample.
+
+### 11.9 Text cut off at the length limit (agreed in #185, November 8)
+
+Explanation text is generated under a character limit (96 in the development runs; a larger limit is proposed for the held-out runs). Text that reaches the limit can stop mid-sentence. Matty accepted this treatment in [#185](https://github.com/ReymoT/data-center-agentic/issues/185); it applies to both systems and every rater.
+
+- **Cap hit (computed, not judged):** the scorer lists every summary, limitation and claim text whose length reaches the run's limit (`review.cap_hits`). The limit is taken from the run's pinned response settings, never assumed.
+- **Visibly unfinished (judged, only on cap hits):** for each cap hit, each rater records whether the text is visibly unfinished: it ends mid-word or mid-clause, without a finished sentence, or in stray characters. If it is, the rater copies the unfinished end exactly as `cut_off_text`. Both raters record this decision in their originals; agreement on it is reported, and disagreements go to joint adjudication.
+- **Complete facts before the cut are rated as usual.** A checkable fact that is complete before the cut is extracted and labelled under sections 1–4 and 11.1–11.6, including contradicted or unsupported. A cut never excuses a wrong complete statement. A capped claim record is still one assertion and is labelled from its complete part, its value and its citations.
+- **The cut-off end is never an assertion.** It is never labelled unsupported and never used to support a claim. In `text_review`, a summary sentence or limitation that is only that end takes the decision `cut_off`, with no IDs; it is allowed only at the end of a text marked unfinished.
+- **Completeness is scored as written.** A reason or limitation lost to the cut scores 0 (section 6). Each output's score carries its cap-hit and unfinished counts by field.
+- **Reporting:** beside the main E04 results, by system and field: cap-hit and unfinished counts; mean completeness for outputs with and without a cap hit; and a separate sensitivity check, faithfulness over outputs with nothing unfinished (`review.cap_report`). The sensitivity check never replaces the main measure.
+
+Workfiles: `blank_annotation(case, key, text_review=True, cap_limit=<limit>)` lists the computed cap hits with empty decisions. Completed originals are checked with `validate_annotation(..., cap_limit=<limit>)`, and the comparison CLI takes `--cap-limit <limit>`. Without a limit, legacy and development originals validate and report exactly as before; their ratings are not revised under this clause.

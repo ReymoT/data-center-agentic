@@ -13,7 +13,8 @@ judgement supplied as explicit ID pairs; without one they are reported as found 
 rater only. Raw-text assertions (rule §11.7) match the same way; an output has either
 raw text or an explanation, so they only ever match each other, and their extraction and label agreement are reported separately from the structured
 explanation. Agreement on ``reference_kind`` (rule §11.6) is reported over matched
-assertions where both raters recorded a kind.
+assertions where both raters recorded a kind. Agreement on the rule §11.9 "visibly
+unfinished" decision is reported over the computed cap hits when both raters record it.
 """
 
 import hashlib
@@ -35,7 +36,11 @@ class Original:
 
 
 def load_original(
-    raw: bytes, cases: Iterable[review.ReviewCase], *, require_text_review: bool = False
+    raw: bytes,
+    cases: Iterable[review.ReviewCase],
+    *,
+    require_text_review: bool = False,
+    cap_limit: int | None = None,
 ) -> Original:
     """Parse one original ratings file and refuse anything incomplete or inconsistent.
 
@@ -59,6 +64,7 @@ def load_original(
             entry,
             complete=True,
             require_text_review=require_text_review,
+            cap_limit=cap_limit,
         )
         entries[key] = entry
     expected = {(c, k) for c in by_id for k in review.OUTPUT_KEYS}
@@ -144,6 +150,27 @@ class Comparison:
     raw_extraction: Extraction = Extraction(0, 0, 0)  # raw text, never mixed into the above
     raw_labels: Agreement = Agreement(0, 0, None)
     kinds: Agreement = Agreement(0, 0, None)  # matched assertions where both gave a kind
+    # Rule §11.9: both raters' "visibly unfinished" decision on each computed cap hit.
+    unfinished_pairs: Mapping[tuple[str, str, str, str], tuple[bool, bool]] = field(
+        default_factory=dict
+    )
+
+    @property
+    def unfinished(self) -> Agreement:
+        return _agreement(list(self.unfinished_pairs.values()))
+
+
+def _unfinished_pairs(key: Key, ea: dict, eb: dict) -> dict:
+    """Pair the two raters' decisions on the same cap hits; both must record them."""
+    ca, cb = ea.get("cap_review"), eb.get("cap_review")
+    if ca is None and cb is None:
+        return {}
+    if ca is None or cb is None or ca["limit"] != cb["limit"]:
+        raise ValueError(f"{key}: both raters record cap_review for the same length limit")
+    return {
+        (*key, x["field"], x["unit"]): (x["unfinished"], y["unfinished"])
+        for x, y in zip(ca["units"], cb["units"], strict=True)
+    }
 
 
 def compare(
@@ -161,11 +188,13 @@ def compare(
         raise ValueError("matches name an unknown output")
     matched, one_sided, not_applicable = [], [], 0
     completeness_pairs: dict[Key, dict[str, tuple[int, int]]] = {}
+    unfinished_pairs: dict = {}
     for key in sorted(a.entries):
         ea, eb = a.entries[key], b.entries[key]
         if ea["not_applicable"]:
             not_applicable += 1
             continue
+        unfinished_pairs |= _unfinished_pairs(key, ea, eb)
         completeness_pairs[key] = {
             part: (ea["completeness"][part], eb["completeness"][part])
             for part in review.COMPLETENESS
@@ -226,6 +255,7 @@ def compare(
         raw_extraction=extraction("raw"),
         raw_labels=_agreement([(m.a_label, m.b_label) for m in matched if m.source == "raw"]),
         kinds=_agreement([(m.a_kind, m.b_kind) for m in matched if m.a_kind and m.b_kind]),
+        unfinished_pairs=unfinished_pairs,
     )
 
 
@@ -298,6 +328,13 @@ def summary(comparison: Comparison) -> dict:
             **agreement(comparison.kinds),
             "only_a": sum(bool(m.a_kind) and not m.b_kind for m in kinds),
             "only_b": sum(bool(m.b_kind) and not m.a_kind for m in kinds),
+        }
+    if any("cap_review" in e for e in comparison.a.entries.values()):
+        pairs = comparison.unfinished_pairs.values()
+        report["cap_review"] = {
+            "cap_hits": len(comparison.unfinished_pairs),
+            "unfinished": {"a": sum(x for x, _ in pairs), "b": sum(y for _, y in pairs)},
+            "agreement": agreement(comparison.unfinished),
         }
     return report
 
@@ -411,6 +448,21 @@ def adjudication_record(comparison: Comparison) -> dict:
                         "rationale": "",
                     }
                 )
+    for (case_id, output, cap_field, unit), (x, y) in comparison.unfinished_pairs.items():
+        if x != y:
+            items.append(
+                {
+                    "kind": "unfinished",
+                    "case_id": case_id,
+                    "output": output,
+                    "field": cap_field,
+                    "unit": unit,
+                    "a": x,
+                    "b": y,
+                    "decision": None,
+                    "rationale": "",
+                }
+            )
     return {
         "rubric_version": review.RUBRIC_VERSION,
         "originals": summary(comparison)["originals"],
@@ -439,6 +491,8 @@ def validate_adjudication(record: dict, comparison: Comparison) -> None:
             raise ValueError(f"{where}: decision must be a label")
         if item["kind"] == "completeness" and decision not in (0, 1):
             raise ValueError(f"{where}: decision must be 0 or 1")
+        if item["kind"] == "unfinished" and type(decision) is not bool:
+            raise ValueError(f"{where}: decision must be true or false")
         if item["kind"] == "extraction":
             if decision == "drop" and item.get("decided_label") is None:
                 continue
