@@ -1,0 +1,26 @@
+{
+  "scope": "metadata-only plan preparation; not source or comparison execution",
+  "code_commit": "6a7630918a515a7a0b92e3eb57cfb7127d91de4c",
+  "development_episodes": 40,
+  "required_unique_indices": 340,
+  "permitted_indices_canonical_sha256": "61ab86cdc5024ecb188a377afba73b36be816fb5ea4660ff7f59bfd59de23967",
+  "index_min": 1466,
+  "index_max": 8123,
+  "comparison_code_sha256": {
+    "scripts/compare_cf60_development.py": "dd7f6e82eb9f7dddeb2a2027678f575f5aa0decde484dd275f10c73531039fc8",
+    "dc_sustainability/data/cf60_comparison.py": "68ad5a519d00aa315080ce619fb62f127bcc84ee81b73d09a729eaeaf7d54941",
+    "dc_sustainability/data/cf60_broker.py": "832e6cfe27a41e457e0775ca825b6ec8debea3b2c6d34d5dfb5310d330b5ce56"
+  },
+  "candidate_source_exists": true,
+  "candidate_source_file_bytes": 601730,
+  "source_contents_read": false,
+  "source_hash_verified": false,
+  "extract_ready": false,
+  "complete_saved_states_identified": 0,
+  "saved_states_missing": 1200,
+  "model_calls": 0,
+  "solver_calls": 0,
+  "comparison_executed": false,
+  "plan_sha256": "574cb690ed7f9c8ab63a9ef8dfbe6b4cfd7cfd05f8e6da58b0b5a532e5993aad",
+  "pending_draft_rejected_before_extract_access": true
+}

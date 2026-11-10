@@ -1,5 +1,18 @@
 # R04 backup demo walkthrough
 
+## Current demo choices — November 9
+
+The latest technical result is RUN-cb85f5a3425c, with 180 records, 17 requests, 532.219 seconds, zero replay findings/mismatches, 39 valid numeric/unit pairs and successful cleanup. Separate-person receiving and explanation faithfulness are still pending. Use the [updated script](report/R04_FIVE_MINUTE_SCRIPT_2026-11-09.txt) and [saved new-run excerpts](report/R04_DEMO_CB85_EXCERPTS.json), which read only selected fields from the actual records.
+
+Option A: keep the existing trace-explorer and screenshots explicitly labelled RUN-fd87c6c8a9cb. That older snapshot has its own 96-character limit, timing and receiving record. Then show the published corrected-run summary separately. Do not change a screenshot caption or claim the explorer displays cb85 when it does not.
+
+Option B: open R04_DEMO_CB85_EXCERPTS.json or the unchanged cb85 receiving packet in a text/JSON viewer. Show slot 0 (failed initial and repair, checked fallback, only J1 starts now) and slot 3 (initial plan passes and J2 starts). The fallback's future J2 intention at slot 2 was not executed at slot 0. Both Agent repairs fail; do not call their presence a success. No model runtime needs to be started for either option.
+
+End with the recorded freshness/impact-support limits and the separate #60 source/CF60 gate. The receiving packet has raw responses for Nisha's scoped review, not new formal blinded ratings. No new model call is authorized by this demo guide. The walkthrough below is archival; its old commits, paths and steps are not the current instructions for either option. Use the current choices above and the updated script.
+
+
+## Historical walkthrough (archival, not current instructions)
+
 The [working saved-trace explorer](report/UI_VISUALIZATION.md) supplies the actual
 UI for this walkthrough. Select the Agent run and recorded fallback filter to show
 initial/repair checks, checked fallback and actual starts. It reads saved evidence;

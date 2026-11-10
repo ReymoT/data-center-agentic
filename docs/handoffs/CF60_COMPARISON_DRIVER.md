@@ -73,3 +73,5 @@ Next, bind an approved private extract and any saved-state inventory before real
 execution. Ved and Edison review downstream reference and C/D implications after
 the actual comparison. The [compatibility plan](CF60_DEVELOPMENT_COMPATIBILITY_PLAN.md)
 still governs those steps.
+
+The [November 9 input/execution proposal](CF60_INPUT_EXECUTION_PROPOSAL_2026-11-09.md) now separates source ingestion, exact extract pinning and later comparison approval. It explicitly discloses whole-file hashing/CSV traversal and the 1200 currently missing saved states. It does not authorize or execute those operations.

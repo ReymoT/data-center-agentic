@@ -1,0 +1,28 @@
+R04 FIVE-MINUTE SCRIPT — CORRECTED CANDIDATE, NOVEMBER 9
+
+Evidence: RUN-cb85f5a3425c, public EP-HAND1, one seed (101).
+No inference, source acquisition or study run is part of this presentation.
+
+Before presenting
+Choose the evidence view explicitly. The existing trace-explorer/screenshots show RUN-fd87c6c8a9cb, not cb85. If using them, state that they are the older saved run and show the new validation summary separately. For cb85 itself, open R04_DEMO_CB85_EXCERPTS.json and the published audit. Do not silently relabel older screenshots. AI assistance is allowed to rehearse, explain the files and improve delivery while preserving the facts.
+
+0:00–0:45 | Research question
+We are testing whether an ontology-grounded, tool-verified agent improves accuracy, faithfulness and safety compared with a plain LLM. This public example demonstrates the workflow. The final held-out comparison is not complete.
+
+0:45–1:25 | Architecture
+Both LLM systems use the same model, generation settings and visibility rules. Their queues can diverge after different actions; matching the scenario does not mean identical states at every slot. Agent checks its proposal, may repair once, and can select a checked Greedy-A fallback. The controller rechecks before current-slot starts. Plain makes one combined request without feedback, repair or fallback. Independent replay is separate from the production simulator/checker.
+
+1:25–2:35 | Slot 0
+Show the cb85 slot-0 excerpt, or identify the older explorer run if using it. The initial proposal failed. The repair also failed. The fallback passed and J1 actually started at slot 0. Its plan included a later J2 start at slot 2; that intention was not executed at slot 0. This job start is credited to fallback, not to a successful model repair.
+
+2:35–3:25 | Slot 3
+The initial model plan passed and J2 actually started at slot 3. No repair or fallback was needed at this decision. Agent completed J1/J2 in the episode; Plain completed no jobs. Those are descriptive facts from this one public fixture, not a general performance estimate.
+
+3:25–4:15 | Corrected A01 validation
+The earlier candidate failed because claims had units without values. That original failure is preserved. The corrected request schema now enforces coherent pairs. The new authorized validation finished all six systems and 180 records using 17 requests in 532.219 seconds. All native/offline prompt counts matched; replay had zero findings or structural mismatches and cleanup passed. All 39 generated claims had numeric/unit pairs. Both Agent repairs still failed their checks.
+
+4:15–5:00 | Limits and next work
+No explanation field hit the 256-character limit in this run, but that alone does not prove completeness or faithfulness. Numeric pairing does not prove a number is correct. Nisha offered separate-person receiving; a returned receiving report is not yet recorded. Freshness/impact evidence and source/CF60 compatibility remain limited, and the scientific freeze and held-out study are pending. We should report what the evidence supports, including failures and fallback.
+
+If asked whether the research question is positive
+This run shows the mechanisms working on one public example. The held-out paired evaluation and faithfulness assessment must answer the research question.
