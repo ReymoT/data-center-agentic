@@ -14,7 +14,8 @@ RUN-cb85f5a3425c completed six systems and 180 decision records with 17 requests
 532.219 seconds; all native/offline token counts matched, replay had zero findings
 or result mismatches, and cleanup passed. All 39 generated claims paired numeric
 values with units. Agent completed J1 through fallback and J2 from an initial model
-plan; both repairs failed their checks. Separate-person receiving, explanation
+plan; both repairs failed their checks. [Nisha's separate-person technical receiving
+is accepted](docs/handoffs/A01_CB85_NISHA_RECEIVING_2026-11-10.md) on November 10 after the ZIP hash was confirmed. Explanation
 faithfulness, source/CF60 acceptance and scientific freeze remain pending. This is
 not a held-out result or shared-default adoption. The single-use ID is consumed.
 
