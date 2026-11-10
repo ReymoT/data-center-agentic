@@ -17,8 +17,8 @@ from dc_sustainability.data import carbon_source as carbon
 from dc_sustainability.data import materialize_development as development
 from dc_sustainability.data import splits
 
-VERSION = "d04-held-custody-v1"
-ALGORITHM = "sha256-rank-greedy-fixed-development-v1"
+VERSION = "d04-held-custody-v2-forecast-union"
+ALGORITHM = "sha256-rank-greedy-fixed-development-forecast-union-v2"
 DEVELOPMENT_CONTENT_RECEIPT = "data/manifests/d04-development-content-112-v2/receipt.json"
 DEVELOPMENT_CONTENT_SHA256 = "33c8dce514cdbcba53f9ed03399219be8a511d628ab61def694eedaac894b319"
 
@@ -144,9 +144,55 @@ def _authorization(receipt: dict, expected_sha256: str, destination: Path) -> No
     _parameters(receipt["parameters"])
 
 
+def forecast_footprint(day: date, recorded_scoring) -> dict:
+    """Metadata arithmetic only: recorded mapping and both CF60 hypotheses.
+
+    Include the 30 scoring slots and every legacy/CF60 candidate history read.
+    No observations, nonce or source loader is used. Never wrap year boundaries.
+    """
+    comparisons = interval_comparison(day)
+    indices = list(recorded_scoring)
+    if (
+        len(indices) != 30
+        or any(type(i) is not int for i in indices)
+        or indices != list(range(indices[0], indices[0] + 30))
+    ):
+        raise ValueError("invalid recorded scoring footprint")
+    physical = comparisons[0]["start_row"]
+    if physical is None:
+        raise ValueError("out-of-year footprint")
+    result = {
+        "recorded_scoring": indices,
+        "legacy_reads": [i - 1 for i in indices],
+        "start_scoring": [r["start_row"] for r in comparisons],
+        "end_scoring": [r["end_row"] for r in comparisons],
+        "start_cf60_reads": list(range(physical - 5, physical + 27)),
+        "end_cf60_reads": list(range(physical - 4, physical + 28)),
+    }
+    rows = [i for values in result.values() for i in values]
+    if any(type(i) is not int or not 0 <= i < 8760 for i in rows):
+        raise ValueError("out-of-year footprint; no wrapping")
+    result["reserved_union"] = sorted(set(rows))
+    return result
+
+
+def _development_footprints():
+    records = development.allocation()[0]["records"]
+    if len(records) != 40 or len({r["episode_id"] for r in records}) != 40:
+        raise ValueError("exact forty fixed development records required")
+    return {
+        r["episode_id"]: forecast_footprint(
+            date.fromisoformat(r["window"]["date"]), r["window"]["proposed_physical_indices"]
+        )
+        for r in records
+    }
+
+
 def _records(parameters: dict) -> tuple[splits.Allocation, ...]:
     pool, selection_seed, job_root = _parameters(parameters)
     dev = _development()  # never invoke the joint allocator or regenerate dev contents
+    dev_footprints = _development_footprints()
+    reserved = set().union(*(set(f["reserved_union"]) for f in dev_footprints.values()))
     chosen: list[splits.Window] = []
     for day in sorted(
         pool, key=lambda d: (splits.digest([VERSION, selection_seed, d.isoformat()]), d)
@@ -156,6 +202,10 @@ def _records(parameters: dict) -> tuple[splits.Allocation, ...]:
             continue
         if any(window.overlaps(w) for w in (*chosen, *(r.window for r in dev))):
             continue
+        footprint = forecast_footprint(day, window.indices)
+        if reserved.intersection(footprint["reserved_union"]):
+            continue
+        reserved.update(footprint["reserved_union"])
         chosen.append(window)
         if len(chosen) == 6:
             break
@@ -185,9 +235,30 @@ def _records(parameters: dict) -> tuple[splits.Allocation, ...]:
                 )
     records = dev + tuple(held)
     splits.validate_isolation(records)
+    validate_forecast_isolation(records)
     if len(held) != 30 or len({r.window.day.month for r in held}) != 6:
         raise ValueError("invalid held-out design")
     return records
+
+
+def validate_forecast_isolation(records) -> dict:
+    """Return private footprint evidence; refuse both directions of any group overlap."""
+    fixed = _development_footprints()
+    footprints, groups = {}, {}
+    for record in records:
+        footprint = (
+            fixed[record.episode_id]
+            if record.partition == "development"
+            else forecast_footprint(record.window.day, record.window.indices)
+        )
+        footprints[record.episode_id] = footprint
+        key = (record.partition, record.window.source_sha256, record.window.day)
+        rows = set(footprint["reserved_union"])
+        for other, other_rows in groups.items():
+            if key != other and key[1] == other[1] and rows.intersection(other_rows):
+                raise ValueError("forecast/scoring footprint overlap")
+        groups.setdefault(key, set()).update(rows)
+    return footprints
 
 
 def build_metadata(receipt: dict, *, authorization_sha256: str, revision: str) -> dict:
@@ -227,7 +298,8 @@ def build_metadata(receipt: dict, *, authorization_sha256: str, revision: str) -
         "records": [r.metadata() for r in records],
         "scientific_acceptance": False,
         "held_out_contents_generated": False,
-        "isolation_status": "conditional_interval_start_Q05_unresolved",
+        "isolation_status": "recorded_plus_both_hypotheses_forecast_union_Q05_unresolved",
+        "forecast_footprints": validate_forecast_isolation(records),
         "variant_contract": "same private jobs and realized carbon; only forecast visibility differs",
         "seed_derivation": "first16hex SHA256([version,job_root,SHA256([version,date,scenario])])",
     }

@@ -403,3 +403,68 @@ def test_committed_generic_interval_comparison_matches_all_rows():
     assert set(data["dates"]) == {"2022-01-01", "2022-01-31", "2022-12-30", "2022-12-31"}
     for day, rows in data["dates"].items():
         assert rows == list(custody.interval_comparison(date.fromisoformat(day)))
+
+
+def test_versioned_forecast_union_and_fixed_40_receipt(authorization):
+    from dc_sustainability.data.cf60_receiving import development_footprints
+
+    original = development.allocation()[0]["records"]
+    fixed = custody._development_footprints()
+    for independent in development_footprints(original):
+        name = independent.pop("episode_id")
+        assert fixed[name] == independent
+    manifest = build(authorization)
+    assert manifest["version"] == "d04-held-custody-v2-forecast-union"
+    assert len(manifest["forecast_footprints"]) == 70
+    assert len(fixed) == 40
+    # Compare every distinct date/partition reserved union in both directions.
+    grouped = {}
+    for r in manifest["records"]:
+        key = r["partition"], r["window"]["date"]
+        grouped.setdefault(key, set()).update(
+            manifest["forecast_footprints"][r["episode_id"]]["reserved_union"]
+        )
+    for key, rows in grouped.items():
+        assert all(not rows.intersection(other) for name, other in grouped.items() if name != key)
+    old = dict(authorization, version="d04-held-custody-v1")
+    with pytest.raises(ValueError, match="authorization"):
+        build(old)
+
+
+@pytest.mark.parametrize("day", [date(2022, 1, 1), date(2022, 12, 31)])
+def test_forecast_union_year_edges_fail_without_wrap(day):
+    with pytest.raises(ValueError, match="out-of-year"):
+        # Explicit synthetic recorded ordinals; Jan 1 history underflows only if
+        # the recorded mapping starts at zero, even though Phoenix starts at 07Z.
+        custody.forecast_footprint(day, range(0, 30) if day.month == 1 else range(8730, 8760))
+
+
+def test_recorded_mapping_is_reserved_even_when_different_from_physical():
+    day = date(2022, 2, 15)
+    physical = custody.interval_comparison(day)[0]["start_row"]
+    fp = custody.forecast_footprint(day, range(physical + 20, physical + 50))
+    assert set(range(physical + 19, physical + 50)) <= set(fp["reserved_union"])
+    assert fp["start_cf60_reads"] == list(range(physical - 5, physical + 27))
+    assert fp["end_cf60_reads"] == list(range(physical - 4, physical + 28))
+    assert fp["end_scoring"][-1] == physical + 30
+
+
+def test_disjoint_scoring_can_still_fail_forecast_history_overlap(monkeypatch):
+    first, second = date(2022, 2, 15), date(2022, 2, 17)
+    p = custody.interval_comparison(first)[0]["start_row"]
+    fp = custody.forecast_footprint(first, range(p + 20, p + 50))
+    monkeypatch.setattr(custody, "_development_footprints", lambda: {"EP-SYNTHETIC-DEV": fp})
+    dev = splits.Allocation(
+        episode_id="EP-SYNTHETIC-DEV",
+        partition="development",
+        scenario="normal",
+        seed=1,
+        window=splits.Window(first),
+        related_group="a" * 64,
+    )
+    held = replace(
+        dev, episode_id="EP-SYNTHETIC-HELD", partition="held_out", window=splits.Window(second)
+    )
+    assert not dev.window.overlaps(held.window)
+    with pytest.raises(ValueError, match="footprint overlap"):
+        custody.validate_forecast_isolation((dev, held))

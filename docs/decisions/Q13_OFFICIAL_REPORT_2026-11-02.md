@@ -15,8 +15,8 @@ The assistant has not directly accessed Canvas. This supersedes the earlier
 - Destination: Canvas Assignments / Final Project Report.
 - Reported due wording: December 9, 2026, "at midnight"; weight 20%.
 - Filename pattern: `Group#-Project#-F26-Final Project Report.PDF`.
-  `Group15-Project21-F26-Final Project Report.PDF` remains provisional until the
-  project number is confirmed.
+  `Group15-Project21-F26-Final Project Report.PDF` uses project number 21, confirmed
+  in Nisha's November 4 public reply.
 - Required sections: title; abstract (1); introduction (2); problem statement (1);
   related works (1); system architecture and algorithms (3); datasets with size
   and preprocessing (1); evaluations with metrics/experiments/findings (4);
@@ -29,7 +29,8 @@ The [report outline](../report/README.md) budgets 9.5 pages. Matty owns the
 authorized read-only saved-development-trace explorer under the existing demo
 and R04/R06 work; it adds no operating control or model calls.
 
-December 7 is the conservative internal report submission target. The exact
-meaning/timezone of midnight, project number and repository release/license
-requirements remain unresolved in #16. Do not turn Nisha's end-of-day assumption
-into an official timestamp or treat a planning date as an actual submission.
+December 7 is the conservative internal report submission target. Nisha confirmed
+the December 9 end-of-day (11:59 pm) meaning and project number 21. Official timezone
+and repository release/license requirements remain unresolved in #16. Arizona
+time is her working assumption, not separately verified official guidance. No
+planning date or filename is evidence of an actual submission.

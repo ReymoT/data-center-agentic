@@ -82,6 +82,7 @@ def test_c_and_d_run_through_p05_with_measured_artifact_hashes(tmp_path, artifac
     units = check_units(cfg, statuses, tmp_path / "out" / cfg.run_id / "units")
     for records, res in units.values():
         assert res.completed_job_ids == ("J1", "J2")
+        assert all(d.config_hash == cfg.config_hash for d in records)
         assert any(d.initial is not None for d in records)  # learned probabilities chose
 
 
