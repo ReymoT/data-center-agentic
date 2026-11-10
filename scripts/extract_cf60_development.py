@@ -28,7 +28,12 @@ from dc_sustainability.data.cf60_extract import (  # noqa: E402
 from dc_sustainability.data.cf60_receiving import development_footprints  # noqa: E402
 from dc_sustainability.data.materialize_development import allocation  # noqa: E402
 
-CODE_FILES = ("scripts/extract_cf60_development.py", "dc_sustainability/data/cf60_extract.py")
+CODE_FILES = (
+    "scripts/extract_cf60_development.py",
+    "dc_sustainability/data/cf60_extract.py",
+    "scripts/launch_cf60_ingest.py",
+    "dc_sustainability/runtime/windows_job.py",
+)
 
 
 def code_pins():
@@ -49,8 +54,8 @@ def revision():
     ).stdout.strip()
 
 
-def run(source, authorization, output):
-    approval_bytes = authorization.read_bytes()
+def preflight(source, approval_bytes, output):
+    """Validate metadata/approval without reading source contents or consuming the ID."""
     approval = json.loads(approval_bytes)
     if (
         approval.get("status") != "approved"
@@ -119,6 +124,15 @@ def run(source, authorization, output):
         raise FileExistsError("preserve existing extract")
     if not output.parent.is_dir() or not source.is_file() or source.resolve() == output.resolve():
         raise ValueError("source or destination metadata unavailable")
+    return approval, pins, limit
+
+
+def run(source, authorization, output, *, approval_bytes=None):
+    # The supervisor supplies the exact approval snapshot it validated, not a reread.
+    if approval_bytes is None:
+        approval_bytes = authorization.read_bytes()
+    approval, pins, limit = preflight(source, approval_bytes, output)
+    indices = approval["permitted_indices"]
     ledger = output.parent / ".cf60-extract-consumed-authorizations"
     ledger.mkdir(exist_ok=True)
     key = hashlib.sha256(approval["authorization_id"].encode()).hexdigest()

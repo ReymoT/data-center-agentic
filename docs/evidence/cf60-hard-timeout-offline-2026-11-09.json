@@ -1,0 +1,30 @@
+{
+  "base_commit": "07b73e09b3adc74bde8e2f9c2e376d4016b60839",
+  "scope": "offline Windows stop-control preparation",
+  "code_sha256": {
+    "scripts/extract_cf60_development.py": "be783d6948ad3fb742c61a2a953703f495f434217a426cf8f95b3b6844ee747d",
+    "dc_sustainability/data/cf60_extract.py": "d2dd7bc83d8118ebfea1b9c39db0b3b706ceeeccd3bed7a974efa13ead5fb3c5",
+    "scripts/launch_cf60_ingest.py": "8ecf9ad26cabadf39ee76f240f20b9ef9ed705bc6c953b8f9ad1344f411704d3",
+    "dc_sustainability/runtime/windows_job.py": "6363a8b1f37bcdad35f0c9251a37b595e6b1a7f4ed2c3cc13702aaa3b479e580"
+  },
+  "maximum_worker_deadline_s": 120,
+  "cleanup_budget_s": 3,
+  "containment": "Windows Job Object; gated worker; kill-on-close; no portable fallback",
+  "real_source_contents_read": false,
+  "real_source_hash_verified": false,
+  "real_ingest_executed": false,
+  "comparison_executed": false,
+  "model_calls": 0,
+  "solver_calls": 0,
+  "source_custody_authorization": "pending",
+  "validation": {
+    "full_native_offline_tests_passed": 2278,
+    "subtests_passed": 19,
+    "host_symlink_skips": 3,
+    "seconds": 95.67,
+    "setup_validator": "pass",
+    "freeze_manifest_validator": "valid pre-freeze; not readiness",
+    "ruff_lint_format": "pass",
+    "compileall": "pass"
+  }
+}
