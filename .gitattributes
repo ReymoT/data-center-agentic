@@ -8,3 +8,7 @@ docs/evidence/i01-action-choice-validation-2026-11-04.json -text
 
 # Preserve Nisha's supplied CF60 receiving evidence byte for byte.
 docs/evidence/cf60-nisha-2026-11-08/* -text
+
+# Preserve Nisha's supplied cb85 receiving files byte for byte.
+docs/evidence/A01_CB85_NISHA_REPORT_2026-11-10.txt -text
+docs/evidence/A01_CB85_NISHA_VERIFIER_2026-11-10.txt -text

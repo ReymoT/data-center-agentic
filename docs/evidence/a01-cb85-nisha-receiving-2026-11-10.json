@@ -1,0 +1,59 @@
+{
+  "accepted_on": "2026-11-10",
+  "report_date_as_supplied": "2026-11-09 19:10 MST (UTC-7)",
+  "reviewer": "Nisha Mahadev Kolekar (nkolekar-nk)",
+  "run_id": "RUN-cb85f5a3425c",
+  "scope": "saved public-development technical receiving only",
+  "decision": "PASS; transfer hash condition resolved by manager recomputation",
+  "supplied_files": {
+    "A01_CB85_NISHA_REPORT_2026-11-10.txt": {
+      "bytes": 9681,
+      "sha256": "0e876c20bc8eb6c7f7dcf1c825363f60ebaae8d9b137cb584e22d7f872f4e010"
+    },
+    "A01_CB85_NISHA_VERIFIER_2026-11-10.txt": {
+      "bytes": 2640,
+      "sha256": "baf16cf44138deb605532ff355d0050bcf9cbb7506953279d5c1b1ac04305ad1"
+    }
+  },
+  "packet": {
+    "bytes": 5028073,
+    "sha256": "c5ec6470d2c35502c739b73e89fef54dc447a1a785d6e80f70b60e600979de08",
+    "manager_recomputed": true,
+    "matches_report": true
+  },
+  "manager_checks": {
+    "saved_evidence_verifier": "exit 0; JSON exactly equals supplied verifier output",
+    "packet_manifest_rows_checked": 1045,
+    "original_run_files_checked": 390,
+    "execution_pins_checked": 80,
+    "reference_files_LF_compared_to_actual_git_commit": 644,
+    "execution_commit": "44c889735d43f5aabcabdb0bd789d8b3f5ce5286",
+    "claim_pairing_fix_is_ancestor": true,
+    "model_requests": 0
+  },
+  "observations": {
+    "results": 6,
+    "traces": 180,
+    "plain_requests": 5,
+    "agent_requests": 12,
+    "claim_pairs": 39,
+    "cap_hits_256": 0,
+    "replay_findings": 0,
+    "result_mismatches": 0,
+    "optional_trace_config_hash_missing": 180
+  },
+  "not_supplied": [
+    "cb85_review.py",
+    "cb85_extra.py",
+    "cb85-review-report.json",
+    "cb85-extra-report.json"
+  ],
+  "unresolved": [
+    "explanation-content/faithfulness assessment",
+    "shared/default adoption",
+    "full I01/I04 acceptance",
+    "source/custody/CF60 acceptance",
+    "I02 scientific freeze"
+  ],
+  "new_run_authorized": false
+}

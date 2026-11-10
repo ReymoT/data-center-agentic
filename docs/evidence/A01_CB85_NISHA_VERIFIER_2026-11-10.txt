@@ -1,0 +1,123 @@
+{
+  "status": "automated_saved_evidence_checks_passed",
+  "run_id": "RUN-cb85f5a3425c",
+  "original_run_files": 390,
+  "execution_source_pins": 80,
+  "results": [
+    {
+      "system": "greedy_a",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "decision_tree_c",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "greedy_b",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "random_forest_d",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "agent",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "missed_job_ids": [
+        "J3"
+      ]
+    },
+    {
+      "system": "plain_llm",
+      "traces": 30,
+      "replay_findings": 0,
+      "result_mismatches": 0,
+      "completed_job_ids": [],
+      "missed_job_ids": [
+        "J1",
+        "J2",
+        "J3"
+      ]
+    }
+  ],
+  "requests": {
+    "agent": 12,
+    "plain_llm": 5
+  },
+  "optional_trace_config_hash_missing": 180,
+  "claim_pairs": {
+    "plain_llm": {
+      "numeric": 20,
+      "null_pair": 0,
+      "invalid_pair": 0
+    },
+    "agent": {
+      "numeric": 19,
+      "null_pair": 0,
+      "invalid_pair": 0
+    }
+  },
+  "field_lengths": {
+    "plain_llm": {
+      "explanations": 5,
+      "fields": 34,
+      "cap_hits": 0,
+      "over_limit": 0
+    },
+    "agent": {
+      "explanations": 5,
+      "fields": 39,
+      "cap_hits": 0,
+      "over_limit": 0
+    }
+  },
+  "model_requests_made_by_verifier": 0,
+  "limitations": [
+    "Supplied review aid, not a prefilled separate-person receiving judgment.",
+    "Captured native/offline count evidence compared; not independently retokenized.",
+    "Historical live runtime/GPU/cleanup not rerun or independently observed.",
+    "Structural replay and paired fields do not establish faithfulness or study success."
+  ]
+}
