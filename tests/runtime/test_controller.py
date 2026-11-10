@@ -269,3 +269,34 @@ def test_thirty_actual_slots_drain_running_work_and_keep_each_trace(tmp_path):
         assert store.read(draft.decision_id) == result.record
     assert len(sim.history) == 30
     assert sim.result(run_id="RUN-GATE", system="greedy_a").completed_job_ids == ("J1", "J2")
+
+
+@pytest.mark.parametrize("wrong", ["config", "run"])
+def test_bound_config_mismatch_stops_before_reservation_or_effect(tmp_path, wrong):
+    ep, sim, store, _ = setup(tmp_path)
+    digest = "a" * 64
+    controller = ExecutionController(sim, lambda: ep.snapshot, store, config_hash=digest)
+    record = intention(sim, ep.snapshot).model_copy(
+        update={
+            "run_id": "RUN-" + ("b" * 12 if wrong == "run" else digest[:12]),
+            "config_hash": "b" * 64 if wrong == "config" else None,
+        }
+    )
+    before = sim.state()
+    with pytest.raises(ValueError, match="config"):
+        execute(controller, record)
+    assert sim.state() == before
+    assert not list((store.directory / ".execution-intents").iterdir())
+
+
+def test_bound_config_is_added_before_fingerprint_and_replay(tmp_path):
+    ep, sim, store, _ = setup(tmp_path)
+    digest = "a" * 64
+    controller = ExecutionController(sim, lambda: ep.snapshot, store, config_hash=digest)
+    record = intention(sim, ep.snapshot).model_copy(update={"run_id": "RUN-" + digest[:12]})
+    first = execute(controller, record)
+    assert first.record.config_hash == digest and record.config_hash is None
+    after = sim.state()
+    repeated = execute(controller, record)
+    assert repeated.replayed and repeated.record == first.record
+    assert sim.state() == after

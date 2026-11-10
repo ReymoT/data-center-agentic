@@ -71,6 +71,7 @@ def test_full_episode_runs_all_30_slots_through_the_controller(tmp_path, system)
     records = traces(root, status.unit)
     assert [d.slot for d in records] == list(range(30))
     assert all(d.system == system and d.run_id == cfg.run_id for d in records)
+    assert all(d.config_hash == cfg.config_hash for d in records)
     assert all(d.model_call_count == 0 for d in records)
     completion = records[24:]
     assert all(d.final_status == "blocked" and not d.executed_starts for d in completion)

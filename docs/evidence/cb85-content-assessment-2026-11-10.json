@@ -1,0 +1,308 @@
+{
+  "scope": "AI-assisted manager technical content assessment; not independent human ratings or study scoring",
+  "date": "2026-11-10",
+  "run_id": "RUN-cb85f5a3425c",
+  "packet_sha256": "c5ec6470d2c35502c739b73e89fef54dc447a1a785d6e80f70b60e600979de08",
+  "reviewed_outputs": [
+    {
+      "system": "agent",
+      "slot": 0,
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s00",
+      "attempt_sha256": "484415c72c26cfac83fb719a5190fce32c79a010e36131106051e914eaf829c2",
+      "request_sha256": "1ac92a467f087e3492f581ca275cb43e971c456183f8f317a8788e76e670a950",
+      "response_sha256": "1d4991ce461279223d9f6a4cdd79a564a642da86433182c932cd01de6e26bc28",
+      "explanation_sha256": "588f7708dcdbce4bd963067eb2bb10b2893c1fd3af5a21d71db572effd45a65a",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "claim_count": 4,
+      "max_field_length": 226,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": true
+    },
+    {
+      "system": "agent",
+      "slot": 1,
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s01",
+      "attempt_sha256": "ef22519ef17ed68ec50628ddcf6e31bdc3811784596a1bdc1f324147b3549ca9",
+      "request_sha256": "18fc5119c175f0824d5deb9c6b5d0fff90e75a19422aec6d3f8232797c6cb299",
+      "response_sha256": "6373b4dfb1277508ffc3e9792d0696396cc91e1b63bb385ad4405fcce1e8f13c",
+      "explanation_sha256": "9f94a897e6b6a86c2ac45b08d06c396111d2f092cec17dcc518c65365f713029",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "claim_count": 4,
+      "max_field_length": 146,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": true
+    },
+    {
+      "system": "agent",
+      "slot": 2,
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s02",
+      "attempt_sha256": "da33dbc5d1e1afb197f09eb68c865adee15ff88c801c24567e53596f2be8bf3b",
+      "request_sha256": "f58995b0bc42adc9fbcbb52db3fc9a0866b78ba57790d07e402f38716c272ef7",
+      "response_sha256": "2b622123c873fcea8f75162686b48ebfbe1b88b34e4a0b38aa1843fec06b4655",
+      "explanation_sha256": "e7e1a18ce1182af9c362d9fe9ed8a023328bb6ed5508b72ee31d2fa00119e764",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "claim_count": 4,
+      "max_field_length": 190,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": true
+    },
+    {
+      "system": "agent",
+      "slot": 3,
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s03",
+      "attempt_sha256": "27b2f7c58373f703248c8bf789f186b6a6cf04b02b171fbccf207b1f36b09a52",
+      "request_sha256": "b11f1ed86df2a1cc0ce39b142fbc5c56cf6db398b75f532b063f1e28988cde86",
+      "response_sha256": "7bbeffcd1f244ccc05f9189fcee2f7c06ae1728af43c1dd988ed4977957df4b7",
+      "explanation_sha256": "43cd427eef2fd1526a1a97df9cb0d979a96d37af11b929f6ffb3ff29ddfed979",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "claim_count": 3,
+      "max_field_length": 158,
+      "numeric_pairs": 3,
+      "context_evidence_ids_checked": true
+    },
+    {
+      "system": "agent",
+      "slot": 4,
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s04",
+      "attempt_sha256": "7d0cc2df41f80f4a0b8c4732dad06484ca2e850f7805e510b3c7d33744a0664b",
+      "request_sha256": "b33a8f69d52f48535bcd871582c38ac0b197428c1650d04b5efd25cb3ebf3233",
+      "response_sha256": "46034f625da729f2df3ad4a88dfc4f8f3f75d70dd6ec330144eebf0a7d132f69",
+      "explanation_sha256": "beb6a470a126baab1d75b52002af940d486409d25a4a64add6861ffe5550dd89",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "claim_count": 4,
+      "max_field_length": 110,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": true
+    },
+    {
+      "system": "plain_llm",
+      "slot": 0,
+      "decision_id": "DEC-cb85f5a342.pl.EP-HAND1.t0.s00",
+      "attempt_sha256": "756408a0d43a4645aef43ae998a02b78ab39742fe6a0f66aa927952aae9b2de3",
+      "request_sha256": "a8937af2aed9e2e448992a989b3e5f9f4e6cf66ddd244f839dfbe60818341abc",
+      "response_sha256": "a82ff77162f7e0fdc9bdefc65baf625ca726d4ebf262adb2bd4ac8be1a46ceab",
+      "explanation_sha256": "3e7602bd44566a9c1fb5c170b8f5225296ac1ecaf00bc5585d692e590522ebb1",
+      "claim_ids": [
+        "CLAIM-001",
+        "CLAIM-002",
+        "CLAIM-003",
+        "CLAIM-004"
+      ],
+      "claim_count": 4,
+      "max_field_length": 96,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 1,
+      "decision_id": "DEC-cb85f5a342.pl.EP-HAND1.t0.s01",
+      "attempt_sha256": "2dccef7f62874dfa3b63fa22da63f92499b44fa16f1aa20b03e525bb5700b552",
+      "request_sha256": "143c3f1a2dfc63fa6dad1c0632dbba35cf20e0057347bc3f267b99deddbb4e24",
+      "response_sha256": "a014bded92dc5a24f666f11ce82460efa001df9c52130df815b87df3e02e514f",
+      "explanation_sha256": "4d28a0150922bf6ebce4f86084d64c640ab39a057d75d19b07b8908302c8687c",
+      "claim_ids": [
+        "CLAIM-START-J1",
+        "CLAIM-DEFER-J2",
+        "CLAIM-EMISSIONS-FORECAST",
+        "CLAIM-CAPACITY-CONSUMPTION"
+      ],
+      "claim_count": 4,
+      "max_field_length": 89,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 2,
+      "decision_id": "DEC-cb85f5a342.pl.EP-HAND1.t0.s02",
+      "attempt_sha256": "923da0fde58fd55547604bbf7775f12edeee756da7590fb152d79525117ee87c",
+      "request_sha256": "e9c14e540faca8c7dceb8ee8867d4e8baed4faf5fb76f77ed7ed39690f1af5db",
+      "response_sha256": "1c9fc6bce1b2d60ecaa6412db0ce65daad0e4cd1792291c9df546787219b56ae",
+      "explanation_sha256": "36403b0affecb1a4d8181b0392b72c4268960596bf27ce30eccc72308c27071c",
+      "claim_ids": [
+        "CLAIM-01",
+        "CLAIM-02",
+        "CLAIM-03",
+        "CLAIM-04"
+      ],
+      "claim_count": 4,
+      "max_field_length": 119,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 3,
+      "decision_id": "DEC-cb85f5a342.pl.EP-HAND1.t0.s03",
+      "attempt_sha256": "ae36bdf52742f929c806c7fe433a05fdc5409d2a142cdc662728f71b5a3dbc76",
+      "request_sha256": "c0497cecb3f9cb8562a3ab743a537d44463f552af23257a6419c0d475fb33278",
+      "response_sha256": "957a6ecdee4724720cb9a229259acc8af668a42a2ff0c9248b93edb974c3482a",
+      "explanation_sha256": "111d4da18b32d13eef53694c85e4e5274fd2c82b054817b2b51006395c9fe950",
+      "claim_ids": [
+        "CLAIM-001",
+        "CLAIM-002",
+        "CLAIM-003",
+        "CLAIM-004"
+      ],
+      "claim_count": 4,
+      "max_field_length": 93,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": false
+    },
+    {
+      "system": "plain_llm",
+      "slot": 4,
+      "decision_id": "DEC-cb85f5a342.pl.EP-HAND1.t0.s04",
+      "attempt_sha256": "b5305d6818c1d657c3a871d89935b4d45a834c7d22bceaf1ac4701c228855aee",
+      "request_sha256": "4360c4f29307b4f33f8117267d10dc12b91b508c2ee194c707f1712eed394cfb",
+      "response_sha256": "e2877aa0ece5e3c8e7eeae887a3ac80d2552c2f4778ea0152e67f94380568662",
+      "explanation_sha256": "c6bad08a12e44aa4c8eb9c8f3a8f919ebe6948df37a75c50147f109ad538609f",
+      "claim_ids": [
+        "CLAIM-01",
+        "CLAIM-02",
+        "CLAIM-03",
+        "CLAIM-04"
+      ],
+      "claim_count": 4,
+      "max_field_length": 99,
+      "numeric_pairs": 4,
+      "context_evidence_ids_checked": false
+    }
+  ],
+  "claim_count": 39,
+  "cap_hits_256": 0,
+  "findings": [
+    {
+      "id": "CBA-01",
+      "system": "plain_llm",
+      "slot": 0,
+      "location": "CLAIM-003",
+      "finding": "Proposed simultaneous starts require background 40 + J1 40 + J2 30 = 110 kW against 100 kW. The capacity-respected claim conflicts with the plan/check.",
+      "evidence": [
+        "CON-CAP-01",
+        "FACT-SITE-BG",
+        "FACT-JOB-J1",
+        "FACT-JOB-J2",
+        "initial check fail"
+      ],
+      "disposition": "retain original; flag for content review; no formal rating assigned"
+    },
+    {
+      "id": "CBA-02",
+      "system": "plain_llm",
+      "slot": 0,
+      "location": "limitations[0]",
+      "finding": "Statement that forecasts beyond slot 0 are missing conflicts with visible facts for slots 1-6; the missing list begins at 7.",
+      "evidence": [
+        "FACT-CI-s01 through FACT-CI-s06",
+        "missing_carbon_slots"
+      ],
+      "disposition": "retain original; flag for content review"
+    },
+    {
+      "id": "CBA-03",
+      "system": "plain_llm",
+      "slots": [
+        1,
+        2,
+        3
+      ],
+      "location": "staleness/freshness and minimization language",
+      "finding": "Stale or freshness-respected assertions are not established by the missing trusted decision UTC. Local visible CI facts do not certify global emissions minimization. Missing future forecasts must not be relabelled stale.",
+      "evidence": [
+        "CON-FRESH-01",
+        "current visible forecast facts",
+        "trusted decision UTC limitation"
+      ],
+      "disposition": "separate unsupported rationale from numeric values and plan intentions"
+    },
+    {
+      "id": "CBA-04",
+      "system": "agent",
+      "slots": [
+        0,
+        3
+      ],
+      "location": "slot0 C2; slot3 C1/C3",
+      "finding": "J2 deadline claims cite CON-DL-J1, whose applies_to_jobs is J1. J2 deadline 6 is available in FACT-JOB-J2, but that supporting fact is not cited by these claims. A true deadline number does not repair citation applicability.",
+      "evidence": [
+        "CON-DL-J1.applies_to_jobs=[J1]",
+        "FACT-JOB-J2.deadline_slot=6"
+      ],
+      "disposition": "citation-support finding, not a claim that J2 deadline is numerically false"
+    },
+    {
+      "id": "CBA-05",
+      "system": "agent",
+      "slots": [
+        0,
+        1,
+        2
+      ],
+      "location": "all-constraints or deferral rationale",
+      "finding": "Physical check PASS is supported, but freshness was skipped. Do not expand check PASS into universal verification or treat a carbon-wait rationale as a proved optimality result.",
+      "evidence": [
+        "CheckResult.performed",
+        "CheckResult.skipped freshness",
+        "impact_claim_support unsupported"
+      ],
+      "disposition": "qualify scope; retained limitations matter"
+    },
+    {
+      "id": "CBA-06",
+      "system": "agent",
+      "slot": 4,
+      "location": "C3/C4",
+      "finding": "Forecast numbers 400 and 480 g/kWh match the cited facts. The added assertion that they were used for emissions calculation is not substantiated by an impact calculation in this explanation request; impact support is unsupported.",
+      "evidence": [
+        "FACT-CI-s04=400",
+        "FACT-CI-s05=480",
+        "impact_claim_support unsupported"
+      ],
+      "disposition": "separate supported numeric facts from unsupported process/impact assertion"
+    },
+    {
+      "id": "CBA-07",
+      "system": "plain_llm",
+      "slot": 1,
+      "location": "CLAIM-CAPACITY-CONSUMPTION",
+      "finding": "The paired 40 kW equals one component; J1 plus background totals 80 kW. Numerical association to the combined-load wording is ambiguous even though capacity feasibility for J1 alone is true.",
+      "evidence": [
+        "FACT-SITE-BG=40 kW",
+        "FACT-JOB-J1=40 kW",
+        "CON-CAP-01=100 kW"
+      ],
+      "disposition": "flag value/text association for review, not automatic relabeling"
+    }
+  ],
+  "decision": "Do not promote shared defaults on this one-episode technical PASS. Keep 256/4096 opt-in profile unchanged pending explicit affected-owner adoption and content protocol acceptance. No prompt or scoring change adopted.",
+  "formal_ratings_written": false,
+  "originals_modified": false,
+  "model_requests": 0,
+  "research_conclusion": "No held-out accuracy/faithfulness/safety improvement established."
+}

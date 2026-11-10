@@ -218,7 +218,10 @@ def _drive_episode(
     simulator = SchedulingSimulator(allow_completion_starts=False)
     simulator.reset(episode, forecasts_by_slot=bundle.forecasts_by_slot)
     controller = ExecutionController(
-        simulator, lambda: episode.snapshot, TraceStore(folder / "traces")
+        simulator,
+        lambda: episode.snapshot,
+        TraceStore(folder / "traces"),
+        config_hash=config.config_hash,
     )
     step = None
     if registry.spec(unit.system).trials:

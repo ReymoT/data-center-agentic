@@ -4,6 +4,7 @@ One controller is the sole simulator mutator. Its lock serializes its own calls;
 it does not claim protection against unrelated code directly mutating S01.
 """
 
+import re
 import threading
 from dataclasses import dataclass
 
@@ -20,7 +21,12 @@ class ExecutionOutcome:
 
 
 class ExecutionController:
-    def __init__(self, simulator, snapshot_reader, trace_store: TraceStore):
+    def __init__(self, simulator, snapshot_reader, trace_store: TraceStore, *, config_hash=None):
+        if config_hash is not None and (
+            not isinstance(config_hash, str) or re.fullmatch(r"[0-9a-f]{64}", config_hash) is None
+        ):
+            raise ValueError("config_hash must be a lowercase SHA256")
+        self._config_hash = config_hash
         self._simulator = simulator
         self._snapshot_reader = snapshot_reader
         self._traces = trace_store
@@ -42,6 +48,14 @@ class ExecutionController:
         if not isinstance(record, s.DecisionRecord):
             raise TypeError("controller requires DecisionRecord, never direct ApprovedActions")
         record = s.DecisionRecord.model_validate(record.model_dump(mode="python"), strict=True)
+        if self._config_hash is not None:
+            if record.config_hash not in (None, self._config_hash):
+                raise ValueError("decision config hash differs from bound run")
+            if record.run_id != "RUN-" + self._config_hash[:12]:
+                raise ValueError("decision run ID differs from bound config")
+            record = s.DecisionRecord.model_validate(
+                {**record.model_dump(mode="python"), "config_hash": self._config_hash}, strict=True
+            )
         if stage not in {None, "initial", "repaired", "fallback"}:
             raise ValueError("unknown selected stage")
         if type(expected_state_version) is not int or expected_state_version < 0:

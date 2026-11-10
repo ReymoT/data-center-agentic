@@ -131,6 +131,7 @@ def test_plain_and_agent_units_run_whole_episodes_with_a_ledger_per_trial(tmp_pa
     for st in statuses:
         records = traces(root, st.unit)
         assert [d.slot for d in records] == list(range(30))
+        assert all(d.config_hash == cfg.config_hash for d in records)
         assert all(d.system == st.unit.system and d.trial == st.unit.trial for d in records)
         assert all(d.model_call_count == 0 for d in records[24:])  # completion slots
         assert all(d.model_call_count <= m.CALL_CAP[st.unit.system] for d in records)
