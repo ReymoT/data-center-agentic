@@ -1,5 +1,8 @@
 # Reimo D04/D05 Issue #60 custody handoff
 
+November 10 operational update: [the v2 forecast-union amendment](NOV10_SELECTOR_CONTENT_AND_TRACE.md) supersedes the v1 selector/receipt version described below. Current code requires d04-held-custody-v2-forecast-union and sha256-rank-greedy-fixed-development-forecast-union-v2. The earlier v1 proposal and validation remain historical evidence, not current execution instructions. No real nonce or selection exists; Nisha must receive and pin the amended code before her private preparation. Source/custody and separate execution gates remain open.
+
+
 Reimo produces D04 allocation tooling; Nisha independently receives private custody.
 Reviewed base: `6e653e85c0432ffc135d11194914dade6173e6db`, instruction 1.28.
 Task branch: `reimo/issue60-held-out-custody-review`. F02 1.0.0 is unchanged.
