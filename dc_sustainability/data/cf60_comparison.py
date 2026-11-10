@@ -60,6 +60,9 @@ def compare(records, rows, saved_states=(), *, time_limit_s=1800, authorization=
         key = state.episode_id, state.current_slot
         if key[0] not in by_episode or key in states:
             raise ValueError("unknown or duplicate saved state")
+        if not 0 <= key[1] < 30:
+            # F02 Slot has no upper bound; an unused state must not reduce the missing count.
+            raise ValueError("saved state slot outside the 30 compared issues")
         s.Context.build(state, snapshot, representation="flat")
         states[key] = state, snapshot
     source = s.SourceRef(

@@ -3,6 +3,9 @@
 import argparse
 import hashlib
 import json
+import math
+import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -19,6 +22,17 @@ def pinned_json(path, expected):
     if hashlib.sha256(payload).hexdigest() != expected:
         raise ValueError(f"input checksum mismatch: {path.name}")
     return json.loads(payload)
+
+
+def checkout_revision():
+    status = subprocess.run(
+        ["git", "status", "--porcelain"], cwd=ROOT, check=True, capture_output=True, text=True
+    )
+    if status.stdout.strip():
+        raise ValueError("clean comparison checkout required")
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, capture_output=True, text=True
+    ).stdout.strip()
 
 
 def run(extract_path, authorization_path, output, states_path=None):
@@ -55,6 +69,58 @@ def run(extract_path, authorization_path, output, states_path=None):
             or actual_path.resolve() != Path(expected_path).resolve()
         ):
             raise ValueError(f"authorized path mismatch: {key}")
+    # Validate the final record and destinations before consuming its single-use ID.
+    for field in ("extract_sha256", "states_sha256"):
+        value = approval.get(field)
+        if field == "states_sha256" and states_path is None and value is None:
+            continue
+        if not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None:
+            raise ValueError(f"invalid authorization checksum: {field}")
+    if states_path is None and approval.get("states_sha256") is not None:
+        raise ValueError("authorized saved states were not supplied")
+    if states_path is not None and (
+        not isinstance(approval.get("states_provenance_ref"), str)
+        or not approval["states_provenance_ref"].strip()
+    ):
+        raise ValueError("saved-state provenance reference required")
+    time_limit = approval.get("time_limit_s")
+    if (
+        type(time_limit) not in (int, float)
+        or not math.isfinite(time_limit)
+        or not 0 < time_limit <= 1800
+    ):
+        raise ValueError("time limit must be positive and at most 1800 seconds")
+    revision = approval.get("code_revision")
+    if (
+        not isinstance(revision, str)
+        or re.fullmatch(r"[0-9a-f]{40}", revision) is None
+        or revision != checkout_revision()
+    ):
+        raise ValueError("comparison checkout differs from authorized revision")
+    records = allocation()[0]["records"]
+    from dc_sustainability.data.cf60_receiving import development_footprints
+
+    allowed = sorted(
+        {
+            index
+            for row in development_footprints(records)
+            for name in ("legacy_reads", "start_cf60_reads", "end_cf60_reads")
+            for index in row[name]
+        }
+    )
+    proposed = approval.get("permitted_indices")
+    if (
+        not isinstance(proposed, list)
+        or any(type(i) is not int for i in proposed)
+        or proposed != allowed
+    ):
+        raise ValueError("authorization must bind the exact development index set")
+    if output.exists():
+        raise FileExistsError("preserve existing comparison output")
+    if not output.parent.is_dir():
+        raise ValueError("existing output parent required")
+    if not extract_path.is_file() or (states_path is not None and not states_path.is_file()):
+        raise ValueError("authorized input file is unavailable")
     authorization_id = approval["authorization_id"]
     if not isinstance(authorization_id, str) or not authorization_id.strip():
         raise ValueError("nonempty single-use authorization ID required")
@@ -90,9 +156,8 @@ def run(extract_path, authorization_path, output, states_path=None):
             states = pinned_json(states_path, approval["states_sha256"])
         elif approval.get("states_sha256") is not None:
             raise ValueError("authorized saved states were not supplied")
-        manifest, _ = allocation()
         result = compare(
-            manifest["records"],
+            records,
             rows,
             states,
             time_limit_s=approval["time_limit_s"],

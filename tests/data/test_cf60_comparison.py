@@ -52,6 +52,18 @@ def test_projection_q04_features_and_missing_state_counts():
     assert old[0]["values"][-1] - new[0]["values"][-1] == 2
 
 
+@pytest.mark.parametrize("slot", [30, 45])
+def test_saved_state_outside_compared_slots_is_rejected(slot):
+    records, rows = inputs()
+    site = snapshot()
+    state = s.VisibleState.from_snapshot(
+        site, episode_id=records[0]["episode_id"], current_slot=slot, state_version=0
+    )
+    entry = {"state": state.to_jsonable(), "snapshot": site.to_jsonable()}
+    with pytest.raises(ValueError, match="outside the 30 compared issues"):
+        compare(records, rows, [entry])
+
+
 def test_missing_history_is_not_zero():
     records, _ = inputs()
     result = compare(records, {})
@@ -69,7 +81,10 @@ def test_reject_extra_rows_and_invalid_budget():
         compare(records, rows, time_limit_s=1801)
 
 
-def test_cli_rejects_pin_and_output_reuse(tmp_path):
+def test_cli_rejects_pin_and_output_reuse(tmp_path, monkeypatch):
+    from scripts import compare_cf60_development as driver
+
+    monkeypatch.setattr(driver, "checkout_revision", lambda: "1" * 40)
     records, rows = inputs()
     from dc_sustainability.data.carbon_source import SHA256
 
@@ -89,6 +104,7 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
     }
     approval = {
         "authorization_id": "synthetic-first",
+        "code_revision": "1" * 40,
         "status": "approved",
         "scope": "cf60-development-forecast-features-only",
         "source_sha256": SHA256,
@@ -137,3 +153,54 @@ def test_cli_rejects_pin_and_output_reuse(tmp_path):
     auth.write_text(json.dumps(approval))
     with pytest.raises(ValueError, match="checksum mismatch"):
         run(extract, auth, tmp_path / "unused")
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("extract_sha256", None),
+        ("extract_sha256", "bad"),
+        ("time_limit_s", True),
+        ("time_limit_s", 1801),
+        ("permitted_indices", []),
+        ("code_revision", None),
+    ],
+)
+def test_invalid_authorization_is_rejected_before_consumption(tmp_path, monkeypatch, field, value):
+    from dc_sustainability.data.carbon_source import SHA256
+    from scripts import compare_cf60_development as driver
+
+    _, rows = inputs()
+    extract = tmp_path / "synthetic.json"
+    extract.write_text("{}")
+    output = tmp_path / "out"
+    monkeypatch.setattr(driver, "checkout_revision", lambda: "1" * 40)
+    pins = {
+        name: hashlib.sha256((ROOT / name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+        for name in (
+            "scripts/compare_cf60_development.py",
+            "dc_sustainability/data/cf60_comparison.py",
+            "dc_sustainability/data/cf60_broker.py",
+        )
+    }
+    approval = {
+        "status": "approved",
+        "scope": "cf60-development-forecast-features-only",
+        "source_sha256": SHA256,
+        "authorization_id": "SYNTHETIC-preflight",
+        "code_revision": "1" * 40,
+        "code_sha256": pins,
+        "extract_sha256": hashlib.sha256(extract.read_bytes()).hexdigest(),
+        "extract_path": str(extract),
+        "output_path": str(output),
+        "permitted_indices": sorted(rows),
+        "time_limit_s": 1800,
+    }
+    approval[field] = value
+    auth = tmp_path / "approval.json"
+    auth.write_text(json.dumps(approval))
+    monkeypatch.setattr(driver, "pinned_json", lambda *a: pytest.fail("must not open input"))
+    with pytest.raises(ValueError):
+        driver.run(extract, auth, output)
+    assert not output.exists()
+    assert not (tmp_path / ".cf60-consumed-authorizations").exists()

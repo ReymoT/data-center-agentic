@@ -75,3 +75,5 @@ the actual comparison. The [compatibility plan](CF60_DEVELOPMENT_COMPATIBILITY_P
 still governs those steps.
 
 The [November 9 input/execution proposal](CF60_INPUT_EXECUTION_PROPOSAL_2026-11-09.md) now separates source ingestion, exact extract pinning and later comparison approval. It explicitly discloses whole-file hashing/CSV traversal and the 1200 currently missing saved states. It does not authorize or execute those operations.
+
+November 9 offline hardening: saved-state slots must be 0–29. Final approval preflight validates exact code revision on a clean checkout, hashes, indices, paths and time bounds before consuming the ID. Supplied states require states_provenance_ref. Pending templates cannot launch. The new scoped extractor is synthetic-tested only; see the input proposal for the physical read footprint and remaining custody/source decisions. No real comparison has run.

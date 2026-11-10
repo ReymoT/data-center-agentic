@@ -1,0 +1,24 @@
+{
+  "base_commit": "531caddee32e469c22b4705050e9c0e60343a68b",
+  "scope": "synthetic-only offline hardening",
+  "extractor_code_sha256": {
+    "scripts/extract_cf60_development.py": "4ad47f0e204cc45929cfb7269c4dc5eaddfebde186b9ec22613186a851075ecd",
+    "dc_sustainability/data/cf60_extract.py": "d2dd7bc83d8118ebfea1b9c39db0b3b706ceeeccd3bed7a974efa13ead5fb3c5"
+  },
+  "comparison_code_sha256": {
+    "scripts/compare_cf60_development.py": "e1fa4e220f6e9792f83e1eef2a6d2a2a194053427fea89eedb5ad9f7af14060d",
+    "dc_sustainability/data/cf60_comparison.py": "010eab6ec2994c38adbfc776a59843b3dda063bcb29594ee67a43ea67cc5d748",
+    "dc_sustainability/data/cf60_broker.py": "832e6cfe27a41e457e0775ca825b6ec8debea3b2c6d34d5dfb5310d330b5ce56"
+  },
+  "focused_tests_passed": 34,
+  "source_contents_read": false,
+  "source_hash_verified": false,
+  "extract_ready": false,
+  "comparison_executed": false,
+  "saved_states_missing": 1200,
+  "model_calls": 0,
+  "solver_calls": 0,
+  "custody_and_nonce_timing": "pending",
+  "source_B1_B2_B3": "unresolved",
+  "source_B4": "provisional"
+}
