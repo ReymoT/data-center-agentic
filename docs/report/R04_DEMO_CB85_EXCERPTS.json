@@ -1,0 +1,117 @@
+{
+  "evidence_kind": "selected fields from actual saved public-development records; not a new run or rating",
+  "run_id": "RUN-cb85f5a3425c",
+  "source_checkout": "44c889735d43f5aabcabdb0bd789d8b3f5ce5286",
+  "records": [
+    {
+      "run_id": "RUN-cb85f5a3425c",
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s00",
+      "system": "agent",
+      "trial": 0,
+      "slot": 0,
+      "final_status": "executed",
+      "model_call_count": 3,
+      "executed_starts": [
+        {
+          "job_id": "J1",
+          "start_slot": 0
+        }
+      ],
+      "original_record_sha256": "692280aabe68ea8480c6b24caac4326a57cc48f34189e8b68ba185715455d009",
+      "stages": {
+        "initial": {
+          "planned_starts": [],
+          "check_status": "fail",
+          "plan_hash": "a101afd85239af371127e7d5a0f3aaff21de9fb52fc2e7b452dc8ed87f476547"
+        },
+        "repaired": {
+          "planned_starts": [
+            {
+              "job_id": "J1",
+              "start_slot": 0
+            },
+            {
+              "job_id": "J2",
+              "start_slot": 0
+            }
+          ],
+          "check_status": "fail",
+          "plan_hash": "4ed140633ed9631dfae838cd29f74f19dcbed66a162a7b81984cbf62c734472e"
+        },
+        "fallback": {
+          "planned_starts": [
+            {
+              "job_id": "J1",
+              "start_slot": 0
+            },
+            {
+              "job_id": "J2",
+              "start_slot": 2
+            }
+          ],
+          "check_status": "pass",
+          "plan_hash": "babde0eac86db2755c9c12d788dd148d4dae859f25fe92037b8c0c2ec244a7a6"
+        }
+      },
+      "execution_check": {
+        "status": "pass",
+        "plan_hash": "babde0eac86db2755c9c12d788dd148d4dae859f25fe92037b8c0c2ec244a7a6",
+        "impact_claim_support": "unsupported",
+        "skipped": [
+          {
+            "name": "freshness",
+            "reason": "Q04 routing requires a separately supplied trusted decision UTC"
+          }
+        ]
+      },
+      "explanation_text_included": false
+    },
+    {
+      "run_id": "RUN-cb85f5a3425c",
+      "decision_id": "DEC-cb85f5a342.ag.EP-HAND1.t0.s03",
+      "system": "agent",
+      "trial": 0,
+      "slot": 3,
+      "final_status": "executed",
+      "model_call_count": 2,
+      "executed_starts": [
+        {
+          "job_id": "J2",
+          "start_slot": 3
+        }
+      ],
+      "original_record_sha256": "1c79d36b4a6aba5d643f7baa742af5878b4890f5cbfd53d9c5248a7ce8a05912",
+      "stages": {
+        "initial": {
+          "planned_starts": [
+            {
+              "job_id": "J2",
+              "start_slot": 3
+            }
+          ],
+          "check_status": "pass",
+          "plan_hash": "ec4a7ca0ccd33cc9515b89edd67af4ea8d85652c93ae7ba78439c3af4345fcfd"
+        },
+        "repaired": null,
+        "fallback": null
+      },
+      "execution_check": {
+        "status": "pass",
+        "plan_hash": "ec4a7ca0ccd33cc9515b89edd67af4ea8d85652c93ae7ba78439c3af4345fcfd",
+        "impact_claim_support": "unsupported",
+        "skipped": [
+          {
+            "name": "freshness",
+            "reason": "Q04 routing requires a separately supplied trusted decision UTC"
+          }
+        ]
+      },
+      "explanation_text_included": false
+    }
+  ],
+  "limitations": [
+    "Source field values copied without changing original records.",
+    "The older trace explorer is a different run; do not relabel it.",
+    "Physical/structural checks are not human faithfulness or source/CF60 acceptance."
+  ]
+}

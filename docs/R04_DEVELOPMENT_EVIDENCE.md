@@ -1,6 +1,15 @@
 # Agent and verification: development-evidence draft
 
-Latest: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
+## Current corrected public validation — November 9
+
+[RUN-cb85f5a3425c passed its bounded technical validation](handoffs/A01_PAIRED_CLAIM_VALIDATION_RESULT_2026-11-09.md): six complete results, 180 decision records, 17 model requests (5 Plain, 12 Agent) and 532.219 seconds. All 17 native counts matched the offline counts; E01 replay/structural comparison had zero findings or result mismatches, and cleanup passed. All 39 generated claims paired numeric values and units. No generated explanation field reached the 256-character cap. The null/null claim branch was not sampled in this run.
+
+Agent completed J1 through checked fallback at slot 0 and J2 from an initial model plan at slot 3; both recorded repairs failed their checks. Plain completed no jobs. Pairing and field lengths do not establish numeric truth or faithfulness. Trusted-UTC freshness and impact-support limitations remain. Separate-person receiving is offered by Nisha but no returned report is recorded yet; settings adoption, source/CF60 acceptance and scientific freeze remain pending.
+
+This is one public episode and one seed, not a held-out study or proof of research superiority. The older failed runs remain retained. The [current five-minute script](report/R04_FIVE_MINUTE_SCRIPT_2026-11-09.txt) and [new-run stage excerpts](report/R04_DEMO_CB85_EXCERPTS.json) distinguish this result from the older trace-explorer snapshot. Older dated material below is historical evidence, not the current run's settings or receiving status.
+
+
+Earlier: [the authorized action-choice validation passed](handoffs/I01_ACTION_CHOICE_VALIDATION_RESULT.md)
 for RUN-fd87c6c8a9cb: six systems, 180 traces, 17 requests, 445.156 seconds,
 zero replay findings/result mismatches and successful cleanup. Agent completed
 J1/J2 using one model-initial start and one fallback start; Plain completed no
@@ -89,7 +98,7 @@ faithfulness evaluation uses independent original annotations, separate extracti
 and label agreement, and a retained adjudication record. Nisha owns reliability
 reporting; Matty contributes second ratings and joint adjudication.
 
-## Observed public-development receiving
+## Historical public-development receiving (earlier run)
 
 The authorized run used public EP-HAND1, one trial with seed 101, Plain first then
 Agent, on accepted isolated Ollama 0.40.5 and qwen3:8b. Temperature was 0.2,
@@ -131,7 +140,7 @@ On the same public EP-HAND1 bundle, A/B and the actual C/D binaries each produce
 mismatches. This run used no model requests. Actual binary/source/summary hashes
 and private custody are in the [P04 handoff](handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md).
 
-The LLM and classical receiving exercises used different run identities and code
+In those historical exercises, the LLM and classical receiving used different run identities and code
 commits. They demonstrate six implemented paths, not one frozen six-system
 comparison. They provide no measured improvement, held-out estimate or final I01
 approval. The [acceptance audit](handoffs/I01_ACCEPTANCE_AUDIT_2026-11-02.md)
