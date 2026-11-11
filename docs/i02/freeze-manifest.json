@@ -54,7 +54,7 @@
       "status": "blocked",
       "path": null,
       "sha256": null,
-      "blocker": "#60: Nisha reviewed/pinned selector v2 at fda701d and reports B5 storage ready (restricted ACL/deny test/BitLocker; record private). Matty confirmed legacy-or-CF60-only scope; longer-history alternatives require a new pre-nonce version. Reimo v2 restricted-parameter confirmation and Nisha actual private nonce/selection/isolation receiving remain pending. Source-use and separate execution gates remain open. See docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md. November 11: PR #208 publishes Reimo public review and pending exact-record status. #60 reopened; Nisha must supply/identify the authenticated restricted record before Reimo exact acceptance. No actual private locator/record received by Matty. See docs/handoffs/NOV11_MANAGER_READINESS_AND_HANDOFF.md."
+      "blocker": "#60: Nisha reviewed/pinned selector v2 at fda701d and reports B5 storage ready (restricted ACL/deny test/BitLocker; record private). Matty confirmed legacy-or-CF60-only scope; longer-history alternatives require a new pre-nonce version. Reimo v2 restricted-parameter confirmation and Nisha actual private nonce/selection/isolation receiving remain pending. Source-use and separate execution gates remain open. See docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md. November 11: PR #208 publishes Reimo public review and pending exact-record status. #60 reopened; Nisha reports creating and sending the exact restricted record directly to Reimo (public SHA256 c40eefea7dd0defb7ddc6b8f36914bde0363d486a3ae88ef9e2b5d2ec6d6fe67); Reimo exact authentication/acceptance is next. Matty has not inspected the private record. See docs/handoffs/NOV11_MANAGER_READINESS_AND_HANDOFF.md."
     },
     {
       "id": "study-forecast",
@@ -142,7 +142,7 @@
       "status": "pending",
       "path": "docs/evidence/a01-bounded-paired-validation-2026-10-30.json",
       "sha256": null,
-      "blocker": "Prospective explanation-profile-256-4096-v1 is adopted by Matty after exact Nisha/Ved agreement. Exact future run config/code/prompt/schema/model/environment bindings remain required; no default migration, full scientific freeze or execution authorization. See docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md. November 11: docs/evidence/nov11-offline-study-bindings.json pins reviewed code/prompt/schema/lock/profile files and retained expected runtime identities offline. Final study configuration, budgets, seeds and scientific acceptance remain pending; no authorization."
+      "blocker": "Prospective explanation-profile-256-4096-v1 is adopted by Matty after exact Nisha/Ved agreement. Exact future run config/code/prompt/schema/model/environment bindings remain required; no default migration, full scientific freeze or execution authorization. See docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md. November 11: docs/evidence/nov11-offline-study-bindings.json pins reviewed code/prompt/schema/lock/profile files and retained expected runtime identities offline. Final study configuration, budgets, seeds and scientific acceptance remain pending; no authorization. Fresh offline installed executable/archive/tokenizer/six-blob hashes match in docs/evidence/a01-offline-identity-2026-11-11.json. No service/API probe, effective-settings check or inference was performed; remaining freeze/authorization gates are unchanged."
     },
     {
       "id": "run-settings",
