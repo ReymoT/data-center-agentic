@@ -1,0 +1,26 @@
+{
+  "profile_id": "explanation-profile-256-4096-v1",
+  "status": "adopted_for_prospective_study_configuration",
+  "date": "2026-11-10",
+  "manager": "MattyAnd",
+  "owner_agreements": {
+    "Ved": "https://github.com/ReymoT/data-center-agentic/issues/185#issuecomment-6779877050",
+    "Nisha": "https://github.com/ReymoT/data-center-agentic/issues/185#issuecomment-6782827619"
+  },
+  "explanation_characters": 256,
+  "output_tokens": 4096,
+  "context_tokens": 16384,
+  "max_prompt_tokens": 12288,
+  "plan_detail_characters": 96,
+  "claim_pairing": "number_plus_allowed_unit_or_null_plus_null",
+  "cap_review_limit_for_profile": 256,
+  "runtime_defaults_promoted": false,
+  "scientific_freeze": false,
+  "run_authorization": null,
+  "forecast_selector_scope": [
+    "legacy_preceding_row_persistence",
+    "CF60_start_hypothesis",
+    "CF60_end_hypothesis"
+  ],
+  "longer_history_requires_new_selector_before_nonce": true
+}

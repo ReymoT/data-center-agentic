@@ -1,5 +1,8 @@
 # Decisions still requiring confirmation
 
+November 10 decision: [Matty adopts the agreed prospective 256/4096 response profile and limits the pinned v2 selector to legacy persistence or CF60](../decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md). Owner agreement is received. Runtime defaults, full I02 freeze, source/custody acceptance and run authorization remain separate. Older dated waiting/adoption notes are historical where superseded.
+
+
 Professor feedback update, October 28: reporting inter-rater reliability for human faithfulness annotations is accepted and no longer an open ownership question. [Nisha is the sole accountable reporting owner](../decisions/PROFESSOR_FEEDBACK_IRR.md) under E07/R05. PR #104 retains the completed development matching/report: 32 matched claims, 75% raw label agreement and kappa 0.00 under the documented prevalence limitation. Joint adjudication of 77 items and the later held-out application remain open execution work.
 
 Current implementation, instruction 1.28: S01 Option B/Q01, unlabeled P03 state collection, both E05 development originals, E05 agreement tooling and provisional D04 split tooling are merged. D04 remains scientifically provisional; A01 live validation, trained C/D, the runner, actual E05 matching/adjudication and full integration remain open. No successful model study or held-out result is claimed.

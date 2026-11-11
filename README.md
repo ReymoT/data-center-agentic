@@ -9,6 +9,9 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 10 protocol decision: [the agreed prospective response profile is adopted and v2 forecast scope is legacy or CF60 only](docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md). Runtime defaults and prior evidence remain unchanged. Reimo's v2 parameter confirmation, actual selection/receiving, source-use evidence, compatibility and full I02 freeze still gate execution.
+
+
 November 10 offline readiness: [the versioned selector, saved-content assessment and future trace binding](docs/handoffs/NOV10_SELECTOR_CONTENT_AND_TRACE.md) preserve the fixed development allocation and old evidence. Nisha's #60 read-footprint/order reply is received; real selection/custody, source permission and freeze remain pending. The content assessment flags unsupported claims; no shared-default promotion or research superiority is claimed.
 
 

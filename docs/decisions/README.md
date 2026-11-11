@@ -1,5 +1,8 @@
 # Decision records
 
+November 10 decision: [Matty adopts the agreed prospective 256/4096 response profile and limits the pinned v2 selector to legacy persistence or CF60](NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md). Owner agreement is received. Runtime defaults, full I02 freeze, source/custody acceptance and run authorization remain separate. Older dated waiting/adoption notes are historical where superseded.
+
+
 Current implementation, instruction 1.27: [published work and receiving gates](../handoffs/OCT24_IMPLEMENTATION_AND_RECEIVING.md). A03 physical checks, A04 execution/traces and A02 bounded orchestration are real merged code. PR #64 has Matty receiving fixes/current-main reconciliation but still needs Nisha replay and independent evidence; it is unmerged. D05 inventory PR #65 is published, not scientific source acceptance. A01 transport/deployment and P02/L02/runner/live acceptance remain open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged; older dated preparation notes are historical where superseded.
 
 Current workflow, instruction 1.27: [Matty's coder-owned decision rule](Q11_CODER_OWNED_DECISIONS.md) gives the implementer internal decision authority, limits shared confirmation to affected owners and escalates unresolved shared questions within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance. Existing scope, task ownership and scientific agreements remain unchanged.
