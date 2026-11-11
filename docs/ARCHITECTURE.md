@@ -1,5 +1,7 @@
 # Architecture for the final scheduling study
 
+November 11 follow-up: [the source questions are sent and offline installed-artifact identities match](handoffs/NOV11_SOURCE_REQUESTS_AND_OFFLINE_IDENTITY.md). Nisha reports the restricted v2 record delivered to Reimo; his exact acceptance is next. Actual custody receiving, source acceptance and scientific freeze remain pending. No source data or model request was used.
+
 November 11 status: [the manager handoff and offline configuration bindings](handoffs/NOV11_MANAGER_READINESS_AND_HANDOFF.md) are prepared. Reimo has responded and his draft reviews are published in PR #208. Issue #60 is reopened: access to the exact restricted v2 record, authenticated approval and authoritative source evidence remain outstanding. No private selection, source ingest or study run is complete. The I02 checklist remains unfrozen.
 
 November 10 protocol decision: [the agreed prospective response profile is adopted and v2 forecast scope is legacy or CF60 only](decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md). Runtime defaults and prior evidence remain unchanged. Reimo's v2 parameter confirmation, actual selection/receiving, source-use evidence, compatibility and full I02 freeze still gate execution.

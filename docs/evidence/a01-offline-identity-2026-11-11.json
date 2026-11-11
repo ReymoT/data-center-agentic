@@ -1,0 +1,89 @@
+{
+  "all_measured_hashes_match": true,
+  "canonical_manifest_references_verified": true,
+  "checks": {
+    "blob:05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76": {
+      "bytes": 487,
+      "expected": "05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76",
+      "expected_bytes": 487,
+      "matches": true,
+      "sha256": "05a61d37b08453e59290add468e3bb2f688e23a01e967fecb0e2fa41218cea76"
+    },
+    "blob:500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41": {
+      "bytes": 859,
+      "expected": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "expected_bytes": 859,
+      "matches": true,
+      "sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+    },
+    "blob:a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f": {
+      "bytes": 5225374496,
+      "expected": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+      "expected_bytes": 5225374496,
+      "matches": true,
+      "sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f"
+    },
+    "blob:ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4": {
+      "bytes": 1723,
+      "expected": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+      "expected_bytes": 1723,
+      "matches": true,
+      "sha256": "ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4"
+    },
+    "blob:cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb": {
+      "bytes": 120,
+      "expected": "cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+      "expected_bytes": 120,
+      "matches": true,
+      "sha256": "cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb"
+    },
+    "blob:d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12": {
+      "bytes": 11338,
+      "expected": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "expected_bytes": 11338,
+      "matches": true,
+      "sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
+    },
+    "official_archive": {
+      "expected": "5134ce7e3bc8e94d0494721c799ec293b429450d0c52461b0ee3647dd3bb4bb7",
+      "matches": true,
+      "sha256": "5134ce7e3bc8e94d0494721c799ec293b429450d0c52461b0ee3647dd3bb4bb7"
+    },
+    "runtime_executable": {
+      "expected": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a",
+      "matches": true,
+      "sha256": "ec9f3325f134597c7188b735dcc4e79a9eca4bf53f6b958ddf22aa04bf5ce57a"
+    },
+    "tokenizer": {
+      "expected": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "matches": true,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    }
+  },
+  "date": "2026-11-11",
+  "elapsed_seconds": 4.156,
+  "expected_evidence": "docs/evidence/a01-pinned-runtime-readiness-2026-10-25.json",
+  "held_out_access": false,
+  "kind": "A01_offline_installed_artifact_identity_not_inference",
+  "limitations": [
+    "Executable/archive/installed blob identity checked by bytes; no executable or service started.",
+    "No /api/show probe: rendered default-parameter text and effective generation settings are not freshly observed. Raw stored parameter blob is a different representation.",
+    "Non-executable runtime library files were not individually compared with archive contents; official archive and executable match retained pins.",
+    "No new environment/scientific acceptance or run authorization is supplied."
+  ],
+  "model_requests": 0,
+  "qwen3_8b_alias_records": [
+    {
+      "points_to_accepted_digest": true,
+      "sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "store": "manifests"
+    }
+  ],
+  "raw_parameter_blob_verified": true,
+  "rendered_api_parameter_text_rechecked": false,
+  "reviewed_code_commit": "d7673b747f81cc5463570d0f3cdeb39a951ad187",
+  "runtime_started": false,
+  "runtime_version_expected": "0.40.5",
+  "runtime_version_observed_by_execution": null,
+  "source_data_reads": 0
+}
