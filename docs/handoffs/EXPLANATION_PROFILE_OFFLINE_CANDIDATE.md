@@ -1,5 +1,8 @@
 # Explanation settings: offline candidate
 
+November 10 superseding decision: [the prospective study profile is adopted](../decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md), with Nisha/Ved agreement and Matty authorization. The opt-in implementation and old runtime defaults remain unchanged; final configuration binding, I02 acceptance and separate run authorization remain required. The failed candidate below and later corrected cb85 PASS are both preserved. Earlier preparation-only statements below are historical.
+
+
 November 9 outcome: the explicitly authorized native validation failed closed on a value/unit claim inconsistency. Its ID is consumed; no retry occurred. See the [outcome](A01_EXPLANATION_VALIDATION_OUTCOME_2026-11-09.md). The preparation below is historical; candidate adoption remains pending.
 
 Nisha and Ved explicitly agreed in issue #185 to test a 256-character explanation limit and 4,096 output tokens. This implementation is opt-in. Existing runs retain 96 characters and 1,536 output tokens, including their existing configuration identities.
