@@ -1,5 +1,17 @@
 # Reimo R01 contribution draft
 
+## Manager receiving note — November 11, 2026
+
+Published through PR #208 as draft report contribution and historical producer
+validation, not an accepted final paper. Deck repair/visual checks and the macOS
+checks below are Reimo's reported preparation evidence; Matty did not rerun those
+presentation checks or receive the local deck in this four-Markdown-file PR.
+The `local-inputs/` and `local-outputs/` presentation files are not repository
+artifacts or downloadable attachments here. Nisha should use the report text
+with its stated limitations; any deck transfer remains a separate handoff.
+The original local-session/no-publication statements below are historical and
+do not negate Matty's explicit authorization to publish these four documents.
+
 Group 15 / Project 21. Local draft, November 10, 2026 (Phoenix), reviewed against
 fetched main `27083dc4e3be7c9fc32071fe3a6a33aff3218837`, instruction 1.28.
 No authoritative record is replaced and no scientific result is invented.

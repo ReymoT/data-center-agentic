@@ -1,5 +1,17 @@
 # Reimo minimal publication plan — approval pending
 
+## Publication disposition — November 11, 2026
+
+Matty explicitly authorized reviewing, fixing and merging this branch. PR #208
+publishes all four Markdown handoffs, including this historical plan for context.
+The local publication-approval requirements below describe the November 10 draft
+session and are satisfied for these four files only. They are not an additional
+review gate. [Reimo's authenticated #60 status is already posted](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6787639650); its
+prepared comment below is retained as a template, not posted again or treated as
+private-parameter acceptance. External requests remain unsent drafts. No deck or
+private artifact is included and no source access, nonce, selection or execution
+is authorized. This does not close #60 or approve the final report.
+
 Reviewed latest fetched main `27083dc4e3be7c9fc32071fe3a6a33aff3218837`.
 Main has not advanced since the three drafts and presentation were prepared.
 This is a local plan, not permission to publish or contact anyone.

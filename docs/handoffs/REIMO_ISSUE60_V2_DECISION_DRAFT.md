@@ -1,5 +1,16 @@
 # Reimo issue #60 v2 decision draft
 
+## Manager review — November 11, 2026
+
+Published as supporting draft evidence through PR #208 under Matty's explicit
+review/fix/merge instruction. The original November 10 audit below is historical;
+its local-only and unposted wording describes that preparation session.
+[Reimo has now posted his authenticated status](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6787639650): public v2 review passed,
+but exact restricted-record confirmation still awaits authentication, B1–B3 remain
+unresolved and B4 provisional. Neither conditional alternative below is an
+approval. This publication supplies no restricted receipt, source permission,
+nonce/selection authorization or scientific acceptance. Issue #60 remains open.
+
 Local draft for Reimo's review, November 10, 2026 (Phoenix). Not posted, approved,
 or a replacement for accepted records. Fetched main and working base:
 `27083dc4e3be7c9fc32071fe3a6a33aff3218837`; instruction 1.28, F02 1.0.0.
