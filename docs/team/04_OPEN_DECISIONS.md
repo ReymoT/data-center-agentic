@@ -1,5 +1,9 @@
 # Decisions still requiring confirmation
 
+Current manager rule, instruction 1.29 — November 12, 2026:
+
+When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
+
 November 10 decision: [Matty adopts the agreed prospective 256/4096 response profile and limits the pinned v2 selector to legacy persistence or CF60](../decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md). Owner agreement is received. Runtime defaults, full I02 freeze, source/custody acceptance and run authorization remain separate. Older dated waiting/adoption notes are historical where superseded.
 
 
@@ -23,7 +27,7 @@ October 22 intake: Edison supplied [Q01-Q04 agreement/new Q04 question](https://
 
 October 21 intake: [Q03's arrival-visibility proposal](../decisions/Q03_INFEASIBLE_ARRIVAL_PROPOSAL.md) has Nisha's recommendation and Matty's support, but still needs affected-owner agreement. Current behavior stays unchanged. [Today's actions](../handoffs/OCT21_ACTIONS.md) and the [consolidated owner request](https://github.com/ReymoT/data-center-agentic/issues/33#issuecomment-6322132165) name exact outstanding decisions, dependencies and checkpoints.
 
-Version: 1.28 — 2026-10-27. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
+Version: 1.29 — 2026-11-12. Matty maintains this index; each driver prepares a recommendation with affected members. Drivers do not silently approve their own research assumptions. Record the team's accepted rule, date, approver, affected versions and tests in `docs/decisions/`. Update all consumers and this index. Unresolved decisions block dependent acceptance, not unrelated scaffolding or unit-test work.
 
 Current October 20 intake: [Q01-Q04 ledger](../decisions/Q01_Q04_AGREEMENT_STATUS.md), [Q09 setup agreement](../decisions/Q09_DEPLOYMENT_OCT20.md), [Q10 partial review agreement](../decisions/Q10_REVIEW_STATUS.md), [Q11 coordination-role acceptance](../decisions/Q11_MANAGER_AUTHORITY.md), and [Q13 reported course dates](../decisions/Q13_PRESENTATION_DEADLINE.md). [The current handoff](../handoffs/OCT20_REVIEW_AND_FOLLOWUPS.md) records reviewed implementation boundaries. Earlier dated status entries below remain historical where superseded. Passing tests does not create missing owner agreement.
 

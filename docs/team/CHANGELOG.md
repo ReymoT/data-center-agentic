@@ -1,6 +1,8 @@
 # Instruction deployment changelog
 
-Current deployment: 1.28 - 2026-10-27. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.29 - 2026-11-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+November 12 manager instruction (1.29): Matty explicitly requires direct correction and validation of problems rather than returning jobs to their original owners for fixes, followed by an owner tag explaining the problem, fix and validation. Published consistently in AGENTS, PROJECT_MASTER, all five role masters and numbered files 00-04. Existing accountability, main authority, merge rule, affected-owner shared-contract agreement, privacy, scientific evidence and exact execution authorization remain unchanged. No independent approval or source permission may be fabricated to bypass a blocker.
 
 Factual readiness reconciliation after PR #140, no policy/version change: Matty
 authorized source acceptance audit, I01/P04 receiving preparation and documentation

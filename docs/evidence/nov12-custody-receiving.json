@@ -1,0 +1,81 @@
+{
+  "accepted_record_revision": 2,
+  "accepted_record_sha256": "adf4a975f14dad407a56e3b3517a181d8cfcfd9c918894b63d5e7ec6292c1dfc",
+  "date_arizona": "2026-11-12",
+  "independent_26_checks_rerun_by_manager": false,
+  "independent_receiving_ref": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6842942228",
+  "kind": "manager_scoped_receiving_of_authenticated_public_custody_reports",
+  "manager": "MattyAnd",
+  "manager_checks": {
+    "authenticated_github_authors_match": true,
+    "exact_revision_hash_matches_both_records": true,
+    "metadata_only_scope_consistent": true,
+    "reported_code_equals_reviewed_main": true,
+    "selector_hash_locally_verified": true
+  },
+  "manager_disposition": "accept_authenticated_reported_metadata_only_handoff_with_explicit_evidence_limits",
+  "metadata_sha256": "ed26b5658abbf237e20872b5edb84560470d9e20543a06fa82c2164ee594d281",
+  "model_calls": 0,
+  "original_public_records": [
+    {
+      "author": {
+        "login": "ReymoT"
+      },
+      "authorAssociation": "OWNER",
+      "body": "@MattyAnd @nkolekar-nk\n\nI have received, authenticated and privately reviewed Nisha's corrected restricted v2 parameter/destination record, revision 2.\n\n**Accepted record SHA-256:**\n`adf4a975f14dad407a56e3b3517a181d8cfcfd9c918894b63d5e7ec6292c1dfc`\n\nI confirm the accepted v2 selector pins, complete 168-date candidate pool, explicit v2 nonce-derivation rules and separate domains, root constraints, fail-stop rules, conditions A/B and legacy-or-CF60 forecast restriction.\n\nI also accept the revised custody arrangement: the nonce and associated restricted records are stored separately from the selector destination, which contains only `metadata.json` and `complete.sha256`. Independent checksum custody remains required.\n\nThis comment is my approval and decision locator for the exact revision 2 parameter/custody record. It supersedes the unaccepted original record.\n\nNisha may proceed with the agreed private nonce creation, selection, isolation checks and independent receiving under the accepted protocol.\n\nThis approval does not authorize source ingestion, model execution, scientific freeze or any subsequent study run. Source-use/provenance requirements remain separate and unresolved.",
+      "createdAt": "2026-11-13T03:22:07Z",
+      "id": "IC_kwDOUWAd788AAAABl90yBw",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6842823175",
+      "viewerDidAuthor": false
+    },
+    {
+      "author": {
+        "login": "nkolekar-nk"
+      },
+      "authorAssociation": "COLLABORATOR",
+      "body": "@MattyAnd @ReymoT Nisha: **private held-out selection and independent receiving: PASS.** This is metadata only. No nonce, seed, date, episode ID or path is in this comment.\n\n**Bindings**\n- Accepted record (revision 2): `adf4a975f14dad407a56e3b3517a181d8cfcfd9c918894b63d5e7ec6292c1dfc`, accepted by Reimo [here](https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6842823175)\n- Receipt digest (`splits.digest(receipt)`): `ad36d2b5c783115cd13e4f042d1d3db101b42be087af6f7d4c17193bbaa0d1b1`\n- Restricted metadata SHA256 (external checksum): `ed26b5658abbf237e20872b5edb84560470d9e20543a06fa82c2164ee594d281`\n- My receiving report SHA256: `3f53111e77d0b4296246b616b7ae70b7551e8673bbdcfe3a6b4ee8424969bbce`\n- Code revision `7e2fb301c10391bf1189cf46d5ef3117314edba1`, with selector `held_out_custody.py` LF SHA256 `2eec2778\u20264bfd` unchanged. Python 3.12.10.\n\n**What happened, in the agreed order**\n1. After Reimo's acceptance, I created one 256-bit nonce with the OS CSPRNG before any source or outcome inspection, and derived both roots in separate v2-tagged domains. The fail-stops were clear: unequal roots, none prohibited, both within bounds.\n2. The one-shot preparation ran once and succeeded: one selection, no retry, no seed search. The destination holds only `metadata.json` and `complete.sha256`. The nonce and receipt are stored separately on B5, and the checksums are in the separate external store.\n3. My independent receiving passed all 26 checks, using my own code for the digest, root derivation, rank-and-greedy selection, IDs, seeds, groups, windows and footprints:\n   - the receipt matches the accepted record, including the complete 168-date pool;\n   - the roots reproduce from the nonce;\n   - the selection reproduces: 6 dates in 6 distinct months;\n   - 30 held-out episodes (24 core plus 6 withheld-forecast variants) and 70 unique IDs;\n   - IDs, seeds, related groups and windows all reproduce;\n   - the 40 development records are unchanged against the public allocation;\n   - every held-out footprint (recorded scoring, legacy, and CF60 under both start and end hypotheses) is disjoint from every development footprint and from the other held-out dates, and matches the selector's footprints;\n   - no content hashes exist, `scientific_acceptance` is false, and the external checksum and `custody.verify()` both pass.\n\n**Scope:** this is custody and selection metadata only. No held-out contents were generated, no carbon CSV or source value was read, and no model ran. It isn't source-use acceptance, ingest authorization, forecast adoption or the scientific freeze. The development read limits I accepted earlier still apply to any later ingest.\n",
+      "createdAt": "2026-11-13T03:30:12Z",
+      "id": "IC_kwDOUWAd788AAAABl98DFA",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6842942228",
+      "viewerDidAuthor": false
+    }
+  ],
+  "private_metadata_inspected_by_manager": false,
+  "private_report_transferred_to_manager": false,
+  "producer_acceptance_ref": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6842823175",
+  "receipt_digest": "ad36d2b5c783115cd13e4f042d1d3db101b42be087af6f7d4c17193bbaa0d1b1",
+  "receiving_report_sha256": "3f53111e77d0b4296246b616b7ae70b7551e8673bbdcfe3a6b4ee8424969bbce",
+  "reported_by_nisha": {
+    "both_interval_history_union_isolation": "PASS",
+    "checks_passed": 26,
+    "combined_unique_ids": 70,
+    "core": 24,
+    "dates": 6,
+    "development_records_preserved": 40,
+    "distinct_months": 6,
+    "external_checksum_and_custody_verify": "PASS",
+    "held_out_metadata_records": 30,
+    "nonce_before_source_or_outcome_inspection": true,
+    "receiving": "PASS",
+    "retry": false,
+    "selection_attempts": 1,
+    "withheld_variants": 6
+  },
+  "reported_code_revision": "7e2fb301c10391bf1189cf46d5ef3117314edba1",
+  "reviewed_main": "7e2fb301c10391bf1189cf46d5ef3117314edba1",
+  "scientific_freeze": false,
+  "selection_or_receiving_rerun_by_manager": false,
+  "selector_lf_sha256": "2eec2778b4957f6bad3755467e9ab5adc517a2eab3fed151aacf018eb9914bfd",
+  "source_ingest_authorized": false,
+  "source_reads": 0,
+  "source_use_accepted": false,
+  "study_run_authorized": false
+}
