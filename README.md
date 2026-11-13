@@ -9,6 +9,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 12 receiving update: [Reimo accepted revision 2 and Nisha reports metadata-only private receiving PASS](docs/handoffs/NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md). Matty received the authenticated public handoff with explicit evidence limits. The pending ingest checklist is refreshed; source-use evidence, operational ingest approval, actual episode contents, compatibility and scientific freeze remain outstanding. No selection rerun, source read or model call is authorized.
+
 November 11 follow-up: [the source questions are sent and offline installed-artifact identities match](docs/handoffs/NOV11_SOURCE_REQUESTS_AND_OFFLINE_IDENTITY.md). Nisha reports the restricted v2 record delivered to Reimo; his exact acceptance is next. Actual custody receiving, source acceptance and scientific freeze remain pending. No source data or model request was used.
 
 November 11 status: [the manager handoff and offline configuration bindings](docs/handoffs/NOV11_MANAGER_READINESS_AND_HANDOFF.md) are prepared. Reimo has responded and his draft reviews are published in PR #208. Issue #60 is reopened: access to the exact restricted v2 record, authenticated approval and authoritative source evidence remain outstanding. No private selection, source ingest or study run is complete. The I02 checklist remains unfrozen.

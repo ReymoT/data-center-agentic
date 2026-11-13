@@ -1,10 +1,14 @@
 # Master instructions — Ved
 
+Current manager rule, instruction 1.29 — November 12, 2026:
+
+When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
+
 Current evaluation update, instruction 1.28: [the professor's inter-rater-reliability feedback](../decisions/PROFESSOR_FEEDBACK_IRR.md) is an accepted reporting requirement. Nisha is the sole accountable owner for reporting matched counts, label marginals, raw agreement, Cohen's kappa, undefined cases and a plain-language interpretation for development and held-out human faithfulness annotations. Matty remains the independent second rater and joint adjudicator, not a co-owner of the reporting task. PR #104 retains the development matching and reliability artifacts: 32 matched claims, 75% raw label agreement and Cohen's kappa 0.00 under the documented single-label prevalence limitation. Joint adjudication of 77 open items and the later held-out report remain unfinished; originals stay unchanged. Other task owners, shared formats and scientific gates are unchanged.
 
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.28 — 2026-10-27. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.29 — 2026-11-12. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 

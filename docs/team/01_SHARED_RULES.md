@@ -1,10 +1,14 @@
 # Shared rules for all five assistants
 
+Current manager rule, instruction 1.29 — November 12, 2026:
+
+When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
+
 Current evaluation update, instruction 1.28: [the professor's inter-rater-reliability feedback](../decisions/PROFESSOR_FEEDBACK_IRR.md) is accepted. Nisha is the sole accountable owner for reliability reporting under E07/R05. Matty remains the independent second rater and joint adjudicator, not a second reporting owner. Report matched counts, label marginals, raw agreement, Cohen's kappa, undefined cases and interpretation before adjudication; keep extraction agreement separate and both originals unchanged.
 
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.28 — 2026-10-27. Owner: Matty. Applies with the member's master file and assigned Issue.
+Version: 1.29 — 2026-11-12. Owner: Matty. Applies with the member's master file and assigned Issue.
 
 ## Current manager instruction
 

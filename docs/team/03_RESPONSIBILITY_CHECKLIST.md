@@ -1,5 +1,9 @@
 # Shared responsibility and coverage checklist
 
+Current manager rule, instruction 1.29 — November 12, 2026:
+
+When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
+
 Current evidence reconciliation: A01/A02 and L01 public-development receiving are
 recorded in [the paired handoff](../handoffs/EP_HAND1_RECEIVING_F04_F05.md), with
 #12/#18 closed. E05 development adjudication and Matty calibration are submitted;
@@ -18,7 +22,7 @@ Current E05 status: both original development rating files are retained through 
 
 Historical October 22 follow-up: [F04/F05 #40](https://github.com/ReymoT/data-center-agentic/issues/40) and [the handoff](../handoffs/OCT22_NISHA_FOLLOWUPS.md) record the earlier E04 preparation state. The current E05 status above supersedes its pending-original description. All 50 rows below are preserved.
 
-Version: 1.28 — 2026-10-27. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
+Version: 1.29 — 2026-11-12. Maintainer: Matty. One accountable primary owner per row; technical contacts are separate people. PRs may merge once checks pass; teammate review is welcome but not required. Shared data-format or settings changes require affected teammates' agreement first. All boxes mean pending implementation, not missing ownership. Add an Issue link and merged acceptance evidence to each row when work begins. Lead allocation details that refine paired proposal duties are explicitly disclosed in `00_START_HERE.md` and Q12; no task is silently transferred.
 
 Use the published main checklist. Teammates and their AI assistants must not change or replace this shared instruction file without Matty's explicit authorization; propose corrections in an Issue.
 

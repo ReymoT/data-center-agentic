@@ -1,5 +1,7 @@
 # CF60 input and bounded-execution proposal
 
+November 12 update: [the accepted revision 2 and reported metadata receiving](NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md) resolve earlier missing acceptance/selection status. A new pending proposal records those commitments without authorizing ingest. Source-use evidence and exact operational custody/execution gates remain open. Earlier dated waiting notes below are historical.
+
 Prepared by Matty with AI assistance on November 9; offline implementation follows main 531caddee32e469c22b4705050e9c0e60343a68b. Matty is the accountable manager; this is not a claim of unassisted manual review. This is a reviewable plan, not source-access permission or execution authorization. The [metadata receipt](../evidence/cf60-input-plan-2026-11-09.json) records what was actually checked. No source CSV contents were opened or hashed, no comparison ran and no saved state was invented.
 
 ## Proposed sequence

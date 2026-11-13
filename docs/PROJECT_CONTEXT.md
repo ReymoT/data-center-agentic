@@ -41,3 +41,8 @@ Matty instructed on 2026-10-18: "Remeber after merging branches you must delete 
 After merging a task branch, verify that its latest work is included in main and the applicable checks have passed, then delete the merged GitHub branch. Preserve main and any unmerged work; if the branch has advanced since verification, recheck before deleting it.
 
 This applies to GitHub task-branch cleanup after verified integration. Preserve teammates' local checkouts/worktrees and unpublished work; deleting a merged remote branch does not remove its commits from main.
+
+
+## November 12 direct-fix instruction
+
+When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
