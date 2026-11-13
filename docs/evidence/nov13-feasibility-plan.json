@@ -1,11 +1,12 @@
 {
   "all_windows_conditional_on_actual_gates": true,
+  "calendar_correction": "PR 213 initially overlapped reserved dates. Corrected directly, preserving later reproduction/I04/repair buffer.",
   "contingency_activated": false,
   "date_arizona": "2026-11-13",
   "future_nisha_state_receiving_offer": "accepted_in_principle_not_yet_due",
   "internal_submission_target": "2026-12-07",
   "kind": "manager_internal_feasibility_plan_not_execution",
-  "manager_feasibility_checkpoint": "2026-11-24T18:00:00-07:00",
+  "manager_feasibility_checkpoint": "2026-11-22T18:00:00-07:00",
   "manager_safeguards_accepted": true,
   "nisha_estimated_days": {
     "rating_reliability_adjudication_tables": 4,
@@ -16,20 +17,30 @@
   "nisha_suggested_freeze_date_not_adopted": "2026-11-28",
   "non_nisha_durations": "manager_allowances_not_owner_commitments",
   "remaining_owner_reply_deadline": "2026-11-13T20:57:04-07:00",
+  "reserved_dates": [
+    "2026-11-26",
+    "2026-11-27"
+  ],
   "reviewed_main": "1db03f905f3dedbd98bb7b85ebaa8c437c8408ca",
   "run_authorization": null,
   "scientific_freeze": false,
   "source_acceptance": false,
   "windows": [
     {
-      "end": "2026-11-26",
+      "end": "2026-11-24",
       "id": "runs",
-      "start": "2026-11-25"
+      "start": "2026-11-23"
     },
     {
       "end": "2026-11-30",
       "id": "evaluation",
-      "start": "2026-11-27"
+      "start": "2026-11-25",
+      "working_dates": [
+        "2026-11-25",
+        "2026-11-28",
+        "2026-11-29",
+        "2026-11-30"
+      ]
     },
     {
       "end": "2026-12-01",

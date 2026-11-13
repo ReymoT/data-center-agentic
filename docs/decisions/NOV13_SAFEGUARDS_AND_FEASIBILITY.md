@@ -64,7 +64,7 @@ estimates, not measured throughput or guaranteed task durations.
 
 That seven-day estimate does not explicitly reserve final O04/P07 dependencies,
 second-machine I03, Matty's I04, or a repair/revalidation buffer. Matty therefore
-sets a conservative internal target/checkpoint of November 24, 2026 at 18:00
+sets a conservative internal target/checkpoint of November 22, 2026 at 18:00
 Arizona for a feasible full freeze, before December 7 internal submission. This
 supersedes the earlier November 13 planning target, which is not achieved by
 passing CI. November 28 is retained as Nisha's estimate, not adopted as the latest
@@ -72,10 +72,10 @@ safe freeze date. No official course requirement is changed.
 
 | Internal window | Evidence/deliverable | Owner and dependency |
 |---|---|---|
-| Nov 13-23 | Source/custody/extract/state/compatibility gates, adopted forecast, complete exact inputs and permissions | Reimo source; Matty scoped preparation/direct fixes/approvals; Ved O02/Q08; Edison C-D; Nisha evaluation/I02 |
-| Nov 24 by 18:00 Arizona | Explicit feasibility decision and accepted I02 freeze only if all scientific gates pass | Nisha assembles; Matty receives/decides; owner evidence required |
-| Nov 25-26 | Freshly authorized frozen 300-run execution, preserved failures/cleanup | Matty execution/integration and Nisha E02 coordination; no authorization supplied here |
-| Nov 27-30 | O04/P07 and E01/E03/E06 outputs, blinded ratings, E07 IRR, adjudication/tables | Ved references after frozen inference; Edison P07 after O04; Nisha evaluation/report; Matty independent second rater |
+| Nov 13-21 | Source/custody/extract/state/compatibility gates, adopted forecast, complete exact inputs and permissions | Reimo source; Matty scoped preparation/direct fixes/approvals; Ved O02/Q08; Edison C-D; Nisha evaluation/I02 |
+| Nov 22 by 18:00 Arizona | Explicit feasibility decision and accepted I02 freeze only if all scientific gates pass | Nisha assembles; Matty receives/decides; owner evidence required |
+| Nov 23-24 | Freshly authorized frozen 300-run execution, preserved failures/cleanup | Matty execution/integration and Nisha E02 coordination; no authorization supplied here |
+| Nov 25 and Nov 28-30 | O04/P07 and E01/E03/E06 outputs, blinded ratings, E07 IRR, adjudication/tables | Ved references after frozen inference; Edison P07 after O04; Nisha evaluation/report; Matty independent second rater |
 | Dec 1 | Evidence-backed report text and internal table/result consistency review | Nisha R05 assembly with each author's evidence; no pending results filled in |
 | Dec 2-3 | I03 second-machine reproduction of accepted final artifacts | Ved; prerequisites are actual accepted E06/E07/P06 artifacts |
 | Dec 4 | I04 integrated acceptance and R06 release checks | Matty receives I03 and resolves scoped integration defects |
@@ -84,7 +84,7 @@ safe freeze date. No official course requirement is changed.
 
 All task windows beyond Nisha's stated estimates are manager planning allowances,
 not promises from Ved/Edison/Reimo/Nisha. O04/P07 and the four-day rating window
-can overlap only where exact frozen artifacts, blinding and dependencies permit.
+use four working days (Nov 25, 28, 29 and 30), leaving the proposal-reserved Nov 26-27 free. They can overlap only where exact frozen artifacts, blinding and dependencies permit.
 If references, ratings, solver work, reproduction or defect repair exceed a window,
 Matty must re-evaluate feasibility explicitly; dates never override a gate. No
 retraining, outcome-driven amendment, silent matrix reduction or unauthorized
@@ -97,7 +97,7 @@ fallback extension. The final two calendar days are not a planned execution budg
 
 ## Dated manager decision, not automatic contingency
 
-At November 24 18:00 Arizona, Matty records either the accepted full-study freeze
+At November 22 18:00 Arizona, Matty records either the accepted full-study freeze
 and feasible remaining path, or the exact missing gate and a contingency decision.
 An earlier decision is appropriate if authoritative evidence shows infeasibility.
 Passing the date, absent upstream replies or owner silence never activates a
@@ -113,3 +113,12 @@ checks dates/dependencies and marks every window as planning. Setup/link/policy
 and I02 integrity validators apply. Freeze.commit stays null; all 18 checklist
 items stay pending/blocked. No source access, state export, simulator/model/solver,
 training, human rating, study result or scientific acceptance is created here.
+
+## Calendar correction after PR 213
+
+The initial manager schedule overlapped the proposal-reserved November 26-27
+noted in PROJECT_PLAN. Matty corrected this directly: checkpoint November 22,
+runs November 23-24, four evaluation days November 25 and 28-30. No work is
+required on the reserved dates. Later report/reproduction/I04/repair/submission
+windows are preserved. The earlier November 24 manager comment and PR 213
+snapshot are superseded for scheduling only; no scientific gate is relaxed.
