@@ -1,5 +1,7 @@
 # Ingest requirements and scientific contingency proposal
 
+November 13: [Nisha's scoped conditions and future receiving offer are accepted by Matty; the backward feasibility plan is recorded](NOV13_SAFEGUARDS_AND_FEASIBILITY.md). Other affected-owner replies remain pending. No contingency, trajectory or execution is adopted by that acceptance.
+
 Date: November 12, 2026 (Arizona). Manager: MattyAnd. Reviewed main:
 `f6c4d09b1b062c2cd13bb52f3ad2aae4f924485e`, instruction 1.29.
 Matty authorized answering Reimo, preparing this contingency proposal and the

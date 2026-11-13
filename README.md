@@ -9,6 +9,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 13 planning: [Matty accepts Nisha's safeguards and future scoped state receiving offer](docs/decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md). The conservative internal freeze/feasibility checkpoint is November 24 at 6 PM Arizona, reserving reproduction, I04 and repair time before December 7. These are planning targets, not completed work or execution permission; the contingency remains unactivated.
+
 November 12 planning update: [the manager ingest requirements and scientific contingency proposal](docs/decisions/NOV12_INGEST_REQUIREMENTS_AND_CONTINGENCY.md) confirm that metadata receiving does not authorize source access. The [missing-state recovery/generation plan](docs/handoffs/CF60_DEVELOPMENT_STATE_PLAN_2026-11-12.md) separates original-state recovery from new evidence. No reduced study, private input access, state generation or run is approved.
 
 November 12 receiving update: [Reimo accepted revision 2 and Nisha reports metadata-only private receiving PASS](docs/handoffs/NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md). Matty received the authenticated public handoff with explicit evidence limits. The pending ingest checklist is refreshed; source-use evidence, operational ingest approval, actual episode contents, compatibility and scientific freeze remain outstanding. No selection rerun, source read or model call is authorized.

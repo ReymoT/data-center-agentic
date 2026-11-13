@@ -1,5 +1,7 @@
 # Development visible-state recovery and generation plan
 
+November 13: [Nisha's scoped conditions and future receiving offer are accepted by Matty; the backward feasibility plan is recorded](../decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md). Other affected-owner replies remain pending. No contingency, trajectory or execution is adopted by that acceptance.
+
 Owner: Matty for this preparation/direct fixes; Ved receives O02/Q08 implications,
 Edison C/D implications, Nisha evaluation/I02. Reviewed main:
 `f6c4d09b1b062c2cd13bb52f3ad2aae4f924485e`, instruction 1.29.

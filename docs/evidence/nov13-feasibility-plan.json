@@ -1,0 +1,55 @@
+{
+  "all_windows_conditional_on_actual_gates": true,
+  "contingency_activated": false,
+  "date_arizona": "2026-11-13",
+  "future_nisha_state_receiving_offer": "accepted_in_principle_not_yet_due",
+  "internal_submission_target": "2026-12-07",
+  "kind": "manager_internal_feasibility_plan_not_execution",
+  "manager_feasibility_checkpoint": "2026-11-24T18:00:00-07:00",
+  "manager_safeguards_accepted": true,
+  "nisha_estimated_days": {
+    "rating_reliability_adjudication_tables": 4,
+    "report_text": 1,
+    "runs": 2
+  },
+  "nisha_reply": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6843775762",
+  "nisha_suggested_freeze_date_not_adopted": "2026-11-28",
+  "non_nisha_durations": "manager_allowances_not_owner_commitments",
+  "remaining_owner_reply_deadline": "2026-11-13T20:57:04-07:00",
+  "reviewed_main": "1db03f905f3dedbd98bb7b85ebaa8c437c8408ca",
+  "run_authorization": null,
+  "scientific_freeze": false,
+  "source_acceptance": false,
+  "windows": [
+    {
+      "end": "2026-11-26",
+      "id": "runs",
+      "start": "2026-11-25"
+    },
+    {
+      "end": "2026-11-30",
+      "id": "evaluation",
+      "start": "2026-11-27"
+    },
+    {
+      "end": "2026-12-01",
+      "id": "report",
+      "start": "2026-12-01"
+    },
+    {
+      "end": "2026-12-03",
+      "id": "I03",
+      "start": "2026-12-02"
+    },
+    {
+      "end": "2026-12-04",
+      "id": "I04",
+      "start": "2026-12-04"
+    },
+    {
+      "end": "2026-12-06",
+      "id": "repair_buffer",
+      "start": "2026-12-05"
+    }
+  ]
+}
