@@ -1,5 +1,7 @@
 # Project plan
 
+November 12 planning update: [the manager ingest requirements and scientific contingency proposal](decisions/NOV12_INGEST_REQUIREMENTS_AND_CONTINGENCY.md) confirm that metadata receiving does not authorize source access. The [missing-state recovery/generation plan](handoffs/CF60_DEVELOPMENT_STATE_PLAN_2026-11-12.md) separates original-state recovery from new evidence. No reduced study, private input access, state generation or run is approved.
+
 November 12 receiving update: [Reimo accepted revision 2 and Nisha reports metadata-only private receiving PASS](handoffs/NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md). Matty received the authenticated public handoff with explicit evidence limits. The pending ingest checklist is refreshed; source-use evidence, operational ingest approval, actual episode contents, compatibility and scientific freeze remain outstanding. No selection rerun, source read or model call is authorized.
 
 November 11 follow-up: [the source questions are sent and offline installed-artifact identities match](handoffs/NOV11_SOURCE_REQUESTS_AND_OFFLINE_IDENTITY.md). Nisha reports the restricted v2 record delivered to Reimo; his exact acceptance is next. Actual custody receiving, source acceptance and scientific freeze remain pending. No source data or model request was used.

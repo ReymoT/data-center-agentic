@@ -1,0 +1,32 @@
+{
+  "code_lf_sha256": {
+    "dc_sustainability/data/cf60_comparison.py": "010eab6ec2994c38adbfc776a59843b3dda063bcb29594ee67a43ea67cc5d748",
+    "dc_sustainability/schemas.py": "a3ebde01f7e3930a3c14ad0795eac28204d084ef3866171982af8a5da6d2591d",
+    "dc_sustainability/simulator/core.py": "21a513f5ed757d3a51267755bbdf811b4770d56013592332a5e4ac38c9680ef2",
+    "dc_sustainability/training/collect.py": "d4833efb0b05968c98a65bc82ea62083ccb582a1e18c257223571ee4451b3299",
+    "dc_sustainability/training/pipeline.py": "aed7dba8e4d3f30a3375a9fe8424956860b6b056b6d1a3c8217480f2eb12e7c1",
+    "scripts/compare_cf60_development.py": "e1fa4e220f6e9792f83e1eef2a6d2a2a194053427fea89eedb5ad9f7af14060d"
+  },
+  "date_arizona": "2026-11-12",
+  "export_implemented_by_this_change": false,
+  "kind": "offline_state_plan_code_inspection_not_capture",
+  "model_calls": 0,
+  "private_input_reads": 0,
+  "reviewed_code_commit": "f6c4d09b1b062c2cd13bb52f3ad2aae4f924485e",
+  "run_authorization": null,
+  "scope_change_accepted": false,
+  "simulator_steps": 0,
+  "solver_calls": 0,
+  "source_reads": 0,
+  "states_supplied": 0,
+  "target": {
+    "completion_slots": 6,
+    "decision_slots": 24,
+    "development_episodes": 40,
+    "hypotheses": 2,
+    "issue_hypothesis_comparisons": 2400,
+    "slots": 30,
+    "state_pairs": 1200
+  },
+  "training_calls": 0
+}
