@@ -1,5 +1,7 @@
 # CF60 development compatibility check plan
 
+November 12: [the state recovery/generation plan](CF60_DEVELOPMENT_STATE_PLAN_2026-11-12.md) now specifies the 1200 missing state/snapshot pairs, provenance, trajectory, proposed bounds and fail-stop criteria. The [manager ingest/contingency proposal](../decisions/NOV12_INGEST_REQUIREMENTS_AND_CONTINGENCY.md) confirms source/execution gates. These are plans, not state exports, accepted scope changes or compatibility results.
+
 Matty approved preparing this offline plan on November 4. It does not adopt CF60,
 authorize new source reads, solver calls, relabeling, training or held-out access.
 Reimo retains the production broker work; Ved owns O02/Q08 certification and
