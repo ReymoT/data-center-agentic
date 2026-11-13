@@ -57,3 +57,22 @@ Matty also ran the corrected CLI offline against the saved unified public I01
 packet: all six units scored, no unscored units, and equal-work savings remained
 blocked rather than zero for Plain versus Agent. The output remains outside Git;
 no model call, source acquisition or held-out access occurred.
+
+## Report tables (Nisha, November 13)
+
+`scripts/render_study_tables.py` renders the saved study-tables JSON as IEEE LaTeX tables
+for the report through `dc_sustainability/evaluation/table_report.py`. Nothing is
+recomputed: every number is read from the JSON. The output is a new file headed by the
+source JSON's SHA256, split, status and protocol. The tables are:
+- paired Agent-minus-Plain differences for core and withheld episodes, with episode
+  intervals and the date sensitivity check;
+- equal-work savings, where a blocked comparison is shown as blocked with its reason;
+- per-scenario mean, standard deviation, run count and missing count for all six systems;
+- Greedy B forecast-tie rates.
+
+Every caption states the split ("Development data: not a study result." unless
+held-out). An absent estimate prints as an em dash, a missing interval says "no CI", and
+exclusions are counted with their reasons. Unscored runs are summarized by reason only,
+so episode IDs never enter report text. Rendering the saved public RUN-cb85f5a3425c
+tables produced seven tables, with savings correctly blocked. That output stays outside
+Git, and no held-out value was read.
