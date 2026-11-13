@@ -76,14 +76,25 @@ class BlindOutput:
 
 @dataclass(frozen=True)
 class ReviewCase:
+    """One decision shown to raters with two blinded outputs.
+
+    Development cases share one ``state``. Study cases set ``states`` instead: the two
+    systems follow different trajectories, so each output is judged against the visible
+    state its own system faced at that slot (``state`` is then None).
+    """
+
     case_id: str
     snapshot: s.ConstraintSnapshot
-    state: s.VisibleState
+    state: s.VisibleState | None
     outputs: dict[str, BlindOutput]
+    states: dict[str, s.VisibleState] | None = None
+
+    def state_for(self, key: str) -> s.VisibleState:
+        return self.states[key] if self.states is not None else self.state
 
     def not_applicable(self, key: str) -> bool:
         """Q10 exempts only an empty-queue no-op, never an omitted waiting-job decision."""
-        return not self.state.waiting_jobs and self.outputs[key].empty_plan_without_text
+        return not self.state_for(key).waiting_jobs and self.outputs[key].empty_plan_without_text
 
 
 def _blind_output(data: dict, state: s.VisibleState) -> BlindOutput:
@@ -117,20 +128,36 @@ def load_cases(data: dict) -> tuple[ReviewCase, ...]:
     cases, seen = [], set()
     for raw in data["cases"]:
         snapshot = s.ConstraintSnapshot.from_jsonable(raw["snapshot"])
-        state = s.VisibleState.from_jsonable(raw["state"])
-        if state.constraint_snapshot_id != snapshot.snapshot_id:
-            raise ValueError(f"{raw['case_id']}: state and snapshot differ")
-        if state.site != snapshot.site:
-            raise ValueError(f"{raw['case_id']}: state site differs from its snapshot")
-        if not set(state.constraint_ids) <= {c.constraint_id for c in snapshot.constraints}:
-            raise ValueError(f"{raw['case_id']}: visible constraint is absent from its snapshot")
+        if ("state" in raw) == ("states" in raw):
+            raise ValueError(f"{raw['case_id']}: give exactly one of 'state' or 'states'")
+        if "states" in raw:
+            if tuple(sorted(raw["states"])) != OUTPUT_KEYS:
+                raise ValueError(f"{raw['case_id']}: states must be exactly X and Y")
+            states = {k: s.VisibleState.from_jsonable(v) for k, v in raw["states"].items()}
+            shared = None
+        else:
+            shared = s.VisibleState.from_jsonable(raw["state"])
+            states = None
+        for state in states.values() if states else (shared,):
+            if state.constraint_snapshot_id != snapshot.snapshot_id:
+                raise ValueError(f"{raw['case_id']}: state and snapshot differ")
+            if state.site != snapshot.site:
+                raise ValueError(f"{raw['case_id']}: state site differs from its snapshot")
+            if not set(state.constraint_ids) <= {c.constraint_id for c in snapshot.constraints}:
+                raise ValueError(
+                    f"{raw['case_id']}: visible constraint is absent from its snapshot"
+                )
+        if states and len({(x.episode_id, x.current_slot) for x in states.values()}) != 1:
+            raise ValueError(f"{raw['case_id']}: both states must be the same episode and slot")
         if raw["case_id"] in seen:
             raise ValueError(f"duplicate case {raw['case_id']}")
         seen.add(raw["case_id"])
         if tuple(sorted(raw["outputs"])) != OUTPUT_KEYS:
             raise ValueError(f"{raw['case_id']}: outputs must be exactly X and Y")
-        outputs = {k: _blind_output(v, state) for k, v in raw["outputs"].items()}
-        cases.append(ReviewCase(raw["case_id"], snapshot, state, outputs))
+        outputs = {
+            k: _blind_output(v, states[k] if states else shared) for k, v in raw["outputs"].items()
+        }
+        cases.append(ReviewCase(raw["case_id"], snapshot, shared, outputs, states))
     return tuple(cases)
 
 
@@ -519,26 +546,37 @@ def cap_report(scored: Iterable[tuple[str, OutputScore]]) -> dict:
     return report
 
 
-def render_packet(cases: tuple[ReviewCase, ...]) -> str:
-    """Markdown packet for raters: decision facts and both outputs, no system or answers."""
-    lines = [
-        "# E04 development cases: rater packet",
-        "",
-        f"Rubric `{RUBRIC_VERSION}`. Synthetic pilot cases written for rubric development; "
-        "they are not model outputs. Rate each output independently using "
-        "[EXTRACTION_RULE.md](EXTRACTION_RULE.md) and `annotation_template.json`, before "
-        "discussing with the other rater or opening the case generator script.",
-        "",
-    ]
+DEVELOPMENT_HEADER = (
+    "# E04 development cases: rater packet",
+    "",
+    f"Rubric `{RUBRIC_VERSION}`. Synthetic pilot cases written for rubric development; "
+    "they are not model outputs. Rate each output independently using "
+    "[EXTRACTION_RULE.md](EXTRACTION_RULE.md) and `annotation_template.json`, before "
+    "discussing with the other rater or opening the case generator script.",
+)
+
+
+def render_packet(cases: tuple[ReviewCase, ...], header: Iterable[str] = DEVELOPMENT_HEADER) -> str:
+    """Markdown packet for raters: decision facts and both outputs, no system or answers.
+
+    A study case shows each output under the visible state its own system faced.
+    """
+    lines = [*header, ""]
     for case in cases:
-        lines += [f"## {case.case_id}", ""] + _facts(case) + [""]
-        for key in OUTPUT_KEYS:
-            lines += [f"### Output {key}", ""] + _output(case.outputs[key]) + [""]
+        lines += [f"## {case.case_id}", ""]
+        if case.states is None:
+            lines += _facts(case.state, case.snapshot) + [""]
+            for key in OUTPUT_KEYS:
+                lines += [f"### Output {key}", ""] + _output(case.outputs[key]) + [""]
+        else:
+            for key in OUTPUT_KEYS:
+                lines += [f"### Output {key}", "", f"State seen by output {key}:", ""]
+                lines += _facts(case.states[key], case.snapshot) + [""]
+                lines += _output(case.outputs[key]) + [""]
     return "\n".join(lines).rstrip() + "\n"
 
 
-def _facts(case: ReviewCase) -> list[str]:
-    st, snap = case.state, case.snapshot
+def _facts(st: s.VisibleState, snap: s.ConstraintSnapshot) -> list[str]:
     visible = set(st.constraint_ids)
     cons = [c for c in snap.constraints if c.constraint_id in visible]
     cap = [c for c in cons if c.constraint_type == "capacity"]
