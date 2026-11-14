@@ -1,5 +1,7 @@
 # Ingest requirements and scientific contingency proposal
 
+November 13 receiving: [all four affected-owner scope/bounds replies are received; offline controls and rating-tool fixes are recorded](../handoffs/NOV13_STATE_EXPORT_CONTROLS.md). Earlier missing-reply statements are historical. Exact private access, trajectory/input review and run authorization remain required; no contingency is activated.
+
 November 13: [Nisha's scoped conditions and future receiving offer are accepted by Matty; the backward feasibility plan is recorded](NOV13_SAFEGUARDS_AND_FEASIBILITY.md). Other affected-owner replies remain pending. No contingency, trajectory or execution is adopted by that acceptance.
 
 Date: November 12, 2026 (Arizona). Manager: MattyAnd. Reviewed main:

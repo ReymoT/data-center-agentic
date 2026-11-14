@@ -1,0 +1,34 @@
+{
+  "kind": "affected_owner_agreement_intake",
+  "date_arizona": "2026-11-13",
+  "owners": {
+    "Nisha": {
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6843775762",
+      "author": "nkolekar-nk",
+      "createdAt": "2026-11-13T04:18:01Z",
+      "position": "scoped agreement with recorded conditions; not source/run/freeze approval"
+    },
+    "Reimo": {
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6862627291",
+      "author": "ReymoT",
+      "createdAt": "2026-11-13T19:19:55Z",
+      "position": "scoped agreement with recorded conditions; not source/run/freeze approval"
+    },
+    "Ved": {
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6864394333",
+      "author": "vedp3705",
+      "createdAt": "2026-11-13T20:41:06Z",
+      "position": "scoped agreement with recorded conditions; not source/run/freeze approval"
+    },
+    "Edison": {
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/60#issuecomment-6866865299",
+      "author": "epez7",
+      "createdAt": "2026-11-13T22:49:03Z",
+      "position": "scoped agreement with recorded conditions; not source/run/freeze approval"
+    }
+  },
+  "manager_action": "proceed_with_offline_controls_and_synthetic_tests",
+  "execution_authorized": false,
+  "source_accepted": false,
+  "contingency_activated": false
+}
