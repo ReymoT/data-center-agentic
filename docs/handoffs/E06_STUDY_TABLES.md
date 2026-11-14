@@ -76,3 +76,5 @@ exclusions are counted with their reasons. Unscored runs are summarized by reaso
 so episode IDs never enter report text. Rendering the saved public RUN-cb85f5a3425c
 tables produced seven tables, with savings correctly blocked. That output stays outside
 Git, and no held-out value was read.
+
+November 13 Matty receiving: fixed incomplete LaTeX escaping (braces/dollar/tilde/caret), rejected nonfinite measures, kept saved-report status in held-out captions, and withheld free-form exception details that can contain private identifiers. Machine reason codes and counts remain; original JSON is unchanged. CLI summaries print hashes/counts instead of private output paths. Focused regressions cover the fixes. A split label never establishes scientific freeze or positive research findings.

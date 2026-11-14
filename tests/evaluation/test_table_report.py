@@ -118,3 +118,27 @@ def test_scenario_table_keeps_missing_counts():
     cell["missing"] = 1
     text = "\n".join(tr.scenario_table(r, "completed_jobs"))
     assert "1 missing" in text
+
+
+def test_tex_escapes_braces_dollars_and_control_characters_once():
+    assert tr._tex("{x}$~^\\") == r"\{x\}\$\textasciitilde{}\textasciicircum{}\textbackslash{}"
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf"), True])
+def test_nonfinite_values_cannot_appear_as_scientific_numbers(value):
+    with pytest.raises(ValueError, match="nonfinite or nonnumeric"):
+        tr._num(value, 2)
+
+
+def test_heldout_split_does_not_erase_unfrozen_status():
+    r = report()
+    r["split"] = "held_out"
+    text = tr.render(r, "a" * 64)
+    assert "not\\_a\\_frozen\\_result" in text and "freeze acceptance is not established" in text
+
+
+def test_unscored_private_exception_details_stay_only_in_json():
+    r = report()
+    r["unscored_runs"] = [{"reason": "EP-SECRET failed at C:/private"}]
+    text = tr.render(r, "a" * 64)
+    assert "EP-SECRET" not in text and "C:/private" not in text and "1 details_withheld" in text

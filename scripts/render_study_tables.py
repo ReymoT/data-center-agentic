@@ -38,7 +38,9 @@ def main(argv=None) -> int:
     )
     with args.out.open("x", encoding="utf-8", newline="\n") as stream:
         stream.write(text)
-    print(f"wrote {args.out} ({report['split']}, {text.count('begin{table')} tables)")
+    print(
+        f"wrote {text.count('begin{table')} tables; source_sha256 {hashlib.sha256(raw).hexdigest()}"
+    )
     return 0
 
 
