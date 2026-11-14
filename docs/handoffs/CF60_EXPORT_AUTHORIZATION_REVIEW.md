@@ -1,5 +1,10 @@
 # CF60 development export: authorization review
 
+Completed-review follow-up: [the supplied AI-assisted review found an empty-recovery
+integrity defect, confirmed and fixed directly](CF60_COMPLETED_REVIEW_INTAKE.md).
+Recovery now requires at least one authenticated original-state commitment.
+Pre-fix downloadable code pins must be refreshed before any exact approval.
+
 Prepared by Matty, November 13, 2026 (America/Phoenix), under instruction 1.29.
 This is preparation, not an export approval. AI assistance may organize evidence,
 check public pins, explain the code and find problems. It cannot turn a missing

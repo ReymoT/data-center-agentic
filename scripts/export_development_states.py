@@ -128,7 +128,9 @@ def preflight(raw, output):
         seen.add(resolved)
     if approval["route"] == "recover":
         hashes = approval.get("original_state_hashes")
-        if not isinstance(hashes, dict) or len(hashes) > 1200:
+        # An empty recovery is not evidence; validate_entries then requires coverage
+        # to equal these commitments, so at least one recovered state is produced.
+        if not isinstance(hashes, dict) or not 0 < len(hashes) <= 1200:
             raise ValueError("authenticated original-state commitments required")
         for key, value in hashes.items():
             ep, _, slot = key.rpartition("@")
