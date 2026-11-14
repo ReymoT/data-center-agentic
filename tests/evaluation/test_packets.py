@@ -18,10 +18,28 @@ SEL = Selection("EP-A", "normal|persistence", 3, 0)
 
 
 def units(agent="good", plain="late", trial=0, **fields):
-    return {
+    result = {
         ("agent", "EP-A", trial): tuple(run("EP-A", "agent", trial, agent, **fields)),
         ("plain_llm", "EP-A", trial): tuple(run("EP-A", "plain_llm", trial, plain, **fields)),
     }
+    if "input_hash" not in fields:
+        for key, records in result.items():
+            replay = replay_episode(
+                PLANNED["EP-A"].episode, executed_starts(records, "EP-A"), Q03_OPTION_B
+            )
+            result[key] = tuple(
+                r.model_copy(
+                    update={
+                        "input_hash": get_context(
+                            replay.state_at(r.slot), PLANNED["EP-A"].episode.snapshot
+                        ).content_hash
+                    }
+                )
+                if r.slot < s.PROPOSED_DECISION_SLOTS
+                else r
+                for r in records
+            )
+    return result
 
 
 def build(selected=None, u=None, seed=7):
@@ -160,3 +178,26 @@ def test_study_packet_renders_each_outputs_own_state():
     packet = review.render_packet(review.load_cases(cases), ("# study",))
     assert packet.count("State seen by output") == 2
     assert "agent" not in packet and "plain_llm" not in packet
+
+
+def test_missing_input_hash_is_withheld_without_guessing():
+    cases, key = build(u=units(input_hash=None))
+    assert not cases["cases"]
+    assert key["missing"][0]["reason"] == "agent saved input hash unavailable"
+
+
+def test_incomplete_unit_is_withheld_even_if_selected_state_hash_matches():
+    u = units()
+    k = ("agent", "EP-A", 0)
+    u[k] = u[k][:-1]
+    cases, key = build(u=u)
+    assert not cases["cases"]
+    assert "all 30 slots" in key["missing"][0]["reason"]
+
+
+def test_unit_identity_cannot_be_relabelled_by_its_mapping_key():
+    u = units()
+    k = ("agent", "EP-A", 0)
+    u[k] = tuple(r.model_copy(update={"trial": 1}) for r in u[k])
+    cases, key = build(u=u)
+    assert not cases["cases"] and "identity mismatch" in key["missing"][0]["reason"]

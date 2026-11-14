@@ -35,7 +35,7 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     for path in (args.main_out, args.boundary_out):
         if path.exists():
-            parser.error(f"{path} already exists; the sample is drawn once")
+            parser.error("sample output already exists; the sample is drawn once")
     episodes = [load_bundle(path).episode for path in args.bundle]
     main_record = sampling.select(episodes)
     boundary = sampling.select_boundary(episodes)
@@ -53,4 +53,8 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(f"Review sample stopped: {type(exc).__name__}", file=sys.stderr)
+        raise SystemExit(1) from None

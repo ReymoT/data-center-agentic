@@ -65,12 +65,14 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     if args.out_dir.exists() or args.key_out.exists():
         parser.error("the rater folder and the key must both be new")
-    if args.out_dir.resolve() in args.key_out.resolve().parents:
+    if args.key_out.resolve().is_relative_to(args.out_dir.resolve()):
         parser.error("the unblinding key must not be inside the rater folder")
 
     planned, episodes = {}, []
     for path in args.bundle:
         bundle = load_bundle(path)
+        if bundle.episode.episode_id in planned:
+            parser.error("duplicate episode bundle")
         episodes.append(bundle.episode)
         planned[bundle.episode.episode_id] = study_tables.planned_episode(
             bundle.episode, bundle.slot0_utc, bundle.forecasts_by_slot
@@ -90,7 +92,7 @@ def main(argv=None) -> int:
             continue  # unfinished units are reported as missing pairs below
         key = (records[0].system, records[0].episode_id, records[0].trial)
         if key in units:
-            parser.error(f"duplicate unit {key}")
+            parser.error("duplicate saved unit")
         units[key] = records
 
     case_file, key = packets.build(
@@ -126,6 +128,12 @@ def main(argv=None) -> int:
             args.out_dir / "annotation_template.json", dump(template)
         ),
     }
+    hashes["EXTRACTION_RULE.md"] = write_new(
+        args.out_dir / "EXTRACTION_RULE.md",
+        (Path(__file__).resolve().parents[1] / "docs/e04/EXTRACTION_RULE.md").read_text(
+            encoding="utf-8"
+        ),
+    )
     key["rater_files_sha256"] = hashes
     key_hash = write_new(args.key_out, dump(key))
     print(
@@ -140,4 +148,8 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(f"Study packet stopped: {type(exc).__name__}", file=sys.stderr)
+        raise SystemExit(1) from None

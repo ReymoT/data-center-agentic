@@ -109,6 +109,15 @@ def build(
             if unit is None:
                 problem = f"{system} unit missing"
                 break
+            if any(
+                (r.system, r.episode_id, r.trial) != (system, sel.episode_id, sel.trial)
+                for r in unit
+            ):
+                problem = f"{system} saved unit identity mismatch"
+                break
+            if sorted(r.slot for r in unit) != list(range(30)):
+                problem = f"{system} saved unit does not contain all 30 slots exactly once"
+                break
             at_slot = [r for r in unit if r.slot == sel.slot]
             if len(at_slot) != 1:
                 problem = f"{system} has {len(at_slot)} records at the slot"
@@ -124,9 +133,10 @@ def build(
             )
             # Raters must see exactly what the model saw: the replayed state's Context must
             # reproduce the saved input hash (graph and flat Contexts hash identically).
-            if record.input_hash is not None and (
-                get_context(state, plan_ep.episode.snapshot).content_hash != record.input_hash
-            ):
+            if record.input_hash is None:
+                problem = f"{system} saved input hash unavailable"
+                break
+            if get_context(state, plan_ep.episode.snapshot).content_hash != record.input_hash:
                 problem = f"{system} replayed state does not reproduce the saved input hash"
                 break
             records[system], states[system] = record, state
