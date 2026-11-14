@@ -1,5 +1,12 @@
 # Reimo source-evidence status draft for issue #60
 
+November 13 manager status: the upstream source requests are now sent at
+https://github.com/HewlettPackard/dc-rl/issues/8 and
+https://github.com/facebookresearch/CarbonExplorer/issues/15 . Neither has a
+posted comment at this review. B1-B3 remain unresolved and B4 provisional.
+Earlier references to unsent drafts below are historical; no reply or permission
+is inferred. See [the export authorization review](CF60_EXPORT_AUTHORIZATION_REVIEW.md).
+
 ## Manager review — November 11, 2026
 
 Published as supporting draft evidence through PR #208. The November 10 audit
