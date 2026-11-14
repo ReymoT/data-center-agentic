@@ -1,5 +1,10 @@
 # Offline state-export controls and scoped agreement intake
 
+Publication verified: PR #217 merged at c2ec1f1fb13aa9a080d313b41c2271df362853ad;
+exact main CI run 43539804481 passed. Final PR suite: 2339 tests and 19 subtests
+passed. The [authorization review checklist](CF60_EXPORT_AUTHORIZATION_REVIEW.md)
+assembles the next evidence/input steps. No real export is authorized or claimed.
+
 Manager: MattyAnd. Instruction 1.29. Nisha, Reimo, Ved and Edison have supplied
 [their directly affected scope/bounds positions](../evidence/nov13-scoped-owner-agreements.json).
 They agree with the recovery-first plan and conditional new no-start diagnostic
@@ -128,4 +133,5 @@ The [pending authorization template](../evidence/state-export-authorization-pend
 is intentionally incomplete and is regression-tested to refuse dispatch.
 
 Final focused export suite: 17 passed. Full lint/format, setup/local-link/policy
-and I02 checks pass. The final exact hosted suite runs after publication.
+and I02 checks pass. The final exact hosted suite and merged-main CI have now
+passed as recorded above; the earlier validation chronology remains historical.
