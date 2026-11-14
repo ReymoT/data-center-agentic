@@ -138,6 +138,24 @@ def test_synthetic_recovery_records_coverage_and_refuses_repeat(tmp_path, monkey
         cli.work(raw, tmp_path / "out")
 
 
+def test_empty_recovery_is_refused_before_ledger_or_input_use(tmp_path, monkeypatch):
+    a, _, source = recovery_setup(tmp_path, monkeypatch)
+    source.write_bytes(b"[]")
+    a["inputs"][0]["sha256"] = hashlib.sha256(b"[]").hexdigest()
+    a["original_state_hashes"] = {}
+    raw = ex.payload(a)
+    reservation = (
+        tmp_path
+        / ".state-export-consumed-authorizations"
+        / (hashlib.sha256(a["authorization_id"].encode()).hexdigest() + ".json")
+    )
+    reservation.write_bytes(ex.payload({"approval_sha256": hashlib.sha256(raw).hexdigest()}))
+    with pytest.raises(ValueError, match="commitments required"):
+        cli.work(raw, tmp_path / "out")
+    assert not (tmp_path / ".state-export-worker-consumed-authorizations").exists()
+    assert not (tmp_path / "out").exists()
+
+
 def test_changed_input_is_preserved_as_failure_without_retry(tmp_path, monkeypatch):
     a, raw, source = recovery_setup(tmp_path, monkeypatch)
     source.write_text("[]")
@@ -154,6 +172,7 @@ def test_changed_input_is_preserved_as_failure_without_retry(tmp_path, monkeypat
         ("maximum_input_bytes", True),
         ("source_use_ref", None),
         ("code_sha256", {}),
+        ("original_state_hashes", {}),
     ],
 )
 def test_approved_record_does_not_bypass_scope_gates(tmp_path, monkeypatch, field, value):
