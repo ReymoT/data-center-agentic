@@ -1,5 +1,7 @@
 # November 13 safeguards, receiving and feasibility schedule
 
+November 13 receiving: [all four affected-owner scope/bounds replies are received; offline controls and rating-tool fixes are recorded](../handoffs/NOV13_STATE_EXPORT_CONTROLS.md). Earlier missing-reply statements are historical. Exact private access, trajectory/input review and run authorization remain required; no contingency is activated.
+
 Manager: MattyAnd. Reviewed main: 1db03f905f3dedbd98bb7b85ebaa8c437c8408ca,
 instruction 1.29. Matty authorized accepting the safeguards, recording the future
 receiving offer and building a backward plan with reproduction and repair time.

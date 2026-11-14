@@ -1,5 +1,7 @@
 # Development visible-state recovery and generation plan
 
+November 13 implementation update: [the agreed offline controls and synthetic verification](NOV13_STATE_EXPORT_CONTROLS.md) supersede earlier missing-owner-reply and no-driver statements below. Conditional scope/bounds agreement is received; exact live trajectory/input/source/custody review and fresh approval remain required. No real state export has run.
+
 November 13: [Nisha's scoped conditions and future receiving offer are accepted by Matty; the backward feasibility plan is recorded](../decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md). Other affected-owner replies remain pending. No contingency, trajectory or execution is adopted by that acceptance.
 
 Owner: Matty for this preparation/direct fixes; Ved receives O02/Q08 implications,

@@ -30,3 +30,6 @@ Still to build: the report renderer for the study-tables JSON.
 ## Matty receiving and direct fixes — November 13
 
 Matty accepts own-state-per-output with the matching immutable snapshot and the final recommended plan as documented in EXTRACTION_RULE section 11.10. A plan shown is not an execution verdict. Personal rater availability remains unconfirmed; no assistant commits Matty's time or ratings. Fixed the packet path that previously admitted missing input hashes, incomplete units or mapping-key identity drift. Those pairs are withheld with reasons. Added regression tests; included the rubric in the rater folder, rejected key/output path equality and removed private values from CLI failure summaries. Recovered/rerun public checks are separate from any future held-out authorization. The table renderer is tracked in PR #216.
+
+Matty subsequently confirmed the four rating dates plus adjudication in #95.
+This supersedes the pending-availability note above; it supplies no ratings.
