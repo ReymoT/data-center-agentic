@@ -1,5 +1,11 @@
 # Project plan
 
+November 13 environment refresh: [Matty's observed executor-preparation inventory
+and feasibility disposition](handoffs/NOV13_EXECUTOR_ENVIRONMENT_AND_FEASIBILITY.md)
+record a 74-package lock-version match, pip consistency and 158 tracked file pins.
+Actual source/input/custody bindings remain missing; no dispatch or contingency
+activation is granted. The November 22, 18:00 Arizona checkpoint is retained.
+
 November 13 controls: [all affected scope replies are received; offline state-export controls are implemented and synthetic-tested](handoffs/NOV13_STATE_EXPORT_CONTROLS.md). Real state export/source use remains unauthorized. Matty confirmed his rating availability; the contingency remains unactivated and I02 unfrozen.
 
 November 13 planning: [Matty accepts Nisha's safeguards and future scoped state receiving offer](decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md). The conservative internal freeze/feasibility checkpoint is November 22 at 6 PM Arizona, reserving reproduction, I04 and repair time before December 7. These are planning targets, not completed work or execution permission; the contingency remains unactivated.
