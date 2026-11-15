@@ -1,5 +1,12 @@
 # Project plan
 
+November 15 availability: [all 40 files at the recorded Matty episode location
+are present and byte-hash matched to the v2 receipt](handoffs/NOV15_MATTY_COPY_AVAILABILITY.md).
+Episode values were not parsed and the CSV was not opened. Original states,
+forecast bundles, source-use evidence and exact execution/custody approval remain
+pending. [The development-only fallback draft](report/DEVELOPMENT_ONLY_CONTINGENCY_DRAFT.md)
+is prepared as deadline insurance, not activated; the November 22 checkpoint stands.
+
 November 13 environment refresh: [Matty's observed executor-preparation inventory
 and feasibility disposition](handoffs/NOV13_EXECUTOR_ENVIRONMENT_AND_FEASIBILITY.md)
 record a 74-package lock-version match, pip consistency and 158 tracked file pins.
