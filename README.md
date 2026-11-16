@@ -9,6 +9,11 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+The [development bundle assembler](docs/handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md)
+now prepares the missing input format from explicit episode JSONs and a permitted
+row extract. Synthetic checks pass; no real bundle preparation, source permission
+or study result is claimed. The development-only fallback draft remains inactive.
+
 November 13 controls: [all affected scope replies are received; offline state-export controls are implemented and synthetic-tested](docs/handoffs/NOV13_STATE_EXPORT_CONTROLS.md). Real state export/source use remains unauthorized. Matty confirmed his rating availability; the contingency remains unactivated and I02 unfrozen.
 
 November 13 planning: [Matty accepts Nisha's safeguards and future scoped state receiving offer](docs/decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md). The conservative internal freeze/feasibility checkpoint is November 22 at 6 PM Arizona, reserving reproduction, I04 and repair time before December 7. These are planning targets, not completed work or execution permission; the contingency remains unactivated.
