@@ -61,6 +61,10 @@ policies/models, modify traces or turn development evidence into study findings.
 
 Drafts of each section live in this folder (or are linked here) as their source of truth, so every claim stays reviewable next to its evidence. The final PDF is set in the IEEE conference template on a shared Overleaf project that Nisha created. Access is by email invitation, and its edit link stays out of this public repository. The repository is the supplemental material; restricted or private inputs stay out of Git under the Q13 boundary.
 
+## November 16 handoff and feedback
+
+[Matty Overleaf handoff](MATTY_OVERLEAF_HANDOFF_2026-11-16.md) records the inserted agent/verification, UI/figure and contribution text with compilation limits. [Presentation feedback assessment](NOV16_PRESENTATION_FEEDBACK.md) records proposed cross-validation, repair-feedback ablation, expert ranking and scale checks. These are not adopted experiments or new execution approvals. Final study findings and remaining owner handoffs stay pending.
+
 ## Schedule
 
 These are conditional report-production targets, reconciled to the manager's
