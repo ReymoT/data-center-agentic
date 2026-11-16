@@ -2,6 +2,14 @@
 
 Assembler: Nisha (R05); release package: Matty (R06).
 
+November 15: [an evidence-first working report](VERIFIED_EVIDENCE_WORKING_DRAFT.md),
+[claim/source index](VERIFIED_EVIDENCE_INDEX.md) and
+[draft delivery manifest](EVIDENCE_FIRST_DELIVERY_MANIFEST.json) now assemble the
+available methods, development evidence and figures. Original owner drafts remain
+editable sources. Held-out findings, final PDF/layout, I03/I04 and final R05/R06
+acceptance remain pending. The fallback is prepared but not activated. Ready
+methods/contribution handoffs are coordinated in [#223](https://github.com/ReymoT/data-center-agentic/issues/223).
+
 **Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
 - **Due December 9, 2026, at 11:59 pm.** 20% of the course grade.
 - **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
@@ -30,12 +38,12 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | A | Abstract | 1 | Nisha | 0.25 | Research question; findings | Write last |
 | B | Introduction | 2 | Nisha | 0.75 | [Draft](R05_INTRODUCTION_PROBLEM.md); research question | Drafted; findings wait for I02 |
 | C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; Reimo's review pending |
-| D | Related works | 1 | Matty, Nisha | 0.5 | [Draft](R05_RELATED_WORKS.md); [source review](../SOURCE_REVIEW.md) | Drafted; Matty's review pending |
+| D | Related works | 1 | Matty, Nisha | 0.5 | [Draft](R05_RELATED_WORKS.md); [source review](../SOURCE_REVIEW.md) | Integrated wording reviewed against retained source review; final bibliography formatting/check pending |
 | E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft exists |
-| F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Not started |
+| F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Evidence-first assembly drafted; owner wording/source limitations confirmation pending |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
 | H | UI / visualization interface designs | **4** | Matty | 1 | [Working explorer and screenshot](UI_VISUALIZATION.md) | Implemented and browser-checked on saved development evidence; final report acceptance pending |
-| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Not started |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty statement and attribution draft available; other owner confirmations pending |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | [Reference list](REFERENCES.md) | Started; software and data entries pending |
 | | **Total** | **20** | | **~9.5** | | |
@@ -55,15 +63,21 @@ Drafts of each section live in this folder (or are linked here) as their source 
 
 ## Schedule
 
-These are draft report-production targets. Presentation preparation (November 9–11 review, November 13 rehearsal, November 14 email and Canvas submission) is recorded separately. The November 13 scientific freeze target is conditional on its acceptance gates.
+These are conditional report-production targets, reconciled to the manager's
+November 22 feasibility checkpoint and reserved November 26-27 dates. Older
+November 13 freeze/November 23 completion targets are superseded. This update
+does not restart presentation work or change official course requirements.
 
 | Date | Milestone |
 |---|---|
-| November 13 | I02 freeze (conditional) |
-| November 16 | Class presentation |
-| November 23 | Held-out runs, references and annotations complete (plan) |
-| November 27 | Section drafts C–F and H due from owners (earlier if you're away over Thanksgiving) |
-| December 2 | Demo; evaluation findings and reliability drafts complete |
-| December 6 | Full IEEE draft for team review |
+| November 17, 6 PM Arizona | Ready methods/contribution draft or concrete blocker on #223; internal status checkpoint |
+| November 22, 6 PM Arizona | Explicit feasibility decision; I02 freeze only if acceptance gates pass |
+| November 23-24 | Frozen execution only if freshly authorized and ready |
+| November 25 and 28-30 | References/scoring/ratings/reliability/adjudication as exact prerequisites permit |
+| November 26-27 | Reserved; no work required by this plan |
+| December 1 | Consolidated evidence-backed text/tables; unavailable results remain pending |
+| December 2-3 | Ved I03 reproduction only with actual accepted final artifacts |
+| December 4 | Matty I04 and R06 checks only after accepted prerequisites |
+| December 5-6 | Repair/revalidation, IEEE layout and final review buffer |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
 | December 9, 11:59 pm | Deadline reported by Nisha; official timezone unconfirmed |

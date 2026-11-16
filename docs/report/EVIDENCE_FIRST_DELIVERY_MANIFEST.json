@@ -1,0 +1,327 @@
+{
+  "kind": "evidence_first_report_source_manifest_v1",
+  "status": "draft_sources_not_final_release",
+  "date_arizona": "2026-11-15",
+  "baseline_evidence_commit": "8eb3cf0cf80c7cf85e9217084cd18eeed91a5e26",
+  "report_assembler": "Nisha",
+  "release_preparation_owner": "MattyAnd",
+  "report_draft": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
+  "evidence_index": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
+  "files": [
+    {
+      "path": "data/D05_SOURCE_EVIDENCE.md",
+      "sha256": "02163dfcaa5c4f8e831eb082270ca51d8fd5c2f67b0171555d3d6a505f125272",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "data/manifests/d04-development-content-112-v2/receipt.json",
+      "sha256": "33c8dce514cdbcba53f9ed03399219be8a511d628ab61def694eedaac894b319",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/data/development_bundles.py",
+      "sha256": "d67425110e4b156915d5fba23645676488728f82d1e34d601f7e816c5794d1ea",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/knowledge/__init__.py",
+      "sha256": "e16c1fb3e3c52ba5e584d0c9f01c74972b6c8f66b1efcfabfc3fb1811e829fb2",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/knowledge/ontology.py",
+      "sha256": "9b3c9318f2f2278078bf135169f262363c0082498783743f1690ca3af4bf7759",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "74784959e6cd925d29dba57cb0bad39ae9efc8a4d3bc125ea10000b0ba7f30bc",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/INTERFACES.md",
+      "sha256": "745893b78e97a0c3b8ae8989dfc8732f8da58a2b9c43e70d18820c3bf5d7ab33",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/PROJECT_PLAN.md",
+      "sha256": "2663e8cc060cc50d856583c575a7d48d74ee503b7e79d88cf0f9c9c66c5e520f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/R04_DEVELOPMENT_EVIDENCE.md",
+      "sha256": "cd4adf0d5aa12f6f49dc055f6f730ede92487d0973e19568b16f78a26e40c035",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/SOURCE_REVIEW.md",
+      "sha256": "fc1232cfded91d6ef61a8d519069dcd3839e1f849241ffaec226a874dffc3577",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/decisions/NOV10_PROFILE_ADOPTION_AND_FORECAST_SCOPE.md",
+      "sha256": "5f8d9b00b3b9355cd7fb283b45ee504b1605811b3c4c6dae7e877903dfe730b1",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/decisions/NOV13_SAFEGUARDS_AND_FEASIBILITY.md",
+      "sha256": "3d39d7239819cc3d6ae37b3968fab97e6a19ece0d80468db8400e58082061367",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/decisions/Q13_OFFICIAL_REPORT_2026-11-02.md",
+      "sha256": "544a45acdcc0149e97bbfbc0e7f1e1edf7a92e9c863d2496664cda458f1f745e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/e04/calibration/ratings/NISHA_SUBMISSION.md",
+      "sha256": "007174f8d10336c9bcae1f6500e289c2e83ff6d1c5de23d4ed209d59a7891857",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/e04/ratings/agreement/E05_DEVELOPMENT_ADJUDICATION_2026-10-29.json",
+      "sha256": "35758cfcd733b1377acc9b30acf8bf8b6408ba0a9c1379d0ab73eb56af7ee0bf",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/e04/ratings/agreement/E05_DEVELOPMENT_IRR.md",
+      "sha256": "04371af6d466aa3be852abadb33f23635b7787b1fe5bedb487f5ce5fcd7138d4",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/A01_CB85_NISHA_REPORT_2026-11-10.txt",
+      "sha256": "0e876c20bc8eb6c7f7dcf1c825363f60ebaae8d9b137cb584e22d7f872f4e010",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/A01_CB85_NISHA_VERIFIER_2026-11-10.txt",
+      "sha256": "929180db5c234b5f980c192db8a5c78f965252b95619d83513fa2a41d8459afc",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/a01-paired-claim-validation-2026-11-09.json",
+      "sha256": "ca678ea624365c5f6597f64ea0994e156419f498d1797ad7e33029e53270c0bd",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/development-bundle-authorization-pending.json",
+      "sha256": "afd869057e7a8ae9332e04ba921178ac56109cfc15ec252ba5499a4d350d4ae8",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/A01_CB85_NISHA_RECEIVING_2026-11-10.md",
+      "sha256": "2c566f1fd232b2f964155c25b5bfa18a41f960e97c06beae6a554832f1a0d0c1",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/A01_PAIRED_CLAIM_VALIDATION_RESULT_2026-11-09.md",
+      "sha256": "4e1baf76d39aa5df7d5cf1fbe949c6c39cdf5c2a03e13c1c28eaec007f1f8a34",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md",
+      "sha256": "b826e647ca57e9ff0a7555895e682ff128aadf5c8591dc7b30db3833c9220bc0",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md",
+      "sha256": "60e6ce086b6c1721a45afd72454adfa8b3996e4f00b4c14eb96fe263283c7944",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/E03_EQUAL_WORK_COMPARISON.md",
+      "sha256": "1ae8b12e2ce09f6b8a91999f0ba7b6afbc458b0d76bf424d7b4efd7b60503f04",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/E03_RUN_METRICS.md",
+      "sha256": "b73baacfcaac468defca16cb1b1e8a99772f0da98c30ea3b2990304a7c3ddfd8",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/LEGACY_LABEL_AUDIT_2026-11-04.md",
+      "sha256": "4b203ad3f323838baf340949e3dd95897cf7c7dfebd264dc90212058f2c87703",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/NOV10_SELECTOR_CONTENT_AND_TRACE.md",
+      "sha256": "d7cb279fda773fb49461bd6883046f03329e2c19baa302b805cb2ec1b8f75e6b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/NOV13_STATE_EXPORT_CONTROLS.md",
+      "sha256": "51059b3f89419a98fead963439226d96265d1db1d3235fe3524bc55bc8c02849",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/NOV15_MATTY_COPY_AVAILABILITY.md",
+      "sha256": "103786dd2f75cb7b78b862d381ca00a833b5997971741f1a58b89fe9d06c3ac7",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/REIMO_SOURCE_EVIDENCE_STATUS_DRAFT.md",
+      "sha256": "daa5d92e0a0d7abdc0701c925f7a112567475fe524f2076fd8916ee76c074a6e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/i02/README.md",
+      "sha256": "a4229057e567235846c695b2e83431e2bd918c97ec22973dfb79b5425e82951c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/i02/freeze-manifest.json",
+      "sha256": "7af1d419a0e0a190a5506ad501a838c96f090dcd0215845077813c5e75f1683b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/DEVELOPMENT_ONLY_CONTINGENCY_DRAFT.md",
+      "sha256": "70c7a3864507e45f01bbeaa2709aefe87372eacc1da04807c6b4fe53542ae8bd",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/MATTY_CONTRIBUTIONS.md",
+      "sha256": "01b27524133b141b5ade0be94a8750b46ed5c2d0f0e7492d68b3daebe54469ab",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R05_EVALUATION.md",
+      "sha256": "e0b291b52ed49837b91a6220a9c65a2d23b3e2cb40b779e9011713fd4de794c5",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R05_INTRODUCTION_PROBLEM.md",
+      "sha256": "c7081a929b5c78fa53a7a79065523f09d8f9490b71f8841add57708a7be37a9e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R05_RELATED_WORKS.md",
+      "sha256": "8b374ad77d98bddd1a18773fde2b7486eb349074a274ffa78cdb1db96407b035",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/README.md",
+      "sha256": "cf240925a08e0ed79d69877d33f38c4954e453333a4dd463cbddd0b5aeadfec1",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/REFERENCES.md",
+      "sha256": "0e8ad20a9e360ac2baa236e82113a46a9a2f1a6ad10e16a0a46d7c9e09cc2cbb",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/UI_VISUALIZATION.md",
+      "sha256": "697d22687b54deb3f0d6785824edf32c3a8f73f90282ec01383272bb54e9f3ad",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
+      "sha256": "8f145743753d0b5e3b0046dea24083e92ba2a18f380ab22891a874181473b15c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
+      "sha256": "c44f1dfbdb8cece24723651f47f6022be95b84f2bcaa75c1e84f6e6d9af4332f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/images/trace-explorer.jpg",
+      "sha256": "1f2c2b1e5178cd11c1dc9a1e24bb5d3e4899a32e67aa137867d7cfb6c82c9abc",
+      "hash_convention": "exact_bytes"
+    },
+    {
+      "path": "docs/team/03_RESPONSIBILITY_CHECKLIST.md",
+      "sha256": "fa386711ffeeac7f2e4c5a27ca91997a9588e120975b102f892abf13038bb599",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "models/DEVELOPMENT_FOLD_METRICS.md",
+      "sha256": "5b61a194992f997bfffd2cb62f2f19d79d05defcd832d64668b77251de15fbb8",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "models/development_fold_metrics_2026-11-02.json",
+      "sha256": "39b09bbb4ec9bd4b6c34cd81800c4b31acdce436a45d85ffd7fe24d64c6fb799",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "ontology/README.md",
+      "sha256": "c8708a718ce24fe2b4ce93415714901bc1c8371465202f297e5de692cdd8db0e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/build_trace_explorer.py",
+      "sha256": "e862de32e0afd099365378027335f4b409f7f9f45665417c9f0e5c63d7fcbdd3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    }
+  ],
+  "self_hash_excluded": true,
+  "snapshot_scope": "Selected public repository evidence and authorized documentation drafts. Detailed private records, source CSV, episodes/binaries/raw logs/held-out contents are excluded.",
+  "i02_status_counts_at_preparation": {
+    "pending": 13,
+    "blocked": 5
+  },
+  "scientific_freeze": false,
+  "held_out_results_available": false,
+  "fallback_activated": false,
+  "final_delivery_or_submission": false,
+  "new_model_or_source_run_authorized": false,
+  "pending_final_artifacts": [
+    {
+      "id": "source-and-input-acceptance",
+      "owner": "Reimo/Matty and affected consumers",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "scientific-freeze-and-frozen-results",
+      "owner": "Nisha/Matty",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "O04-P07-final-references-and-scores",
+      "owner": "Ved/Edison",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "held-out-ratings-E06-E07",
+      "owner": "Nisha; Matty second rater",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "owner-contribution-confirmations",
+      "owner": "all members; Nisha assembles",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "I03-I04",
+      "owner": "Ved/Matty",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "final-IEEE-PDF",
+      "owner": "Nisha",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    },
+    {
+      "id": "final-release-and-submission-receipt",
+      "owner": "Matty/Nisha",
+      "status": "pending",
+      "path": null,
+      "sha256": null
+    }
+  ],
+  "verification_limits": "Byte commitments and source mapping are not independent scientific acceptance, source permission, layout verification or a submission receipt."
+}

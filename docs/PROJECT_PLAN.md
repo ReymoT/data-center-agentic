@@ -1,5 +1,11 @@
 # Project plan
 
+November 15 evidence-first delivery: [a working report and evidence index](report/VERIFIED_EVIDENCE_WORKING_DRAFT.md)
+assemble available methods/development observations now. [#223](https://github.com/ReymoT/data-center-agentic/issues/223)
+requests existing R01/R02/R03/R05 methods/contribution drafts or blockers by
+November 17 at 6 PM Arizona. Final results, R05/R06 acceptance and the fallback
+decision remain pending; the November 22 feasibility checkpoint is unchanged.
+
 November 15 bundle preparation: [the missing legacy JSON assembly step is implemented
 and synthetic-tested](handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md). It uses
 explicit episode JSONs and a separately authorized extract, never a CSV fallback.
