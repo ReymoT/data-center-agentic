@@ -1,6 +1,6 @@
 # Ontology-Grounded, Tool-Verified Data-Center Sustainability Recommendations
 
-Group 15, Project 21. Working assembly, November 15, 2026 (America/Phoenix).
+Group 15, Project 21. Working assembly, November 16, 2026 (America/Phoenix).
 Members: Edison Perez Cash; Matty Anderson and Nisha Mahadev Kolekar; Reimo Tamme;
 Ved Patil. R05 assembler: Nisha. R04/R06 preparation: Matty.
 
@@ -189,6 +189,21 @@ The I02 checklist is currently 13 pending and five blocked, with zero frozen
 items and no accepted freeze commit. Metadata-only custody receiving is not
 held-out content materialization, source permission or a completed study. [E7]
 
+The accepted November 12 handoff is metadata-only: Nisha reports six dates in
+six months, 24 core plus six withheld records and 26 passing independent checks.
+Matty accepted her authenticated public report without receiving the private
+metadata/report or rerunning those checks. Operational custody, source-use
+permission and actual episode contents remain separate pending gates. [E7, E8]
+
+The merged study-packet builder presents each blinded output with its own
+replay-verified visible state and matching immutable snapshot. It shows the final
+recommended plan, which is not proof of execution; missing/mismatched hashes,
+incomplete units and identity mismatches withhold a pair with a recorded reason.
+The unblinding key remains separate. The table renderer formats saved study-table
+JSON without recomputing results. These are implemented tools, not completed
+held-out packets or findings. Matty reserved November 25 and 28-30 for up to 180
+outputs plus adjudication; November 26-27 remain reserved. [E7]
+
 Evaluation separates accuracy/completion/reference gaps, safety of proposals and
 execution, abstention/fallback, resource accounting, and human explanation
 faithfulness. E01 reconstructs execution separately from the production checker.
@@ -290,6 +305,12 @@ separate when choosing final figures. [E3, E10]
 | Matty Anderson and Nisha Mahadev Kolekar | Shared research comparison/evaluation; Matty adapter, graph workflow integration, checker/controller, CI and release preparation; Nisha Plain/explanation, independent evaluator and reliability/report assembly | Distinct detailed ownership retained; final R04/R05/R06 and held-out review remain pending |
 | Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 final prose and contribution/source limitations confirmation |
 | Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 final prose and contribution/certification limits; O04/I03 pending |
+
+Nisha supplied the introduction/problem, related-work and updated evaluation
+handoffs in #223; PR #226 is merged. She reports her contribution text is in the
+private shared Overleaf project. That text was not available in this repository
+review and is not invented here. Reimo's, Ved's and Edison's contribution handoffs
+remain pending at the existing November 17, 18:00 Arizona checkpoint. [E11]
 
 The responsibility checklist and owner drafts govern attribution. Matty's
 contribution statement is available; this table does not invent personal
