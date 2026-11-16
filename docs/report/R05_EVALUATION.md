@@ -5,8 +5,8 @@ I02; it is not frozen yet. Results in §3 are retained development evidence.
 Report held-out results separately after frozen runs and the reliability repeat
 (#95), preserving the originals and development findings.
 
-November 16 update: the held-out dates were selected on November 12 (Arizona time)
-and independently received; the study-packet format (rule 11.10), packet builder and
+November 16 update: Nisha reports metadata-only held-out date selection and
+independent receiving on November 12 (Arizona time); the study-packet format (rule 11.10), packet builder and
 LaTeX table renderer are merged; and the rating days are reserved. None of this is a
 freeze, a held-out output or a study result.
 
@@ -39,12 +39,15 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
   this is not the I02 freeze.
 - **Held-out date selection** ([November 12 receiving record](../handoffs/NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md)).
   Under Reimo's accepted revision 2 parameter record and the pinned v2 selector, one
-  private nonce was created after acceptance and before any source or outcome was
-  inspected, and one preparation ran without retry or search. It gave six dates in six
-  months, 24 core plus six withheld metadata records, and left the 40 development
-  records unchanged. Nisha's independent receiving check passed all 26 checks. Only
-  hashes are public; no held-out contents, carbon observations or model outputs exist
-  from this step. Episode contents, source acceptance and the freeze remain pending (#60).
+  private nonce was reportedly created after acceptance and before source or outcome
+  inspection for that preparation. Nisha reports one preparation without retry or
+  search, six dates in six months, 24 core plus six withheld metadata records,
+  40 unchanged development records and all 26 independent checks passing. Matty
+  accepted the authenticated public report for coordination; he did not receive
+  the private report/metadata or rerun those checks. Public hashes are commitments,
+  not manager-verified private file hashes. No held-out contents, carbon observations
+  or model outputs were produced by this metadata step according to that report.
+  Episode contents, source acceptance and the freeze remain pending (#60).
 
 **Accuracy.** Measured against saved execution records and independently replayed (E01):
 - executed-schedule validity;
@@ -54,9 +57,11 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
 
 Savings are reported only between schedules that complete the same work under the same inputs.
 
-Source lineage, pollutant/system boundary, physical intervals, rights and the
-freeze remain gated by #60; the held-out date selection and its custody receiving
-were completed on November 12. Until accepted, carbon quantities are
+Source lineage, pollutant/system boundary, physical intervals, rights, actual
+operational ingest custody/authorization and the freeze remain gated by #60.
+The reported metadata selection/isolation receiving is accepted for its limited
+scope; it does not establish operational custody or permission for source reads.
+Until the applicable gates are accepted, carbon quantities are
 development proxy arithmetic, not verified site emissions or causal savings.
 The six systems have separate receiving records, not one completed frozen study.
 
