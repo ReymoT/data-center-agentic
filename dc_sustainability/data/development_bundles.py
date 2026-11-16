@@ -33,8 +33,21 @@ def assemble(episodes, extract, *, records, commitments, deadline):
         raise ValueError("exact fixed development cohort required")
     if not isinstance(episodes, dict) or set(episodes) != ids:
         raise ValueError("complete unique episode JSON mapping required")
-    if set(extract) != {"source_sha256", "rows"} or extract["source_sha256"] != SHA256:
+    core = {"source_sha256", "rows"}
+    producer_metadata = {"extractor_code_sha256", "ingestion"}
+    if (
+        not isinstance(extract, dict)
+        or set(extract) not in (core, core | producer_metadata)
+        or extract["source_sha256"] != SHA256
+        or (
+            producer_metadata <= set(extract)
+            and any(not isinstance(extract[name], dict) for name in producer_metadata)
+        )
+    ):
         raise ValueError("pinned explicit extract required")
+    # The operational extractor retains these two provenance dictionaries. Accept
+    # that known record intact; exact byte-hash binding remains the caller's gate.
+    # Metadata presence is not independent authentication or source permission.
     allowed = permitted_indices(records)
     rows = extract["rows"]
     if not isinstance(rows, list) or len(rows) != len(allowed):

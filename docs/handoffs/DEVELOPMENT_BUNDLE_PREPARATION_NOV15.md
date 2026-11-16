@@ -1,5 +1,16 @@
 # Development legacy forecast-bundle preparation
 
+Remaining-preparation fix, November 15: the assembler now accepts both the bare
+source/rows payload and the operational extractor's complete record containing
+the two known provenance dictionaries, extractor_code_sha256 and ingestion.
+Unknown fields, incomplete metadata pairs and non-dictionary metadata remain
+rejected. The original pinned extract is not stripped or reserialized to fit;
+its full byte hash is retained in bundle provenance. An offline regression feeds
+the real producer's synthetic output bytes directly into the bundle worker.
+It failed at the old field guard before this fix and passes afterward. No actual
+pinned CSV, retained episodes or services were accessed. Synthetic test files and
+test-only approvals do not establish live permissions or run acceptance.
+
 Matty authorized this missing assembly step and offline synthetic verification on
 November 15, 2026 (America/Phoenix), against main
 3e9cf87a8f70c279fb2794985222c7bfaf7c1e18 and instruction 1.29. No actual source,
@@ -79,3 +90,23 @@ prepared but inactive; the November 22, 18:00 Arizona feasibility checkpoint sta
 #95 waits for actual ratings; Matty availability is confirmed. #16 retains November
 20-or-new-guidance. #164/O04 and #166/I04 remain correctly blocked by final inputs.
 No duplicate task or repeat scope reply is requested. Keep incomplete issues open.
+
+## Execution remains on hold
+
+The targeted extractor, bundle, capture, comparison and launcher tests pass 103
+cases after the handoff fix. They process generated synthetic test fixtures only.
+No final live authorization is filled or consumed. Older manifests/code-pin sheets
+are historical after this production-code change; refresh pins for the exact
+reviewed checkout immediately before any later approval.
+
+| Later stage | Existing entry point | Required handoff before proceeding |
+| --- | --- | --- |
+| Extract | scripts/launch_cf60_ingest.py | Authenticated source/use/custody and nonce-timing disposition; exact named source, physical read scope, index union, output and fresh single-use approval |
+| Assemble bundles | scripts/prepare_development_bundles.py | Verified extract bytes/hash with its metadata preserved, exact40 episode hashes/full-content access and operational bindings; separate fresh approval |
+| Capture diagnostic states | scripts/export_development_states.py | Verified40 bundles and provenance/receiving; explicit new refusal/drain trajectory scope and separate fresh approval; never call these recovered original states |
+| Compare | scripts/compare_cf60_development.py | Accepted exact extract/state hashes, provenance and coverage, actual custody/budget and separate fresh comparison approval; no feature certification from forecast-only output |
+
+Do not auto-chain stages, reuse IDs, infer a missing checksum or start a service.
+The source/actual-input and independent acceptance gates still apply. This sheet
+finishes offline handoff preparation; it supplies no source permission, dispatch,
+simulation, solver/training/model approval, scientific freeze or fallback decision.

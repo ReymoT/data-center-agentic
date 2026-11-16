@@ -8,10 +8,13 @@ from unittest.mock import patch
 
 import pytest
 
+from dc_sustainability import schemas as s
 from dc_sustainability.data import development_bundles as b
 from dc_sustainability.data import materialize_development as m
 from dc_sustainability.data import state_export as ex
+from scripts import extract_cf60_development as producer
 from scripts import prepare_development_bundles as cli
+from tests.data.test_cf60_extract import payload as synthetic_csv
 
 
 @pytest.fixture
@@ -129,7 +132,7 @@ def test_published_pending_template_refuses_before_input_access(tmp_path):
             cli.preflight(raw, tmp_path / "out")
 
 
-def approval_fixture(data, tmp_path, monkeypatch):
+def approval_fixture(data, tmp_path, monkeypatch, *, extract_path=None):
     records, episodes, commitments, extract, _ = data
     monkeypatch.setattr(cli.export, "public_cohort", lambda _: (records, commitments))
     monkeypatch.setattr(cli, "clean_revision", lambda: "a" * 40)
@@ -140,8 +143,9 @@ def approval_fixture(data, tmp_path, monkeypatch):
         items.append(
             {"episode_id": eid, "path": str(path), "sha256": commitments[eid]["file_sha256"]}
         )
-    source = tmp_path / "synthetic-extract.json"
-    source.write_bytes(ex.payload(extract))
+    source = tmp_path / "synthetic-extract.json" if extract_path is None else extract_path
+    if extract_path is None:
+        source.write_bytes(ex.payload(extract))
     a = {
         "status": "approved",
         "approved_by": "MattyAnd",
@@ -278,3 +282,80 @@ def test_output_cap_preserves_failure_without_bundle_publication(synthetic, tmp_
         cli.work(raw, tmp_path / "out")
     assert json.loads((tmp_path / "out/failure.json").read_text())["no_retry"]
     assert list((tmp_path / "out").glob("EP-*.json")) == []
+
+
+def test_real_extractor_record_flows_into_bundle_worker(synthetic, tmp_path, monkeypatch):
+    # Real producer/consumer functions, synthetic inputs and test-only approvals.
+    # This is an in-process offline seam test, not real source/run acceptance.
+    records, episodes, commitments, _, expected = copy.deepcopy(synthetic)
+    data = synthetic_csv()
+    synthetic_sha = hashlib.sha256(data).hexdigest()
+    original_sha = m.carbon.SHA256
+    for eid, value in episodes.items():
+        ep = s.PrivateEpisode.from_jsonable(
+            json.loads(json.dumps(value).replace(original_sha, synthetic_sha))
+        )
+        episodes[eid] = ep.to_jsonable()
+        commitments[eid] = {
+            "episode_canonical_sha256": ep.canonical_hash(),
+            "constraint_snapshot_sha256": ep.snapshot.canonical_hash(),
+            "file_sha256": hashlib.sha256(ex.payload(ep.to_jsonable())).hexdigest(),
+        }
+    for module in (producer, cli, b, ex, m.carbon):
+        monkeypatch.setattr(module, "SHA256", synthetic_sha)
+    monkeypatch.setattr(producer, "revision", lambda: "a" * 40)
+    source = tmp_path / "synthetic-diagnostic.csv"
+    source.write_bytes(data)
+    output = tmp_path / "producer-extract.json"
+    a = {
+        "status": "approved",
+        "approved_by": "MattyAnd",
+        "scope": "cf60-development-row-extract-only",
+        "source_sha256": synthetic_sha,
+        "code_sha256": producer.code_pins(),
+        "code_revision": "a" * 40,
+        "source_path": str(source),
+        "output_path": str(output),
+        "nonce_relation": "before_nonce",
+        "physical_read_scope": "whole-file-bytes-all-timestamps-selected-numeric-only",
+        "maximum_bytes": producer.MAX_BYTES,
+        "required_data_rows": producer.REQUIRED_ROWS,
+        "time_limit_s": 30,
+        "permitted_indices": b.permitted_indices(records),
+    }
+    for field in (
+        "approval_ref",
+        "source_use_ref",
+        "custody_disposition_ref",
+        "nonce_timing_ref",
+        "executor",
+        "machine",
+        "storage_ref",
+        "authorization_id",
+    ):
+        a[field] = "SYNTHETIC-SEAM-ONLY"
+    producer.run(source, tmp_path / "unused-approval.json", output, approval_bytes=ex.payload(a))
+    extract = json.loads(output.read_bytes())
+    before = output.read_bytes()
+    assert set(extract) == {"source_sha256", "rows", "ingestion", "extractor_code_sha256"}
+    assert extract["ingestion"]["selected_numeric_values"] == 340
+    synthetic_input_dir = tmp_path / "consumer"
+    synthetic_input_dir.mkdir()
+    fixture = (records, episodes, commitments, extract, expected)
+    _, raw, _ = approval_fixture(fixture, synthetic_input_dir, monkeypatch, extract_path=output)
+    cli.work(raw, synthetic_input_dir / "out")
+    provenance = json.loads((synthetic_input_dir / "out/provenance.json").read_bytes())
+    assert len(provenance["bundles"]) == 40
+    assert provenance["input_sha256"][0] == hashlib.sha256(before).hexdigest()
+    assert output.read_bytes() == before
+
+
+@pytest.mark.parametrize(
+    "fields",
+    [{"unexpected": {}}, {"ingestion": {}}, {"ingestion": [], "extractor_code_sha256": {}}],
+)
+def test_unrecognized_or_incomplete_producer_metadata_is_rejected(synthetic, fields):
+    data = copy.deepcopy(synthetic)
+    data[3].update(fields)
+    with pytest.raises(ValueError, match="extract"):
+        assemble(data)
