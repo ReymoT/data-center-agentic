@@ -5,6 +5,11 @@ I02; it is not frozen yet. Results in §3 are retained development evidence.
 Report held-out results separately after frozen runs and the reliability repeat
 (#95), preserving the originals and development findings.
 
+November 16 update: Nisha reports metadata-only held-out date selection and
+independent receiving on November 12 (Arizona time); the study-packet format (rule 11.10), packet builder and
+LaTeX table renderer are merged; and the rating days are reserved. None of this is a
+freeze, a held-out output or a study result.
+
 Later development addition: [P06 blocked-fold candidate metrics](../../models/DEVELOPMENT_FOLD_METRICS.md)
 provide measured confusion cells, support, precision/recall/F1 and timings for five
 configurations across the three fixed development folds. These are post-selection
@@ -32,6 +37,17 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
   Ved (November 5) and Edison (November 9) confirmed these analysis settings
   without correction ([#194](https://github.com/ReymoT/data-center-agentic/pull/194));
   this is not the I02 freeze.
+- **Held-out date selection** ([November 12 receiving record](../handoffs/NOV12_CUSTODY_RECEIVING_AND_PENDING_INGEST.md)).
+  Under Reimo's accepted revision 2 parameter record and the pinned v2 selector, one
+  private nonce was reportedly created after acceptance and before source or outcome
+  inspection for that preparation. Nisha reports one preparation without retry or
+  search, six dates in six months, 24 core plus six withheld metadata records,
+  40 unchanged development records and all 26 independent checks passing. Matty
+  accepted the authenticated public report for coordination; he did not receive
+  the private report/metadata or rerun those checks. Public hashes are commitments,
+  not manager-verified private file hashes. No held-out contents, carbon observations
+  or model outputs were produced by this metadata step according to that report.
+  Episode contents, source acceptance and the freeze remain pending (#60).
 
 **Accuracy.** Measured against saved execution records and independently replayed (E01):
 - executed-schedule validity;
@@ -41,8 +57,11 @@ from that corpus and remain explicitly unknown. No held-out rating is added here
 
 Savings are reported only between schedules that complete the same work under the same inputs.
 
-Source lineage, pollutant/system boundary, physical intervals, rights and actual
-private custody/freeze remain gated by #60. Until accepted, carbon quantities are
+Source lineage, pollutant/system boundary, physical intervals, rights, actual
+operational ingest custody/authorization and the freeze remain gated by #60.
+The reported metadata selection/isolation receiving is accepted for its limited
+scope; it does not establish operational custody or permission for source reads.
+Until the applicable gates are accepted, carbon quantities are
 development proxy arithmetic, not verified site emissions or causal savings.
 The six systems have separate receiving records, not one completed frozen study.
 
@@ -96,6 +115,10 @@ Matty [adopted the prospective 256-character / 4096-token profile](../decisions/
 - Every selected pair is kept, including failures and one-sided no-ops. `pair_record` marks only the system entries with an empty waiting queue as not applicable; the other side remains reviewable. Failed/malformed outputs are not automatically not applicable: raw-text assertions are reviewed separately under rule 11.7, and missing outputs remain explicit missing records.
 - Boundary trials rotate within scenario/forecast-condition strata using seed 20261021. Matty and Ved accepted this implementation in #195. Reproduction records CPython version, seeds, manifest and ordering; no held-out sample is frozen yet.
 
+**Study packets** ([E04 study packets](../handoffs/E04_STUDY_PACKETS.md), [#215](https://github.com/ReymoT/data-center-agentic/pull/215); [rule 11.10](../e04/EXTRACTION_RULE.md)). Each blinded output is rated against its own system's replay-verified visible state and the matching episode constraint snapshot. Raters see the final recommended plan (fallback, otherwise repaired, otherwise initial): the plan offered last, not proof that it passed or executed. A missing or mismatched saved input hash, an incomplete unit or an identity mismatch withholds the pair with a reason in the private key; nothing is guessed. The rubric is copied into the packet, and the stage/system key stays separate from the raters.
+
+**Rating schedule.** Matty reserved November 25 and 28-30 for his independent ratings, about 45 outputs a day and up to 180, plus adjudication ([#95](https://github.com/ReymoT/data-center-agentic/issues/95)). November 26-27 stay reserved. This is availability, not completed ratings; ratings start only from frozen held-out outputs.
+
 **Statistics.**
 
 The [paired statistics helper](../handoffs/E03_EQUAL_WORK_COMPARISON.md#paired-statistics-november-4)
@@ -104,6 +127,10 @@ Their proposed settings/definitions still need acceptance before I02; publishing
 the code does not freeze the analysis or produce held-out findings. The
 [E06 table builder](../handoffs/E06_STUDY_TABLES.md) now joins these helpers, keeps
 core and withheld episodes apart and pairs emissions only through equal-work savings.
+The [report-table renderer](../handoffs/E06_STUDY_TABLES.md) ([#216](https://github.com/ReymoT/data-center-agentic/pull/216))
+turns that saved JSON into IEEE LaTeX tables without recomputing anything. Every caption
+states the split, missing values stay visible with their reasons, blocked savings show
+as blocked, and no episode IDs enter report text.
 Reference gaps, faithfulness scores and final analysis acceptance remain unfinished.
 New Agent traces
 now sum recorded request latencies consistently with Plain; historical missing

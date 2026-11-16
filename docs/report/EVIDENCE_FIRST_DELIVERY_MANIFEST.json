@@ -185,7 +185,7 @@
     },
     {
       "path": "docs/report/R05_EVALUATION.md",
-      "sha256": "e0b291b52ed49837b91a6220a9c65a2d23b3e2cb40b779e9011713fd4de794c5",
+      "sha256": "fa7258c9afd1f9e0a2b85d772df41d9201341fcbcc358647d490e1a1ee369961",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -330,5 +330,12 @@
     "reason": "Offline extractor-to-bundle producer-metadata handoff fix; refresh the two affected public source commitments.",
     "publication_note": "Baseline identifies prior evidence, not equality of every refreshed file to that historical commit. New working file digests are published with the subsequent preparation-fix commit.",
     "live_execution_authorized": false
+  },
+  "r05_evaluation_refresh": {
+    "date_arizona": "2026-11-16",
+    "reviewed_commit": "9b66bdaba401974222e2dcdcf5afbbc7285755e7",
+    "reason": "Nisha R05 evaluation draft brought up to date with the November 12 held-out date selection receiving, rule 11.10 study packets (#215), the report-table renderer (#216) and the reserved rating days; refresh its one public source commitment.",
+    "live_execution_authorized": false,
+    "manager_review_note": "Attribute private metadata checks to the authenticated Nisha report; retain manager non-rerun limits and separate operational custody/source-read authorization gates."
   }
 }
