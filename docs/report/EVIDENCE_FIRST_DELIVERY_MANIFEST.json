@@ -20,7 +20,7 @@
     },
     {
       "path": "dc_sustainability/data/development_bundles.py",
-      "sha256": "d67425110e4b156915d5fba23645676488728f82d1e34d601f7e816c5794d1ea",
+      "sha256": "a9a60b167f4dbc3a7089a5f498816ef05d8e4e41962cb790893d9378aa18d230",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -125,7 +125,7 @@
     },
     {
       "path": "docs/handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md",
-      "sha256": "60e6ce086b6c1721a45afd72454adfa8b3996e4f00b4c14eb96fe263283c7944",
+      "sha256": "1e48fd2023d62c56013af2b55ca3051d7ed4fe1ca165f88adfa274ee330c868e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -323,5 +323,12 @@
       "sha256": null
     }
   ],
-  "verification_limits": "Byte commitments and source mapping are not independent scientific acceptance, source permission, layout verification or a submission receipt."
+  "verification_limits": "Byte commitments and source mapping are not independent scientific acceptance, source permission, layout verification or a submission receipt.",
+  "preparation_refresh": {
+    "date_arizona": "2026-11-15",
+    "reviewed_commit": "9eb32ef13ef9cce0ff0784d897bf4b8ec7392fc7",
+    "reason": "Offline extractor-to-bundle producer-metadata handoff fix; refresh the two affected public source commitments.",
+    "publication_note": "Baseline identifies prior evidence, not equality of every refreshed file to that historical commit. New working file digests are published with the subsequent preparation-fix commit.",
+    "live_execution_authorized": false
+  }
 }
