@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "c3068f3ed73e168322d0c7c6552b8c1049a47840f01abc139877ab3a1e3d7087",
+      "sha256": "71692a4ee175b9495ea0b9fc8ac7941ac1ad36288723e66f525bf64ae8286cdd",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -251,6 +251,16 @@
     {
       "path": "scripts/build_trace_explorer.py",
       "sha256": "e862de32e0afd099365378027335f4b409f7f9f45665417c9f0e5c63d7fcbdd3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/MATTY_OVERLEAF_HANDOFF_2026-11-16.md",
+      "sha256": "6fa101a21ca5ded60835b5f0a6dd53bae3544a91626bcba60c797003b594e846",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/NOV16_PRESENTATION_FEEDBACK.md",
+      "sha256": "1fa8acfd050e8dcc724a2d0422ebef15c6a40e243012df140cbb8a43e1a34842",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -341,6 +351,11 @@
   "nov16_consolidation": {
     "reviewed_commit": "e8a10a1ec028c876efd38305e31d35c5e6f26586",
     "reason": "Integrate accepted R05 metadata-scope, packet/renderer and rating-schedule updates; distinguish reported Overleaf contribution from text received.",
+    "live_execution_authorized": false
+  },
+  "nov16_feedback_handoff": {
+    "reviewed_commit": "4b511e34ba30baf0c947a4565f1cf71771e436f2",
+    "status": "documented_proposals_and_partial_report_handoff_not_final_acceptance",
     "live_execution_authorized": false
   }
 }
