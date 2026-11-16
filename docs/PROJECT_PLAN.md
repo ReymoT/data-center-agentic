@@ -1,5 +1,11 @@
 # Project plan
 
+November 15 bundle preparation: [the missing legacy JSON assembly step is implemented
+and synthetic-tested](handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md). It uses
+explicit episode JSONs and a separately authorized extract, never a CSV fallback.
+No real assembly ran; source/input/custody approval remains pending and the
+development-only contingency remains inactive.
+
 November 15 availability: [all 40 files at the recorded Matty episode location
 are present and byte-hash matched to the v2 receipt](handoffs/NOV15_MATTY_COPY_AVAILABILITY.md).
 Episode values were not parsed and the CSV was not opened. Original states,
