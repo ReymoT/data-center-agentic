@@ -43,7 +43,7 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Evidence-first assembly drafted; owner wording/source limitations confirmation pending |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
 | H | UI / visualization interface designs | **4** | Matty | 1 | [Working explorer and screenshot](UI_VISUALIZATION.md) | Implemented and browser-checked on saved development evidence; final report acceptance pending |
-| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty statement and attribution draft available; other owner confirmations pending |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty statement available; Nisha reports her text in private Overleaf (not received in this repository review); Reimo/Ved/Edison handoffs pending |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | [Reference list](REFERENCES.md) | Started; software and data entries pending |
 | | **Total** | **20** | | **~9.5** | | |
