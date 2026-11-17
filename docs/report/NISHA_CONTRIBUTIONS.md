@@ -28,9 +28,11 @@ inter-rater reliability report (#91, #92, #104, #193); the joint adjudication
 record is kept separate from the original labels.
 
 **Receiving.** Reviewed development runs as the separate-person receiver
-and ran the independent 26-check receiving of the November 12 held-out date
-selection; these are scoped receiving checks, not a rerun of others' work or
-scientific acceptance.
+and reports independent 26-check receiving of the November 12 metadata-only
+held-out date selection. Matty accepted the authenticated public handoff without
+receiving the private metadata/report or rerunning those checks. These scoped
+checks do not establish operational custody, source-read permission, episode
+content materialization or scientific acceptance.
 
 **Report (R05).** Wrote the evaluation, introduction/problem and related-work drafts
 and the report outline, and assembles the final report in the IEEE Overleaf project.
@@ -38,6 +40,7 @@ Held-out ratings, reliability and findings remain future work.
 
 Project-written evaluator, runner, rules and analysis code are distinct from
 third-party components: Ollama/Qwen3 8B and the pinned Python packages keep their
-own terms. AI coding assistants were used; every change was reviewed, tested and
-merged by a team member. This is a contribution/evidence statement, not a license
+own terms. AI coding assistants were used. The cited merged PRs provide the available
+review and validation history; this statement does not certify every individual
+change as independently reviewed or tested. This is a contribution/evidence statement, not a license
 grant.
