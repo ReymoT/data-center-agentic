@@ -142,7 +142,12 @@ this draft does not promote defaults or authorize another request. [E3]
 Greedy A proposes earliest feasible starts. Greedy B ranks forecast emissions
 with checked fallback when required forecast evidence is unavailable. The learned
 references produce candidate probabilities and use a deterministic
-probability-to-schedule constructor through the common checks/controller. Current
+probability-to-schedule constructor through the common checks/controller. The
+constructor prioritizes nonflexibility and latest-start urgency, then decreasing
+probability, earlier start and numeric/full job ID, reserving at most one start
+per job under cumulative occupancy. The 0.5 classification threshold is not a
+schedule filter. Edison's accepted [R03 handoff](R03_CLASSICAL_POLICIES_AND_ML.md)
+records impact, candidate/training, artifact and inference limits. Current
 development artifacts are a depth-8 decision tree and a 100-tree, depth-10 random
 forest. Their selection used development rollouts, not a post hoc choice of the
 largest classification F1. [E1, E6]
@@ -301,16 +306,20 @@ separate when choosing final figures. [E3, E10]
 
 | Member | Existing responsibilities and evidence | Confirmation still needed |
 | --- | --- | --- |
-| Edison Perez Cash | Classical/learned policies and impact; public model/development-metric records | R03 final prose, contributions confirmation; P07 pending |
+| Edison Perez Cash | Classical/learned policies and impact; public model/development-metric records | R03 methods/contribution handoff received (#230); P07 and final acceptance pending |
 | Matty Anderson and Nisha Mahadev Kolekar | Shared research comparison/evaluation; Matty adapter, graph workflow integration, checker/controller, CI and release preparation; Nisha Plain/explanation, independent evaluator and reliability/report assembly | Distinct detailed ownership retained; final R04/R05/R06 and held-out review remain pending |
 | Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 final prose and contribution/source limitations confirmation |
 | Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 final prose and contribution/certification limits; O04/I03 pending |
 
-Nisha supplied the introduction/problem, related-work and updated evaluation
-handoffs in #223; PR #226 is merged. She reports her contribution text is in the
-private shared Overleaf project. That text was not available in this repository
-review and is not invented here. Reimo's, Ved's and Edison's contribution handoffs
-remain pending at the existing November 17, 18:00 Arizona checkpoint. [E11]
+Nisha's [repository contribution statement](NISHA_CONTRIBUTIONS.md) is received
+through #229, alongside her introduction/problem, related-work and evaluation
+handoffs. Edison supplied his methods and contribution in #230. Nisha's statement
+covers Plain/explanation rendering, independent replay/evaluation, runner/matrix,
+review/sampling/reliability tooling and report assembly; implementation ownership
+is distinct from completed final study execution. Her metadata receiving remains
+an attributed public report, not manager-rerun operational custody acceptance.
+Reimo's and Ved's methods/contribution handoffs remain pending at the existing
+November 17, 18:00 Arizona checkpoint. [E11]
 
 The responsibility checklist and owner drafts govern attribution. Matty's
 contribution statement is available; this table does not invent personal
@@ -346,6 +355,8 @@ No missing result, new run or source-use approval is created by either draft.
 ## Presentation-feedback follow-through — pending experiments
 
 The professor feedback supplied by Matty requests grouped ten-fold training/tuning for C/D, explicit verifier arithmetic and repair deltas, an ML-ranked warm-start Agent variant, and a turnaround-versus-equal-work emissions-reduction plot. These follow-ups are tracked with owners and acceptance criteria in [the November 17 record](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md). Grouping must also isolate shared source windows; ten folds do not automatically reduce estimator variance. Structured feedback and hybrid ranking would be versioned protocol changes, not descriptions of the current Agent. Turnaround means completion minus arrival, and reduction needs valid paired equal-work evidence relative to Greedy A. No new training, repair, hybrid or Pareto results exist from recording this request. Final report and demo must include the actual disposition of all four items, including explicit limitations where evidence remains unavailable.
+
+Offline designs now specify [repair arithmetic/delta semantics](REPAIR_FEEDBACK_DESIGN_NOV17.md) and the [separate ML warm-start variant](ML_WARMSTART_DESIGN_NOV17.md). They are proposals with fixed boundary/verification criteria, not implemented feedback or hybrid results; exact shared agreement and later execution authorization remain required.
 
 ## References and assembly note
 

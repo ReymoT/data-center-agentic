@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "6d396348bfaafbb74c05003b7e074f8d55976a10a4ac977e6b0713498f06efb8",
+      "sha256": "93f8c973688e54360adff7e2d05ac57d39bdb23741e9b04465051eb4e884830b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "8f145743753d0b5e3b0046dea24083e92ba2a18f380ab22891a874181473b15c",
+      "sha256": "ebf9a6e96edd5797b363d7a990583d7ec1b97b42c0a8a72e2619aa3d486cba55",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "e2808efc980b0db2c3e573e500cc33145a933bd6951103da186640f2097e7ea1",
+      "sha256": "c37ceb5085dd94720d1e100c5024c373beb2d3e77d4d72cd350ddb5baff1f31d",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -272,6 +272,26 @@
       "path": "docs/DEMO.md",
       "hash_convention": "CRLF_normalized_to_LF",
       "sha256": "c2387753122fdbbb2f29e813a6281587d582337fc5bc3e0fb06d8f23bc60d849"
+    },
+    {
+      "path": "docs/report/REPAIR_FEEDBACK_DESIGN_NOV17.md",
+      "sha256": "1638888e884f43a901b83886560ef0e50333039f4ccce79a27ad89a574b12f88",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/ML_WARMSTART_DESIGN_NOV17.md",
+      "sha256": "a9217ae0470636431e49a148d98c03840dd3ac036d0c0e22ee1694d0eaf486ca",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R03_CLASSICAL_POLICIES_AND_ML.md",
+      "sha256": "971228a061fbf26a19c3fd983cd2b5e447b2e8469fc36da533f0fae25d56b09c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/NISHA_CONTRIBUTIONS.md",
+      "sha256": "52ea1fc986adcdab3721ee228943554d1f6641a8baaa2b62276b83d953add4fd",
+      "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
   "self_hash_excluded": true,
@@ -372,6 +392,11 @@
     "reviewed_commit": "b466a95b05c7231acf22f521e29b0d3656e9bc65",
     "issue": 231,
     "status": "required_reporting_followthrough_exact_shared_protocol_pending",
+    "live_execution_authorized": false
+  },
+  "nov17_offline_design_and_owner_integration": {
+    "reviewed_commit": "a216cf90e587675a5395053ea874a6beadacecd1",
+    "status": "designs_not_adopted_or_executed_owner_handoffs_received",
     "live_execution_authorized": false
   }
 }
