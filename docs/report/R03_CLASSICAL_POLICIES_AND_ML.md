@@ -13,7 +13,9 @@ Shared slot, job, background and site energy/emissions use explicit units, PUE a
 duration. Capacity uses IT power, not facility power.
 
 - Facility kWh = PUE × IT kW × hours.
-- kg CO2e = kWh × g/kWh ÷ 1000.
+- Modeled kg = kWh × intensity in g/kWh ÷ 1000. The code uses emissions
+  fields, but exact pollutant basis/source applicability remain unresolved; do
+  not interpret the proxy arithmetic as verified real-site CO2e or causal savings.
 - Preserve full precision; one-decimal display is presentation only.
 - Internal absolute tolerance for hand checks is 0.01.
 
@@ -63,8 +65,11 @@ Selected full-data development refits (legacy forecast path):
 | Decision tree C | max_depth 8 | `7e9e5769771f045241317d976f142b936f328399df58b040f9bbf67ba77a8f0b` |
 | Random forest D | 100 trees, max_depth 10 | `37149e530ef8e026b08279bedae1dd95170f70c279dd59d566637f43df94cf6a` |
 
-Schema `p04-artifact-v1`. Positive threshold 0.5. Inference ranks by predicted
-selection probability, then earlier start and numeric ID; proposals pass through
+Schema `p04-artifact-v1`. Classification metrics use threshold 0.5; the schedule
+constructor ranks candidates rather than filtering at that threshold. Its ordering
+is nonflexible jobs first, then latest-start urgency, descending predicted
+selection probability, earlier start, numeric job ID and full ID. At most one
+start is reserved per job, with cumulative occupancy checked. Proposals pass through
 common checks with no solver calls at inference time. Missing forecasts invoke
 checked A under accepted Q04 scope.
 
@@ -125,3 +130,7 @@ their documented gates.
 - I02 remains a pre-freeze checklist on tip main; no frozen held-out results.
 - This document supplies assembly text only. It does not authorize private reads,
   model calls, solver runs, retraining or publication of private paths.
+
+## Matty factual review
+
+Reviewed against `dc_sustainability/training/schedule.py`, the greedy implementation and the public P04/P06 records. The source record remains methods/development evidence only; no binaries, private data, inference or scoring were loaded or run for this review.
