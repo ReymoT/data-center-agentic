@@ -343,6 +343,10 @@ must instead state the held-out question remains unanswered and apply the
 No missing result, new run or source-use approval is created by either draft.
 [E7-E9, E11]
 
+## Presentation-feedback follow-through — pending experiments
+
+The professor feedback supplied by Matty requests grouped ten-fold training/tuning for C/D, explicit verifier arithmetic and repair deltas, an ML-ranked warm-start Agent variant, and a turnaround-versus-equal-work emissions-reduction plot. These follow-ups are tracked with owners and acceptance criteria in [the November 17 record](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md). Grouping must also isolate shared source windows; ten folds do not automatically reduce estimator variance. Structured feedback and hybrid ranking would be versioned protocol changes, not descriptions of the current Agent. Turnaround means completion minus arrival, and reduction needs valid paired equal-work evidence relative to Greedy A. No new training, repair, hybrid or Pareto results exist from recording this request. Final report and demo must include the actual disposition of all four items, including explicit limitations where evidence remains unavailable.
+
 ## References and assembly note
 
 Use [REFERENCES.md](REFERENCES.md), preserving its verified/preprint/unconfirmed

@@ -1,5 +1,7 @@
 # November 16 presentation feedback: scope assessment
 
+November 17 superseding manager request: [four-item report/demo follow-through](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md), tracked in [#231](https://github.com/ReymoT/data-center-agentic/issues/231), requires explicit disposition of grouped ten-fold CV, structured repair arithmetic, ML warm-start and delay/impact plotting. The earlier recommendations below are historical where they differ; no new experiment is claimed as executed.
+
 Status: recorded proposals and manager recommendations, not an adopted experiment or execution approval. Based on the discussion supplied by Matty on November 16; not an independently verified instructor transcript. Existing study settings, ownership and acceptance gates remain unchanged.
 
 | Feedback | Accountable implementation owner | Assessment and recommendation |

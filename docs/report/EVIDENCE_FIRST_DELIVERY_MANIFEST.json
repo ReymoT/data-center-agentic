@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "71692a4ee175b9495ea0b9fc8ac7941ac1ad36288723e66f525bf64ae8286cdd",
+      "sha256": "6d396348bfaafbb74c05003b7e074f8d55976a10a4ac977e6b0713498f06efb8",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -220,7 +220,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "d15aa674ef4ccefef5dbfa3b2ba9d93e36f81c7223926dcb9386d2740db4bff9",
+      "sha256": "e2808efc980b0db2c3e573e500cc33145a933bd6951103da186640f2097e7ea1",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -260,8 +260,18 @@
     },
     {
       "path": "docs/report/NOV16_PRESENTATION_FEEDBACK.md",
-      "sha256": "1fa8acfd050e8dcc724a2d0422ebef15c6a40e243012df140cbb8a43e1a34842",
+      "sha256": "aa7bc873d34b3efbfefd5d53d4041c851f67e7d6bd6889d7a683769612babbb9",
       "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md",
+      "hash_convention": "CRLF_normalized_to_LF",
+      "sha256": "8b9287b6b54b221daca52bbb48584e96bd1287fd69d30bbb7029c660ac330dff"
+    },
+    {
+      "path": "docs/DEMO.md",
+      "hash_convention": "CRLF_normalized_to_LF",
+      "sha256": "c2387753122fdbbb2f29e813a6281587d582337fc5bc3e0fb06d8f23bc60d849"
     }
   ],
   "self_hash_excluded": true,
@@ -356,6 +366,12 @@
   "nov16_feedback_handoff": {
     "reviewed_commit": "4b511e34ba30baf0c947a4565f1cf71771e436f2",
     "status": "documented_proposals_and_partial_report_handoff_not_final_acceptance",
+    "live_execution_authorized": false
+  },
+  "nov17_feedback_coverage": {
+    "reviewed_commit": "b466a95b05c7231acf22f521e29b0d3656e9bc65",
+    "issue": 231,
+    "status": "required_reporting_followthrough_exact_shared_protocol_pending",
     "live_execution_authorized": false
   }
 }
