@@ -39,11 +39,11 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | B | Introduction | 2 | Nisha | 0.75 | [Draft](R05_INTRODUCTION_PROBLEM.md); research question | Drafted; findings wait for I02 |
 | C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; Reimo's review pending |
 | D | Related works | 1 | Matty, Nisha | 0.5 | [Draft](R05_RELATED_WORKS.md); [source review](../SOURCE_REVIEW.md) | Integrated wording reviewed against retained source review; final bibliography formatting/check pending |
-| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft exists |
+| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft and Edison R03 handoff available; Ved/Reimo handoffs pending |
 | F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Evidence-first assembly drafted; owner wording/source limitations confirmation pending |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
 | H | UI / visualization interface designs | **4** | Matty | 1 | [Working explorer and screenshot](UI_VISUALIZATION.md) | Implemented and browser-checked on saved development evidence; final report acceptance pending |
-| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty statement available; Nisha reports her text in private Overleaf (not received in this repository review); Reimo/Ved/Edison handoffs pending |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty, [Nisha](NISHA_CONTRIBUTIONS.md) and [Edison R03](R03_CLASSICAL_POLICIES_AND_ML.md) statements received; Reimo/Ved handoffs pending |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | [Reference list](REFERENCES.md) | Started; software and data entries pending |
 | | **Total** | **20** | | **~9.5** | | |
@@ -89,3 +89,7 @@ does not restart presentation work or change official course requirements.
 ## Required presentation-feedback coverage
 
 Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md) into methods/results or explicit limitations/future work: grouped ten-fold C/D validation (Edison), structured repair arithmetic/deltas (Matty), ML warm-start variant (Matty with Edison candidates), and paired turnaround versus equal-work reduction plot (Nisha). Reimo covers the same dispositions in the demo. Track exact agreements/evidence in #231. No unavailable finding or protocol adoption is implied.
+
+## Ready offline designs and accepted handoffs
+
+Matty prepared the [repair-feedback design](REPAIR_FEEDBACK_DESIGN_NOV17.md) and [ML warm-start design](ML_WARMSTART_DESIGN_NOV17.md) for #231. These do not adopt a schema/prompt/variant or authorize execution. The assembled report now incorporates accepted Edison R03 methods and Nisha contribution evidence; original owner files remain unchanged.
