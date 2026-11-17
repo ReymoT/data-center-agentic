@@ -85,3 +85,7 @@ does not restart presentation work or change official course requirements.
 | December 5-6 | Repair/revalidation, IEEE layout and final review buffer |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
 | December 9, 11:59 pm | Deadline reported by Nisha; official timezone unconfirmed |
+
+## Required presentation-feedback coverage
+
+Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md) into methods/results or explicit limitations/future work: grouped ten-fold C/D validation (Edison), structured repair arithmetic/deltas (Matty), ML warm-start variant (Matty with Edison candidates), and paired turnaround versus equal-work reduction plot (Nisha). Reimo covers the same dispositions in the demo. Track exact agreements/evidence in #231. No unavailable finding or protocol adoption is implied.
