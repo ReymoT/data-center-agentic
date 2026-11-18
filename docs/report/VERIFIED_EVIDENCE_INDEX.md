@@ -49,3 +49,7 @@ logs, held-out metadata/nonce, new ratings or private artifact transfers are inc
 ## Corrected R02 receiving
 
 PR #234 added an empty file; #235 supplies reconstructed evidence-based R02 prose. It is now indexed and integrated, not a personal attestation or completed O04/I03. Reimo R01 and remaining personal/final acceptance stay pending; #60 source gates and #231 agreements are unchanged.
+
+## November 18 active scope
+
+[Activation decision](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md) governs current delivery. [R01 reconstructed methods](R01_MANAGER_RECONSTRUCTION_NOV18.md) remove the outstanding prose dependency without inventing personal attestation. Existing scientific/source gaps remain limitations; no new source/model/solver operation is authorized. Final study artifacts listed above are deferred outside this delivery, not manufactured or marked complete.

@@ -1,5 +1,7 @@
 # Matty project preferences
 
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
 Current implementation, instruction 1.27: A03 physical checks, A04 execution/traces, A02 bounded orchestration, P02 A/B and the P03 probability constructor are merged. PR #64 remains red/unmerged for independent replay. D05 inventory is published, not scientific source acceptance. A01 has a concrete Arc/Vulkan host candidate but no successful model validation; L02/runner/trained C/D/live acceptance remain open. The coder-owned rule, all 50 assignments and independent evaluation are unchanged.
 
 Current workflow, instruction 1.27: [Matty's coder-owned decision rule](decisions/Q11_CODER_OWNED_DECISIONS.md) gives the implementer internal decision authority, limits shared confirmation to affected owners and escalates unresolved shared questions within 24 elapsed hours. Proceed with agreed independent work; block only the disputed behavior/acceptance. Existing scope, task ownership and scientific agreements remain unchanged.

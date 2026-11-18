@@ -1,5 +1,7 @@
 # Project plan
 
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
 November 15 evidence-first delivery: [a working report and evidence index](report/VERIFIED_EVIDENCE_WORKING_DRAFT.md)
 assemble available methods/development observations now. [#223](https://github.com/ReymoT/data-center-agentic/issues/223)
 requests existing R01/R02/R03/R05 methods/contribution drafts or blockers by

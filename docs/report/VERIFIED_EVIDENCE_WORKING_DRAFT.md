@@ -1,16 +1,18 @@
 # Ontology-Grounded, Tool-Verified Data-Center Sustainability Recommendations
 
-Group 15, Project 21. Working assembly, November 16, 2026 (America/Phoenix).
+Group 15, Project 21. Working assembly, November 18, 2026 (America/Phoenix).
 Members: Edison Perez Cash; Matty Anderson and Nisha Mahadev Kolekar; Reimo Tamme;
 Ved Patil. R05 assembler: Nisha. R04/R06 preparation: Matty.
 
-This is an editable evidence-first draft, not the final IEEE PDF or a declaration
-that the study/fallback is complete. It assembles published methods and bounded
-development observations while the full study remains pending. Original owner
+This is the active development-evidence-only report source following Matty's
+[November 18 activation](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md), not the final IEEE PDF.
+It reports published methods and bounded development observations. The planned
+held-out study was not completed; its comparative research question remains
+unanswered. Activation is a reporting decision, not a completed project or run. Original owner
 drafts and rating files are preserved. Evidence keys refer to the
 [claim/evidence index](VERIFIED_EVIDENCE_INDEX.md); bibliography keys refer to
 [the existing references](REFERENCES.md). Layout, final citation numbering,
-contribution confirmations and final findings remain assembly work.
+contribution confirmations and final evidence-only acceptance remain assembly work; missing held-out findings will not be filled in.
 
 ## Abstract — working text
 
@@ -27,7 +29,7 @@ demonstrates selected contract, replay and fallback behavior, including failed
 repairs and explanation-content limitations. A saved technical validation contains
 six system results, 180 records and 17 model requests; it is one public example,
 not an estimate of comparative performance. The held-out study remains unfrozen
-and unexecuted in the accepted project record. This draft therefore reports
+and unexecuted, and is outside the activated delivery scope. This draft therefore reports
 implemented mechanisms and development evidence without claiming research
 superiority, operational carbon savings or final held-out reliability. [E1-E7]
 
@@ -290,9 +292,9 @@ research-endpoint improvement. Original excluded-candidate counts are unavailabl
 from the saved definite-row corpus. Existing selected binaries are unchanged;
 an alternative configuration with higher F1 is not silently reselected. [E6]
 
-### 7.4 Held-out findings
+### 7.4 Held-out findings — not performed
 
-Pending. No final held-out accuracy, faithfulness, safety, emissions comparison,
+The held-out study was not performed in the activated evidence-only delivery. No final held-out accuracy, faithfulness, safety, emissions comparison,
 O04/P07 output or held-out reliability value is reported. Do not insert zeros,
 development values or claims that the hypothesis is positive here. [E7]
 
@@ -319,7 +321,7 @@ separate when choosing final figures. [E3, E10]
 | --- | --- | --- |
 | Edison Perez Cash | Classical/learned policies and impact; public model/development-metric records | R03 methods/contribution handoff received (#230); P07 and final acceptance pending |
 | Matty Anderson and Nisha Mahadev Kolekar | Shared research comparison/evaluation; Matty adapter, graph workflow integration, checker/controller, CI and release preparation; Nisha Plain/explanation, independent evaluator and reliability/report assembly | Distinct detailed ownership retained; final R04/R05/R06 and held-out review remain pending |
-| Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 final prose and contribution/source limitations confirmation |
+| Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 reconstructed by Matty; personal attestation not invented; source limits retained |
 | Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 methods reconstructed/received (#235); personal contribution attestation and O04/I03 pending |
 
 Nisha's [repository contribution statement](NISHA_CONTRIBUTIONS.md) is received
@@ -331,9 +333,11 @@ is distinct from completed final study execution. Her metadata receiving remains
 an attributed public report, not manager-rerun operational custody acceptance.
 Ved's originally empty R02 file is now repaired through #235 and available for
 assembly. Its evidence-based responsibility summary is not an invented personal
-attestation. Reimo's R01 methods/contribution handoff remains missing at the
-November 17, 18:00 Arizona checkpoint; no new public response was present at this
-review. Source evidence and final study acceptance remain unresolved. [E11]
+attestation. Matty reconstructed [R01 data/simulator methods](R01_MANAGER_RECONSTRUCTION_NOV18.md)
+from retained implementation and evidence without waiting for another Reimo handoff.
+This is not a personal contribution attestation. Reimo's November 18 source-status
+reply is received; B1-B3 remain unresolved and B4 provisional. New source processing
+is discontinued for the active delivery; its limitations remain explicit. [E11]
 
 The responsibility checklist and owner drafts govern attribution. Matty's
 contribution statement is available; this table does not invent personal
@@ -353,17 +357,16 @@ The implemented system separates grounded proposals from deterministic checks an
 controlled effects, with saved evidence for bounded development cases. Those cases
 also expose failed repairs, fallback reliance and explanation-content limits.
 They do not establish an improvement over a plain LLM or real-site carbon savings.
-The original research question remains pending the accepted frozen study. [E2-E9]
+The original comparative research question remains unanswered; the activated delivery does not include that frozen study. [E2-E9]
 
-We will assemble verified sections now while pursuing actual permitted source/
-extract/custody inputs in parallel. The internal feasibility checkpoint is
-November 22 at 18:00 Arizona. A full-study path requires accepted input/forecast
-compatibility and I02 before execution, then independent references, scoring,
-annotations, reproduction and final acceptance. The development-only contingency
-is prepared but unactivated. If Matty explicitly activates it, the final report
-must instead state the held-out question remains unanswered and apply the
-[prepared evidence/limitations wording](DEVELOPMENT_ONLY_CONTINGENCY_DRAFT.md).
-No missing result, new run or source-use approval is created by either draft.
+Matty activated the prepared development-evidence-only path on November 18 to
+remove the dependency on unavailable source evidence and further owner responses.
+The report/demo use existing permitted public/sanitized evidence, preserve the
+sealed held-out selection and state that the original held-out question remains
+unanswered. Source-use/provenance gaps remain unresolved; #60 is discontinued as
+not planned for this delivery rather than certified resolved. New CV/repair/hybrid/
+Pareto work is described with its actual unexecuted disposition. Final report
+layout, attribution, public-package rights checks and submission remain required.
 [E7-E9, E11]
 
 ## Presentation-feedback follow-through — pending experiments

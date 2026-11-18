@@ -1,5 +1,7 @@
 # Demo runbook preparation
 
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
 The completed public EP-HAND1 receiving exercise supports a saved-evidence demo.
 Use the [R04 development section](R04_DEVELOPMENT_EVIDENCE.md) and
 [backup walkthrough](R04_BACKUP_DEMO.md). No new model request is needed.
