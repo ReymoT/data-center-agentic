@@ -27,3 +27,7 @@ The simulator accepts controller-issued ApprovedActions, not arbitrary model pla
 Use the retained public EP-HAND1 examples with exact run identity, earlier failures, failed repairs and checked fallback reliance. They establish exercised technical behavior only. Historical development classification and pre-adjudication human reliability remain development evidence; no held-out superiority or real-site savings follows. The original source-dependent study is unexecuted and the research question unanswered in the activated delivery scope.
 
 Retained sources: [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md), [Matty-copy check](../handoffs/NOV15_MATTY_COPY_AVAILABILITY.md), [source status](../handoffs/REIMO_SOURCE_EVIDENCE_STATUS_DRAFT.md), [R04](../R04_DEVELOPMENT_EVIDENCE.md). Personal contribution confirmation, final release rights, report layout and authenticated submission remain separate; their absence is not filled with invented evidence.
+
+## Concurrent owner handoff preserved
+
+Reimo supplied PR #237 while this manager reconstruction was being prepared. His proposed R01_DATA_AND_SIMULATOR_METHODS.md and introduction-review changes remain in that separate PR, unmodified by this change. This manager file has a distinct name to avoid replacing his contribution. The owner PR is received for later review, not claimed merged or missing; it does not itself resolve source acceptance.

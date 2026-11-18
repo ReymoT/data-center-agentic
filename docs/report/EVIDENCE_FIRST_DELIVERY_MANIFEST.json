@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "0b122b44596d1d53de2a12db41f2220d3fd92c0c656d1e2c684200da482fa2bc",
+      "sha256": "71b775b14fa6eb50a321fed906f4a67cb06f67061a15164aa479fd2688581759",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "7fd06445d22a972d2f1467736aec9cfaba6a2aa014205d18f3df1029152a8fc0",
+      "sha256": "9996f2672799e09241674e6b1581643ce581e1c42354be231e56a07a74a18c73",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "f3c8688c9a8b45a3f26763ffce7fa5619d57d089e2320c0df718fd60fbcbebcb",
+      "sha256": "667b16a6d12080f083eb66e8a798982153547e025f15ac7ae1905d8a23c75531",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -304,8 +304,8 @@
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
-      "path": "docs/report/R01_DATA_AND_SIMULATOR_METHODS.md",
-      "sha256": "fb04a70dc27868116f9435d33eaa112d5ba77b81ca66f628835f9eb3471819d7",
+      "path": "docs/report/R01_MANAGER_RECONSTRUCTION_NOV18.md",
+      "sha256": "a7b92f6d4aa09cff0168da58693b6e731a369313104a8048b2434373108275fe",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {

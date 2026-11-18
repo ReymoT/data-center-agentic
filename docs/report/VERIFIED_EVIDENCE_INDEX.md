@@ -52,4 +52,4 @@ PR #234 added an empty file; #235 supplies reconstructed evidence-based R02 pros
 
 ## November 18 active scope
 
-[Activation decision](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md) governs current delivery. [R01 reconstructed methods](R01_DATA_AND_SIMULATOR_METHODS.md) remove the outstanding prose dependency without inventing personal attestation. Existing scientific/source gaps remain limitations; no new source/model/solver operation is authorized. Final study artifacts listed above are deferred outside this delivery, not manufactured or marked complete.
+[Activation decision](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md) governs current delivery. [R01 reconstructed methods](R01_MANAGER_RECONSTRUCTION_NOV18.md) remove the outstanding prose dependency without inventing personal attestation. Existing scientific/source gaps remain limitations; no new source/model/solver operation is authorized. Final study artifacts listed above are deferred outside this delivery, not manufactured or marked complete.

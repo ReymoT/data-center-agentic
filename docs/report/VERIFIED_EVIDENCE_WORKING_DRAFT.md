@@ -333,7 +333,7 @@ is distinct from completed final study execution. Her metadata receiving remains
 an attributed public report, not manager-rerun operational custody acceptance.
 Ved's originally empty R02 file is now repaired through #235 and available for
 assembly. Its evidence-based responsibility summary is not an invented personal
-attestation. Matty reconstructed [R01 data/simulator methods](R01_DATA_AND_SIMULATOR_METHODS.md)
+attestation. Matty reconstructed [R01 data/simulator methods](R01_MANAGER_RECONSTRUCTION_NOV18.md)
 from retained implementation and evidence without waiting for another Reimo handoff.
 This is not a personal contribution attestation. Reimo's November 18 source-status
 reply is received; B1-B3 remain unresolved and B4 provisional. New source processing
