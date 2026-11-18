@@ -45,3 +45,21 @@ Our conclusions are limited to the scenarios we evaluate. [State here whether th
 - **Carbon wording.** Pollutant basis and interval meaning remain open in #60, so this draft says "carbon intensity" and doesn't claim verified CO2e or site-specific emissions.
 - **Frontier.** The job table was proposed for calibration but never acquired or accepted (D02), so it isn't cited as a data source.
 - **"Independent."** The evaluator is separate from the production checker, but it isn't an outside review, so don't say more than that.
+
+## R01 factual review (November 18, 2026)
+
+Reimo's data/simulator review retains the problem statement above: its 100/40 kW
+capacity/background, fixed PUE 1.2, 24 start slots plus six drain slots,
+nonpreemptive jobs and hidden future-arrival/realized-carbon boundary agree with
+the [R01 methods and evidence](R01_DATA_AND_SIMULATOR_METHODS.md). Rejected batches
+start no new work but still advance running work and the clock. Impact figures
+are modeled proxies, with missing carbon leaving emissions unavailable. The
+strict S02 savings helper also rejects episodes with unfinished jobs.
+
+Metadata-only held-out selection and independent receiving PASS are complete;
+held-out findings and reliability reporting remain pending. All 40 development
+episodes are present and hash-verified in the published aggregate record. Legacy
+bundle code is synthetic-tested, with no real bundles, real extract, full
+1,200-state export, authorized compatibility finding or I02 scientific freeze.
+B1–B3 remain unresolved, B4 provisional; Frontier calibration is unavailable.
+This review supplies section C factual input without accepting the full report.
