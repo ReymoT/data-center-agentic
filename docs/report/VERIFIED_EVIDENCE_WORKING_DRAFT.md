@@ -115,6 +115,17 @@ existence does not imply every source is accepted or that graph-derived text is
 the authoritative execution contract. Production checks consume the authoritative
 F02 inputs. Missing, stale or unsupported evidence is explicit. [E1, E2]
 
+The corrected [R02 methods handoff](R02_ONTOLOGY_AND_REFERENCE_METHODS.md),
+reconstructed in #235 after #234 merged an empty file, records controlled SPARQL,
+equivalent canonical graph/flat content and offline ontology/unit/SHACL helpers.
+Unit mapping adds semantic identifiers without converting values or establishing
+pollutant basis. The visible reference uses binary job/start decisions with
+exactly-one-start, timing/nonflexibility and per-slot occupancy constraints;
+solver certification remains conditional on encoded inputs/backend settings.
+Cached labels refer to one selected schedule, not all possible optima. Private
+hindsight and policy-visible contexts remain distinct. These are methods and
+development evidence, not completed O04 or I03. [E2, E6, E11]
+
 ### 4.2 Agent, Plain and controlled execution
 
 The agent workflow uses LangGraph orchestration for grounding, proposing,
@@ -309,7 +320,7 @@ separate when choosing final figures. [E3, E10]
 | Edison Perez Cash | Classical/learned policies and impact; public model/development-metric records | R03 methods/contribution handoff received (#230); P07 and final acceptance pending |
 | Matty Anderson and Nisha Mahadev Kolekar | Shared research comparison/evaluation; Matty adapter, graph workflow integration, checker/controller, CI and release preparation; Nisha Plain/explanation, independent evaluator and reliability/report assembly | Distinct detailed ownership retained; final R04/R05/R06 and held-out review remain pending |
 | Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 final prose and contribution/source limitations confirmation |
-| Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 final prose and contribution/certification limits; O04/I03 pending |
+| Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 methods reconstructed/received (#235); personal contribution attestation and O04/I03 pending |
 
 Nisha's [repository contribution statement](NISHA_CONTRIBUTIONS.md) is received
 through #229, alongside her introduction/problem, related-work and evaluation
@@ -318,8 +329,11 @@ covers Plain/explanation rendering, independent replay/evaluation, runner/matrix
 review/sampling/reliability tooling and report assembly; implementation ownership
 is distinct from completed final study execution. Her metadata receiving remains
 an attributed public report, not manager-rerun operational custody acceptance.
-Reimo's and Ved's methods/contribution handoffs remain pending at the existing
-November 17, 18:00 Arizona checkpoint. [E11]
+Ved's originally empty R02 file is now repaired through #235 and available for
+assembly. Its evidence-based responsibility summary is not an invented personal
+attestation. Reimo's R01 methods/contribution handoff remains missing at the
+November 17, 18:00 Arizona checkpoint; no new public response was present at this
+review. Source evidence and final study acceptance remain unresolved. [E11]
 
 The responsibility checklist and owner drafts govern attribution. Matty's
 contribution statement is available; this table does not invent personal
