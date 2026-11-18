@@ -39,11 +39,11 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | B | Introduction | 2 | Nisha | 0.75 | [Draft](R05_INTRODUCTION_PROBLEM.md); research question | Drafted; findings wait for I02 |
 | C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; Reimo's review pending |
 | D | Related works | 1 | Matty, Nisha | 0.5 | [Draft](R05_RELATED_WORKS.md); [source review](../SOURCE_REVIEW.md) | Integrated wording reviewed against retained source review; final bibliography formatting/check pending |
-| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft and Edison R03 handoff available; Ved/Reimo handoffs pending |
+| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04/Edison R03 and corrected [Ved R02](R02_ONTOLOGY_AND_REFERENCE_METHODS.md) available; Reimo R01 pending |
 | F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Evidence-first assembly drafted; owner wording/source limitations confirmation pending |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
 | H | UI / visualization interface designs | **4** | Matty | 1 | [Working explorer and screenshot](UI_VISUALIZATION.md) | Implemented and browser-checked on saved development evidence; final report acceptance pending |
-| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty, [Nisha](NISHA_CONTRIBUTIONS.md) and [Edison R03](R03_CLASSICAL_POLICIES_AND_ML.md) statements received; Reimo/Ved handoffs pending |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty, [Nisha](NISHA_CONTRIBUTIONS.md) and [Edison R03](R03_CLASSICAL_POLICIES_AND_ML.md) statements received; Reimo R01 handoff and remaining personal/final confirmations pending |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | [Reference list](REFERENCES.md) | Started; software and data entries pending |
 | | **Total** | **20** | | **~9.5** | | |
@@ -93,3 +93,7 @@ Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOW
 ## Ready offline designs and accepted handoffs
 
 Matty prepared the [repair-feedback design](REPAIR_FEEDBACK_DESIGN_NOV17.md) and [ML warm-start design](ML_WARMSTART_DESIGN_NOV17.md) for #231. These do not adopt a schema/prompt/variant or authorize execution. The assembled report now incorporates accepted Edison R03 methods and Nisha contribution evidence; original owner files remain unchanged.
+
+## November 17 R02 integration and checkpoint
+
+Corrected R02 methods from #235 are integrated into the working report and evidence index. The original #234 file was empty; repaired prose retains scientific/tie/source limits and does not invent Ved personal attestation. Reimo R01 and #60 actual evidence/input gates remain outstanding after the recorded 6 PM Arizona checkpoint. The #231 response window remains unchanged (November 18, approximately 10:25 AM Arizona); designs are not shared-protocol adoption.

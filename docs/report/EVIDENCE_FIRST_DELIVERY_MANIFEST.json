@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "93f8c973688e54360adff7e2d05ac57d39bdb23741e9b04465051eb4e884830b",
+      "sha256": "270f39e8fc46e2ee76074c974c06b91b6971b9c877bad033d414cf51ff704796",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "ebf9a6e96edd5797b363d7a990583d7ec1b97b42c0a8a72e2619aa3d486cba55",
+      "sha256": "b3b5fbdc455d0d095afc778f67bde40c391a973f145eecf8e0ff43641157d303",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "c37ceb5085dd94720d1e100c5024c373beb2d3e77d4d72cd350ddb5baff1f31d",
+      "sha256": "60d3de6afea34e383f662daf0be8a35f4dd2feda3b305333c9f0b8e2dcd8b69b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -291,6 +291,11 @@
     {
       "path": "docs/report/NISHA_CONTRIBUTIONS.md",
       "sha256": "52ea1fc986adcdab3721ee228943554d1f6641a8baaa2b62276b83d953add4fd",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R02_ONTOLOGY_AND_REFERENCE_METHODS.md",
+      "sha256": "21bdd679dcc2f00c1294187533198f9f71df8421fa2b3887e8f5f81710230ab8",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -397,6 +402,11 @@
   "nov17_offline_design_and_owner_integration": {
     "reviewed_commit": "a216cf90e587675a5395053ea874a6beadacecd1",
     "status": "designs_not_adopted_or_executed_owner_handoffs_received",
+    "live_execution_authorized": false
+  },
+  "nov17_r02_integration": {
+    "reviewed_commit": "1a4fb27821f9435ad4b17c5c84967ee882636434",
+    "status": "corrected_methods_received_personal_and_final_acceptance_not_invented",
     "live_execution_authorized": false
   }
 }
