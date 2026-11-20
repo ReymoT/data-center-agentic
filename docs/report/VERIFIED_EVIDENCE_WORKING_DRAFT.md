@@ -1,41 +1,22 @@
-# Ontology-Grounded, Tool-Verified Data-Center Sustainability Recommendations
+# Explicit Rules for Safe Simulated Scheduling — Working Report
 
 November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
 
-Group 15, Project 21. Working assembly, November 18, 2026 (America/Phoenix).
+Group 15, Project 21. Working assembly, November 19, 2026 (America/Phoenix).
 Members: Edison Perez Cash; Matty Anderson and Nisha Mahadev Kolekar; Reimo Tamme;
 Ved Patil. R05 assembler: Nisha. R04/R06 preparation: Matty.
 
-This is the active development-evidence-only report source following Matty's
-[November 18 activation](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md), not the final IEEE PDF.
-It reports published methods and bounded development observations. The planned
-held-out study was not completed; its comparative research question remains
-unanswered. Activation is a reporting decision, not a completed project or run. Original owner
-drafts and rating files are preserved. Evidence keys refer to the
-[claim/evidence index](VERIFIED_EVIDENCE_INDEX.md); bibliography keys refer to
-[the existing references](REFERENCES.md). Layout, final citation numbering,
-contribution confirmations and final evidence-only acceptance remain assembly work; missing held-out findings will not be filled in.
+This is the working report for the focused rule-system study, not the final IEEE PDF. The November18 development-evidence-only path is retained as backup, not the primary research scope. Existing implementation and measured development observations remain historical evidence. New rules-v1 code, independent verification and synthetic evaluation results are not claimed complete. Original owner drafts, ratings and source limitations remain preserved. Evidence keys refer to the [index](VERIFIED_EVIDENCE_INDEX.md); final layout, citations, attribution, release checks and submission remain unfinished. [E11,E12]
 
 ## Abstract — working text
 
-We investigate whether an ontology-grounded, tool-verified agent improves the
-accuracy, faithfulness and safety of data-center sustainability recommendations
-relative to a plain language model. Our test setting is hourly workload scheduling
-at one simulated site. The implementation separates policy-visible facts,
-language-model proposals, deterministic verification and controlled execution.
-An RDF knowledge graph supports the agent's retrieval; the plain model receives
-equivalent flat facts. The agent has bounded repair and a separately checked
-fallback. Independent replay, trace analysis and human explanation annotations
-address distinct evaluation questions. Existing public development evidence
-demonstrates selected contract, replay and fallback behavior, including failed
-repairs and explanation-content limitations. A saved technical validation contains
-six system results, 180 records and 17 model requests; it is one public example,
-not an estimate of comparative performance. The held-out study remains unfrozen
-and unexecuted, and is outside the activated delivery scope. This draft therefore reports
-implemented mechanisms and development evidence without claiming research
-superiority, operational carbon savings or final held-out reliability. [E1-E7]
+We ask whether a compact set of explicit rules can reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios. The focused study design lifts rules from permitted illustrative examples and declared assumptions, lowers them into a deterministic discrete scheduler, and independently checks safety and progress within explicit finite bounds. Two authored scenarios cover carbon-aware timing and overloaded or infeasible workloads; failed proposals, attempted fallback and actual execution are kept distinct. The proposed evaluation compares the rule scheduler with Greedy A/B on separately generated synthetic cases after protocol freeze. At this drafting checkpoint, the rule specification and adapter proposal are prepared, while consumer acceptance, implementation, bounded verification and new evaluation are pending. Earlier Agent/Plain infrastructure and public technical validations supply historical implementation evidence, not results for this new question. The original source-dependent held-out study was not performed. We therefore make no claim of rule-system generalization, universal safety, human faithfulness, real-site carbon savings or Agent superiority. This draft distinguishes completed evidence from planned methods and unresolved limits. [E1-E12]
 
 ## 1. Introduction
+
+The current question is: can explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? The rule table, deterministic joint-selection objective, study-local trace identity and independent verification boundaries are specified prospectively. Verification separates safety from progress under joint-feasibility and closed-workload assumptions. Any newly generated evaluation cases must remain separate from rule development; failures and missing comparisons will be reported rather than filled with favorable values. [E12]
+
+The legacy setting and infrastructure discussed in sections2-9 below remain historical technical context unless explicitly labeled as the new focused-study design. Their six-system measurements, three-fold model metrics and human annotations must not be pooled with the new three-policy synthetic comparison. The new proposed toy cases use60kW capacity/20kW background/PUE1; the smaller verification domain uses30/10/PUE1. These authored assumptions differ from the historical100/40/PUE1.2 setting. [E1-E12]
 
 Flexible jobs can execute at different times. Under fixed job power and site PUE,
 moving the same completed work between slots changes modeled emissions when the
@@ -52,7 +33,7 @@ underlying model and equivalent visible information. Two greedy policies and
 decision-tree/random-forest references provide additional scheduling context;
 they are not additional research questions. [E1, E2]
 
-The comparison tests the combined grounding/checking/repair workflow. It does
+The original proposed comparison targeted the combined grounding/checking/repair workflow. It does
 not isolate the causal contribution of each component, and Agent has a larger
 bounded call budget. Development integration, human rubric calibration and a
 frozen held-out study are different evidence categories. The first two have
@@ -355,21 +336,11 @@ with this draft. [E1, E8, E11]
 
 ## 10. Working conclusion and next evidence
 
-The implemented system separates grounded proposals from deterministic checks and
-controlled effects, with saved evidence for bounded development cases. Those cases
-also expose failed repairs, fallback reliance and explanation-content limits.
-They do not establish an improvement over a plain LLM or real-site carbon savings.
-The original comparative research question remains unanswered; the activated delivery does not include that frozen study. [E2-E9]
+The active contribution is a focused rule-system study with explicit, prospective methods and independently checkable properties. Its implementation, bounded verification and isolated synthetic evaluation still need actual artifacts; the current evidence cannot answer the new research question yet. A rule explanation is not automatically a faithfulness judgment, and bounded synthetic verification is not a real-facility or arbitrary-scale guarantee. [E12]
 
-Matty activated the prepared development-evidence-only path on November 18 to
-remove the dependency on unavailable source evidence and further owner responses.
-The report/demo use existing permitted public/sanitized evidence, preserve the
-sealed held-out selection and state that the original held-out question remains
-unanswered. Source-use/provenance gaps remain unresolved; #60 is discontinued as
-not planned for this delivery rather than certified resolved. New CV/repair/hybrid/
-Pareto work is described with its actual unexecuted disposition. Final report
-layout, attribution, public-package rights checks and submission remain required.
-[E7-E9, E11]
+Historical Agent/Plain infrastructure demonstrates selected development behavior, including failed repairs, fallback reliance and explanation limitations. It does not establish superiority over a plain LLM. The original held-out study remains unperformed and its question unanswered. Source B1-B3 remain unresolved and B4 provisional; #60 was closed NOT_PLANNED rather than certified resolved. [E2-E9]
+
+Following Hasan's guidance and Matty's November19 decision, the primary plan is executable explicit rules, independent bounded verification and new synthetic tests against Greedy A/B where feasible. The November18 evidence-only package remains backup. No new test results, model runs, accepted source rights or scientific freeze are inferred from publishing this report update. Exact adapter/generator acceptance, code/specification hashes and fresh bounded execution authorization remain gates; final report layout, attribution, rights review and submission are separate. [E11,E12]
 
 ## Presentation-feedback follow-through — pending experiments
 

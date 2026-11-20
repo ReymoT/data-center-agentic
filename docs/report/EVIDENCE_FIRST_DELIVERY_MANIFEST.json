@@ -50,7 +50,7 @@
     },
     {
       "path": "docs/R04_DEVELOPMENT_EVIDENCE.md",
-      "sha256": "cd4adf0d5aa12f6f49dc055f6f730ede92487d0973e19568b16f78a26e40c035",
+      "sha256": "b5c5cccf9d2e17d4d22e3cee9fdeffbfaa06d531ad40df48a3e022c37511819b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "849bf319bd65cb0169951ab5e2708678dd272d10c6038765c5c033c5a7258685",
+      "sha256": "60e427b047f624a2b5caed5771fa0515517f89d77317fff77fa76ba5c139ebfd",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "1658202de8df13caa7eff9cd6cf0d061e4d85675788d63ca4c66d213abe84585",
+      "sha256": "fe57046792d326e075beb4efb3b79856fac8a1d633e40a1379c57be9a5d967dc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -330,7 +330,7 @@
     },
     {
       "path": "docs/rule_study/RULE01_SPECIFICATION.md",
-      "sha256": "0d91c8e7304856895b593a3c9cc63c4b112b9090af294d82b9134209e9662d50",
+      "sha256": "72449ddc6fdfec17119401bd26afe20c1db119805c5fde768d973e86731111ea",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -346,6 +346,16 @@
     {
       "path": "docs/report/R01_DATA_AND_SIMULATOR_METHODS.md",
       "sha256": "b9e960679dec433cc15e9663d38299a7997a6e05556774d43be66ba7f9ee933b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/ADAPTER_RECORD_PROPOSAL.md",
+      "sha256": "34e68477383a4d1b329c18acc6e663faf62a98c8021ca1c84617d07a4368a172",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/adapter_record.example.json",
+      "sha256": "97881b92ddc5025018b6169a4c42e15d619311d68de5375698521d366231d474",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -480,5 +490,10 @@
     "status": "specification_prepared_acceptance_pending",
     "research_execution_authorized": false,
     "checklist": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md"
+  },
+  "rule_adapter_report_refresh": {
+    "status": "proposed_adapter_report_scope_corrected_not_results",
+    "affected_acceptance_pending": true,
+    "execution_authorized": false
   }
 }
