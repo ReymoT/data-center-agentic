@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "6972983b081f7135fdb6345edca691c71dfad617527f0586f347d41a32c9c562",
+      "sha256": "10970da03934eecaffa70f215d74d4da1b5617617c7f3592ada78910b6c9b42d",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "779c0ef3be504f8fd0f65b17f6eeb54353e8f3f2f0d6639fac5ffd6dc09c9823",
+      "sha256": "7a892815081a2d2e25932c43e2e2abdd3393f748864bdff91552494a7203e27b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "ad4d32677e009d488a9b288cbcc6a29c56a63997c570036e8a7e7c61474cfb4f",
+      "sha256": "84098db1e0a29ef3e6bd8bf222c4cf337753a10f48bb76b905d28a0a49537471",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "e983245f98680815dd08319d3a7e6a31b2bd9a04cf6ce7b67938486100ffe749",
+      "sha256": "32b0b45c8ffc826d2ddc94d44c7138320227ba19b40f2254350a401fd578b14d",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -391,6 +391,21 @@
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
       "sha256": "e88e8d36349e6f29aac8b7ab673cbad292d27d4fdc7d77311625a59cbccc5086",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/rehearse_rule_study_supervisor.py",
+      "sha256": "5df7bc77704bcfbf156f627a5fa9fd004992f96c886aad8a36f57d69bf33c416",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/runtime/test_rule_study_supervisor.py",
+      "sha256": "9c22c1b1ec5dd3230c4f577e68ec650761ffe7db253f3128225e39388b634993",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/OFFLINE_SUPERVISOR_PREPARATION.md",
+      "sha256": "ea3a07a5133e2ee83eeeddf2795589b28734cfe611112535dbe3d09c11fa486f",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
