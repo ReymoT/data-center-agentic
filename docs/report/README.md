@@ -4,7 +4,7 @@ November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE
 
 Assembler: Nisha (R05); release package: Matty (R06).
 
-Active scope: [development-evidence-only delivery activated November 18](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
+Backup scope (activated November 18, superseded as primary on November 19): [development-evidence-only delivery](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
 
 November 15: [an evidence-first working report](VERIFIED_EVIDENCE_WORKING_DRAFT.md),
 [claim/source index](VERIFIED_EVIDENCE_INDEX.md) and

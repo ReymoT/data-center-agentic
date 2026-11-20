@@ -44,7 +44,7 @@ recommendation can nevertheless overload capacity, miss a deadline or assert a
 saving that its evidence cannot support. The relevant question is recommendation
 quality, not whether text sounds plausible. [E1, E2]
 
-Our research question is: does an ontology-grounded, tool-verified agent improve
+Our original, still unanswered research question is: does an ontology-grounded, tool-verified agent improve
 the accuracy, faithfulness and safety of data-center sustainability
 recommendations compared with a plain LLM? Scheduling supplies bounded decisions
 that can be checked and independently replayed. Agent and Plain use the same

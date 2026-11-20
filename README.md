@@ -13,6 +13,11 @@ November 19 active plan: [the focused rule-system study](docs/decisions/NOV19_RU
 
 November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](docs/decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
 
+
+The new focused question is: Can a small set of explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? We will use a normal carbon-aware scheduling case and an overloaded/infeasible fallback case. The new work is planned, not completed. It will use new artificial inputs with declared provenance, not the source-dependent private corpus. Safety/progress claims will be restricted to the independently verified bounds and assumptions. The old Agent-versus-Plain study is not replaced by an invented positive result.
+
+Active task handoffs: [Matty specification #239](https://github.com/ReymoT/data-center-agentic/issues/239) -> [Ved implementation #240](https://github.com/ReymoT/data-center-agentic/issues/240) -> [Nisha independent verification #241](https://github.com/ReymoT/data-center-agentic/issues/241) -> [Edison synthetic comparison #242](https://github.com/ReymoT/data-center-agentic/issues/242) -> [Matty final audit #244](https://github.com/ReymoT/data-center-agentic/issues/244). [Reimo report/demo #243](https://github.com/ReymoT/data-center-agentic/issues/243) proceeds in parallel. Preparation starts now; details and dates are in the approved plan.
+
 The [development bundle assembler](docs/handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md)
 now prepares the missing input format from explicit episode JSONs and a permitted
 row extract. Synthetic checks pass; no real bundle preparation, source permission

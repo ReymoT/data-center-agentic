@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "a7a6c814cb8b861bdf3b8cf801596c27ae41854874bd314ea8fba871aa287ee1",
+      "sha256": "6972983b081f7135fdb6345edca691c71dfad617527f0586f347d41a32c9c562",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "004a83f1979057c3cf76a7619aa89e768ea44795921212a8c1798315ab7baabd",
+      "sha256": "a5c29f6959de37ceb62254e97925ff67cf36ba38572f10fb2f9c69a4baa58002",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -220,7 +220,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "a679b0c324bd4a85ad3c4deff80d0ee7fd75d0e8d4e7409fb5413ed65e366ec1",
+      "sha256": "1658202de8df13caa7eff9cd6cf0d061e4d85675788d63ca4c66d213abe84585",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,12 +310,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "8d64b81ec035b9dd906e734a3a7ae800cc25c525092beb239cf6606b789c5409",
+      "sha256": "16015d1a1ba2a2aa21097cdee58fd9a2c38a8fd54049185dc8422d4174b837e3",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "PROJECT_MASTER.md",
-      "sha256": "797daf0435c294b29a5ac832a272b7936935a603973609931830356c8e3869d8",
+      "sha256": "e0c796b0de2e14836bc5aa02494db042fe1096e1d452ce1c486d25a0f76a53d4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {

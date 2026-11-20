@@ -56,7 +56,7 @@ Current D06 update, 2026-10-19: [Matty's handoff verification](docs/handoffs/D06
 
 Course planning update, October 20, 2026: Nisha reports Group 15 presents in class November 16, submits the presentation November 18 at 11:59 pm, demos December 2 (submission 11:59 pm), and submits the report December 9 at 11:59 pm. Read [Q13](docs/decisions/Q13_PRESENTATION_DEADLINE.md) and [the current plan](docs/PROJECT_PLAN.md). Timezone, rubric/formats and separate code/release requirements remain unconfirmed. Rehearsal must be before November 16; no exact day is agreed. These are attributed course reports, not verified outcomes or scientific acceptance.
 
-The research question is: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
+The original, still unanswered research question was: Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
 Read the [README](README.md) and [architecture](docs/ARCHITECTURE.md) for the planned scheduling study, main agent/plain-LLM comparison and four additional references. Read [implemented F02 interfaces](docs/INTERFACES.md) and their pending consumer-adoption status, with [the checklist](docs/team/03_RESPONSIBILITY_CHECKLIST.md) for ownership. Do not duplicate schemas or claim teammate-owned tasks.
 
