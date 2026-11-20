@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "05e4447bdc5e5fe7b0691d2a32184e680d4e25e1ec611e788181c9a7b6cf94f7",
+      "sha256": "6972983b081f7135fdb6345edca691c71dfad617527f0586f347d41a32c9c562",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "0d9c1b7a8e8bad133e52c724534fb435d4f3d46981131a792dd24b7eb0870817",
+      "sha256": "006c8ec6df24e50b70c7164f021d1881da8d8cf5da380044a7ab2068a8494910",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -175,7 +175,7 @@
     },
     {
       "path": "docs/report/DEVELOPMENT_ONLY_CONTINGENCY_DRAFT.md",
-      "sha256": "b90e1ed628c3dee1607af544b69dbc4b14e6cf47202cd55e94b0b3b77de824f5",
+      "sha256": "f4e088bf2648e2934b8dae6c64149726a87d3bf5dd05d63277d2c5045ea08c7b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "71b775b14fa6eb50a321fed906f4a67cb06f67061a15164aa479fd2688581759",
+      "sha256": "eb828bc561fc3584ec5dbc2e14fcb206288244192b22dd1df49b228adeeeab8c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "9996f2672799e09241674e6b1581643ce581e1c42354be231e56a07a74a18c73",
+      "sha256": "849bf319bd65cb0169951ab5e2708678dd272d10c6038765c5c033c5a7258685",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "667b16a6d12080f083eb66e8a798982153547e025f15ac7ae1905d8a23c75531",
+      "sha256": "1658202de8df13caa7eff9cd6cf0d061e4d85675788d63ca4c66d213abe84585",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -230,7 +230,7 @@
     },
     {
       "path": "docs/team/03_RESPONSIBILITY_CHECKLIST.md",
-      "sha256": "fa386711ffeeac7f2e4c5a27ca91997a9588e120975b102f892abf13038bb599",
+      "sha256": "a0c0197d51eb655e712fe9fd0243428376c9d8ad892043cfca8f3f6c1b355a68",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -271,7 +271,7 @@
     {
       "path": "docs/DEMO.md",
       "hash_convention": "CRLF_normalized_to_LF",
-      "sha256": "57f151ed846a397232b6a51b2416830951c313ddc93c2de43ed6f4ded54d55fb"
+      "sha256": "97379ea7e3e142d6949e8549bb52be03635b009ee0fb1bf68052c8a6be155ade"
     },
     {
       "path": "docs/report/REPAIR_FEEDBACK_DESIGN_NOV17.md",
@@ -300,7 +300,7 @@
     },
     {
       "path": "docs/decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md",
-      "sha256": "3cc7b4713cef0565919e85cfac61a8c895b355ba3384bf5b9838578871dce74b",
+      "sha256": "96e685ede2fa722bb6de184c220974d0ee9316bf22af491773f80d315c5a08ae",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,17 +310,22 @@
     },
     {
       "path": "README.md",
-      "sha256": "856e8aacf9e057feebcf2763982a2f6ef8b650e55a3e2248835b135e98a2fc34",
+      "sha256": "ad4d32677e009d488a9b288cbcc6a29c56a63997c570036e8a7e7c61474cfb4f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "PROJECT_MASTER.md",
-      "sha256": "6aef7ba57976194a0644d201bb52c7d4006db2df4b136b82fe6e7d4e9119dc2e",
+      "sha256": "7e423eb5fa8efe9016b05bdc2e75dbb463fdbb8ffa7d6f7348e9b3d9d870b831",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/PROJECT_CONTEXT.md",
-      "sha256": "f7e6aaf0f32181536884e351f4b66f922c3d9a20f32d0383f3c487962fd00164",
+      "sha256": "a7bcabb192b952a12f5c96389522f31dab427091613798596b0a869bd4e1f315",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/decisions/NOV19_RULE_STUDY_PLAN.md",
+      "sha256": "e28dcae0c56508a058da4e164be6b8f19be3e1f1c9965811bed8257fda127970",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -441,5 +446,14 @@
     "source_acceptance": false,
     "live_execution_authorized": false,
     "decision": "docs/decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md"
+  },
+  "nov19_active_plan": {
+    "decision": "docs/decisions/NOV19_RULE_STUDY_PLAN.md",
+    "status": "manager_approved_plan_not_results",
+    "instruction_deployment": "1.30",
+    "internal_delivery_candidate": "2026-11-28",
+    "original_held_out_completed": false,
+    "source_acceptance": false,
+    "live_execution_authorized": false
   }
 }

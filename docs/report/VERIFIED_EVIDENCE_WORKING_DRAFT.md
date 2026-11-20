@@ -1,5 +1,7 @@
 # Ontology-Grounded, Tool-Verified Data-Center Sustainability Recommendations
 
+November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 Group 15, Project 21. Working assembly, November 18, 2026 (America/Phoenix).
 Members: Edison Perez Cash; Matty Anderson and Nisha Mahadev Kolekar; Reimo Tamme;
 Ved Patil. R05 assembler: Nisha. R04/R06 preparation: Matty.
@@ -42,7 +44,7 @@ recommendation can nevertheless overload capacity, miss a deadline or assert a
 saving that its evidence cannot support. The relevant question is recommendation
 quality, not whether text sounds plausible. [E1, E2]
 
-Our research question is: does an ontology-grounded, tool-verified agent improve
+Our original, still unanswered research question is: does an ontology-grounded, tool-verified agent improve
 the accuracy, faithfulness and safety of data-center sustainability
 recommendations compared with a plain LLM? Scheduling supplies bounded decisions
 that can be checked and independently replayed. Agent and Plain use the same

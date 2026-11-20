@@ -1,5 +1,7 @@
 # Verified-evidence assembly index
 
+November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 Status: working draft, November 15, 2026. Baseline
 8eb3cf0cf80c7cf85e9217084cd18eeed91a5e26. Read this alongside the
 [assembled report source](VERIFIED_EVIDENCE_WORKING_DRAFT.md). The index maps

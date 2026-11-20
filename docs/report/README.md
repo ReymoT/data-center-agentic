@@ -1,8 +1,10 @@
 # Final report: assembly outline (R05)
 
+November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 Assembler: Nisha (R05); release package: Matty (R06).
 
-Active scope: [development-evidence-only delivery activated November 18](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
+Backup scope (activated November 18, superseded as primary on November 19): [development-evidence-only delivery](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
 
 November 15: [an evidence-first working report](VERIFIED_EVIDENCE_WORKING_DRAFT.md),
 [claim/source index](VERIFIED_EVIDENCE_INDEX.md) and
@@ -105,3 +107,5 @@ Corrected R02 methods from #235 are integrated into the working report and evide
 The full-study execution/ratings/reproduction windows above are historical conditional planning, not active prerequisites. Evidence-only text and demo assembly proceed now; November 20 official-field checkpoint and December 7 internal target remain. Final evidence-only artifact checks and submission receipt are still required; former study I03/I04 completion is not claimed.
 
 Concurrent update: Reimo R01 owner prose arrived in [PR #237](https://github.com/ReymoT/data-center-agentic/pull/237) during manager reconstruction. It is preserved separately for review; the manager reconstruction has a distinct filename, and source-dependent work remains outside the activated scope.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.
