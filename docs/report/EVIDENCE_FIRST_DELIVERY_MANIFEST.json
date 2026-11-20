@@ -325,7 +325,7 @@
     },
     {
       "path": "docs/decisions/NOV19_RULE_STUDY_PLAN.md",
-      "sha256": "5d574659c0dd5df0f34900ee2278278c621078ff821ed0ad9fbd955ce2d8ebf2",
+      "sha256": "e28dcae0c56508a058da4e164be6b8f19be3e1f1c9965811bed8257fda127970",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
