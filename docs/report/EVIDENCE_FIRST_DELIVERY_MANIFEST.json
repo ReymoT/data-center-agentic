@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "d0954223d7b591d191c20c002ddfa30e5173d90b190c2237d1d6809fb853b4ef",
+      "sha256": "006c8ec6df24e50b70c7164f021d1881da8d8cf5da380044a7ab2068a8494910",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "a5c29f6959de37ceb62254e97925ff67cf36ba38572f10fb2f9c69a4baa58002",
+      "sha256": "eb828bc561fc3584ec5dbc2e14fcb206288244192b22dd1df49b228adeeeab8c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -230,7 +230,7 @@
     },
     {
       "path": "docs/team/03_RESPONSIBILITY_CHECKLIST.md",
-      "sha256": "f0bbdb3fb5644aaa184ffc8f52f4e3b5356324cad73c0d992f137fa3feb520f3",
+      "sha256": "a0c0197d51eb655e712fe9fd0243428376c9d8ad892043cfca8f3f6c1b355a68",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -271,7 +271,7 @@
     {
       "path": "docs/DEMO.md",
       "hash_convention": "CRLF_normalized_to_LF",
-      "sha256": "e8ca2255e9d92ce714f3d46bb1338362024f30e0c12bed5d05f6271ffddb5ec5"
+      "sha256": "97379ea7e3e142d6949e8549bb52be03635b009ee0fb1bf68052c8a6be155ade"
     },
     {
       "path": "docs/report/REPAIR_FEEDBACK_DESIGN_NOV17.md",
@@ -310,12 +310,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "16015d1a1ba2a2aa21097cdee58fd9a2c38a8fd54049185dc8422d4174b837e3",
+      "sha256": "ad4d32677e009d488a9b288cbcc6a29c56a63997c570036e8a7e7c61474cfb4f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "PROJECT_MASTER.md",
-      "sha256": "e0c796b0de2e14836bc5aa02494db042fe1096e1d452ce1c486d25a0f76a53d4",
+      "sha256": "7e423eb5fa8efe9016b05bdc2e75dbb463fdbb8ffa7d6f7348e9b3d9d870b831",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -325,7 +325,7 @@
     },
     {
       "path": "docs/decisions/NOV19_RULE_STUDY_PLAN.md",
-      "sha256": "af515ee4b00b0f06d6ee63240afc379b62f63b79070b7418b2ff1eac3b12ce37",
+      "sha256": "5d574659c0dd5df0f34900ee2278278c621078ff821ed0ad9fbd955ce2d8ebf2",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

@@ -107,3 +107,5 @@ Corrected R02 methods from #235 are integrated into the working report and evide
 The full-study execution/ratings/reproduction windows above are historical conditional planning, not active prerequisites. Evidence-only text and demo assembly proceed now; November 20 official-field checkpoint and December 7 internal target remain. Final evidence-only artifact checks and submission receipt are still required; former study I03/I04 completion is not claimed.
 
 Concurrent update: Reimo R01 owner prose arrived in [PR #237](https://github.com/ReymoT/data-center-agentic/pull/237) during manager reconstruction. It is preserved separately for review; the manager reconstruction has a distinct filename, and source-dependent work remains outside the activated scope.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.

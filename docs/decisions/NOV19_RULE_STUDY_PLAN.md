@@ -24,16 +24,22 @@ Reuse compatible simulator/contracts and Greedy A/B implementations. Do not sile
 
 All dates below are November 2026, 18:00 America/Phoenix (UTC-07:00). Dates are latest completion deadlines, not permission to wait. Start ready work immediately, publish working handoffs early and report concrete blockers as soon as found.
 
-| Task | Single accountable owner | Deadline | Required handoff |
+| Task | Accountable owner | Deadline | Required handoff |
 |---|---|---|---|
 | RULE-01 / #239 | Matty | Nov 20 | Question, two cases, rule table, state bounds, metrics, synthetic provenance and agreed consumer boundaries |
 | RULE-02 / #240 | Ved | Nov 22 | Executable scheduler, trace/explanations, checked fallback, negative tests and exact working commit; Matty supplies rule logic |
 | RULE-03 / #241 | Nisha | Nov 23 | Independent verifier, bounded reachable-state evidence/counterexamples and explicit progress assumptions |
 | RULE-04 / #242 | Edison | Nov 25 | Frozen isolated synthetic test set, rule vs Greedy A/B results, denominators and reproducible tables/plots |
-| RULE-05 / #243 | Reimo | Nov 25 | Methods, workflow diagram, two-scenario demo and report integration; draft starts now |
+| RULE-05 / #243 | Reimo | Nov 25 | Methods, workflow diagram and report integration; provide requested materials to Edison/Ved |
 | RULE-06 / #244 | Matty | Nov 28 | Nov 26-27 direct fixes/reproduction, then final audit and delivery candidate; Ved reproduces and Nisha checks independence |
 
-Matty's specification is first on the critical path. Nisha starts the verification harness, Edison the generator/evaluation harness and Reimo the report/demo skeleton in parallel; they do not wait for the entire scheduler. RULE-02 implementation acceptance needs RULE-01's stable boundaries. RULE-03 final acceptance needs exact executable code. RULE-04 scoring needs rule/verifier freeze; RULE-05 final tables need RULE-04 evidence. November 26-27 is protected repair time. November 28 is the internal delivery candidate, not a newly asserted official submission deadline. Existing course/release confirmation stays in #16.
+| RULE-07 / #246 | Edison and Ved | Nov 25 | Two-scenario demo; Edison coordinates package/visuals, Ved executable wiring/replay; both proactively request needed teammate materials |
+
+Matty's specification is first on the critical path. Nisha starts the verification harness, Edison the generator/evaluation harness and Reimo the report skeleton in parallel; they do not wait for the entire scheduler. RULE-02 implementation acceptance needs RULE-01's stable boundaries. RULE-03 final acceptance needs exact executable code. RULE-04 scoring needs rule/verifier freeze; RULE-05 final tables need RULE-04 evidence. RULE-07 demo preparation starts immediately in parallel; its final execution needs RULE-02, independent findings need RULE-03 and displayed comparison results need RULE-04. Edison and Ved request exact materials from Matty, Nisha, Reimo and other affected owners rather than waiting for unsolicited handoffs. November 26-27 is protected repair time. November 28 is the internal delivery candidate, not a newly asserted official submission deadline. Existing course/release confirmation stays in #16.
+
+## Demo responsibility: final manager amendment
+
+Matty explicitly assigns demo production jointly to Edison and Ved. Edison coordinates the storyboard, visuals and delivery package; Ved leads executable wiring, repeatable commands and replay. Both must proactively ask teammates for the exact materials they need and record requests/checkpoints in #246: Matty supplies rule/scenario specifications, Nisha independent verification/bounds, Reimo methods/diagrams, and relevant owners the permitted result artifacts. Reimo retains report/methods ownership, not demo production. Do not let a missing optional visual block executable preparation. The demo must show both scenarios with actual evidence; unimplemented or untested behavior stays labeled, never presented as a result.
 
 ## Evidence gates and evaluation isolation
 
@@ -65,7 +71,7 @@ Main is authoritative. Teammates and their AI assistants must fetch origin/main 
 
 Pass 1, scope: two scenarios, explicit lift/lower/independent verification, isolated new synthetic testing and bounded comparison match supplied professor guidance; old research question remains distinct.
 
-Pass 2, dependencies: each RULE task has one accountable owner; parallel preparation precedes sequential freeze/verification/evaluation; no waiting loop or missing handoff is intentionally introduced.
+Pass 2, dependencies: RULE-01 through RULE-06 each have one accountable owner; RULE-07 has explicitly authorized Edison/Ved joint demo ownership with a defined coordination/technical split; parallel preparation precedes sequential freeze/verification/evaluation; no waiting loop or missing handoff is intentionally introduced.
 
 Pass 3, science: independent implementation, finite proof bounds, nontrivial progress assumptions, unseen-test isolation, permitted input provenance, honest failures and equal-work gates are specified before scoring.
 
