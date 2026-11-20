@@ -50,7 +50,7 @@
     },
     {
       "path": "docs/R04_DEVELOPMENT_EVIDENCE.md",
-      "sha256": "b5c5cccf9d2e17d4d22e3cee9fdeffbfaa06d531ad40df48a3e022c37511819b",
+      "sha256": "79ae57595035eacac0b875e50bc893d2dca56efbbac938a5c6adaef53032c5d4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "60e427b047f624a2b5caed5771fa0515517f89d77317fff77fa76ba5c139ebfd",
+      "sha256": "c02232fa0da349029e1f951d3a31b26b1ae5142b0e18059cc98532d3540e588e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "fe57046792d326e075beb4efb3b79856fac8a1d633e40a1379c57be9a5d967dc",
+      "sha256": "966f9103b3cbe650c59b2e7ef17c7b5aa81d0ca86229e3845363582baa84e550",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -330,17 +330,17 @@
     },
     {
       "path": "docs/rule_study/RULE01_SPECIFICATION.md",
-      "sha256": "72449ddc6fdfec17119401bd26afe20c1db119805c5fde768d973e86731111ea",
+      "sha256": "a67043fc4e6d5b48e16ce7cfcb351933342dca2f83d10e1748b48c552a98f6b3",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "eb70bb44fa89f4a82a5e2fc963d0f634ca892accda8024b8ab4176a1b1cb164b",
+      "sha256": "e983245f98680815dd08319d3a7e6a31b2bd9a04cf6ce7b67938486100ffe749",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/specification.json",
-      "sha256": "97eb723fbf47ed6e6d2b0ea7b3d18a9d84c56c8db3322265587ff0dd7c5ecac9",
+      "sha256": "960ead50fa8f6ecc5166cc9b3b24d71f4eddb51244b797ba311fe1f34c449a69",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -350,12 +350,17 @@
     },
     {
       "path": "docs/rule_study/ADAPTER_RECORD_PROPOSAL.md",
-      "sha256": "34e68477383a4d1b329c18acc6e663faf62a98c8021ca1c84617d07a4368a172",
+      "sha256": "888207e90dd341c4d7b8332900680c179e81459fd8dca76956bb907fe90b7008",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/adapter_record.example.json",
       "sha256": "97881b92ddc5025018b6169a4c42e15d619311d68de5375698521d366231d474",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/decisions/NOV19_RULE01_REVIEW_REVISION.md",
+      "sha256": "f607e27346d8d70447c7ee754e0493dcae6558e22cdee1cbd7d03c9a8c05203e",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -494,6 +499,11 @@
   "rule_adapter_report_refresh": {
     "status": "proposed_adapter_report_scope_corrected_not_results",
     "affected_acceptance_pending": true,
+    "execution_authorized": false
+  },
+  "rule01_review_2": {
+    "decision": "docs/decisions/NOV19_RULE01_REVIEW_REVISION.md",
+    "status": "manager_decisions_recorded_consumer_freeze_pending",
     "execution_authorized": false
   }
 }

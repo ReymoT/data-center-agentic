@@ -87,7 +87,28 @@
     "initial_inputs": 64,
     "max_states": 10000,
     "max_transitions": 50000,
-    "execution_authorized": false
+    "execution_authorized": false,
+    "max_seconds": 600,
+    "budget_scope": "combined_primary_and_optional_supplement_across_oracle_and_policy_graphs",
+    "methods": [
+      "legal_action_graph_for_joint_feasibility",
+      "policy_induced_graph_for_properties"
+    ],
+    "supplemental_domain": {
+      "initial_inputs": 1024,
+      "arrivals": [
+        0,
+        1
+      ],
+      "flexible": [
+        false,
+        true
+      ],
+      "primary_subset_inputs": 64,
+      "optional": true,
+      "delivery_blocker": false,
+      "uses_remaining_combined_budget_only": true
+    }
   },
   "evaluation": {
     "policies": [
@@ -105,11 +126,37 @@
     "development_seed_domain": 2026111901,
     "evaluation_seed_domain": 2026111902,
     "generate_after_rule_verifier_freeze": true,
-    "execution_authorized": false
+    "execution_authorized": false,
+    "job_count_options": {
+      "normal_feasible": [
+        2,
+        3,
+        4
+      ],
+      "overloaded_impossible": [
+        3,
+        4
+      ],
+      "missing_forecast": [
+        2,
+        3,
+        4
+      ]
+    },
+    "diversity_reporting": [
+      "actual_full_case_hash_count",
+      "actual_workload_hash_count_excluding_scores"
+    ],
+    "missing_forecast_interpretation": "safety_fallback_accounting_control_not_policy_ranking"
   },
   "pending_acceptance": [
-    "Ved/Nisha adapter and rule semantics",
-    "Ved/Nisha independent safety/progress bounds",
-    "Edison/Nisha generation and metrics"
-  ]
+    "Ved exact adapter/common-runner acceptance",
+    "Edison review-2 generator/metrics/result mapping",
+    "Final implementation and exact frozen authorization bindings"
+  ],
+  "specification_revision": "review-2-manager-decisions-remaining-consumer-acceptance-pending",
+  "received_acceptance": {
+    "Nisha": "proposal-1 reader/gate/objective/primary-domain/generator with review-2 requested changes recorded",
+    "Ved": "identity/objective/progress/primary-domain/unchanged-abstention principles"
+  }
 }
