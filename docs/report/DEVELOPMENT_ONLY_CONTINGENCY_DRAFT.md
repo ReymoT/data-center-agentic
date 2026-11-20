@@ -1,4 +1,8 @@
-# Development-evidence-only contingency: prepared draft, not activated
+# Development-evidence-only contingency: activated November 18
+
+November 19 update: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) is the active primary plan; this evidence-only path remains backup. This dated record is preserved, not source acceptance or evidence of new completed experiments.
+
+Current disposition: Matty explicitly activated this delivery scope on November 18. See [activation and scope limits](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). The preparation text below is retained as history; future-tense activation requirements are satisfied for this reporting scope only, not data/run permission.
 
 Prepared by Matty on November 15, 2026, as deadline insurance. This is supporting
 draft text and an evidence map for Nisha's existing evaluation/report role, not

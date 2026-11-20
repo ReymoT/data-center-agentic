@@ -1,5 +1,7 @@
 # Master instructions — Reimo
 
+Current scope, instruction 1.30 - November 19, 2026: Matty approved the focused rule-system study recommended by Professor Hasan. Read [the approved November 19 plan](../decisions/NOV19_RULE_STUDY_PLAN.md). Start ready work now; deadlines are latest completion times (18:00 America/Phoenix), not start dates. RULE-01 Matty Nov20; RULE-02 Ved Nov22; RULE-03 Nisha Nov23; RULE-04 Edison, RULE-05 Reimo (report/methods) and RULE-07 Edison/Ved (demo) Nov25; RULE-06 Matty Nov28 with Nov26-27 repair buffer. New independently authored synthetic inputs, independent bounded safety/progress verification and Greedy A/B comparisons replace the original source-dependent study for active delivery. The original research question remains unanswered; evidence-only delivery stays the backup. No real-source/private-data use, live LLM call or unspecified research batch is authorized. At the next assistant execution after a missed deadline, reassign unfinished work to a capable available owner, preserve work and independent verification, and tag old/new owners with the reason and checkpoint. No unattended monitor is installed. Fix defects directly and notify owners. Edison and Ved jointly own demo production and must proactively request required materials from teammates. Main's published masters are authoritative: synchronize local instruction copies verbatim at the recorded commit/version, preserving code; do not rewrite masters independently. Historical tasks/status below remain records, not the active critical path.
+
 Current manager rule, instruction 1.29 — November 12, 2026:
 
 When Matty or his assistant finds a problem in project work, fix and validate it directly within the authorized scope instead of returning the job to the original owner for another correction round. Preserve existing work, then tag the responsible teammate with what was wrong, what changed and the validation result. This direct-fix workflow does not invent source rights, private inputs, human judgments, independent approvals or successful results, and does not waive shared-contract agreement, privacy, exact execution authorization or CI gates. Existing task accountability and Matty-only instruction authority remain in force.
@@ -8,7 +10,7 @@ Current evaluation update, instruction 1.28: [the professor's inter-rater-reliab
 
 Current manager update, October 24: [coder-owned decisions](../decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Version: 1.29 — 2026-11-12. Repository: https://github.com/ReymoT/data-center-agentic
+Version: 1.30 — 2026-11-19. Repository: https://github.com/ReymoT/data-center-agentic
 
 Current implementation update, 2026-10-15: D02 calibration tooling and D03 provisional synthetic fixtures are merged. [Matty's D03 checker-consumer handoff](../handoffs/A03_D03_F04_F05.md) records fixed-rule tests, not simulator or independent-evaluation acceptance. Frontier calibration, Q01-Q06 and downstream acceptance remain pending where documented. Task ownership and shared rules are unchanged.
 
@@ -109,3 +111,9 @@ You are Done only when data/fixture/simulator tests pass, Ved's reproduction is 
 - Finish with published and validated code, passing current-base checks, documented artifacts and receiving-member acceptance. Mark Done only after verification. Include task ID, commit/PR, commands, hashes, tests actually run, limitations and next handoff in your completion message.
 
 The shared rules define publication, state-transition and handoff procedures. The checklist assigns a separate technical contact for each task. Technical validation and independent scientific evaluation remain required. Shared-format and settings changes require agreement from the affected teammates before implementation; record that agreement in the Issue or decision record.
+
+## Active November 19 assignments
+
+- [RULE-05 #243](https://github.com/ReymoT/data-center-agentic/issues/243): accountable owner Reimo; due 2026-11-25 at 18:00 America/Phoenix. Start now, hand off early and follow the acceptance criteria in the issue.
+
+Demo ownership amendment: Edison and Ved produce the demo in RULE-07 #246. Reimo retains report/methods/diagram integration and supplies materials when requested; he is not the demo production owner.

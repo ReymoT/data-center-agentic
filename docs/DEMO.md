@@ -1,5 +1,9 @@
 # Demo runbook preparation
 
+November 19 active plan: [the focused rule-system study](decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
 The completed public EP-HAND1 receiving exercise supports a saved-evidence demo.
 Use the [R04 development section](R04_DEVELOPMENT_EVIDENCE.md) and
 [backup walkthrough](R04_BACKUP_DEMO.md). No new model request is needed.
@@ -13,3 +17,5 @@ Before final demonstration, save reviewed traces, environment/data/model/config 
 ## Professor-feedback coverage for final demo
 
 Reimo includes the four [November 17 feedback dispositions](report/PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md) tracked in #231: grouped ten-fold learned-model validation; exact repair arithmetic/deltas and single-repair/fallback behavior; ML-ranked warm-start choices; and paired turnaround versus equal-work modeled emissions reduction. Coordinate with Edison, Matty and Nisha. Show measured artifacts only where accepted; otherwise label the item proposed/pending and explain the limitation. Preserve original run identities, the six-system baseline and source/right/custody/authorization gates. This is a coverage requirement, not approval for a new model/demo run.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.

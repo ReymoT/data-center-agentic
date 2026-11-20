@@ -1,5 +1,7 @@
 # Verified-evidence assembly index
 
+November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 Status: working draft, November 15, 2026. Baseline
 8eb3cf0cf80c7cf85e9217084cd18eeed91a5e26. Read this alongside the
 [assembled report source](VERIFIED_EVIDENCE_WORKING_DRAFT.md). The index maps
@@ -49,3 +51,7 @@ logs, held-out metadata/nonce, new ratings or private artifact transfers are inc
 ## Corrected R02 receiving
 
 PR #234 added an empty file; #235 supplies reconstructed evidence-based R02 prose. It is now indexed and integrated, not a personal attestation or completed O04/I03. Reimo R01 and remaining personal/final acceptance stay pending; #60 source gates and #231 agreements are unchanged.
+
+## November 18 active scope
+
+[Activation decision](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md) governs current delivery. [R01 reconstructed methods](R01_MANAGER_RECONSTRUCTION_NOV18.md) remove the outstanding prose dependency without inventing personal attestation. Existing scientific/source gaps remain limitations; no new source/model/solver operation is authorized. Final study artifacts listed above are deferred outside this delivery, not manufactured or marked complete.
