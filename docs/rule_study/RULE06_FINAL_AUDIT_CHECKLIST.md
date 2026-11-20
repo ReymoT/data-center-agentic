@@ -25,3 +25,5 @@ Owner Matty. Prepared November19; checklist only, no boxes are pre-passed. Due N
 | Delivery | Audited candidate bundle/PDF/demo hash inventory, broken-link/secret/private-data review, actual submission receipt later | Matty |
 
 For every gate record PASS, FAIL, BLOCKED or NOT_APPLICABLE with evidence and reason; blank is not PASS. Do not mark research or final delivery complete merely because code CI passes. Deadline pressure cannot supply missing permissions, independent results or course acceptance.
+
+Offline preparation update November20: [the dummy-only timeout rehearsal](OFFLINE_SUPERVISOR_PREPARATION.md) tests process-tree containment and preserved failure evidence. It does not pass the research-authorization, actual dispatch, verification or clean-reproduction gates above.
