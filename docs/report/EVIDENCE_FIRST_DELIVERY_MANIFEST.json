@@ -50,7 +50,7 @@
     },
     {
       "path": "docs/R04_DEVELOPMENT_EVIDENCE.md",
-      "sha256": "79ae57595035eacac0b875e50bc893d2dca56efbbac938a5c6adaef53032c5d4",
+      "sha256": "eb02f01f63c9ec3943f5763f6f9f9e517c994dccf941711c809e2b1c2b5ed1ca",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "c02232fa0da349029e1f951d3a31b26b1ae5142b0e18059cc98532d3540e588e",
+      "sha256": "2fc4460c34d4d5577783074d5bfcf283bef4b750460005f5b52f8cf954785bc5",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -350,7 +350,7 @@
     },
     {
       "path": "docs/rule_study/ADAPTER_RECORD_PROPOSAL.md",
-      "sha256": "888207e90dd341c4d7b8332900680c179e81459fd8dca76956bb907fe90b7008",
+      "sha256": "3b7bf71f75634732aef196a10ff449e7db5c2dd64372cd21540b05483f2b422a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -361,6 +361,36 @@
     {
       "path": "docs/decisions/NOV19_RULE01_REVIEW_REVISION.md",
       "sha256": "f607e27346d8d70447c7ee754e0493dcae6558e22cdee1cbd7d03c9a8c05203e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/evaluation/rule_study_verifier.py",
+      "sha256": "9d25fcdb821a3cc1adec07a64d658f165c8a6049f18ccd862030a82fb667bc94",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/evaluation/rule_study_trace.py",
+      "sha256": "cfd20cb92f69d6620be620631984fe071d43f4c5c1161e6a0ce8ca41affd9c1d",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/verify_rule_study.py",
+      "sha256": "1177cf661cd5f8241b7dc5ed521ac5eb6f6c432083a5b2551449cc846188cd85",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/evaluation/test_rule_study_verifier.py",
+      "sha256": "d1e3e3b0a7202f85d162e10871e0c43e755eb05ea9e1ae0689c4c5734f365894",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/evaluation/test_rule_study_trace.py",
+      "sha256": "3abfa87bac31e713a2d7f13f860f4722803945e1f9bcfc336a5cd6b7d0193767",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE03_VERIFIER.md",
+      "sha256": "e88e8d36349e6f29aac8b7ab673cbad292d27d4fdc7d77311625a59cbccc5086",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
@@ -505,5 +535,10 @@
     "decision": "docs/decisions/NOV19_RULE01_REVIEW_REVISION.md",
     "status": "manager_decisions_recorded_consumer_freeze_pending",
     "execution_authorized": false
+  },
+  "rule03_review": {
+    "status": "harness_implemented_fixture_tested_not_actual_system_verification",
+    "execution_authorized": false,
+    "external_artifact_bindings_authenticated": false
   }
 }
