@@ -1,0 +1,115 @@
+{
+  "kind": "rule_study_specification_proposal_v1",
+  "status": "manager_prepared_affected_acceptance_pending_not_execution_authorization",
+  "study_id": "rules-v1",
+  "provenance": "Independently authored synthetic assumptions, not derived from private or upstream data",
+  "baseline_commit": "ce4ec4cd9f158513fb42cab37848ab73fe575015",
+  "instruction_version": "1.30",
+  "new_research_execution_authorized": false,
+  "runtime_schema_changed": false,
+  "scenarios": [
+    {
+      "id": "A",
+      "capacity_kw": 60,
+      "background_kw": 20,
+      "pue": 1.0,
+      "first_scores": [
+        300,
+        100,
+        200
+      ],
+      "remaining_score": 200,
+      "jobs": [
+        {
+          "job_id": "J1",
+          "power_kw": 20,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "flexible": true
+        },
+        {
+          "job_id": "J2",
+          "power_kw": 20,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        }
+      ],
+      "expected_not_measured": "J2 at0 and J1 preferably1; execute current starts only"
+    },
+    {
+      "id": "B",
+      "capacity_kw": 60,
+      "background_kw": 20,
+      "pue": 1.0,
+      "first_scores": [
+        300,
+        100,
+        200
+      ],
+      "remaining_score": 200,
+      "jobs": [
+        {
+          "job_id": "J1",
+          "power_kw": 30,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        },
+        {
+          "job_id": "J2",
+          "power_kw": 30,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        }
+      ],
+      "expected_not_measured": "At most one job can complete; joint80kW exceeds60kW",
+      "fault_injection_not_natural_output": {
+        "starts": [
+          "J1@0",
+          "J2@0"
+        ],
+        "purpose": "rejection and checked fallback demonstration"
+      },
+      "feasible_progress_subcase": {
+        "change_job": "J2",
+        "flexible": true,
+        "deadline_slot": 2
+      }
+    }
+  ],
+  "verification": {
+    "initial_inputs": 64,
+    "max_states": 10000,
+    "max_transitions": 50000,
+    "execution_authorized": false
+  },
+  "evaluation": {
+    "policies": [
+      "rules-v1",
+      "greedy_a",
+      "greedy_b"
+    ],
+    "episodes_per_stratum": 40,
+    "strata": [
+      "normal_feasible",
+      "overloaded_impossible",
+      "missing_forecast"
+    ],
+    "rollouts": 360,
+    "development_seed_domain": 2026111901,
+    "evaluation_seed_domain": 2026111902,
+    "generate_after_rule_verifier_freeze": true,
+    "execution_authorized": false
+  },
+  "pending_acceptance": [
+    "Ved/Nisha adapter and rule semantics",
+    "Ved/Nisha independent safety/progress bounds",
+    "Edison/Nisha generation and metrics"
+  ]
+}
