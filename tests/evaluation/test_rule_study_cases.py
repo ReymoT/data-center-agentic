@@ -269,3 +269,173 @@ def test_cli_exit_codes_and_exclusive_output(tmp_path):
     assert cli.main(["--set", str(good)]) == 1  # default expects 40 per stratum
     with pytest.raises(SystemExit):
         cli.main(["--set", str(good), "--expected", "final=forty"])
+
+
+# Manager review regressions: supplied fixtures only, no generated evaluation set.
+def test_empty_collection_cannot_pass():
+    with pytest.raises(ValueError):
+        rc.check_case_sets([], spec=SPEC)
+
+
+def test_skipped_counts_are_incomplete_not_overall_pass():
+    report = run(one_set(), expected=None)
+    assert report["overall"] == "INCOMPLETE"
+
+
+@pytest.mark.parametrize("expected", [True, 0, -1, 1.5])
+def test_invalid_expected_counts_refused(expected):
+    with pytest.raises(ValueError):
+        run(one_set(), expected=expected)
+
+
+def test_changed_specification_cannot_be_silently_certified():
+    changed = copy.deepcopy(SPEC)
+    changed["evaluation"]["job_count_options"]["overloaded_impossible"] = [2]
+    with pytest.raises(ValueError, match="specification"):
+        rc.check_case_sets([one_set()], spec=changed)
+
+
+@pytest.mark.parametrize("field,value", [("horizon", 12), ("pue", 9), ("fault_injected", True)])
+def test_unknown_semantic_case_fields_cannot_hide_as_metadata(field, value):
+    bad = copy.deepcopy(NORMAL)
+    bad[field] = value
+    assert run(one_set(cases=(bad, OVERLOAD, MISSING)))["overall"] == "FAIL"
+
+
+def test_unknown_job_fields_cannot_change_downstream_workload():
+    bad = copy.deepcopy(NORMAL)
+    bad["jobs"][0]["priority"] = 99
+    assert run(one_set(cases=(bad, OVERLOAD, MISSING)))["overall"] == "FAIL"
+
+
+def test_conflicting_score_encodings_are_refused():
+    bad = copy.deepcopy(NORMAL)
+    bad.update(first_scores=[300] * 6, remaining_score=200)
+    assert run(one_set(cases=(bad, OVERLOAD, MISSING)))["overall"] == "FAIL"
+
+
+def test_one_shared_budget_and_reported_counters():
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    budget = v.Budget(max_states=1, max_transitions=1)
+    report = rc.check_case_sets(
+        [one_set()], spec=SPEC, graph_budget=budget, expected_per_stratum={"final": 1}
+    )
+    assert report["overall"] == "INCOMPLETE"
+    assert report["budget"]["states_used"] <= 1
+    assert report["budget"]["transitions_used"] <= 1
+
+
+def test_zero_time_budget_does_not_run_unbounded_assignment_search(monkeypatch):
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    monkeypatch.setattr(v, "completion_witness", lambda *a, **k: pytest.fail("oracle ran"))
+    report = rc.check_case_sets(
+        [one_set()],
+        spec=SPEC,
+        graph_budget=v.Budget(max_seconds=0),
+        expected_per_stratum={"final": 1},
+    )
+    assert report["overall"] == "INCOMPLETE"
+
+
+def test_unknown_expected_set_is_not_silently_ignored():
+    with pytest.raises(ValueError):
+        rc.check_case_sets([one_set()], spec=SPEC, expected_per_stratum={"typo": 40})
+
+
+@pytest.mark.parametrize(
+    "payload", ['{"set_id":"a","set_id":"b","cases":[]}', '{"set_id":"a","cases":[],"x":NaN}']
+)
+def test_ambiguous_json_is_refused(tmp_path, payload):
+    p = tmp_path / "bad.json"
+    p.write_text(payload)
+    with pytest.raises(ValueError):
+        rc.load_case_set(p)
+
+
+def test_invalid_domain_is_not_enumerated(monkeypatch):
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    bad = copy.deepcopy(NORMAL)
+    bad["jobs"][0]["deadline_slot"] = 24
+
+    def witness(case, *a, **k):
+        assert case.case_id != "N1", "unbounded out-of-domain oracle"
+        return original(case, *a, **k)
+
+    original = v.completion_witness
+    monkeypatch.setattr(v, "completion_witness", witness)
+    assert run(one_set(cases=(bad, OVERLOAD, MISSING)))["overall"] == "FAIL"
+
+
+def test_single_set_does_not_establish_unseen_isolation_or_acceptance():
+    report = run(one_set())
+    assert report["study_acceptance"] == "NOT_ESTABLISHED"
+    assert "INCOMPLETE" in report["unseen_isolation"]
+    assert "not checked" in report["missing_forecast_accounting"]
+
+
+def test_graph_disagreement_retains_case_id_and_blocks_pass(monkeypatch):
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    monkeypatch.setattr(v, "explore_legal_graph", lambda *a, **k: ([], False, True))
+    report = run(one_set())
+    assert report["overall"] == "FAIL"
+    assert report["sets"][0]["oracle_crosscheck_mismatched_case_ids"] == ["N1", "M1"]
+
+
+@pytest.mark.parametrize(
+    "kwargs", [{"max_states": 10001}, {"max_transitions": 50001}, {"max_seconds": 601}]
+)
+def test_increased_budgets_cannot_bypass_shared_ceiling(kwargs):
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    with pytest.raises(ValueError, match="ceilings"):
+        rc.check_case_sets([one_set()], spec=SPEC, graph_budget=v.Budget(**kwargs))
+
+
+def test_oversized_input_is_refused_before_json_parse(tmp_path, monkeypatch):
+    p = tmp_path / "large.json"
+    p.write_text(" " * 50)
+    monkeypatch.setattr(rc, "MAX_INPUT_BYTES", 20)
+    with pytest.raises(ValueError, match="byte limit"):
+        rc.load_case_set(p)
+
+
+def test_cli_preserves_failure_and_incomplete_reports(tmp_path):
+    from scripts import check_rule_study_cases as cli
+
+    source = tmp_path / "cases.json"
+    source.write_text('{"set_id":"x","set_id":"y","cases":[]}')
+    failed = tmp_path / "failed.json"
+    assert cli.main(["--set", str(source), "--out", str(failed)]) == 1
+    assert json.loads(failed.read_text())["input_error"] == "ValueError"
+    source.write_text(json.dumps(one_set()))
+    partial = tmp_path / "partial.json"
+    assert (
+        cli.main(
+            [
+                "--set",
+                str(source),
+                "--expected",
+                "final=1",
+                "--max-states",
+                "0",
+                "--out",
+                str(partial),
+            ]
+        )
+        == 2
+    )
+    assert json.loads(partial.read_text())["overall"] == "INCOMPLETE"
+
+
+def test_cli_duplicate_or_unknown_expected_counts_are_refused(tmp_path):
+    from scripts import check_rule_study_cases as cli
+
+    source = tmp_path / "cases.json"
+    source.write_text(json.dumps(one_set()))
+    with pytest.raises(SystemExit):
+        cli.main(["--set", str(source), "--expected", "final=1", "--expected", "final=2"])
+    assert cli.main(["--set", str(source), "--expected", "typo=1"]) == 1

@@ -16,12 +16,13 @@ Input shape (this checker's assumption until RULE-04 publishes its format): a JS
 ``{"set_id": str, "cases": [case, ...]}`` where each case has the trace reader's case
 fields (``case_id``, ``capacity_kw``, ``background_kw``, ``jobs``, and ``scores`` (null when
 no forecast is visible) or ``first_scores`` + ``remaining_score``) plus ``stratum`` and
-``feasibility_label`` (``jointly_feasible`` or ``jointly_infeasible``). Other fields are
-metadata: they are recorded as present but excluded from case identity hashes.
+``feasibility_label`` (``jointly_feasible`` or ``jointly_infeasible``). Only explicitly
+named metadata fields are ignored; unsupported semantic fields are refused.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import Counter
 from pathlib import Path
@@ -31,6 +32,30 @@ from dc_sustainability.evaluation import rule_study_trace as tr
 from dc_sustainability.evaluation import rule_study_verifier as v
 
 RECORD_KIND = "rule_study_case_set_check_v1"
+SUPPORTED_SPEC_SHA256 = "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd"
+# Reader resource limits, not new scientific sample counts or execution permission.
+MAX_INPUT_BYTES = 8 * 1024 * 1024
+MAX_SETS = 2
+MAX_CASES_PER_SET = 120
+CASE_FIELDS = frozenset(
+    {
+        "case_id",
+        "capacity_kw",
+        "background_kw",
+        "jobs",
+        "scores",
+        "first_scores",
+        "remaining_score",
+        "fault_starts",
+        "stratum",
+        "feasibility_label",
+        "metadata",
+        "generator_attempt",
+    }
+)
+JOB_FIELDS = frozenset(
+    {"job_id", "power_kw", "duration_slots", "arrival_slot", "deadline_slot", "flexible"}
+)
 STRATA = ("normal_feasible", "overloaded_impossible", "missing_forecast")
 LABELS = ("jointly_feasible", "jointly_infeasible")
 AUTHORED_SLOTS = 6  # scores for slots 0-5 are drawn; later slots use the drain score
@@ -78,9 +103,49 @@ def case_identity(case: v.Case) -> dict:
     return {**workload_identity(case), "scores": None if case.scores is None else list(case.scores)}
 
 
-def oracle_label(case: v.Case) -> str:
-    witness, _ = v.completion_witness(case, v.initial_state())
+def oracle_label(case: v.Case, budget: v.Budget) -> str:
+    witness, _ = v.completion_witness(case, v.initial_state(), budget=budget)
     return "jointly_feasible" if witness is not None else "jointly_infeasible"
+
+
+def _validate_budget(budget: v.Budget) -> None:
+    if budget.max_states > 10_000 or budget.max_transitions > 50_000 or budget.max_seconds > 600:
+        raise ValueError("budget exceeds prospective combined 10000/50000/600 ceilings")
+
+
+def _validate_set(data: Mapping) -> None:
+    if not isinstance(data, Mapping) or not isinstance(data.get("cases"), list):
+        raise ValueError("case set must be an object with a cases list")
+    if set(data) - {"set_id", "cases", "metadata"}:
+        raise ValueError("unsupported case-set fields")
+    if not isinstance(data.get("set_id"), str) or not data["set_id"].strip():
+        raise ValueError("case set needs a nonempty set_id")
+    if len(data["cases"]) > MAX_CASES_PER_SET:
+        raise ValueError("case-set reader limit exceeded")
+
+
+def _case_from_dict(raw: Mapping) -> v.Case:
+    if not isinstance(raw, Mapping) or set(raw) - CASE_FIELDS:
+        raise ValueError("unsupported case fields")
+    if not isinstance(raw.get("case_id"), str) or not raw["case_id"].strip():
+        raise ValueError("nonempty case_id required")
+    if "scores" in raw and ("first_scores" in raw or "remaining_score" in raw):
+        raise ValueError("conflicting score encodings")
+    if "scores" not in raw:
+        if (
+            not isinstance(raw.get("first_scores"), list)
+            or not 1 <= len(raw["first_scores"]) <= v.HORIZON
+        ):
+            raise ValueError("invalid compact score profile")
+    elif raw["scores"] is not None and not isinstance(raw["scores"], list):
+        raise ValueError("scores must be a list or null")
+    if not isinstance(raw.get("jobs"), list) or not 1 <= len(raw["jobs"]) <= 4:
+        raise ValueError("jobs must contain one to four entries")
+    if any(not isinstance(j, Mapping) or set(j) != JOB_FIELDS for j in raw["jobs"]):
+        raise ValueError("unsupported or missing job fields")
+    if "fault_starts" in raw and not isinstance(raw["fault_starts"], list):
+        raise ValueError("fault_starts must be a list")
+    return tr.case_from_dict(raw)
 
 
 def predicate_findings(case: v.Case, stratum: str, label: str) -> list[str]:
@@ -144,12 +209,14 @@ def check_case_set(
     graph_budget: v.Budget | None = None,
 ) -> dict:
     """Check one case set; returns its section of the report (without overlap)."""
-    if not isinstance(data, Mapping) or not isinstance(data.get("cases"), list):
-        raise ValueError("case set must be an object with a cases list")
-    set_id = data.get("set_id")
-    if not isinstance(set_id, str) or not set_id:
-        raise ValueError("case set needs a nonempty set_id")
-    graph_budget = graph_budget or v.Budget(max_states=200_000, max_transitions=1_000_000)
+    _validate_set(data)
+    set_id = data["set_id"]
+    if expected_per_stratum is not None and (
+        type(expected_per_stratum) is not int or not 1 <= expected_per_stratum <= 40
+    ):
+        raise ValueError("expected count must be a positive integer at most 40 or None")
+    graph_budget = graph_budget if graph_budget is not None else v.Budget()
+    _validate_budget(graph_budget)
     rows, malformed = [], []
     for n, raw in enumerate(data["cases"]):
         try:
@@ -157,37 +224,69 @@ def check_case_set(
                 raise ValueError(f"stratum {raw.get('stratum')!r}")
             if raw.get("feasibility_label") not in LABELS:
                 raise ValueError(f"feasibility_label {raw.get('feasibility_label')!r}")
-            case = tr.case_from_dict(raw)
+            case = _case_from_dict(raw)
         except (KeyError, TypeError, ValueError, AttributeError) as exc:
             malformed.append({"index": n, "case_id": _safe_id(raw), "reason": str(exc)})
             continue
         rows.append((raw, case))
 
     label_mismatches, predicate_failures, crosscheck = [], [], Counter()
+    unchecked_labels, crosscheck_mismatches = [], []
     by_stratum: dict[str, dict] = {
         s: {"cases": 0, "full": set(), "workload": set()} for s in STRATA
     }
     full_hashes, workload_hashes, ids = Counter(), Counter(), Counter()
     for raw, case in rows:
-        label = oracle_label(case)
         stratum = raw["stratum"]
         ids[case.case_id] += 1
-        if label != raw["feasibility_label"]:
-            label_mismatches.append(
-                {"case_id": case.case_id, "generator": raw["feasibility_label"], "oracle": label}
-            )
-        findings = predicate_findings(case, stratum, label)
+        # Refuse out-of-domain inputs before expensive enumeration. Labels here
+        # remain claims; the independently computed label is checked below.
+        findings = predicate_findings(case, stratum, raw["feasibility_label"])
         if findings:
             predicate_failures.append(
                 {"case_id": case.case_id, "stratum": stratum, "findings": findings}
             )
-        _, graph_done, complete = v.explore_legal_graph(case, graph_budget, f"{set_id}/labels")
-        if not complete:
+        invalid_domain = set(findings) - {
+            "stratum_requires_feasible",
+            "stratum_requires_infeasible",
+        }
+        if invalid_domain:
+            unchecked_labels.append(case.case_id)
+            crosscheck["not_run_invalid_predicate"] += 1
+        elif graph_budget.max_seconds == 0 or not graph_budget.check_time():
+            unchecked_labels.append(case.case_id)
             crosscheck["incomplete"] += 1
-        elif graph_done == (label == "jointly_feasible"):
-            crosscheck["agreements"] += 1
         else:
-            crosscheck["mismatches"] += 1
+            try:
+                label = oracle_label(case, graph_budget)
+            except v.BudgetStopped:
+                unchecked_labels.append(case.case_id)
+                crosscheck["incomplete"] += 1
+            else:
+                if label != raw["feasibility_label"]:
+                    label_mismatches.append(
+                        {
+                            "case_id": case.case_id,
+                            "generator": raw["feasibility_label"],
+                            "oracle": label,
+                        }
+                    )
+                # Stratum feasibility must agree with the computed oracle too.
+                actual = predicate_findings(case, stratum, label)
+                if actual:
+                    predicate_failures.append(
+                        {"case_id": case.case_id, "stratum": stratum, "findings": actual}
+                    )
+                _, graph_done, complete = v.explore_legal_graph(
+                    case, graph_budget, f"{set_id}/labels"
+                )
+                if not complete:
+                    crosscheck["incomplete"] += 1
+                elif graph_done == (label == "jointly_feasible"):
+                    crosscheck["agreements"] += 1
+                else:
+                    crosscheck["mismatches"] += 1
+                    crosscheck_mismatches.append(case.case_id)
         full = v.canonical_sha256(case_identity(case))
         work = v.canonical_sha256(workload_identity(case))
         full_hashes[full] += 1
@@ -215,7 +314,11 @@ def check_case_set(
     duplicate_ids = sorted(i for i, n in ids.items() if n > 1)
     checks = {
         "well_formed": _verdict(not malformed, len(data["cases"])),
-        "feasibility_labels": _verdict(not label_mismatches, len(rows)),
+        "feasibility_labels": {"status": "FAIL", "checked": len(rows) - len(unchecked_labels)}
+        if label_mismatches
+        else {"status": "INCOMPLETE", "reason": "unexamined labels"}
+        if unchecked_labels
+        else _verdict(True, len(rows)),
         "stratum_predicates": _verdict(not predicate_failures, len(rows)),
         "stratum_counts": _verdict(not count_failures, len(STRATA))
         if expected_per_stratum is not None
@@ -225,7 +328,7 @@ def check_case_set(
             {"status": "FAIL", "checked": len(rows)}
             if crosscheck["mismatches"]
             else {"status": "INCOMPLETE", "reason": "legal-graph budget hit"}
-            if crosscheck["incomplete"]
+            if crosscheck["incomplete"] or unchecked_labels
             else _verdict(True, len(rows))
         ),
     }
@@ -242,6 +345,8 @@ def check_case_set(
         "duplicate_full_case_hashes": duplicates,
         "duplicate_case_ids": duplicate_ids,
         "oracle_crosscheck_counts": dict(crosscheck),
+        "oracle_crosscheck_mismatched_case_ids": crosscheck_mismatches,
+        "unexamined_label_case_ids": unchecked_labels,
         "_full": set(full_hashes),
         "_workload": set(workload_hashes),
     }
@@ -270,11 +375,29 @@ def check_case_sets(
     *,
     spec: Mapping,
     expected_per_stratum: Mapping[str, int | None] | None = None,
+    graph_budget: v.Budget | None = None,
 ) -> dict:
     """Check each set, then cross-set and authored-example overlap. Any full overlap fails."""
-    expected_per_stratum = expected_per_stratum or {}
+    if v.canonical_sha256(spec) != SUPPORTED_SPEC_SHA256:
+        raise ValueError("unsupported specification revision; review checker assumptions first")
+    if not isinstance(sets, (list, tuple)) or not 1 <= len(sets) <= MAX_SETS:
+        raise ValueError("supply one or two case sets")
+    for data in sets:
+        _validate_set(data)
+    ids = [s["set_id"] for s in sets]
+    if len(set(ids)) != len(ids):
+        raise ValueError("set_id values must be distinct")
+    expected_per_stratum = expected_per_stratum if expected_per_stratum is not None else {}
+    if not isinstance(expected_per_stratum, Mapping) or set(expected_per_stratum) - set(ids):
+        raise ValueError("expected counts reference unknown set IDs")
+    graph_budget = graph_budget if graph_budget is not None else v.Budget()
+    _validate_budget(graph_budget)
     sections = [
-        check_case_set(s, expected_per_stratum=expected_per_stratum.get(s.get("set_id"), 40))
+        check_case_set(
+            s,
+            expected_per_stratum=expected_per_stratum.get(s["set_id"], 40),
+            graph_budget=graph_budget,
+        )
         for s in sets
     ]
     authored_full, authored_work = authored_identities(spec)
@@ -302,8 +425,18 @@ def check_case_sets(
         "record_kind": RECORD_KIND,
         "checker_source_sha256": _own_sha256(),
         "verifier_source_sha256": v.source_sha256(),
+        "parser_source_sha256": hashlib.sha256(
+            Path(tr.__file__).read_bytes().replace(b"\r\n", b"\n")
+        ).hexdigest(),
         "spec_sha256": v.canonical_sha256(spec),
         "sets": sections,
+        "budget": graph_budget.summary(),
+        "study_acceptance": "NOT_ESTABLISHED",
+        "scope": "supplied cases and supplied-set pairs only; not seed/provenance/freeze or generator acceptance",
+        "unseen_isolation": "INCOMPLETE: no second set supplied"
+        if len(sets) < 2
+        else "supplied-pair content overlap checked; roles and provenance not authenticated",
+        "missing_forecast_accounting": "not checked: visible scores are null; private evaluator-only weights not supplied or authenticated",
         "overlap": overlaps,
         "checks": {
             "no_full_case_overlap": {
@@ -317,7 +450,7 @@ def check_case_sets(
         },
         "overall": "PASS"
         if not full_overlap
-        and all(c["status"] in ("PASS", "NOT_RUN") for s in sections for c in s["checks"].values())
+        and all(c["status"] == "PASS" for s in sections for c in s["checks"].values())
         else (
             "FAIL"
             if full_overlap
@@ -335,7 +468,25 @@ def check_case_sets(
 
 
 def load_case_set(path: Path) -> Mapping:
-    return json.loads(path.read_text(encoding="utf-8"))
+    with Path(path).open("rb") as handle:
+        raw = handle.read(MAX_INPUT_BYTES + 1)
+    if len(raw) > MAX_INPUT_BYTES:
+        raise ValueError("case-set input byte limit exceeded")
+
+    def pairs(items):
+        data = {}
+        for key, value in items:
+            if key in data:
+                raise ValueError("duplicate JSON key")
+            data[key] = value
+        return data
+
+    def reject_constant(value):
+        raise ValueError("nonfinite JSON number")
+
+    data = json.loads(raw, object_pairs_hook=pairs, parse_constant=reject_constant)
+    _validate_set(data)
+    return data
 
 
 def _own_sha256() -> str:

@@ -62,3 +62,12 @@ PR #234 added an empty file; #235 supplies reconstructed evidence-based R02 pros
 ## November 19 concrete adapter and report alignment
 
 E12 supplies the focused-study design and concrete study-local record proposal. This is preparation, not an implemented adapter or an independent result. R04 and the working abstract/introduction/conclusion now identify the new question and distinguish historical measurements from pending rule-system findings. Ved's principles reply is received in #239; exact new adapter/evaluation acceptance still requires actual consumer replies. No run, proof, new trace or generalization result is created by this update.
+
+
+## RULE-03 case-set checker receiving — November 20
+
+The reviewed [case-set checker](../rule_study/RULE03_VERIFIER.md) adds fixture-tested
+label, stratum, diversity and supplied-set overlap checks. This is implementation
+receiving, not an actual generated-set result or a completed rule-system study.
+Specification/source pins and resource/input limits are explicit; unsupported
+external provenance, freeze history and missing-forecast accounting remain pending.

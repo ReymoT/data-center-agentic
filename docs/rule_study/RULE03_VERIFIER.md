@@ -160,7 +160,7 @@ checker or simulator.
 
 | Check | How |
 |---|---|
-| Feasibility labels | Recomputed with the brute-force joint-assignment oracle and compared with each case's `feasibility_label`. The legal-action-graph oracle cross-checks them under its own budget |
+| Feasibility labels | Recomputed with the brute-force joint-assignment oracle and compared with each case's `feasibility_label`. The legal-action-graph oracle cross-checks them under one combined supplied-set budget |
 | Stratum predicates | The review-2 generator proposal: site 60/20 kW; job count 2-4 (overload 3-4); power {10,20,30}, duration {1,2}, arrival {0,1,2}; deadline = min(6, arrival + duration + slack) with slack {0,1,2}; contiguous job IDs; slot 0-5 scores in {100,200,300} with drain score 200; at least one flexible job and a nonconstant profile for normal cases; the fixed J1/J2 30 kW conflict pair for overload; no visible scores for missing-forecast cases; feasible normal/missing cases and infeasible overload cases |
 | Counts | Actual cases per stratum against the expected count (default 40). Full-case and workload-only diversity are counted, never assumed |
 | Duplicates | Repeated full-case hashes or case IDs within a set fail |
@@ -174,8 +174,7 @@ Case IDs and generator metadata are excluded. Both use the canonical JSON conven
 `{"set_id", "cases": [...]}`, with trace-reader case fields plus `stratum` and
 `feasibility_label`.
 
-**Exit codes:** 0 PASS, 1 FAIL, 2 INCOMPLETE. Output files are created exclusively. The checker
-has 25 tests, all on hand-built cases.
+**Exit codes:** 0 PASS, 1 FAIL, 2 INCOMPLETE. Output files are created exclusively. The checker has 51 tests, all on hand-built fixtures. A local PASS covers only the supplied cases and comparisons, not study acceptance.
 
 ```
 python scripts/check_rule_study_cases.py --set final.json --set development.json --expected final=40 --expected development=none --out <new file>
@@ -198,3 +197,47 @@ Callback exploration models time with the verifier's own state machine. Actual r
 The result/folder field assumptions above still need compatibility receiving against Ved's first actual RULE-02 records. The PR is a usable reviewed verifier harness, not a claim that rules-v1 is implemented or verified. The original primary-domain oracle hand-count facts are retained; no new scientific system run was performed by this review.
 
 The reader validates the documented trace envelope and start/plan-field subset, not every legacy F02 check-result/abstention semantic. It must still receive actual adapter fixtures before claiming complete serialization compatibility. Actual policy/runner source identity cannot be authenticated by --rules-v1 alone; the report records that study acceptance is not established by the harness or the caller flag.
+
+
+## Case-set checker manager review — November 20
+
+The review reproduced 18 failing regressions on the submitted version before fixes.
+The updated case-set suite has 51 passing tests; the case/verifier/trace/supervisor
+focused suite has 144. These are authored unit fixtures, not generated research sets.
+
+- Empty collections are refused; empty sets or skipped counts cannot produce an
+  overall PASS. Counts must be strict positive integers no greater than the
+  recorded 40 per stratum, or None for an explicitly incomplete diagnostic.
+- All supplied sets share one budget (at most 10,000 states, 50,000 transitions,
+  600 seconds). Assignment search also checks this cooperative budget; out-of-domain
+  cases are rejected before expensive enumeration. Actual counters, unfinished
+  label IDs and graph-disagreement case IDs are retained. These defaults do not
+  grant another run allowance or authorization; actual callers must use the exact
+  authorized remaining combined budget and process supervision.
+- The checker supports only canonical specification hash
+  `9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd`.
+  A changed specification requires reviewed matching checker assumptions, rather
+  than silently hashing a protocol this implementation does not enforce.
+- Unknown case/job fields and competing score encodings are refused. Only explicit
+  case `metadata` and `generator_attempt` fields are ignored for identity. This
+  checker-local shape remains provisional until Edison's actual generator format
+  is received; it does not change F02 or establish shared-format acceptance.
+- Reader resource limits are two supplied sets, 120 cases per set and 8 MiB per
+  input file. These are defensive parser limits, not new experimental counts.
+  Duplicate JSON keys and nonfinite JSON constants are refused. CLI malformed
+  input reports are preserved with exit1; INCOMPLETE returns2. Existing output
+  paths and racing creation cannot be overwritten. `--max-states`,
+  `--max-transitions` and `--max-seconds` can only reduce the prospective ceilings.
+- Reports include the checker, verifier and parser source hashes. CLI summaries
+  state that study acceptance is NOT_ESTABLISHED. A single supplied set cannot
+  establish development/final isolation. Even two sets do not authenticate their
+  roles, seeds, generation history, freeze chronology or source provenance.
+- Missing-forecast cases expose no scores. Their hidden accounting weights and
+  the nonconstant pre-removal profile cannot be checked from this input shape;
+  no claim of complete generator/metric/accounting validation is made. Workload
+  overlap remains reported, not silently treated as independent sampling.
+
+The original no-overlap, feasibility and diversity work is preserved. Actual
+RULE-02 compatibility, generator receiving, frozen-system verification and final
+study acceptance remain open in #239/#241/#242. No actual generator, scheduler,
+model, source or research batch was run for this review.

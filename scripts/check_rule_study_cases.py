@@ -32,9 +32,11 @@ def _expected(items: list[str]) -> dict[str, int | None]:
         name, sep, value = item.partition("=")
         if not sep or not name:
             raise SystemExit("--expected must look like set_id=40 or set_id=none")
+        if name in out:
+            raise SystemExit("duplicate --expected set_id")
         if value == "none":
             out[name] = None
-        elif value.isdigit():
+        elif value.isdigit() and 1 <= int(value) <= 40:
             out[name] = int(value)
         else:
             raise SystemExit(f"--expected {item!r}: count must be an integer or none")
@@ -51,14 +53,43 @@ def main(argv=None) -> int:
         help="per-stratum count per set, e.g. final=40 (default 40); none skips the count",
     )
     parser.add_argument("--out", type=Path, help="new JSON report path")
+    parser.add_argument("--max-states", type=int, default=10_000)
+    parser.add_argument("--max-transitions", type=int, default=50_000)
+    parser.add_argument("--max-seconds", type=float, default=600.0)
     args = parser.parse_args(argv)
     if args.out is not None and args.out.exists():
         raise SystemExit(f"refusing to overwrite {args.out}")
-    spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
-    sets = [rc.load_case_set(p) for p in args.sets]
-    report = rc.check_case_sets(sets, spec=spec, expected_per_stratum=_expected(args.expected))
+    expected = _expected(args.expected)
+    try:
+        budget = v.Budget(
+            max_states=args.max_states,
+            max_transitions=args.max_transitions,
+            max_seconds=args.max_seconds,
+        )
+        rc._validate_budget(budget)
+        if len(args.sets) > rc.MAX_SETS:
+            raise ValueError("supply at most two sets")
+        spec = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
+        sets = [rc.load_case_set(p) for p in args.sets]
+        report = rc.check_case_sets(
+            sets, spec=spec, expected_per_stratum=expected, graph_budget=budget
+        )
+    except (ValueError, OSError, TypeError, RecursionError) as exc:
+        report = {
+            "record_kind": rc.RECORD_KIND,
+            "overall": "FAIL",
+            "sets": [],
+            "checks": {"no_full_case_overlap": {"status": "NOT_RUN"}},
+            "input_error": type(exc).__name__,
+            "reason": str(exc),
+            "study_acceptance": "NOT_ESTABLISHED",
+        }
     summary = {
         "overall": report["overall"],
+        "study_acceptance": report["study_acceptance"],
+        "scope": report.get("scope", "input refused; no case checks performed"),
+        "input_error": report.get("input_error"),
+        "unseen_isolation": report.get("unseen_isolation", "NOT_RUN"),
         "overlap_check": report["checks"]["no_full_case_overlap"]["status"],
         "sets": {
             s["set_id"]: {
@@ -73,8 +104,11 @@ def main(argv=None) -> int:
         text = json.dumps(
             report, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
         )
-        with args.out.open("x", encoding="utf-8", newline="\n") as handle:
-            handle.write(text + "\n")
+        try:
+            with args.out.open("x", encoding="utf-8", newline="\n") as handle:
+                handle.write(text + "\n")
+        except OSError as exc:
+            parser.exit(2, f"Report output refused: {type(exc).__name__}\n")
         print(f"wrote {args.out} sha256={v.canonical_sha256(report)}")
     return {"PASS": 0, "FAIL": 1}.get(report["overall"], 2)
 
