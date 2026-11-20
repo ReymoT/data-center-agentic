@@ -148,7 +148,38 @@ python scripts/verify_rule_study.py --traces <folder of trace subfolders> --out 
    code hashes.
 3. Freeze the verifier commit before Edison generates the final synthetic set. Then
    independently confirm that set's feasibility labels and check for overlap with the
-   development and authored cases.
+   development and authored cases, using the case-set checker below.
+
+## Case-set checker (review-2 decision 6)
+
+[`rule_study_cases.py`](../../dc_sustainability/evaluation/rule_study_cases.py) and
+[`check_rule_study_cases.py`](../../scripts/check_rule_study_cases.py) independently check
+generated case sets before evaluation. Generator labels are treated as claims, not as an oracle.
+Like the verifier, they use only the standard library and import no generator, scheduler,
+checker or simulator.
+
+| Check | How |
+|---|---|
+| Feasibility labels | Recomputed with the brute-force joint-assignment oracle and compared with each case's `feasibility_label`. The legal-action-graph oracle cross-checks them under its own budget |
+| Stratum predicates | The review-2 generator proposal: site 60/20 kW; job count 2-4 (overload 3-4); power {10,20,30}, duration {1,2}, arrival {0,1,2}; deadline = min(6, arrival + duration + slack) with slack {0,1,2}; contiguous job IDs; slot 0-5 scores in {100,200,300} with drain score 200; at least one flexible job and a nonconstant profile for normal cases; the fixed J1/J2 30 kW conflict pair for overload; no visible scores for missing-forecast cases; feasible normal/missing cases and infeasible overload cases |
+| Counts | Actual cases per stratum against the expected count (default 40). Full-case and workload-only diversity are counted, never assumed |
+| Duplicates | Repeated full-case hashes or case IDs within a set fail |
+| Overlap | Any full-case overlap between sets (final, development) or with authored cases A, B and B-progress fails. Workload-only overlap is reported, not rejected |
+
+**Identity hashes.** The workload hash covers the sorted jobs plus capacity, background and the
+30-slot horizon. The full-case hash adds the visible score profile, or null when none is visible.
+Case IDs and generator metadata are excluded. Both use the canonical JSON convention.
+
+**Input shape.** This is the checker's assumption until RULE-04 publishes its format:
+`{"set_id", "cases": [...]}`, with trace-reader case fields plus `stratum` and
+`feasibility_label`.
+
+**Exit codes:** 0 PASS, 1 FAIL, 2 INCOMPLETE. Output files are created exclusively. The checker
+has 25 tests, all on hand-built cases.
+
+```
+python scripts/check_rule_study_cases.py --set final.json --set development.json --expected final=40 --expected development=none --out <new file>
+```
 
 ## Manager direct review and fixes — November20
 
