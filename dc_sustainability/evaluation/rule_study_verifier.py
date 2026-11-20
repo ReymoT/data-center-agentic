@@ -31,13 +31,14 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import math
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Iterable, Literal, Mapping, Sequence
 
 RECORD_KIND = "rule_study_verification_v1"
-VERIFIER_VERSION = "rule03-draft-2"
+VERIFIER_VERSION = "rule03-review-3"
 HORIZON = 30
 LAST_START_SLOT = 23
 DEFAULT_SCORE = 200
@@ -112,6 +113,24 @@ class Case:
     fault_starts: tuple[str, ...] = ()  # injected slot-0 proposal; empty means no fault
 
     def __post_init__(self):
+        if not isinstance(self.case_id, str) or not self.case_id:
+            raise ValueError("case_id must be a nonempty string")
+        if not isinstance(self.jobs, tuple) or not all(isinstance(j, Job) for j in self.jobs):
+            raise ValueError("jobs must be an immutable tuple of Job records")
+        for value in (self.capacity_kw, self.background_kw):
+            if type(value) is not int:
+                raise ValueError("capacity/background must be integers, not bool or float")
+        if self.scores is not None and (
+            not isinstance(self.scores, tuple)
+            or any(type(x) is not int or x < 0 for x in self.scores)
+        ):
+            raise ValueError("scores must be an immutable tuple of nonnegative integers")
+        if not isinstance(self.fault_starts, tuple) or any(
+            not isinstance(x, str) or not x for x in self.fault_starts
+        ):
+            raise ValueError("fault_starts must be a tuple of nonempty IDs")
+        if len(self.jobs) > 4:
+            raise ValueError("case exceeds the four-job study bound")
         ids = [j.job_id for j in self.jobs]
         if len(set(ids)) != len(ids):
             raise ValueError(f"{self.case_id}: duplicate job IDs")
@@ -314,7 +333,13 @@ def view_for(case: Case, state: State) -> SystemView:
     )
 
 
-def completion_witness(case: Case, state: State) -> tuple[dict[str, int] | None, int]:
+class BudgetStopped(RuntimeError):
+    """Cooperative stop during independent enumeration, never infeasibility evidence."""
+
+
+def completion_witness(
+    case: Case, state: State, *, budget: Budget | None = None
+) -> tuple[dict[str, int] | None, int]:
     """Brute-force search for one schedule completing every pending job.
 
     Returns (witness start map or None, number of assignments examined). Independent of
@@ -324,6 +349,8 @@ def completion_witness(case: Case, state: State) -> tuple[dict[str, int] | None,
     options = [list(j.legal_starts(state.slot)) for j in pending]
     examined = 0
     for combo in itertools.product(*options):
+        if budget is not None and not budget.check_time():
+            raise BudgetStopped("time ceiling during joint-assignment cross-check")
         examined += 1
         if _assignment_fits(case, state, dict(zip((j.job_id for j in pending), combo))):
             return dict(zip((j.job_id for j in pending), combo)), examined
@@ -381,6 +408,26 @@ class Budget:
     started: float = field(default_factory=time.monotonic)
     exhausted: str | None = None
     by_scope: dict[str, dict[str, int]] = field(default_factory=dict)
+
+    def __post_init__(self):
+        for name in ("max_states", "max_transitions", "states", "transitions"):
+            value = getattr(self, name)
+            if type(value) is not int or value < 0:
+                raise ValueError(f"{name} must be a nonnegative integer")
+        if (
+            type(self.max_seconds) not in (int, float)
+            or not math.isfinite(self.max_seconds)
+            or self.max_seconds < 0
+        ):
+            raise ValueError("max_seconds must be finite and nonnegative")
+
+    def check_time(self) -> bool:
+        if self.exhausted:
+            return False
+        if time.monotonic() - self.started > self.max_seconds:
+            self.exhausted = "seconds"
+            return False
+        return True
 
     def take_state(self, scope: str = "unscoped") -> bool:
         return self._take("states", self.max_states, scope)
@@ -491,6 +538,18 @@ def _decide(system: SystemFn, case: Case, state: State, tally: _Tally) -> System
         decision = system(view_for(case, state))
         if not isinstance(decision, SystemDecision):
             raise TypeError("system must return SystemDecision")
+        if not isinstance(decision.executed_starts, tuple) or not all(
+            isinstance(j, str) and j for j in decision.executed_starts
+        ):
+            raise TypeError("executed_starts must be a tuple of nonempty job IDs")
+        if not isinstance(decision.proposals, tuple) or not all(
+            isinstance(stage, ProposalStage)
+            and isinstance(stage.origin, str)
+            and isinstance(stage.starts, tuple)
+            and all(isinstance(j, str) and j for j in stage.starts)
+            for stage in decision.proposals
+        ):
+            raise TypeError("proposals must contain valid ProposalStage records")
         return decision
     except Exception as exc:  # the system under test is untrusted
         tally.checked["S5"] += 1
@@ -544,8 +603,8 @@ def explore_policy_graph(
     calls = 0
     seen = {state}
     while state.slot < HORIZON:
-        if _idle(case, state):
-            return State(HORIZON, state.running, state.completed, state.missed), True, calls
+        # Unlike the oracle, the untrusted policy must be called at every clock slot.
+        # Otherwise a restart/invalid start after the queue empties is never observed.
         decision = _decide(system, case, state, tally)
         calls += 1
         if decision is None or not _check_decision(case, state, decision, tally):
@@ -586,7 +645,10 @@ def _verify_one_domain(name, cases, system, budget) -> dict:
         _, graph_done, complete = explore_legal_graph(case, budget, oracle_scope)
         if not complete:
             break
-        witness, _ = completion_witness(case, initial_state())
+        try:
+            witness, _ = completion_witness(case, initial_state(), budget=budget)
+        except BudgetStopped:
+            break
         if (witness is not None) == graph_done:
             crosscheck["agreements"] += 1
         else:
@@ -621,9 +683,21 @@ def _verify_one_domain(name, cases, system, budget) -> dict:
     properties = {
         prop: _status(prop, system, tally, budget, explored, len(cases)) for prop in PROPERTY_IDS
     }
+    if crosscheck["mismatches"]:
+        for prop, entry in properties.items():
+            if entry["status"] == "PASS":
+                properties[prop] = {
+                    **entry,
+                    "status": "INCOMPLETE",
+                    "reason": "independent feasibility cross-check disagreed",
+                }
     if system is not None and properties["P1"]["status"] == "PASS" and p1_eligible == 0:
         properties["P1"] = {**properties["P1"], "status": "NOT_RUN", "reason": "no P1 inputs"}
-    if system is not None and properties["S4"]["status"] == "PASS" and not tally.checked["S4"]:
+    if (
+        system is not None
+        and properties["S4"]["status"] not in ("FAIL", "INCOMPLETE")
+        and not tally.checked["S4"]
+    ):
         properties["S4"] = {
             **properties["S4"],
             "status": "NOT_RUN",
@@ -676,6 +750,7 @@ def verify_domains(
         results.append(result)
     report = {
         "record_kind": RECORD_KIND,
+        "study_acceptance": "not_established_by_harness_or_caller_identity_flag",
         "verifier_version": VERIFIER_VERSION,
         "verifier_source_sha256": source_sha256(),
         "spec_sha256": spec_sha256,
@@ -717,10 +792,16 @@ def _status(prop, system, tally, budget, explored, total) -> dict:
         return {**entry, "status": "FAIL"}
     if budget.exhausted or explored < total:
         return {**entry, "status": "INCOMPLETE", "reason": f"ceiling hit: {budget.exhausted}"}
+    if not tally.checked[prop]:
+        return {**entry, "status": "NOT_RUN", "reason": "property was not exercised"}
     return {**entry, "status": "PASS"}
 
 
 EXCLUSIONS = [
+    "Callback exploration checks declared actions on the verifier's own clock; actual runner "
+    "state transitions require confirmed adapter trace semantics and evidence.",
+    "Elapsed ceilings are cooperative between operations. An untrusted in-process callback "
+    "cannot be preempted here; an approved process supervisor is required for a real run.",
     "Bounded: results hold only for the enumerated inputs and stated bounds; no unbounded proof.",
     "P1 covers only closed workloads revealed at slot 0, jointly feasible by the oracle, with a "
     "visible forecast and no injected fault; other inputs are reported, not claimed complete.",

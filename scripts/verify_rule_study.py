@@ -60,6 +60,16 @@ def main(argv=None) -> int:
     parser.add_argument("--max-seconds", type=float, default=600.0)
     args = parser.parse_args(argv)
 
+    if (
+        type(args.max_states) is not int
+        or not 0 <= args.max_states <= 10_000
+        or type(args.max_transitions) is not int
+        or not 0 <= args.max_transitions <= 50_000
+        or not 0 <= args.max_seconds <= 600
+    ):
+        raise SystemExit("limits must be finite/nonnegative and cannot exceed review-2 ceilings")
+    if args.domain and "primary" in args.domain and args.domain[0] != "primary":
+        raise SystemExit("primary must run before supplemental domains")
     if args.out is not None and args.out.exists():
         raise SystemExit(f"refusing to overwrite {args.out}")
     if bool(args.traces) == bool(args.domain):
@@ -97,7 +107,7 @@ def main(argv=None) -> int:
     budget = {k: report["budget"][k] for k in ("states_used", "transitions_used", "ceiling_hit")}
     print(json.dumps({"budget": budget, "results": summary}, indent=2))
     _write(args.out, report)
-    return 0
+    return _exit_code(report)
 
 
 def _trace_mode(args, spec) -> int:
@@ -108,6 +118,7 @@ def _trace_mode(args, spec) -> int:
         [tr.load_trace_dir(f) for f in folders],
         expected_spec_sha256=v.canonical_sha256(spec),
         is_rules_v1_run=args.rules_v1,
+        budget=v.Budget(args.max_states, args.max_transitions, args.max_seconds),
     )
     summary = {
         policy: {
@@ -119,7 +130,26 @@ def _trace_mode(args, spec) -> int:
     }
     print(json.dumps({"refused": report["refused_traces"], "results": summary}, indent=2))
     _write(args.out, report)
-    return 0
+    return _exit_code(report)
+
+
+def _exit_code(report: dict) -> int:
+    results = report["results"]
+    groups = list(results.values()) if isinstance(results, dict) else list(results)
+    statuses = [p["status"] for group in groups for p in group["properties"].values()]
+    if (
+        report.get("refused_traces")
+        or "FAIL" in statuses
+        or any(group.get("oracle_crosscheck", {}).get("mismatches", 0) for group in groups)
+    ):
+        return 1
+    if (
+        "INCOMPLETE" in statuses
+        or report.get("budget", {}).get("ceiling_hit")
+        or report.get("binding_validation", {}).get("status") == "INCOMPLETE"
+    ):
+        return 2
+    return 0  # Oracle-only NOT_RUN is diagnostic success, never study acceptance.
 
 
 def _write(out: Path | None, report: dict) -> None:
@@ -128,7 +158,9 @@ def _write(out: Path | None, report: dict) -> None:
     text = json.dumps(
         report, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
     )
-    out.write_text(text + "\n", encoding="utf-8", newline="\n")
+    # Exclusive creation closes the check/write race; never overwrite another run.
+    with out.open("x", encoding="utf-8", newline="\n") as handle:
+        handle.write(text + "\n")
     print(f"wrote {out} sha256={v.canonical_sha256(report)}")
 
 

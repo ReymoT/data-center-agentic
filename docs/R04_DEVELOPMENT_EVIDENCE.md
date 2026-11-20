@@ -1,5 +1,7 @@
 # Agent and verification: development-evidence draft
 
+November20 technical handoff: Nisha's [independent RULE03 verifier harness](rule_study/RULE03_VERIFIER.md) is implemented and directly reviewed with synthetic fixtures. Manager fixes close idle/drain false-pass paths, selected-plan validation and malformed-evidence/budget/no-op gaps. The actual frozen rules-v1 system is still not verified; source/state binding authentication and real-adapter compatibility remain pending. This is technical harness evidence, not a new study result.
+
 November19 review-2 clarification: [recorded manager decisions](decisions/NOV19_RULE01_REVIEW_REVISION.md) retain64 primary inputs and optionally add1024 separately reported inputs within the same combined prospective verification caps; the64 are a subset, not independent extra evidence. Keep feasibility-oracle exploration separate from policy-induced verification. Safe refusal preventing completion on a P1-eligible input is a progress FAIL, not a progress success. Overload generation proposes3-4 jobs with actual workload-diversity counts. The missing-forecast stratum is a safety/fallback/accounting control because all policies route to Greedy A, not evidence of policy-ranking advantage. These are protocol decisions, not measured findings or run approval.
 
 ## Current focused-study contribution — November19

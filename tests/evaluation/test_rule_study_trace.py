@@ -370,9 +370,75 @@ def test_cli_trace_mode(tmp_path, capsys):
             json.dumps(d), "utf-8"
         )
     out = tmp_path / "report.json"
-    assert cli.main(["--traces", str(tmp_path / "runs"), "--out", str(out)]) == 0
+    assert cli.main(["--traces", str(tmp_path / "runs"), "--out", str(out)]) == 1
     report = json.loads(out.read_text("utf-8"))
     # Test bindings carry a placeholder spec hash, so the real-spec check refuses them.
     assert "spec_sha256" in report["refused_traces"][0]["reason"]
     with pytest.raises(SystemExit):
         cli.main(["--traces", str(tmp_path / "runs"), "--domain", "primary"])
+
+
+# Manager review regressions use constructed traces, never real adapter results.
+def test_review_executed_empty_plan_is_a_valid_checked_noop():
+    data, decisions, result = build_trace(case_dict("A"))
+    d = decisions[24]
+    d["proposal_stages"] = [{"stage_id": "noop", "origin": "rules-v1", "plan": {"starts": []}}]
+    d["selected_stage_id"] = "noop"
+    d["execution"]["status"] = "executed"
+    report = tr.verify_traces([rebind((data, decisions, result))])
+    assert status(report)["S5"] == "PASS"
+
+
+@pytest.mark.parametrize(
+    "mutate",
+    [
+        lambda d: d.update(model_call_count=0.0),
+        lambda d: d["execution"]["state_after"].update(state_version=99),
+        lambda d: d["proposal_stages"][0]["arithmetic"][0]["terms"][0].update(value="bad"),
+        lambda d: d["proposal_stages"][0]["plan"]["starts"][0].update(extra="unrecognized"),
+    ],
+)
+def test_review_malformed_evidence_is_refused(mutate):
+    data, decisions, result = build_trace(case_dict("A"))
+    mutate(decisions[0])
+    report = tr.verify_traces([rebind((data, decisions, result))])
+    assert report["refused_traces"]
+
+
+def test_review_invalid_future_plan_cannot_supply_current_execution():
+    data, decisions, result = build_trace(case_dict("A"))
+    # Actual starts are physically valid, but the selected plan also repeats J1 later.
+    decisions[0]["proposal_stages"][0]["plan"]["starts"].append({"job_id": "J1", "start_slot": 1})
+    report = tr.verify_traces([rebind((data, decisions, result))])
+    assert status(report)["S4"] == "FAIL"
+
+
+def test_review_arithmetic_terms_are_bound_to_input_jobs_and_units():
+    data, decisions, result = build_trace(case_dict("A"))
+    decisions[0]["proposal_stages"][0]["arithmetic"][0]["terms"][1]["unit"] = "MW"
+    report = tr.verify_traces([rebind((data, decisions, result))])
+    assert report["results"]["rules-v1"]["arithmetic_consistency"]["status"] == "FAIL"
+
+
+def test_review_unprovided_artifact_bindings_are_not_claimed_authenticated():
+    report = tr.verify_traces([build_trace(case_dict("A"))])
+    assert report["binding_validation"]["status"] == "INCOMPLETE"
+    assert "external adapter" in report["binding_validation"]["not_authenticated"]
+
+
+def test_review_unknown_plan_fields_are_refused():
+    stale_data, stale_decisions, stale_result = build_trace(case_dict("A"))
+    stale_decisions[0]["proposal_stages"][0]["plan"]["state_version"] = 99
+    stale = tr.verify_traces([rebind((stale_data, stale_decisions, stale_result))])
+    assert "state_version" in stale["refused_traces"][0]["reason"]
+    data, decisions, result = build_trace(case_dict("A"))
+    decisions[0]["proposal_stages"][0]["plan"]["unknown"] = True
+    report = tr.verify_traces([rebind((data, decisions, result))])
+    assert "unknown fields" in report["refused_traces"][0]["reason"]
+
+
+def test_review_trace_mode_obeys_shared_budget():
+    report = tr.verify_traces([build_trace(case_dict("A"))], budget=v.Budget(max_states=1))
+    assert status(report)["S3"] == "INCOMPLETE"
+    assert report["budget"]["ceiling_hit"] == "states"
+    assert report["budget"]["states_used"] == 1

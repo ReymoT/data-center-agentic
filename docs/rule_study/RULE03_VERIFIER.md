@@ -57,9 +57,7 @@ three domains together use 6,389 states and 5,297 transitions.
 - **Case B fault arithmetic:** 20 + 30 + 30 = 80 kW against a 60 kW limit, an excess of 20 kW.
 - **B-progress witness:** J1 at slot 0, then J2 at slot 1.
 
-**Budget margin.** With a simple test-fixture policy, all three domains together use 9,462 of
-the 10,000 combined states, a margin of about 5%. A rules-v1 run should fit the same way, but if
-it doesn't, the supplement reports INCOMPLETE while the primary result stands.
+**Policy budget after manager review.** The former9,462-state fixture estimate used an idle-policy shortcut and is historical, not a current budget margin. Policy exploration now calls the untrusted function through all30 slots, including empty-queue and drain states. This catches late restarts/starts that the shortcut missed. The optional supplement can therefore become INCOMPLETE under the unchanged combined ceilings; preserve the completed primary result and report actual counts rather than promise it fits.
 
 **Finding: timing is enforced by expiry.** A nonflexible job not started at arrival, or any job
 past its latest start, is marked missed at the next boundary. So no reachable state ever offers
@@ -71,8 +69,7 @@ waiting. That also triggers S1.
 [`rule_study_trace.py`](../../dc_sustainability/evaluation/rule_study_trace.py) reads
 `rule_study_decision_v1` and `rule_study_result_v1` records under
 [proposal-1](ADAPTER_RECORD_PROPOSAL.md), which Nisha and Ved accepted in #239. It replays them
-with the same independent predicates. It never uses a reported check result or status as a
-verdict.
+with the same independent predicates. It never uses a reported check result or status as an independent safety verdict. Source labels and hashes are not authenticated merely because they are syntactically valid.
 
 **Fail closed.** The whole trace is refused, counted, and leaves the other results INCOMPLETE if
 it has any of these:
@@ -116,10 +113,7 @@ Results are reported per policy (rules-v1, greedy_a, greedy_b).
 
 ## Tests
 
-[`test_rule_study_verifier.py`](../../tests/evaluation/test_rule_study_verifier.py) has 31 tests,
-and [`test_rule_study_trace.py`](../../tests/evaluation/test_rule_study_trace.py) has 28 trace-mode
-tests on constructed proposal-1 records. Those cover valid traces, every property failure, and 12
-contract breaches that must refuse the trace.
+The focused [exploration tests](../../tests/evaluation/test_rule_study_verifier.py) and [trace tests](../../tests/evaluation/test_rule_study_trace.py) now contain80 passing synthetic-fixture cases after direct manager review. They include the original harness tests and added false-pass/malformed-evidence/budget/no-op regressions. These are not actual rules-v1 or Greedy results.
 They cover the oracle counts, predicates and expiry, fail-closed inputs, the combined budget with
 its per-scope counters and overlap, and the rule that a later ceiling hit leaves the primary
 result intact. They also check that deliberately correct or broken fixture systems are
@@ -155,3 +149,21 @@ python scripts/verify_rule_study.py --traces <folder of trace subfolders> --out 
 3. Freeze the verifier commit before Edison generates the final synthetic set. Then
    independently confirm that set's feasibility labels and check for overlap with the
    development and authored cases.
+
+## Manager direct review and fixes — November20
+
+The review reproduced13 failing synthetic regressions before correction (plus two already rejected inputs). These are unit fixtures, not actual rules-v1 or research results. Fixes preserve the independent standard-library predicates and do not import the production checker/simulator/schemas/scheduler.
+
+- Policy exploration no longer skips empty/drain decisions. An attempted restart at slot24 now fails S1/S5 instead of being missed. No property with zero exercised checks is labeled PASS after a callback failure. Oracle disagreement blocks PASS certification.
+- Capacity/background/score types, budget limits and system-return shapes fail closed. Trace mode now uses the shared budget and bounded four-job cases. Joint-assignment cross-checks check elapsed time cooperatively.
+- Trace replay accepts a genuinely selected empty plan as an executed no-op; it still refuses starts without a selected stage or a different executed set. Full selected current/future placements are checked independently, so an invalid future reservation cannot authorize current execution.
+- Float/bool model-call counts, unknown start/plan fields, malformed/nonfinite arithmetic and invalid state_after versions are rejected. Arithmetic reporting checks actual job terms/units in addition to totals, exposing its own PASS/FAIL/NOT_RUN diagnostic without pretending it is a human-faithfulness judgment.
+- CLI output creation is exclusive, so a race cannot overwrite a prior report. Limits may only reduce the published prospective caps; primary precedes supplements. Exit1 means FAIL/refused trace or oracle disagreement; exit2 means incomplete checks/bindings/ceiling; exit0 is diagnostic/check success, not study acceptance. Failing reports are preserved.
+
+**Critical evidence limits:** raw external state/snapshot/transition bytes and adapter/generator/environment/code artifacts are not supplied to this reader. It verifies case content, expected specification when supplied, decision-list hashes and within-trace consistency; `binding_validation` remains INCOMPLETE for the unauthenticated external artifacts. State-hash continuity remains informational until the runner defines and supplies the exact hashed objects. A physical-property PASS is conditional on the supplied input/action records, not proof that a real runner produced them. Accounting totals are not independently recomputed here. Nested legacy F02 check-result semantics are not used as verdicts.
+
+Callback exploration models time with the verifier's own state machine. Actual runner transition/clock verification needs accepted trace semantics and authenticated artifacts. The time budget is cooperative: an in-process callback cannot be preempted, and input/module isolation is not implemented by this CLI. A real frozen run requires the separately approved process supervisor, bounded inputs and exact authorization before execution. This harness review makes no new run authorization or final #241 acceptance.
+
+The result/folder field assumptions above still need compatibility receiving against Ved's first actual RULE-02 records. The PR is a usable reviewed verifier harness, not a claim that rules-v1 is implemented or verified. The original primary-domain oracle hand-count facts are retained; no new scientific system run was performed by this review.
+
+The reader validates the documented trace envelope and start/plan-field subset, not every legacy F02 check-result/abstention semantic. It must still receive actual adapter fixtures before claiming complete serialization compatibility. Actual policy/runner source identity cannot be authenticated by --rules-v1 alone; the report records that study acceptance is not established by the harness or the caller flag.

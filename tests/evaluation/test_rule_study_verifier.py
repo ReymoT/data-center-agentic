@@ -334,7 +334,7 @@ def test_combined_budget_and_overlap_across_domains():
 
 
 def test_supplement_hitting_ceiling_keeps_primary_result():
-    budget = v.Budget(max_states=2_000)
+    budget = v.Budget(max_states=5_000)
     report = v.verify_domains(
         [("primary", v.primary_domain()), ("extended", v.extended_domain())],
         deadline_first,
@@ -393,3 +393,78 @@ def test_cli_writes_new_canonical_report(tmp_path, capsys):
     assert report["spec_sha256"] == v.canonical_sha256(SPEC)
     with pytest.raises(SystemExit):
         cli.main(["--domain", "authored", "--out", str(out)])  # refuses to overwrite
+
+
+# Manager review regressions: synthetic fixture systems only, not research results.
+def test_review_idle_policy_still_checked_in_drain_slots():
+    def restarts_after_idle(view):
+        if view.slot == 24:
+            return v.SystemDecision(("J1",))
+        return deadline_first(view)
+
+    report = v.verify_system(v.primary_domain()[:1], restarts_after_idle, system_id="fixture-drain")
+    assert report["properties"]["S5"]["status"] == "FAIL"
+    assert report["counts"]["drain_slot_decisions"] > 0
+
+
+@pytest.mark.parametrize(
+    "capacity,scores", [(True, (100,) * 30), (float("nan"), (100,) * 30), (30, (True,) * 30)]
+)
+def test_review_case_rejects_nonphysical_scalar_types(capacity, scores):
+    with pytest.raises(ValueError):
+        v.Case("bad", capacity, 10, (), scores)
+
+
+@pytest.mark.parametrize(
+    "kwargs", [{"max_states": -1}, {"max_states": True}, {"max_seconds": float("nan")}]
+)
+def test_review_budget_rejects_invalid_limits(kwargs):
+    with pytest.raises(ValueError):
+        v.Budget(**kwargs)
+
+
+def test_review_oracle_disagreement_cannot_certify_policy(monkeypatch):
+    monkeypatch.setattr(v, "completion_witness", lambda case, state, **kwargs: (None, 0))
+    report = v.verify_system(v.primary_domain()[:1], deadline_first, system_id="fixture-oracle")
+    assert report["oracle_crosscheck"]["mismatches"] == 1
+    assert report["properties"]["S3"]["status"] == "INCOMPLETE"
+
+
+def test_review_malformed_system_decision_is_reported():
+    report = v.verify_system(
+        v.primary_domain()[:1], lambda view: v.SystemDecision(True), system_id="fixture-malformed"
+    )
+    assert report["properties"]["S5"]["status"] == "FAIL"
+
+
+def test_review_cli_fail_closed_exit_and_atomic_output(tmp_path):
+    import importlib.util
+
+    path = Path(__file__).parents[2] / "scripts/verify_rule_study.py"
+    spec = importlib.util.spec_from_file_location("review_rule_cli", path)
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    assert cli._exit_code({"results": [{"properties": {"S1": {"status": "FAIL"}}}]}) == 1
+    assert cli._exit_code({"results": [{"properties": {"S1": {"status": "INCOMPLETE"}}}]}) == 2
+    assert cli._exit_code({"results": [], "budget": {"ceiling_hit": "states"}}) == 2
+    out = tmp_path / "existing.json"
+    out.write_text("preserve", encoding="utf-8")
+    with pytest.raises(FileExistsError):
+        cli._write(out, {})
+    assert out.read_text(encoding="utf-8") == "preserve"
+    with pytest.raises(SystemExit):
+        cli.main(["--domain", "primary", "--max-seconds", "nan"])
+    with pytest.raises(SystemExit):
+        cli.main(["--domain", "primary", "--max-states", "10001"])
+    with pytest.raises(SystemExit):
+        cli.main(["--domain", "extended", "--domain", "primary"])
+
+
+def test_review_unexercised_safety_is_not_passed_after_callback_error():
+    def broken(view):
+        raise RuntimeError("fixture failure before any action")
+
+    report = v.verify_system(v.primary_domain()[:1], broken, system_id="fixture-error")
+    assert report["properties"]["S1"]["checked"] == 0
+    assert report["properties"]["S1"]["status"] == "NOT_RUN"
+    assert report["properties"]["S5"]["status"] == "FAIL"

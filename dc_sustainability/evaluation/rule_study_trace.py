@@ -32,6 +32,7 @@ Field names of ``rule_study_result_v1`` beyond the proposal's prose (``decision_
 from __future__ import annotations
 
 import json
+import math
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -190,10 +191,32 @@ def _bindings(obj, where: str) -> Mapping:
 def _plan_starts(plan, where: str) -> tuple[tuple[str, int], ...]:
     if not isinstance(plan, Mapping) or not isinstance(plan.get("starts", []), list):
         raise TraceRefused(f"{where}.plan: expected an F02 Plan object with a starts list")
+    _fields(
+        plan,
+        frozenset(
+            {
+                "schema_version",
+                "record_type",
+                "episode_id",
+                "slot",
+                "state_version",
+                "starts",
+                "deferrals",
+                "abstentions",
+                "evidence_ids",
+                "status",
+            }
+        ),
+        f"{where}.plan",
+        required=frozenset({"starts"}),
+    )
     out = []
     for i, s in enumerate(plan.get("starts", [])):
         if not isinstance(s, Mapping) or not isinstance(s.get("job_id"), str):
             raise TraceRefused(f"{where}.plan.starts[{i}]: expected job_id/start_slot")
+        _fields(s, frozenset({"job_id", "start_slot"}), f"{where}.plan.starts[{i}]")
+        if not s["job_id"]:
+            raise TraceRefused(f"{where}: empty job ID")
         out.append((s["job_id"], _int(s.get("start_slot"), f"{where}.plan.starts[{i}]", 0, 29)))
     return tuple(out)
 
@@ -237,7 +260,7 @@ def read_decision(rec, *, case_id: str, policy_id: str, bindings: Mapping) -> De
         raise TraceRefused(f"{where}: policy/case identity differs within the trace")
     if dict(_bindings(rec["bindings"], where)) != dict(bindings):
         raise TraceRefused(f"{where}: bindings differ within the trace")
-    if rec["model_call_count"] != 0 or isinstance(rec["model_call_count"], bool):
+    if type(rec["model_call_count"]) is not int or rec["model_call_count"] != 0:
         raise TraceRefused(f"{where}: model_call_count must be exactly 0")
     index = _int(rec["decision_index"], f"{where}.decision_index", 0, 29)
     sb = _fields(rec["state_before"], STATE_BEFORE_FIELDS, f"{where}.state_before")
@@ -255,12 +278,39 @@ def read_decision(rec, *, case_id: str, policy_id: str, bindings: Mapping) -> De
             raise TraceRefused(f"{sw}: origin {st['origin']!r}")
         if not isinstance(st["stage_id"], str) or not st["stage_id"]:
             raise TraceRefused(f"{sw}: stage_id")
-        arithmetic = st.get("arithmetic") or []
+        arithmetic = st.get("arithmetic", [])
         if not isinstance(arithmetic, list):
             raise TraceRefused(f"{sw}.arithmetic: expected a list")
-        stages.append(
-            Stage(st["stage_id"], st["origin"], _plan_starts(st["plan"], sw), tuple(arithmetic))
-        )
+        for entry in arithmetic:
+            if not isinstance(entry, Mapping):
+                raise TraceRefused(f"{sw}.arithmetic: expected object entries")
+            if entry.get("rule_id") != "R04":
+                continue
+            _int(entry.get("slot"), f"{sw}.arithmetic.slot", 0, 29)
+            for key in ("total", "limit", "signed_excess"):
+                value = entry.get(key)
+                if type(value) not in (int, float) or not math.isfinite(value):
+                    raise TraceRefused(f"{sw}.arithmetic.{key}: expected finite number")
+            terms = entry.get("terms")
+            if not isinstance(terms, list) or any(
+                not isinstance(term, Mapping)
+                or type(term.get("value")) not in (int, float)
+                or not math.isfinite(term["value"])
+                for term in terms
+            ):
+                raise TraceRefused(f"{sw}.arithmetic.terms: expected finite numeric terms")
+        starts = _plan_starts(st["plan"], sw)
+        plan = st["plan"]
+        if "record_type" in plan and plan["record_type"] != "Plan":
+            raise TraceRefused(f"{sw}.plan: unknown record_type")
+        if "slot" in plan and _int(plan["slot"], f"{sw}.plan.slot", 0, 29) != slot:
+            raise TraceRefused(f"{sw}.plan.slot: does not match decision state")
+        if (
+            "state_version" in plan
+            and _int(plan["state_version"], f"{sw}.plan.state_version", 0, 10**9) != version
+        ):
+            raise TraceRefused(f"{sw}.plan.state_version: stale or mismatched state")
+        stages.append(Stage(st["stage_id"], st["origin"], starts, tuple(arithmetic)))
     ids = [s.stage_id for s in stages]
     if len(set(ids)) != len(ids):
         raise TraceRefused(f"{where}: duplicate stage_id")
@@ -283,6 +333,11 @@ def read_decision(rec, *, case_id: str, policy_id: str, bindings: Mapping) -> De
         sa = _fields(ex["state_after"], STATE_AFTER_FIELDS, f"{where}.execution.state_after")
         after_slot = _int(sa["slot"], f"{where}.execution.state_after.slot", 1, 30)
         after_sha = _sha(sa["state_sha256"], f"{where}.execution.state_after.state_sha256")
+        after_version = _int(
+            sa["state_version"], f"{where}.execution.state_after.state_version", 1, 10**9
+        )
+        if after_version != after_slot:
+            raise TraceRefused(f"{where}: state_after.state_version must match its boundary slot")
     elif ex["status"] != "indeterminate":
         raise TraceRefused(f"{where}: state_after is required unless execution is indeterminate")
     return Decision(
@@ -408,7 +463,17 @@ def _check_arithmetic(t: _TraceTally, case, state, decision: Decision, stage: St
             if isinstance(terms, list) and all(isinstance(x, Mapping) for x in terms)
             else None
         )
-        if reported != expected or term_sum != entry.get("total"):
+        expected_terms = [(None, case.background_kw, "kW")]
+        for jid, start, end in state.running:
+            if start <= slot < end:
+                expected_terms.append((jid, case.job(jid).power_kw, "kW"))
+        for jid, start in stage.starts:
+            job = case.job(jid)
+            if job is not None and start <= slot < start + job.duration_slots:
+                expected_terms.append((jid, job.power_kw, "kW"))
+        reported_terms = [(x.get("job_id"), x.get("value"), x.get("unit")) for x in terms]
+        terms_match = sorted(expected_terms, key=repr) == sorted(reported_terms, key=repr)
+        if reported != expected or term_sum != entry.get("total") or not terms_match:
             t.arithmetic_mismatches.append(
                 {
                     "decision_index": decision.index,
@@ -417,17 +482,37 @@ def _check_arithmetic(t: _TraceTally, case, state, decision: Decision, stage: St
                     "reported": reported,
                     "independent": expected,
                     "reported_term_sum": term_sum,
+                    "terms_match_input_jobs_and_units": terms_match,
                 }
             )
 
 
-def replay_trace(trace: Trace, t: _TraceTally) -> dict:
+def _valid_plan(case: v.Case, state: v.State, stage: Stage) -> bool:
+    seen = set()
+    waiting = {j.job_id for j in state.waiting(case)}
+    for job_id, start in stage.starts:
+        job = case.job(job_id)
+        if job is None or job_id not in waiting or job_id in seen:
+            return False
+        seen.add(job_id)
+        if start not in job.legal_starts(state.slot):
+            return False
+    return all(
+        _plan_load(case, state, stage.starts, slot) <= case.capacity_kw
+        for slot in range(state.slot, v.HORIZON)
+    )
+
+
+def replay_trace(trace: Trace, t: _TraceTally, budget: v.Budget | None = None) -> dict:
     """Replay one read trace; returns per-trace facts used for P1/P2 and aggregation."""
     case = trace.case
     state = v.initial_state()
     prev_after_sha = None
     stopped = None
     for d in trace.decisions:
+        if budget is not None and not budget.take_state("trace_replay"):
+            stopped = "budget"
+            break
         tally = t.tally
         if d.slot != state.slot or d.index != state.slot:
             _record(
@@ -465,12 +550,8 @@ def replay_trace(trace: Trace, t: _TraceTally) -> dict:
                 f"status {d.status} with starts {list(executed)}",
                 d,
             )
-        if d.status == "executed" and not executed:
-            _record(
-                t, case, state, "S5", "executed_without_starts", "status executed, no starts", d
-            )
         selected = next((s for s in d.stages if s.stage_id == d.selected_stage_id), None)
-        if executed and selected is None:
+        if (executed or d.status == "executed") and selected is None:
             _record(
                 t,
                 case,
@@ -482,8 +563,8 @@ def replay_trace(trace: Trace, t: _TraceTally) -> dict:
             )
         if (
             selected is not None
-            and executed
-            and sorted(executed) != sorted(selected.current(d.slot))
+            and d.status == "executed"
+            and (sorted(executed) != sorted(selected.current(d.slot)))
         ):
             _record(
                 t,
@@ -494,10 +575,27 @@ def replay_trace(trace: Trace, t: _TraceTally) -> dict:
                 f"executed {list(executed)}; selected {list(selected.current(d.slot))}",
                 d,
             )
+        for stage in d.stages:
+            if _valid_plan(case, state, stage):
+                continue
+            tally.checked["S4"] += 1
+            if selected is stage and (executed or d.status == "executed"):
+                _record(
+                    t,
+                    case,
+                    state,
+                    "S4",
+                    "invalid_selected_plan_executed",
+                    f"selected stage {stage.stage_id} has invalid current/future placements",
+                    d,
+                )
         stages = [v.ProposalStage(s.origin, s.current(d.slot)) for s in d.stages]
         valid = v._check_decision(case, state, v.SystemDecision(executed, tuple(stages)), tally)
         if not valid:
             stopped = "invalid_execution"
+            break
+        if budget is not None and not budget.take_transition("trace_replay"):
+            stopped = "budget"
             break
         state = v.advance(case, state, executed)
         if d.after_slot != state.slot:
@@ -520,8 +618,10 @@ def verify_traces(
     *,
     expected_spec_sha256: str | None = None,
     is_rules_v1_run: bool = False,
+    budget: v.Budget | None = None,
 ) -> dict:
     """Read and replay (case, decisions, result) triples; one report per policy_id."""
+    budget = budget or v.Budget()
     per_policy: dict[str, dict] = {}
     refused: list[dict] = []
     for n, (case_data, decisions, result) in enumerate(traces):
@@ -548,9 +648,13 @@ def verify_traces(
         bucket["traces"] += 1
         bucket["bindings"].add(json.dumps(dict(trace.result["bindings"]), sort_keys=True))
         t = bucket["t"]
-        facts = replay_trace(trace, t)
+        facts = replay_trace(trace, t, budget)
         final = facts["state"]
-        witness, _ = v.completion_witness(trace.case, v.initial_state())
+        try:
+            witness, _ = v.completion_witness(trace.case, v.initial_state(), budget=budget)
+        except v.BudgetStopped:
+            bucket["partial"] += 1
+            continue
         outside = v._p1_scope(trace.case, witness)
         if not facts["complete"] or trace.result["status"] != "complete":
             bucket["partial"] += 1
@@ -617,6 +721,9 @@ def verify_traces(
                 "the same object, pending the runner's convention",
             },
             "arithmetic_consistency": {
+                "status": "FAIL"
+                if b["t"].arithmetic_mismatches
+                else ("PASS" if b["t"].arithmetic_checked else "NOT_RUN"),
                 "checked": b["t"].arithmetic_checked,
                 "mismatches": len(b["t"].arithmetic_mismatches),
                 "examples": b["t"].arithmetic_mismatches[:10],
@@ -631,10 +738,16 @@ def verify_traces(
         "verifier_source_sha256": v.source_sha256(),
         "trace_reader_source_sha256": _own_sha256(),
         "methods": ["trace_replay"],
+        "budget": budget.summary(),
         "accepted_adapter_versions": sorted(ACCEPTED_ADAPTER_VERSIONS),
         "spec_sha256_expected": expected_spec_sha256,
         "refused_traces": refused,
         "results": results,
+        "binding_validation": {
+            "status": "INCOMPLETE",
+            "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency",
+            "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied",
+        },
         "exclusions": v.EXCLUSIONS
         + ["Trace replay checks only the supplied records; it is not bounded exploration."],
     }
