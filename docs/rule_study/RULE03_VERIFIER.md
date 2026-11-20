@@ -38,7 +38,7 @@ earlier domains is counted, never pooled: the extended domain contains all 64 pr
 | S4 | An invalid proposal, including the slot-0 injected fault, is never the executed set. Counted only where an invalid proposal existed; otherwise NOT_RUN with a reason, never a vacuous PASS |
 | S5 | No new starts in slots 24-29; system errors fail closed. Drain-slot decisions are counted |
 | P1 | Only inputs that are fault-free, forecast-present, closed at slot 0 and oracle-feasible. Refusal that prevents completion is a FAIL. Other inputs are counted by scope reason, never as a PASS |
-| P2 | NOT_RUN here. It compares reported results with the reconstruction, so it runs in trace mode on adapter records |
+| P2 | Trace mode only: the result record's completed/missed/unfinished sets must match the reconstruction, with every job completed or missed |
 
 ## Oracle results (offline, specification inputs only)
 
@@ -66,9 +66,60 @@ past its latest start, is marked missed at the next boundary. So no reachable st
 a late start, and an R02/R03 timing violation can only come from starting a job that is not
 waiting. That also triggers S1.
 
+## Trace mode (recorded runs)
+
+[`rule_study_trace.py`](../../dc_sustainability/evaluation/rule_study_trace.py) reads
+`rule_study_decision_v1` and `rule_study_result_v1` records under
+[proposal-1](ADAPTER_RECORD_PROPOSAL.md), which Nisha and Ved accepted in #239. It replays them
+with the same independent predicates. It never uses a reported check result or status as a
+verdict.
+
+**Fail closed.** The whole trace is refused, counted, and leaves the other results INCOMPLETE if
+it has any of these:
+
+- an unknown kind, version, study, policy or field;
+- a malformed or differing binding, or a case hash that doesn't match the supplied case input;
+- a spec hash that doesn't match the published specification;
+- decision hashes not bound by the result record;
+- a gap in the decision sequence;
+- a nonzero model-call count.
+
+The illustrative example JSON is refused.
+
+**Checks on each trace:**
+
+| Property | Checked as |
+|---|---|
+| S1-S3 | On the executed current starts |
+| S4 | Invalid stages are never executed; executed starts must equal the selected stage's current starts; nothing executes without a selected stage |
+| S5 | One decision per slot in order, state_version equal to slot, state_after.slot equal to slot + 1, consistent execution status. `indeterminate` stops the trace as partial |
+| P1 | On oracle-eligible inputs |
+| P2 | As described above |
+
+Results are reported per policy (rules-v1, greedy_a, greedy_b).
+
+**Informational, never a safety verdict:**
+
+- **R04 arithmetic consistency:** the reported total, limit, signed excess and term sum compared
+  with an independent recomputation.
+- **State-hash continuity:** whether state_after matches the next state_before.
+
+**Reader assumptions still to confirm against RULE-02's actual output:**
+
+- the result field names (`decision_sha256s`, `completed_job_ids`, `missed_job_ids`,
+  `unfinished_job_ids`, `accounting`, `status`);
+- the execution fields `transition_ref` / `transition_sha256` and `state_after.state_sha256`;
+- the case input shape (specification scenario fields, with `scores` or `first_scores` +
+  `remaining_score`, plus optional `fault_starts`);
+- the folder layout (`case.json`, `result.json`, `decisions/*.json`);
+- whether the two state hashes cover the same object.
+
 ## Tests
 
-[`test_rule_study_verifier.py`](../../tests/evaluation/test_rule_study_verifier.py) has 31 tests.
+[`test_rule_study_verifier.py`](../../tests/evaluation/test_rule_study_verifier.py) has 31 tests,
+and [`test_rule_study_trace.py`](../../tests/evaluation/test_rule_study_trace.py) has 28 trace-mode
+tests on constructed proposal-1 records. Those cover valid traces, every property failure, and 12
+contract breaches that must refuse the trace.
 They cover the oracle counts, predicates and expiry, fail-closed inputs, the combined budget with
 its per-scope counters and overlap, and the rule that a later ceiling hit leaves the primary
 result intact. They also check that deliberately correct or broken fixture systems are
@@ -91,13 +142,13 @@ The fixtures are not rules-v1, Greedy A or Greedy B.
 ```
 python scripts/verify_rule_study.py --domain primary --domain extended --domain authored
 python scripts/verify_rule_study.py --domain primary --system pkg.module:function --system-id rules-v1 --rules-v1 --out <new file>
+python scripts/verify_rule_study.py --traces <folder of trace subfolders> --out <new file>
 ```
 
 ## Remaining for #241 (due November 23, 18:00 Arizona)
 
-1. Once the exact serialization is agreed, add trace mode: an independent reader for
-   `rule_study_decision_v1` / `result_v1`, S5 clock/version checks on the recorded states, and
-   P2.
+1. Confirm the trace-reader assumptions above against Ved's first real RULE-02 records and
+   adjust the reader if the field names differ.
 2. Wrap Ved's RULE-02 scheduler as a `SystemView -> SystemDecision` callable at his frozen
    commit. Run primary, then the supplement and the authored cases, and publish the reports with
    code hashes.
