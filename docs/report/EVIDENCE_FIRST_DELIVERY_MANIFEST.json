@@ -190,7 +190,7 @@
     },
     {
       "path": "docs/report/R05_INTRODUCTION_PROBLEM.md",
-      "sha256": "c7081a929b5c78fa53a7a79065523f09d8f9490b71f8841add57708a7be37a9e",
+      "sha256": "a9d6337b75879947b7a6a10fbd7c08c38cd2b9cc51ace98f38c05e88fe9bd2f7",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -326,6 +326,11 @@
     {
       "path": "docs/decisions/NOV19_RULE_STUDY_PLAN.md",
       "sha256": "e28dcae0c56508a058da4e164be6b8f19be3e1f1c9965811bed8257fda127970",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R01_DATA_AND_SIMULATOR_METHODS.md",
+      "sha256": "b9e960679dec433cc15e9663d38299a7997a6e05556774d43be66ba7f9ee933b",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

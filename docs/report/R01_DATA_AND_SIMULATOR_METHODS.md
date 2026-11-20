@@ -1,5 +1,9 @@
 # Data and simulator methods (R01)
 
+November19 manager review: this is Reimo's retained historical data/simulator methods contribution. The [focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md), instruction1.30, is now the primary delivery; the original source-dependent held-out study is not being resumed by this PR. #60 is closed NOT_PLANNED while B1-B3 remain unresolved and B4 provisional. Newly authored synthetic rule-study inputs require their own declared provenance and accepted protocol; this historical source/corpus is not an authorized substitute. Reimo owns report/methods/diagrams; Edison and Ved own demo production in #246 and request needed materials.
+
+The reviewed-main/instruction1.29 statement below records the original November18 drafting context, not current instruction authority. Current published masters on main supersede it. No new study, bounded proof or generalization result is claimed here.
+
 Owner: Reimo Tamme. Draft handoff for issue [#223](https://github.com/ReymoT/data-center-agentic/issues/223), covering IEEE sections E/F/I and the simulator portion of C. Derived from [the existing contribution draft](../handoffs/REIMO_R01_CONTRIBUTION_DRAFT.md); historical source preserved. Reviewed main: `cd272e93a58af8e373bfa8ed96d1191687b919fc`, instructions 1.29, November 18, 2026. This supplies methods for assembly, not final scientific acceptance.
 
 ### Datasets, preprocessing and partitions (§F)
@@ -58,8 +62,9 @@ the remaining six drain running work and retain accounting. At each boundary,
 policies see only arrived waiting jobs, running/completed work and permitted
 evidence. Future jobs and realized scoring carbon stay private. Nonpreemptive
 work occupies half-open intervals and must respect arrival, deadline,
-nonflexibility and running-plus-proposed IT capacity. The controller authenticates
-and binds a passing latest-state check before supplying approved actions. A
+nonflexibility and running-plus-proposed IT capacity. The trusted runtime controller binds a passing latest-state check before
+supplying typed approved actions. That capability is not cryptographic
+authentication and does not protect against unrelated code mutating simulator state. A
 rejected batch starts no work but advances existing work and the clock once.
 Impossible arrivals remain visible for the agreed arrival decision, become missed
 at the next boundary and receive no completion credit. The site assumptions are
@@ -79,8 +84,9 @@ the modeled carbon weighting, not that work's energy. [D11.]
 Synthetic hand checks establish 140 completed IT kWh with 54.5/48.4 kg job proxy
 values at PUE 1.0 and 65.4/58.08 kg at PUE 1.2 for two schedules; these validate
 arithmetic, not operational savings. Simulator, checker, controller, accounting
-and independent replay have bounded development integration evidence. S01's
-separate Ved reproduction remains recorded as pending in current main. The
+and independent replay have bounded development integration evidence. At the original November18 drafting checkpoint, S01's separate Ved
+reproduction was recorded as pending; this historical statement is not
+acceptance of the new RULE-06 reproduction task. The
 latest public cb85 technical validation/receiving covers six results and 180
 decision records; it does not establish comparative study superiority, complete
 scientific I01/I02 acceptance, source rights or held-out findings. Saved explanations
@@ -114,8 +120,8 @@ The setting is one simulated site/resource pool with synthetic flexibility and
 fixed power/PUE. It has no live facility control or empirical Frontier calibration.
 AZPS generation geography does not establish electricity supplied to a Phoenix
 site; generation-average attribution is not consumption-adjusted, marginal,
-market-based or avoided-emissions accounting. Original export/interval/pollutant
-and rights gates remain open. Forecast availability is simulated, and flat
+market-based or avoided-emissions accounting. Original export/interval/pollutant and rights evidence remains unresolved;
+#60 is discontinued for active delivery, not resolved scientific acceptance. Forecast availability is simulated, and flat
 persistence cannot test choosing cleaner future hours. Existing labels/models
 cannot be declared CF60-compatible without the separately authorized assessment.
 Metadata selection/receiving is complete; source-derived held-out content,

@@ -1,5 +1,7 @@
 # Introduction and problem statement (R05 draft)
 
+November19 scope reconciliation: the original introduction below is retained as historical Agent-versus-Plain study context, not the current tested research question. The new question is: can a small set of explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? The [approved focused plan](../decisions/NOV19_RULE_STUDY_PLAN.md) lifts rules from permitted examples/assumptions, lowers them into executable scheduling, independently verifies bounded safety/progress, and proposes isolated new synthetic evaluation. These are planned deliverables, not measured findings. The original held-out study is unperformed; source evidence remains unresolved even though #60 is closed NOT_PLANNED. Reimo supplies report/methods/diagrams; Edison and Ved own the demo in #246. Preserve original contribution attribution and distinguish historical results from future rule-study evidence.
+
 Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the reference list](REFERENCES.md).
 
 ## I. Introduction
