@@ -1,5 +1,7 @@
 # Project plan
 
+November 19 active plan: [the focused rule-system study](decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
 
 November 15 evidence-first delivery: [a working report and evidence index](report/VERIFIED_EVIDENCE_WORKING_DRAFT.md)
@@ -218,3 +220,5 @@ The table below preserves the original internal estimates for context. It is not
 November 26-27 is reserved in the proposal. Optional extensions follow required results under separately approved work. No scheduler or automatic assistant wakeup is created.
 
 Update 2026-10-12: Matty completed the independent [A01/F03 local model installation and identity checks](OLLAMA_SETUP.md). Qwen3 8B Q4_K_M is installed with full digest/license evidence. No SDK/lock/shared-setting change, inference or full task acceptance is claimed; remaining deployment/integration prerequisites still apply.
+
+The active single-owner schedule and dependency/acceptance gates are in the November 19 decision; the original 50 task rows below are historical scope, not new assignments.

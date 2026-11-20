@@ -1,6 +1,9 @@
 # Instruction deployment changelog
 
-Current deployment: 1.29 - 2026-11-12. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+Current deployment: 1.30 - 2026-11-19. The original source archive remains package 1.0, unchanged outside the repository. Ved's merged F02 contract is version 1.0.0; consumer adoption remains pending. Instruction versions do not imply schema adoption.
+
+November 19 manager authorization (1.30): focused rule-system study, six single-owner RULE issues, Nov25 core completion/Nov26-27 fixes/Nov28 delivery candidate, immediate start and next-execution overdue reassignment. Publish matching scope across masters/numbered files. Local synchronization is required without overwriting code or granting independent master-edit authority. Old source-dependent tasks are superseded, not completed; exact bounded research execution and independent acceptance remain separate.
+
 
 November 12 manager instruction (1.29): Matty explicitly requires direct correction and validation of problems rather than returning jobs to their original owners for fixes, followed by an owner tag explaining the problem, fix and validation. Published consistently in AGENTS, PROJECT_MASTER, all five role masters and numbered files 00-04. Existing accountability, main authority, merge rule, affected-owner shared-contract agreement, privacy, scientific evidence and exact execution authorization remain unchanged. No independent approval or source permission may be fabricated to bypass a blocker.
 

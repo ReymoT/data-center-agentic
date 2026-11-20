@@ -1,5 +1,7 @@
 # Project master instructions
 
+Current scope, instruction 1.30 - November 19, 2026: Matty approved the focused rule-system study recommended by Professor Hasan. Read [the approved November 19 plan](docs/decisions/NOV19_RULE_STUDY_PLAN.md). Start ready work now; deadlines are latest completion times (18:00 America/Phoenix), not start dates. RULE-01 Matty Nov20; RULE-02 Ved Nov22; RULE-03 Nisha Nov23; RULE-04 Edison and RULE-05 Reimo Nov25; RULE-06 Matty Nov28 with Nov26-27 repair buffer. New independently authored synthetic inputs, independent bounded safety/progress verification and Greedy A/B comparisons replace the original source-dependent study for active delivery. The original research question remains unanswered; evidence-only delivery stays the backup. No real-source/private-data use, live LLM call or unspecified research batch is authorized. At the next assistant execution after a missed deadline, reassign unfinished work to a capable available owner, preserve work and independent verification, and tag old/new owners with the reason and checkpoint. No unattended monitor is installed. Fix defects directly and notify owners. Main's published masters are authoritative: synchronize local instruction copies verbatim at the recorded commit/version, preserving code; do not rewrite masters independently. Historical tasks/status below remain records, not the active critical path.
+
 November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](docs/decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
 
 Current manager rule, instruction 1.29 — November 12, 2026:
@@ -10,7 +12,7 @@ Current evaluation update, instruction 1.28: [the professor's inter-rater-reliab
 
 Current manager update, October 24: [coder-owned decisions](docs/decisions/Q11_CODER_OWNED_DECISIONS.md), authorized by Matty in [the team announcement](https://github.com/ReymoT/data-center-agentic/issues/57). Internal implementation decisions belong to the coder; shared changes go only to affected owners and unresolved shared questions escalate to Matty within 24 elapsed hours. Work on agreed portions proceeds immediately. Existing task assignments, exact merge/main-authority rules and scientific acceptance stay intact. Earlier dated entries are historical where superseded.
 
-Instruction deployment: 1.29 — 2026-11-12. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
+Instruction deployment: 1.30 — 2026-11-19. Repository: [ReymoT/data-center-agentic](https://github.com/ReymoT/data-center-agentic).
 
 Matty Anderson is the project manager and uses [MattyAnd](https://github.com/MattyAnd). Start with this file and [AGENTS.md](AGENTS.md), then read the [complete team package](docs/team/00_START_HERE.md), all numbered files 00-04, your role file, assigned Issue, decisions and prerequisite handoffs.
 

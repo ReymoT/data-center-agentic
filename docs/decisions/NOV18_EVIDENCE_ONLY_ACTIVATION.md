@@ -1,5 +1,7 @@
 # November 18: development-evidence-only delivery activated
 
+November 19 update: [the focused rule-system study](NOV19_RULE_STUDY_PLAN.md) is the active primary plan; this evidence-only path remains backup. This dated record is preserved, not source acceptance or evidence of new completed experiments.
+
 Manager: MattyAnd. Matty explicitly selected "Activate development-evidence-only delivery now" in this chat on November 18, 2026 (America/Phoenix). This activates the previously prepared contingency; it supersedes the November 22 wait-for-feasibility decision for the active delivery baseline. It does not change official course requirements or claim course acceptance.
 
 ## Active scope and practical resolution
