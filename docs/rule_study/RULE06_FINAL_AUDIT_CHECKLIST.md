@@ -8,13 +8,13 @@ Owner Matty. Prepared November19; checklist only, no boxes are pre-passed. Due N
 | Accepted boundaries | Exact adapter/result mapping and affected-owner replies; no guessed F02 SystemId | Ved/Nisha/Edison #239 |
 | Rule freeze | Rule IDs/predicates, objective/ties, complete search limits and specification/code hashes | Ved #240 |
 | Input authorization | Independently authored profiles/workloads, generator provenance/parameters/hash and no old private/source reuse | Edison #242 |
-| Unseen isolation | Dev/test seed domains, accepted/rejected generation counts, case hashes, no overlap and no tuning on final set | Edison/Nisha |
+| Unseen isolation | Dev/test seeds, accepted/rejected counts, full-case and workload-only diversity, overload3-4 jobs, no overlap/tuning | Edison/Nisha |
 | Research authorization | Exact approved single-use batch/proof envelope, code ancestry/hashes, resource/stop controls, new output location | Matty before run |
-| Independent verification | Distinct oracle implementation; actual states/transitions,64-domain inputs or explicit deviations; no production-checker verdict reuse | Nisha #241 |
+| Independent verification | Distinct oracle and policy-induced graphs; separate primary64/optional1024 results and overlap; actual counters within combined caps; no production-checker verdict reuse | Nisha #241 |
 | Safety | Separate property results, invalid-proposal tests, latest-state gate, capacity terms and fail-closed evidence | Nisha/Ved |
-| Progress | Joint feasibility and closed-arrival assumptions; starvation/deadlock counterexamples; termination is not successful completion | Nisha |
+| Progress | Joint feasibility/closed arrivals; P1-eligible refused completion is FAIL; ineligible is scoped NOT_RUN; termination is not completion | Nisha |
 | Real results | Actual files/hashes, complete vs partial status, failure retention, zero placeholder/fabricated measurements | Edison |
-| Comparison | Identical inputs, fair Greedy A/B, all denominators and missing-data reasons; equal-work gates before reduction | Edison/Nisha |
+| Comparison | Identical inputs/denominators/equal-work gates; missing-forecast is a safety/accounting control, not policy superiority | Edison/Nisha |
 | Demo | Two scenarios, runnable commands, actual fired-rule arithmetic/fallback; fault injection labeled; optional saved backup | Edison + Ved #246 |
 | Requested materials | Named requests answered or exact unresolved optional artifacts; report/method diagrams supplied by Reimo | Edison/Ved/Reimo |
 | Clean reproduction | Independent operator, environment identity, commands, regenerated outputs, semantic comparison and discrepancy log | Ved, with Nisha verifying code she did not author |
