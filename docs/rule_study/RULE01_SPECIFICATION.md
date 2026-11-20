@@ -73,3 +73,7 @@ Metrics: execution-violation count/rate with checked/executed denominator; compl
 3. Edison + Nisha: confirm generator sampling/strata,120-case count, units, fair Greedy comparisons and isolation before freeze.
 
 This supplies all manager-owned decisions/proposals; it does not fabricate teammate acceptance. #239 stays open for these narrow shared boundaries, with implementation/harness preparation continuing now. Request exact alternatives immediately, retaining the November20 18:00 Arizona deadline. Any scope change gets an explicit revision/hash; never overwrite past evidence as if it used new rules.
+
+## Concrete adapter record proposal
+
+[ADAPTER_RECORD_PROPOSAL.md](ADAPTER_RECORD_PROPOSAL.md) now specifies exact study-local identity/fields, common unchanged gate, refusal-and-drain behavior, independent verifier output and hash convention. Its [non-executable example](adapter_record.example.json) is not a result. Ved's earlier principles agreement is recorded, but this serialization still requires actual consumer acceptance in #239. No F02 registry or runtime code changes are made here.

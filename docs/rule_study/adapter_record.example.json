@@ -1,0 +1,46 @@
+{
+  "record_kind": "illustrative_example_not_executable",
+  "adapter_version": "proposal-1",
+  "study_id": "rule-study-20261119-v1",
+  "policy_id": "rules-v1",
+  "case_id": "A",
+  "decision_index": 0,
+  "status": "not_run",
+  "bindings": {
+    "spec_sha256": null,
+    "adapter_source_sha256": null,
+    "generator_source_sha256": null,
+    "case_sha256": null,
+    "environment_lock_sha256": null,
+    "code_commit": null
+  },
+  "state_before": null,
+  "proposal_stages": [],
+  "selected_stage_id": null,
+  "execution": null,
+  "errors": [],
+  "model_call_count": null,
+  "illustrative_expected_plan_not_an_actual_result": {
+    "starts": [
+      {
+        "job_id": "J2",
+        "start_slot": 0
+      },
+      {
+        "job_id": "J1",
+        "start_slot": 1
+      }
+    ],
+    "current_starts": [
+      "J2"
+    ],
+    "rule_ids_to_explain": [
+      "R02",
+      "R03",
+      "R04",
+      "R06",
+      "R07"
+    ]
+  },
+  "note": "Runtime must reject this illustration; no hashes/checks/transitions/results have been measured."
+}
