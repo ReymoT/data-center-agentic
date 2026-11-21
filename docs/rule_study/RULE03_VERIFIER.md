@@ -241,3 +241,41 @@ The original no-overlap, feasibility and diversity work is preserved. Actual
 RULE-02 compatibility, generator receiving, frozen-system verification and final
 study acceptance remain open in #239/#241/#242. No actual generator, scheduler,
 model, source or research batch was run for this review.
+
+## Accounting-sidecar checker — November 21
+
+This closes the gap noted above: missing-forecast weights and the hidden
+nonconstant profile can now be checked, using the evaluator-only sidecar that
+RULE-04 writes (`rule_study_accounting_weights_v1`, #253). Code:
+`dc_sustainability/evaluation/rule_study_accounting.py`, CLI
+`scripts/check_rule_study_accounting.py`. It does not import the generator.
+
+Checks on one supplied visible-set/sidecar pair:
+
+- **well_formed:** exact sidecar and entry fields, `record_kind`, 30 integer
+  (not bool/float) weights, lowercase 64-hex hashes and a bool visibility flag.
+- **binding:** same `set_id`, `case_set_sha256` equals the canonical hash of the
+  supplied visible set, and `generator_source_sha256` matches the set metadata.
+- **coverage:** every visible case appears exactly once in the sidecar, with no
+  extra or duplicate IDs.
+- **identity:** full-case and workload hashes are recomputed with the case
+  checker's own identity functions (full identity uses visible scores, so null
+  for missing-forecast cases).
+- **weight_domain:** slots 0-5 in {100, 200, 300}, drain slots 6-29 equal 200.
+- **visibility:** `weights_visible_to_policy` is false exactly for
+  missing-forecast cases; visible scores equal the sidecar weights; hidden
+  weights never appear in the visible set.
+- **hidden_profile:** normal and missing-forecast weights are nonconstant over
+  slots 0-5. Overload profiles may be constant.
+
+`job_impact` and `site_impact` give independent reference arithmetic for the
+declared unit (power kW x 1 h x PUE 1.0 x weight, score-kWh; site adds 20 kW
+background over all 30 slots), so Edison's metric records can be recomputed
+once they exist. Empty inputs are NOT_RUN/INCOMPLETE, never PASS. Exit codes and
+exclusive output follow the case checker.
+
+Development receiving (local, development seed only, outputs not committed):
+the generator's 120-case development pair passes all seven checks, and the
+visible set passes the case checker. This is consistency of a supplied pair,
+not seed/provenance/freeze authentication, metric acceptance or any policy
+result. No final seed, scheduler, model, source or research batch was run.
