@@ -4,6 +4,8 @@ November 19 active plan: [the focused rule-system study](decisions/NOV19_RULE_ST
 
 November 20 receiving: the independent verifier kernel/trace reader is implemented in PR #250, separately from production checking. Its real adapter compatibility and external artifact authentication remain pending. Ved accepted proposal-1, but the executable rule adapter is not yet delivered. The [offline supervisor rehearsal](rule_study/OFFLINE_SUPERVISOR_PREPARATION.md) exercises existing Windows containment with dummy workers only; it does not wire or authorize an actual study run.
 
+November 20 generator receiving: development preparation now separates policy-visible cases from evaluator-only artificial weights. Independent visible-case checks pass on development fixtures; sidecar accounting and real adapter verification are not established. Final generation stays closed until the frozen dispatcher and authorization gates are implemented. See [generator receiving](rule_study/RULE04_GENERATOR_RECEIVING.md).
+
 November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
 
 Development input preparation includes a [gated legacy bundle assembler](handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md).
