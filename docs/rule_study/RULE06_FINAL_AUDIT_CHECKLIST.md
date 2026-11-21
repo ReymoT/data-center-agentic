@@ -27,3 +27,5 @@ Owner Matty. Prepared November19; checklist only, no boxes are pre-passed. Due N
 For every gate record PASS, FAIL, BLOCKED or NOT_APPLICABLE with evidence and reason; blank is not PASS. Do not mark research or final delivery complete merely because code CI passes. Deadline pressure cannot supply missing permissions, independent results or course acceptance.
 
 Offline preparation update November20: [the dummy-only timeout rehearsal](OFFLINE_SUPERVISOR_PREPARATION.md) tests process-tree containment and preserved failure evidence. It does not pass the research-authorization, actual dispatch, verification or clean-reproduction gates above.
+
+November 20 receiving: specification design is accepted in [the exact record](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md). [Offline preflight](DISPATCH_PREFLIGHT_PREPARATION.md) tests hash/one-use dummy controls, not actual research dispatch. [Course and license receiving](../decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) resolves timezone/public-hosting facts while contributor license and release checks remain pending. All actual run/reproduction gates stay unpassed.

@@ -15,7 +15,7 @@ acceptance remain pending. The earlier inactive status is superseded by the Nove
 methods/contribution handoffs are coordinated in [#223](https://github.com/ReymoT/data-center-agentic/issues/223).
 
 **Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
-- **Due December 9, 2026, at 11:59 pm.** 20% of the course grade.
+- **Due December 9, 2026, at 11:59 pm Arizona time.** 20% of the course grade.
 - **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
 - **One PDF per group**, uploaded to Canvas under Assignments › Final Project Report, named `Group15-Project21-F26-Final Project Report.PDF` (project number 21 confirmed by Nisha, [#16](https://github.com/ReymoT/data-center-agentic/issues/16)).
 - The detailed contributions of each team member are required.
@@ -23,7 +23,7 @@ methods/contribution handoffs are coordinated in [#223](https://github.com/Reymo
 
 Nisha reports project number 21 and an end-of-day deadline of 11:59 pm on December 9
 in her [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165).
-Arizona timezone is her working assumption, not separately confirmed official guidance.
+Her [November 20 checkpoint](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-7049547810) confirms Arizona time and the required public repository. The team license choice remains pending.
 December 7 is Matty's conservative internal submission target,
 not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
@@ -88,7 +88,7 @@ does not restart presentation work or change official course requirements.
 | December 4 | Matty I04 and R06 checks only after accepted prerequisites |
 | December 5-6 | Repair/revalidation, IEEE layout and final review buffer |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
-| December 9, 11:59 pm | Deadline reported by Nisha; official timezone unconfirmed |
+| December 9, 11:59 pm | Deadline confirmed by Nisha as Arizona time |
 
 ## Required presentation-feedback coverage
 
