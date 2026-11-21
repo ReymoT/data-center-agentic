@@ -79,3 +79,16 @@ This supplies manager-owned decisions and records real replies without fabricati
 ## Concrete adapter record proposal
 
 [ADAPTER_RECORD_PROPOSAL.md](ADAPTER_RECORD_PROPOSAL.md) now specifies exact study-local identity/fields, common unchanged gate, refusal-and-drain behavior, independent verifier output and hash convention. Its [non-executable example](adapter_record.example.json) is not a result. Nisha's reader/gate acceptance and Ved's earlier principles agreement are recorded; remaining exact consumer acceptance is tracked in #239. No F02 registry or runtime code changes are made here.
+
+
+## November 20 actual acceptance and generator receiving
+
+Ved's [concrete proposal-1 acceptance](https://github.com/ReymoT/data-center-agentic/issues/239#issuecomment-7031694901)
+and Edison's [exact review-2 response](https://github.com/ReymoT/data-center-agentic/issues/239#issuecomment-7052918378)
+are received, alongside Nisha's recorded reply. Earlier missing-response statements
+above are historical where superseded. Do not repeat those requests. The original
+pinned specification.json design snapshot is preserved; current replies are linked
+here without silently changing its hash. Actual frozen implementation bindings,
+accounting receiving and bounded execution remain separate uncompleted gates.
+[Generator receiving](RULE04_GENERATOR_RECEIVING.md) records the partial development
+implementation and disabled final route, not an executed study or final freeze.

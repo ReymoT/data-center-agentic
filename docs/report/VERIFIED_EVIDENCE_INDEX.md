@@ -71,3 +71,13 @@ label, stratum, diversity and supplied-set overlap checks. This is implementatio
 receiving, not an actual generated-set result or a completed rule-system study.
 Specification/source pins and resource/input limits are explicit; unsupported
 external provenance, freeze history and missing-forecast accounting remain pending.
+
+
+## RULE-04 generator receiving — November 20
+
+[Reviewed generator implementation](../rule_study/RULE04_GENERATOR_RECEIVING.md)
+supplies deterministic development-seed preparation and separate artificial-weight
+accounting inputs. Its unit fixtures pass independent visible-case checks; no final
+set, rollout, complete accounting acceptance or scientific result is supplied.
+Edison's actual review-2 response is received; final dispatcher/freeze and exact
+authorization remain pending.

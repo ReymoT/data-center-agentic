@@ -18,8 +18,10 @@ Draw order, per seed domain (one ``random.Random``, every draw a ``choice``):
 Acceptance: normal and missing-forecast proposals need joint feasibility, at least one
 flexible job and a nonconstant slot 0-5 profile; overload proposals need joint
 infeasibility. A repeated full-case identity or an authored example (A, B, B-progress)
-counts as a rejected attempt and is redrawn; final-domain proposals also reject any
-development case. Each stratum stops after 10,000 attempts.
+counts as a rejected attempt and is redrawn. Each stratum stops after 10,000 attempts.
+Only development preparation is enabled. Final generation, including development
+exclusion receiving, needs the later frozen-code single-use dispatcher; a URL is
+not sufficient authorization and cannot unlock the final seed here.
 
 Outputs are two separate objects: the policy-visible case set (the shape the RULE-03
 case checker reads; missing-forecast scores are null) and an evaluator-only accounting
@@ -33,7 +35,6 @@ import hashlib
 import itertools
 import json
 import random
-import re
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -41,7 +42,7 @@ from typing import Mapping
 
 RECORD_KIND = "rule_study_case_set_v1"
 ACCOUNTING_RECORD_KIND = "rule_study_accounting_weights_v1"
-GENERATOR_VERSION = "rule04-generator-v1"
+GENERATOR_VERSION = "rule04-generator-v1-reviewed-development-only"
 STUDY_ID = "rule-study-20261119-v1"
 SUPPORTED_SPEC_SHA256 = "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd"
 SPEC_PATH = Path(__file__).resolve().parents[2] / "docs" / "rule_study" / "specification.json"
@@ -71,10 +72,6 @@ FLEXIBLE = (False, True)
 SLACKS = (0, 1, 2)
 SCORES = (100, 200, 300)
 
-AUTHORIZATION_PATTERN = re.compile(
-    r"^https://github\.com/ReymoT/data-center-agentic/(issues|pull)/\d+#issuecomment-\d+$"
-)
-
 
 @dataclass(frozen=True)
 class Job:
@@ -84,6 +81,19 @@ class Job:
     arrival_slot: int
     deadline_slot: int
     flexible: bool
+
+    def __post_init__(self):
+        if not isinstance(self.job_id, str) or not self.job_id.strip():
+            raise ValueError("job_id must be nonempty")
+        for name in ("power_kw", "duration_slots", "arrival_slot", "deadline_slot"):
+            if type(getattr(self, name)) is not int:
+                raise ValueError(f"{name} must be an integer, not bool/float")
+        if self.power_kw <= 0 or not 1 <= self.duration_slots <= HORIZON:
+            raise ValueError("invalid job power/duration")
+        if not 0 <= self.arrival_slot <= LAST_START_SLOT or not 0 <= self.deadline_slot <= HORIZON:
+            raise ValueError("job time outside the declared horizon")
+        if type(self.flexible) is not bool:
+            raise ValueError("flexible must be bool")
 
     def legal_starts(self) -> range:
         """Starts a full-knowledge schedule may use: before slot 24, ending by the deadline."""
@@ -160,6 +170,21 @@ def source_sha256() -> str:
 
 def jointly_feasible(jobs: tuple[Job, ...], capacity_kw: int, background_kw: int) -> bool:
     """True if some assignment completes every job within capacity, knowing all arrivals."""
+    if (
+        not isinstance(jobs, tuple)
+        or not 1 <= len(jobs) <= 4
+        or any(not isinstance(j, Job) for j in jobs)
+    ):
+        raise ValueError("one to four immutable jobs required")
+    if len({j.job_id for j in jobs}) != len(jobs):
+        raise ValueError("duplicate job IDs")
+    if (
+        type(capacity_kw) is not int
+        or capacity_kw <= 0
+        or type(background_kw) is not int
+        or background_kw < 0
+    ):
+        raise ValueError("invalid site power values")
     for starts in itertools.product(*(job.legal_starts() for job in jobs)):
         load = [background_kw] * HORIZON
         for job, start in zip(jobs, starts):
@@ -174,6 +199,8 @@ def jointly_feasible(jobs: tuple[Job, ...], capacity_kw: int, background_kw: int
 
 
 def draw_proposal(rng: random.Random, stratum: str) -> Proposal:
+    if stratum not in STRATA:
+        raise ValueError("unknown stratum")
     count = rng.choice(JOB_COUNTS[stratum])
     jobs = []
     for index in range(1, count + 1):
@@ -192,6 +219,8 @@ def draw_proposal(rng: random.Random, stratum: str) -> Proposal:
 
 def rejection_reason(proposal: Proposal, stratum: str) -> str | None:
     """Stratum acceptance predicate; None means the proposal is accepted."""
+    if stratum not in STRATA:
+        raise ValueError("unknown stratum")
     feasible = jointly_feasible(proposal.jobs, CAPACITY_KW, BACKGROUND_KW)
     if stratum == "overloaded_impossible":
         return "jointly_feasible" if feasible else None
@@ -277,6 +306,7 @@ def _generate(
     per_stratum: int = CASES_PER_STRATUM,
     max_attempts: int = MAX_ATTEMPTS_PER_STRATUM,
 ) -> tuple[list[_Accepted], dict]:
+    _validate_generation_controls(domain, per_stratum, max_attempts)
     rng = random.Random(SEED_DOMAINS[domain])
     accepted: list[_Accepted] = []
     report = {}
@@ -323,6 +353,20 @@ def _generate(
     return accepted, report
 
 
+def _validate_generation_controls(domain, per_stratum, max_attempts):
+    if not isinstance(domain, str) or domain not in SEED_DOMAINS:
+        raise ValueError("unknown seed domain")
+    if domain == "final":
+        raise PermissionError(
+            "final generation is disabled until the reviewed frozen-code dispatcher, "
+            "single-use authorization and containment are implemented; a comment URL is not authorization"
+        )
+    if type(per_stratum) is not int or not 1 <= per_stratum <= CASES_PER_STRATUM:
+        raise ValueError("per_stratum must be an integer from 1 through 40")
+    if type(max_attempts) is not int or not 1 <= max_attempts <= MAX_ATTEMPTS_PER_STRATUM:
+        raise ValueError("max_attempts must be an integer from 1 through 10000")
+
+
 def generate(
     domain: str,
     *,
@@ -333,28 +377,17 @@ def generate(
 ) -> tuple[dict, dict]:
     """Return (policy-visible case set, evaluator-only accounting weights) for a seed domain.
 
-    The final domain needs an explicit issue-comment authorization reference. It is recorded,
-    not verified: it does not itself grant approval.
+    Development preparation only. Both public and internal final-domain entry points
+    fail closed until an exact authenticated frozen-code dispatcher is implemented.
     """
-    if domain not in SEED_DOMAINS:
-        raise ValueError(f"unknown seed domain {domain!r}")
-    if domain == "final":
-        if not isinstance(authorization, str) or not AUTHORIZATION_PATTERN.match(authorization):
-            raise PermissionError(
-                "final-domain generation needs --authorization with the approving issue comment URL"
-            )
-    elif authorization is not None:
+    _validate_generation_controls(domain, per_stratum, max_attempts)
+    if authorization is not None:
         raise ValueError("authorization applies only to the final domain")
     spec = load_specification() if spec is None else spec
     if canonical_sha256(spec) != SUPPORTED_SPEC_SHA256:
         raise ValueError("unsupported specification revision; review generator assumptions first")
     authored = authored_full_identities(spec)
     excluded: set[str] = set()
-    if domain == "final":
-        development, _ = _generate(
-            "development", authored, set(), per_stratum=per_stratum, max_attempts=max_attempts
-        )
-        excluded = {c.full_sha256 for c in development}
     accepted, report = _generate(
         domain, authored, excluded, per_stratum=per_stratum, max_attempts=max_attempts
     )
