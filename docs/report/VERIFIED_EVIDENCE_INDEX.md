@@ -81,3 +81,7 @@ accounting inputs. Its unit fixtures pass independent visible-case checks; no fi
 set, rollout, complete accounting acceptance or scientific result is supplied.
 Edison's actual review-2 response is received; final dispatcher/freeze and exact
 authorization remain pending.
+
+## November 20 accepted design and offline readiness
+
+[Specification acceptance](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) closes the design task, not code or scientific execution. [Dispatch preflight](../rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) is dummy-tested preparation only. [Course/license receiving](../decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) and the dependency metadata inventory preserve the remaining actual release decision; no study result or license adoption is implied.

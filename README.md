@@ -147,9 +147,7 @@ submission by November 14. The December 2 demo permits live, recorded or screens
 delivery. The newer [official report update](docs/decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
 requires 5â€“10 IEEE conference pages and one PDF, superseding the earlier 15â€“20-page
 plan. Nisha's [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
-reports project number 21 and December 9 at 11:59 pm. Arizona timezone is her
-working assumption; official timezone and release/license requirements remain
-unconfirmed. December 7 remains the internal report submission target.
+reports project number 21 and December 9 at 11:59 pm. Her [November 20 update](docs/decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) confirms Arizona time and the public-repository requirement. The team license choice and release checks remain pending. December 7 remains the internal report submission target.
 These are attributed course reports, not direct assistant access to Canvas.
 
 The [offline I01 preparation](docs/handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md)
@@ -324,3 +322,5 @@ Record affected teammates' agreement in the Issue or decision record before chan
 The [project plan](docs/PROJECT_PLAN.md) links the authoritative checklist and timeline. The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices and records partial Q09/Q11 decisions. Shared-record consumer adoption, source evidence, final provider/budget pins, remaining team permissions, detailed allocations and target platforms still need evidence. Stubs, constant success verdicts and fabricated model responses/traces/results are not completion evidence. Final end-to-end acceptance belongs to Matty, independent verification to Nisha, and second-machine reproduction to Ved.
 
 November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.
+
+November 20 specification handoff: [the exact design revision and all consumer replies are recorded](docs/decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md). RULE-01 is complete; actual executable freeze and research authorization remain under RULE-06. [Offline dispatcher preflight](docs/rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) checks hashes and one-use dummy dispatch; it cannot generate final cases.

@@ -1,5 +1,8 @@
 # Q13 course update reported by Nisha
 
+Current November 20 receiving supersedes earlier unknown-timezone/release statements below: [Nisha confirms December 9, 11:59 PM Arizona time and the public repository requirement](Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md). Only the team license choice and actual release checks remain; no private email or course access is claimed.
+
+
 Superseding report-only update: [official 5–10-page IEEE requirements](Q13_OFFICIAL_REPORT_2026-11-02.md).
 The earlier 15–20-page entry below is historical. Presentation planning remains
 unchanged. The linked record includes Nisha's November 4 project-number/end-of-day

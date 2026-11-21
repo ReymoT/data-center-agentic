@@ -92,3 +92,5 @@ here without silently changing its hash. Actual frozen implementation bindings,
 accounting receiving and bounded execution remain separate uncompleted gates.
 [Generator receiving](RULE04_GENERATOR_RECEIVING.md) records the partial development
 implementation and disabled final route, not an executed study or final freeze.
+
+[November 20 exact specification acceptance](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) records completion of RULE-01 with all replies received. Executable freeze and actual run authorization remain separate under #244.
