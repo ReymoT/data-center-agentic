@@ -102,3 +102,7 @@ Ved’s PR #256 investigation is preserved in [the historical audit](R02_TECHNIC
 ## RULE-02 implementation receiving (November 21, 2026)
 
 PR #257 adds the study-local executable scheduler and common checked runner. Matty fixed path containment, case-binding consistency, replay/aggregation evidence integrity and the fixed-PUE case boundary. The original implementer report is preserved as historical, unreceived evidence; see `docs/handoffs/RULE02_IMPLEMENTATION.md` for the current handoff. Focused receiving tests: 148 passed. Independent frozen-system verification, accounting receiving and authorized scientific evaluation remain separate and pending.
+
+## RULE02 historical evidence received (November 22, 2026)
+
+The recreated rule02-publish submission f3f5be0 supplies 1,270 artifacts and 10 authored traces (300 decisions) bound to the original 176361a implementation. Exact bytes and historical Git-source pins were checked without policy execution; see `docs/handoffs/RULE02_EVIDENCE_RECEIVING_NOV22.md` and its JSON. This does not validate the later corrected main implementation, authenticate the submitter runtime, complete independent receiving or authorize a scientific run. The original evidence and handoff are preserved; Windows byte preservation and a strict read-only receiving checker were added.

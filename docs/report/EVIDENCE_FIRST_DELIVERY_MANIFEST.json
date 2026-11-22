@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "a37cd65217004a4ea7315b4bf7fd36f98faca1affc4e657dbce2418f8f22aba0",
+      "sha256": "537b24ffb962bd7e77b57500272dd29aca14b6459dd2ee672c3e013d708db3b6",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -525,7 +525,7 @@
     },
     {
       "path": "docs/handoffs/RULE02_IMPLEMENTATION.md",
-      "sha256": "8605fe5f06f5a826e0927f7f036b2e42d7b6c2be669a36ac81af8c2676d12041",
+      "sha256": "07090578fae53dc12daae5cea6c29f8322ba5688d4f7a0070ef9b4e97c8fd973",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -561,6 +561,46 @@
     {
       "path": "tests/rule_study/test_rule_scheduler.py",
       "sha256": "3e5ab30cc0c003c9d0e464a3123810292e23a15b6cf57e1d0b76c332bf203d60",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "409e9c27c1541c0214ef6483509e501ff896fe33c86bcc1ef66c018b6f34893c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/check_rule02_evidence.py",
+      "sha256": "34c68290f0ce4d8b9df5dd99c9a3842b39e77162eb60e35c2101b7ecdc94c3cb",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/test_rule02_evidence.py",
+      "sha256": "3f15e890d570fd7fab954d84882efe8aa0f301ff768d2898e62f5a08d35e666b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule02/MANIFEST.json",
+      "sha256": "28893c3d52de7478f6e12b32df8189e5e7b00aa7f6e7a654571e2efe8743bb53",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule02/README.md",
+      "sha256": "f1ddaaae9f04b4be74413fa027235b4cdd7578443bb1547e7e77fe553466c861",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE02_EVIDENCE_RECEIVING_NOV22.md",
+      "sha256": "0ca2b4140033e23f01c90aeda9c772fc9d4589f8e52de82a8c0689489ffd371b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE02_EVIDENCE_RECEIVING_NOV22.json",
+      "sha256": "bdedc15c8f6b26c3144b509d1a58f7acb419a0c4c7e7fdb79f772731bdccf210",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE02_EVIDENCE_SUBMISSION_NOV22.md",
+      "sha256": "c177274fa4cb3f071fb92fba36c9abcc53f20c0ace22bbe24d55de6b8c96d3ef",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

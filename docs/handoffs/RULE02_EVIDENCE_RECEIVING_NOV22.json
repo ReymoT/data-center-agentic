@@ -1,0 +1,105 @@
+{
+  "artifacts": 1270,
+  "current_implementation_verified": false,
+  "date_arizona": "2026-11-22",
+  "decisions": 300,
+  "implementation_commit": "176361ad23ba57940b1576828893ce3a7b1a1666",
+  "independent_scientific_acceptance": false,
+  "model_or_policy_executed": false,
+  "original_manifest_sha256": "28893c3d52de7478f6e12b32df8189e5e7b00aa7f6e7a654571e2efe8743bb53",
+  "runtime_environment_authenticated": false,
+  "scope": "Static receiving of implementer-supplied historical authored traces only; no policy replay or new scientific run.",
+  "status": "HISTORICAL_ARTIFACTS_CHECKED",
+  "submitted_evidence_commit": "f3f5be05bcaf7fa978dc4e81ec4cb76deb5575cc",
+  "trace_reader_checks": {
+    "greedy_a": {
+      "binding_validation": {
+        "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied",
+        "status": "INCOMPLETE",
+        "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency"
+      },
+      "counterexample_total": 0,
+      "counts": {
+        "complete_traces": 3,
+        "distinct_binding_sets": 3,
+        "p1_eligible_traces": 2,
+        "p1_outside_scope": {
+          "not_jointly_feasible": 1
+        },
+        "p2_checked_traces": 3,
+        "partial_traces": 0,
+        "traces": 3
+      },
+      "properties": {
+        "P1": "PASS",
+        "P2": "PASS",
+        "S1": "PASS",
+        "S2": "PASS",
+        "S3": "PASS",
+        "S4": "NOT_RUN",
+        "S5": "PASS"
+      },
+      "refused_traces": []
+    },
+    "greedy_b": {
+      "binding_validation": {
+        "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied",
+        "status": "INCOMPLETE",
+        "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency"
+      },
+      "counterexample_total": 0,
+      "counts": {
+        "complete_traces": 3,
+        "distinct_binding_sets": 3,
+        "p1_eligible_traces": 2,
+        "p1_outside_scope": {
+          "not_jointly_feasible": 1
+        },
+        "p2_checked_traces": 3,
+        "partial_traces": 0,
+        "traces": 3
+      },
+      "properties": {
+        "P1": "PASS",
+        "P2": "PASS",
+        "S1": "PASS",
+        "S2": "PASS",
+        "S3": "PASS",
+        "S4": "NOT_RUN",
+        "S5": "PASS"
+      },
+      "refused_traces": []
+    },
+    "rules-v1": {
+      "binding_validation": {
+        "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied",
+        "status": "INCOMPLETE",
+        "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency"
+      },
+      "counterexample_total": 0,
+      "counts": {
+        "complete_traces": 4,
+        "distinct_binding_sets": 4,
+        "p1_eligible_traces": 2,
+        "p1_outside_scope": {
+          "fault_injected": 1,
+          "not_jointly_feasible": 1
+        },
+        "p2_checked_traces": 4,
+        "partial_traces": 0,
+        "traces": 4
+      },
+      "properties": {
+        "P1": "PASS",
+        "P2": "PASS",
+        "S1": "PASS",
+        "S2": "PASS",
+        "S3": "PASS",
+        "S4": "PASS",
+        "S5": "PASS"
+      },
+      "refused_traces": []
+    }
+  },
+  "traces": 10
+}
