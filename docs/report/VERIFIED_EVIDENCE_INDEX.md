@@ -106,3 +106,7 @@ PR #257 adds the study-local executable scheduler and common checked runner. Mat
 ## RULE02 historical evidence received (November 22, 2026)
 
 The recreated rule02-publish submission f3f5be0 supplies 1,270 artifacts and 10 authored traces (300 decisions) bound to the original 176361a implementation. Exact bytes and historical Git-source pins were checked without policy execution; see `docs/handoffs/RULE02_EVIDENCE_RECEIVING_NOV22.md` and its JSON. This does not validate the later corrected main implementation, authenticate the submitter runtime, complete independent receiving or authorize a scientific run. The original evidence and handoff are preserved; Windows byte preservation and a strict read-only receiving checker were added.
+
+## November 22 manager preparation
+
+[Current readiness/handoffs](../handoffs/NOV22_MANAGER_READINESS_AND_HANDOFFS.md) reconciles completed RULE02 implementation, current-code independent receiving and unchanged dates. [Worker preparation](../rule_study/WORKER_PREPARATION_NOV22.md) wires one authored case to the actual runner after containment/hash checks; inspection never releases it. Ordinary unit-fixture success is not a scientific run. [Notice/tree audit](DEPENDENCY_NOTICE_AND_TREE_AUDIT_NOV22.json) records actual installed notice locations and package-pattern scan, with [third-party notices](../../THIRD_PARTY_NOTICES.md) and the version-pinned supplemental LangSmith license. Team contributor consent, actual final package compliance, frozen-system verification and authorized execution remain pending.

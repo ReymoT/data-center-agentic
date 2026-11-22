@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "1efb075bb36b6ced4cfb5363486dc9193a8cc917b060fa0de1f1d9b4768dbd47",
+      "sha256": "0abba0a9dd9ee325d6a00f6f74db8dc40d1b2a4fedcaf2b313e96397efb4c559",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "b4be70ba9cbdfb0dfff3b38fa5589afd1a06167e44dbab004ddf8144f0f43e36",
+      "sha256": "bedd424c29c9d68e07dbb26314321729c17fa4e8d94d2bfa0e7faa6f1a51beea",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "2d835a190b2f9d77413aaae9c7982c0c26ea5a24bfa73af5d42f44a5e079c7f7",
+      "sha256": "9d9148793bc2448b4422526a960ee3848768341c6d1c919443810978b444f7e8",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "537b24ffb962bd7e77b57500272dd29aca14b6459dd2ee672c3e013d708db3b6",
+      "sha256": "5632a5398a91d8586d37decd794c8390db53a03ac3a68ca6b8d904df60bfbeeb",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "966f9103b3cbe650c59b2e7ef17c7b5aa81d0ca86229e3845363582baa84e550",
+      "sha256": "9f1a99336b09b5cdda09367fe0248878b2f68584b3678c73192f08f5a63cf239",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "2978bc910b2eff893c6c4417abd431b08fb7894d3782d292e8e8cfa3868636e9",
+      "sha256": "9d572738b2775669bac11abe7e2450d1e86dc6f1fd4b3708e31bf7d1752575bc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "2516a1ae12fb4fc2712bb315a9d166fb2bde1ca02da5f034aca510bee3bcaee6",
+      "sha256": "3b17b086c12cd7b38b82f9a4658cb2ac9e0ecb0e3e7fd4ae3ced2cd6f0b82786",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -390,7 +390,7 @@
     },
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
-      "sha256": "f291f780ca3c3ac7814d27ad4d245e918a7f3b023b36e64eaabfa209b4da5514",
+      "sha256": "dd9985cef4207cbd69cc14e3522024a6cbf35c04a0d41abdb07cc1abd81e7d7e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "409e9c27c1541c0214ef6483509e501ff896fe33c86bcc1ef66c018b6f34893c",
+      "sha256": "4195f6f380343ae6f9fb4d10cd5c271587daabdd8b132ae0813caa1a57c49bf9",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -601,6 +601,41 @@
     {
       "path": "docs/handoffs/RULE02_EVIDENCE_SUBMISSION_NOV22.md",
       "sha256": "c177274fa4cb3f071fb92fba36c9abcc53f20c0ace22bbe24d55de6b8c96d3ef",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "aa8c1667ead4c23041925d11d8d0296ddf3a7a6cb46f40c273d9dd3b3f727816",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/NOV22_MANAGER_READINESS_AND_HANDOFFS.md",
+      "sha256": "0a6d5509f55bc0f26c81e8429753f271c57fe67fdb8cf4601956df9242969bfa",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/DEPENDENCY_NOTICE_AND_TREE_AUDIT_NOV22.json",
+      "sha256": "c5bf96c22bd2ff9a621ec5f2dd2bca604dc5ec5cc319cad22e7f64ef87b5f420",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/WORKER_PREPARATION_NOV22.md",
+      "sha256": "1bc42b361b368d95d7adbb9ace009b67ce4063cecaea91d2633f7cee161cc6e2",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/prepare_rule_study_worker.py",
+      "sha256": "a1869189225e73e9d3c00437a8860a0926928dbd7f9b9b22827a8764265752a8",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/runtime/test_rule_study_prepared_worker.py",
+      "sha256": "decc72a4bbb543ea80e2482dddfde47c6d8d9590313240bb6967b9b350ffbaea",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "third_party/notices/langsmith-0.14.7-LICENSE.txt",
+      "sha256": "34e0b9842c7a31d34e53bc7eb224e81e07a34996106e029bbc72dea2d449f496",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
