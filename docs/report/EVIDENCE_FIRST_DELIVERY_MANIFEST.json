@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "8e7a0f77e031b78f9d4577e27c3628c70218831214ef2e29c0cf3328982e2b35",
+      "sha256": "33cea9a4e78013c6416d9d223130b3c7d9bead7c4934e51e7a5b914981d9c369",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -295,7 +295,7 @@
     },
     {
       "path": "docs/report/R02_ONTOLOGY_AND_REFERENCE_METHODS.md",
-      "sha256": "21bdd679dcc2f00c1294187533198f9f71df8421fa2b3887e8f5f81710230ab8",
+      "sha256": "8466da92786f20be7091e54fb9c26ff28f45d3066c1b806a827be7a59cf5d5c0",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -486,6 +486,11 @@
     {
       "path": "tests/evaluation/test_rule_study_accounting.py",
       "sha256": "e7a6d62028d44895a7ea240773d78d62a6062e03f510a4c1793461bf61f1431f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/R02_TECHNICAL_AUDIT_NOV18.md",
+      "sha256": "da81ddb74bf7e3787fe4288f3e7ebf6c063ccdefd5f718ed4d360890074bac7a",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
