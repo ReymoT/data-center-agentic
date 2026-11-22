@@ -1,8 +1,8 @@
 """The merged RULE-03 strict reader and CLI must accept what the runner writes, and fail closed.
 
 Nothing here modifies the reader. Traces come from the real runner/simulator/checker with a
-unit-test-only commit value (the tree is uncommitted while tests run); the frozen-commit
-verification is performed separately from a clean checkout and is reported in the handoff.
+unit-test-only commit value (the tree is uncommitted while tests run). These tests do not
+establish frozen-commit verification; that requires a separately accepted artifact handoff.
 """
 
 import json

@@ -327,6 +327,89 @@ def test_replay_returns_identical_saved_evidence_without_stepping(tmp_path):
         assert original.decision_sha256 == again.decision_sha256
 
 
+@pytest.mark.parametrize(
+    "case_id", ["../escape", "..\\escape", "/absolute", "C:drive", "a/b", "a\\b"]
+)
+def test_case_identity_cannot_escape_trace_directory(tmp_path, case_id):
+    with pytest.raises(ValueError, match="single path component"):
+        rn.RuleStudyRunner(
+            None,
+            c.CASE_A.snapshot,
+            tmp_path,
+            policy_id="rules-v1",
+            case_id=case_id,
+            decision_time_utc=c.CASE_A.decision_time_utc,
+            bindings=bindings_for(c.CASE_A),
+            score_convention=rn.sch.ScoreKwhConvention(),
+        )
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_case_body_must_match_binding_before_writing(tmp_path):
+    case = c.CASE_A
+    with pytest.raises(ValueError, match="different immutable file"):
+        rn.RuleStudyRunner(
+            None,
+            case.snapshot,
+            tmp_path,
+            policy_id="rules-v1",
+            case_id=case.case_id,
+            decision_time_utc=case.decision_time_utc,
+            bindings=bindings_for(replace(case, background_kw=10)),
+            score_convention=rn.sch.ScoreKwhConvention(),
+            case_json=case.case_json(),
+        )
+    assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.parametrize("target", ["decision", "transition", "state", "snapshot", "case"])
+def test_replay_refuses_modified_saved_evidence_without_stepping(tmp_path, target):
+    runner, sim = fresh_runner(tmp_path, c.CASE_A)
+    outcome = runner.decide(0)
+    record = outcome.record
+    paths = {
+        "decision": runner.root / outcome.decision_ref,
+        "transition": runner.root / record.execution.transition_ref,
+        "state": runner.root / "states" / f"{record.state_before.visible_state_sha256}.json",
+        "snapshot": runner.root
+        / "snapshots"
+        / f"{record.state_before.constraint_snapshot_sha256}.json",
+        "case": runner.root / "case.json",
+    }
+    # Still parseable JSON: even whitespace changes exact persisted bytes.
+    with paths[target].open("a", encoding="utf-8") as stream:
+        stream.write(" ")
+    with pytest.raises(ValueError, match="commitment|hash mismatch"):
+        runner.decide(0)
+    assert len(sim.history) == 1
+
+
+def test_missing_completion_commitment_never_reexecutes(tmp_path):
+    runner, sim = fresh_runner(tmp_path, c.CASE_A)
+    runner.decide(0)
+    (runner.root / ".completed" / "decision-00.json").unlink()
+    with pytest.raises(IndeterminateExecution, match="completion commitment"):
+        runner.decide(0)
+    assert len(sim.history) == 1
+
+
+def test_result_refuses_modified_transition(tmp_path):
+    case_run, _, _ = run(tmp_path, c.CASE_A)
+    path = case_run.root / case_run.outcomes[0].record.execution.transition_ref
+    with path.open("a", encoding="utf-8") as stream:
+        stream.write(" ")
+    with pytest.raises(ValueError, match="transition hash mismatch"):
+        rn.build_result(
+            case_run.root, c.CASE_A, "rules-v1", bindings_for(c.CASE_A), rn.sch.ScoreKwhConvention()
+        )
+
+
+def test_nonunit_pue_is_not_silently_bound_to_same_case(tmp_path):
+    with pytest.raises(ValueError, match="PUE to 1"):
+        run(tmp_path, replace(c.CASE_A, pue=1.7))
+    assert list(tmp_path.iterdir()) == []
+
+
 def test_replay_from_a_restarted_runner_uses_only_saved_evidence(tmp_path):
     case_run, _, _ = run(tmp_path, c.CASE_A)
     runner2, sim2 = fresh_runner(tmp_path, c.CASE_A)

@@ -98,3 +98,7 @@ provenance, metric acceptance or actual safety/progress/generalization evidence.
 ## R02 report organization — November21
 
 Ved’s PR #256 investigation is preserved in [the historical audit](R02_TECHNICAL_AUDIT_NOV18.md). [The concise R02 section](R02_ONTOLOGY_AND_REFERENCE_METHODS.md) separates current source methods, reported local history and unperformed study evidence. Investigation counts/platform claims are not silently upgraded to manager-reproduced or current CI results.
+
+## RULE-02 implementation receiving (November 21, 2026)
+
+PR #257 adds the study-local executable scheduler and common checked runner. Matty fixed path containment, case-binding consistency, replay/aggregation evidence integrity and the fixed-PUE case boundary. The original implementer report is preserved as historical, unreceived evidence; see `docs/handoffs/RULE02_IMPLEMENTATION.md` for the current handoff. Focused receiving tests: 148 passed. Independent frozen-system verification, accounting receiving and authorized scientific evaluation remain separate and pending.
