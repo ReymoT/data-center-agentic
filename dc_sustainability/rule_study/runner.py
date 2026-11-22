@@ -21,6 +21,7 @@ intention marker leaves it reserved, and a later replay reports ``IndeterminateE
 import hashlib
 import json
 import os
+import re
 import subprocess
 import threading
 from dataclasses import dataclass
@@ -180,25 +181,34 @@ class RuleStudyRunner:
     ):
         if policy_id not in r.POLICY_IDS:
             raise ValueError(f"policy_id must be one of {r.POLICY_IDS}")
-        if not isinstance(case_id, str) or not case_id:
-            raise ValueError("a nonempty case_id is required")
+        if (
+            not isinstance(case_id, str)
+            or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,127}", case_id) is None
+        ):
+            raise ValueError("case_id must be a safe single path component")
         if policy_id == "rules-v1" and score_convention is None:
             raise ValueError("rules-v1 needs an explicit ScoreConvention")
         if fault_injection is not None and policy_id != "rules-v1":
             raise ValueError("fault injection is a rules-v1 demonstration only")
         if not isinstance(bindings, r.Bindings):
             raise TypeError("bindings must be Bindings")
+        if (
+            case_json is not None
+            and r.study_sha256(r.study_json(case_json)) != bindings.case_sha256
+        ):
+            raise ValueError("case body and bindings identify a different immutable file")
         self._sim = simulator
         self._reader = snapshot_reader
         self._policy_id = policy_id
         self._case_id = case_id
         self._time = decision_time_utc
         self._bindings = bindings
+        self._case_expected = case_json is not None
         self._convention = score_convention
         self._fault = fault_injection
         self._lock = threading.Lock()
         self.root = Path(directory) / policy_id / f"{case_id}-{policy_id}"
-        for name in ("decisions", "states", "snapshots", "transitions", ".intents"):
+        for name in ("decisions", "states", "snapshots", "transitions", ".intents", ".completed"):
             (self.root / name).mkdir(parents=True, exist_ok=True)
         self._reasons: dict[str, str] = {}
         if case_json is not None:
@@ -218,6 +228,13 @@ class RuleStudyRunner:
                     "case_id": self._case_id,
                     "decision_index": index,
                     "bindings": self._bindings.to_jsonable(),
+                    "score_convention": None
+                    if self._convention is None
+                    else {
+                        "id": self._convention.convention_id,
+                        "status": self._convention.status,
+                        "unit": self._convention.unit,
+                    },
                     "fault": probe,
                 }
             )
@@ -247,7 +264,46 @@ class RuleStudyRunner:
                     "reserved decision has no final record; reconcile actual state, do not retry"
                 )
             text = decision_path.read_text(encoding="utf-8")
-            return self._outcome(index, r.RuleStudyDecision.from_json(text), text, None, True)
+            record = r.RuleStudyDecision.from_json(text)
+            completion = self.root / ".completed" / decision_path.name
+            if not completion.exists():
+                raise IndeterminateExecution("record has no completion commitment; do not retry")
+            if completion.read_text(encoding="utf-8") != r.study_sha256(text) + "\n":
+                raise ValueError("saved decision differs from its completion commitment")
+            if (
+                record.policy_id != self._policy_id
+                or record.case_id != self._case_id
+                or record.decision_index != index
+                or record.bindings != self._bindings
+                or record.state_before.to_jsonable() != saved["state_before"]
+            ):
+                raise ValueError("saved decision identity differs from its reservation")
+            evidence = [
+                (
+                    self.root / "states" / f"{record.state_before.visible_state_sha256}.json",
+                    record.state_before.visible_state_sha256,
+                ),
+                (
+                    self.root
+                    / "snapshots"
+                    / f"{record.state_before.constraint_snapshot_sha256}.json",
+                    record.state_before.constraint_snapshot_sha256,
+                ),
+            ]
+            if record.execution.state_after is not None:
+                digest = record.execution.state_after.state_sha256
+                evidence.append((self.root / "states" / f"{digest}.json", digest))
+            if record.execution.transition_ref is not None:
+                expected_ref = f"transitions/transition-{index:02d}.json"
+                if record.execution.transition_ref != expected_ref:
+                    raise ValueError("unexpected transition reference")
+                evidence.append((self.root / expected_ref, record.execution.transition_sha256))
+            if self._case_expected or (self.root / "case.json").exists():
+                evidence.append((self.root / "case.json", self._bindings.case_sha256))
+            for path, digest in evidence:
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+                    raise ValueError(f"saved evidence hash mismatch: {path.name}")
+            return self._outcome(index, record, text, None, True)
         if decision_path.exists():
             raise ValueError("a decision record exists outside this reservation")
         return None
@@ -473,6 +529,7 @@ class RuleStudyRunner:
     def _publish_record(self, index, decision_path, record, transition) -> DecisionOutcome:
         text = record.to_json()
         _publish(decision_path, text)
+        _publish(self.root / ".completed" / decision_path.name, r.study_sha256(text) + "\n")
         return self._outcome(index, record, text, transition, False)
 
     # ------------------------------------------------------------------ candidate stages
@@ -678,11 +735,33 @@ def build_result(
     for path in decision_files:
         text = path.read_text(encoding="utf-8")
         record = r.RuleStudyDecision.from_json(text)
+        commitment = root / ".completed" / path.name
+        if (
+            not commitment.is_file()
+            or commitment.read_text(encoding="utf-8") != r.study_sha256(text) + "\n"
+        ):
+            raise ValueError("result cannot use an uncommitted or modified decision")
+        if (
+            record.bindings != bindings
+            or record.policy_id != policy_id
+            or record.case_id != case.case_id
+            or record.decision_index != len(hashes)
+        ):
+            raise ValueError("result decision identity or sequence mismatch")
         hashes.append(r.study_sha256(text))
         for job_id in record.execution.current_starts:
             started[job_id] = record.decision_index
         if record.execution.transition_ref:
-            transitions.append(_load_json(root / record.execution.transition_ref))
+            expected_ref = f"transitions/transition-{record.decision_index:02d}.json"
+            if record.execution.transition_ref != expected_ref:
+                raise ValueError("unexpected result transition reference")
+            transition_path = root / expected_ref
+            if (
+                hashlib.sha256(transition_path.read_bytes()).hexdigest()
+                != record.execution.transition_sha256
+            ):
+                raise ValueError("result transition hash mismatch")
+            transitions.append(_load_json(transition_path))
         stop_errors = [e for e in record.errors if e.code.startswith("STOP_")]
         stopped = stopped or bool(stop_errors) or record.execution.status == "indeterminate"
         errors.extend(stop_errors)
@@ -783,6 +862,8 @@ def run_case(
     snapshot_reader: Optional[Callable[[], s.ConstraintSnapshot]] = None,
 ) -> tuple[CaseRun, SchedulingSimulator, RuleStudyRunner]:
     """Run all 30 decisions of an authored case through the common runner and write the result."""
+    if type(case.pue) not in (int, float) or case.pue != 1:
+        raise ValueError("the accepted rule-study case envelope fixes PUE to 1")
     sim = simulator or SchedulingSimulator(allow_completion_starts=False)
     if simulator is None:
         sim.reset(case.episode(), forecasts_by_slot=case.forecasts_by_slot())

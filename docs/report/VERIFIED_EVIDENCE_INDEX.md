@@ -85,3 +85,20 @@ authorization remain pending.
 ## November 20 accepted design and offline readiness
 
 [Specification acceptance](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) closes the design task, not code or scientific execution. [Dispatch preflight](../rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) is dummy-tested preparation only. [Course/license receiving](../decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) and the dependency metadata inventory preserve the remaining actual release decision; no study result or license adoption is implied.
+
+
+## Independent accounting checker receiving — November21
+
+[Accounting-sidecar implementation](../rule_study/RULE03_VERIFIER.md) adds independent
+supplied-pair weight/header/coverage/identity/profile checks and exact arithmetic.
+Manager review preserves Nisha's original contribution and scopes PASS to those
+checks. Fixture compatibility is not retained-file receipt, authenticated source
+provenance, metric acceptance or actual safety/progress/generalization evidence.
+
+## R02 report organization — November21
+
+Ved’s PR #256 investigation is preserved in [the historical audit](R02_TECHNICAL_AUDIT_NOV18.md). [The concise R02 section](R02_ONTOLOGY_AND_REFERENCE_METHODS.md) separates current source methods, reported local history and unperformed study evidence. Investigation counts/platform claims are not silently upgraded to manager-reproduced or current CI results.
+
+## RULE-02 implementation receiving (November 21, 2026)
+
+PR #257 adds the study-local executable scheduler and common checked runner. Matty fixed path containment, case-binding consistency, replay/aggregation evidence integrity and the fixed-PUE case boundary. The original implementer report is preserved as historical, unreceived evidence; see `docs/handoffs/RULE02_IMPLEMENTATION.md` for the current handoff. Focused receiving tests: 148 passed. Independent frozen-system verification, accounting receiving and authorized scientific evaluation remain separate and pending.
