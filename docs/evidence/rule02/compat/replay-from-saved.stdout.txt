@@ -1,0 +1,107 @@
+{
+  "all_identical": true,
+  "note": "replay of committed saved evidence only; not independent verification",
+  "record_kind": "rule02_replay_from_saved_v1",
+  "traces": [
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "A",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_a",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_a/A-greedy_a"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_a",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_a/B-greedy_a"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B-progress",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_a",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_a/B-progress-greedy_a"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "A",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_b",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_b/A-greedy_b"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_b",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_b/B-greedy_b"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B-progress",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "greedy_b",
+      "simulator_transitions_executed": 0,
+      "trace": "greedy_b/B-progress-greedy_b"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "A",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "rules-v1",
+      "simulator_transitions_executed": 0,
+      "trace": "rules-v1/A-rules-v1"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B-fault",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "rules-v1",
+      "simulator_transitions_executed": 0,
+      "trace": "rules-v1/B-fault-rules-v1"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B-progress",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "rules-v1",
+      "simulator_transitions_executed": 0,
+      "trace": "rules-v1/B-progress-rules-v1"
+    },
+    {
+      "all_replayed_from_saved_files": true,
+      "case_id": "B",
+      "decision_hashes_match_result": true,
+      "decisions_replayed": 30,
+      "identical": true,
+      "policy_id": "rules-v1",
+      "simulator_transitions_executed": 0,
+      "trace": "rules-v1/B-rules-v1"
+    }
+  ]
+}

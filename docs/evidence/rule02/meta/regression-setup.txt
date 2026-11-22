@@ -1,0 +1,4 @@
+$ python scripts/validate_setup.py
+PASS: 50 task records, role inventories, acyclic dependencies, local Markdown links,
+      deployment/contract versions, canonical interface pointer, config placeholders,
+      dependency inputs, README preferences and seven-file policy rules.

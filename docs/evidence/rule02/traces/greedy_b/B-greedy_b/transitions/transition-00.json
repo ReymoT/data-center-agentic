@@ -1,0 +1,1 @@
+{"fallback_reasons":{},"latest_state_recheck":null,"missed_job_ids":["J1","J2"],"nonflexible_violation_ids":["J1","J2"],"rejection":"requires runtime-approved ApprovedActions","slot_record":{"background_load_kw":20.0,"completed_job_ids":[],"emissions_kg":null,"energy_kwh":null,"job_load_kw":0.0,"phase":"decision","running_job_ids":[],"slot":0,"started_job_ids":[]}}
