@@ -85,3 +85,12 @@ authorization remain pending.
 ## November 20 accepted design and offline readiness
 
 [Specification acceptance](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) closes the design task, not code or scientific execution. [Dispatch preflight](../rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) is dummy-tested preparation only. [Course/license receiving](../decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) and the dependency metadata inventory preserve the remaining actual release decision; no study result or license adoption is implied.
+
+
+## Independent accounting checker receiving — November21
+
+[Accounting-sidecar implementation](../rule_study/RULE03_VERIFIER.md) adds independent
+supplied-pair weight/header/coverage/identity/profile checks and exact arithmetic.
+Manager review preserves Nisha's original contribution and scopes PASS to those
+checks. Fixture compatibility is not retained-file receipt, authenticated source
+provenance, metric acceptance or actual safety/progress/generalization evidence.
