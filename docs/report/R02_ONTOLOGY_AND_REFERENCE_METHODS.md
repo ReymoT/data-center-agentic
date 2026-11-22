@@ -69,7 +69,7 @@ The [accepted specification](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.
 uses independently authored artificial inputs, explicit rules and separate bounded
 safety/progress checking. The legacy MILP, ontology prototype and historical
 Agent/Plain evidence remain methods/background, not results of that new study.
-RULE-02 implementation is under separate review in PR #257; independent verifier,
+RULE-02 implementation is documented in PR #257 and its current handoff; independent verifier,
 case and accounting checker implementations are available, but their fixture tests
 are not frozen-scheduler verification or unseen generalization evidence.
 
