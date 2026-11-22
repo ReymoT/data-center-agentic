@@ -326,3 +326,143 @@ def test_cli_exit_codes_and_exclusive_output(tmp_path):
     sidecar["cases"].pop()
     bad = _write(tmp_path / "bad.json", sidecar)
     assert _cli("--cases", str(cases), "--accounting", str(bad)).returncode == 1
+
+
+# Manager regressions: hand-built pairs only, never final-seed generation.
+def test_duplicate_visible_ids_cannot_be_silently_collapsed():
+    cases, sidecar = pair()
+    cases["cases"].append(copy.deepcopy(cases["cases"][0]))
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+@pytest.mark.parametrize("value", ["oops", 123, True])
+def test_matching_malformed_generator_hashes_are_not_a_binding_pass(value):
+    cases, sidecar = pair()
+    cases["metadata"]["generator_source_sha256"] = value
+    sidecar["generator_source_sha256"] = value
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [("units", "kgCO2e"), ("units", 123), ("visibility", "policy-visible"), ("visibility", None)],
+)
+def test_semantically_invalid_header_values_are_refused(field, value):
+    cases, sidecar = pair()
+    sidecar[field] = value
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+def test_header_failure_cannot_be_hidden_by_empty_inputs():
+    cases, sidecar = pair()
+    cases["cases"] = []
+    sidecar["cases"] = []
+    sidecar["record_kind"] = "wrong"
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+def test_changed_claimed_specification_cannot_be_ignored():
+    cases, sidecar = pair()
+    cases["metadata"]["spec_sha256"] = "0" * 64
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+def test_conflicting_visible_set_unit_claim_is_not_ignored():
+    cases, sidecar = pair()
+    cases["metadata"]["units"] = "g/kWh"
+    seal(cases, sidecar)
+    assert status(ra.check_accounting(cases, sidecar), "binding") == "FAIL"
+
+
+def test_hidden_weights_in_visible_metadata_are_detected():
+    cases, sidecar = pair()
+    cases["cases"][2]["metadata"] = {"debug": {"weights": list(PROFILE)}}
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+def test_unknown_case_label_is_not_well_formed():
+    cases, sidecar = pair()
+    cases["cases"][0]["feasibility_label"] = "unknown"
+    seal(cases, sidecar)
+    assert ra.check_accounting(cases, sidecar)["overall"] == "FAIL"
+
+
+@pytest.mark.parametrize("value", [True, 100.0, float("nan"), float("inf"), -100, None])
+def test_impact_helpers_refuse_invalid_weights(value):
+    weights = list(PROFILE)
+    weights[0] = value
+    with pytest.raises(ValueError):
+        ra.site_impact(tr.case_from_dict(CASES[0]), weights, {"J1": 0})
+
+
+def test_cli_preserves_malformed_input_failure_report(tmp_path):
+    from scripts import check_rule_study_accounting as cli
+
+    cases, sidecar = pair()
+    cp = _write(tmp_path / "cases.json", cases)
+    ap = tmp_path / "bad.json"
+    ap.write_text('{"cases":[],"cases":[]}')
+    out = tmp_path / "failure.json"
+    assert cli.main(["--cases", str(cp), "--accounting", str(ap), "--out", str(out)]) == 1
+    assert json.loads(out.read_text())["overall"] == "FAIL"
+
+
+def test_development_generator_fixture_is_compatible_without_final_seed():
+    from dc_sustainability.evaluation import rule_study_generator as g
+
+    cases, sidecar = g.generate("development", per_stratum=1)
+    report = ra.check_accounting(cases, sidecar)
+    assert report["overall"] == "PASS"
+    assert report["study_acceptance"] == "NOT_ESTABLISHED"
+    assert "NOT_ESTABLISHED" in report["binding_authentication"]
+    assert report["supported_spec_sha256"] == rc.SUPPORTED_SPEC_SHA256
+    assert "NOT_CHECKED" in report["case_set_validity"]
+
+
+def test_known_hidden_fields_in_top_level_visible_metadata_are_detected():
+    cases, sidecar = pair()
+    cases["metadata"]["debug"] = {"realized_weights": list(PROFILE)}
+    seal(cases, sidecar)
+    assert status(ra.check_accounting(cases, sidecar), "visibility") == "FAIL"
+
+
+def test_extra_sidecar_entries_fail_even_with_no_visible_cases():
+    cases, sidecar = pair()
+    cases["cases"] = []
+    seal(cases, sidecar)
+    report = ra.check_accounting(cases, sidecar)
+    assert status(report, "coverage") == "FAIL"
+    assert report["overall"] == "FAIL"
+
+
+def test_empty_input_and_impact_do_not_hide_bad_weights():
+    with pytest.raises(ValueError):
+        ra.job_impact(tr.case_from_dict(CASES[0]), [True] * 30, {})
+
+
+def test_arithmetic_is_not_a_schedule_feasibility_verdict():
+    # Deliberately illegal simultaneous starts still have measurable arithmetic.
+    # Do not filter away unsafe execution evidence by treating arithmetic as a gate.
+    case = tr.case_from_dict(CASES[1])
+    assert ra.job_impact(case, PROFILE, {"J1": 0, "J2": 0}) == 60 * PROFILE[0]
+
+
+def test_cli_empty_pair_is_incomplete_and_failure_output_is_exclusive(tmp_path):
+    from scripts import check_rule_study_accounting as cli
+
+    cases, sidecar = pair()
+    cases["cases"], sidecar["cases"] = [], []
+    seal(cases, sidecar)
+    cp = _write(tmp_path / "cases.json", cases)
+    ap = _write(tmp_path / "accounting.json", sidecar)
+    out = tmp_path / "incomplete.json"
+    assert cli.main(["--cases", str(cp), "--accounting", str(ap), "--out", str(out)]) == 2
+    before = out.read_bytes()
+    with pytest.raises(SystemExit):
+        cli.main(["--cases", str(cp), "--accounting", str(ap), "--out", str(out)])
+    assert out.read_bytes() == before

@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "6f32ffe447b9113abf9913d1963e56b50d5f0dbd577132525255916c3226c9ed",
+      "sha256": "1efb075bb36b6ced4cfb5363486dc9193a8cc917b060fa0de1f1d9b4768dbd47",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "9b49f4b06106f2a12dd571055e81359fc6ed9f8b2c1b422af818f97fc30ffab2",
+      "sha256": "b4be70ba9cbdfb0dfff3b38fa5589afd1a06167e44dbab004ddf8144f0f43e36",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "70662212ca878bd8cc65e3d69d60d26a53796469f8f876de80956445ae95814b",
+      "sha256": "8e7a0f77e031b78f9d4577e27c3628c70218831214ef2e29c0cf3328982e2b35",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "07219945756cd9bd02e7295ebfcdc6cefac4bae30a2f4aba4240b5916ce7e820",
+      "sha256": "2978bc910b2eff893c6c4417abd431b08fb7894d3782d292e8e8cfa3868636e9",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -390,7 +390,7 @@
     },
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
-      "sha256": "1f2dee3db16f3247e25c00d62c99e5ec92c907a0baa0d6bf12cb0de6bda6b4b5",
+      "sha256": "f291f780ca3c3ac7814d27ad4d245e918a7f3b023b36e64eaabfa209b4da5514",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -471,6 +471,21 @@
     {
       "path": "docs/report/DEPENDENCY_LICENSE_INVENTORY_NOV20.json",
       "sha256": "02144d623641e85efb3a08de4ddf95478ff0fde80be0578d11ca422224f87db4",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/evaluation/rule_study_accounting.py",
+      "sha256": "fa1f28b29fba8bf91fa86dfdad075e9ded51bbd51770d11192a8806a8413a19c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/check_rule_study_accounting.py",
+      "sha256": "c2aec639028fe1fa844d7aa4d28cff89f2ead1869c8a6d0dabaf07e3c49c060f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/evaluation/test_rule_study_accounting.py",
+      "sha256": "e7a6d62028d44895a7ea240773d78d62a6062e03f510a4c1793461bf61f1431f",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

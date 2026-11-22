@@ -33,9 +33,25 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     if args.out is not None and args.out.exists():
         raise SystemExit(f"refusing to overwrite {args.out}")
-    report = ra.check_accounting(rc.load_case_set(args.cases), ra.load_sidecar(args.accounting))
+    try:
+        report = ra.check_accounting(rc.load_case_set(args.cases), ra.load_sidecar(args.accounting))
+    except (ValueError, OSError, TypeError, RecursionError) as exc:
+        report = {
+            "record_kind": ra.RECORD_KIND,
+            "overall": "FAIL",
+            "cases": {},
+            "checks": {},
+            "input_error": type(exc).__name__,
+            "reason": str(exc),
+            "study_acceptance": "NOT_ESTABLISHED",
+            "scope": "input refused; no pair checks performed",
+        }
     summary = {
         "overall": report["overall"],
+        "scope": report["scope"],
+        "study_acceptance": report["study_acceptance"],
+        "binding_authentication": report.get("binding_authentication", "NOT_RUN"),
+        "input_error": report.get("input_error"),
         "cases": report["cases"],
         "checks": {k: c["status"] for k, c in report["checks"].items()},
     }
@@ -44,8 +60,11 @@ def main(argv=None) -> int:
         text = json.dumps(
             report, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
         )
-        with args.out.open("x", encoding="utf-8", newline="\n") as handle:
-            handle.write(text + "\n")
+        try:
+            with args.out.open("x", encoding="utf-8", newline="\n") as handle:
+                handle.write(text + "\n")
+        except OSError as exc:
+            parser.exit(2, f"Report output refused: {type(exc).__name__}\n")
         print(f"wrote {args.out} sha256={v.canonical_sha256(report)}")
     return {"PASS": 0, "FAIL": 1}.get(report["overall"], 2)
 

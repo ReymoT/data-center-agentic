@@ -264,7 +264,7 @@ Checks on one supplied visible-set/sidecar pair:
 - **weight_domain:** slots 0-5 in {100, 200, 300}, drain slots 6-29 equal 200.
 - **visibility:** `weights_visible_to_policy` is false exactly for
   missing-forecast cases; visible scores equal the sidecar weights; hidden
-  weights never appear in the visible set.
+  declared scores stay null and known accounting fields are absent from visible metadata. This does not prove arbitrary information-flow isolation or actual policy routing.
 - **hidden_profile:** normal and missing-forecast weights are nonconstant over
   slots 0-5. Overload profiles may be constant.
 
@@ -274,8 +274,45 @@ background over all 30 slots), so Edison's metric records can be recomputed
 once they exist. Empty inputs are NOT_RUN/INCOMPLETE, never PASS. Exit codes and
 exclusive output follow the case checker.
 
-Development receiving (local, development seed only, outputs not committed):
-the generator's 120-case development pair passes all seven checks, and the
-visible set passes the case checker. This is consistency of a supplied pair,
+Nisha reported local development receiving in PR #255 (development seed only, files not supplied or committed): her 120-case pair passed the sidecar and visible-set checks. This is her reported local observation, not a manager receipt of retained files. The manager review separately tests hand-built pairs and one development case per stratum. This is consistency of a supplied pair,
 not seed/provenance/freeze authentication, metric acceptance or any policy
 result. No final seed, scheduler, model, source or research batch was run.
+
+
+## Accounting-sidecar manager review — November 21
+
+The review reproduced 19 failing regressions before correction. The updated
+accounting suite has 59 tests; the combined accounting/generator/case/trace/verifier
+and dummy-dispatch focused suite has 278. These are unit fixtures, not final-set
+or policy results. The production checker and generator are not imported by the
+accounting implementation; generator compatibility is exercised only in tests.
+
+- Duplicate visible IDs no longer silently overwrite each other. Coverage checks
+  both sides; an extra sidecar entry still fails when there are no visible cases.
+  A known failure is FAIL even when the checked-item count is zero.
+- Matching malformed generator hashes cannot pass binding. The supported claimed
+  specification and visible-set artificial-unit label are checked when present.
+  Header visibility must identify an evaluator-only sidecar. Weight units must
+  be the actual generator's artificial score-kWh convention or the explicit
+  weight-only fixture label; physical-emissions labels are not silently accepted.
+- Known accounting fields in nested visible metadata are flagged. Scores/null
+  and visibility flags are still checked, but no claim is made that this detects
+  arbitrary encodings, prevents seed reconstruction or proves runtime routing.
+- Arithmetic helpers refuse bool/float/NaN/infinite/negative/nonnumeric weights,
+  malformed lengths and unsupported start/case shapes. They calculate exact
+  synthetic integer arithmetic over the supplied starts; they intentionally do
+  not reject away unsafe execution evidence or certify capacity/deadline safety.
+  Callers still need independent schedule checks and accepted completed-job sets.
+- CLI malformed-input failures produce preserved FAIL reports with exit1;
+  INCOMPLETE returns2. Existing/racing outputs are never overwritten. Reports
+  include checker/case-parser/verifier source commitments and explicit scope.
+
+A pair PASS is not a feasibility/stratum/count/overlap verdict: run the separate
+case checker too. `study_acceptance` and external binding authentication remain
+NOT_ESTABLISHED. Matching a hash claim in supplied metadata does not authenticate
+who generated the pair or its seed/freeze/source bytes. Independent impact-total
+recomputation against actual metric records, retained input receiving and actual
+RULE-02/frozen-policy verification remain pending in #241/#242/#244. The accepted
+specification task #239 is closed; this review does not reopen it or approve a run.
+No final seed, policy/model/source/private-data operation ran. Only synthetic
+hand-built and development-seed unit fixtures were used.
