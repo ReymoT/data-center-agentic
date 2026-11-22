@@ -1,6 +1,15 @@
 # RULE-07 executable demo handoff (Ved)
 
-Date: November 22, 2026, Arizona · Branch: `ved/rule07-v3-pinned-759a8c3` (local only) · Pinned integration base: `origin/main` `759a8c33f07aba52e3b016502b6c52c0e9e24137` (includes merged RULE-02, PR #257, and PRs #258 and #259) · Final code commit the current traces bind to: `ae9c34302c0d5e8be6da941589a68019d905827f`
+Date: November 22, 2026, Arizona · Branch: `ved/rule07-v3-pinned-759a8c3` (local only) · Pinned integration base: `origin/main` `759a8c33f07aba52e3b016502b6c52c0e9e24137` (includes merged RULE-02, PR #257, and PRs #258 and #259) · 
+
+Code commit: a7a71d005e8b329415b665951b9c56a63ee94110
+PR: #261
+Trace archive: rule07-traces-a7a71d0.tar.gz
+Checksum manifest: rule07-traces-a7a71d0.sha256
+Replay verification: passed
+Archive checksum verification: passed
+Manifest entries: 617
+Extracted files: 617
 
 Scope: the executable-wiring, repeatable-command and replay part of [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246) that Ved owns. The RULE-02 scheduler, runner, records and cases are already merged and are reused unchanged. Nothing was pushed, no PR or issue comment was made, and nothing remote was touched.
 
@@ -110,7 +119,7 @@ Two trace sets exist. Do not mix them.
 |---|---|---|---|---|---|
 | **Historical** (delivered earlier): `rule07-traces-64511d6.tar.gz` + `rule07-traces-64511d6.sha256` | code commit `64511d6a6a776f6f2d971c31e83e92fef1612af7` (earlier branch `ved/rule07-executable-demo-v2`, base `d04ccc1`) | an earlier base | 617 files, 4 cases | That the code at `64511d6` produced these exact saved traces, which replay from disk. | That the current integrated code (`ae9c343` on `759a8c3`) behaves the same; it predates the explicit-status change. It is not verification of the current implementation. |
 | Older still: `rule07-traces-9059d4c.tar.gz` | `9059d4cc0bbe489dd40a7f61685e086399072f5d` | `276c442` | 617 files | Same, for the first version (before the BLOCKED presentation fix). | Same. |
-| **Current**: `rule07-traces-ae9c343.tar.gz` + `rule07-traces-ae9c343.sha256` | final code commit `ae9c34302c0d5e8be6da941589a68019d905827f` | pinned base `759a8c3` | 617 files, 4 cases | That the final integrated code produced these traces and that they replay from disk with 0 simulator steps. | Independent verification (NOT_RUN), second-machine behavior, any research or frozen-policy result. |
+| **Current**: `rule07-traces-ae9c343.tar.gz` + `rule07-traces-ae9c343.sha256` | final code commit `a7a71d005e8b329415b665951b9c56a63ee94110` | pinned base `759a8c3` | 617 files, 4 cases | That the final integrated code produced these traces and that they replay from disk with 0 simulator steps. | Independent verification (NOT_RUN), second-machine behavior, any research or frozen-policy result. |
 
 `176361a` is not a trace-binding commit: it is the merged RULE-02 implementation commit (ancestor of the base). No RULE-07 trace set binds to it.
 
