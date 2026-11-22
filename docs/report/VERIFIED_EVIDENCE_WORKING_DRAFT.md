@@ -1,5 +1,7 @@
 # Explicit Rules for Safe Simulated Scheduling — Working Report
 
+November 22 factual update: RULE02 executable implementation and offline tests are available through #257; #258 adds historical 176361a traces and artifact receiving. Those traces do not establish current-code independent verification or unseen-case generalization. The real authored-worker backend is prepared but publicly inspection-only; actual verification, isolated evaluation and fresh bounded release remain pending. Methods/contributions can be assembled now while findings and final conclusions wait for actual evidence.
+
 November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
 
 Group 15, Project 21. Working assembly, November 19, 2026 (America/Phoenix).
@@ -345,7 +347,19 @@ Historical Agent/Plain infrastructure demonstrates selected development behavior
 
 Following Hasan's guidance and Matty's November19 decision, the primary plan is executable explicit rules, independent bounded verification and new synthetic tests against Greedy A/B where feasible. The November18 evidence-only package remains backup. No new test results, model runs, accepted source rights or scientific freeze are inferred from publishing this report update. Exact adapter/generator acceptance, code/specification hashes and fresh bounded execution authorization remain gates; final report layout, attribution, rights review and submission are separate. [E11,E12]
 
-## Presentation-feedback follow-through — pending experiments
+## Presentation-feedback follow-through — current disposition
+
+November 22 focused-study disposition (#231):
+
+| Feedback | Current treatment |
+|---|---|
+| Grouped ten-fold C/D cross-validation | Future work outside the new critical path. Historical three-fold measurements remain historical; no new refit is claimed. |
+| Explicit violation arithmetic / repair deltas | The rule scheduler emits exact rule/state arithmetic and preserves failed proposals/checks/fallback. The old LLM repair-feedback ablation is not run or claimed. |
+| ML warm-start / expert ranking | Future work; no new ranker, Agent variant or model experiment is added. |
+| Turnaround versus impact | Pending actual matched RULE04 accounting. Use artificial score-kWh, completed/missed/unfinished denominators and equal-work gates; unavailable comparisons remain unavailable, never zero. |
+
+Reimo and Nisha carry these dispositions into the report; Edison and Ved carry them into the demo. This table records implemented mechanisms versus pending/future experiments, not unseen-case findings. The earlier proposal history below is retained, not reactivated.
+
 
 The professor feedback supplied by Matty requests grouped ten-fold training/tuning for C/D, explicit verifier arithmetic and repair deltas, an ML-ranked warm-start Agent variant, and a turnaround-versus-equal-work emissions-reduction plot. These follow-ups are tracked with owners and acceptance criteria in [the November 17 record](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md). Grouping must also isolate shared source windows; ten folds do not automatically reduce estimator variance. Structured feedback and hybrid ranking would be versioned protocol changes, not descriptions of the current Agent. Turnaround means completion minus arrival, and reduction needs valid paired equal-work evidence relative to Greedy A. No new training, repair, hybrid or Pareto results exist from recording this request. Final report and demo must include the actual disposition of all four items, including explicit limitations where evidence remains unavailable.
 

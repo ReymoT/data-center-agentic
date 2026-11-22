@@ -1,5 +1,7 @@
 # RULE-03 independent verifier: harness status
 
+November 22 receiving status: Ved's current scheduler is merged through #257 and historical trace evidence through #258. Actual code is no longer missing. #241 still requires current-code mapping, accepted binding/freeze and independent bounded verification; the old 176361a archive is not that result. See [current handoffs](../handoffs/NOV22_MANAGER_READINESS_AND_HANDOFFS.md). Earlier dated pending-code notes remain historical.
+
 Owner: Nisha, issue #241. Built November 20, 2026 against main c6ca364 (instruction 1.30,
 RULE-01 [review-2](../decisions/NOV19_RULE01_REVIEW_REVISION.md)) and
 [RULE01_SPECIFICATION.md](RULE01_SPECIFICATION.md).

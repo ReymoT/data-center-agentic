@@ -92,7 +92,7 @@ does not restart presentation work or change official course requirements.
 
 ## Required presentation-feedback coverage
 
-Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md) into methods/results or explicit limitations/future work: grouped ten-fold C/D validation (Edison), structured repair arithmetic/deltas (Matty), ML warm-start variant (Matty with Edison candidates), and paired turnaround versus equal-work reduction plot (Nisha). Reimo covers the same dispositions in the demo. Track exact agreements/evidence in #231. No unavailable finding or protocol adoption is implied.
+Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOWTHROUGH_NOV17.md) into methods/results or explicit limitations/future work: grouped ten-fold C/D validation (Edison), structured repair arithmetic/deltas (Matty), ML warm-start variant (Matty with Edison candidates), and paired turnaround versus equal-work reduction plot (Nisha). Edison and Ved cover the same dispositions in the demo; Reimo supplies methods/diagram materials. Track exact agreements/evidence in #231. No unavailable finding or protocol adoption is implied.
 
 ## Ready offline designs and accepted handoffs
 
