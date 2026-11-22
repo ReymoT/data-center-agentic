@@ -318,3 +318,59 @@ RULE-02/frozen-policy verification remain pending in #241/#242/#244. The accepte
 specification task #239 is closed; this review does not reopen it or approve a run.
 No final seed, policy/model/source/private-data operation ran. Only synthetic
 hand-built and development-seed unit fixtures were used.
+
+## Current-code receiving of RULE-02 — November 22
+
+For #241 after #257/#258. Code: `dc_sustainability/evaluation/rule_study_receiving.py`,
+CLI `scripts/receive_rule_study_system.py`, tests
+`tests/evaluation/test_rule_study_receiving.py` (29 tests).
+
+**Why runs, not a separate policy model.** For a closed case every arrival is known and
+rules-v1, the production checker, the Greedy A fallback and the simulator are
+deterministic, so the policy-induced graph of the actual system is one path per case.
+Verifying the system on a domain is therefore one run of the real common runner per
+case and policy, followed by independent replay. No reimplementation of rules-v1 is
+used as the system under test.
+
+**Independent pin.** `reconstruct_pin` rebuilds, without calling the runner's
+`make_bindings`: the canonical specification hash, the adapter map hash over every
+`dc_sustainability/rule_study/*.py` (LF-normalized), the generator and Windows Python
+3.12 lock hashes, git HEAD and clean-tree status. At main `759a8c3` it gives adapter
+`6b4c4350...1a1c8c`, spec `9597931f...a8542bd`, generator `ab795084...df4072`, lock
+`38562754...f9034c`; these equal the runner's own bindings (a test checks this).
+
+**Domain mapping.** `case_spec_for` maps verifier cases (primary 64, extended 1,024,
+authored A, B, B-fault, B-progress) to the runner's `CaseSpec` with PUE 1 and a perfect
+artificial forecast when scores exist. The authored mapping reproduces the runner's own
+authored `case.json` byte-for-byte. Baselines skip the injected B-fault case.
+
+**Artifact and binding check.** Every decision and result record must carry exactly the
+pinned bindings; `case.json` must hash to its case binding; every referenced raw state,
+snapshot and transition file must exist and hash to its reference; every decision needs
+its completion commitment. Binding status is PASS only for a git pin on a clean tree;
+a test-only commit or a dirty tree is INCOMPLETE, any finding is FAIL.
+
+**Replay.** The merged trace reader replays the records against the verifier's own
+reconstruction (S1-S5, P1, P2 and R04 arithmetic). Overall is FAIL on any run error,
+refused trace, property/arithmetic FAIL or artifact finding; PASS needs a clean binding
+PASS and only PASS/NOT_RUN properties; otherwise INCOMPLETE.
+
+**What has run.** Only unit tests with a test-only commit on the authored cases and the
+first three primary cases (rules-v1 and Greedy A): no run errors, no refused traces, no
+artifact findings, S1/S2/S3/S5/P1/P2 PASS, rules-v1 arithmetic PASS and authored S4 PASS.
+These are implementation checks, not the frozen-system verification result.
+
+**Bounded plan (not run).** `python scripts/receive_rule_study_system.py --domain primary
+--domain authored` prints it without running anything:
+
+| Domain | Cases | rules-v1 runs | with Greedy A/B |
+| --- | --- | --- | --- |
+| primary (required) | 64 | 64 | 192 |
+| authored A/B | 4 | 4 | 10 |
+| extended (optional supplement) | 1,024 | 1,024 | 3,072 |
+
+At most 30 decisions per run. Replay uses one shared budget of 10,000 states, 50,000
+transitions and 600 s; the extended supplement is likely to hit it and would then be
+reported INCOMPLETE, separately from the primary result. Runs take roughly 2 s each
+locally. `--execute` needs a new `--out` directory and should be used only for an
+approved run on a clean checkout of the pinned commit.
