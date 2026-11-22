@@ -1,0 +1,29 @@
+{
+  "refused": [],
+  "results": {
+    "greedy_b": {
+      "counts": {
+        "traces": 3,
+        "complete_traces": 3,
+        "partial_traces": 0,
+        "p1_eligible_traces": 2,
+        "p1_outside_scope": {
+          "not_jointly_feasible": 1
+        },
+        "p2_checked_traces": 3,
+        "distinct_binding_sets": 3
+      },
+      "properties": {
+        "S1": "PASS",
+        "S2": "PASS",
+        "S3": "PASS",
+        "S4": "NOT_RUN",
+        "S5": "PASS",
+        "P1": "PASS",
+        "P2": "PASS"
+      },
+      "arithmetic_mismatches": 0
+    }
+  }
+}
+wrote docs/evidence/rule02/compat/verify-greedy_b.json sha256=67c21a20091f2e87330c7cdcc37596a4b2bd2e3ddd5c56539f62c461e37efa6b

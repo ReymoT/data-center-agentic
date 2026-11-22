@@ -1,0 +1,10 @@
+$ python -m pytest tests/simulator tests/verification tests/runtime tests/policies -q -rs
+........................................................................ [ 28%]
+........................................................................ [ 56%]
+.....................................s...ssss.......s................... [ 85%]
+.....................................                                    [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/runtime/test_rule_study_dispatch_preflight.py:121: real Windows containment
+SKIPPED [4] tests/runtime/test_rule_study_supervisor.py:14: requires actual Windows process-tree containment
+SKIPPED [1] tests/runtime/test_rule_study_supervisor.py:62: requires Windows preflight
+247 passed, 6 skipped in 2.74s

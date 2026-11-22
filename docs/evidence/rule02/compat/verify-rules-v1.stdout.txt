@@ -1,0 +1,30 @@
+{
+  "refused": [],
+  "results": {
+    "rules-v1": {
+      "counts": {
+        "traces": 4,
+        "complete_traces": 4,
+        "partial_traces": 0,
+        "p1_eligible_traces": 2,
+        "p1_outside_scope": {
+          "fault_injected": 1,
+          "not_jointly_feasible": 1
+        },
+        "p2_checked_traces": 4,
+        "distinct_binding_sets": 4
+      },
+      "properties": {
+        "S1": "PASS",
+        "S2": "PASS",
+        "S3": "PASS",
+        "S4": "PASS",
+        "S5": "PASS",
+        "P1": "PASS",
+        "P2": "PASS"
+      },
+      "arithmetic_mismatches": 0
+    }
+  }
+}
+wrote docs/evidence/rule02/compat/verify-rules-v1.json sha256=060749a0d4e8ed61a55a1bdd1a8e962c9fbf549173e7257d66bdc4ee37d35d72

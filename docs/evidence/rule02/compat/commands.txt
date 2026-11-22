@@ -1,0 +1,4 @@
+python scripts/verify_rule_study.py --traces docs/evidence/rule02/traces/rules-v1 --system-id rules-v1 --rules-v1 --out docs/evidence/rule02/compat/verify-rules-v1.json
+python scripts/verify_rule_study.py --traces docs/evidence/rule02/traces/greedy_a --system-id greedy_a --out docs/evidence/rule02/compat/verify-greedy_a.json
+python scripts/verify_rule_study.py --traces docs/evidence/rule02/traces/greedy_b --system-id greedy_b --out docs/evidence/rule02/compat/verify-greedy_b.json
+python docs/evidence/rule02/tools/replay_from_saved.py --traces docs/evidence/rule02/traces --out docs/evidence/rule02/compat/replay-from-saved.json

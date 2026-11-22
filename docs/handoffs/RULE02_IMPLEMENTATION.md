@@ -51,7 +51,9 @@ is a separate jointly feasible example; B-fault is explicitly injected, not a na
 policy failure. No new joint-exclusion semantics are adopted in this PR.
 
 The historical implementer report names local `/tmp` traces and a `c42376...` code binding.
-Those artifacts are not supplied by this branch. The published original code commit is
+The later submission now supplies archived replacement traces bound to `176361a`; see
+[the November 22 receiving record](RULE02_EVIDENCE_RECEIVING_NOV22.md). They do not validate
+the corrected implementation on main. The published original code commit is
 `176361ad23ba57940b1576828893ce3a7b1a1666`, followed by documentation commit
 `ee1de66aec897d481308e3ce35a583c026c1b3ee`. Neither historical trace claims nor their hashes
 authenticate the corrected implementation. A later approved run must bind the actual

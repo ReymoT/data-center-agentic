@@ -1,0 +1,9 @@
+py-version exit=0 :: python --version
+rule_study exit=0 :: python -m pytest tests/rule_study -q -rs
+core4 exit=0 :: python -m pytest tests/simulator tests/verification tests/runtime tests/policies -q -rs
+full exit=0 :: python -m pytest tests -q -rs
+format exit=0 :: ruff format --check dc_sustainability scripts tests
+lint exit=0 :: ruff check dc_sustainability scripts tests
+compile exit=0 :: python -m compileall -q dc_sustainability scripts tests
+setup exit=0 :: python scripts/validate_setup.py
+smoke exit=0 :: python scripts/smoke_dependencies.py

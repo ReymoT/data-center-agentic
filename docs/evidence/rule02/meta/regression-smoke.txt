@@ -1,0 +1,21 @@
+$ python scripts/smoke_dependencies.py
+IMPORT joblib 1.6.0
+IMPORT langgraph 1.2.14
+IMPORT matplotlib 3.11.2
+IMPORT numpy 2.5.4
+IMPORT openpyxl 3.1.5
+IMPORT pandas 3.0.6
+IMPORT pyarrow 26.0.0
+IMPORT pydantic 2.14.0
+IMPORT pyshacl 0.40.1
+IMPORT pytest 9.1.1
+IMPORT pytest-cov 7.1.0
+IMPORT python-dotenv 1.2.4
+IMPORT rdflib 7.6.0
+IMPORT ruff 0.17.0
+IMPORT scikit-learn 1.9.1
+IMPORT scipy 1.18.1
+PASS SHACL valid/invalid and SPARQL
+PASS tiny certified integer program
+PASS both classifiers fit/save/load prediction equality
+PASS bounded LangGraph route (no provider or model call)

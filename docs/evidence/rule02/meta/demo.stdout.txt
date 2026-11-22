@@ -1,0 +1,82 @@
+== case A | policy rules-v1 | outcome COMPLETE (record status: complete)
+   decision 0: rules-v1[pass]; selected=STG-0; execution=executed; fired rules=['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09']
+   actual starts by slot: {0: ['J2'], 1: ['J1']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=8000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=640.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/rules-v1/A-rules-v1 | result sha256=26a91eea23781f14bf2195e316d78d5784871070bb89e04269f7c35e73f9ee8a
+   decision-00 sha256=e5831858a9f62f8f4d4d56aaa52dfa1ceb8fb8c24a1671d636f929917039ba63
+== case A | policy greedy_a | outcome COMPLETE (record status: complete)
+   decision 0: greedy_a[pass]; selected=STG-0; execution=executed; fired rules=n/a
+   actual starts by slot: {0: ['J1', 'J2']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=12000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=640.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_a/A-greedy_a | result sha256=42ab02954da02a97f4a56be83efe1347ab4b4637ba5b64ab02851a73d391d136
+   decision-00 sha256=317502b62ecad81cc180a73549f5fdb344b7fbd1913be714ce44ec26ef4779af
+== case A | policy greedy_b | outcome COMPLETE (record status: complete)
+   decision 0: greedy_b[pass]; selected=STG-0; execution=executed; fired rules=n/a
+   actual starts by slot: {0: ['J2'], 1: ['J1']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=8000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=640.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_b/A-greedy_b | result sha256=ec2eb544018b7efa96f20a397eb57e2c462e3374d950973eb1ce22519903f723
+   decision-00 sha256=8a7e09536c37ca0bc0dc562ce91dffc35adfd5e23e1415370323aebb29d182bb
+== case B | policy rules-v1 | outcome BLOCKED (record status: complete)
+   decision 0: rules-v1[fail] -> greedy_a_fallback[fail, reason=invalid_proposal]; selected=None; execution=blocked; fired rules=['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09']
+   actual starts by slot: none
+   completed=[] missed=['J1', 'J2'] unscheduled=['J1', 'J2'] unfinished=['J1', 'J2']
+   synthetic impact=0 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=600.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/rules-v1/B-rules-v1 | result sha256=a8788c269200163d0603e8d9595021ddfd743c0518a04fa26b0a1d26e6802c9b
+   decision-00 sha256=e6a1ca15b08a46b558258f1f07bc990f2cc71ac350c3472c2236b04e91d0bb9a
+== case B | policy greedy_a | outcome BLOCKED (record status: complete)
+   decision 0: greedy_a[fail]; selected=None; execution=blocked; fired rules=n/a
+   actual starts by slot: none
+   completed=[] missed=['J1', 'J2'] unscheduled=['J1', 'J2'] unfinished=['J1', 'J2']
+   synthetic impact=0 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=600.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_a/B-greedy_a | result sha256=86e5a48c23631b12143784fdc4404ffa478cb819a309c086b7f74e10188f756e
+   decision-00 sha256=85bd2f63994e2688b6a0aa1acbbe00c61d0436518c046ba3da237f8513471f82
+== case B | policy greedy_b | outcome BLOCKED (record status: complete)
+   decision 0: greedy_b[fail]; selected=None; execution=blocked; fired rules=n/a
+   actual starts by slot: none
+   completed=[] missed=['J1', 'J2'] unscheduled=['J1', 'J2'] unfinished=['J1', 'J2']
+   synthetic impact=0 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=600.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_b/B-greedy_b | result sha256=b597a96b40b2e888deedf902e1ab8cfaa85a8410f077faecd0774717affbc45a
+   decision-00 sha256=cfac583a0763fd7f402edf2efcbda97f584d1aa4b0a2a0acdf80ff4c61166a26
+== case B-fault | policy rules-v1 | outcome BLOCKED (record status: complete)
+   decision 0: fault_injection[fail] -> greedy_a_fallback[fail, reason=invalid_proposal]; selected=None; execution=blocked; fired rules=['R04', 'R08', 'R09']
+   actual starts by slot: none
+   completed=[] missed=['J1', 'J2'] unscheduled=['J1', 'J2'] unfinished=['J1', 'J2']
+   synthetic impact=0 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=600.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/rules-v1/B-fault-rules-v1 | result sha256=47a5286de8b67b06f4f05e28fa7faa7a8d1def1f6b0e624e99d2e14e28e94eb6
+   decision-00 sha256=6c2e7c4d4e1b3f17e77255cfe7c04538e56df1cdd9d1033c44df207df35300c5
+== case B-progress | policy rules-v1 | outcome COMPLETE (record status: complete)
+   decision 0: rules-v1[pass]; selected=STG-0; execution=executed; fired rules=['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09']
+   actual starts by slot: {0: ['J1'], 1: ['J2']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=12000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=660.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/rules-v1/B-progress-rules-v1 | result sha256=1d02f5cacb50124eeb6a0eab6c3fea936801f367a4dc38f9d49bc8423ffc3cfb
+   decision-00 sha256=39d8932e487bfbc6ca4b5658a3b3a0ffc0d5cf8264c3b74cee816280e5d11096
+== case B-progress | policy greedy_a | outcome COMPLETE (record status: complete)
+   decision 0: greedy_a[pass]; selected=STG-0; execution=executed; fired rules=n/a
+   actual starts by slot: {0: ['J1'], 1: ['J2']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=12000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=660.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_a/B-progress-greedy_a | result sha256=36f6a948279d8e442c81bf878cf8d45111b25b538ec84b8e397c80b0db325b8d
+   decision-00 sha256=9560c603bc4b9af0486aa0548030b67f4f6cc4a6ba04453c050c106de7cbfe3d
+== case B-progress | policy greedy_b | outcome COMPLETE (record status: complete)
+   decision 0: greedy_b[pass]; selected=STG-0; execution=executed; fired rules=n/a
+   actual starts by slot: {0: ['J1'], 1: ['J2']}
+   completed=['J1', 'J2'] missed=[] unscheduled=[] unfinished=[]
+   synthetic impact=12000 score-kWh (artificial score weight x kWh; not g/kWh, not emissions) [score-kwh-v1; artificial, not g/kWh or emissions]; site energy=660.0 kWh over 30 slots
+   replay: identical saved evidence; simulator transitions unchanged=True (30)
+   trace: /tmp/rule02-evidence-gen/traces/greedy_b/B-progress-greedy_b | result sha256=13242838e4755307503a7a444df279b5fe308f1d5cd821a02609aeb6c09537fb
+   decision-00 sha256=047bcd6b5900717948a246df1ba193c02390ff11859d46b20dbbf62e1bcccd2b
+
+study rule-study-20261119-v1 adapter proposal-1; model calls: 0; synthetic authored inputs only; artificial score-kWh, not g/kWh or emissions; this demo is not independent verification.
