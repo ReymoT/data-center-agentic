@@ -94,3 +94,7 @@ supplied-pair weight/header/coverage/identity/profile checks and exact arithmeti
 Manager review preserves Nisha's original contribution and scopes PASS to those
 checks. Fixture compatibility is not retained-file receipt, authenticated source
 provenance, metric acceptance or actual safety/progress/generalization evidence.
+
+## R02 report organization — November21
+
+Ved’s PR #256 investigation is preserved in [the historical audit](R02_TECHNICAL_AUDIT_NOV18.md). [The concise R02 section](R02_ONTOLOGY_AND_REFERENCE_METHODS.md) separates current source methods, reported local history and unperformed study evidence. Investigation counts/platform claims are not silently upgraded to manager-reproduced or current CI results.
