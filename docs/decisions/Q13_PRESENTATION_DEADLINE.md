@@ -1,5 +1,8 @@
 # Q13: reported course dates and remaining delivery requirements
 
+Current November 20 receiving supersedes earlier unknown-timezone/release statements below: [Nisha confirms December 9, 11:59 PM Arizona time and the public repository requirement](Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md). Only the team license choice and actual release checks remain; no private email or course access is claimed.
+
+
 November 4: [Nisha reports project number 21 and a December 9, 11:59 pm report deadline](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165).
 Arizona timezone remains her working assumption. Official timezone and release/
 license requirements remain open; dated earlier unknowns below are historical.

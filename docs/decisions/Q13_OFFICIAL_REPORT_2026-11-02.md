@@ -1,5 +1,8 @@
 # Q13 final report requirements — November 2 update
 
+Current November 20 receiving supersedes earlier unknown-timezone/release statements below: [Nisha confirms December 9, 11:59 PM Arizona time and the public repository requirement](Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md). Only the team license choice and actual release checks remain; no private email or course access is claimed.
+
+
 November 4: [Nisha confirms](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
 project number 21 and December 9, 2026, at 11:59 pm, at the end of that day.
 The filename is `Group15-Project21-F26-Final Project Report.PDF`. Arizona timezone

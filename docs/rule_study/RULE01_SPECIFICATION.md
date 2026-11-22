@@ -1,0 +1,96 @@
+# RULE-01 specification: rules-v1, two scenarios and independent verification
+
+Owner Matty, issue #239. Prepared November 19, 2026 from main ce4ec4cd9f158513fb42cab37848ab73fe575015, instructions 1.30. Status: manager specification review-2; Nisha's conditional response is received and its requested changes are decided, while remaining consumer acceptance is pending. This is neither implemented code nor a frozen research run authorization. Use [the plan](../decisions/NOV19_RULE_STUDY_PLAN.md).
+
+## Question and evidence boundary
+
+Can a small set of explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? Report safety, progress, trace-grounded arithmetic and synthetic generalization separately. Do not equate a deterministic explanation with human faithfulness or a nonzero carbon preference with real-site savings. Original Agent-versus-Plain study remains unperformed.
+
+The only illustrative cases introduced here are newly authored assumptions in [specification.json](specification.json). No source CSV, private development values, old held-out dates/nonce or retained forecasts were read or used. The public cb85 fallback trace motivates separating proposal, verification, fallback and execution; its workload is not copied into new research inputs. Carbon-like values are artificial score weights, not measured emissions. If encoded in existing g/kWh contracts, label them artificial synthetic intensities and keep the modeled mass explicitly synthetic.
+
+## Two authored cases (expected behavior, not measured results)
+
+Both use 30 hourly simulator slots (0-23 can start, 24-29 drain), capacity 60 kW including 20 kW background, PUE 1.0, no future-arrival disclosure. Jobs below finish by slot 3; unused profile slots have score 200.
+
+A: J1 has power20, duration1, arrival0, deadline3, flexible=true; J2 has power20, duration1, arrival0, deadline1, flexible=false. Synthetic scores begin [300,100,200]. Expected full feasible selection starts J2 now and prefers J1 at slot1. Future starts are advisory, not prematurely executed; re-evaluate each slot. Explain the time/score trade-off and actual completed quantities.
+
+B: J1/J2 each power30, duration1, arrival0, deadline1, flexible=false. Background20 plus both jobs is80 > capacity60: jointly impossible. Execute at most one; explicitly explain the unscheduled job and eventual missed status. A separate fault-injection demonstration proposes both at slot0, shows the independent arithmetic rejection, then an attempted production-checked Greedy A fallback. Do not assume that fallback passes; the existing abstention rule can reject it in this jointly infeasible case, leaving zero new starts and explicit missed-job accounting. The invalid proposal is deliberately injected, not a claimed natural output of rules-v1. B-progress subcase changes J2 to flexible=true/deadline2: the two jobs should complete sequentially, demonstrating feasible delayed work. Keep the subcase separate from the impossible case.
+
+## Rules and deterministic selection
+
+Use integer power/score arithmetic in the bounded study; state physical units and convert facility energy only with explicit PUE/slot duration.
+
+| Rule | Predicate/action | Explanation evidence |
+|---|---|---|
+| R01 | Validate exact visible state/version, unique job IDs and authoritative capacity; unknown/malformed facts fail closed | State version and evidence/constraint IDs |
+| R02 | Start only arrived waiting jobs, at or after now, before slot24, finishing by deadline and slot30 | Arrival, duration, proposed start/end and deadline |
+| R03 | Nonflexible jobs can start only at arrival; no duplicate/restarted jobs | Job status and flexibility |
+| R04 | For every occupied slot, background + running + all selected jobs <= IT capacity; PUE does not scale this IT limit | Slot, each kW term, total, limit and signed excess |
+| R05 | Enumerate jointly feasible schedules for visible waiting jobs within the study bound; include an unscheduled option per job | Search bounds, candidate counts, accepted/rejected schedule IDs |
+| R06 | Choose lexicographically: most scheduled jobs; then inclusion vector preferring nonflexible, earliest latest-start, deadline, job ID; then smallest summed job synthetic impact score; then smallest sum of completion times; then start-vector lexicographic order | Exact objective tuple and selected starts; unscheduled sorts after legal starts |
+| R07 | Execute only selected starts equal to the current slot, after latest-state production recheck; future placements remain advisory | Selected/check/executed stage linkage |
+| R08 | Missing/stale/future-issued/incomplete forecast coverage disables score optimization; use independently production-checked Greedy A. Invalid proposal likewise routes to checked fallback; failed fallback executes no new work and advances existing work/time safely | Coverage reason, both checks and actual execution outcome |
+| R09 | Record rule IDs and arithmetic, waiting/unscheduled/missed distinctions, fallback and explicit errors; never invent completion or certify individual rejection as global infeasibility | Exact input/output identity and trace |
+
+Existing-checker compatibility finding: recheck_schedule justifies per-job abstention from individual opportunities without subtracting other newly proposed reservations. In caseB each job individually fits, so selecting one and abstaining on the other may itself fail the unchanged checker. Do not weaken that production rule silently, claim a passing fallback, or convert individual feasibility into a global infeasibility certificate. Preserve the failed attempt and safe no-start result if that is what the actual pipeline does. A new study-local joint-exclusion/certificate adapter, if chosen, requires exact Ved/Nisha agreement and independent validation; report old-gate versus new-local semantics separately and compare all policies under the same agreed gate.
+
+The objective prioritizes feasible work, not carbon savings at the expense of disappearing jobs. Maximum four visible waiting jobs and six start slots (0-5) for evaluation give at most 7^4=2401 assignments including unscheduled options per decision. Check full durations, running load and nonflexibility before scoring. Outside this scoped envelope, reject the rule-study invocation explicitly rather than silently sample, truncate jobs or claim the generalization result applies. Existing Greedy A/B are unmodified. Full 30-slot clock/visibility/accounting remains unchanged.
+
+Receding-horizon optimization can reschedule future advisory starts. Never claim advance reservations persisted unless the adapter explicitly records them. New arrivals can invalidate previous advisory feasibility: progress claims require the closed-workload assumptions below. No global optimality relative to unknown future jobs is claimed.
+
+## Independent safety and progress
+
+Nisha implements predicates/transitions independently, without calling the production checker or copying the scheduler's success verdict. Existing E01 replay can validate compatible traces, but replay alone is not exhaustive verification or a liveness proof. Use brute-force independent joint feasibility on the finite domain, not an external MILP/LLM oracle.
+
+Safety S1-S5: correct arrivals/status/unique starts; nonflexible timing/deadlines; per-slot joint capacity; no unverified invalid execution including injected failures; valid clock/state-version transition and no new starts in drain slots. Report each property separately.
+
+Progress P1: for a finite closed set where all jobs are revealed at slot0, full joint completion is feasible under the verifier, complete usable forecasts/constraints are stable, no injected fault is present and time advances, all jobs complete by their deadlines. Selecting a complete jointly feasible remaining plan at each step is an implementation obligation to verify, not an assumption that excuses a failing scheduler. Missing-forecast/fault-injection fallback cases are evaluated separately and are not covered by this completion claim. Counterexamples refute this claim; do not weaken it after seeing final test results. The rule must not indefinitely defer a job just because a later score is lower.
+
+Progress P2 (all cases): the finite run ends with every arrived job completed or explicitly missed/unscheduled with reason. P2 is accounting/termination, not proof that feasible work completed. For dynamic arrivals and impossible workloads, report completed/missed/unfinished quantities and feasible opportunity separately; do not promise all individually feasible jobs complete. Future arrivals are not supplied to policies.
+
+Exact small verification domain: two labeled flexible jobs, both arrival0/duration1, each power in {10,20} and deadline in {1,2}; capacity30/background10/PUE1; score at slots0,1 independently in {100,300}. This gives 4 job types squared times 4 score profiles =64 initial inputs. Enumerate all legal current-start subsets and reachable transitions through slot2; pad the compatibility simulator to30 with no new arrivals. Track blocked invalid injections separately. A maximum10,000 unique states and50,000 transitions is a stop ceiling, not a claimed count; hitting it means INCOMPLETE, not PASS. Safety tests also exercise missing capacity, duplicate IDs, stale version, drain-slot starts and malformed/out-of-scope records as negative tests. No unbounded proof is claimed. Keep the full legal-action feasibility-oracle exploration separate from the rules-v1-induced reachable-state verification; report counters and counterexamples per method/domain. Safe gate refusal on P1-eligible input that prevents completion is P1 FAIL, not a progress pass.
+
+Optional secondary domain: expand arrival to{0,1} and flexibility to{False,True}, retaining the primary power/deadline/profile settings, yielding16 job types squared times4 profiles=1024 initial inputs. Report it separately; the primary64 inputs are a subset, not independent extra evidence. Preserve the64-input primary result first. If the supplement is incomplete, state that the primary64 domain does not exhaustively exercise arrival/nonflexible rules. The supplement is not a delivery blocker and may use only the remaining combined600-second/10000-state/50000-transition prospective verification allowance across both domains and methods. Record actual counters/cache reuse; unfinished exploration is INCOMPLETE. P1 remains scoped to closed-workload eligible inputs; later arrivals do not silently extend the completion claim. [Review decisions](../decisions/NOV19_RULE01_REVIEW_REVISION.md) define exact interpretation.
+
+## Synthetic evaluation protocol proposal (not authorized to run)
+
+Edison implements and versions the generator before rule tuning. Configuration/seed domains are published now; generate final cases only after rule/verifier/specification freeze and explicit bounded approval. Any post-evaluation change requires retained failures plus a fresh untouched set and amended prospective protocol.
+
+Proposed primary test set:120 episodes,40 normal-feasible,40 overloaded/impossible,40 missing-forecast stress. Normal/missing-forecast job count2-4, overload job count3-4, power from {10,20,30} kW, duration1-2, arrivals0-2, deadlines1-6 and artificial scores from {100,200,300}. Use constraint-aware generation with separately recorded feasibility labels, not an inference that every random draw is feasible. Bound proposal/selection attempts, reject nonmatching draws transparently and publish accepted/rejected counts. Limit each stratum to10,000 generation attempts; insufficient accepted cases is an explicit failure. No replacement with private data. Missing-forecast cases use the same documented workload distribution with no visible forecast, never a private actual converted to forecast. All policies receive identical visible facts; synthetic realized weights stay in the accounting/evaluator view.
+
+Proposed primary synthetic configuration: capacity60/background20/PUE1, six authored score slots0-5 and remaining drain scores200. In forecast-present cases, declare a perfect artificial forecast: the authored profile intentionally supplies both forecast and synthetic accounting weights, with fresh per-decision simulated issue time and trusted configured UTC mapping. This is an explicit toy-model assumption, not leakage from a restricted private source or a claim of real forecast accuracy. Missing-forecast cases expose no forecast facts.
+
+Proposed generator: Python3.12 random.Random with the recorded seed domain, processing strata in the listed order and case indices0-39. For normal proposals draw, in order: job count from(2,3,4); then each job by ID, power from(10,20,30), duration from(1,2), arrival from(0,1,2), flexible from(False,True), slack from(0,1,2); set deadline=min(6,arrival+duration+slack). Then draw six scores independently from(100,200,300). Accept only jointly feasible proposals with at least one flexible job and nonconstant score profile, retaining attempt counts. Overload proposals draw job count from(3,4) at the first draw and otherwise use the same order; replace J1/J2 with the caseB immediate nonflexible30kW pair, guaranteeing at least that joint conflict; remaining jobs stay as drawn. Missing-forecast proposals follow the normal acceptance predicate and remove policy forecast facts. Keep draws/accepted IDs deterministic, including rejected attempts. Report actual distinct workload-only hashes and full-case hashes per stratum; the workload hash excludes scores/forecasts and includes sorted jobs plus site/horizon parameters. Independent verification must confirm the feasibility strata; generator labels are not a safety oracle. Nisha's conditional generator acceptance is received and the manager adopted her workload-diversity correction in review-2; Edison's exact acceptance remains required before generator freeze.
+
+Generator design must define exact sampling/order before freeze; seed alone is insufficient. Use independent documented seed domains rule-development=2026111901 and final-evaluation=2026111902; do not reuse old study seeds or claims of original held-out data. Publish generator hash, exact parameters, accepted case hashes and no-duplicate check. Development examples and final evaluations must not overlap. Initial proposal: 3 policies (rules-v1, Greedy A, Greedy B),120 episodes each,30 steps:360 rollouts/10,800 transitions. No new Agent/Plain calls or ML training. Greedy B's missing-forecast routing to Greedy A is reported explicitly. Because rules-v1 R08 also routes to Greedy A, this stratum is a safety/fallback/accounting control, not a claim of policy-ranking advantage.
+
+Proposed research ceilings: one serial offline batch, zero external network/model/solver calls, no retries, at most360 rollouts,30 steps/rollout,2,401 full-schedule assignments per rules decision,3,600 wall seconds total,60 seconds per episode/policy,256 MiB output. Verification has one prospective combined600s/10,000 states/50,000 transitions bound across primary and optional secondary work and both methods, with separate result counters. These are unaccepted execution-envelope proposals; no batch is dispatched by publishing them. The generator implementation, platform resource controls, exact code hashes and unused authorization/output location must be bound before requesting Matty's fresh approval. Preserve partial failures, stop on safety/replay/hash/containment failure, do not silently restart.
+
+Metrics: execution-violation count/rate with checked/executed denominator; completed, missed and unfinished jobs; turnaround=end-arrival for completed jobs plus counts (not just a potentially biased completed-only mean); start waiting delay separately; fallback rate and reason; synthetic job/site impact with units, background/PUE and horizon; equal-work reduction only for compatible matched workloads/completions and positive Greedy A denominator. Comparisons on different completed sets remain unavailable, not zero. For timing-vs-score plots, pair on matched completed jobs and show missing points/reasons. Primary tables are per stratum; no pooled superiority claim or interpolated Pareto frontier. Descriptive paired differences first; optional resampling needs a separately frozen method, not a copied old-study interval claim.
+
+## Current affected-owner acceptance status (review-2)
+
+1. Nisha explicitly accepted proposal-1 reader/output, unchanged gate, independent methods, primary bounds/objective and generator principles, requesting the secondary-domain addition and overload-diversity fix. Her response is [recorded](https://github.com/ReymoT/data-center-agentic/issues/239#issuecomment-7030302299); manager decisions are in [review-2](../decisions/NOV19_RULE01_REVIEW_REVISION.md). Do not describe her response as missing.
+2. Ved's identity/objective/progress/primary-domain/unchanged-abstention principles are accepted; exact study-local serialization/common-runner implementation acceptance still needs its concrete record. No silent F02 change or false old-policy identity.
+3. Edison's exact review-2 sampling/counts/strata, workload-diversity reporting, metrics/isolation and result mapping acceptance is outstanding before freeze. Ready generator/harness preparation continues now.
+
+This supplies manager-owned decisions and records real replies without fabricating final consumer agreement. #239 stays open for the remaining exact boundaries/version bindings. Original November20 18:00Arizona deadline stands. No research execution is authorized.
+
+## Concrete adapter record proposal
+
+[ADAPTER_RECORD_PROPOSAL.md](ADAPTER_RECORD_PROPOSAL.md) now specifies exact study-local identity/fields, common unchanged gate, refusal-and-drain behavior, independent verifier output and hash convention. Its [non-executable example](adapter_record.example.json) is not a result. Nisha's reader/gate acceptance and Ved's earlier principles agreement are recorded; remaining exact consumer acceptance is tracked in #239. No F02 registry or runtime code changes are made here.
+
+
+## November 20 actual acceptance and generator receiving
+
+Ved's [concrete proposal-1 acceptance](https://github.com/ReymoT/data-center-agentic/issues/239#issuecomment-7031694901)
+and Edison's [exact review-2 response](https://github.com/ReymoT/data-center-agentic/issues/239#issuecomment-7052918378)
+are received, alongside Nisha's recorded reply. Earlier missing-response statements
+above are historical where superseded. Do not repeat those requests. The original
+pinned specification.json design snapshot is preserved; current replies are linked
+here without silently changing its hash. Actual frozen implementation bindings,
+accounting receiving and bounded execution remain separate uncompleted gates.
+[Generator receiving](RULE04_GENERATOR_RECEIVING.md) records the partial development
+implementation and disabled final route, not an executed study or final freeze.
+
+[November 20 exact specification acceptance](../decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) records completion of RULE-01 with all replies received. Executable freeze and actual run authorization remain separate under #244.

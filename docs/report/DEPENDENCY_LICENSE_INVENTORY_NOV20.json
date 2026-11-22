@@ -1,0 +1,1222 @@
+{
+  "kind": "dependency_license_metadata_inventory_v1",
+  "date_arizona": "2026-11-20",
+  "source": "observed installed distribution metadata against locked Windows requirements; not legal compatibility approval",
+  "requirements_path": "requirements/requirements-windows-py312.lock.txt",
+  "requirements_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+  "distribution_count": 74,
+  "version_match_count": 74,
+  "metadata_missing_distributions": [],
+  "team_license_status": "Apache-2.0 existing proposal only; not selected or applied",
+  "scope_exclusions": [
+    "copied source review",
+    "wheel/binary notice review",
+    "models/data/source-use permissions",
+    "actual final public-package audit"
+  ],
+  "distributions": [
+    {
+      "distribution": "annotated-types",
+      "locked_version": "0.8.0",
+      "notice_review": "PENDING",
+      "installed_version": "0.8.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "anyio",
+      "locked_version": "4.15.1",
+      "notice_review": "PENDING",
+      "installed_version": "4.15.1",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "certifi",
+      "locked_version": "2026.7.22",
+      "notice_review": "PENDING",
+      "installed_version": "2026.7.22",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MPL-2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "charset-normalizer",
+      "locked_version": "3.5.2",
+      "notice_review": "PENDING",
+      "installed_version": "3.5.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "cloudpickle",
+      "locked_version": "3.1.2",
+      "notice_review": "PENDING",
+      "installed_version": "3.1.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD-3-Clause",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "colorama",
+      "locked_version": "0.4.6",
+      "notice_review": "PENDING",
+      "installed_version": "0.4.6",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "contourpy",
+      "locked_version": "1.4.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.4.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "coverage",
+      "locked_version": "7.16.2",
+      "notice_review": "PENDING",
+      "installed_version": "7.16.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache-2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt",
+        "NOTICE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "cycler",
+      "locked_version": "0.12.1",
+      "notice_review": "PENDING",
+      "installed_version": "0.12.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Copyright (c) 2015, matplotlib project All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: * Redistributions of source code must",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "distro",
+      "locked_version": "1.9.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.9.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache License, Version 2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "et_xmlfile",
+      "locked_version": "2.0.0",
+      "notice_review": "PENDING",
+      "installed_version": "2.0.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "fonttools",
+      "locked_version": "4.66.1",
+      "notice_review": "PENDING",
+      "installed_version": "4.66.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "LICENSE.external"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "h11",
+      "locked_version": "0.16.0",
+      "notice_review": "PENDING",
+      "installed_version": "0.16.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "html5rdf",
+      "locked_version": "1.2.1",
+      "notice_review": "PENDING",
+      "installed_version": "1.2.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Copyright (c) 2006-2013 James Graham and other contributors Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without r",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "httpcore",
+      "locked_version": "1.0.9",
+      "notice_review": "PENDING",
+      "installed_version": "1.0.9",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "httpcore2",
+      "locked_version": "2.13.1",
+      "notice_review": "PENDING",
+      "installed_version": "2.13.1",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "httpx",
+      "locked_version": "0.28.1",
+      "notice_review": "PENDING",
+      "installed_version": "0.28.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD-3-Clause",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "httpx2",
+      "locked_version": "2.13.1",
+      "notice_review": "PENDING",
+      "installed_version": "2.13.1",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "idna",
+      "locked_version": "3.20",
+      "notice_review": "PENDING",
+      "installed_version": "3.20",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "iniconfig",
+      "locked_version": "2.3.1",
+      "notice_review": "PENDING",
+      "installed_version": "2.3.1",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "joblib",
+      "locked_version": "1.6.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.6.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "jsonpatch",
+      "locked_version": "1.34",
+      "notice_review": "PENDING",
+      "installed_version": "1.34",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Modified BSD License",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "jsonpointer",
+      "locked_version": "3.2.0",
+      "notice_review": "PENDING",
+      "installed_version": "3.2.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Modified BSD License",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "kiwisolver",
+      "locked_version": "1.5.1",
+      "notice_review": "PENDING",
+      "installed_version": "1.5.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "========================= The Kiwi licensing terms ========================= Kiwi is licensed under the terms of the Modified BSD License (also known as New or Revised BSD), as follows: Copyright (c) 2013-2026, Nucleic Development Team All ",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langchain-core",
+      "locked_version": "1.6.9",
+      "notice_review": "PENDING",
+      "installed_version": "1.6.9",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langchain-protocol",
+      "locked_version": "0.0.19",
+      "notice_review": "PENDING",
+      "installed_version": "0.0.19",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langgraph",
+      "locked_version": "1.2.14",
+      "notice_review": "PENDING",
+      "installed_version": "1.2.14",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langgraph-checkpoint",
+      "locked_version": "4.2.0",
+      "notice_review": "PENDING",
+      "installed_version": "4.2.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langgraph-prebuilt",
+      "locked_version": "1.1.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.1.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langgraph-sdk",
+      "locked_version": "0.4.6",
+      "notice_review": "PENDING",
+      "installed_version": "0.4.6",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "langsmith",
+      "locked_version": "0.14.7",
+      "notice_review": "PENDING",
+      "installed_version": "0.14.7",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "matplotlib",
+      "locked_version": "3.11.2",
+      "notice_review": "PENDING",
+      "installed_version": "3.11.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "License agreement for matplotlib versions 1.3.0 and later ========================================================= 1. This LICENSE AGREEMENT is between the Matplotlib Development Team (\"MDT\"), and the Individual or Organization (\"Licensee\"",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "LICENSE_DEJAVU",
+        "LICENSE_STIX"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "narwhals",
+      "locked_version": "2.27.1",
+      "notice_review": "PENDING",
+      "installed_version": "2.27.1",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "numpy",
+      "locked_version": "2.5.4",
+      "notice_review": "PENDING",
+      "installed_version": "2.5.4",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "COPYING",
+        "LICENSE",
+        "LICENSE.md",
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "openpyxl",
+      "locked_version": "3.1.5",
+      "notice_review": "PENDING",
+      "installed_version": "3.1.5",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "orjson",
+      "locked_version": "3.13.0",
+      "notice_review": "PENDING",
+      "installed_version": "3.13.0",
+      "version_matches_lock": true,
+      "license_expression": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "LICENSE-MPL-2.0"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "ormsgpack",
+      "locked_version": "1.12.2",
+      "notice_review": "PENDING",
+      "installed_version": "1.12.2",
+      "version_matches_lock": true,
+      "license_expression": "Apache-2.0 OR MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE-APACHE",
+        "LICENSE-MIT"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "owlrl",
+      "locked_version": "7.6.2",
+      "notice_review": "PENDING",
+      "installed_version": "7.6.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "W3C-20150513",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "packaging",
+      "locked_version": "26.3",
+      "notice_review": "PENDING",
+      "installed_version": "26.3",
+      "version_matches_lock": true,
+      "license_expression": "Apache-2.0 OR BSD-2-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pandas",
+      "locked_version": "3.0.6",
+      "notice_review": "PENDING",
+      "installed_version": "3.0.6",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD 3-Clause License Copyright (c) 2008-2011, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team All rights reserved. Copyright (c) 2011-2026, Open source contributors. Redistribution and use in source and binary ",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pillow",
+      "locked_version": "12.3.0",
+      "notice_review": "PENDING",
+      "installed_version": "12.3.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT-CMU",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pluggy",
+      "locked_version": "1.6.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.6.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "prettytable",
+      "locked_version": "3.18.0",
+      "notice_review": "PENDING",
+      "installed_version": "3.18.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pyarrow",
+      "locked_version": "26.0.0",
+      "notice_review": "PENDING",
+      "installed_version": "26.0.0",
+      "version_matches_lock": true,
+      "license_expression": "Apache-2.0",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt",
+        "NOTICE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pydantic",
+      "locked_version": "2.14.0",
+      "notice_review": "PENDING",
+      "installed_version": "2.14.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pydantic_core",
+      "locked_version": "2.50.0",
+      "notice_review": "PENDING",
+      "installed_version": "2.50.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "Pygments",
+      "locked_version": "2.21.0",
+      "notice_review": "PENDING",
+      "installed_version": "2.21.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-2-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pyparsing",
+      "locked_version": "3.3.3",
+      "notice_review": "PENDING",
+      "installed_version": "3.3.3",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pyshacl",
+      "locked_version": "0.40.1",
+      "notice_review": "PENDING",
+      "installed_version": "0.40.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION 1. Definitions. \"License\" shall mean the terms and conditions for use, reproduction, and distribution as d",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pytest",
+      "locked_version": "9.1.1",
+      "notice_review": "PENDING",
+      "installed_version": "9.1.1",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "pytest-cov",
+      "locked_version": "7.1.0",
+      "notice_review": "PENDING",
+      "installed_version": "7.1.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "python-dateutil",
+      "locked_version": "2.9.0.post0",
+      "notice_review": "PENDING",
+      "installed_version": "2.9.0.post0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Dual License",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "python-dotenv",
+      "locked_version": "1.2.4",
+      "notice_review": "PENDING",
+      "installed_version": "1.2.4",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD-3-Clause",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "PyYAML",
+      "locked_version": "6.0.3",
+      "notice_review": "PENDING",
+      "installed_version": "6.0.3",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "rdflib",
+      "locked_version": "7.6.0",
+      "notice_review": "PENDING",
+      "installed_version": "7.6.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD-3-Clause",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "requests",
+      "locked_version": "2.34.2",
+      "notice_review": "PENDING",
+      "installed_version": "2.34.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache-2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "requests-toolbelt",
+      "locked_version": "1.0.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.0.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache 2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "ruff",
+      "locked_version": "0.17.0",
+      "notice_review": "PENDING",
+      "installed_version": "0.17.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "scikit-learn",
+      "locked_version": "1.9.1",
+      "notice_review": "PENDING",
+      "installed_version": "1.9.1",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "COPYING",
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "scipy",
+      "locked_version": "1.18.1",
+      "notice_review": "PENDING",
+      "installed_version": "1.18.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 1. Redistrib",
+      "license_metadata_truncated": true,
+      "license_classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "observed_license_notice_file_names": [
+        "COPYING_QHULL.txt",
+        "LICENSE",
+        "LICENSE.md",
+        "LICENSE.txt",
+        "LICENSE_DOP"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "six",
+      "locked_version": "1.17.0",
+      "notice_review": "PENDING",
+      "installed_version": "1.17.0",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "sniffio",
+      "locked_version": "1.3.1",
+      "notice_review": "PENDING",
+      "installed_version": "1.3.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "MIT OR Apache-2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "LICENSE.APACHE2",
+        "LICENSE.MIT"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "tenacity",
+      "locked_version": "9.2.1",
+      "notice_review": "PENDING",
+      "installed_version": "9.2.1",
+      "version_matches_lock": true,
+      "license_expression": "Apache-2.0",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "threadpoolctl",
+      "locked_version": "3.7.0",
+      "notice_review": "PENDING",
+      "installed_version": "3.7.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "truststore",
+      "locked_version": "0.10.4",
+      "notice_review": "PENDING",
+      "installed_version": "0.10.4",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "typing-inspection",
+      "locked_version": "0.4.4",
+      "notice_review": "PENDING",
+      "installed_version": "0.4.4",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "typing_extensions",
+      "locked_version": "4.16.0",
+      "notice_review": "PENDING",
+      "installed_version": "4.16.0",
+      "version_matches_lock": true,
+      "license_expression": "PSF-2.0",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "tzdata",
+      "locked_version": "2026.5",
+      "notice_review": "PENDING",
+      "installed_version": "2026.5",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "Apache-2.0",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE",
+        "LICENSE_APACHE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "urllib3",
+      "locked_version": "2.8.0",
+      "notice_review": "PENDING",
+      "installed_version": "2.8.0",
+      "version_matches_lock": true,
+      "license_expression": "MIT",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.txt"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "uuid_utils",
+      "locked_version": "0.17.1",
+      "notice_review": "PENDING",
+      "installed_version": "0.17.1",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE.md"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "wcwidth",
+      "locked_version": "0.9.2",
+      "notice_review": "PENDING",
+      "installed_version": "0.9.2",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "websockets",
+      "locked_version": "16.1.1",
+      "notice_review": "PENDING",
+      "installed_version": "16.1.1",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "xxhash",
+      "locked_version": "4.0.1",
+      "notice_review": "PENDING",
+      "installed_version": "4.0.1",
+      "version_matches_lock": true,
+      "license_expression": null,
+      "license_metadata_excerpt": "BSD-2-Clause",
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    },
+    {
+      "distribution": "zstandard",
+      "locked_version": "0.25.0",
+      "notice_review": "PENDING",
+      "installed_version": "0.25.0",
+      "version_matches_lock": true,
+      "license_expression": "BSD-3-Clause",
+      "license_metadata_excerpt": null,
+      "license_metadata_truncated": false,
+      "license_classifiers": [],
+      "observed_license_notice_file_names": [
+        "LICENSE"
+      ],
+      "metadata_status": "OBSERVED"
+    }
+  ]
+}

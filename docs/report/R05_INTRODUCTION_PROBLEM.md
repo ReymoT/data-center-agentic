@@ -1,5 +1,7 @@
 # Introduction and problem statement (R05 draft)
 
+November19 scope reconciliation: the original introduction below is retained as historical Agent-versus-Plain study context, not the current tested research question. The new question is: can a small set of explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? The [approved focused plan](../decisions/NOV19_RULE_STUDY_PLAN.md) lifts rules from permitted examples/assumptions, lowers them into executable scheduling, independently verifies bounded safety/progress, and proposes isolated new synthetic evaluation. These are planned deliverables, not measured findings. The original held-out study is unperformed; source evidence remains unresolved even though #60 is closed NOT_PLANNED. Reimo supplies report/methods/diagrams; Edison and Ved own the demo in #246. Preserve original contribution attribution and distinguish historical results from future rule-study evidence.
+
 Owner: Nisha; Reimo co-owns the problem statement. **Status: draft.** Sections B and C of the [report outline](README.md), about 0.75 and 0.5 pages. Bracketed items wait for evidence and aren't claims. Citation keys match [the reference list](REFERENCES.md).
 
 ## I. Introduction
@@ -45,3 +47,21 @@ Our conclusions are limited to the scenarios we evaluate. [State here whether th
 - **Carbon wording.** Pollutant basis and interval meaning remain open in #60, so this draft says "carbon intensity" and doesn't claim verified CO2e or site-specific emissions.
 - **Frontier.** The job table was proposed for calibration but never acquired or accepted (D02), so it isn't cited as a data source.
 - **"Independent."** The evaluator is separate from the production checker, but it isn't an outside review, so don't say more than that.
+
+## R01 factual review (November 18, 2026)
+
+Reimo's data/simulator review retains the problem statement above: its 100/40 kW
+capacity/background, fixed PUE 1.2, 24 start slots plus six drain slots,
+nonpreemptive jobs and hidden future-arrival/realized-carbon boundary agree with
+the [R01 methods and evidence](R01_DATA_AND_SIMULATOR_METHODS.md). Rejected batches
+start no new work but still advance running work and the clock. Impact figures
+are modeled proxies, with missing carbon leaving emissions unavailable. The
+strict S02 savings helper also rejects episodes with unfinished jobs.
+
+Metadata-only held-out selection and independent receiving PASS are complete;
+held-out findings and reliability reporting remain pending. All 40 development
+episodes are present and hash-verified in the published aggregate record. Legacy
+bundle code is synthetic-tested, with no real bundles, real extract, full
+1,200-state export, authorized compatibility finding or I02 scientific freeze.
+B1–B3 remain unresolved, B4 provisional; Frontier calibration is unavailable.
+This review supplies section C factual input without accepting the full report.

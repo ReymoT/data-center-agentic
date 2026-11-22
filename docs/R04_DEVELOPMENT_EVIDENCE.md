@@ -1,5 +1,23 @@
 # Agent and verification: development-evidence draft
 
+November20 technical handoff: Nisha's [independent RULE03 verifier harness](rule_study/RULE03_VERIFIER.md) is implemented and directly reviewed with synthetic fixtures. Manager fixes close idle/drain false-pass paths, selected-plan validation and malformed-evidence/budget/no-op gaps. The actual frozen rules-v1 system is still not verified; source/state binding authentication and real-adapter compatibility remain pending. This is technical harness evidence, not a new study result.
+
+November19 review-2 clarification: [recorded manager decisions](decisions/NOV19_RULE01_REVIEW_REVISION.md) retain64 primary inputs and optionally add1024 separately reported inputs within the same combined prospective verification caps; the64 are a subset, not independent extra evidence. Keep feasibility-oracle exploration separate from policy-induced verification. Safe refusal preventing completion on a P1-eligible input is a progress FAIL, not a progress success. Overload generation proposes3-4 jobs with actual workload-diversity counts. The missing-forecast stratum is a safety/fallback/accounting control because all policies route to Greedy A, not evidence of policy-ranking advantage. These are protocol decisions, not measured findings or run approval.
+
+## Current focused-study contribution — November19
+
+Our active question is whether a compact explicit rule system can reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios. The [approved plan](decisions/NOV19_RULE_STUDY_PLAN.md) replaces the source-dependent original held-out study for delivery; the evidence-only package stays backup. The original Agent-versus-Plain question remains unanswered.
+
+Matty has prepared the [rule specification](rule_study/RULE01_SPECIFICATION.md), authored cases, [study-local adapter proposal](rule_study/ADAPTER_RECORD_PROPOSAL.md) and [final audit checklist](rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md). Ved implements the executable rules; Nisha independently verifies safety/progress; Edison evaluates new synthetic cases; Reimo supplies report/methods/diagrams. Edison and Ved produce the demo and request needed materials. These ownership statements are not claims that the new code, verifier or evaluation already exists.
+
+The two scenarios are normal carbon-aware timing and overloaded/infeasible scheduling with checked fallback or safe refusal; a separate feasible delayed-work subcase tests progress. Invalid-proposal injection is explicitly labeled. The existing abstention checker may refuse Greedy A fallback too; retain actual blocked/no-start behavior rather than invent a successful fallback. All three policies must use the same agreed physical gate. Rule IDs/arithmetic show trace-grounded reasons, not human-faithfulness certification.
+
+Independent verification must report the finite input/state/transition domain and properties; replay alone is not a proof. Progress requires the stated closed-workload joint-feasibility assumptions. The proposed64-input domain and120-case synthetic comparison are not executed findings. Shared record/generator acceptance and fresh bounded execution authorization remain pending. No private source reuse, new model calls or trained-policy runs are authorized by this update.
+
+### Historical development evidence retained below
+
+The public cb85 observations below support legacy implementation and motivate the separation of proposals, checks, fallback and actual execution. They are not new rules-v1 outputs, an independent proof or unseen-synthetic generalization results. Keep their original counts and limitations unchanged.
+
 ## Current corrected public validation — November 9
 
 [RUN-cb85f5a3425c passed its bounded technical validation](handoffs/A01_PAIRED_CLAIM_VALIDATION_RESULT_2026-11-09.md): six complete results, 180 decision records, 17 model requests (5 Plain, 12 Agent) and 532.219 seconds. All 17 native counts matched the offline counts; E01 replay/structural comparison had zero findings or result mismatches, and cleanup passed. All 39 generated claims paired numeric values and units. No generated explanation field reached the 256-character cap. The null/null claim branch was not sampled in this run.

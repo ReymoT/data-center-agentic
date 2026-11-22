@@ -9,10 +9,23 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 19 active plan: [the focused rule-system study](docs/decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
+November 20 implementation receiving: Nisha’s independent verifier harness is merged through PR #250; this is not verification of the actual rule scheduler. Ved has accepted the adapter contract, while his executable handoff remains pending. Edison’s response is now received as recorded below. Matty’s [offline timeout rehearsal](docs/rule_study/OFFLINE_SUPERVISOR_PREPARATION.md) tests dummy processes only. Actual study dispatch, authenticated evidence and final results remain pending.
+
+November 20 generator receiving: Edison’s exact review-2 response is received. The development-only synthetic generator is implemented and fixture-tested against the independent case checker. Final generation remains disabled pending the frozen-code single-use dispatcher and exact authorization; metrics/accounting and actual policy verification remain pending. See [generator receiving](docs/rule_study/RULE04_GENERATOR_RECEIVING.md).
+
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](docs/decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
+
+The new focused question is: Can a small set of explicit rules reproduce safe, explainable scheduling decisions and generalize to unseen synthetic scenarios? We will use a normal carbon-aware scheduling case and an overloaded/infeasible fallback case. The new work is planned, not completed. It will use new artificial inputs with declared provenance, not the source-dependent private corpus. Safety/progress claims will be restricted to the independently verified bounds and assumptions. The old Agent-versus-Plain study is not replaced by an invented positive result.
+
+Active task handoffs: [Matty specification #239](https://github.com/ReymoT/data-center-agentic/issues/239) -> [Ved implementation #240](https://github.com/ReymoT/data-center-agentic/issues/240) -> [Nisha independent verification #241](https://github.com/ReymoT/data-center-agentic/issues/241) -> [Edison synthetic comparison #242](https://github.com/ReymoT/data-center-agentic/issues/242) -> [Matty final audit #244](https://github.com/ReymoT/data-center-agentic/issues/244). [Reimo report/methods #243](https://github.com/ReymoT/data-center-agentic/issues/243) proceeds in parallel. Preparation starts now; details and dates are in the approved plan.
+
 The [development bundle assembler](docs/handoffs/DEVELOPMENT_BUNDLE_PREPARATION_NOV15.md)
 now prepares the missing input format from explicit episode JSONs and a permitted
 row extract. Synthetic checks pass; no real bundle preparation, source permission
-or study result is claimed. The development-only fallback draft remains inactive.
+or study result is claimed. The evidence-only delivery path is now activated; this does not authorize the assembler.
 
 November 13 controls: [all affected scope replies are received; offline state-export controls are implemented and synthetic-tested](docs/handoffs/NOV13_STATE_EXPORT_CONTROLS.md). Real state export/source use remains unauthorized. Matty confirmed his rating availability; the contingency remains unactivated and I02 unfrozen.
 
@@ -134,9 +147,7 @@ submission by November 14. The December 2 demo permits live, recorded or screens
 delivery. The newer [official report update](docs/decisions/Q13_OFFICIAL_REPORT_2026-11-02.md)
 requires 5â€“10 IEEE conference pages and one PDF, superseding the earlier 15â€“20-page
 plan. Nisha's [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165)
-reports project number 21 and December 9 at 11:59 pm. Arizona timezone is her
-working assumption; official timezone and release/license requirements remain
-unconfirmed. December 7 remains the internal report submission target.
+reports project number 21 and December 9 at 11:59 pm. Her [November 20 update](docs/decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) confirms Arizona time and the public-repository requirement. The team license choice and release checks remain pending. December 7 remains the internal report submission target.
 These are attributed course reports, not direct assistant access to Canvas.
 
 The [offline I01 preparation](docs/handoffs/I01_OFFLINE_CONFIGURATION_2026-11-02.md)
@@ -309,3 +320,7 @@ A pull request can be merged once its checks pass. A teammate review is welcome 
 Record affected teammates' agreement in the Issue or decision record before changing shared formats or settings. Matty is the project manager and has also authorized direct publication of these documents to `main`. Development can use short task branches, with applicable checks before publication. [Module ownership](docs/OWNERSHIP.md) supports technical coordination, and [repository settings](docs/REPOSITORY_SETTINGS.md) record the current workflow. Matty's GitHub account for this project is [MattyAnd](https://github.com/MattyAnd).
 
 The [project plan](docs/PROJECT_PLAN.md) links the authoritative checklist and timeline. The [decision register](docs/team/04_OPEN_DECISIONS.md) retains unresolved choices and records partial Q09/Q11 decisions. Shared-record consumer adoption, source evidence, final provider/budget pins, remaining team permissions, detailed allocations and target platforms still need evidence. Stubs, constant success verdicts and fabricated model responses/traces/results are not completion evidence. Final end-to-end acceptance belongs to Matty, independent verification to Nisha, and second-machine reproduction to Ved.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.
+
+November 20 specification handoff: [the exact design revision and all consumer replies are recorded](docs/decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md). RULE-01 is complete; actual executable freeze and research authorization remain under RULE-06. [Offline dispatcher preflight](docs/rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) checks hashes and one-use dummy dispatch; it cannot generate final cases.

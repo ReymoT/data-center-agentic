@@ -1,0 +1,162 @@
+{
+  "kind": "rule_study_specification_proposal_v1",
+  "status": "manager_prepared_affected_acceptance_pending_not_execution_authorization",
+  "study_id": "rules-v1",
+  "provenance": "Independently authored synthetic assumptions, not derived from private or upstream data",
+  "baseline_commit": "ce4ec4cd9f158513fb42cab37848ab73fe575015",
+  "instruction_version": "1.30",
+  "new_research_execution_authorized": false,
+  "runtime_schema_changed": false,
+  "scenarios": [
+    {
+      "id": "A",
+      "capacity_kw": 60,
+      "background_kw": 20,
+      "pue": 1.0,
+      "first_scores": [
+        300,
+        100,
+        200
+      ],
+      "remaining_score": 200,
+      "jobs": [
+        {
+          "job_id": "J1",
+          "power_kw": 20,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "flexible": true
+        },
+        {
+          "job_id": "J2",
+          "power_kw": 20,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        }
+      ],
+      "expected_not_measured": "J2 at0 and J1 preferably1; execute current starts only"
+    },
+    {
+      "id": "B",
+      "capacity_kw": 60,
+      "background_kw": 20,
+      "pue": 1.0,
+      "first_scores": [
+        300,
+        100,
+        200
+      ],
+      "remaining_score": 200,
+      "jobs": [
+        {
+          "job_id": "J1",
+          "power_kw": 30,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        },
+        {
+          "job_id": "J2",
+          "power_kw": 30,
+          "duration_slots": 1,
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "flexible": false
+        }
+      ],
+      "expected_not_measured": "At most one job can complete; joint80kW exceeds60kW",
+      "fault_injection_not_natural_output": {
+        "starts": [
+          "J1@0",
+          "J2@0"
+        ],
+        "purpose": "rejection and checked fallback demonstration"
+      },
+      "feasible_progress_subcase": {
+        "change_job": "J2",
+        "flexible": true,
+        "deadline_slot": 2
+      }
+    }
+  ],
+  "verification": {
+    "initial_inputs": 64,
+    "max_states": 10000,
+    "max_transitions": 50000,
+    "execution_authorized": false,
+    "max_seconds": 600,
+    "budget_scope": "combined_primary_and_optional_supplement_across_oracle_and_policy_graphs",
+    "methods": [
+      "legal_action_graph_for_joint_feasibility",
+      "policy_induced_graph_for_properties"
+    ],
+    "supplemental_domain": {
+      "initial_inputs": 1024,
+      "arrivals": [
+        0,
+        1
+      ],
+      "flexible": [
+        false,
+        true
+      ],
+      "primary_subset_inputs": 64,
+      "optional": true,
+      "delivery_blocker": false,
+      "uses_remaining_combined_budget_only": true
+    }
+  },
+  "evaluation": {
+    "policies": [
+      "rules-v1",
+      "greedy_a",
+      "greedy_b"
+    ],
+    "episodes_per_stratum": 40,
+    "strata": [
+      "normal_feasible",
+      "overloaded_impossible",
+      "missing_forecast"
+    ],
+    "rollouts": 360,
+    "development_seed_domain": 2026111901,
+    "evaluation_seed_domain": 2026111902,
+    "generate_after_rule_verifier_freeze": true,
+    "execution_authorized": false,
+    "job_count_options": {
+      "normal_feasible": [
+        2,
+        3,
+        4
+      ],
+      "overloaded_impossible": [
+        3,
+        4
+      ],
+      "missing_forecast": [
+        2,
+        3,
+        4
+      ]
+    },
+    "diversity_reporting": [
+      "actual_full_case_hash_count",
+      "actual_workload_hash_count_excluding_scores"
+    ],
+    "missing_forecast_interpretation": "safety_fallback_accounting_control_not_policy_ranking"
+  },
+  "pending_acceptance": [
+    "Ved exact adapter/common-runner acceptance",
+    "Edison review-2 generator/metrics/result mapping",
+    "Final implementation and exact frozen authorization bindings"
+  ],
+  "specification_revision": "review-2-manager-decisions-remaining-consumer-acceptance-pending",
+  "received_acceptance": {
+    "Nisha": "proposal-1 reader/gate/objective/primary-domain/generator with review-2 requested changes recorded",
+    "Ved": "identity/objective/progress/primary-domain/unchanged-abstention principles"
+  }
+}

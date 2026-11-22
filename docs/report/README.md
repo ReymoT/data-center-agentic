@@ -1,17 +1,21 @@
 # Final report: assembly outline (R05)
 
+November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
 Assembler: Nisha (R05); release package: Matty (R06).
+
+Backup scope (activated November 18, superseded as primary on November 19): [development-evidence-only delivery](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
 
 November 15: [an evidence-first working report](VERIFIED_EVIDENCE_WORKING_DRAFT.md),
 [claim/source index](VERIFIED_EVIDENCE_INDEX.md) and
 [draft delivery manifest](EVIDENCE_FIRST_DELIVERY_MANIFEST.json) now assemble the
 available methods, development evidence and figures. Original owner drafts remain
 editable sources. Held-out findings, final PDF/layout, I03/I04 and final R05/R06
-acceptance remain pending. The fallback is prepared but not activated. Ready
+acceptance remain pending. The earlier inactive status is superseded by the November 18 activation. Ready
 methods/contribution handoffs are coordinated in [#223](https://github.com/ReymoT/data-center-agentic/issues/223).
 
 **Official instructions as reported by Nisha** ([source on #16](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6589886278)):
-- **Due December 9, 2026, at 11:59 pm.** 20% of the course grade.
+- **Due December 9, 2026, at 11:59 pm Arizona time.** 20% of the course grade.
 - **5–10 pages**, written as a paper submission to a good conference, using the **IEEE conference template** (Overleaf).
 - **One PDF per group**, uploaded to Canvas under Assignments › Final Project Report, named `Group15-Project21-F26-Final Project Report.PDF` (project number 21 confirmed by Nisha, [#16](https://github.com/ReymoT/data-center-agentic/issues/16)).
 - The detailed contributions of each team member are required.
@@ -19,7 +23,7 @@ methods/contribution handoffs are coordinated in [#223](https://github.com/Reymo
 
 Nisha reports project number 21 and an end-of-day deadline of 11:59 pm on December 9
 in her [November 4 confirmation](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-6639775165).
-Arizona timezone is her working assumption, not separately confirmed official guidance.
+Her [November 20 checkpoint](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-7049547810) confirms Arizona time and the required public repository. The team license choice remains pending.
 December 7 is Matty's conservative internal submission target,
 not an asserted official deadline. [Current course record](../decisions/Q13_OFFICIAL_REPORT_2026-11-02.md).
 
@@ -37,13 +41,13 @@ IEEE two-column pages are dense, so the budget below is about 9.5 pages, under t
 | — | Title | — | Nisha | — | Proposal | — |
 | A | Abstract | 1 | Nisha | 0.25 | Research question; findings | Write last |
 | B | Introduction | 2 | Nisha | 0.75 | [Draft](R05_INTRODUCTION_PROBLEM.md); research question | Drafted; findings wait for I02 |
-| C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; Reimo's review pending |
+| C | Problem statement | 1 | Nisha with Reimo | 0.5 | [Draft](R05_INTRODUCTION_PROBLEM.md); site, jobs, episodes and impact rules ([architecture](../ARCHITECTURE.md)) | Drafted; manager reconstructed simulator/source limits without requiring another Reimo review |
 | D | Related works | 1 | Matty, Nisha | 0.5 | [Draft](R05_RELATED_WORKS.md); [source review](../SOURCE_REVIEW.md) | Integrated wording reviewed against retained source review; final bibliography formatting/check pending |
-| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04 draft and Edison R03 handoff available; Ved/Reimo handoffs pending |
-| F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | Evidence-first assembly drafted; owner wording/source limitations confirmation pending |
+| E | System architecture and algorithms | 3 | Matty (agent, verification, R04); Ved (knowledge graph, retrieval, references, R02); Edison (Greedy A/B, C/D, R03); Reimo (simulator, R01) | 2 | [R04 draft](../R04_DEVELOPMENT_EVIDENCE.md); [ontology](../../ontology/README.md); [P04 artifacts](../handoffs/P04_REAL_DEVELOPMENT_ARTIFACTS.md) | R04/Edison R03 and corrected [Ved R02](R02_ONTOLOGY_AND_REFERENCE_METHODS.md) available; [R01 reconstructed by Matty](R01_MANAGER_RECONSTRUCTION_NOV18.md) available; personal attribution not invented |
+| F | Datasets: descriptions, sizes, preprocessing | 1 | Reimo (R01) | 0.75 | [data README](../../data/README.md); [D04 materialization](../handoffs/D04_DEVELOPMENT_MATERIALIZATION_112.md) | R01 methods reconstructed from verified records; source limits retained |
 | G | Evaluations: metrics, experiments, findings | **4** | Nisha (R05) with Edison (R03) | 2.5 | [R05 evaluation draft](R05_EVALUATION.md); [I02 matrix](../i02/README.md); held-out results | Design and development reliability drafted; findings wait for I02 |
 | H | UI / visualization interface designs | **4** | Matty | 1 | [Working explorer and screenshot](UI_VISUALIZATION.md) | Implemented and browser-checked on saved development evidence; final report acceptance pending |
-| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty, [Nisha](NISHA_CONTRIBUTIONS.md) and [Edison R03](R03_CLASSICAL_POLICIES_AND_ML.md) statements received; Reimo/Ved handoffs pending |
+| I | Division of work and team members' contributions | 1 | All; Nisha assembles | 0.5 | [responsibility checklist](../team/03_RESPONSIBILITY_CHECKLIST.md); PR history | Matty, [Nisha](NISHA_CONTRIBUTIONS.md) and [Edison R03](R03_CLASSICAL_POLICIES_AND_ML.md) statements received; Reimo R01 handoff and remaining personal/final confirmations pending |
 | J | Conclusions | 1 | Nisha | 0.25 | — | Write last |
 | K | References | 1 | All | 0.5 | [Reference list](REFERENCES.md) | Started; software and data entries pending |
 | | **Total** | **20** | | **~9.5** | | |
@@ -84,7 +88,7 @@ does not restart presentation work or change official course requirements.
 | December 4 | Matty I04 and R06 checks only after accepted prerequisites |
 | December 5-6 | Repair/revalidation, IEEE layout and final review buffer |
 | December 7 | Internal PDF submission target; confirm official fields before upload |
-| December 9, 11:59 pm | Deadline reported by Nisha; official timezone unconfirmed |
+| December 9, 11:59 pm | Deadline confirmed by Nisha as Arizona time |
 
 ## Required presentation-feedback coverage
 
@@ -93,3 +97,17 @@ Nisha integrates all four [November 17 feedback items](PROFESSOR_FEEDBACK_FOLLOW
 ## Ready offline designs and accepted handoffs
 
 Matty prepared the [repair-feedback design](REPAIR_FEEDBACK_DESIGN_NOV17.md) and [ML warm-start design](ML_WARMSTART_DESIGN_NOV17.md) for #231. These do not adopt a schema/prompt/variant or authorize execution. The assembled report now incorporates accepted Edison R03 methods and Nisha contribution evidence; original owner files remain unchanged.
+
+## November 17 R02 integration and checkpoint
+
+Corrected R02 methods from #235 are integrated into the working report and evidence index. The original #234 file was empty; repaired prose retains scientific/tie/source limits and does not invent Ved personal attestation. Reimo R01 and #60 actual evidence/input gates remain outstanding after the recorded 6 PM Arizona checkpoint. The #231 response window remains unchanged (November 18, approximately 10:25 AM Arizona); designs are not shared-protocol adoption.
+
+## Current delivery schedule
+
+The full-study execution/ratings/reproduction windows above are historical conditional planning, not active prerequisites. Evidence-only text and demo assembly proceed now; November 20 official-field checkpoint and December 7 internal target remain. Final evidence-only artifact checks and submission receipt are still required; former study I03/I04 completion is not claimed.
+
+Concurrent update: Reimo R01 owner prose arrived in [PR #237](https://github.com/ReymoT/data-center-agentic/pull/237) during manager reconstruction. It is preserved separately for review; the manager reconstruction has a distinct filename, and source-dependent work remains outside the activated scope.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.
+
+November19 ready manager handoff: [RULE-01 exact specification](../rule_study/RULE01_SPECIFICATION.md) and [RULE-06 final audit checklist](../rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md). Shared-boundary acceptance and research execution remain pending; these documents do not claim results.

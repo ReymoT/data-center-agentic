@@ -1,5 +1,13 @@
 # Project plan
 
+November 19 active plan: [the focused rule-system study](decisions/NOV19_RULE_STUDY_PLAN.md) supersedes the November 18 evidence-only baseline as our primary delivery. Missing source permissions/provenance/verified inputs prevented the original held-out study; Professor Hasan recommended lifting explicit rules from representative permitted examples, lowering them into an executable discrete scheduler and independently verifying safety and progress. We will demonstrate two scenarios and, after frozen-protocol authorization, test on new independently authored synthetic cases against compatible Greedy A/B references. Core work is due November 25, fixes/reproduction November 26-27 and audited candidate November 28. Start now; these are deadlines, not start dates. The evidence-only package remains backup. The original research question is unanswered; no new results, source approval or model runs are claimed. Earlier dated status entries below are historical where superseded.
+
+November 20 factual refresh: Ved’s concrete adapter agreement is received; do not request it again. Nisha’s verifier harness is merged through #250, with actual frozen-system verification pending. Edison’s exact review-2 generator/result agreement is now received as recorded in the update below; actual frozen implementation bindings remain pending. [RULE-06 offline timeout preparation](rule_study/OFFLINE_SUPERVISOR_PREPARATION.md) is dummy-tested; actual dispatcher wiring, bindings, authorization and research runs remain pending. All original November 20–28 checkpoints remain unchanged.
+
+November 20 acceptance update: Edison’s exact review-2 generator/metrics/result reply is received. His generator handoff is reviewed as partial RULE-04 implementation; metrics/accounting remains due at his November 23 checkpoint and full evaluation November 25. Ved’s actual adapter, independent frozen-system verification and exact final-generation dispatcher/authorization remain pending. See [generator receiving](rule_study/RULE04_GENERATOR_RECEIVING.md).
+
+November 18 active delivery: [Matty explicitly activated development-evidence-only delivery](decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Finish the report and saved-evidence demo from existing permitted public/sanitized records without waiting for Reimo or new source processing. The planned held-out study remains unexecuted and the research question unanswered. Source B1-B3 remain unresolved, B4 provisional; no new data/model/solver/training operation is authorized. This supersedes earlier inactive-contingency/November 22 wait statements for the active delivery scope; historical records remain preserved.
+
 November 15 evidence-first delivery: [a working report and evidence index](report/VERIFIED_EVIDENCE_WORKING_DRAFT.md)
 assemble available methods/development observations now. [#223](https://github.com/ReymoT/data-center-agentic/issues/223)
 requests existing R01/R02/R03/R05 methods/contribution drafts or blockers by
@@ -216,3 +224,11 @@ The table below preserves the original internal estimates for context. It is not
 November 26-27 is reserved in the proposal. Optional extensions follow required results under separately approved work. No scheduler or automatic assistant wakeup is created.
 
 Update 2026-10-12: Matty completed the independent [A01/F03 local model installation and identity checks](OLLAMA_SETUP.md). Qwen3 8B Q4_K_M is installed with full digest/license evidence. No SDK/lock/shared-setting change, inference or full task acceptance is claimed; remaining deployment/integration prerequisites still apply.
+
+The active single-owner schedule and dependency/acceptance gates are in the November 19 decision; the original 50 task rows below are historical scope, not new assignments.
+
+November 19 final manager amendment: Edison and Ved jointly produce the two-scenario demo in [RULE-07 #246](https://github.com/ReymoT/data-center-agentic/issues/246), due November 25 at 18:00 Arizona. Edison coordinates the package/visuals; Ved executable wiring/replay. Both must proactively ask teammates for needed materials. Reimo retains report/methods/diagram integration in #243.
+
+November19 ready manager handoff: [RULE-01 exact specification](rule_study/RULE01_SPECIFICATION.md) and [RULE-06 final audit checklist](rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md). Shared-boundary acceptance and research execution remain pending; these documents do not claim results.
+
+November 20 course receiving: [Nisha confirmed](decisions/Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md) the final report deadline as December 9, 2026, 11:59 PM Arizona time and the required public software repository. December 7 remains internal. The existing Apache-2.0 team-code proposal and license inventory remain pending final contributor agreement and release checks.
