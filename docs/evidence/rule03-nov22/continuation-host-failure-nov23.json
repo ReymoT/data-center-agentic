@@ -1,0 +1,47 @@
+{
+  "kind": "rule03_continuation_host_failure_receipt_v1",
+  "date_arizona": "2026-11-23",
+  "authorization_id": "rule03-c51a10-9621b44-20261123",
+  "request_sha256": "203147aa190d14a00e92d666debe28da2f755467e70502264e2a47f7c77652ad",
+  "host_commit": "9621b44a986d3847e4f46e16022c4d41566b9213",
+  "status": "FAIL",
+  "failure_stage": "exclusive publication of first authored case.json",
+  "error": "PermissionError / WinError 5 from os.link in sandbox",
+  "raw_report_sha256": "380ad062df46222173dfed456e341e0c46ce74e1a09596578b3c3eeb0a4b49e4",
+  "raw_dispatch_result_sha256": "3fc031d24b540857c04d7ed0699b3b532d72a5a177c037e7d6409845f5bb916f",
+  "supervision": {
+    "status": "failed",
+    "released": true,
+    "cleanup_verified": true,
+    "returncode": 7,
+    "elapsed_before_cleanup_s": 54.578000000008615,
+    "elapsed_including_cleanup_s": 54.578000000008615
+  },
+  "completed_authored_runs": 0,
+  "saved_replay_phase": "NOT_RUN",
+  "new_states": 0,
+  "new_transitions": 0,
+  "cumulative_charged_states": 10000,
+  "cumulative_charged_transitions": 10000,
+  "original_attempt_status": "INCOMPLETE",
+  "source_evidence_stable": true,
+  "retry_allowed": false,
+  "authorization_consumed": true,
+  "diagnostic_probes": {
+    "scope": "file I/O only; no policy or replay",
+    "sandbox": {
+      "scope": "file I/O only, no policy or replay",
+      "hardlink": "PermissionError",
+      "winerror": 5
+    },
+    "native_host": {
+      "scope": "file I/O only, no policy or replay",
+      "hardlink": "PASS"
+    }
+  },
+  "native_host_scientific_execution": "NOT_RUN_PENDING_FRESH_APPROVAL",
+  "scientific_freeze_accepted": false,
+  "original_independent_receiving": "received; distinct from this new attempted scope",
+  "source_issue": "https://github.com/ReymoT/data-center-agentic/issues/241#issuecomment-7113732354",
+  "sanitization": "Raw reports retained outside Git; local paths and PID excluded from this receipt."
+}
