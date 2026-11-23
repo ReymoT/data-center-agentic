@@ -1,5 +1,8 @@
 # RULE-06 final audit checklist (#244)
 
+November 23 continuation controls: [new fixed host preparation](NARROW_CONTINUATION_PREPARATION_NOV23.md) verifies/extracts old evidence, preserves original producer pins and authenticates identical scientific source before new authored output. A shared budget, cumulative counters, original-ID refusal and phase-stop behavior are fixture-tested. Input extraction dry test has zero scientific steps. Fresh actual authorization, continuation, new-scope person receiving and later freeze/accounting/evaluation/reproduction/release gates remain unpassed.
+
+
 November 23: [actual independent-person receiving](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) is received for retained integrity/pins/coverage. Complete verification/freeze and accounting/evaluation/reproduction/package gates remain unpassed. Explicitly audit no-partial-progress behavior on infeasible inputs and distinguish51 incomplete Greedy B traces overall from43 outstanding P1-eligible cases.
 
 

@@ -9,6 +9,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 23 continuation preparation: [the narrow launcher](docs/rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md) is implemented and offline-tested for10 authored runs plus51 saved Greedy B replays, without regenerating192 primary traces. Source and evidence pins, original-ID refusal, one shared bound and cumulative counts are enforced. A static dry test verified/extracted all29,569 retained files with zero policy/replay work. The actual scientific continuation remains NOT_RUN pending a freshly reviewed exact request and approval; original INCOMPLETE findings remain unchanged.
+
 November 23 independent receiving: [Nisha confirmed the retained evidence](docs/handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md), including all file hashes, source bindings and recorded coverage. Overall remains INCOMPLETE; authored/S4 and the unfinished Greedy B replay are still missing. In all12 jointly infeasible primary cases, all three policies start no jobs; safe refusal does not salvage a feasible subset. No policy was changed or further scientific run/replay performed.
 
 November 22 actual bounded verification: the approved attempt ran once on merged code `3daf00f7` and stopped at its 10,000-state ceiling after 107.172 seconds. All 192 primary case-policy traces were generated. Replay completed for all 64 rules-v1 and 64 Greedy A traces, but only 13 Greedy B traces; 51 Greedy B traces remain incomplete and none of the 10 authored case-policy runs happened. Overall status is INCOMPLETE, not a scientific freeze or generalization result.
