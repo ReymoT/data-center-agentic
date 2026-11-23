@@ -445,3 +445,103 @@ def test_verification_statuses_are_explicit_and_never_pass(all_runs):
     text = report_text(runs["A"], "A")
     assert "independent verification (Nisha, #241): NOT_RUN" in text
     assert "not independent verification" in text
+
+
+@pytest.mark.parametrize("policy", ["greedy_a", "greedy_b"])
+def test_baselines_replay_with_the_same_score_convention(tmp_path, policy):
+    sr = d.run_scenario("A", policy, tmp_path, code_commit=TEST_ONLY_COMMIT)
+    assert sr.replay["status"] == "pass"
+    assert sr.replay["simulator_steps_during_replay"] == 0
+
+
+def test_replay_never_invokes_decide_even_if_evidence_disappears(all_runs, monkeypatch):
+    _, runs = all_runs
+    monkeypatch.setattr(
+        d.RuleStudyRunner, "decide", lambda *a: pytest.fail("readonly replay must not execute")
+    )
+    assert d.replay_saved(runs["A"].run.root)["status"] == "pass"
+
+
+@pytest.mark.parametrize("damage", ["reservation", "decision_and_reservation", "directory"])
+def test_incomplete_replay_does_not_repair_or_write_evidence(all_runs, tmp_path, damage):
+    import shutil
+
+    _, runs = all_runs
+    root = tmp_path / "rules-v1/A-rules-v1"
+    shutil.copytree(runs["A"].run.root, root)
+    if damage == "directory":
+        shutil.rmtree(root / ".completed")
+    else:
+        (root / ".intents/decision-00.json").unlink()
+        if damage == "decision_and_reservation":
+            (root / "decisions/decision-00.json").unlink()
+            (root / ".completed/decision-00.json").unlink()
+    before = {
+        p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()
+    }
+    assert d.replay_saved(root)["status"] == "fail"
+    after = {p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()}
+    assert before == after
+
+
+def test_line_ending_change_is_not_normalized_away(all_runs, tmp_path):
+    import shutil
+
+    _, runs = all_runs
+    root = tmp_path / "rules-v1/A-rules-v1"
+    shutil.copytree(runs["A"].run.root, root)
+    p = root / "decisions/decision-00.json"
+    p.write_bytes(p.read_bytes().replace(b"\n", b"\r\n"))
+    assert d.replay_saved(root)["status"] == "fail"
+
+
+def test_all_does_not_silently_ignore_selected_baseline(tmp_path, capsys):
+    out = tmp_path / "never"
+    code, captured = run_main(["--all", "--policy", "greedy_a", "--out-dir", str(out)], capsys)
+    assert code == 2 and "rules-v1" in captured.err
+    assert not out.exists()
+
+
+def test_readonly_runner_never_executes_a_missing_reservation(all_runs, tmp_path):
+    import shutil
+
+    _, runs = all_runs
+    root = tmp_path / "rules-v1/A-rules-v1"
+    shutil.copytree(runs["A"].run.root, root)
+    for folder in ("decisions", ".intents", ".completed"):
+        (root / folder / "decision-00.json").unlink()
+    sim = d.SchedulingSimulator(allow_completion_starts=False)
+    case = c.CASE_A
+    sim.reset(case.episode(), forecasts_by_slot=case.forecasts_by_slot())
+    runner = d.RuleStudyRunner(
+        sim,
+        case.snapshot,
+        tmp_path,
+        policy_id="rules-v1",
+        case_id="A",
+        decision_time_utc=case.decision_time_utc,
+        bindings=runs["A"].bindings,
+        score_convention=d.ScoreKwhConvention(),
+        read_only=True,
+    )
+    with pytest.raises(ValueError, match="cannot execute"):
+        runner.decide(0)
+    assert len(sim.history) == 0
+    assert not (root / "decisions/decision-00.json").exists()
+
+
+def test_readonly_constructor_does_not_create_directories(all_runs, tmp_path):
+    _, runs = all_runs
+    with pytest.raises(ValueError, match="existing unlinked"):
+        d.RuleStudyRunner(
+            None,
+            c.CASE_A.snapshot,
+            tmp_path,
+            policy_id="rules-v1",
+            case_id="A",
+            decision_time_utc=c.CASE_A.decision_time_utc,
+            bindings=runs["A"].bindings,
+            score_convention=d.ScoreKwhConvention(),
+            read_only=True,
+        )
+    assert not list(tmp_path.iterdir())

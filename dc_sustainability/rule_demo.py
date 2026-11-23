@@ -35,7 +35,6 @@ from dc_sustainability.rule_study.runner import (
     RuleStudyRunner,
     build_result,
     make_bindings,
-    replay_case,
     run_case,
 )
 from dc_sustainability.rule_study.scheduler import ScoreKwhConvention
@@ -372,10 +371,16 @@ def compare_with_expectation(scenario: str, observed: dict) -> list[dict]:
 def _fresh_out_dir(out_dir: Path | None) -> Path:
     if out_dir is not None:
         out = Path(out_dir)
+        if any(p.is_symlink() or p.is_junction() for p in (out, *out.absolute().parents)):
+            raise UsageError("linked output directory refused")
         if out.exists() and any(out.iterdir()):
             raise UsageError(f"refusing to reuse non-empty output directory {out}")
         out.mkdir(parents=True, exist_ok=True)
         return out
+    if any(
+        p.is_symlink() or p.is_junction() for p in (DEFAULT_OUT_ROOT, *DEFAULT_OUT_ROOT.parents)
+    ):
+        raise UsageError("linked default output directory refused")
     DEFAULT_OUT_ROOT.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     for _ in range(8):
@@ -425,7 +430,40 @@ def replay_saved(root, *, expect_decision_sha256s: list[str] | None = None) -> d
     try:
         if not (root / "result.json").is_file() or not (root / "decisions").is_dir():
             raise ValueError("not a saved rule-study case folder (no result.json / decisions)")
-        saved_text = (root / "result.json").read_text(encoding="utf-8")
+        # Refuse links and gaps before constructing a runner: its decide method
+        # may execute a new policy step when no reservation exists.
+        if any(p.is_symlink() or p.is_junction() for p in (root, *root.parents)):
+            raise ValueError("linked replay root refused")
+        for directory in (
+            "decisions",
+            ".intents",
+            ".completed",
+            "states",
+            "snapshots",
+            "transitions",
+        ):
+            path = root / directory
+            if not path.is_dir() or path.is_symlink() or path.is_junction():
+                raise ValueError(f"required replay directory missing or linked: {directory}")
+        paths = sorted((root / "decisions").glob("decision-*.json"))
+        if len(paths) != 30 or [p.name for p in paths] != [
+            f"decision-{i:02d}.json" for i in range(30)
+        ]:
+            raise ValueError("saved demo must contain all thirty contiguous decisions")
+        for path in paths:
+            for sibling in (path, root / ".intents" / path.name, root / ".completed" / path.name):
+                if not sibling.is_file() or sibling.is_symlink():
+                    raise ValueError("saved decision/reservation/commitment missing or linked")
+            if (root / ".completed" / path.name).read_bytes() != (
+                r.study_sha256(path.read_bytes().decode("utf-8")) + "\n"
+            ).encode():
+                raise ValueError("saved decision exact bytes differ from completion commitment")
+        for index, path in enumerate(root.rglob("*")):
+            if index >= 1024:
+                raise ValueError("saved case exceeds replay artifact bound")
+            if path.is_symlink() or path.is_junction():
+                raise ValueError("linked replay evidence refused")
+        saved_text = (root / "result.json").read_bytes().decode("utf-8")
         result = r.RuleStudyResult.from_json(saved_text)
         policy, case_id = result.policy_id, result.case_id
         if root.name != f"{case_id}-{policy}" or root.parent.name != policy:
@@ -438,9 +476,13 @@ def replay_saved(root, *, expect_decision_sha256s: list[str] | None = None) -> d
         case_file = root / "case.json"
         if not case_file.is_file():
             raise ValueError("case.json is missing from the saved run (required evidence)")
-        if r.study_sha256(case_file.read_text(encoding="utf-8")) != result.bindings.case_sha256:
+        if r.study_sha256(case_file.read_bytes().decode("utf-8")) != result.bindings.case_sha256:
             raise ValueError("saved case.json does not match the bound case_sha256")
-        convention = ScoreKwhConvention() if policy == "rules-v1" else None
+        if [r.study_sha256(p.read_bytes().decode("utf-8")) for p in paths] != list(
+            result.decision_sha256s
+        ):
+            raise ValueError("saved result does not bind exact decision bytes")
+        convention = ScoreKwhConvention()  # run_case binds this convention for every policy
         sim = SchedulingSimulator(allow_completion_starts=False)
         sim.reset(case.episode(), forecasts_by_slot=case.forecasts_by_slot())
         snapshot = case.snapshot()
@@ -454,9 +496,17 @@ def replay_saved(root, *, expect_decision_sha256s: list[str] | None = None) -> d
             bindings=result.bindings,
             score_convention=convention,
             fault_injection=case.fault_injection if case.fault_starts else None,
+            read_only=True,
         )
         count = len(list((root / "decisions").glob("decision-*.json")))
-        outcomes = replay_case(runner, count)
+        outcomes = []
+        for index in range(count):
+            outcome = runner._replay(
+                index
+            )  # read-only lookup; decide() could execute on a missing intent
+            if outcome is None:
+                raise ValueError("saved reservation missing; replay never executes a new decision")
+            outcomes.append(outcome)
         rebuilt = build_result(root, case, policy, result.bindings, convention)
         hashes = [o.decision_sha256 for o in outcomes]
         report.update(
@@ -741,6 +791,8 @@ def main(argv: list[str] | None = None, *, code_commit: str | None = None) -> in
             print(json.dumps(reports, indent=2, sort_keys=True))
             return 0 if all(rep["status"] == "pass" for rep in reports) else 1
         if args.all:
+            if args.policy != DEFAULT_POLICY:
+                raise UsageError("--all includes B-fault and requires --policy rules-v1")
             names = list(SCENARIOS)
         elif args.scenario:
             names = [normalize_scenario(args.scenario)]
@@ -754,13 +806,15 @@ def main(argv: list[str] | None = None, *, code_commit: str | None = None) -> in
             )
             return 2
         policy = DEFAULT_POLICY if args.all else args.policy
+        if policy not in r.POLICY_IDS or ("B-fault" in names and policy != "rules-v1"):
+            raise UsageError("supported policy required; B-fault is a rules-v1 demonstration only")
         out_dir = _fresh_out_dir(args.out_dir)
         expectations = load_expectations()
         runs = [run_scenario(n, policy, out_dir, code_commit=code_commit) for n in names]
     except UsageError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
-    except BindingError as exc:
+    except (BindingError, OSError, ValueError) as exc:
         print(f"cannot bind the required artifacts: {exc}", file=sys.stderr)
         return 2
     summary = summary_record(runs, expectations, command)

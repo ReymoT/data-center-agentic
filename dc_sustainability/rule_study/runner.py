@@ -178,6 +178,7 @@ class RuleStudyRunner:
         score_convention: Optional[sch.ScoreConvention] = None,
         fault_injection: Optional[FaultInjection] = None,
         case_json: Optional[dict] = None,
+        read_only: bool = False,
     ):
         if policy_id not in r.POLICY_IDS:
             raise ValueError(f"policy_id must be one of {r.POLICY_IDS}")
@@ -192,6 +193,8 @@ class RuleStudyRunner:
             raise ValueError("fault injection is a rules-v1 demonstration only")
         if not isinstance(bindings, r.Bindings):
             raise TypeError("bindings must be Bindings")
+        if type(read_only) is not bool:
+            raise TypeError("read_only must be boolean")
         if (
             case_json is not None
             and r.study_sha256(r.study_json(case_json)) != bindings.case_sha256
@@ -207,12 +210,30 @@ class RuleStudyRunner:
         self._convention = score_convention
         self._fault = fault_injection
         self._lock = threading.Lock()
+        self._read_only = read_only
         self.root = Path(directory) / policy_id / f"{case_id}-{policy_id}"
+        if read_only and any(
+            p.is_symlink() or p.is_junction() for p in (self.root, *self.root.parents)
+        ):
+            raise ValueError("read-only replay refuses linked roots")
         for name in ("decisions", "states", "snapshots", "transitions", ".intents", ".completed"):
-            (self.root / name).mkdir(parents=True, exist_ok=True)
+            path = self.root / name
+            if read_only:
+                if not path.is_dir() or path.is_symlink() or path.is_junction():
+                    raise ValueError(
+                        "read-only replay requires existing unlinked evidence directories"
+                    )
+            else:
+                path.mkdir(parents=True, exist_ok=True)
         self._reasons: dict[str, str] = {}
         if case_json is not None:
-            _publish_immutable(self.root / "case.json", r.study_json(case_json))
+            if read_only:
+                if (self.root / "case.json").read_bytes() != r.study_json(case_json).encode(
+                    "utf-8"
+                ):
+                    raise ValueError("read-only case differs from supplied evidence")
+            else:
+                _publish_immutable(self.root / "case.json", r.study_json(case_json))
 
     # ------------------------------------------------------------------ identity / replay
     def _fingerprint(self, index: int) -> str:
@@ -331,6 +352,8 @@ class RuleStudyRunner:
             replay = self._replay(decision_index)
             if replay is not None:
                 return replay
+            if self._read_only:
+                raise ValueError("read-only replay cannot execute a missing decision")
             state = self._sim.state()
             snapshot = self._reader()
             if state.current_slot != decision_index:
