@@ -1,5 +1,7 @@
 # RULE-06 final audit checklist (#244)
 
+November 23 latest: [native continuation](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md) PASS within its exact scope: 10 authored runs + 51 saved Greedy B replays; 2,130 new / 12,130 cumulative charged steps, verified cleanup. No scientific code changed or primary traces regenerated. Original INCOMPLETE and intermediate host FAIL remain unchanged. New-scope Nisha receiving, actual accounting, freeze, final evaluation and independent reproduction remain separate pending gates. Older dated entries below are historical where superseded.
+
 November 23 continuation controls: [new fixed host preparation](NARROW_CONTINUATION_PREPARATION_NOV23.md) verifies/extracts old evidence, preserves original producer pins and authenticates identical scientific source before new authored output. A shared budget, cumulative counters, original-ID refusal and phase-stop behavior are fixture-tested. Input extraction dry test has zero scientific steps. Fresh actual authorization, continuation, new-scope person receiving and later freeze/accounting/evaluation/reproduction/release gates remain unpassed.
 
 

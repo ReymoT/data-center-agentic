@@ -1,0 +1,43 @@
+{
+  "kind": "rule03_native_continuation_attempt_receipt_v1",
+  "date_arizona": "2026-11-23",
+  "authorization_id": "rule03-native-c51a10-dbb8e6f-20261123",
+  "request_sha256": "b36e7f01c114121a5bf8547ed0016beccf0327f4ac2a1198c04db61cc129c1cb",
+  "host_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+  "saved_producer_commit": "3daf00f7af5b130e8b17ae67b2f79a7dadb7ea00",
+  "overall": "PASS",
+  "limits": {
+    "states": 10000,
+    "transitions": 50000,
+    "wall_seconds": 600,
+    "new_case_policy_runs": 10,
+    "saved_trace_replays": 51
+  },
+  "supervision": {
+    "status": "succeeded",
+    "released": true,
+    "cleanup_verified": true,
+    "returncode": 0,
+    "elapsed_before_cleanup_s": 54.26499999999942,
+    "elapsed_including_cleanup_s": 54.26499999999942
+  },
+  "report_sha256": "b9870310acfe82c4dae3ac4b3f4bed5895fe8039bf332377d3b16b9e0896ca65",
+  "authored_archive_sha256": "d438dd337b63435ece83276def74f8188c4b1b063fbd326ac60fc79bb267f2bc",
+  "authored_archive_bytes": 292766,
+  "authored_files": 1540,
+  "authored_expanded_bytes": 4576770,
+  "authored_manifest_sha256": "c5eb8d897403bd87baa1906cdc921ac78a48e2f9c921ba54449326c4073c39d6",
+  "new_states": 2130,
+  "new_transitions": 2130,
+  "cumulative_charged_states": 12130,
+  "cumulative_charged_transitions": 12130,
+  "original_attempt_overall": "INCOMPLETE; unchanged",
+  "intermediate_sandbox_attempt": "FAIL, zero completed runs/charged steps; preserved separately",
+  "new_primary_executions": 0,
+  "model_calls": 0,
+  "final_cases_generated": 0,
+  "retry_allowed": false,
+  "authorization_consumed": true,
+  "independent_person_receiving": "PENDING for this new continuation",
+  "scientific_freeze_accepted": false
+}

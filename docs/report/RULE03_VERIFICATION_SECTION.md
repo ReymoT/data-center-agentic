@@ -69,7 +69,7 @@ and Greedy B; Greedy runs skip the injected-fault case. That gives at most 202
 case-policy runs of 30 decisions each. An optional 1,024-input supplement was
 deferred. Execution needed one-use authorization on a clean, frozen commit. [E12, E14]
 
-## Part C — Section 7.x: Verification results (partial)
+## Part C — Section 7.x: Original November 22 results (preserved)
 
 The approved attempt ran once on frozen main `3daf00f7` on November 22. It
 stopped at the combined 10,000-state ceiling after 107 s, with no run errors and
@@ -109,8 +109,8 @@ transition counts are both zero. Cleanup was verified. This attempt is **FAIL**
 for a host I/O error, not a policy safety counterexample. Its one-use ID is
 consumed; the original November 22 **INCOMPLETE** result remains unchanged.
 File-only probes reproduced the denial in the sandbox and succeeded on the
-native host. A new exact native-host request is prepared but has not run and
-needs fresh approval. See the [sanitized attempt receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json)
+native host. That earlier pending request was superseded by a freshly approved native-host
+attempt, reported separately below. See the [sanitized attempt receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json)
 and [dated issue handoff](https://github.com/ReymoT/data-center-agentic/issues/241#issuecomment-7113732354).
 
 **Limitation: no partial progress on infeasible inputs.** In all 12 jointly
@@ -126,7 +126,27 @@ feasible subset of work. [E14]
 actual rules-v1 and Greedy A implementations satisfied every checked safety and
 progress property. This is finite-domain evidence for one frozen implementation.
 It is not a proof for larger or unseen inputs, a generalization result or a
-scientific freeze. The authored cases, Greedy B and S4 still need the separately
-authorized continuation: 51 saved Greedy B replays plus 10 authored runs. The
-failed host attempt above did not supply that evidence. Synthetic
-evaluation and accounting against Greedy A/B remain pending. [E14]
+scientific freeze. The failed host attempt above did not supply the missing coverage. The later
+authorized native-host continuation below supplies a separate scoped result,
+awaiting independent receiving. Synthetic evaluation, accounting and scientific
+freeze remain pending. [E14, E15]
+
+## Part D — November 23 native continuation (new-scope receiving pending)
+
+The separately authorized native-host attempt at `dbb8e6f` completed with scoped
+PASS in 54.265 seconds, exit 0 and verified cleanup. It ran all 10 authored
+case-policy runs and replayed the 51 outstanding saved Greedy B traces. New
+charged work was 2,130 states/transitions: 300 authored execution steps plus
+1,830 replay steps. Cumulative work is 12,130, retaining the original 10,000
+and the previously partial replay prefix. Source/evidence bindings stayed stable.
+
+Authored rules-v1 S1-S5/P1/P2 and arithmetic PASS; Greedy A/B S1-S3/S5/P1/P2
+PASS, with S4/arithmetic NOT_RUN for those baselines. The saved Greedy B remainder
+passes S1-S3/S5/P1/P2 and binding checks; primary S4 remains NOT_RUN. The original
+INCOMPLETE and intermediate host FAIL reports are not rewritten. No primary
+trace was regenerated, and no model or final unseen-case run occurred.
+
+These are retained reported outcomes, pending Nisha's independent receiving of
+this new scope. They do not establish generalization, accounting acceptance or
+scientific freeze. The 12 zero-start infeasible primary cases remain a limitation.
+See [the actual handoff and evidence](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md). [E15]
