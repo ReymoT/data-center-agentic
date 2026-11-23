@@ -323,7 +323,7 @@ hand-built and development-seed unit fixtures were used.
 
 For #241 after #257/#258. Code: `dc_sustainability/evaluation/rule_study_receiving.py`,
 CLI `scripts/receive_rule_study_system.py`, tests
-`tests/evaluation/test_rule_study_receiving.py` (40 tests after manager review).
+`tests/evaluation/test_rule_study_receiving.py` (41 tests after manager review).
 
 **Why runs, not a separate policy model.** For a closed case every arrival is known and
 rules-v1, the production checker, the Greedy A fallback and the simulator are
@@ -381,7 +381,8 @@ supplements are refused; test case overrides cannot claim a complete named-domai
 result. Missing/malformed/linked/oversized artifacts become findings and are not
 replayed. Result commitments and contiguous decision coverage are checked. Source
 pins are reconstructed again after execution; drift fails receiving. One shared
-budget prevents later domains receiving a fresh allowance, and partial budget-stopped
+budget prevents later domains receiving a fresh allowance. Skipped artifact checks
+cannot report binding PASS, and partial budget-stopped
 traces remain INCOMPLETE. No production checker supplies the independent verdict.
 These are harness/unit-fixture fixes, not an authorized current-code receiving run
 or independent scientific acceptance. The existing hard process supervisor and a

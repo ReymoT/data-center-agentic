@@ -390,7 +390,7 @@
     },
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
-      "sha256": "c0760183a1447deff0c6b614fefb8e020ae8b7f22190c8938eef4b7edf068258",
+      "sha256": "50ff57df27913d20b5d4bc5019c18b0ea7a7b8f8a4f3c48f56beaf9c45e065f6",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -515,7 +515,7 @@
     },
     {
       "path": "dc_sustainability/rule_study/runner.py",
-      "sha256": "369e305f5212f16df4e2c9c1da72db3b3e512cb295fb1bdcb417ef3f05a03b19",
+      "sha256": "2a31c1158e960226f038263778fad282aa536c9a1d990e4af46cd2fb8ef23e51",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "4195f6f380343ae6f9fb4d10cd5c271587daabdd8b132ae0813caa1a57c49bf9",
+      "sha256": "f21caab50605cfde1a771614a8fcbe14c3f248637ef7c23aca52234af92011cf",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -640,7 +640,7 @@
     },
     {
       "path": "dc_sustainability/evaluation/rule_study_receiving.py",
-      "sha256": "9d94217f2a0221bdfb5a5780425577f16db5bb14c4da8589646af0db44b0b00a",
+      "sha256": "05de6bc21ca50d748b62aaf48f6312c5681ff96184b1a2c0d90091b9e11a5e6e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -650,7 +650,37 @@
     },
     {
       "path": "tests/evaluation/test_rule_study_receiving.py",
-      "sha256": "20fdea91bf25e0aadc6d442cbbea6f55e57424cd1acc5db8129e90ccefe73039",
+      "sha256": "ce6dd1f8934df3eda702372b91ae86fb505e4c8cac7b0eecd8385a5100a89d2e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/rule_demo.py",
+      "sha256": "a2aa6a5f48e26edee129aa6ef9cd7c974b68e28fcd509cd5cf82bc11b001ace2",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/rule_study/test_rule07_demo.py",
+      "sha256": "f72f579f681a16adce4dfd604c88006d51d5ca73453ba8572807990cf2aeba6b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE07_EXECUTABLE_DEMO.md",
+      "sha256": "2c8024df2daf350c97f32f4cd21ff039d7e5dfe5ea837b2a959b57508874da6e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE07_IMPLEMENTER_HANDOFF_NOV22.md",
+      "sha256": "75aefbe6704e1782923b78c4872e97912337dda4bb3db8f7d6a4e48743f836cc",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE07_ARCHIVE_RECEIVING_NOV22.json",
+      "sha256": "28d9a6b0866680844f45b33d29521e4b166ca8fb929cb78f89f64169fd043d23",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "rule07-traces-a7a71d0.sha256",
+      "sha256": "6761755078332e2014311f3623929b3f8dbbb67d36f440993902de95b34f464a",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

@@ -1,0 +1,19 @@
+{
+  "archive": "rule07-traces-a7a71d0.tar.gz",
+  "archive_member_paths_safe": true,
+  "archive_sha256": "33fe41b8451b06c0b80ac5cb79b8f45b27168fa7a1aca7c787d6a74507b6be41",
+  "bound_code_commits": [
+    "a7a71d005e8b329415b665951b9c56a63ee94110"
+  ],
+  "checksum_manifest": "rule07-traces-a7a71d0.sha256",
+  "checksum_manifest_sha256": "6761755078332e2014311f3623929b3f8dbbb67d36f440993902de95b34f464a",
+  "current_demo_code_verified": false,
+  "date_arizona": "2026-11-22",
+  "decisions": 120,
+  "exact_hashes_match": true,
+  "files_checked": 617,
+  "independent_scientific_acceptance": false,
+  "kind": "rule07_historical_archive_receiving_v1",
+  "policy_or_model_executed": false,
+  "scope": "Read-only archive byte/identity check of implementer-supplied authored outputs; not current-code verification or runtime authentication."
+}

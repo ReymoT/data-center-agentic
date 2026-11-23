@@ -3,6 +3,9 @@
 docs/evidence/rule02/** -text
 # Supplemental upstream license text is retained byte for byte with a recorded hash.
 third_party/notices/langsmith-0.14.7-LICENSE.txt -text
+# Keep Ved's supplied RULE07 checksum manifest stable on Windows.
+rule07-traces-a7a71d0.sha256 -text
+rule07-traces-a7a71d0.tar.gz -text
 docs/evidence/I01_RECEIVING_NISHA_2026-11-03.txt -text
 # Keep the published raw summary digest stable across Windows/Unix checkouts.
 docs/evidence/i01-unified-validation-2026-11-04.json -text
