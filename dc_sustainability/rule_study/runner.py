@@ -284,12 +284,12 @@ class RuleStudyRunner:
                 raise IndeterminateExecution(
                     "reserved decision has no final record; reconcile actual state, do not retry"
                 )
-            text = decision_path.read_text(encoding="utf-8")
+            text = decision_path.read_bytes().decode("utf-8")
             record = r.RuleStudyDecision.from_json(text)
             completion = self.root / ".completed" / decision_path.name
             if not completion.exists():
                 raise IndeterminateExecution("record has no completion commitment; do not retry")
-            if completion.read_text(encoding="utf-8") != r.study_sha256(text) + "\n":
+            if completion.read_bytes() != (r.study_sha256(text) + "\n").encode("utf-8"):
                 raise ValueError("saved decision differs from its completion commitment")
             if (
                 record.policy_id != self._policy_id
@@ -756,13 +756,12 @@ def build_result(
     hashes, started, errors, transitions = [], {}, [], []
     stopped = False
     for path in decision_files:
-        text = path.read_text(encoding="utf-8")
+        text = path.read_bytes().decode("utf-8")
         record = r.RuleStudyDecision.from_json(text)
         commitment = root / ".completed" / path.name
-        if (
-            not commitment.is_file()
-            or commitment.read_text(encoding="utf-8") != r.study_sha256(text) + "\n"
-        ):
+        if not commitment.is_file() or commitment.read_bytes() != (
+            r.study_sha256(text) + "\n"
+        ).encode("utf-8"):
             raise ValueError("result cannot use an uncommitted or modified decision")
         if (
             record.bindings != bindings

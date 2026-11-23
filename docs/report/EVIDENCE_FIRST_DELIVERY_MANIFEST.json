@@ -515,7 +515,7 @@
     },
     {
       "path": "dc_sustainability/rule_study/runner.py",
-      "sha256": "05408091ab9e4e91332e389b7ea0891fcdc670ffe120cbad6ee0feca9647eab6",
+      "sha256": "2a31c1158e960226f038263778fad282aa536c9a1d990e4af46cd2fb8ef23e51",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -660,7 +660,7 @@
     },
     {
       "path": "tests/rule_study/test_rule07_demo.py",
-      "sha256": "ac412f15efa39bd4c32bfc00c147dd1fbcc3dc2dcd4683bab27ee6f62cd6b664",
+      "sha256": "f72f579f681a16adce4dfd604c88006d51d5ca73453ba8572807990cf2aeba6b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {

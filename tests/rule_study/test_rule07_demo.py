@@ -545,3 +545,28 @@ def test_readonly_constructor_does_not_create_directories(all_runs, tmp_path):
             read_only=True,
         )
     assert not list(tmp_path.iterdir())
+
+
+@pytest.mark.parametrize("target", ["decisions", ".completed"])
+def test_runner_itself_does_not_normalize_changed_evidence(all_runs, tmp_path, target):
+    import shutil
+
+    _, runs = all_runs
+    root = tmp_path / "rules-v1/A-rules-v1"
+    shutil.copytree(runs["A"].run.root, root)
+    path = root / target / "decision-00.json"
+    path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    case = c.CASE_A
+    runner = d.RuleStudyRunner(
+        None,
+        case.snapshot,
+        tmp_path,
+        policy_id="rules-v1",
+        case_id="A",
+        decision_time_utc=case.decision_time_utc,
+        bindings=runs["A"].bindings,
+        score_convention=d.ScoreKwhConvention(),
+        read_only=True,
+    )
+    with pytest.raises(ValueError, match="commitment"):
+        runner.decide(0)
