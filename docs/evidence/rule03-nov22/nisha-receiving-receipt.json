@@ -1,0 +1,44 @@
+{
+  "kind": "rule03_independent_person_receiving_v1",
+  "date_arizona": "2026-11-23",
+  "source_url": "https://github.com/ReymoT/data-center-agentic/issues/241#issuecomment-7109387548",
+  "source_comment_id": 7109387548,
+  "source_created_utc": "2026-11-23T17:55:39Z",
+  "source_author": "nkolekar-nk",
+  "original_body_sha256": "97bac80cb790ff1c70ccd9b60773bec39650f7f63ce94be5960ac09657e144d2",
+  "received_scope": "retained evidence, no policy rerun or continuation of replay reported",
+  "integrity_pin_binding_receiving": "PASS reported by Nisha",
+  "overall_scientific_status": "INCOMPLETE",
+  "freeze_accepted": false,
+  "reported_oracle_jointly_feasible_cases": 52,
+  "manager_wording_correction": {
+    "greedy_b_incomplete_all_primary_traces": 51,
+    "p1_eligible_primary_total": 52,
+    "p1_eligible_greedy_b_complete_replay": 9,
+    "p1_eligible_greedy_b_replay_outstanding": 43,
+    "explanation": "51 is all incomplete GreedyB traces; among52 P1-eligible primary cases,9 are fully replayed and43 remain. Original source comment retained unchanged."
+  },
+  "manager_static_record_inspection": {
+    "operation": "read retained result fields only, no simulation/oracle/replay",
+    "zero_recorded_job_starts_per_policy": {
+      "rules-v1": 12,
+      "greedy_a": 12,
+      "greedy_b": 12
+    },
+    "matching_case_ids": [
+      "D64-0009",
+      "D64-0010",
+      "D64-0011",
+      "D64-0012",
+      "D64-0033",
+      "D64-0034",
+      "D64-0035",
+      "D64-0036",
+      "D64-0041",
+      "D64-0042",
+      "D64-0043",
+      "D64-0044"
+    ],
+    "scope": "Saved records agree with Nisha\u2019s no-partial-progress observation; GreedyB incomplete replay is not silently promoted."
+  }
+}

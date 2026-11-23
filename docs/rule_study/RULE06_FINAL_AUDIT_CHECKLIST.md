@@ -1,5 +1,8 @@
 # RULE-06 final audit checklist (#244)
 
+November 23: [actual independent-person receiving](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) is received for retained integrity/pins/coverage. Complete verification/freeze and accounting/evaluation/reproduction/package gates remain unpassed. Explicitly audit no-partial-progress behavior on infeasible inputs and distinguish51 incomplete Greedy B traces overall from43 outstanding P1-eligible cases.
+
+
 Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
 
 

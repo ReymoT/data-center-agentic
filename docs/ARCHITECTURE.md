@@ -1,5 +1,8 @@
 # Architecture for the final scheduling study
 
+November 23 receiving: [Nisha's actual inspection](handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) confirms retained trace integrity/pins and the reported partial coverage. The complete-plan gate and fallback make no partial progress in the12 jointly infeasible primary cases; this limitation must remain explicit. No scheduler/checker change or full verification/freeze is claimed.
+
+
 Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
 
 

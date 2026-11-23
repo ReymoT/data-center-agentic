@@ -1,5 +1,8 @@
 # Nisha's receiving guide: November 22 bounded attempt
 
+November 23: [Nisha has completed this retained-evidence receiving](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md). The original guide below is retained; do not request the same inspection again. Overall remains INCOMPLETE and no continuation is authorized.
+
+
 Status: actual retained attempt, overall INCOMPLETE. Nisha owns independent
 receiving and interpretation. Matty performed the contained launch. No separate
 person's acceptance is claimed yet. An AI assistant can help inspect hashes,

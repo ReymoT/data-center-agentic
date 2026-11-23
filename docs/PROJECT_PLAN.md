@@ -1,5 +1,8 @@
 # Project plan
 
+November 23 receiving: Nisha's independent retained-evidence receiving is received, not missing. [The accepted scope and count correction](handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) leave overall INCOMPLETE. Next is a separately authorized51-saved-replay/10-authored continuation and Edison's actual accounting/metric files. Preserve Nov23 18:00 accounting checkpoint, Nov25 core and Nov28 candidate; do not request Nisha's completed receiving again.
+
+
 Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
 
 

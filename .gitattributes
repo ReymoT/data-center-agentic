@@ -8,6 +8,7 @@ LICENSE -text
 rule07-traces-a7a71d0.sha256 -text
 rule07-traces-a7a71d0.tar.gz -text
 docs/evidence/rule03-nov22/receiving-report.json -text
+docs/evidence/rule03-nov22/nisha-receiving-nov23.txt -text
 docs/evidence/rule03-nov22/SHA256SUMS.txt -text
 docs/evidence/rule03-nov22/primary-authored-attempt-3daf00f7.tar.gz -text
 docs/evidence/I01_RECEIVING_NISHA_2026-11-03.txt -text
