@@ -1,5 +1,8 @@
 # Project plan
 
+November 23 ready manager work: the [narrow continuation launcher](rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md) is implemented/offline-tested. Prepare its exact clean-main request after publication, then obtain fresh authorization before10 authored runs plus51 retained Greedy B replays. Old approval stays consumed and Nisha prior receiving stays received. Edison actual accounting/metrics, Reimo methods and Edison/Ved demo remain separate deliverables; Nov25 core/Nov28 candidate remain.
+
+
 November 23 receiving: Nisha's independent retained-evidence receiving is received, not missing. [The accepted scope and count correction](handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) leave overall INCOMPLETE. Next is a separately authorized51-saved-replay/10-authored continuation and Edison's actual accounting/metric files. Preserve Nov23 18:00 accounting checkpoint, Nov25 core and Nov28 candidate; do not request Nisha's completed receiving again.
 
 

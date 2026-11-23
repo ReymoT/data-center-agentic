@@ -1,5 +1,8 @@
 # Architecture for the final scheduling study
 
+November 23 narrow continuation host: [the fixed preparation](rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md) separates original saved-trace producer pins from the new host/authored producer pin, requiring identical scientific source bytes and original Git ancestry. Its only work is10 authored runs plus51 saved replays under one new bounded allowance. It does not change the scheduler, checker, independent kernel or scientific limits, and has not executed the continuation.
+
+
 November 23 receiving: [Nisha's actual inspection](handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md) confirms retained trace integrity/pins and the reported partial coverage. The complete-plan gate and fallback make no partial progress in the12 jointly infeasible primary cases; this limitation must remain explicit. No scheduler/checker change or full verification/freeze is claimed.
 
 
