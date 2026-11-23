@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "411f7f3a64f07d100458912644501a8d18f7cf6f87d77dc30750001efdb33df2",
+      "sha256": "5c8efba1e54c72f4e2b1b0371a816711a16e1248353e7a028d3df8055628dbf8",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
