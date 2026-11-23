@@ -1,5 +1,7 @@
 # RULE-03 independent verifier: harness status
 
+November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) is received and accepted for the bounded verification component. All 202 planned traces are fully replayed across retained attempts; checked properties pass with explicit NOT_RUN exclusions. The exact verification baseline is recorded, while actual accounting, whole-study freeze, final evaluation, reproduction and release remain separate pending gates. Do not request Nisha's completed receiving again. Earlier dated entries below are historical where superseded.
+
 November 22 receiving status: Ved's current scheduler is merged through #257 and historical trace evidence through #258. Actual code is no longer missing. #241 still requires current-code mapping, accepted binding/freeze and independent bounded verification; the old 176361a archive is not that result. See [current handoffs](../handoffs/NOV22_MANAGER_READINESS_AND_HANDOFFS.md). Earlier dated pending-code notes remain historical.
 
 Owner: Nisha, issue #241. Built November 20, 2026 against main c6ca364 (instruction 1.30,

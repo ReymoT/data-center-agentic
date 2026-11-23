@@ -1,0 +1,36 @@
+@MattyAnd @epez7 Nisha: independent receiving of the November 23 native continuation (#268). **Result: PASS within the stated scope.** I inspected only the retained evidence on main, following the receiving guide, and ran no policy or replay. The original November 22 INCOMPLETE and the intermediate sandbox FAIL stay separate and unchanged.
+
+**1. Integrity: PASS**
+- The report (`b9870310...896ca65`), authored archive (`d438dd33...67f2bc`, 292,766 bytes) and manifest (`c5eb8d89...c39d6`) hashes all match the receipt.
+- I extracted the archive into a new folder. It contains 1,540 regular files and 4,576,770 bytes, matching the receipt, with no links, duplicates, absolute names or parent traversal.
+- All 1,540 file hashes match `AUTHORED_SHA256SUMS.txt`.
+
+**2. Source bindings: PASS**
+- `dbb8e6fc391850c8291dcc66e4a57006e8ecc13f` is on main (#266 merge).
+- Its spec, all six `rule_study/*.py` files, generator and lock are byte-identical to `3daf00f7`. The rebuilt pin is therefore spec `9597931f...`, adapter `ce6658a6...`, generator `ab795084...` and lock `38562754...`, equal to both `new_authored_pin` and `saved_producer_pin`.
+- **Authored traces:** all 10 folders have 30 decisions and bind exactly `dbb8e6f`. Every state, snapshot, transition and completion file matches its hash, and `decision_sha256s` match. Zero findings.
+- **Saved Greedy B:** the 51 traces named in the continuation proposal match the original archive by folder and `result.json` hash. All 51 are distinct and are exactly the traces after the 13 that were fully replayed on November 22. In my earlier receiving, I had already checked their bindings to `3daf00f7` and their raw files. Old pins are not rewritten.
+
+**3. Coverage and budget: confirmed**
+- Authored: 4 cases / 10 runs / 300 decisions, with no run errors and no refused traces.
+- Saved Greedy B: 51 replays / 1,530 decisions.
+- New charged work: 300 execution + 300 authored replay + 1,530 saved replay = 2,130 states and 2,130 transitions. Cumulative: 10,000 + 2,130 = 12,130. The 10 above the 12,120 estimate are the earlier partial trace's prefix being replayed again.
+- No ceiling was hit, and source/evidence was stable. The receipt records exit 0, 54.265 s and verified cleanup. I can confirm those only as Matty's attributed host record; hashes alone don't prove them.
+
+**4. Results: confirmed from the records**
+- **Authored rules-v1:**
+  - S1/S2/S3/S5 PASS (120 checks each);
+  - **S4 PASS (3 checks):** in B-fault, the injected J1+J2 slot-0 proposal and its fallback were both blocked, and nothing executed;
+  - P1 PASS (2 eligible: A and B-progress; B is outside scope as infeasible and B-fault as fault-injected);
+  - P2 PASS (4);
+  - arithmetic PASS (8 checks, 0 mismatches).
+- **Authored Greedy A/B:** S1/S2/S3/S5 PASS (90 each), P1 PASS (2), P2 PASS (3). S4 and arithmetic are NOT_RUN, as expected, because fault injection and rule arithmetic exist only for rules-v1.
+- **Saved Greedy B:** 51/51 complete. S1/S2/S3/S5 PASS (1,530 each), P1 PASS (43 eligible, 8 infeasible outside scope), P2 PASS (51). S4 is NOT_RUN in the fault-free primary domain.
+- Zero counterexamples.
+- **Combined with November 22**, Greedy B is now fully replayed: 13 + 51 = 64 traces, P1-eligible 9 + 43 = 52, with 4 + 8 = 12 infeasible.
+- **Independent cross-check:** my oracle labels A and B-progress feasible and B and B-fault infeasible. In the records, A and B-progress complete both jobs for every policy, and B and B-fault complete none, with no slot-0 start.
+- **Scenario A timing:** Greedy A starts both jobs at slot 0, while rules-v1 and Greedy B start only J2 and delay J1 to a lower-score slot. This is the carbon-aware timing the scenario was designed to show, and it's useful for the demo. It is not a comparison result.
+
+**Summary:** across both attempts, all 202 planned case-policy traces are now replayed. Every checked safety and progress property passes within scope, with S4 covered only by authored B-fault. The 12 zero-start infeasible primary cases remain a limitation. This receiving is not a scientific freeze, generalization or accounting acceptance. @epez7, your accounting files and metrics are the remaining handoff for my accounting receiving.
+
+Nisha
