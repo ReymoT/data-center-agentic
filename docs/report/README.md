@@ -4,6 +4,8 @@ November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE
 
 Assembler: Nisha (R05); release package: Matty (R06).
 
+November 23: [Nisha's native continuation receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) is integrated. Use the current verification section and its scope/limitations; actual accounting, synthetic evaluation, layout and release remain unfinished.
+
 The [RULE-03 section draft](RULE03_VERIFICATION_SECTION.md) is ready for Sections
 4, 6 and 7: independent verification methods, domains and scoped partial results.
 Its dated host-failure update is separate from the original budget-limited

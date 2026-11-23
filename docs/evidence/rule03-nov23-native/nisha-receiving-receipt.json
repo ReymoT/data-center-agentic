@@ -1,0 +1,46 @@
+{
+  "kind": "rule03_native_independent_receiving_receipt_v1",
+  "date_arizona": "2026-11-23",
+  "source_actor": "nkolekar-nk",
+  "source_comment_id": 7117083623,
+  "source_created_at": "2026-11-23T23:32:43Z",
+  "source_url": "https://github.com/ReymoT/data-center-agentic/issues/241#issuecomment-7117083623",
+  "source_body_sha256": "a3502602538535cc07fb2b7b73b2bd43793822883a4f061fa2815d12b4500759",
+  "source_preservation": "exact API comment-body UTF-8 bytes; no edits",
+  "reported_receiving": "PASS within the stated scope; retained evidence only; no policy/replay rerun",
+  "manager_reconciliation": "counts match saved reports; source baseline hashes match current and producing Git blobs; no scientific execution",
+  "report_sha256": "b9870310acfe82c4dae3ac4b3f4bed5895fe8039bf332377d3b16b9e0896ca65",
+  "authored_cases": 4,
+  "authored_runs": 10,
+  "authored_decisions": 300,
+  "saved_greedy_b_replays": 51,
+  "saved_greedy_b_decisions": 1530,
+  "combined_planned_traces_replayed": 202,
+  "combined_primary_greedy_b_replays": 64,
+  "combined_primary_greedy_b_p1_eligible": 52,
+  "rules_v1_authored_s4": {
+    "status": "PASS",
+    "checks": 3,
+    "violations": 0
+  },
+  "rules_v1_authored_arithmetic": {
+    "checks": 8,
+    "mismatches": 0
+  },
+  "new_charged_states": 2130,
+  "new_charged_transitions": 2130,
+  "cumulative_charged_states": 12130,
+  "cumulative_charged_transitions": 12130,
+  "independent_oracle_cross_check": "reported by Nisha; not rerun by manager",
+  "host_runtime_cleanup": "attributed manager supervision record, not proven by file hashes",
+  "historical_records": "original INCOMPLETE and intermediate sandbox FAIL unchanged",
+  "limitations": [
+    "finite primary64 plus four authored cases only",
+    "primary S4 and baseline authored S4 NOT_RUN",
+    "12 jointly infeasible primary cases make no partial progress",
+    "no generalization, advantage or human-faithfulness conclusion"
+  ],
+  "scientific_evaluation_freeze": false,
+  "accounting_acceptance": false,
+  "final_evaluation_performed": false
+}

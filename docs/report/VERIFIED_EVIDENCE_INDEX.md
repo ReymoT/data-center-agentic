@@ -1,5 +1,7 @@
 # Verified-evidence assembly index
 
+November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) is received and accepted for the bounded verification component. All 202 planned traces are fully replayed across retained attempts; checked properties pass with explicit NOT_RUN exclusions. The exact verification baseline is recorded, while actual accounting, whole-study freeze, final evaluation, reproduction and release remain separate pending gates. Do not request Nisha's completed receiving again. Earlier dated entries below are historical where superseded.
+
 Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
 
 
@@ -31,7 +33,9 @@ held-out finding or grant publication rights for private artifacts.
 | E13 | [RULE03 harness and limits](../rule_study/RULE03_VERIFIER.md), [independent kernel](../../dc_sustainability/evaluation/rule_study_verifier.py), [trace reader](../../dc_sustainability/evaluation/rule_study_trace.py), [CLI](../../scripts/verify_rule_study.py) | Implemented verifier harness with synthetic unit-fixture evidence; actual partial frozen-code trace evidence and separate-person receiving are recorded in E14; complete verification remains pending |
 | E14 | [Actual bounded attempt](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md), [original report](../evidence/rule03-nov22/receiving-report.json), [independent receiving](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md), [original Nisha source](../evidence/rule03-nov22/nisha-receiving-nov23.txt), [count reconciliation](../evidence/rule03-nov22/nisha-receiving-receipt.json) | Actual partial primary trace evidence and separate-person integrity/binding receiving; overall INCOMPLETE, S4/authored unrun, Greedy B partial; not freeze, generalization or accounting acceptance |
 
-| E15 | [Native continuation handoff](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md), [raw report](../evidence/rule03-nov23-native/continuation-report.json), [receipt](../evidence/rule03-nov23-native/attempt-receipt.json), [new authored hashes](../evidence/rule03-nov23-native/AUTHORED_SHA256SUMS.txt) | Actual separately authorized 10-authored/51-saved continuation PASS; original INCOMPLETE preserved, new-scope independent receiving and accounting/freeze remain pending |
+| E15 | [Native continuation handoff](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md), [raw report](../evidence/rule03-nov23-native/continuation-report.json), [receipt](../evidence/rule03-nov23-native/attempt-receipt.json), [new authored hashes](../evidence/rule03-nov23-native/AUTHORED_SHA256SUMS.txt) | Actual separately authorized 10-authored/51-saved continuation PASS; original INCOMPLETE preserved, new-scope receiving accepted in E16; accounting/whole-study freeze remain pending |
+
+| E16 | [Accepted native receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md), [original Nisha source](../evidence/rule03-nov23-native/nisha-receiving-source.txt), [receiving receipt](../evidence/rule03-nov23-native/nisha-receiving-receipt.json), [verification baseline](../rule_study/RULE03_VERIFICATION_BASELINE_NOV23.json) | Actual independent receiving of the new scope; 202 required traces completely replayed across preserved attempts; bounded verification baseline accepted, not accounting/whole-study freeze/generalization |
 
 ## Ready now versus pending
 
@@ -39,7 +43,7 @@ The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
 verification method, domain counts and partial outcomes. It distinguishes the
 original state-budget stop from the later [host I/O failure receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json):
 the latter completed zero authored runs and no saved replays. The later separately authorized native-host continuation is recorded in E15;
-its new-scope receiving remains pending. None of these attempts establishes a
+its new-scope receiving is accepted in E16. None of these attempts establishes a
 complete scientific freeze or generalization result.
 
 Ready source material: methods and architecture, observed development results,

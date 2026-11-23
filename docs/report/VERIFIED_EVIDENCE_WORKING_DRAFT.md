@@ -1,5 +1,7 @@
 # Explicit Rules for Safe Simulated Scheduling — Working Report
 
+November 23 latest: [accepted independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) records complete replay coverage of all 202 required primary/authored case-policy traces across preserved attempts. Checked safety/progress properties pass within the declared finite scope; rules-v1 authored S4 has three checks, with primary/baseline exclusions explicit. The verification source baseline is recorded. This does not answer unseen-case generalization or the original Agent-versus-Plain question. Actual accounting, whole-study freeze, final evaluation, reproduction and delivery remain pending; earlier dated partial-status text is historical where superseded.
+
 November 23 separate-person receiving is now supplied by Nisha for the retained evidence. Integrity/pins and recorded coverage are confirmed; overall remains INCOMPLETE. In all12 jointly infeasible primary cases no policy starts any job, so the system does not salvage a feasible subset. See [received evidence and correction](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md). No new policy/replay or freeze is claimed. [E14]
 
 

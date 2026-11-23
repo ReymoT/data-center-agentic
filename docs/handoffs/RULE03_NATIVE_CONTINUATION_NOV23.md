@@ -1,5 +1,7 @@
 # November 23 native-host continuation: PASS within scope, receiving pending
 
+Latest: [Nisha's independent receiving is accepted](RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md). The historical pending state below describes publication before her reply; raw attempt reports remain unchanged. Accounting and whole-study freeze remain separate pending gates.
+
 Matty explicitly approved the exact single-use native-host request in chat.
 The clean merged host was `dbb8e6fc391850c8291dcc66e4a57006e8ecc13f`, with
 exact merged-main CI green. Request SHA-256:
