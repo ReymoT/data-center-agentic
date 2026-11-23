@@ -33,6 +33,13 @@ held-out finding or grant publication rights for private artifacts.
 
 ## Ready now versus pending
 
+The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
+verification method, domain counts and partial outcomes. It distinguishes the
+original state-budget stop from the later [host I/O failure receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json):
+the latter completed zero authored runs and no saved replays. The proposed
+native-host continuation remains unexecuted pending fresh exact approval; neither
+attempt establishes a complete freeze or generalization result.
+
 Ready source material: methods and architecture, observed development results,
 public evidence links, saved UI figure, reliability method/limitations, Matty's
 contribution statement and the assembled report source. Owners can correct or

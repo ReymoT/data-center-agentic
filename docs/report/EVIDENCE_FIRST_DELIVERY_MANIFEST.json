@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "9d9148793bc2448b4422526a960ee3848768341c6d1c919443810978b444f7e8",
+      "sha256": "6dc1f5e4b034e0d73d83830c408867d04d81f49ddcb76c3b6c463c3cff50718a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "5e7b3e67e11c16d13ee46f0e0b1212db2e6d1331c70684a4875350f4f6a1b899",
+      "sha256": "8a395e514ce2ce7383f55a4251e128ee69dff7520ebf2919962f156e40705b6b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -791,6 +791,16 @@
     {
       "path": ".github/workflows/bootstrap.yml",
       "sha256": "c822078283d75a29508e9f14141c7c4e1272fdd970d14a75f683af1cd852a2df",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/RULE03_VERIFICATION_SECTION.md",
+      "sha256": "85084a67f48c6f1e80c8fc66be05f2f8d49bdd74a6ae293d83f08a6c6732751f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/continuation-host-failure-nov23.json",
+      "sha256": "c12683f14721dcabc6dcf7a9522ab76dc3db0717e2f34aaf617622f3f18c08fb",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

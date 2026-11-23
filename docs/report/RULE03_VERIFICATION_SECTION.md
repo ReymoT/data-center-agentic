@@ -2,8 +2,9 @@
 
 Owner draft for the working report, November 23, 2026 (America/Phoenix). Part A is
 for Section 4 (Architecture and Algorithms), Part B for Section 6 (Evaluation
-design) and Part C for Section 7 (results). Every number comes from the retained
-November 22 attempt and the November 23 independent receiving; evidence keys refer
+design) and Part C for Section 7 (results). The primary-domain counts come from the retained
+November 22 attempt and the November 23 independent receiving. The later host-failure
+update is recorded separately below; evidence keys refer
 to the [index](VERIFIED_EVIDENCE_INDEX.md). This text adds no new run, replay,
 freeze or generalization claim.
 
@@ -39,7 +40,8 @@ start assignment, and the legal-action graph is explored separately as a
 cross-check. That oracle is kept apart from verification of the policy itself.
 [E12, E13]
 
-For a closed case every arrival is known in advance, and rules-v1, the production
+For the closed-at-slot-0 domain, all jobs have arrived at slot 0; this does not grant
+visibility of future arrivals in other domains. Rules-v1, the production
 checker, the Greedy A fallback and the simulator are all deterministic. The
 system's reachable behavior on a case is therefore a single path. We verify the
 actual implementation by running its common runner once per case and policy, and
@@ -50,8 +52,11 @@ git commit. It then requires that every decision and result record carries
 exactly those bindings, and that every saved state, snapshot, transition and
 completion file matches its hash. [E13, E14]
 
-All work shares one combined ceiling of 10,000 states, 50,000 transitions and
-600 seconds. Reaching it gives INCOMPLETE, never PASS. Statuses are PASS, FAIL,
+Within each exact authorized attempt, execution and replay share one combined
+ceiling of 10,000 states, 50,000 transitions and 600 seconds. A separately
+authorized continuation has its own bound and reports cumulative work; it must
+not reset or conceal the original counters. Reaching a ceiling gives INCOMPLETE,
+never PASS. Statuses are PASS, FAIL,
 INCOMPLETE or NOT_RUN, and a property with zero checks is NOT_RUN. [E12, E13]
 
 ## Part B — Section 6.x: Verification domains
@@ -92,8 +97,21 @@ checks pass. My own rebuild of the frozen commit's bindings matches the report.
 All 192 traces have 30 decisions and carry exactly those bindings, and every
 referenced file matches its hash, with zero findings. My brute-force oracle also
 finds exactly 52 jointly feasible primary cases, and in the result records all
-three policies complete every job in them. For Greedy B, 51 of those records are
-not replay-verified. [E14]
+three policies complete every job in them. Greedy B has 51 traces awaiting full
+replay across all 64 cases; 43 of these are among the 52 P1-eligible cases. Reading
+their recorded completion sets is not replay verification. [E14]
+
+**November 23 host attempt.** A separately approved narrow continuation at host
+commit `9621b44` stopped after 54.578 seconds because the host sandbox denied
+exclusive hard-link publication of the first authored `case.json`. No authored
+run completed, no saved Greedy B replay started, and the new charged state and
+transition counts are both zero. Cleanup was verified. This attempt is **FAIL**
+for a host I/O error, not a policy safety counterexample. Its one-use ID is
+consumed; the original November 22 **INCOMPLETE** result remains unchanged.
+File-only probes reproduced the denial in the sandbox and succeeded on the
+native host. A new exact native-host request is prepared but has not run and
+needs fresh approval. See the [sanitized attempt receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json)
+and [dated issue handoff](https://github.com/ReymoT/data-center-agentic/issues/241#issuecomment-7113732354).
 
 **Limitation: no partial progress on infeasible inputs.** In all 12 jointly
 infeasible primary cases, all three policies start no job, so both jobs are
@@ -109,5 +127,6 @@ actual rules-v1 and Greedy A implementations satisfied every checked safety and
 progress property. This is finite-domain evidence for one frozen implementation.
 It is not a proof for larger or unseen inputs, a generalization result or a
 scientific freeze. The authored cases, Greedy B and S4 still need the separately
-authorized continuation: 51 saved Greedy B replays plus 10 authored runs. Synthetic
+authorized continuation: 51 saved Greedy B replays plus 10 authored runs. The
+failed host attempt above did not supply that evidence. Synthetic
 evaluation and accounting against Greedy A/B remain pending. [E14]

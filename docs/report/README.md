@@ -4,6 +4,11 @@ November 19 active plan: [the focused rule-system study](../decisions/NOV19_RULE
 
 Assembler: Nisha (R05); release package: Matty (R06).
 
+The [RULE-03 section draft](RULE03_VERIFICATION_SECTION.md) is ready for Sections
+4, 6 and 7: independent verification methods, domains and scoped partial results.
+Its dated host-failure update is separate from the original budget-limited
+attempt. Complete verification, new-scope receiving and accounting remain pending.
+
 Backup scope (activated November 18, superseded as primary on November 19): [development-evidence-only delivery](../decisions/NOV18_EVIDENCE_ONLY_ACTIVATION.md). Final comparative held-out study and its dependent tasks are deferred outside this delivery. Complete actual evidence text, limitations, layout, reproducible public-artifact checks, contribution attribution and release/submission; do not wait for #60 source acceptance.
 
 November 15: [an evidence-first working report](VERIFIED_EVIDENCE_WORKING_DRAFT.md),
