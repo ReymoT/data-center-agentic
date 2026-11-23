@@ -1,5 +1,21 @@
 # RULE-06 final audit checklist (#244)
 
+November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) is received and accepted for the bounded verification component. All 202 planned traces are fully replayed across retained attempts; checked properties pass with explicit NOT_RUN exclusions. The exact verification baseline is recorded, while actual accounting, whole-study freeze, final evaluation, reproduction and release remain separate pending gates. Do not request Nisha's completed receiving again. Earlier dated entries below are historical where superseded.
+
+## November 23 current gate reconciliation
+
+| Gate | Actual status | Scope / remaining evidence |
+|---|---|---|
+| Bounded verification and new-scope receiving | PASS within declared primary/authored scope | Nisha actual reply and 202 completely replayed traces; optional extended domain excluded |
+| Verified implementation/verifier baseline | PASS for result reuse only | Exact 163 source/lock/specification hashes; a scientific change invalidates reuse |
+| Actual accounting/metric acceptance | BLOCKED | Edison retained case/sidecar/hash/first metric files and independent receiving in #242 |
+| Whole-study protocol/input/metric freeze | BLOCKED | Accounting/input-isolation/metric requirements still need actual acceptance |
+| Final evaluation and clean reproduction | BLOCKED | No final run; separate exact authorization after freeze, then reproduction evidence |
+| Report/demo/release | BLOCKED | Final methods/diagram, integration, layout, actual package and submission checks remain |
+
+This table does not overwrite original attempt statuses or assert blanket study completion.
+
+
 November 23 latest: [native continuation](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md) PASS within its exact scope: 10 authored runs + 51 saved Greedy B replays; 2,130 new / 12,130 cumulative charged steps, verified cleanup. No scientific code changed or primary traces regenerated. Original INCOMPLETE and intermediate host FAIL remain unchanged. New-scope Nisha receiving, actual accounting, freeze, final evaluation and independent reproduction remain separate pending gates. Older dated entries below are historical where superseded.
 
 November 23 continuation controls: [new fixed host preparation](NARROW_CONTINUATION_PREPARATION_NOV23.md) verifies/extracts old evidence, preserves original producer pins and authenticates identical scientific source before new authored output. A shared budget, cumulative counters, original-ID refusal and phase-stop behavior are fixture-tested. Input extraction dry test has zero scientific steps. Fresh actual authorization, continuation, new-scope person receiving and later freeze/accounting/evaluation/reproduction/release gates remain unpassed.

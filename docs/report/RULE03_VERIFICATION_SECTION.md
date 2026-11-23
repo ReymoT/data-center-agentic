@@ -128,10 +128,10 @@ progress property. This is finite-domain evidence for one frozen implementation.
 It is not a proof for larger or unseen inputs, a generalization result or a
 scientific freeze. The failed host attempt above did not supply the missing coverage. The later
 authorized native-host continuation below supplies a separate scoped result,
-awaiting independent receiving. Synthetic evaluation, accounting and scientific
+now independently received within scope. Synthetic evaluation, accounting and scientific
 freeze remain pending. [E14, E15]
 
-## Part D — November 23 native continuation (new-scope receiving pending)
+## Part D — November 23 native continuation (independent receiving accepted)
 
 The separately authorized native-host attempt at `dbb8e6f` completed with scoped
 PASS in 54.265 seconds, exit 0 and verified cleanup. It ran all 10 authored
@@ -146,7 +146,16 @@ passes S1-S3/S5/P1/P2 and binding checks; primary S4 remains NOT_RUN. The origin
 INCOMPLETE and intermediate host FAIL reports are not rewritten. No primary
 trace was regenerated, and no model or final unseen-case run occurred.
 
-These are retained reported outcomes, pending Nisha's independent receiving of
-this new scope. They do not establish generalization, accounting acceptance or
+Nisha independently received this new scope from retained evidence without a
+policy or replay rerun. Her original reply and the source/count reconciliation
+are preserved in [the accepted receiving record](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md).
+They do not establish generalization, accounting acceptance or
 scientific freeze. The 12 zero-start infeasible primary cases remain a limitation.
 See [the actual handoff and evidence](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md). [E15]
+
+Across the preserved attempts, all 202 planned case-policy traces are completely
+replayed: 192 primary plus 10 authored. Greedy B now has 13 + 51 = 64 complete
+primary replays and 9 + 43 = 52 eligible P1 cases. Authored rules-v1 S4 has three
+checks and no violations; authored arithmetic has eight checks and no mismatches.
+The accepted source baseline freezes this bounded verification result only, not
+the final metric/input protocol. Optional extended coverage was not executed. [E16]

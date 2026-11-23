@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "3dc722317b169eb396e15586bbab3a2156ddfbc5c358efb4356a00c389bb1e14",
+      "sha256": "cbcd3100d5b4193f00a2f048fd1004b9f1f354b8852b15e7336bea64eea3a5b9",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,12 +45,12 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "496bf3f7051bc682480d4eb1b53cf7acc918f53c57a9a90b1eada7464bf6ce21",
+      "sha256": "f5da7bd316287fcbac58347983c4896db5f461fa3ae64262ef6a7b096e4424d8",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/R04_DEVELOPMENT_EVIDENCE.md",
-      "sha256": "eb02f01f63c9ec3943f5763f6f9f9e517c994dccf941711c809e2b1c2b5ed1ca",
+      "sha256": "a62eae9c09dda882853a76d55da6e75fb393348e4100b98a33770ead047a52ec",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "6dc1f5e4b034e0d73d83830c408867d04d81f49ddcb76c3b6c463c3cff50718a",
+      "sha256": "afd654ce9b14ad77870902b99e458e8a01c372deb8a5776e7e5879fcc92c14f1",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "551a5ccb198d6fb330e82e0bc648abf80e53f7080b823749750cc2f7586932cd",
+      "sha256": "d04685d3847a81530c1d87523af94420eef1f143a35cd84326e7b6d0ba26937b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "2a756b7f422e418a82ca4d1657bedc5cf563da58293ab7ace6bf6dd3f83c6ce6",
+      "sha256": "4f2836d2cc3f16d94525b43e8537e8cc2a4312ce56cadf0afc794e83a2e93818",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "f886e189a007a2ba01211a43718bfaacd3a7633c22f4865b2c9ac5a6f55e131b",
+      "sha256": "8f86a4ab9ea7fd8da0c3b751e44af3d7311313a533f09790c8f275ee5bb10e65",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "82ace422dc2b207219827e69e6e72461a5baf4ff325b55a46ca29900fc97a0a1",
+      "sha256": "ca5ae05595908f8d563b940e335e2d675354429a1e51a68751d6b4ba01e6bb10",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -390,7 +390,7 @@
     },
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
-      "sha256": "50ff57df27913d20b5d4bc5019c18b0ea7a7b8f8a4f3c48f56beaf9c45e065f6",
+      "sha256": "df7f9632d037e614b9196c4f93d57a2418c278e0a140b87b3e6f96f59128d6a5",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -795,7 +795,7 @@
     },
     {
       "path": "docs/report/RULE03_VERIFICATION_SECTION.md",
-      "sha256": "ad6a4c8fd6ffc479c2c2866cd5d102231476b9782532a86b0f8c9291103e3a7c",
+      "sha256": "e803259905b27e3c34cb86557423fffff9d53f216db7c0d2533f0568acbab7f8",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -805,7 +805,7 @@
     },
     {
       "path": "docs/handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md",
-      "sha256": "6b13a19ac591cf1b63469e62cd46c6ec54cf6fd5feda7d92e81f39882c57fe7a",
+      "sha256": "992ef16cb1255e037c53dc1e4f2600003bc80864ea4a8615e8fffb32dca8efe1",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -826,6 +826,26 @@
     {
       "path": "docs/evidence/rule03-nov23-native/AUTHORED_SHA256SUMS.txt",
       "sha256": "620605777e480bbfce6de77cf7df340306b5f2e4fc7358fbfb4c76f7845e8045",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md",
+      "sha256": "18b6b32f237d97fa30c22d935595ff4e91a493277bc4651d54fdc5f848d2bc27",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov23-native/nisha-receiving-source.txt",
+      "sha256": "a3502602538535cc07fb2b7b73b2bd43793822883a4f061fa2815d12b4500759",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov23-native/nisha-receiving-receipt.json",
+      "sha256": "1773e32c73b21d7859303c27fc35a39ab826674ac418706ecc15405d602994e3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE03_VERIFICATION_BASELINE_NOV23.json",
+      "sha256": "1e9662565edbb5b80002e0afb7977a8226bbae5af48014de35528e55f00bc661",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
