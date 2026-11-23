@@ -1,5 +1,7 @@
 # Project plan
 
+November 23 latest: [native continuation](handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md) PASS within its exact scope: 10 authored runs + 51 saved Greedy B replays; 2,130 new / 12,130 cumulative charged steps, verified cleanup. No scientific code changed or primary traces regenerated. Original INCOMPLETE and intermediate host FAIL remain unchanged. New-scope Nisha receiving, actual accounting, freeze, final evaluation and independent reproduction remain separate pending gates. Older dated entries below are historical where superseded.
+
 November 23 ready manager work: the [narrow continuation launcher](rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md) is implemented/offline-tested. Prepare its exact clean-main request after publication, then obtain fresh authorization before10 authored runs plus51 retained Greedy B replays. Old approval stays consumed and Nisha prior receiving stays received. Edison actual accounting/metrics, Reimo methods and Edison/Ved demo remain separate deliverables; Nov25 core/Nov28 candidate remain.
 
 

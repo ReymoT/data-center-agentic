@@ -31,14 +31,16 @@ held-out finding or grant publication rights for private artifacts.
 | E13 | [RULE03 harness and limits](../rule_study/RULE03_VERIFIER.md), [independent kernel](../../dc_sustainability/evaluation/rule_study_verifier.py), [trace reader](../../dc_sustainability/evaluation/rule_study_trace.py), [CLI](../../scripts/verify_rule_study.py) | Implemented verifier harness with synthetic unit-fixture evidence; actual partial frozen-code trace evidence and separate-person receiving are recorded in E14; complete verification remains pending |
 | E14 | [Actual bounded attempt](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md), [original report](../evidence/rule03-nov22/receiving-report.json), [independent receiving](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md), [original Nisha source](../evidence/rule03-nov22/nisha-receiving-nov23.txt), [count reconciliation](../evidence/rule03-nov22/nisha-receiving-receipt.json) | Actual partial primary trace evidence and separate-person integrity/binding receiving; overall INCOMPLETE, S4/authored unrun, Greedy B partial; not freeze, generalization or accounting acceptance |
 
+| E15 | [Native continuation handoff](../handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md), [raw report](../evidence/rule03-nov23-native/continuation-report.json), [receipt](../evidence/rule03-nov23-native/attempt-receipt.json), [new authored hashes](../evidence/rule03-nov23-native/AUTHORED_SHA256SUMS.txt) | Actual separately authorized 10-authored/51-saved continuation PASS; original INCOMPLETE preserved, new-scope independent receiving and accounting/freeze remain pending |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
 verification method, domain counts and partial outcomes. It distinguishes the
 original state-budget stop from the later [host I/O failure receipt](../evidence/rule03-nov22/continuation-host-failure-nov23.json):
-the latter completed zero authored runs and no saved replays. The proposed
-native-host continuation remains unexecuted pending fresh exact approval; neither
-attempt establishes a complete freeze or generalization result.
+the latter completed zero authored runs and no saved replays. The later separately authorized native-host continuation is recorded in E15;
+its new-scope receiving remains pending. None of these attempts establishes a
+complete scientific freeze or generalization result.
 
 Ready source material: methods and architecture, observed development results,
 public evidence links, saved UI figure, reliability method/limitations, Matty's

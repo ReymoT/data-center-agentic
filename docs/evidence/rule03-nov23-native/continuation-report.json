@@ -1,0 +1,589 @@
+{
+  "record_kind": "rule03_narrow_continuation_v1",
+  "overall": "PASS",
+  "scope": "Only this continuation; original attempt stays INCOMPLETE and scientific freeze/person receiving remains separate.",
+  "original_report_sha256": "f1e11a4f781c4d3efc920975a67d032d623cd7648ad60c63bd5bf2f6d008915e",
+  "original_attempt_overall": "INCOMPLETE",
+  "saved_producer_pin": {
+    "spec_sha256": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+    "adapter_source_sha256": "ce6658a6089edd7f79c9269c0cd1f178ce26d22368665f5e2d4b6a300e9c4bf5",
+    "adapter_files": {
+      "__init__.py": "45a378f37099cbd4c41fd180234ae3bae0b3fc80da2c5a4f938077af42de6546",
+      "cases.py": "ac859c7aa53106ccfe5122a86f0ece9812e5cd3d14180e53cb6cf6a392bad850",
+      "demo.py": "3fb3119fb4e0b71f1040043823faca5aac825ab79fda3c14d594b59b3bc550da",
+      "records.py": "4b2a5d3f7ea20acf8d856669420999069eb76cb1cb012df6fd607674799d9d30",
+      "runner.py": "2a31c1158e960226f038263778fad282aa536c9a1d990e4af46cd2fb8ef23e51",
+      "scheduler.py": "c55366725dcb566a1602a2e4511c898a813a53d91aeb024bf45066179278232d"
+    },
+    "generator_source_sha256": "ab7950847683a8411e906de06bf12346db9b3fc74cb302718d586399d5df4072",
+    "environment_lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "code_commit": "3daf00f7af5b130e8b17ae67b2f79a7dadb7ea00",
+    "clean_tree": true,
+    "commit_source": "git",
+    "merged_main": true
+  },
+  "new_authored_pin": {
+    "spec_sha256": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+    "adapter_source_sha256": "ce6658a6089edd7f79c9269c0cd1f178ce26d22368665f5e2d4b6a300e9c4bf5",
+    "adapter_files": {
+      "__init__.py": "45a378f37099cbd4c41fd180234ae3bae0b3fc80da2c5a4f938077af42de6546",
+      "cases.py": "ac859c7aa53106ccfe5122a86f0ece9812e5cd3d14180e53cb6cf6a392bad850",
+      "demo.py": "3fb3119fb4e0b71f1040043823faca5aac825ab79fda3c14d594b59b3bc550da",
+      "records.py": "4b2a5d3f7ea20acf8d856669420999069eb76cb1cb012df6fd607674799d9d30",
+      "runner.py": "2a31c1158e960226f038263778fad282aa536c9a1d990e4af46cd2fb8ef23e51",
+      "scheduler.py": "c55366725dcb566a1602a2e4511c898a813a53d91aeb024bf45066179278232d"
+    },
+    "generator_source_sha256": "ab7950847683a8411e906de06bf12346db9b3fc74cb302718d586399d5df4072",
+    "environment_lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+    "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+    "clean_tree": true,
+    "commit_source": "git",
+    "merged_main": true
+  },
+  "phases": {
+    "authored": {
+      "record_kind": "rule_study_receiving_v1",
+      "receiver_source_sha256": "05de6bc21ca50d748b62aaf48f6312c5681ff96184b1a2c0d90091b9e11a5e6e",
+      "verifier_source_sha256": "9d25fcdb821a3cc1adec07a64d658f165c8a6049f18ccd862030a82fb667bc94",
+      "pin": {
+        "spec_sha256": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+        "adapter_source_sha256": "ce6658a6089edd7f79c9269c0cd1f178ce26d22368665f5e2d4b6a300e9c4bf5",
+        "adapter_files": {
+          "__init__.py": "45a378f37099cbd4c41fd180234ae3bae0b3fc80da2c5a4f938077af42de6546",
+          "cases.py": "ac859c7aa53106ccfe5122a86f0ece9812e5cd3d14180e53cb6cf6a392bad850",
+          "demo.py": "3fb3119fb4e0b71f1040043823faca5aac825ab79fda3c14d594b59b3bc550da",
+          "records.py": "4b2a5d3f7ea20acf8d856669420999069eb76cb1cb012df6fd607674799d9d30",
+          "runner.py": "2a31c1158e960226f038263778fad282aa536c9a1d990e4af46cd2fb8ef23e51",
+          "scheduler.py": "c55366725dcb566a1602a2e4511c898a813a53d91aeb024bf45066179278232d"
+        },
+        "generator_source_sha256": "ab7950847683a8411e906de06bf12346db9b3fc74cb302718d586399d5df4072",
+        "environment_lock_sha256": "38562754e7ff8c500933a48f8c497799e1ac6af0fa7602d3df312195cef9034c",
+        "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+        "clean_tree": true,
+        "commit_source": "git",
+        "merged_main": true
+      },
+      "policies": [
+        "rules-v1",
+        "greedy_a",
+        "greedy_b"
+      ],
+      "domains": {
+        "authored": {
+          "domain": "authored",
+          "cases": 4,
+          "runs_completed": 10,
+          "run_errors": [],
+          "binding_check": {
+            "status": "PASS",
+            "traces_checked": 10,
+            "findings": {},
+            "note": "independent pin vs every decision/result binding, case.json and raw state/snapshot/transition/commitment files; local hashes, not signatures"
+          },
+          "property_statuses": {
+            "greedy_a": {
+              "S1": "PASS",
+              "S2": "PASS",
+              "S3": "PASS",
+              "S4": "NOT_RUN",
+              "S5": "PASS",
+              "P1": "PASS",
+              "P2": "PASS"
+            },
+            "greedy_b": {
+              "S1": "PASS",
+              "S2": "PASS",
+              "S3": "PASS",
+              "S4": "NOT_RUN",
+              "S5": "PASS",
+              "P1": "PASS",
+              "P2": "PASS"
+            },
+            "rules-v1": {
+              "S1": "PASS",
+              "S2": "PASS",
+              "S3": "PASS",
+              "S4": "PASS",
+              "S5": "PASS",
+              "P1": "PASS",
+              "P2": "PASS"
+            }
+          },
+          "arithmetic": {
+            "greedy_a": "NOT_RUN",
+            "greedy_b": "NOT_RUN",
+            "rules-v1": "PASS"
+          },
+          "replay": {
+            "record_kind": "rule_study_verification_v1",
+            "verifier_version": "rule03-review-3",
+            "verifier_source_sha256": "9d25fcdb821a3cc1adec07a64d658f165c8a6049f18ccd862030a82fb667bc94",
+            "trace_reader_source_sha256": "cfd20cb92f69d6620be620631984fe071d43f4c5c1161e6a0ce8ca41affd9c1d",
+            "methods": [
+              "trace_replay"
+            ],
+            "budget": {
+              "max_states": 10000,
+              "max_transitions": 50000,
+              "max_seconds": 600,
+              "states_used": 600,
+              "transitions_used": 600,
+              "ceiling_hit": null,
+              "by_scope": {
+                "authored/actual_runner": {
+                  "states": 300,
+                  "transitions": 300
+                },
+                "trace_replay": {
+                  "states": 300,
+                  "transitions": 300
+                }
+              }
+            },
+            "accepted_adapter_versions": [
+              "proposal-1"
+            ],
+            "spec_sha256_expected": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+            "refused_traces": [],
+            "results": {
+              "greedy_a": {
+                "counts": {
+                  "traces": 3,
+                  "complete_traces": 3,
+                  "partial_traces": 0,
+                  "p1_eligible_traces": 2,
+                  "p1_outside_scope": {
+                    "not_jointly_feasible": 1
+                  },
+                  "p2_checked_traces": 3,
+                  "distinct_binding_sets": 3
+                },
+                "properties": {
+                  "S1": {
+                    "meaning": "starts only arrived waiting jobs, each job at most once",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S2": {
+                    "meaning": "nonflexible jobs start at arrival; every start finishes by its deadline",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S3": {
+                    "meaning": "background + running + new job power <= IT capacity in every occupied slot",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S4": {
+                    "meaning": "no invalid proposal (including injected faults) is executed",
+                    "checked": 0,
+                    "violations": 0,
+                    "status": "NOT_RUN",
+                    "reason": "no invalid proposal occurred"
+                  },
+                  "S5": {
+                    "meaning": "valid clock transition: one slot per step, no new starts in drain slots 24-29",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P1": {
+                    "meaning": "closed, fault-free, forecast-present, jointly feasible inputs complete all jobs",
+                    "checked": 2,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P2": {
+                    "meaning": "every arrived job ends completed or explicitly missed, matching the reported result",
+                    "checked": 3,
+                    "violations": 0,
+                    "status": "PASS"
+                  }
+                },
+                "state_hash_continuity": {
+                  "checked": 87,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "informational: assumes state_after and the next state_before hash the same object, pending the runner's convention"
+                },
+                "arithmetic_consistency": {
+                  "status": "NOT_RUN",
+                  "checked": 0,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "R04 capacity arithmetic only; not a human faithfulness judgment"
+                },
+                "counterexample_total": 0,
+                "counterexamples": []
+              },
+              "greedy_b": {
+                "counts": {
+                  "traces": 3,
+                  "complete_traces": 3,
+                  "partial_traces": 0,
+                  "p1_eligible_traces": 2,
+                  "p1_outside_scope": {
+                    "not_jointly_feasible": 1
+                  },
+                  "p2_checked_traces": 3,
+                  "distinct_binding_sets": 3
+                },
+                "properties": {
+                  "S1": {
+                    "meaning": "starts only arrived waiting jobs, each job at most once",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S2": {
+                    "meaning": "nonflexible jobs start at arrival; every start finishes by its deadline",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S3": {
+                    "meaning": "background + running + new job power <= IT capacity in every occupied slot",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S4": {
+                    "meaning": "no invalid proposal (including injected faults) is executed",
+                    "checked": 0,
+                    "violations": 0,
+                    "status": "NOT_RUN",
+                    "reason": "no invalid proposal occurred"
+                  },
+                  "S5": {
+                    "meaning": "valid clock transition: one slot per step, no new starts in drain slots 24-29",
+                    "checked": 90,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P1": {
+                    "meaning": "closed, fault-free, forecast-present, jointly feasible inputs complete all jobs",
+                    "checked": 2,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P2": {
+                    "meaning": "every arrived job ends completed or explicitly missed, matching the reported result",
+                    "checked": 3,
+                    "violations": 0,
+                    "status": "PASS"
+                  }
+                },
+                "state_hash_continuity": {
+                  "checked": 87,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "informational: assumes state_after and the next state_before hash the same object, pending the runner's convention"
+                },
+                "arithmetic_consistency": {
+                  "status": "NOT_RUN",
+                  "checked": 0,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "R04 capacity arithmetic only; not a human faithfulness judgment"
+                },
+                "counterexample_total": 0,
+                "counterexamples": []
+              },
+              "rules-v1": {
+                "counts": {
+                  "traces": 4,
+                  "complete_traces": 4,
+                  "partial_traces": 0,
+                  "p1_eligible_traces": 2,
+                  "p1_outside_scope": {
+                    "fault_injected": 1,
+                    "not_jointly_feasible": 1
+                  },
+                  "p2_checked_traces": 4,
+                  "distinct_binding_sets": 4
+                },
+                "properties": {
+                  "S1": {
+                    "meaning": "starts only arrived waiting jobs, each job at most once",
+                    "checked": 120,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S2": {
+                    "meaning": "nonflexible jobs start at arrival; every start finishes by its deadline",
+                    "checked": 120,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S3": {
+                    "meaning": "background + running + new job power <= IT capacity in every occupied slot",
+                    "checked": 120,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S4": {
+                    "meaning": "no invalid proposal (including injected faults) is executed",
+                    "checked": 3,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "S5": {
+                    "meaning": "valid clock transition: one slot per step, no new starts in drain slots 24-29",
+                    "checked": 120,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P1": {
+                    "meaning": "closed, fault-free, forecast-present, jointly feasible inputs complete all jobs",
+                    "checked": 2,
+                    "violations": 0,
+                    "status": "PASS"
+                  },
+                  "P2": {
+                    "meaning": "every arrived job ends completed or explicitly missed, matching the reported result",
+                    "checked": 4,
+                    "violations": 0,
+                    "status": "PASS"
+                  }
+                },
+                "state_hash_continuity": {
+                  "checked": 116,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "informational: assumes state_after and the next state_before hash the same object, pending the runner's convention"
+                },
+                "arithmetic_consistency": {
+                  "status": "PASS",
+                  "checked": 8,
+                  "mismatches": 0,
+                  "examples": [],
+                  "note": "R04 capacity arithmetic only; not a human faithfulness judgment"
+                },
+                "counterexample_total": 0,
+                "counterexamples": []
+              }
+            },
+            "binding_validation": {
+              "status": "INCOMPLETE",
+              "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency",
+              "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied"
+            },
+            "exclusions": [
+              "Callback exploration checks declared actions on the verifier's own clock; actual runner state transitions require confirmed adapter trace semantics and evidence.",
+              "Elapsed ceilings are cooperative between operations. An untrusted in-process callback cannot be preempted here; an approved process supervisor is required for a real run.",
+              "Bounded: results hold only for the enumerated inputs and stated bounds; no unbounded proof.",
+              "P1 covers only closed workloads revealed at slot 0, jointly feasible by the oracle, with a visible forecast and no injected fault; other inputs are reported, not claimed complete.",
+              "Systems are treated as stateless functions of the visible state; a system with hidden memory needs trace-mode verification instead.",
+              "Policy properties are judged on the system's own reachable states; the legal-action graph only decides P1 eligibility.",
+              "Scores are artificial weights; no emissions, savings or real-site claim is made.",
+              "Explanation text and arithmetic records are not checked here.",
+              "Trace replay checks only the supplied records; it is not bounded exploration."
+            ]
+          },
+          "overall": "PASS",
+          "runs_expected": 10
+        }
+      },
+      "overall": "PASS",
+      "scope": "the pinned implementation on the listed closed synthetic domains only; not generalization, final-set evaluation, metric acceptance or a scientific freeze",
+      "pin_stable": true,
+      "combined_budget": {
+        "max_states": 10000,
+        "max_transitions": 50000,
+        "max_seconds": 600,
+        "states_used": 600,
+        "transitions_used": 600,
+        "ceiling_hit": null,
+        "by_scope": {
+          "authored/actual_runner": {
+            "states": 300,
+            "transitions": 300
+          },
+          "trace_replay": {
+            "states": 300,
+            "transitions": 300
+          }
+        }
+      }
+    },
+    "saved_greedy_b": {
+      "domain": "saved_primary_greedy_b_remainder",
+      "cases": 51,
+      "runs_completed": 51,
+      "run_errors": [],
+      "binding_check": {
+        "status": "PASS",
+        "traces_checked": 51,
+        "findings": {},
+        "note": "independent pin vs every decision/result binding, case.json and raw state/snapshot/transition/commitment files; local hashes, not signatures"
+      },
+      "property_statuses": {
+        "greedy_b": {
+          "S1": "PASS",
+          "S2": "PASS",
+          "S3": "PASS",
+          "S4": "NOT_RUN",
+          "S5": "PASS",
+          "P1": "PASS",
+          "P2": "PASS"
+        }
+      },
+      "arithmetic": {
+        "greedy_b": "NOT_RUN"
+      },
+      "replay": {
+        "record_kind": "rule_study_verification_v1",
+        "verifier_version": "rule03-review-3",
+        "verifier_source_sha256": "9d25fcdb821a3cc1adec07a64d658f165c8a6049f18ccd862030a82fb667bc94",
+        "trace_reader_source_sha256": "cfd20cb92f69d6620be620631984fe071d43f4c5c1161e6a0ce8ca41affd9c1d",
+        "methods": [
+          "trace_replay"
+        ],
+        "budget": {
+          "max_states": 10000,
+          "max_transitions": 50000,
+          "max_seconds": 600,
+          "states_used": 2130,
+          "transitions_used": 2130,
+          "ceiling_hit": null,
+          "by_scope": {
+            "authored/actual_runner": {
+              "states": 300,
+              "transitions": 300
+            },
+            "trace_replay": {
+              "states": 1830,
+              "transitions": 1830
+            }
+          }
+        },
+        "accepted_adapter_versions": [
+          "proposal-1"
+        ],
+        "spec_sha256_expected": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+        "refused_traces": [],
+        "results": {
+          "greedy_b": {
+            "counts": {
+              "traces": 51,
+              "complete_traces": 51,
+              "partial_traces": 0,
+              "p1_eligible_traces": 43,
+              "p1_outside_scope": {
+                "not_jointly_feasible": 8
+              },
+              "p2_checked_traces": 51,
+              "distinct_binding_sets": 51
+            },
+            "properties": {
+              "S1": {
+                "meaning": "starts only arrived waiting jobs, each job at most once",
+                "checked": 1530,
+                "violations": 0,
+                "status": "PASS"
+              },
+              "S2": {
+                "meaning": "nonflexible jobs start at arrival; every start finishes by its deadline",
+                "checked": 1530,
+                "violations": 0,
+                "status": "PASS"
+              },
+              "S3": {
+                "meaning": "background + running + new job power <= IT capacity in every occupied slot",
+                "checked": 1530,
+                "violations": 0,
+                "status": "PASS"
+              },
+              "S4": {
+                "meaning": "no invalid proposal (including injected faults) is executed",
+                "checked": 0,
+                "violations": 0,
+                "status": "NOT_RUN",
+                "reason": "no invalid proposal occurred"
+              },
+              "S5": {
+                "meaning": "valid clock transition: one slot per step, no new starts in drain slots 24-29",
+                "checked": 1530,
+                "violations": 0,
+                "status": "PASS"
+              },
+              "P1": {
+                "meaning": "closed, fault-free, forecast-present, jointly feasible inputs complete all jobs",
+                "checked": 43,
+                "violations": 0,
+                "status": "PASS"
+              },
+              "P2": {
+                "meaning": "every arrived job ends completed or explicitly missed, matching the reported result",
+                "checked": 51,
+                "violations": 0,
+                "status": "PASS"
+              }
+            },
+            "state_hash_continuity": {
+              "checked": 1479,
+              "mismatches": 0,
+              "examples": [],
+              "note": "informational: assumes state_after and the next state_before hash the same object, pending the runner's convention"
+            },
+            "arithmetic_consistency": {
+              "status": "NOT_RUN",
+              "checked": 0,
+              "mismatches": 0,
+              "examples": [],
+              "note": "R04 capacity arithmetic only; not a human faithfulness judgment"
+            },
+            "counterexample_total": 0,
+            "counterexamples": []
+          }
+        },
+        "binding_validation": {
+          "status": "INCOMPLETE",
+          "verified": "case content, specification when supplied, decision-list hashes and within-trace consistency",
+          "not_authenticated": "external adapter/generator/environment/code artifacts and raw state/transition bytes are not supplied"
+        },
+        "exclusions": [
+          "Callback exploration checks declared actions on the verifier's own clock; actual runner state transitions require confirmed adapter trace semantics and evidence.",
+          "Elapsed ceilings are cooperative between operations. An untrusted in-process callback cannot be preempted here; an approved process supervisor is required for a real run.",
+          "Bounded: results hold only for the enumerated inputs and stated bounds; no unbounded proof.",
+          "P1 covers only closed workloads revealed at slot 0, jointly feasible by the oracle, with a visible forecast and no injected fault; other inputs are reported, not claimed complete.",
+          "Systems are treated as stateless functions of the visible state; a system with hidden memory needs trace-mode verification instead.",
+          "Policy properties are judged on the system's own reachable states; the legal-action graph only decides P1 eligibility.",
+          "Scores are artificial weights; no emissions, savings or real-site claim is made.",
+          "Explanation text and arithmetic records are not checked here.",
+          "Trace replay checks only the supplied records; it is not bounded exploration."
+        ]
+      },
+      "overall": "PASS"
+    }
+  },
+  "combined_budget": {
+    "max_states": 10000,
+    "max_transitions": 50000,
+    "max_seconds": 600,
+    "states_used": 2130,
+    "transitions_used": 2130,
+    "ceiling_hit": null,
+    "by_scope": {
+      "authored/actual_runner": {
+        "states": 300,
+        "transitions": 300
+      },
+      "trace_replay": {
+        "states": 1830,
+        "transitions": 1830
+      }
+    }
+  },
+  "source_evidence_stable": true,
+  "cumulative_charged_states": 12130,
+  "cumulative_charged_transitions": 12130,
+  "scientific_freeze_accepted": false,
+  "independent_person_receiving": "PENDING",
+  "new_primary_executions": 0,
+  "model_calls": 0,
+  "final_cases_generated": 0
+}

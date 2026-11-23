@@ -1,5 +1,7 @@
 # Architecture for the final scheduling study
 
+November 23 latest: [native continuation](handoffs/RULE03_NATIVE_CONTINUATION_NOV23.md) PASS within its exact scope: 10 authored runs + 51 saved Greedy B replays; 2,130 new / 12,130 cumulative charged steps, verified cleanup. No scientific code changed or primary traces regenerated. Original INCOMPLETE and intermediate host FAIL remain unchanged. New-scope Nisha receiving, actual accounting, freeze, final evaluation and independent reproduction remain separate pending gates. Older dated entries below are historical where superseded.
+
 November 23 narrow continuation host: [the fixed preparation](rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md) separates original saved-trace producer pins from the new host/authored producer pin, requiring identical scientific source bytes and original Git ancestry. Its only work is10 authored runs plus51 saved replays under one new bounded allowance. It does not change the scheduler, checker, independent kernel or scientific limits, and has not executed the continuation.
 
 
