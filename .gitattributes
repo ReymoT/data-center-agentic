@@ -1,5 +1,5 @@
 # Preserve the supplied receiving report's exact original bytes on every platform.
-docs/evidence/rule03-nov23-native/** -text
+docs/evidence/rule03-nov23-native/** -text whitespace=cr-at-eol
 # RULE02 implementer evidence has exact-byte hashes, including its original tools/logs.
 docs/evidence/rule02/** -text
 # Supplemental upstream license text is retained byte for byte with a recorded hash.
