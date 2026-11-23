@@ -1,5 +1,8 @@
 # Project plan
 
+Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
+
+
 Current November 22 update: #260/#261 are merged and exact main CI passes 2,929 tests plus 19 subtests. Nisha has supplied her verification proposal; Matty now prepares the contained fresh authorization package. Edison retained accounting/metric files remain required. Ved/Reimo license consent is received and original team code is now Apache-2.0 within the documented exclusions. Keep Nov23 verification/accounting checkpoint, Nov25 core and Nov28 candidate. See [current handoff](handoffs/NOV22_RECEIVING_LICENSE_AND_STATUS.md); no scientific execution is claimed.
 
 

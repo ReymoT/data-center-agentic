@@ -1,0 +1,292 @@
+{
+  "kind": "rule03_scoped_continuation_proposal_v1",
+  "status": "PENDING_FRESH_EXACT_AUTHORIZATION_NOT_RUN",
+  "frozen_code_commit": "3daf00f7af5b130e8b17ae67b2f79a7dadb7ea00",
+  "original_authorization_id_consumed": "rule03-primary-authored-3daf00f7-20261122",
+  "original_report_sha256": "f1e11a4f781c4d3efc920975a67d032d623cd7648ad60c63bd5bf2f6d008915e",
+  "existing_archive_sha256": "7513b60c0f3656ef876dee9e6847f7a721f53669d5aed2aefa672356c9e7b7ca",
+  "saved_greedy_b_replay_remaining": [
+    {
+      "case_id": "D64-0014",
+      "folder": "traces/primary/greedy_b/D64-0014-greedy_b",
+      "result_sha256": "97ca15805f6af09ec1713d7940104dfffe70d2ff94f1184056d2bab94f881211"
+    },
+    {
+      "case_id": "D64-0015",
+      "folder": "traces/primary/greedy_b/D64-0015-greedy_b",
+      "result_sha256": "0e52aba27e0339724e5a8f0daa32cd4dfd1301bd4790348d43737aa094fca481"
+    },
+    {
+      "case_id": "D64-0016",
+      "folder": "traces/primary/greedy_b/D64-0016-greedy_b",
+      "result_sha256": "8004581fe0e4e63f96e90d187915d825704642e64a6656e635b37ce32ada16dc"
+    },
+    {
+      "case_id": "D64-0017",
+      "folder": "traces/primary/greedy_b/D64-0017-greedy_b",
+      "result_sha256": "5a464b43838f534603bb46cd2d605d8c11f71a9fd2345245eeda873e7b55318b"
+    },
+    {
+      "case_id": "D64-0018",
+      "folder": "traces/primary/greedy_b/D64-0018-greedy_b",
+      "result_sha256": "9f6ad0ccf68edf5beca2b68c8c5514e9f3bfacd98e711ade8a104e0f259b7a7a"
+    },
+    {
+      "case_id": "D64-0019",
+      "folder": "traces/primary/greedy_b/D64-0019-greedy_b",
+      "result_sha256": "758d5930b79dde31eea64374bd00481d96237e8298635f7591d7f07390f5d1bc"
+    },
+    {
+      "case_id": "D64-0020",
+      "folder": "traces/primary/greedy_b/D64-0020-greedy_b",
+      "result_sha256": "69feed93c9ffed7f0cfdfb2ec8ffebe5001cebab313e0363b735e5fee314633e"
+    },
+    {
+      "case_id": "D64-0021",
+      "folder": "traces/primary/greedy_b/D64-0021-greedy_b",
+      "result_sha256": "6b6427f918fc97dc0d05997b75dd222354387d00d50ad396aeacdb8ad914582c"
+    },
+    {
+      "case_id": "D64-0022",
+      "folder": "traces/primary/greedy_b/D64-0022-greedy_b",
+      "result_sha256": "ecca39869d6f87f2cd96f8a23a2cedf0464dd595e8b8c0ec2d313ce958821a6f"
+    },
+    {
+      "case_id": "D64-0023",
+      "folder": "traces/primary/greedy_b/D64-0023-greedy_b",
+      "result_sha256": "87c7fe9f2f602fc80605622aace6afa228387e8694fbbf3386886af3dd5645ad"
+    },
+    {
+      "case_id": "D64-0024",
+      "folder": "traces/primary/greedy_b/D64-0024-greedy_b",
+      "result_sha256": "0f494975a1de8f3e9d09358900e8801aeddb087b7b035a3644e3879d08ac0f36"
+    },
+    {
+      "case_id": "D64-0025",
+      "folder": "traces/primary/greedy_b/D64-0025-greedy_b",
+      "result_sha256": "a76c232b0e4cd4f3aea1326d6758adeec556b2a38b5871f8c73b205d889e8d71"
+    },
+    {
+      "case_id": "D64-0026",
+      "folder": "traces/primary/greedy_b/D64-0026-greedy_b",
+      "result_sha256": "59b92d2f67cc3c815cdc2b12481f5e2af6c37749ec8f907988f2752edbd60800"
+    },
+    {
+      "case_id": "D64-0027",
+      "folder": "traces/primary/greedy_b/D64-0027-greedy_b",
+      "result_sha256": "5f47987a565a0bbcbf710359f1e568a1c1f0b43238a731bb911ece5653f389c1"
+    },
+    {
+      "case_id": "D64-0028",
+      "folder": "traces/primary/greedy_b/D64-0028-greedy_b",
+      "result_sha256": "8e86ddb73cfe036f29017b165b79dff382c5795b155f505fcab482a3d60c01c3"
+    },
+    {
+      "case_id": "D64-0029",
+      "folder": "traces/primary/greedy_b/D64-0029-greedy_b",
+      "result_sha256": "5c857fb2a8a1e5e45ca0780458b61b53044703b31a8ad422e45a54b7791545e0"
+    },
+    {
+      "case_id": "D64-0030",
+      "folder": "traces/primary/greedy_b/D64-0030-greedy_b",
+      "result_sha256": "e28356ee63ceb4c76bbc70e9e0fb56b527f38169ad69bfc9411e0af4e9d73062"
+    },
+    {
+      "case_id": "D64-0031",
+      "folder": "traces/primary/greedy_b/D64-0031-greedy_b",
+      "result_sha256": "6639374b5c0cbae862667aac44cb8c36cd0ca07a06d5b394f85beac32ff1477b"
+    },
+    {
+      "case_id": "D64-0032",
+      "folder": "traces/primary/greedy_b/D64-0032-greedy_b",
+      "result_sha256": "7bfb716390b9bb14b0b2c8db3e9d1baa18e349ed7ff2be19b0f2cf728383ca0e"
+    },
+    {
+      "case_id": "D64-0033",
+      "folder": "traces/primary/greedy_b/D64-0033-greedy_b",
+      "result_sha256": "4246dee7c72ccd315360caafd017de5edd2508d4a5167906d85a2b95456f68ad"
+    },
+    {
+      "case_id": "D64-0034",
+      "folder": "traces/primary/greedy_b/D64-0034-greedy_b",
+      "result_sha256": "fc3244ed09f247092abb948ac75822717638d6c1f573150fdf4438c85896103f"
+    },
+    {
+      "case_id": "D64-0035",
+      "folder": "traces/primary/greedy_b/D64-0035-greedy_b",
+      "result_sha256": "200eb1b3c5a87341ac7b8004265c7ee3d9dd30e7b84f0ca47e3242d13aef795f"
+    },
+    {
+      "case_id": "D64-0036",
+      "folder": "traces/primary/greedy_b/D64-0036-greedy_b",
+      "result_sha256": "55db58e1fb50037a6634a23d0bf2390d383555aebde57191f3a913939d457eb5"
+    },
+    {
+      "case_id": "D64-0037",
+      "folder": "traces/primary/greedy_b/D64-0037-greedy_b",
+      "result_sha256": "9be4ede3a7a3e536352e03137d791e760c1768c623b3a05a71dd0369d071877b"
+    },
+    {
+      "case_id": "D64-0038",
+      "folder": "traces/primary/greedy_b/D64-0038-greedy_b",
+      "result_sha256": "367f02953e7c00354b5c90f0c2b4b68f97a1062a4c98d5d8656ec5bd1251b77d"
+    },
+    {
+      "case_id": "D64-0039",
+      "folder": "traces/primary/greedy_b/D64-0039-greedy_b",
+      "result_sha256": "bdfa6aa39e3db815b165fe638f20494b337b4f658ea7e8dc936ccf82e37f77a0"
+    },
+    {
+      "case_id": "D64-0040",
+      "folder": "traces/primary/greedy_b/D64-0040-greedy_b",
+      "result_sha256": "4a6446a671a2c730417a56e7e493661354e609b212bef5a3941cc7450706bed3"
+    },
+    {
+      "case_id": "D64-0041",
+      "folder": "traces/primary/greedy_b/D64-0041-greedy_b",
+      "result_sha256": "6b1e05a53d2500c77351a8e7bc3852535d7dae8591e0ed55605e478195d0888a"
+    },
+    {
+      "case_id": "D64-0042",
+      "folder": "traces/primary/greedy_b/D64-0042-greedy_b",
+      "result_sha256": "6c9af399bc2fd53291030ca91c966a57fe68770a04321eab592426783270d933"
+    },
+    {
+      "case_id": "D64-0043",
+      "folder": "traces/primary/greedy_b/D64-0043-greedy_b",
+      "result_sha256": "59742893fa7596db1c54dd5ce58bcb5edeff7fd88c0e96732faeb13cf2768780"
+    },
+    {
+      "case_id": "D64-0044",
+      "folder": "traces/primary/greedy_b/D64-0044-greedy_b",
+      "result_sha256": "651d80c70407586b8c24f5f621a1d695403bc983d8f4c44d8c65bcbf94734b62"
+    },
+    {
+      "case_id": "D64-0045",
+      "folder": "traces/primary/greedy_b/D64-0045-greedy_b",
+      "result_sha256": "bee055c8ba2cbba8625af382b1dc18d6434b9a79f64731d9cc61b19b23cb0e6d"
+    },
+    {
+      "case_id": "D64-0046",
+      "folder": "traces/primary/greedy_b/D64-0046-greedy_b",
+      "result_sha256": "16f6ec4cf4c611dbd75c1d2fad6905d5bca295b25407dc30eb508d39cd5f751d"
+    },
+    {
+      "case_id": "D64-0047",
+      "folder": "traces/primary/greedy_b/D64-0047-greedy_b",
+      "result_sha256": "9b25648337bc8c37364ffbb1f855c4be2ae13fdea5fe4cfed997e97051e62c47"
+    },
+    {
+      "case_id": "D64-0048",
+      "folder": "traces/primary/greedy_b/D64-0048-greedy_b",
+      "result_sha256": "967320d53f23072eb1393777eae74d83bb20d261955f5fe1f558fa37b3207785"
+    },
+    {
+      "case_id": "D64-0049",
+      "folder": "traces/primary/greedy_b/D64-0049-greedy_b",
+      "result_sha256": "10400010c6b72496545d9194a1adec03f9b5bb63907787070593f2ddefe4bca0"
+    },
+    {
+      "case_id": "D64-0050",
+      "folder": "traces/primary/greedy_b/D64-0050-greedy_b",
+      "result_sha256": "6736ca99118ae3aa3c187b82dfa46720cecc883b1e81cb0b51d6eade3e643fbc"
+    },
+    {
+      "case_id": "D64-0051",
+      "folder": "traces/primary/greedy_b/D64-0051-greedy_b",
+      "result_sha256": "9990cc7e939f7885bb9614c07772b213dcf46e97bb9518b3d86c9544783850c4"
+    },
+    {
+      "case_id": "D64-0052",
+      "folder": "traces/primary/greedy_b/D64-0052-greedy_b",
+      "result_sha256": "97f773e88f1bb6ed93e31eb63996cc3af6541e28df95f56652905a2ffb138c37"
+    },
+    {
+      "case_id": "D64-0053",
+      "folder": "traces/primary/greedy_b/D64-0053-greedy_b",
+      "result_sha256": "9bff0fbd2a86e0b823a8b3be18e2dcfe496c6b74f80362d197ee1212eeb69350"
+    },
+    {
+      "case_id": "D64-0054",
+      "folder": "traces/primary/greedy_b/D64-0054-greedy_b",
+      "result_sha256": "f1718c0776b2be304e406b3f8dcfc00221707b271409bb2acbec173d8eb26d80"
+    },
+    {
+      "case_id": "D64-0055",
+      "folder": "traces/primary/greedy_b/D64-0055-greedy_b",
+      "result_sha256": "ae530c7e81dbddc5e4cecf8c5cca8f884af02adf7b2974ef22d43466919f649d"
+    },
+    {
+      "case_id": "D64-0056",
+      "folder": "traces/primary/greedy_b/D64-0056-greedy_b",
+      "result_sha256": "ba341b4c011cf6f07b3e491cb0156eb88dcdc51be854698ea31a8c466a11c39d"
+    },
+    {
+      "case_id": "D64-0057",
+      "folder": "traces/primary/greedy_b/D64-0057-greedy_b",
+      "result_sha256": "807ae5fb4dd71b4b3e77055f5d4f475314a4f6526d8f2e939539bf239e16995f"
+    },
+    {
+      "case_id": "D64-0058",
+      "folder": "traces/primary/greedy_b/D64-0058-greedy_b",
+      "result_sha256": "70aac0d9c81e3f2ec793c17afaed09288d3a0be5bdb002bd57dd829cacf2f0d3"
+    },
+    {
+      "case_id": "D64-0059",
+      "folder": "traces/primary/greedy_b/D64-0059-greedy_b",
+      "result_sha256": "49ffd0243c859979f419dbbb99909f300cc50f7daec0a2038c1a325cfc2a3eb3"
+    },
+    {
+      "case_id": "D64-0060",
+      "folder": "traces/primary/greedy_b/D64-0060-greedy_b",
+      "result_sha256": "f4e66d5408dde88151dd513d9aefbbd883f4643fb71ae053caba76ff656b1ed8"
+    },
+    {
+      "case_id": "D64-0061",
+      "folder": "traces/primary/greedy_b/D64-0061-greedy_b",
+      "result_sha256": "9108d6ec1ebf196a8710b3175d0b69d20195f60e4908ce18d7b64f808124ea5c"
+    },
+    {
+      "case_id": "D64-0062",
+      "folder": "traces/primary/greedy_b/D64-0062-greedy_b",
+      "result_sha256": "3e01b2830b8e3ae4bf726c62b47a97fcdc0b239b283ac2e0b3f00a30b968f6a7"
+    },
+    {
+      "case_id": "D64-0063",
+      "folder": "traces/primary/greedy_b/D64-0063-greedy_b",
+      "result_sha256": "2540e14771e0cfa8e70985cc650f00165debd4cbc4b59f79291a7ad541185fc0"
+    },
+    {
+      "case_id": "D64-0064",
+      "folder": "traces/primary/greedy_b/D64-0064-greedy_b",
+      "result_sha256": "22a06b2495a3289ce0c0eabb1612777dfe1fb8ee072b33d2770294245b2af679"
+    }
+  ],
+  "remaining_selection_basis": "Original policy-major primary-domain order; first13 GreedyB traces completed replay, nexttrace partial. Re-receive remaining51 from the beginning without regenerating primary traces.",
+  "new_authored_runs_max": 10,
+  "new_authored_domains": [
+    "A",
+    "B",
+    "B-fault",
+    "B-progress"
+  ],
+  "policies": [
+    "rules-v1",
+    "greedy_a",
+    "greedy_b"
+  ],
+  "baseline_fault_injection": false,
+  "combined_ceiling_proposed": {
+    "states": 10000,
+    "transitions": 50000,
+    "seconds": 600
+  },
+  "charged_step_estimate": 2130,
+  "retry_allowed": false,
+  "notes": [
+    "This is a proposal, not an execution authority or modified report.",
+    "Reuse original source bindings for retained primary traces; do not rewrite them to later commits.",
+    "Keep original attempt INCOMPLETE and disclose cumulative work across authorized attempts.",
+    "No additional execution or replay has been performed."
+  ]
+}

@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "2e69be68c740eadb8e0e8370b2ae2475d246779683e387d1aec006614d33f14f",
+      "sha256": "a27325dae1b8caef5bdc4b3b9678ddecb533017608229bd55b621a157d876e9c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "1c6ef4c4b544a91e888b35400f71cd7bcb8bc5d9e0ec5e2553d4625b5c157b62",
+      "sha256": "6836fb7929c834e0417999c638fd6f41ac0e2de6c64c24788809afd22ddb4722",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "a7bfd21a16ccb7e420169c20fe43265761cff151960a7ecb76a1a05b993e4566",
+      "sha256": "1a0d3c7b09245a954d54884082ae83265c93b9fa21e3fafbeae197799d86868c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "486345195aad3fcd3215969bc2274a0026f21088858344a2f4b58f591b2ab0ab",
+      "sha256": "c7b6e53afed38f31429e6fe01175630a9028d061109e3021d533220c91bbac4f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "c9dd7eec5bdbac236fbb0fad3af30c98aadf0330f89bb8c3c7094963de4daf07",
+      "sha256": "a0ae0ced61f5138e3a6b1dfd9c4222cf9b45a40f1bb95acc442a1ba0c56276cc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "4ff979539ff00654c8c21920ab1e00a3472d848c12bb4c23c8a4c3940b45f9b7",
+      "sha256": "2f4e6cf8ef5eacbb25d83e562ca1a024d90cce8655be59c9dc5c62472b71ed40",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "5e3ba49063f4f1810159ed8ccc497a2a188c405260492f4b2d51c9e3b3124fd4",
+      "sha256": "cf4750c4804c0c97b454cddda4daf21bab80777a2de1d623b87c3066582bab50",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -700,7 +700,7 @@
     },
     {
       "path": "docs/handoffs/NOV22_RECEIVING_LICENSE_AND_STATUS.md",
-      "sha256": "f341776d2affa9f0ceac17ba5068693f14988a61b940882e288c0758f1176956",
+      "sha256": "7c79c28086bacb5c772687d58949e0137757cf8935471debb740ce5ed4c428fb",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -721,6 +721,36 @@
     {
       "path": "tests/runtime/test_rule_study_receiving_worker.py",
       "sha256": "c4dc2ed83b579db8dc39443ab6aad9fae8905979bc43d9a9a1b6115288e10a5b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md",
+      "sha256": "b16b632a9f8da67bfbc6edd5b8283de27c63b4a610d2c6838957b05e4e773dfd",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE03_NISHA_RECEIVING_NOV22.md",
+      "sha256": "7213fe6e82356ee3f990a0f14f3aefaf9e650909202ca2b2faaf501f3a64924e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/receiving-report.json",
+      "sha256": "044ec3e1b0e0680c72fa153164b95374a2158e7e069996b258bbbd0e0d74d6f3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/attempt-receipt.json",
+      "sha256": "e64a0dab1196fd6a27dbb0e8fc1896ddaa097f47dd15ab6a854c2d72f5855e5b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/SHA256SUMS.txt",
+      "sha256": "65bc3aaa21f7db7bb3ae3a5d78b41f0fd8622942ce2f56d759aba6fb0a0e099b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/continuation-proposal.json",
+      "sha256": "599e97ec70c9184fc846d68cb3aad0d7e5371c8912216f449b7f3502fc056ffb",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

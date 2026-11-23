@@ -1,5 +1,8 @@
 # Verified-evidence assembly index
 
+Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
+
+
 Current November 22 receiving: [the consolidated handoff](../handoffs/NOV22_RECEIVING_LICENSE_AND_STATUS.md) records merged #260/#261, exact main CI, four saved read-only replays and scoped team-code licensing. [Contained receiving preparation](../rule_study/CONTAINED_RECEIVING_NOV22.md) is not an executed verification result. Actual independent findings and isolated evaluation remain pending.
 
 

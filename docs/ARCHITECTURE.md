@@ -1,5 +1,8 @@
 # Architecture for the final scheduling study
 
+Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
+
+
 Current November 22 update after #260/#261: the actual rule scheduler, independent receiving harness and read-only demo replay are merged. The new contained-receiving preparation wraps the receiving API in the existing hard-timeout supervisor and single-use host authorization checks. Public commands remain inspection-only; actual verification, accounting acceptance and final evaluation are pending. See [current handoff](handoffs/NOV22_RECEIVING_LICENSE_AND_STATUS.md). No policy, F02 format or scientific limit changes.
 
 
