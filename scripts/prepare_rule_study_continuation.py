@@ -86,7 +86,6 @@ def _evidence_bytes(relative):
 def receiving_plan():
     """Reconstruct source and retained-data identities without running a policy/replay."""
     from dc_sustainability.evaluation import rule_study_receiving as rv
-    from dc_sustainability.evaluation import rule_study_trace as tr
     from dc_sustainability.evaluation import rule_study_verifier as v
 
     blobs = {p: _evidence_bytes(p) for p in EVIDENCE_PATHS}
@@ -122,11 +121,29 @@ def receiving_plan():
     )
     if any(current[k] != pin[k] for k in keys):
         raise ValueError("scientific source differs from the frozen producer")
-    # Corroborate immutable original Git blobs, not just a producer assertion.
-    paths = [rv.ADAPTER_DIR / n for n in pin["adapter_files"]]
-    paths += [rv.SPEC_REL, rv.GENERATOR_REL, rv.LOCK_REL]
-    paths += [Path(m.__file__).relative_to(ROOT) for m in (rv, tr, v)]
-    for path in paths:
+    # Cover transitive runtime/checker/schema/impact code too, not just adapters.
+    archived = subprocess.check_output(
+        ["git", "archive", "--format=tar", FROZEN_COMMIT, "dc_sustainability"], cwd=ROOT
+    )
+    frozen_python = {}
+    with tarfile.open(fileobj=io.BytesIO(archived), mode="r:") as sources:
+        for member in sources:
+            if member.name.endswith(".py"):
+                if not member.isfile():
+                    raise ValueError("linked frozen scientific source refused")
+                frozen_python[member.name] = sources.extractfile(member).read()
+    current_python = {
+        p.relative_to(ROOT).as_posix() for p in (ROOT / "dc_sustainability").rglob("*.py")
+    }
+    if set(frozen_python) != current_python:
+        raise ValueError("frozen scientific source file set changed")
+    for relative, original in frozen_python.items():
+        rv._safe_file(ROOT / relative)
+        if original.replace(b"\r\n", b"\n") != (ROOT / relative).read_bytes().replace(
+            b"\r\n", b"\n"
+        ):
+            raise ValueError("frozen scientific source bytes changed")
+    for path in (rv.SPEC_REL, rv.LOCK_REL):
         original = subprocess.check_output(
             ["git", "show", FROZEN_COMMIT + ":" + path.as_posix()], cwd=ROOT
         )

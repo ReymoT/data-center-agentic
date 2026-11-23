@@ -6,7 +6,7 @@
   "transitions_used": 0,
   "new_policy_or_replay_executed": false,
   "scientific_entry_points_guarded": true,
-  "source_sha256": "3693370a1e2387d4ae50588c7aa22d81849541095000f2db1fee620aecb34ad2",
+  "source_sha256": "867d9057984e16740bd9fb38f6272f30365bb743e031ba8b62e43c9fa38b3366",
   "archive_sha256": "7513b60c0f3656ef876dee9e6847f7a721f53669d5aed2aefa672356c9e7b7ca",
   "scope": "Static input handling only; no scientific authority consumed or continuation performed."
 }

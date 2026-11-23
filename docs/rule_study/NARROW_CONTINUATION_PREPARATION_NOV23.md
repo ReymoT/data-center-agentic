@@ -32,13 +32,14 @@ All output is reserved exclusively; it never modifies the original files.
 
 Saved traces retain producer commit3daf00f7 and its original pin. The launcher
 checks that commit's main ancestry, compares current scientific source bindings
-and corroborates the original Git blobs for the six adapter files, specification,
-generator, lock, receiver, trace reader and independent kernel. Any scientific
+and corroborates the original Git blobs for every `dc_sustainability` Python file (including
+transitive simulator/controller/checker/schema/impact code), the specification
+and lock. Any scientific
 source change blocks preparation. It does not rewrite historical records to a
-new commit. The current host/new-authored producer pin is recorded separately;
+new commit. The current host/new-authored producer pin is recorded separately.
+Host plumbing has changed, while the scientific source must be byte-identical.
 CI fetches repository history so the real metadata test can inspect that frozen
 commit; a missing Git object never falls back to an assumed source pin.
-host plumbing has changed, while the scientific source must be byte-identical.
 The old pin's clean-tree fields describe the received original attempt, not a
 claim that the current checkout has the original HEAD. Current clean merged-main
 checks apply separately to the new host and request.
@@ -70,7 +71,7 @@ after an actual authorized run; Edison still supplies actual accounting/metrics.
 
 ## Actual offline validation
 
-35 new unit checks and152 focused controls/receiver checks passed. Host tests
+36 new unit checks and153 focused controls/receiver checks passed. Host tests
 use fixture authority and mocked scientific APIs, never a fabricated human
 approval or research result. Tests cover original-ID refusal, type/limit/command
 guards, source/evidence drift, archive safety/hash/expansion checks, shared budget,

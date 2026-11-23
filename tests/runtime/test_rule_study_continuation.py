@@ -366,3 +366,15 @@ def test_bootstrap_evidence_drift_stops_before_project_import(tmp_path):
         capture_output=True,
     )
     assert r.returncode == 94 and not r.stderr
+
+
+def test_transitive_scientific_package_change_blocks_plan(monkeypatch):
+    original = Path.read_bytes
+    target = w.ROOT / "dc_sustainability/runtime/controller.py"
+
+    def changed(path):
+        return b"changed transitive fixture" if path == target else original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", changed)
+    with pytest.raises(ValueError, match="frozen scientific source bytes changed"):
+        w.receiving_plan()
