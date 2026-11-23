@@ -1,0 +1,34 @@
+@MattyAnd @epez7 Nisha: independent receiving of the November 22 bounded attempt (PR #263, head `26ddede`). I inspected only the retained evidence, following the receiving guide. I did not rerun any policy or continue the replay.
+
+**1. Archive and file integrity: PASS**
+- Archive SHA-256 `7513b60c...e7b7ca`, its size (5,806,440 bytes), the report hash `f1e11a4f...08915e` and the manifest hash all match the receipt.
+- The archive holds 29,569 regular files totaling 85,881,667 bytes, matching the receipt. I extracted it into a new folder: there are no absolute or parent-traversal names, no links and no duplicates.
+- All 29,569 file hashes match `SHA256SUMS.txt`. No file is missing from the manifest and no manifest entry is missing a file.
+
+**2. Code pin and bindings: PASS**
+- `3daf00f7af5b130e8b17ae67b2f79a7dadb7ea00` is a merge commit on main (#262).
+- I rebuilt the pin from that commit's sources myself: spec `9597931f...a8542bd`, adapter `ce6658a6...e9c4bf5` (all six `rule_study/*.py` file hashes match), generator `ab795084...df4072` and lock `38562754...f9034c`. All equal the report's pin. The adapter differs from my earlier `759a8c3` pin only because #261 changed `runner.py`, as you said.
+- All 192 trace folders have 30 decisions each. Every decision and result record carries exactly that pin, and each `case.json` matches its case hash. Every referenced state, snapshot, transition and completion file is present and matches its hash. `decision_sha256s` match the decision files. No model calls are recorded. Zero findings.
+
+**3. Coverage and the budget stop: confirmed as recorded**
+- The stop came at exactly 10,000 states and 10,000 transitions: 5,760 runner steps (192 × 30) plus 4,240 replay steps (64 × 30 for rules-v1, 64 × 30 for Greedy A, and 400 for Greedy B, which is 13 full traces plus 10 decisions of one partial trace). The pin stayed stable, there were no run errors or refused traces, and no retry was recorded.
+- Authored: 0 of 10 runs, so binding and properties are NOT_RUN.
+- My arithmetic agrees with the continuation estimate: the full scope needs 12,120 steps.
+
+**4. Property results: confirmed, with scope**
+- **Primary rules-v1 and Greedy A:** 64/64 complete replays each. S1, S2, S3 and S5 PASS (1,920 checks each). P1 PASS on 52 eligible cases, with 12 outside scope as not jointly feasible. P2 PASS on 64. Zero counterexamples.
+- **S4 is NOT_RUN, not PASS.** No invalid proposal occurs in the primary domain, and the authored B-fault case did not run.
+- **Arithmetic:** rules-v1 R04 has 141 checks and 0 mismatches. Greedy A and B have NOT_RUN, which is expected because only rules-v1 writes arithmetic.
+- **Greedy B:** 13 complete and 51 partial, so every property is INCOMPLETE. It must not be reported as passing.
+- **Independent cross-check:** my own brute-force oracle also finds exactly 52 jointly feasible primary cases. In the result records, all three policies complete every job in those 52 cases. For Greedy B, 51 of those records are not replay-verified.
+
+**5. Observation for the report and demo, not a property failure**
+In all 12 jointly infeasible primary cases (for example D64-0009: 10 kW and 20 kW jobs, both with deadline 1, capacity 30, background 10), all three policies start **no** job, so both jobs are missed. Each job alone would fit. This is safe, and P1 scopes these cases out. It matches the documented Scenario B behavior, where the gate refuses the partial plan and the fallback. However, the report should say plainly that on infeasible inputs the system makes no partial progress, rather than implying it keeps the feasible subset.
+
+**Summary:** the integrity, pin and binding checks PASS. The coverage and property outcomes match the original report exactly. The overall result remains **INCOMPLETE**: Greedy B is partial, the authored cases didn't run and S4 has no coverage. This receiving does not establish a freeze, generalization or accounting acceptance.
+
+**Still open for #241:**
+- the separately authorized continuation (51 saved Greedy B replays plus 10 authored runs);
+- @epez7's development case/accounting files and metric records for accounting receiving.
+
+Nisha
