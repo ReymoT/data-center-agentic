@@ -1,0 +1,6783 @@
+{
+  "cases": [
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-00",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 2,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        200,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-01",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 5,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        100,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-02",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 6,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        100,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-03",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 8,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-04",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 9,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-05",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 10,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        300,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-06",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 11,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        100,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-07",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 12,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        300,
+        300,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-08",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 13,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        100,
+        200,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-09",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 14,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-10",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 15,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        300,
+        300,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-11",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 16,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        100,
+        100,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-12",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 17,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        200,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-13",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 19,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        200,
+        200,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-14",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 20,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        300,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-15",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 21,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        100,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-16",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 23,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-17",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 24,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-18",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 27,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        100,
+        300,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-19",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 28,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        100,
+        300,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-20",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 30,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        100,
+        200,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-21",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 31,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        200,
+        100,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-22",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 32,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        100,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-23",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 33,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-24",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 35,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        300,
+        200,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-25",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 38,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        200,
+        100,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-26",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 41,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        300,
+        200,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-27",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 43,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        100,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-28",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 45,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        200,
+        300,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-29",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 46,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        100,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-30",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 48,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-31",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 52,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        100,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-32",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 54,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-33",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 55,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        100,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-34",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 56,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-35",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 57,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        100,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-36",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 58,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        100,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-37",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 60,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        100,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-38",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 61,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        200,
+        300,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-normal_feasible-39",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 63,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        100,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "normal_feasible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-00",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 1,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        200,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-01",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 2,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-02",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 3,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        100,
+        100,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-03",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 4,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        200,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-04",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 5,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-05",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 6,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-06",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 7,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        200,
+        100,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-07",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 8,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        200,
+        300,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-08",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 9,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        300,
+        300,
+        200,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-09",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 10,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        200,
+        100,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-10",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 11,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        100,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-11",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 12,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        200,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-12",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 13,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-13",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 14,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        300,
+        300,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-14",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 15,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        200,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-15",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 16,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-16",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 17,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-17",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 18,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        200,
+        200,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-18",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 19,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        200,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-19",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 20,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        300,
+        300,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-20",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 21,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        100,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-21",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 22,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-22",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 23,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        300,
+        100,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-23",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 24,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        300,
+        100,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-24",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 25,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        200,
+        200,
+        200,
+        100,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-25",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 26,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-26",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 27,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        200,
+        100,
+        200,
+        100,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-27",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 28,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        100,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-28",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 29,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        200,
+        300,
+        200,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-29",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 30,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-30",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 31,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        300,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-31",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 32,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        300,
+        100,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-32",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 33,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        300,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-33",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 34,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        300,
+        200,
+        300,
+        100,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-34",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 35,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        200,
+        200,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-35",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 36,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": [
+        100,
+        200,
+        200,
+        100,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-36",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 37,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": [
+        300,
+        100,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-37",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 38,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        300,
+        200,
+        200,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-38",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 39,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        300,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-overloaded_impossible-39",
+      "feasibility_label": "jointly_infeasible",
+      "generator_attempt": 40,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": [
+        100,
+        100,
+        100,
+        300,
+        300,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "stratum": "overloaded_impossible"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-00",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 2,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-01",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 5,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-02",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 7,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-03",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 8,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-04",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 10,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-05",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 14,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-06",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 15,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-07",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 16,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-08",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 17,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-09",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 19,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-10",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 21,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-11",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 24,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-12",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 25,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-13",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 33,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-14",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 35,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-15",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 37,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-16",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 40,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-17",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 41,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-18",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 43,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-19",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 46,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-20",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 48,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-21",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 49,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-22",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 52,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-23",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 54,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-24",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 55,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-25",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 56,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-26",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 57,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-27",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 58,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-28",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 60,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-29",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 61,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-30",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 63,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-31",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 64,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-32",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 69,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-33",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 72,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-34",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 73,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 4,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-35",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 74,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 20
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 4,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-36",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 80,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J4",
+          "power_kw": 30
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-37",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 82,
+      "jobs": [
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 6,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J3",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 1,
+          "duration_slots": 1,
+          "flexible": false,
+          "job_id": "J4",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-38",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 83,
+      "jobs": [
+        {
+          "arrival_slot": 1,
+          "deadline_slot": 2,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": false,
+          "job_id": "J2",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    },
+    {
+      "background_kw": 20,
+      "capacity_kw": 60,
+      "case_id": "development-missing_forecast-39",
+      "feasibility_label": "jointly_feasible",
+      "generator_attempt": 84,
+      "jobs": [
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 3,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J1",
+          "power_kw": 30
+        },
+        {
+          "arrival_slot": 0,
+          "deadline_slot": 2,
+          "duration_slots": 2,
+          "flexible": true,
+          "job_id": "J2",
+          "power_kw": 10
+        },
+        {
+          "arrival_slot": 2,
+          "deadline_slot": 5,
+          "duration_slots": 1,
+          "flexible": true,
+          "job_id": "J3",
+          "power_kw": 10
+        }
+      ],
+      "scores": null,
+      "stratum": "missing_forecast"
+    }
+  ],
+  "metadata": {
+    "authorization": null,
+    "generator_source_sha256": "ab7950847683a8411e906de06bf12346db9b3fc74cb302718d586399d5df4072",
+    "generator_version": "rule04-generator-v1-reviewed-development-only",
+    "labels": "generator claims; independent check is RULE-03's case checker",
+    "max_attempts_per_stratum": 10000,
+    "per_stratum": 40,
+    "record_kind": "rule_study_case_set_v1",
+    "report": {
+      "missing_forecast": {
+        "accepted": 40,
+        "attempts": 84,
+        "distinct_full_case_hashes": 40,
+        "distinct_workload_hashes": 40,
+        "rejected": {
+          "jointly_infeasible": 33,
+          "no_flexible_job": 11
+        }
+      },
+      "normal_feasible": {
+        "accepted": 40,
+        "attempts": 63,
+        "distinct_full_case_hashes": 40,
+        "distinct_workload_hashes": 40,
+        "rejected": {
+          "jointly_infeasible": 13,
+          "no_flexible_job": 10
+        }
+      },
+      "overloaded_impossible": {
+        "accepted": 40,
+        "attempts": 40,
+        "distinct_full_case_hashes": 40,
+        "distinct_workload_hashes": 39,
+        "rejected": {}
+      }
+    },
+    "seed": 2026111901,
+    "seed_domain": "development",
+    "spec_sha256": "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd",
+    "units": "artificial score weights; not g/kWh, not emissions"
+  },
+  "set_id": "rule-study-20261119-v1-development"
+}
