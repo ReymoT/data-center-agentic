@@ -1,5 +1,8 @@
 # Q13 November 20 receiving and license inventory
 
+November 22 superseding update: Ved and Reimo have both supplied scoped final consent. Matty adopts Apache-2.0 for original team code, preserving the existing Nisha/Edison positions and all third-party exclusions. See [adoption record](Q13_NOV22_LICENSE_ADOPTION.md). The earlier missing-position inventory below is historical; final assembled-package audit remains #244.
+
+
 [Nisha's actual checkpoint](https://github.com/ReymoT/data-center-agentic/issues/16#issuecomment-7049547810)
 confirms December 9, 2026, 11:59 PM Arizona time for the final report and a public
 GitHub software repository with README and separate code/data/evaluations

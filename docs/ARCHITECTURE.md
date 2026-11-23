@@ -1,5 +1,8 @@
 # Architecture for the final scheduling study
 
+Current November 22 update after #260/#261: the actual rule scheduler, independent receiving harness and read-only demo replay are merged. The new contained-receiving preparation wraps the receiving API in the existing hard-timeout supervisor and single-use host authorization checks. Public commands remain inspection-only; actual verification, accounting acceptance and final evaluation are pending. See [current handoff](handoffs/NOV22_RECEIVING_LICENSE_AND_STATUS.md). No policy, F02 format or scientific limit changes.
+
+
 November 22 implementation status: the study-local scheduler enumerates bounded schedules, emits rule/arithmetic evidence and uses the unchanged production checker and latest-state recheck. The common runner executes only approved current starts; failed proposals route to checked Greedy A and failed fallback remains refusal/no-start. #240 implementation is complete through #257/#258. Historical 176361a traces are preserved separately from current-system verification.
 
 The [prepared contained worker](rule_study/WORKER_PREPARATION_NOV22.md) waits for containment, checks request/source hashes before importing the backend, repeats preflight and calls the actual authored-case runner. Public inspection cannot release it. The future trusted authorization/one-use controller and accepted current-code verification remain separate gates. Nisha's independent oracle does not obtain its verdict from the production checker. Actual bounded findings, unseen evaluation and generalization are still pending. See [current handoffs](handoffs/NOV22_MANAGER_READINESS_AND_HANDOFFS.md).

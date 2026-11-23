@@ -1,0 +1,20 @@
+{
+  "kind": "q13_scoped_source_release_receiving_v1",
+  "date_arizona": "2026-11-22",
+  "reviewed_base_commit": "9fa3fe9d9ad7ba1b3548ae61d30f534530f5b615",
+  "candidate_paths_scanned": 2070,
+  "credential_pattern_paths": [],
+  "sensitive_path_flags": [],
+  "oversized_files_not_scanned": [],
+  "license_raw_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "team_code_license": "Apache-2.0 within LICENSE_SCOPE.md",
+  "contributor_positions": "all received; see Q13_NOV22_LICENSE_ADOPTION.md",
+  "dependency_notice_inventory": "docs/report/DEPENDENCY_NOTICE_AND_TREE_AUDIT_NOV22.json",
+  "limitations": [
+    "Pattern/path scan is not complete privacy or artifact-rights certification.",
+    "Existing tar evidence has separately recorded hashes/inventory; no new archive execution.",
+    "The earlier 74-distribution/115-notice inventory is retained with its recorded scope.",
+    "Final assembled package and notice/rights review remains RULE06 #244."
+  ],
+  "final_release_approved": false
+}

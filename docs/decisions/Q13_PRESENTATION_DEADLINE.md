@@ -1,5 +1,8 @@
 # Q13: reported course dates and remaining delivery requirements
 
+Current November 22 resolution: all contributor positions are received; original team code uses Apache-2.0 with explicit third-party/data/model exclusions. See [license receiving](Q13_NOV22_LICENSE_ADOPTION.md). Official course fields and team-code choice are resolved; final assembled-package acceptance stays in #244. Earlier pending positions below are historical.
+
+
 Current November 20 receiving supersedes earlier unknown-timezone/release statements below: [Nisha confirms December 9, 11:59 PM Arizona time and the public repository requirement](Q13_NOV20_COURSE_AND_LICENSE_RECEIVING.md). Only the team license choice and actual release checks remain; no private email or course access is claimed.
 
 

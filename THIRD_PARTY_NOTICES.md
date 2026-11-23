@@ -1,7 +1,7 @@
 # Third-party dependency notices — preparation
 
 These dependencies retain their own terms. This file does not license original team code.
-The team-code license is still pending in issue #16. Installed Windows dependency notice
+Original team-written code is Apache-2.0 under LICENSE_SCOPE.md; third-party terms are unchanged. Installed Windows dependency notice
 paths and exact hashes are recorded in [the November 22 audit](docs/report/DEPENDENCY_NOTICE_AND_TREE_AUDIT_NOV22.json).
 Versions match the existing Windows Python 3.12 lock. This source repository does not bundle
 those dependency wheels or their installed files. The locators below refer to files inside
