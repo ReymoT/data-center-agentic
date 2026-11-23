@@ -1,5 +1,8 @@
 # November 22 manager readiness and next handoffs
 
+Later November 22 update: [the receiving/license/status handoff](NOV22_RECEIVING_LICENSE_AND_STATUS.md) supersedes the next-action table below where changed. Nisha's proposal and Ved/Reimo license positions are received; #260/#261 are merged. Actual verification/evaluation remain pending.
+
+
 Owner: MattyAnd. Instructions remain 1.30. No master, F02, scientific bound, seed
 or policy change is made by this receiving update.
 

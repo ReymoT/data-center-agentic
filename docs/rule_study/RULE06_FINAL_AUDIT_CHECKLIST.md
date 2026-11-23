@@ -1,5 +1,8 @@
 # RULE-06 final audit checklist (#244)
 
+November 22 receiving update: the [contained receiving wrapper](CONTAINED_RECEIVING_NOV22.md) is implemented preparation. Its future exact plan must be refreshed from clean merged main before authorization. Scoped team-code licensing is resolved; final assembled-package review remains a gate here. No actual independent verification, final-set run or reproduction gate is pre-passed.
+
+
 Owner Matty. Prepared November19; checklist only, no boxes are pre-passed. Due November28 18:00 Arizona, with repairs/reproduction November26-27. See [the specification](RULE01_SPECIFICATION.md) and [plan](../decisions/NOV19_RULE_STUDY_PLAN.md).
 
 | Gate | Evidence to retain | Responsible handoff |
