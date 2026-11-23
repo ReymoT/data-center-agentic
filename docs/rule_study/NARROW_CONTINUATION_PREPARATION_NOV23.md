@@ -36,6 +36,8 @@ and corroborates the original Git blobs for the six adapter files, specification
 generator, lock, receiver, trace reader and independent kernel. Any scientific
 source change blocks preparation. It does not rewrite historical records to a
 new commit. The current host/new-authored producer pin is recorded separately;
+CI fetches repository history so the real metadata test can inspect that frozen
+commit; a missing Git object never falls back to an assumed source pin.
 host plumbing has changed, while the scientific source must be byte-identical.
 The old pin's clean-tree fields describe the received original attempt, not a
 claim that the current checkout has the original HEAD. Current clean merged-main

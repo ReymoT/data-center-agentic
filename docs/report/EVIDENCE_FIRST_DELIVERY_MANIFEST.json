@@ -780,12 +780,17 @@
     },
     {
       "path": "docs/rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md",
-      "sha256": "47997c71281c0effaaaaa31d64aa6b8144efaba864594793f44447f04564c823",
+      "sha256": "8a1b62ecfcb729bad7d5b4598a0fcfe2b9469cd157590b727306dd7a1d9e8f9f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/evidence/rule03-nov22/continuation-static-dry-test.json",
       "sha256": "d5d7f5bc355044670ba83083325ec570848b313813ba64203b121f58b3cc4b23",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": ".github/workflows/bootstrap.yml",
+      "sha256": "c822078283d75a29508e9f14141c7c4e1272fdd970d14a75f683af1cd852a2df",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
