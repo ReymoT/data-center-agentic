@@ -492,7 +492,11 @@ def _receive_folders(name, n_cases, folders, run_errors, pin, spec, *, budget=No
         binding_status = "INCOMPLETE"
     elif artifact_findings:
         binding_status = "FAIL"
-    elif not pin.get("clean_tree") or pin.get("merged_main") is not True:
+    elif (
+        not pin.get("clean_tree")
+        or pin.get("merged_main") is not True
+        or checked_count != len(folders)
+    ):
         binding_status = "INCOMPLETE"
     else:
         binding_status = "PASS" if folders else "NOT_RUN"

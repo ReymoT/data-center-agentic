@@ -364,3 +364,14 @@ def test_unaccepted_spec_cannot_plan_or_execute(tmp_path):
     with pytest.raises(ValueError, match="unsupported"):
         rv.run_receiving(["authored"], ["rules-v1"], tmp_path / "never", ROOT, changed)
     assert not (tmp_path / "never").exists()
+
+
+def test_budget_skipped_artifacts_never_report_binding_pass(copy_a):
+    budget = v.Budget(max_states=0)
+    assert budget.take_state("fixture") is False
+    section = rv._receive_folders(
+        "supplied", 1, [("A", "rules-v1", copy_a)], [], _git_like_pin(), SPEC, budget=budget
+    )
+    assert section["binding_check"]["traces_checked"] == 0
+    assert section["binding_check"]["status"] == "INCOMPLETE"
+    assert section["overall"] == "INCOMPLETE"
