@@ -323,7 +323,7 @@ hand-built and development-seed unit fixtures were used.
 
 For #241 after #257/#258. Code: `dc_sustainability/evaluation/rule_study_receiving.py`,
 CLI `scripts/receive_rule_study_system.py`, tests
-`tests/evaluation/test_rule_study_receiving.py` (29 tests).
+`tests/evaluation/test_rule_study_receiving.py` (40 tests after manager review).
 
 **Why runs, not a separate policy model.** For a closed case every arrival is known and
 rules-v1, the production checker, the Greedy A fallback and the simulator are
@@ -347,7 +347,7 @@ authored `case.json` byte-for-byte. Baselines skip the injected B-fault case.
 **Artifact and binding check.** Every decision and result record must carry exactly the
 pinned bindings; `case.json` must hash to its case binding; every referenced raw state,
 snapshot and transition file must exist and hash to its reference; every decision needs
-its completion commitment. Binding status is PASS only for a git pin on a clean tree;
+its completion commitment. Binding status is PASS only for a git pin on a clean merged-main tree;
 a test-only commit or a dirty tree is INCOMPLETE, any finding is FAIL.
 
 **Replay.** The merged trace reader replays the records against the verifier's own
@@ -369,8 +369,20 @@ These are implementation checks, not the frozen-system verification result.
 | authored A/B | 4 | 4 | 10 |
 | extended (optional supplement) | 1,024 | 1,024 | 3,072 |
 
-At most 30 decisions per run. Replay uses one shared budget of 10,000 states, 50,000
-transitions and 600 s; the extended supplement is likely to hit it and would then be
-reported INCOMPLETE, separately from the primary result. Runs take roughly 2 s each
-locally. `--execute` needs a new `--out` directory and should be used only for an
-approved run on a clean checkout of the pinned commit.
+At most 30 decisions per run. Actual runner decisions (including idle/drain), artifact receiving and replay share one
+combined budget of 10,000 states, 50,000 transitions and 600 s; the extended supplement is likely to hit it and would then be
+reported INCOMPLETE, separately from the primary result. The implementer reported roughly 2 s per case locally; this is not a new timing
+measurement. Uncontained `--execute` is now refused even with a new output path.
+Use the API only behind the exact approved trusted process supervisor; the public
+CLI is plan-only and can write that plan exclusively with `--report`.
+
+Manager receiving corrections: duplicate/unsupported domains and out-of-order optional
+supplements are refused; test case overrides cannot claim a complete named-domain
+result. Missing/malformed/linked/oversized artifacts become findings and are not
+replayed. Result commitments and contiguous decision coverage are checked. Source
+pins are reconstructed again after execution; drift fails receiving. One shared
+budget prevents later domains receiving a fresh allowance, and partial budget-stopped
+traces remain INCOMPLETE. No production checker supplies the independent verdict.
+These are harness/unit-fixture fixes, not an authorized current-code receiving run
+or independent scientific acceptance. The existing hard process supervisor and a
+fresh exact authorization remain required before any actual run.

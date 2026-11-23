@@ -49,7 +49,7 @@ def _pin():
 
 
 def _git_like_pin():
-    return {**_pin(), "commit_source": "git", "clean_tree": True}
+    return {**_pin(), "commit_source": "git", "clean_tree": True, "merged_main": True}
 
 
 # --------------------------------------------------------------------------- pin
@@ -277,3 +277,90 @@ def test_cli_execute_refuses_missing_or_existing_out(tmp_path):
     assert _cli("--domain", "authored", "--execute").returncode != 0
     result = _cli("--domain", "authored", "--execute", "--out", str(tmp_path))
     assert result.returncode != 0 and "refusing to reuse" in result.stderr
+
+
+def test_cli_cannot_turn_execute_flag_into_uncontained_approval(tmp_path):
+    out = tmp_path / "never"
+    result = _cli("--domain", "authored", "--execute", "--out", str(out))
+    assert result.returncode != 0 and "Uncontained" in result.stderr
+    assert not out.exists()
+
+
+@pytest.mark.parametrize(
+    "domains", [[], ["primary", "primary"], ["extended"], ["extended", "primary"]]
+)
+def test_invalid_or_duplicate_domains_never_plan_a_run(domains):
+    with pytest.raises(ValueError):
+        rv.plan_receiving(domains, ["rules-v1"], ROOT, SPEC)
+
+
+def test_one_budget_stops_actual_runner_and_is_shared_with_later_domains(tmp_path):
+    budget = v.Budget(max_states=1, max_transitions=1, max_seconds=30)
+    report = rv.run_receiving(
+        ["authored", "primary"],
+        ["rules-v1"],
+        tmp_path / "runs",
+        ROOT,
+        SPEC,
+        code_commit=TEST_COMMIT,
+        cases_by_domain={"authored": AUTHORED[:1], "primary": PRIMARY},
+        budget=budget,
+    )
+    assert report["overall"] == "INCOMPLETE"
+    assert report["combined_budget"]["states_used"] == 1
+    assert report["combined_budget"]["transitions_used"] == 1
+    assert report["domains"]["primary"]["runs_completed"] == 0
+    assert (
+        len(
+            [
+                p
+                for p in (tmp_path / "runs").rglob("decision-*.json")
+                if p.parent.name == "decisions"
+            ]
+        )
+        == 1
+    )
+
+
+def test_oversized_combined_budget_is_rejected_before_output(tmp_path):
+    with pytest.raises(ValueError, match="combined accepted"):
+        rv.run_receiving(
+            ["authored"],
+            ["rules-v1"],
+            tmp_path / "never",
+            ROOT,
+            SPEC,
+            budget=v.Budget(max_states=10_001),
+        )
+    assert not (tmp_path / "never").exists()
+
+
+def test_malformed_artifact_becomes_finding_and_is_not_replayed(copy_a, monkeypatch):
+    (copy_a / "result.json").write_text("not JSON", encoding="utf-8")
+    monkeypatch.setattr(
+        rv.tr, "load_trace_dir", lambda path: pytest.fail("bad artifacts must not be reread")
+    )
+    section = rv._receive_folders("bad", 1, [("A", "rules-v1", copy_a)], [], _git_like_pin(), SPEC)
+    assert section["overall"] == "FAIL"
+    assert section["binding_check"]["findings"]
+
+
+def test_missing_decision_cannot_pass_artifact_receiving(copy_a):
+    (copy_a / "decisions/decision-05.json").unlink()
+    assert any("decision" in x for x in _findings(copy_a))
+
+
+def test_clean_unmerged_pin_cannot_pass_receiving(copy_a):
+    pin = {**_git_like_pin(), "merged_main": False}
+    section = rv._receive_folders("supplied", 1, [("A", "rules-v1", copy_a)], [], pin, SPEC)
+    assert section["binding_check"]["status"] == "INCOMPLETE"
+    assert section["overall"] == "INCOMPLETE"
+
+
+def test_unaccepted_spec_cannot_plan_or_execute(tmp_path):
+    changed = dict(SPEC, unaccepted=True)
+    with pytest.raises(ValueError, match="unsupported"):
+        rv.plan_receiving(["authored"], ["rules-v1"], ROOT, changed)
+    with pytest.raises(ValueError, match="unsupported"):
+        rv.run_receiving(["authored"], ["rules-v1"], tmp_path / "never", ROOT, changed)
+    assert not (tmp_path / "never").exists()

@@ -29,6 +29,7 @@ import hashlib
 import json
 import re
 import subprocess
+from itertools import islice
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
@@ -51,9 +52,11 @@ ADAPTER_DIR = Path("dc_sustainability/rule_study")
 GENERATOR_REL = Path("dc_sustainability/evaluation/rule_study_generator.py")
 LOCK_REL = Path("requirements/requirements-windows-py312.lock.txt")
 FINDINGS_PER_TRACE = 20
+ACCEPTED_SPEC = "9597931fcee09bc895605b65401483c9c3658da9e0bdf7c954f8669dfa8542bd"
 
 
 def _lf_sha256(path: Path) -> str:
+    _safe_file(path)
     return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
@@ -73,6 +76,7 @@ def reconstruct_pin(repo_root: Path, *, code_commit: str | None = None) -> dict:
     ``code_commit`` overrides git for unit tests only; the result then says so.
     """
     root = Path(repo_root)
+    _safe_file(root / SPEC_REL)
     spec = json.loads((root / SPEC_REL).read_text(encoding="utf-8"))
     sources = sorted((root / ADAPTER_DIR).glob("*.py"))
     if not sources:
@@ -85,13 +89,28 @@ def reconstruct_pin(repo_root: Path, *, code_commit: str | None = None) -> dict:
         "generator_source_sha256": _lf_sha256(root / GENERATOR_REL),
         "environment_lock_sha256": _lf_sha256(root / LOCK_REL),
     }
+    if pin["spec_sha256"] != ACCEPTED_SPEC:
+        raise ValueError("unsupported specification pin")
     if code_commit is not None:
-        pin.update(code_commit=code_commit, clean_tree=None, commit_source="test_only_override")
+        pin.update(
+            code_commit=code_commit,
+            clean_tree=None,
+            merged_main=None,
+            commit_source="test_only_override",
+        )
     else:
         pin.update(
             code_commit=_git(root, "rev-parse", "HEAD"),
             clean_tree=_git(root, "status", "--porcelain") == "",
             commit_source="git",
+        )
+        pin["merged_main"] = (
+            subprocess.run(
+                ["git", "merge-base", "--is-ancestor", pin["code_commit"], "origin/main"],
+                cwd=root,
+                capture_output=True,
+            ).returncode
+            == 0
         )
     return pin
 
@@ -153,6 +172,9 @@ def plan_receiving(
     domains: Sequence[str], policies: Sequence[str], repo_root: Path, spec: Mapping
 ) -> dict:
     """Describe an exact bounded receiving run without running anything."""
+    _check_domains(domains)
+    if v.canonical_sha256(spec) != ACCEPTED_SPEC:
+        raise ValueError("unsupported receiving specification")
     _check_policies(policies)
     pin = reconstruct_pin(repo_root)
     rows = {}
@@ -182,10 +204,28 @@ def _check_policies(policies: Sequence[str]) -> None:
         raise ValueError(f"policies must be distinct values from {POLICIES}")
 
 
+def _check_domains(domains):
+    if not domains or len(set(domains)) != len(domains) or set(domains) - set(DOMAINS):
+        raise ValueError("distinct supported domains required")
+    if "extended" in domains and (
+        "primary" not in domains or domains.index("primary") > domains.index("extended")
+    ):
+        raise ValueError("the optional supplement must follow primary in the same budget")
+
+
+def _safe_file(path):
+    path = Path(path)
+    if any(p.is_symlink() or p.is_junction() for p in (path, *path.parents)):
+        raise ValueError("linked artifact refused")
+    if not path.is_file() or path.stat().st_size > 8 * 1024 * 1024:
+        raise ValueError("missing or oversized artifact")
+
+
 # --------------------------------------------------------------------------- artifact check
 
 
 def _read_text(path: Path) -> str:
+    _safe_file(path)
     return path.read_bytes().decode("utf-8")
 
 
@@ -201,6 +241,13 @@ def _hash_ref(folder: Path, sub: str, digest, where: str, out: list) -> None:
 
 
 def check_trace_artifacts(folder: Path, pin: Mapping) -> list[str]:
+    try:
+        return _check_trace_artifacts(folder, pin)
+    except (ValueError, TypeError, KeyError, AttributeError, OSError) as exc:
+        return [f"malformed or unavailable artifact: {type(exc).__name__}: {exc}"]
+
+
+def _check_trace_artifacts(folder: Path, pin: Mapping) -> list[str]:
     """Binding and raw-artifact findings for one runner output folder; empty means clean."""
     folder = Path(folder)
     out: list[str] = []
@@ -223,9 +270,16 @@ def check_trace_artifacts(folder: Path, pin: Mapping) -> list[str]:
 
     result = json.loads(_read_text(folder / "result.json"))
     compare(result.get("bindings"), "result")
-    decision_paths = sorted((folder / "decisions").glob("*.json"))
-    if not decision_paths:
-        out.append("no decision records")
+    decision_paths = sorted(islice((folder / "decisions").glob("*.json"), v.HORIZON + 1))
+    n = len(decision_paths)
+    if not 1 <= n <= v.HORIZON or [p.name for p in decision_paths] != [
+        f"decision-{i:02d}.json" for i in range(n)
+    ]:
+        out.append("missing, extra or noncontiguous decision records")
+    if result.get("status") == "complete" and n != v.HORIZON:
+        out.append("complete result lacks thirty decisions")
+    if result.get("decision_sha256s") != [_text_sha256(_read_text(p)) for p in decision_paths]:
+        out.append("result does not bind supplied decision bytes")
     for path in decision_paths:
         text = _read_text(path)
         rec = json.loads(text)
@@ -267,6 +321,7 @@ def run_receiving(
     *,
     code_commit: str | None = None,
     cases_by_domain: Mapping[str, Iterable[v.Case]] | None = None,
+    budget: v.Budget | None = None,
 ) -> dict:
     """Run the actual RULE-02 runner on each case, then check artifacts and replay records.
 
@@ -276,23 +331,42 @@ def run_receiving(
     from dc_sustainability.rule_study import runner as rr
     from dc_sustainability.rule_study.scheduler import ScoreKwhConvention
 
+    _check_domains(domains)
+    if v.canonical_sha256(spec) != ACCEPTED_SPEC:
+        raise ValueError("unsupported receiving specification")
     _check_policies(policies)
+    budget = budget or v.Budget()
+    if budget.max_states > 10_000 or budget.max_transitions > 50_000 or budget.max_seconds > 600:
+        raise ValueError("receiving exceeds the combined accepted budget")
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=False)
     pin = reconstruct_pin(repo_root, code_commit=code_commit)
+    if cases_by_domain is not None:
+        pin["case_source"] = "test_only_case_override"
     convention = ScoreKwhConvention()
     sections = {}
     for name in domains:
-        cases = list(
+        source = iter(
             cases_by_domain[name] if cases_by_domain is not None else domain_cases(name, spec)
         )
+        cases = []
+        for case in source:
+            if len(cases) >= 1024:
+                raise ValueError("case override exceeds supported domain bound")
+            cases.append(case)
+        if len({c.case_id for c in cases}) != len(cases):
+            raise ValueError("duplicate case identity")
         domain_dir = out_dir / name
         run_errors, folders = [], []
         for case, policy in _runs(cases, policies):
+            if not budget.check_time():
+                break
             try:
                 case_spec = case_spec_for(case)
                 bindings = rr.make_bindings(case_spec, repo_root, code_commit=code_commit)
-                run, _, runner = rr.run_case(
+                folder = _run_bounded_case(
+                    budget,
+                    name,
                     domain_dir,
                     case_spec,
                     policy,
@@ -300,7 +374,9 @@ def run_receiving(
                     score_convention=convention,
                     fault_injection=case_spec.fault_injection if case_spec.fault_starts else None,
                 )
-                folders.append((case.case_id, policy, runner.root))
+                folders.append((case.case_id, policy, folder))
+                if budget.exhausted:
+                    break
             except Exception as exc:  # recorded, never retried or hidden
                 run_errors.append(
                     {
@@ -309,33 +385,101 @@ def run_receiving(
                         "error": f"{type(exc).__name__}: {exc}",
                     }
                 )
-        sections[name] = _receive_folders(name, len(cases), folders, run_errors, pin, spec)
-    return _report(pin, policies, sections)
+                break  # preserve the first failed run; no automatic continuation/retry
+        sections[name] = _receive_folders(
+            name, len(cases), folders, run_errors, pin, spec, budget=budget
+        )
+        sections[name]["runs_expected"] = len(_runs(cases, policies))
+        if len(folders) != sections[name]["runs_expected"] and sections[name]["overall"] == "PASS":
+            sections[name]["overall"] = "INCOMPLETE"
+        if run_errors:
+            break
+    report = _report(pin, policies, sections)
+    after_pin = reconstruct_pin(repo_root, code_commit=code_commit)
+    report["pin_stable"] = all(pin.get(k) == value for k, value in after_pin.items())
+    if not report["pin_stable"]:
+        report["overall"] = "FAIL"
+    report["combined_budget"] = budget.summary()
+    if budget.exhausted and report["overall"] != "FAIL":
+        report["overall"] = "INCOMPLETE"
+    return report
+
+
+def _run_bounded_case(
+    budget, domain, directory, case, policy, *, bindings, score_convention, fault_injection
+):
+    """Use the actual common runner, charging before every decision, including drains."""
+    from dc_sustainability.rule_study import runner as rr
+    from dc_sustainability.simulator import SchedulingSimulator
+
+    sim = SchedulingSimulator(allow_completion_starts=False)
+    sim.reset(case.episode(), forecasts_by_slot=case.forecasts_by_slot())
+    snapshot = case.snapshot()
+    runner = rr.RuleStudyRunner(
+        sim,
+        lambda: snapshot,
+        directory,
+        policy_id=policy,
+        case_id=case.case_id,
+        decision_time_utc=case.decision_time_utc,
+        bindings=bindings,
+        score_convention=score_convention,
+        fault_injection=fault_injection,
+        case_json=case.case_json(),
+    )
+    scope = f"{domain}/actual_runner"
+    for index in range(v.HORIZON):
+        if not budget.take_state(scope) or not budget.take_transition(scope):
+            break
+        outcome = runner.decide(index)
+        if outcome.stopped or not budget.check_time():
+            break
+    result = rr.build_result(runner.root, case, policy, bindings, score_convention)
+    with (runner.root / "result.json").open("x", encoding="utf-8", newline="\n") as stream:
+        stream.write(result.to_json())
+    return runner.root
 
 
 def receive_existing(folders: Sequence[Path], repo_root: Path, spec: Mapping, **pin_kw) -> dict:
     """Check and replay already written runner folders against an independent pin."""
+    budget = v.Budget()
     pin = reconstruct_pin(repo_root, **pin_kw)
+    if (
+        not folders
+        or len(folders) > 3 * 1024
+        or len({Path(f).resolve() for f in folders}) != len(folders)
+    ):
+        raise ValueError("nonempty distinct bounded trace folders required")
     items = []
     for folder in folders:
         case = json.loads(_read_text(Path(folder) / "case.json"))
         result = json.loads(_read_text(Path(folder) / "result.json"))
         items.append((case.get("case_id"), result.get("policy_id"), Path(folder)))
     policies = sorted({p for _, p, _ in items if isinstance(p, str)})
-    section = _receive_folders("supplied", len(items), items, [], pin, spec)
-    return _report(pin, policies, {"supplied": section})
+    section = _receive_folders("supplied", len(items), items, [], pin, spec, budget=budget)
+    report = _report(pin, policies, {"supplied": section})
+    report["combined_budget"] = budget.summary()
+    return report
 
 
-def _receive_folders(name, n_cases, folders, run_errors, pin, spec) -> dict:
+def _receive_folders(name, n_cases, folders, run_errors, pin, spec, *, budget=None) -> dict:
     artifact_findings = {}
     triples = []
+    checked_count = 0
     for case_id, policy, folder in folders:
+        if budget is not None and not budget.check_time():
+            break
         findings = check_trace_artifacts(folder, pin)
+        checked_count += 1
         if findings:
             artifact_findings[f"{case_id}/{policy}"] = findings
-        triples.append(tr.load_trace_dir(folder))
+            continue
+        try:
+            triples.append(tr.load_trace_dir(folder))
+        except (ValueError, TypeError, KeyError, OSError) as exc:
+            artifact_findings[f"{case_id}/{policy}/parse"] = [str(exc)]
     replay = tr.verify_traces(
-        triples, expected_spec_sha256=v.canonical_sha256(spec), is_rules_v1_run=True
+        triples, expected_spec_sha256=v.canonical_sha256(spec), is_rules_v1_run=True, budget=budget
     )
     property_statuses = {
         policy: {p: x["status"] for p, x in res["properties"].items()}
@@ -344,16 +488,18 @@ def _receive_folders(name, n_cases, folders, run_errors, pin, spec) -> dict:
     arithmetic = {
         policy: res["arithmetic_consistency"]["status"] for policy, res in replay["results"].items()
     }
-    if pin.get("commit_source") != "git":
+    if pin.get("commit_source") != "git" or pin.get("case_source") == "test_only_case_override":
         binding_status = "INCOMPLETE"
     elif artifact_findings:
         binding_status = "FAIL"
-    elif not pin.get("clean_tree"):
+    elif not pin.get("clean_tree") or pin.get("merged_main") is not True:
         binding_status = "INCOMPLETE"
     else:
         binding_status = "PASS" if folders else "NOT_RUN"
     statuses = [s for row in property_statuses.values() for s in row.values()]
     statuses += list(arithmetic.values())
+    # Faulted authored cases legitimately omit baselines. Partial trace coverage
+    # is still carried by the reader as INCOMPLETE, never inferred from silence.
     if run_errors or replay["refused_traces"] or "FAIL" in statuses or artifact_findings:
         overall = "FAIL"
     elif (
@@ -361,6 +507,7 @@ def _receive_folders(name, n_cases, folders, run_errors, pin, spec) -> dict:
         and binding_status == "PASS"
         and all(s in ("PASS", "NOT_RUN") for s in statuses)
         and "PASS" in statuses
+        and not (budget and budget.exhausted)
     ):
         overall = "PASS"
     else:
@@ -372,7 +519,7 @@ def _receive_folders(name, n_cases, folders, run_errors, pin, spec) -> dict:
         "run_errors": run_errors,
         "binding_check": {
             "status": binding_status,
-            "traces_checked": len(folders),
+            "traces_checked": checked_count,
             "findings": artifact_findings,
             "note": "independent pin vs every decision/result binding, case.json and raw "
             "state/snapshot/transition/commitment files; local hashes, not signatures",
