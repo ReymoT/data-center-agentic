@@ -135,11 +135,13 @@ def execute_prepared(request):
 
     spec = json.loads((ROOT / rv.SPEC_REL).read_bytes())
     out = Path(request["output_directory"])
+    # Reserve ownership before failure handling; never add evidence to a raced-in folder.
+    out.mkdir(exist_ok=False)
     try:
         report = rv.run_receiving(
             DOMAINS,
             POLICIES,
-            out,
+            out / "traces",
             ROOT,
             spec,
             budget=v.Budget(max_states=10000, max_transitions=50000, max_seconds=600),
@@ -148,7 +150,7 @@ def execute_prepared(request):
             json.dump(report, stream, indent=2, allow_nan=False)
         return 0 if report["overall"] == "PASS" else 7
     except BaseException as exc:
-        # The runner creates the new directory. Preserve partial traces and failure.
+        # This wrapper owns the new directory. Preserve partial traces and failure.
         if out.is_dir():
             with (out / "receiving-failure.json").open("x", encoding="utf-8") as stream:
                 json.dump({"exception": type(exc).__name__, "retry_allowed": False}, stream)

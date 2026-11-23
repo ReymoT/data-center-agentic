@@ -40,6 +40,9 @@ The child verifies request/source bytes before project import, then repeats
 preflight before calling the existing `run_receiving` API. It cannot import a
 caller-selected module or launch an arbitrary command.
 
+The wrapper reserves its outer output directory exclusively before failure
+handling; the receiver writes beneath `traces/`. A destination created after
+preflight is refused without adding a failure file to someone else's folder.
 The receiving report is saved exclusively. Zero exit alone is not success:
 containment cleanup and a retained PASS report are needed. PASS remains scoped
 to those finite cases; it is not generalization, final accounting acceptance,

@@ -170,7 +170,7 @@ def test_failure_evidence_survives_backend_exception(prepared, monkeypatch):
     data, _, _ = prepared
 
     def fail(*args, **kwargs):
-        Path(data["output_directory"]).mkdir()
+        args[2].mkdir()
         raise RuntimeError("fixture failure")
 
     monkeypatch.setattr(rv, "run_receiving", fail)
@@ -231,3 +231,24 @@ def test_receiving_bootstrap_rejects_code_drift_before_import(tmp_path):
         capture_output=True,
     )
     assert result.returncode == 93 and not result.stderr
+
+
+def test_output_created_after_preflight_is_never_modified(prepared, monkeypatch):
+    from dc_sustainability.evaluation import rule_study_receiving as rv
+
+    data, _, _ = prepared
+    out = Path(data["output_directory"])
+    out.mkdir()
+    marker = out / "existing.txt"
+    marker.write_text("preserve")
+    # Another process creates the destination after the earlier absence check.
+    monkeypatch.setattr(w, "assess", lambda request: {"problems": []})
+
+    def already_exists(*args, **kwargs):
+        raise FileExistsError("fixture output race")
+
+    monkeypatch.setattr(rv, "run_receiving", already_exists)
+    with pytest.raises(FileExistsError):
+        w.execute_prepared(data)
+    assert list(out.iterdir()) == [marker]
+    assert marker.read_text() == "preserve"

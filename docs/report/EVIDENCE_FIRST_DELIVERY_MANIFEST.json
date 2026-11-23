@@ -710,17 +710,17 @@
     },
     {
       "path": "docs/rule_study/CONTAINED_RECEIVING_NOV22.md",
-      "sha256": "4a57227773db89cb399b4a8a68e0168941177b4cfa6bfbb131719f136fd5767b",
+      "sha256": "43c0f75c1d5d02e4e3d97ab312accff44ba709daa6d1052a4a5da3a6ec150a0e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "scripts/prepare_rule_study_receiving.py",
-      "sha256": "c0edd38ea89178d8d8a5a8163d813a1acd5b326daefedfcfb7e9eab19cb62449",
+      "sha256": "34ff54ab1dabc017ef6dfa2089097e5caf84784818a3e37e2146d6efaa1bebe3",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "tests/runtime/test_rule_study_receiving_worker.py",
-      "sha256": "897d4690a41235dfc1f33b44a3c3613929bee239a9cde51988f60d8b3b3b16da",
+      "sha256": "c4dc2ed83b579db8dc39443ab6aad9fae8905979bc43d9a9a1b6115288e10a5b",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
