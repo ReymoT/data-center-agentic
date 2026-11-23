@@ -62,7 +62,10 @@ accounting acceptance.
 
 **Report (R05).** Wrote the evaluation, introduction/problem and related-work drafts
 and the report outline, and assembles the final report in the IEEE Overleaf project.
-Held-out ratings, reliability and findings remain future work.
+Held-out ratings, reliability and findings belong to the original source-dependent
+study, which is deferred outside the active focused rule-study delivery. New
+rule-study verification, synthetic evaluation and final report acceptance remain
+separate from the contributions listed here.
 
 Project-written evaluator, runner, rules and analysis code are distinct from
 third-party components: Ollama/Qwen3 8B and the pinned Python packages keep their
