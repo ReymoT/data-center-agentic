@@ -390,7 +390,7 @@
     },
     {
       "path": "docs/rule_study/RULE03_VERIFIER.md",
-      "sha256": "dd9985cef4207cbd69cc14e3522024a6cbf35c04a0d41abdb07cc1abd81e7d7e",
+      "sha256": "c0760183a1447deff0c6b614fefb8e020ae8b7f22190c8938eef4b7edf068258",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -636,6 +636,21 @@
     {
       "path": "third_party/notices/langsmith-0.14.7-LICENSE.txt",
       "sha256": "34e0b9842c7a31d34e53bc7eb224e81e07a34996106e029bbc72dea2d449f496",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "dc_sustainability/evaluation/rule_study_receiving.py",
+      "sha256": "9d94217f2a0221bdfb5a5780425577f16db5bb14c4da8589646af0db44b0b00a",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/receive_rule_study_system.py",
+      "sha256": "5070c4a636fe8d2457e413e135ecdae7bf069598d3e8229fc3ad6e81e7138360",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/evaluation/test_rule_study_receiving.py",
+      "sha256": "20fdea91bf25e0aadc6d442cbbea6f55e57424cd1acc5db8129e90ccefe73039",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
