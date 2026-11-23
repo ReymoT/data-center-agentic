@@ -1,5 +1,8 @@
 # RULE-06 final audit checklist (#244)
 
+Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](../handoffs/RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
+
+
 November 22 receiving update: the [contained receiving wrapper](CONTAINED_RECEIVING_NOV22.md) is implemented preparation. Its future exact plan must be refreshed from clean merged main before authorization. Scoped team-code licensing is resolved; final assembled-package review remains a gate here. No actual independent verification, final-set run or reproduction gate is pre-passed.
 
 

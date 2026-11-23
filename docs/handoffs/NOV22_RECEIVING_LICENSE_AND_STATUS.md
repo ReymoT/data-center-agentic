@@ -1,5 +1,8 @@
 # November 22 receiving, license and next handoffs
 
+Later November 22 actual result: the approved primary/authored attempt ran once and stopped at its 10,000-state ceiling after 107.172 seconds. Primary192 traces were generated; rules-v1/Greedy A64 complete replay each, Greedy B13 complete/51 incomplete, authored0. Overall INCOMPLETE; original ID consumed, no retry or freeze. [Actual report and smallest continuation proposal](RULE03_BOUNDED_ATTEMPT_NOV22.md) supersede earlier not-run statements below for this attempt only. Separate-person receiving and remaining accounting/evaluation/delivery work stay pending.
+
+
 This update follows merged #260/#261, main
 `9fa3fe9d9ad7ba1b3548ae61d30f534530f5b615`. Exact main CI passed 2,929 tests
 plus 19 subtests and all checks. Both task branches are deleted. The demo archive

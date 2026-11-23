@@ -1,0 +1,37 @@
+{
+  "kind": "rule03_bounded_attempt_receipt_v1",
+  "date_arizona": "2026-11-22",
+  "code_commit": "3daf00f7af5b130e8b17ae67b2f79a7dadb7ea00",
+  "authorization_id": "rule03-primary-authored-3daf00f7-20261122",
+  "request_sha256": "a96bc5388a9ddb4d94c40fd1a7602067b61868161c9901291bfc8ba4ea25591d",
+  "approval_basis": "Matty accepted the immediately preceding exact prepared-run recommendation in this chat; original chat authorization record and one-use ledger retained outside Git.",
+  "host": {
+    "status": "failed",
+    "retry_allowed": false,
+    "authorization_id": "rule03-primary-authored-3daf00f7-20261122",
+    "supervision": {
+      "status": "failed",
+      "released": true,
+      "cleanup_verified": true,
+      "pid": 8436,
+      "returncode": 7,
+      "elapsed_before_cleanup_s": 107.17199999999866,
+      "elapsed_including_cleanup_s": 107.17199999999866
+    }
+  },
+  "report_sha256": "f1e11a4f781c4d3efc920975a67d032d623cd7648ad60c63bd5bf2f6d008915e",
+  "archive": "primary-authored-attempt-3daf00f7.tar.gz",
+  "archive_sha256": "7513b60c0f3656ef876dee9e6847f7a721f53669d5aed2aefa672356c9e7b7ca",
+  "archive_bytes": 5806440,
+  "regular_files": 29569,
+  "uncompressed_file_bytes": 85881667,
+  "file_manifest_sha256": "c196e6f6766d43f0174940d799f299e526828464c0e3cb59d7647783feaa6391",
+  "outcome": "INCOMPLETE",
+  "reason": "combined 10000-state ceiling reached; no retry",
+  "model_calls": 0,
+  "final_cases_generated": 0,
+  "source_or_private_inputs_used": false,
+  "scientific_freeze_accepted": false,
+  "independent_person_receiving": "PENDING Nisha",
+  "privacy_pattern_flags": []
+}
