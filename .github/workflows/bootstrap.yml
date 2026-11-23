@@ -13,6 +13,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v7.0.1
+        with:
+          # Receiving checks corroborate the original frozen producer's Git blobs.
+          fetch-depth: 0
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'

@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "ed389b662f0060bf00d5027ef72abd7403d92bf5ebfad84da2f1bf864f5d443b",
+      "sha256": "c02f456bfb9269752a04cf1b5d50f75f047c89cade47a1968ec9aee6a65c1488",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "59d4cb66b6e3e1f89c6703651dbe34fa9ed96c6743a80d4d2cf358159586140b",
+      "sha256": "9adefd7010dfc20f1d85e70d8966d71327980e50abadcc12ea0301c51c786660",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "54800b2b5aba81bdd9aaa4837d66dcf97c1459621fec11efd0ccf1c106a6f2ed",
+      "sha256": "4f80c8da01337f34b177815a75a7a18f8f4ca271caeeb28e957a8d0a13984ee5",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "795c566de565632c178830aeac9b8d2e753fabcc4b4d70403ee0389e9c4d347c",
+      "sha256": "f188a4f7f864a5f75166db0d48c1f9c8a744b359f35e6522d03700ae2d35c696",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -766,6 +766,31 @@
     {
       "path": "docs/handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md",
       "sha256": "c246c2d50480934abff5837039cfc818bbfb23b114eb009726c2c2955fb37a21",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/prepare_rule_study_continuation.py",
+      "sha256": "867d9057984e16740bd9fb38f6272f30365bb743e031ba8b62e43c9fa38b3366",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/runtime/test_rule_study_continuation.py",
+      "sha256": "0ad221c7c90ce1c314b3f426a0fdec8da99bbbed4e91dca3fb406a9eadf009da",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/NARROW_CONTINUATION_PREPARATION_NOV23.md",
+      "sha256": "61bfceb5d44d93b63a03e81b5dd374fea1591241c833bcafa5eb114d84ed2122",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule03-nov22/continuation-static-dry-test.json",
+      "sha256": "efa90de55a9edf1278b436942ba0fc5c614774bfdfd128f627327d3dbb24889c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": ".github/workflows/bootstrap.yml",
+      "sha256": "c822078283d75a29508e9f14141c7c4e1272fdd970d14a75f683af1cd852a2df",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
