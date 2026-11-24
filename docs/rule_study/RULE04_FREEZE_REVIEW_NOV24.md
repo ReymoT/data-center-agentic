@@ -1,5 +1,9 @@
 # RULE04 protocol freeze review — November 24
 
+Current controller revision: [review 3 fixes](RULE04_REVIEW3_FIXES_NOV24.md) and
+[revision 3 pins](RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json). Both earlier requests
+are superseded. Full nested Windows paths are now checked before ID reservation.
+
 Later review: [direct controller fixes](RULE04_AI_REVIEW_FIXES_NOV24.md) supersede
 the original controller pins with [revision 2](RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json).
 Scientific bindings and inputs are unchanged. The old request is not usable with

@@ -200,7 +200,7 @@
   "dispatcher_preparation": "scripts/prepare_rule_study_rollout.py",
   "dispatcher_scope": "120 existing development cases only; no final generation",
   "protocol_freeze_record": {
-    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json",
-    "sha256_lf": "1eeaa43b9de520e15ac6ed1370a871596f6a8e0eabd9d720a8466548bcf7df39"
+    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json",
+    "sha256_lf": "d1167dbcb2daeb200c3400775a3d6de36d3945fc1dd4add8014ede5895397b48"
   }
 }

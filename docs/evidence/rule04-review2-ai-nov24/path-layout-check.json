@@ -1,0 +1,10 @@
+{
+  "kind": "rule04_complete_artifact_path_projection_v1",
+  "scope": "Static path calculation, not scientific execution",
+  "short_output_example": "C:\\Users\\Ander\\R4_12345678_r3",
+  "short_maximum_artifact_chars": 216,
+  "superseded_review2_maximum_artifact_chars": 286,
+  "refusal_at_chars": 260,
+  "native_fixture": "57 focused tests passed including native short-parent full nested path write/read; no registry change needed",
+  "copy_export_rule": "Retain archives using relative paths; choose a sufficiently short extraction root and recheck full destination paths before copying/extracting"
+}

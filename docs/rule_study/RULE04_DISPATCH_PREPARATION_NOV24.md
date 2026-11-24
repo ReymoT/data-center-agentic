@@ -65,6 +65,11 @@ The canonical external ledger is `RuleStudy_Run_Ledger` beside the checkout.
 
 ## Checks and remaining gates
 
+Latest [review 3 fixes](RULE04_REVIEW3_FIXES_NOV24.md) add complete nested artifact-path
+preflight, in-scan deadline checks, original/pair request provenance, single child
+accounting load and per-stratum partial coverage. The full request remains unapproved;
+fresh approval must accept potentially no missing-forecast/hidden-weight rollout coverage.
+
 Later November 24: [AI review corrections](RULE04_AI_REVIEW_FIXES_NOV24.md) add fixed
 authorized-hash handoff, shared absolute deadline, cooperative stop reserve, durable
 checkpoints, host/pair failure summaries and one-second outer/active-pair output scans.

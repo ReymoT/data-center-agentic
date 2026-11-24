@@ -47,6 +47,8 @@ held-out finding or grant publication rights for private artifacts.
 
 | E22 | [AI-assisted review fixes](../rule_study/RULE04_AI_REVIEW_FIXES_NOV24.md), [revised controller freeze](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json) | Failure/hash/monitoring fixes and ordinary native fixture measurements; no batch execution or full-batch capacity guarantee |
 
+| E23 | [Second AI review fixes](../rule_study/RULE04_REVIEW3_FIXES_NOV24.md), [revision 3 freeze](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json) | Native path-layout tests, guarded short output proposal, deadline/provenance/partial-coverage fixes; no study execution |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
