@@ -1,0 +1,534 @@
+{
+  "equal_work_vs_greedy_a": [
+    {
+      "available": true,
+      "case_id": "A",
+      "greedy_a_total": 12000,
+      "policy_id": "greedy_b",
+      "policy_total": 8000,
+      "reduction": 0.3333333333333333
+    },
+    {
+      "available": true,
+      "case_id": "A",
+      "greedy_a_total": 12000,
+      "policy_id": "rules-v1",
+      "policy_total": 8000,
+      "reduction": 0.3333333333333333
+    },
+    {
+      "available": false,
+      "case_id": "B",
+      "policy_id": "greedy_b",
+      "reason": "greedy_a_impact_not_positive"
+    },
+    {
+      "available": false,
+      "case_id": "B",
+      "policy_id": "rules-v1",
+      "reason": "greedy_a_impact_not_positive"
+    },
+    {
+      "available": false,
+      "case_id": "B-fault",
+      "policy_id": "rules-v1",
+      "reason": "no_greedy_a_run_for_case"
+    },
+    {
+      "available": true,
+      "case_id": "B-progress",
+      "greedy_a_total": 12000,
+      "policy_id": "greedy_b",
+      "policy_total": 12000,
+      "reduction": 0.0
+    },
+    {
+      "available": true,
+      "case_id": "B-progress",
+      "greedy_a_total": 12000,
+      "policy_id": "rules-v1",
+      "policy_total": 12000,
+      "reduction": 0.0
+    }
+  ],
+  "label": "authored-native-dbb8e6f (retained docs/evidence/rule03-nov23-native)",
+  "metrics_source_sha256": "4db118cc97328f1545bac0bc77dafb6ee8fb75cc9cac689944bcca43ff9a0cfd",
+  "notes": [
+    "Computed from retained records only; no policy, checker or simulator ran.",
+    "Unavailable comparisons stay unavailable, never zero.",
+    "Scores are artificial weights; nothing here concerns emissions."
+  ],
+  "record_kind": "rule_study_metrics_v1",
+  "runs": [
+    {
+      "case_id": "A",
+      "case_sha256": "dd52c12a601996cad06d8aac725ce4a5e5f8277661673a239568c88b04a47a10",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "greedy_a",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 12000,
+        "recomputed_total": 12000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          1
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    },
+    {
+      "case_id": "A",
+      "case_sha256": "dd52c12a601996cad06d8aac725ce4a5e5f8277661673a239568c88b04a47a10",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "greedy_b",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          1
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 8000,
+        "recomputed_total": 8000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          2
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    },
+    {
+      "case_id": "A",
+      "case_sha256": "dd52c12a601996cad06d8aac725ce4a5e5f8277661673a239568c88b04a47a10",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "rules-v1",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          1
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 8000,
+        "recomputed_total": 8000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          2
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    },
+    {
+      "case_id": "B",
+      "case_sha256": "6af1a09f42ede0402c5c45ace06087065f217a25590326686dd2a281675eef57",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 0,
+      "completed_job_ids": [],
+      "decisions": 30,
+      "executed_starts": 0,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 1,
+        "error_codes": {
+          "NO_APPROVED_CANDIDATE": 1,
+          "SIMULATOR_REFUSAL": 1
+        },
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 2,
+      "missed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "policy_id": "greedy_a",
+      "start_delay_slots": {
+        "count": 0,
+        "values": []
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 0,
+        "recomputed_total": 0.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 0,
+        "values": []
+      },
+      "unfinished": 2,
+      "unfinished_job_ids": [
+        "J1",
+        "J2"
+      ]
+    },
+    {
+      "case_id": "B",
+      "case_sha256": "6af1a09f42ede0402c5c45ace06087065f217a25590326686dd2a281675eef57",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 0,
+      "completed_job_ids": [],
+      "decisions": 30,
+      "executed_starts": 0,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 1,
+        "error_codes": {
+          "NO_APPROVED_CANDIDATE": 1,
+          "SIMULATOR_REFUSAL": 1
+        },
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 2,
+      "missed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "policy_id": "greedy_b",
+      "start_delay_slots": {
+        "count": 0,
+        "values": []
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 0,
+        "recomputed_total": 0.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 0,
+        "values": []
+      },
+      "unfinished": 2,
+      "unfinished_job_ids": [
+        "J1",
+        "J2"
+      ]
+    },
+    {
+      "case_id": "B",
+      "case_sha256": "6af1a09f42ede0402c5c45ace06087065f217a25590326686dd2a281675eef57",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 0,
+      "completed_job_ids": [],
+      "decisions": 30,
+      "executed_starts": 0,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 1,
+        "blocked_decisions": 1,
+        "error_codes": {
+          "NO_APPROVED_CANDIDATE": 1,
+          "SIMULATOR_REFUSAL": 1
+        },
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 2,
+      "missed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "policy_id": "rules-v1",
+      "start_delay_slots": {
+        "count": 0,
+        "values": []
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 0,
+        "recomputed_total": 0.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 0,
+        "values": []
+      },
+      "unfinished": 2,
+      "unfinished_job_ids": [
+        "J1",
+        "J2"
+      ]
+    },
+    {
+      "case_id": "B-fault",
+      "case_sha256": "b3e76ab08a78f2ac6f00c1dfd6e9787397ec5eb1df3fd025eb96805588e6008f",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 0,
+      "completed_job_ids": [],
+      "decisions": 30,
+      "executed_starts": 0,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 1,
+        "blocked_decisions": 1,
+        "error_codes": {
+          "NO_APPROVED_CANDIDATE": 1,
+          "SIMULATOR_REFUSAL": 1
+        },
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 2,
+      "missed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "policy_id": "rules-v1",
+      "start_delay_slots": {
+        "count": 0,
+        "values": []
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 0,
+        "recomputed_total": 0.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 0,
+        "values": []
+      },
+      "unfinished": 2,
+      "unfinished_job_ids": [
+        "J1",
+        "J2"
+      ]
+    },
+    {
+      "case_id": "B-progress",
+      "case_sha256": "6ccc27a709e9d9abf514c81a3d671306fdedaddafad43b2926f22923c2ebc948",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "greedy_a",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          1
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 12000,
+        "recomputed_total": 12000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          2
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    },
+    {
+      "case_id": "B-progress",
+      "case_sha256": "6ccc27a709e9d9abf514c81a3d671306fdedaddafad43b2926f22923c2ebc948",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "greedy_b",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          1
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 12000,
+        "recomputed_total": 12000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          2
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    },
+    {
+      "case_id": "B-progress",
+      "case_sha256": "6ccc27a709e9d9abf514c81a3d671306fdedaddafad43b2926f22923c2ebc948",
+      "checked_decisions": 30,
+      "code_commit": "dbb8e6fc391850c8291dcc66e4a57006e8ecc13f",
+      "completed": 2,
+      "completed_job_ids": [
+        "J1",
+        "J2"
+      ],
+      "decisions": 30,
+      "executed_starts": 2,
+      "execution_violations": 0,
+      "fallback": {
+        "attempted_stages": 0,
+        "blocked_decisions": 0,
+        "error_codes": {},
+        "selected": 0
+      },
+      "jobs": 2,
+      "missed": 0,
+      "missed_job_ids": [],
+      "policy_id": "rules-v1",
+      "start_delay_slots": {
+        "count": 2,
+        "values": [
+          0,
+          1
+        ]
+      },
+      "status": "complete",
+      "synthetic_impact": {
+        "matches_producer": true,
+        "producer_total": 12000,
+        "recomputed_total": 12000.0,
+        "unit": "score-kWh (artificial score weight x kWh; not g/kWh, not emissions)"
+      },
+      "turnaround_slots": {
+        "count": 2,
+        "values": [
+          1,
+          2
+        ]
+      },
+      "unfinished": 0,
+      "unfinished_job_ids": []
+    }
+  ]
+}
