@@ -1,0 +1,44 @@
+@MattyAnd @epez7 Nisha: independent accounting/metric receiving of the RULE-04 development handoff (#271, on main at `91e23b6`; guide `RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md`). **Result: PASS within the stated scope.** I worked read-only from main and ran no policy, generator, model or scientific replay.
+
+**1. Hashes and preservation: PASS**
+- All five original files match `SHA256SUMS.txt`, and both reviewed files match `REVIEWED_SHA256SUMS.txt`.
+- Each original file is byte-identical to Edison's original PR commit `4e25e31b`, so the bytes are preserved.
+- The reviewed tool `scripts/rule_study_metrics_core.py` has LF-normalized SHA-256 `12f974b2...93b7`, matching the receipt.
+- The case set is `08942727...bd716` and the accounting sidecar is `c35c8dd9...b8599`.
+
+**2. Pair identity, coverage and hidden weights: PASS**
+- The case set records seed 2026111901 (development), generator `ab795084...df4072`, spec `9597931f...a8542bd` and `authorization: null`. Attempts are 63/40/84 per stratum, with the rejection reasons recorded.
+- My case checker reproduces Edison's report byte-for-byte (`565aeb07...`):
+  - 40/40/40 cases;
+  - labels, stratum predicates, counts and duplicates all PASS;
+  - the oracle cross-check PASSes;
+  - distinct workloads are 40/39/40;
+  - unseen isolation is INCOMPLETE, because only one set was supplied.
+- My accounting checker also reproduces Edison's report byte-for-byte (`bb59733f...`). Binding, coverage, identity, weight domain, visibility and hidden profile all PASS, with 120 paired and 40 hidden.
+- **Hidden weights:** all 40 missing-forecast cases have `scores: null`. Exactly those 40 sidecar entries are flagged not visible to the policy, none of their hidden profiles appears in the visible file, and the sidecar is labeled evaluator-only.
+- **Independent provenance check:** on November 21 I generated the development pair locally from the merged generator (same source hash, unchanged since #253) to test my checkers. That pair is **byte-identical** to Edison's files: same `08942727...` and `c35c8dd9...`. This independently supports that the handoff is exactly the deterministic development output. It doesn't establish Edison's separate claim about his earlier unpublished set.
+
+**3. Authored metrics: PASS**
+- I recomputed all 10 retained authored runs with my own script, using no repo code, from the authored archive `d438dd33...`. I had already checked that archive and its `dbb8e6f` bindings in my #241 receiving.
+- Every field of every run matches both `authored-first-metrics.json` and `authored-metrics-reviewed.json`:
+  - decisions;
+  - executed starts;
+  - completed, missed and unfinished counts;
+  - impact (power × 1 h × PUE 1 × weight), matching the producer totals;
+  - turnaround and start delay;
+  - blocked decisions and attempted fallback stages;
+  - zero execution violations.
+- The original and reviewed outputs agree with each other. The reviewed one adds the bindings.
+- Comparisons against Greedy A: all 7 match my independent calculation, including the reasons.
+  - A: rules-v1 and Greedy B 8,000 vs 12,000 score-kWh, a reduction of 1/3, available.
+  - B-progress: equal, reduction 0, available.
+  - B: unavailable, because the Greedy A impact is 0.
+  - B-fault: unavailable, because there is no Greedy A run.
+- **A trade-off worth reporting next to that 1/3:** in A, rules-v1 and Greedy B delay J1 by one slot, so turnaround is [1, 2] compared with Greedy A's [1, 1].
+
+**Notes and remaining limits**
+- In these records a missed job is also counted as unfinished. In B, for example, missed = 2 and unfinished = 2. Tables should not add the two together.
+- These are 10 authored illustrations in artificial score-kWh, not unseen performance or emissions.
+- No policy has run on the 120 development cases, and the hidden-weight accounting path for missing-forecast cases has not been exercised by any rollout yet.
+- Unseen isolation, metric/input freeze and final generation remain open (#242/#244).
+

@@ -254,3 +254,19 @@ def test_metrics_without_review_receipt_are_refused(tmp_path):
 def test_portable_page_does_not_claim_markdown_is_a_rendered_diagram(page):
     assert "Rendered diagram:" not in page
     assert "../docs/report/RULE05_WORKFLOW_DIAGRAMS.md" not in page
+
+
+def test_accepted_metric_receiving_and_turnaround_are_shown():
+    inputs = core.load_inputs({}, metrics=core.DEFAULT_METRICS)
+    section = _section(core.render(inputs), "metrics")
+    assert inputs["metrics_accepted"] and "Nisha accounting/metrics, comment 7121894902" in section
+    assert "independent metric receiving" not in section
+    assert "Mean turnaround (slots)" in section and "33.3%" in section
+    assert "Do not add those counts together" in section
+
+
+def test_modified_accounting_receiving_source_refused(tmp_path):
+    source = tmp_path / "source.txt"
+    source.write_text("not the original reply", encoding="utf-8")
+    with pytest.raises(ValueError, match="receiving source"):
+        core.load_inputs({"accounting_source": source}, metrics=core.DEFAULT_METRICS)

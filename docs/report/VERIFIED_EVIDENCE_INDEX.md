@@ -39,7 +39,9 @@ held-out finding or grant publication rights for private artifacts.
 
 | E17 | [Partial RULE04 review](../handoffs/RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md), [original evidence](../evidence/rule04-dev-nov23/README.md), [reviewed metrics](../evidence/rule04-dev-nov23/authored-metrics-reviewed.json), [review receipt](../evidence/rule04-dev-nov23/manager-review-receipt.json) | Actual development pair/file hashes and read-only authored metric projection; independent accounting/metric receiving and unseen evaluation remain pending; producer reports are attributed |
 
-| E18 | [Demo package review](../handoffs/RULE07_PACKAGE_REVIEW_NOV24.md), [storyboard](../demo/RULE07_STORYBOARD.md), [offline page](../../ui/rule_demo.html) | First reviewable saved-evidence demo, directly corrected and browser-inspected; no new policy execution, independent accounting acceptance or unseen evaluation. Dedicated screenshots/recording and final package remain pending |
+| E18 | [Demo package review](../handoffs/RULE07_PACKAGE_REVIEW_NOV24.md), [storyboard](../demo/RULE07_STORYBOARD.md), [offline page](../../ui/rule_demo.html), [screenshots and fallback walkthrough](../../ui/rule_demo_assets/README.md) | Integrated saved-evidence two-scenario demo; later scoped accounting acceptance and fallback assets supplied. No new policy batch or unseen evaluation |
+| E19 | [Accepted accounting receiving](../handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md), [original Nisha reply](../evidence/rule04-nov24-receiving/nisha-source.txt), [receipt](../evidence/rule04-nov24-receiving/receiving-receipt.json) | Accepted retained development pair and ten authored metric illustrations; whole freeze/new-case evaluation/reproduction remain pending |
+| E20 | [Development dispatcher preparation](../rule_study/RULE04_DISPATCH_PREPARATION_NOV24.md) | Offline fixed-worker/containment tests and preparation only; exact limits, whole freeze and fresh authority remain absent |
 
 ## Ready now versus pending
 
