@@ -96,7 +96,7 @@ def validate_limits(limits):
             raise ValueError(f"unsupported or absent limit: {k}")
     if min(limits["states"], limits["transitions"]) < 21600:
         raise ValueError(
-            "full execution plus replay needs at least 21600 charged steps, plus oracle work"
+            "full execution plus replay needs at least 21600 charged steps; eligibility also uses wall time"
         )
     if limits["case_policy_seconds"] > limits["wall_seconds"]:
         raise ValueError("per-pair time exceeds combined wall bound")
@@ -367,6 +367,7 @@ def _batch(request, out):
                 "scope": "development only; not unseen generalization",
                 "runs": len(metrics),
                 "charged_steps": used,
+                "eligibility_budget_semantics": "existing kernel checks wall time; eligibility assignments are not charged as states/transitions",
                 "strata": grouped,
                 "equal_work_vs_greedy_a": mc.equal_work(metrics),
                 "supervision": reports,

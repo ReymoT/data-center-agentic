@@ -10,9 +10,11 @@ are unchanged. This completes implementation/offline preparation, not a study ru
 Only the existing received 120-case development pair is allowed, by fixed raw hashes.
 The order is the recorded case order, then rules-v1 / Greedy A / Greedy B: 360 runs.
 There is no generator/final-seed operation, arbitrary module/command, model, training,
-retry or warmup. A shared budget charges execution, replay and oracle eligibility work.
-Execution plus full replay alone can charge 21,600 states/transitions; oracle work is
-additional. Old 10,000-step authorization and consumed IDs cannot be reused.
+retry or warmup. A shared budget charges execution and replay states/transitions.
+Full execution plus replay can charge 21,600 of each. The existing independent
+kernel checks the same wall deadline during eligibility enumeration but does not
+charge those assignments as states/transitions: counters are not total CPU work.
+Old 10,000-step authorization and consumed IDs cannot be reused.
 
 Each fixed contained pair worker uses the real common runner and independent
 artifact/replay checker. It stops on FAIL or INCOMPLETE, source/input drift, malformed
