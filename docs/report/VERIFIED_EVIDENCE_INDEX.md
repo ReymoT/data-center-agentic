@@ -39,6 +39,8 @@ held-out finding or grant publication rights for private artifacts.
 
 | E17 | [Partial RULE04 review](../handoffs/RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md), [original evidence](../evidence/rule04-dev-nov23/README.md), [reviewed metrics](../evidence/rule04-dev-nov23/authored-metrics-reviewed.json), [review receipt](../evidence/rule04-dev-nov23/manager-review-receipt.json) | Actual development pair/file hashes and read-only authored metric projection; independent accounting/metric receiving and unseen evaluation remain pending; producer reports are attributed |
 
+| E18 | [Demo package review](../handoffs/RULE07_PACKAGE_REVIEW_NOV24.md), [storyboard](../demo/RULE07_STORYBOARD.md), [offline page](../../ui/rule_demo.html) | First reviewable saved-evidence demo, directly corrected and browser-inspected; no new policy execution, independent accounting acceptance or unseen evaluation. Dedicated screenshots/recording and final package remain pending |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
