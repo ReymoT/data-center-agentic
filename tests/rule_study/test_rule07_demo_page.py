@@ -102,9 +102,9 @@ def test_metrics_panel_is_pending_without_a_record_and_never_shows_zero_savings(
             }
         ],
     }
-    path = tmp_path / "m.json"
-    path.write_text(json.dumps(record), "utf-8")
-    section = _section(core.render(core.load_inputs({}, metrics=path)), "metrics")
+    inputs = core.load_inputs({})
+    inputs["metrics"] = record
+    section = _section(core.render(inputs), "metrics")
     assert "unavailable: greedy_a_impact_not_positive" in section
     assert "(0.000)" not in section
 
@@ -200,3 +200,57 @@ def test_missing_workflow_figure_is_refused(tmp_path):
     empty.write_text("# nothing\n", "utf-8")
     with pytest.raises(ValueError, match="Figure 2"):
         core.load_inputs({"workflow": empty})
+
+
+@pytest.mark.parametrize(
+    "missing", ["B-progress-greedy_b/", "A-rules-v1/decisions/decision-29.json"]
+)
+def test_missing_saved_run_or_decision_is_refused(tmp_path, missing):
+    archive = tmp_path / "partial.tar.gz"
+    with (
+        tarfile.open(core.DEFAULTS["archive"], "r:gz") as src,
+        tarfile.open(archive, "w:gz") as dst,
+    ):
+        for member in src.getmembers():
+            if missing in member.name:
+                continue
+            dst.addfile(member, src.extractfile(member) if member.isfile() else None)
+    with pytest.raises(ValueError, match="incomplete"):
+        core.load_inputs({"archive": archive})
+
+
+def test_duplicate_archive_member_is_refused(tmp_path):
+    archive = _copy_archive(tmp_path, lambda name, data: data)
+    duplicate = tmp_path / "duplicate.tar.gz"
+    with tarfile.open(archive, "r:gz") as src, tarfile.open(duplicate, "w:gz") as dst:
+        for member in src.getmembers():
+            dst.addfile(member, src.extractfile(member) if member.isfile() else None)
+            if member.name.endswith("A-rules-v1/result.json"):
+                dst.addfile(member, src.extractfile(member))
+    with pytest.raises(ValueError, match="duplicate"):
+        core.load_inputs({"archive": duplicate})
+
+
+def test_tampered_metrics_are_refused_before_rendering(tmp_path):
+    for name in (
+        core.DEFAULT_METRICS.name,
+        "manager-review-receipt.json",
+        "REVIEWED_SHA256SUMS.txt",
+    ):
+        shutil.copyfile(core.DEFAULT_METRICS.parent / name, tmp_path / name)
+    metric = tmp_path / core.DEFAULT_METRICS.name
+    metric.write_bytes(metric.read_bytes().replace(b"12000", b"99000"))
+    with pytest.raises(ValueError, match="checksum"):
+        core.load_inputs({}, metrics=metric)
+
+
+def test_metrics_without_review_receipt_are_refused(tmp_path):
+    metric = tmp_path / "unreviewed.json"
+    metric.write_text(json.dumps({"runs": [], "equal_work_vs_greedy_a": []}), "utf-8")
+    with pytest.raises(OSError):
+        core.load_inputs({}, metrics=metric)
+
+
+def test_portable_page_does_not_claim_markdown_is_a_rendered_diagram(page):
+    assert "Rendered diagram:" not in page
+    assert "../docs/report/RULE05_WORKFLOW_DIAGRAMS.md" not in page

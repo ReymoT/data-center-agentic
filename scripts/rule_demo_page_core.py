@@ -71,7 +71,10 @@ def _read_sums(path: Path) -> dict[str, str]:
     for line in Path(path).read_text(encoding="utf-8").splitlines():
         if line.strip():
             digest, name = line.split(None, 1)
-            sums[name.strip()] = digest
+            name = name.strip()
+            if name in sums or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                raise ValueError("duplicate or malformed checksum entry")
+            sums[name] = digest
     return sums
 
 
@@ -79,6 +82,7 @@ def load_authored(archive: Path, sums_path: Path) -> dict[tuple[str, str], dict]
     """Read case/result/decision JSON for each authored run, verifying every member read."""
     sums = _read_sums(sums_path)
     runs: dict[tuple[str, str], dict] = {}
+    seen = set()
     with tarfile.open(archive, "r:gz") as tar:
         for member in tar.getmembers():
             parts = member.name.split("/")
@@ -89,6 +93,9 @@ def load_authored(archive: Path, sums_path: Path) -> dict[tuple[str, str], dict]
                 r"decisions/decision-\d\d\.json", leaf
             ):
                 continue
+            if member.name in seen:
+                raise ValueError(f"{member.name}: duplicate archive member")
+            seen.add(member.name)
             if not member.isfile() or member.size > MAX_MEMBER_BYTES:
                 raise ValueError(f"{member.name}: not a bounded regular file")
             data = tar.extractfile(member).read()
@@ -101,6 +108,8 @@ def load_authored(archive: Path, sums_path: Path) -> dict[tuple[str, str], dict]
             run = runs.setdefault((case_id, policy), {"decisions": {}})
             record = json.load(io.BytesIO(data))
             if leaf.startswith("decisions/"):
+                if record["decision_index"] != int(leaf[-7:-5]):
+                    raise ValueError(f"{member.name}: decision index differs from filename")
                 run["decisions"][record["decision_index"]] = record
             else:
                 run[leaf.removesuffix(".json")] = record
@@ -109,8 +118,19 @@ def load_authored(archive: Path, sums_path: Path) -> dict[tuple[str, str], dict]
             raise ValueError(f"{key}: incomplete run in archive")
         if run["result"]["policy_id"] != key[1] or run["result"]["case_id"] != key[0]:
             raise ValueError(f"{key}: result identity differs from its folder")
-    if not runs:
-        raise ValueError("no authored runs found")
+        if run["case"]["case_id"] != key[0] or set(run["decisions"]) != set(range(30)):
+            raise ValueError(f"{key}: incomplete or mismatched 30-decision trace")
+        if run["result"]["status"] != "complete":
+            raise ValueError(f"{key}: incomplete result")
+        for index, record in run["decisions"].items():
+            if (record["case_id"], record["policy_id"]) != key:
+                raise ValueError(f"{key}: decision identity differs from its folder")
+            digest = sums[f"authored/{key[1]}/{key[0]}-{key[1]}/decisions/decision-{index:02}.json"]
+            if run["result"]["decision_sha256s"][index] != digest:
+                raise ValueError(f"{key}: result decision commitment differs")
+    expected_runs = {(c, p) for c in CASES for p in POLICIES if c != "B-fault" or p == "rules-v1"}
+    if set(runs) != expected_runs:
+        raise ValueError("incomplete or unexpected authored case-policy coverage")
     return runs
 
 
@@ -189,13 +209,27 @@ def load_inputs(paths: Mapping[str, Path], metrics: Path | None = None) -> dict:
     }
     used = list(DEFAULTS)
     if metrics is not None:
-        inputs["metrics"] = json.loads(Path(metrics).read_text(encoding="utf-8"))
-        paths["metrics"] = Path(metrics)
+        metrics = Path(metrics)
+        receipt = metrics.parent / "manager-review-receipt.json"
+        checksums = metrics.parent / "REVIEWED_SHA256SUMS.txt"
+        sums = _read_sums(checksums)
+        for artifact in (metrics, receipt):
+            if sha256_file(artifact) != sums.get(artifact.name):
+                raise ValueError("metrics or review receipt checksum mismatch")
+        reviewed = json.loads(receipt.read_text(encoding="utf-8"))
+        if (
+            reviewed["reviewed_metrics_sha256"] != sha256_file(metrics)
+            or reviewed["authored_input_archive_sha256"] != sha256_file(paths["archive"])
+            or reviewed["authored_producer_commit"]
+            != inputs["baseline"]["new_authored_producer_commit"]
+        ):
+            raise ValueError("metrics receipt does not bind these authored inputs")
+        inputs["metrics"] = json.loads(metrics.read_text(encoding="utf-8"))
+        paths["metrics"] = metrics
         used.append("metrics")
-        receipt = Path(metrics).parent / "manager-review-receipt.json"
-        if receipt.is_file():
-            paths["metrics_review_receipt"] = receipt
-            used.append("metrics_review_receipt")
+        paths["metrics_review_receipt"] = receipt
+        paths["metrics_checksums"] = checksums
+        used.extend(("metrics_review_receipt", "metrics_checksums"))
     for key in used:
         path = paths[key]
         try:
@@ -394,7 +428,7 @@ def metrics_panel(inputs: Mapping) -> str:
     )
     return (
         '<section id="metrics"><h2>Metrics on the authored runs</h2>'
-        f"<p>{badge('OBSERVED', e(metrics['label']))} {badge('PENDING', 'independent metric receiving')}</p>"
+        f"<p>{badge('OBSERVED', metrics['label'])} {badge('PENDING', 'independent metric receiving')}</p>"
         "<p>Artificial score-kWh (power × 1 h × PUE 1.0 × score weight): not g/kWh, not emissions. "
         "Four authored cases are illustrations, not unseen-case performance.</p>"
         "<table><tr><th>Case</th><th>Policy</th><th>Completed</th><th>Missed</th>"
@@ -414,8 +448,8 @@ def workflow_panel(figure: Mapping) -> str:
     return (
         '<section id="workflow"><h2>Workflow</h2>'
         f"<p>{badge('EXPECTED', 'Reimo, RULE-05 ' + figure['title'] + '; design, not a result')}</p>"
-        '<p>Rendered diagram: <a href="../docs/report/RULE05_WORKFLOW_DIAGRAMS.md">'
-        "RULE05_WORKFLOW_DIAGRAMS.md</a>. Nodes and transitions below are read from its "
+        "<p>Editable diagram source in the repository: "
+        "<code>docs/report/RULE05_WORKFLOW_DIAGRAMS.md</code>. Nodes and transitions below are read from its "
         "Mermaid source.</p>"
         f"<ol>{steps}</ol><table><tr><th>From</th><th>To</th><th>When</th></tr>{edges}</table>"
         f"<p><i>Caption:</i> {e(figure['caption'])}</p></section>"
@@ -429,6 +463,7 @@ body{font:15px/1.5 system-ui,sans-serif;color:var(--fg);background:var(--bg);max
 h1{font-size:1.6em}h2{border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:1.8em}
 table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.92em}
 td,th{border:1px solid var(--line);padding:4px 6px;text-align:left;vertical-align:top}
+td,code{overflow-wrap:anywhere}table{table-layout:fixed}
 .run{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:10px 0}
 svg{width:100%;max-width:520px;height:auto}.bg{fill:#9aa4ae}.cap{stroke:#c0392b;stroke-dasharray:6 4}
 .lbl{fill:#fff;font-size:11px}.axis,.score{fill:var(--muted);font-size:11px}

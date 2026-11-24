@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "126c39e1df9d93d3364dc5fc2c1d6828c1041e8b1a8726e7c31dd9326e70846b",
+      "sha256": "425f9dac422de0ffc84c52b54f7e8b34705a1023d54279f688f5a93bde722e24",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -931,6 +931,36 @@
     {
       "path": "docs/handoffs/RULE05_DEMO_HANDOFF.md",
       "sha256": "1d8c023fc38478a69ae72785fb8ddfa8f93d72f83914518bbb8ba1ac06db73b5",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/demo/RULE07_STORYBOARD.md",
+      "sha256": "170d8b73b6a4d8a7da977df9970d926b34dcaf071c7793a14774da88c7547a44",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/build_rule_demo_page.py",
+      "sha256": "65434eb1c867f3130f60ffc24b10fa9e6541116ff1ed94344e2aa4aa5c4240e7",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/rule_demo_page_core.py",
+      "sha256": "83c353ada2d0e54f2ff2c01ce657f6efb17e015bd3d0ecfbd60751bbcb54fa4e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/rule_study/test_rule07_demo_page.py",
+      "sha256": "896e604130718916c12b5e962c9942afd3f282998269d7446cb473719d944c32",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "ui/rule_demo.html",
+      "sha256": "f3406a499902ff374f4fb8fba83d62d420acf1ddca2e910cd038aa768609a821",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE07_PACKAGE_REVIEW_NOV24.md",
+      "sha256": "b549bd39828b923272e81b140274c832a801fbca4079dd39fa7ea7e7f9e5fea3",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

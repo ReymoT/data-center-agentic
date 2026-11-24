@@ -28,7 +28,8 @@ Every panel on the page carries one label. Keep them when presenting:
    starts only, or refusal/drain with no new starts → trace → separate independent
    replay. The page lists its nodes, transitions and caption read from the Mermaid
    source in [RULE05_WORKFLOW_DIAGRAMS.md](../report/RULE05_WORKFLOW_DIAGRAMS.md);
-   show the rendered figure there. Use Figure 1 from the same file for the introduction.
+   the portable page includes its node/transition table. The Markdown file is editable
+   diagram source, not a bundled rendered image. Use Figure 1 from the same file for the introduction.
 3. **Case A** (Expected, then Observed). Both jobs fit 60 kW at slot 0, so this is a
    timing choice, not a capacity problem. rules-v1 and Greedy B start J2 now and J1 at
    slot 1 (score 100 instead of 300); Greedy A starts both at once. Say: this delayed
@@ -74,6 +75,14 @@ By default the metrics panel reads the reviewed records merged in #271,
 `6d6b5630…8810dd8`, matching `REVIEWED_SHA256SUMS.txt`). `--no-metrics` shows that
 panel as Pending. The page also lists the hash of `manager-review-receipt.json`. The original `authored-first-metrics.json` stays as historical producer output and is not the comparison shown. The output file is never overwritten.
 
+Supplying `--metrics` requires the sibling `REVIEWED_SHA256SUMS.txt` and
+`manager-review-receipt.json`. The builder checks both digests and the receipt's
+authored-archive/producer binding before displaying metrics. This is integrity and
+recorded review binding, not independent accounting acceptance. All ten expected
+case-policy runs and every committed decision 0–29 must be present; missing or
+duplicate records refuse the build. Raw file hashes describe the checkout used
+for the build; they do not authenticate their own source.
+
 Every archive member the page reads is checked against `AUTHORED_SHA256SUMS.txt`;
 a mismatch refuses the build. Inputs and their hashes are listed at the end of the page.
 
@@ -86,12 +95,15 @@ python -m dc_sustainability.rule_demo --list
 python -m dc_sustainability.rule_demo --replay <supplied-saved-demo-directory>
 ```
 
-Ved to verify these commands against the corrected merged source before the demo.
+Matty verified `--list` and inspected the read-only `--replay` argument/dispatch against
+the current source during this review. Existing replay fixture tests cover the wiring;
+no saved scientific replay was dispatched to rebuild or inspect this static page.
 His older saved archive (`rule07-traces-a7a71d0`) is historical evidence bound to an
 older producer; the page uses the Nov 23 authored traces (`dbb8e6f`) instead.
 
 ## Still to do
 
-- Screenshots of the page for the report and a fallback recording. The local browser
-  preview could not be opened during this build, so they are not included yet.
+- Matty visually inspected the rebuilt page in Chrome on November 24, including
+  scenario A and the expanded B-fault arithmetic/refusal table. The page displays correctly.
+  Dedicated report screenshots and a fallback recording are not bundled yet.
 - No development-set or final-set results exist; they need separate authorization.
