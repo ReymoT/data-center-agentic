@@ -183,7 +183,7 @@
     "independent_accounting_metrics": "ACCEPTED_SCOPED_NISHA_COMMENT_7121894902",
     "whole_protocol_input_isolation_freeze": "PROTOCOL_FROZEN_FINAL_ISOLATION_NOT_RUN",
     "fixed_360_run_dispatch_backend": "IMPLEMENTED_OFFLINE_PREPARATION_PENDING_MERGED_SOURCE_AND_FRESH_APPROVAL",
-    "new_exact_resource_envelope": "PROPOSED_PENDING_FRESH_EXACT_APPROVAL",
+    "new_exact_resource_envelope": "REVIEW_FINDINGS_FIXED_FRESH_REQUEST_AND_INFORMED_APPROVAL_REQUIRED",
     "fresh_single_use_authorization": "ABSENT"
   },
   "authorization_id": null,
@@ -200,7 +200,7 @@
   "dispatcher_preparation": "scripts/prepare_rule_study_rollout.py",
   "dispatcher_scope": "120 existing development cases only; no final generation",
   "protocol_freeze_record": {
-    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24.json",
-    "sha256_lf": "e54dbe75a6e69479d1a2542ad34afb901e185b5335ede909bde7b4e757aeec70"
+    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json",
+    "sha256_lf": "1eeaa43b9de520e15ac6ed1370a871596f6a8e0eabd9d720a8466548bcf7df39"
   }
 }

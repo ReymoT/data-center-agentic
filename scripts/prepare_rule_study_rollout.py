@@ -170,19 +170,24 @@ def _write(path, value):
     with safe_path(path).open("x", encoding="utf-8", newline="\n") as f:
         json.dump(value, f, indent=2, sort_keys=True, allow_nan=False)
         f.write("\n")
+        f.flush()
+        os.fsync(f.fileno())
 
 
-def _command(path):
+def _command(path, expected_hash, *, deadline=None):
+    prefix = ""
+    if deadline is not None:
+        prefix = "import os; os.environ['RULE04_WORKER_DEADLINE']=" + repr(str(deadline)) + ";\n"
     return [
         sys.executable,
         "-B",
         "-X",
         "utf8",
         "-c",
-        BOOTSTRAP,
+        prefix + BOOTSTRAP,
         str(ROOT),
         str(path),
-        pf.sha(pf.bounded_bytes(path)),
+        expected_hash,
     ]
 
 
@@ -278,8 +283,6 @@ def execute_prepared(request):
     mode = os.environ.get("RULE04_WORKER_PAIR")
     # Pair selection is supplied by fixed parent code, never an arbitrary command.
     if mode is not None:
-        if set(request) != FIELDS or request["kind"] != KIND or assess_after_run(request):
-            raise ValueError("pair source/input request refused")
         validate_limits(request["limits"])
         case_id, policy, states, transitions = json.loads(mode)
         if case_id not in pair()[2] or policy not in POLICIES:
@@ -291,9 +294,27 @@ def execute_prepared(request):
             raise ValueError("invalid remaining pair budget")
         directory = out / f"{case_id}-{policy}"
         directory.mkdir(exist_ok=False)
-        _one_pair(
-            request, case_id, policy, directory, {"states": states, "transitions": transitions}
-        )
+        try:
+            if set(request) != FIELDS or request["kind"] != KIND or assess_after_run(request):
+                raise ValueError("pair source/input request refused")
+            _one_pair(
+                request, case_id, policy, directory, {"states": states, "transitions": transitions}
+            )
+        except BaseException as exc:
+            _write(
+                directory / "pair-failure.json",
+                {
+                    "status": "FAIL_OR_INCOMPLETE",
+                    "case_id": case_id,
+                    "policy_id": policy,
+                    "exception": type(exc).__name__,
+                    "message": str(exc)[:2000],
+                    "reserved_remaining_budget": {"states": states, "transitions": transitions},
+                    "charged_steps": "unknown if execution did not return; bounded by reserved remaining budget",
+                    "retry_allowed": False,
+                },
+            )
+            raise
         return 0
     if assess(request)["problems"]:
         raise ValueError("rollout preparation blocked after containment")
@@ -307,16 +328,25 @@ def _batch(request, out):
     out.mkdir(exist_ok=False)
     started = monotonic()
     limits = request["limits"]
+    deadline = min(
+        started + limits["wall_seconds"],
+        float(os.environ.get("RULE04_WORKER_DEADLINE", started + limits["wall_seconds"])),
+    )
+    # Leave time for pair cleanup and a durable failure summary before the outer kill.
+    write_margin = 1
     used = {"states": 0, "transitions": 0}
     metrics, reports, control_signatures = [], [], {}
     try:
-        for case_id in pair()[2]:
+        case_file, _, parsed = pair()
+        strata = {c["case_id"]: c["stratum"] for c in case_file["cases"]}
+        for case_id in parsed:
             for policy in POLICIES:
                 remaining = {k: limits[k] - used[k] for k in used}
-                seconds = min(
-                    limits["case_policy_seconds"], limits["wall_seconds"] - (monotonic() - started)
-                )
-                if min(remaining.values()) <= 0 or seconds <= 0:
+                seconds = limits["case_policy_seconds"]
+                if (
+                    min(remaining.values()) <= 0
+                    or deadline - monotonic() < seconds + 3 + write_margin
+                ):
                     raise ValueError("combined resource budget exhausted")
                 task = out / "pair-request.json"
                 # One immutable request per pair; no overwrites or retries.
@@ -325,16 +355,20 @@ def _batch(request, out):
                 selector = json.dumps(
                     [case_id, policy, remaining["states"], remaining["transitions"]]
                 )
-                command = _command(task)
+                command = _command(task, pf.sha(pf.bounded_bytes(task)))
                 # Fixed selector bound in the child command, never inherited from the host.
                 command[5] = (
                     "import os; os.environ['RULE04_WORKER_PAIR']="
                     + repr(selector)
                     + ";\n"
-                    + BOOTSTRAP
+                    + command[5]
                 )
                 result = supervisor.supervise(
-                    command, seconds, output=out, limit_bytes=limits["output_bytes"], cwd=ROOT
+                    command,
+                    seconds,
+                    output=out / f"{case_id}-{policy}",
+                    limit_bytes=limits["output_bytes"],
+                    cwd=ROOT,
                 )
                 reports.append({"case_id": case_id, "policy_id": policy, "supervision": result})
                 if result["status"] != "succeeded" or not result["cleanup_verified"]:
@@ -346,16 +380,27 @@ def _batch(request, out):
                         raise ValueError("invalid resource counter")
                     used[k] += value
                 metrics.append(received["metric"])
-                if pair()[2][case_id].scores is None:
+                if parsed[case_id].scores is None:
                     signature = received["execution_signature"]
                     if case_id in control_signatures and control_signatures[case_id] != signature:
                         raise ValueError(
                             "missing-forecast control differs across policies; investigate, do not rank"
                         )
                     control_signatures[case_id] = signature
+                checkpoint = out / f"checkpoint-{len(metrics):04d}.json"
+                pending = checkpoint.with_suffix(".pending")
+                _write(
+                    pending,
+                    {
+                        "completed_runs": len(metrics),
+                        "charged_steps_completed_pairs_only": dict(used),
+                        "last_completed_pair": {"case_id": case_id, "policy_id": policy},
+                        "last_supervision": result,
+                    },
+                )
+                pending.replace(checkpoint)
         if assess_after_run(request):
             raise ValueError("source/input drift after batch")
-        strata = {c["case_id"]: c["stratum"] for c in pair()[0]["cases"]}
         grouped = {
             s: [dict(m, stratum=s) for m in metrics if strata[m["case_id"]] == s]
             for s in sorted(set(strata.values()))
@@ -369,7 +414,7 @@ def _batch(request, out):
                 "charged_steps": used,
                 "eligibility_budget_semantics": "existing kernel checks wall time; eligibility assignments are not charged as states/transitions",
                 "strata": grouped,
-                "equal_work_vs_greedy_a": mc.equal_work(metrics),
+                "equal_work_vs_greedy_a": comparison_rows(mc.equal_work(metrics), strata),
                 "supervision": reports,
                 "independent_person_receiving": "PENDING",
                 "final_cases_generated": 0,
@@ -382,6 +427,7 @@ def _batch(request, out):
             {
                 "status": "FAIL_OR_INCOMPLETE",
                 "exception": type(exc).__name__,
+                "message": str(exc)[:2000],
                 "completed_runs": len(metrics),
                 "charged_steps_completed_pairs_only": used,
                 "failed_pair_additional_work": "unknown if killed; bounded by remaining budget reserved for that pair",
@@ -403,6 +449,19 @@ def assess_after_run(request):
             for r, (_, d) in INPUTS.items()
         )
     )
+
+
+def comparison_rows(rows, strata):
+    return [
+        dict(
+            row,
+            stratum=strata[row["case_id"]],
+            comparison_role="control_not_ranking"
+            if strata[row["case_id"]] == "missing_forecast"
+            else "development_comparison",
+        )
+        for row in rows
+    ]
 
 
 def dispatch_once(path, *, ledger, trusted_authorize=None):
@@ -439,8 +498,8 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         or ledger.is_relative_to(out)
     ):
         raise ValueError("canonical external one-use ledger and separate output required")
-    if "RULE04_WORKER_PAIR" in os.environ:
-        raise ValueError("inherited pair selector refused")
+    if any(k in os.environ for k in ("RULE04_WORKER_PAIR", "RULE04_WORKER_DEADLINE")):
+        raise ValueError("inherited pair selector or deadline refused")
     ledger.mkdir(exist_ok=True)
     entry = ledger / (pf.sha(subject["authorization_id"].encode()) + ".json")
     if entry.with_suffix(".result.json").exists():
@@ -458,12 +517,14 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
             raise ValueError("request/source/input drift after ID reservation")
         if worker.environment_evidence() != environment:
             raise ValueError("environment changed after reservation")
+        deadline = monotonic() + request["limits"]["wall_seconds"]
         result = supervisor.supervise(
-            _command(path),
+            _command(path, subject["request_sha256"], deadline=deadline),
             request["limits"]["wall_seconds"],
             output=out,
             limit_bytes=request["limits"]["output_bytes"],
             cwd=ROOT,
+            deadline=deadline,
         )
         result["retry_allowed"] = False
         if not result["cleanup_verified"]:
@@ -472,13 +533,55 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
             report = read_json(out / "rollout-report.json")
             if report["status"] != "PASS" or report["runs"] != 360 or assess_after_run(request):
                 result["status"] = "failed_result_or_drift"
+        if result["status"] != "succeeded":
+            _supervisor_failure(out, result)
         return result
     except BaseException as exc:
         result["status"] = "failed_after_reservation"
         result["exception"] = type(exc).__name__
+        result["message"] = str(exc)[:2000]
         raise
     finally:
         _write(entry.with_suffix(".result.json"), result)
+
+
+def _supervisor_failure(out, result):
+    """Host fallback after child cleanup, including a hard kill before its summary."""
+    out = safe_path(out)
+    if not out.exists():
+        return
+    target = out / "rollout-failure.json"
+    if target.exists():
+        try:
+            read_json(target)
+        except (ValueError, UnicodeError):
+            # Preserve a child summary truncated by termination, but retain a
+            # separate complete host record rather than treating existence as PASS.
+            target = out / "rollout-supervisor-failure.json"
+        else:
+            return
+    checkpoints = sorted(out.glob("checkpoint-*.json"))
+    if len(checkpoints) > 360:
+        raise ValueError("excessive checkpoint inventory")
+    latest = (
+        read_json(checkpoints[-1])
+        if checkpoints
+        else {
+            "completed_runs": 0,
+            "charged_steps_completed_pairs_only": {"states": 0, "transitions": 0},
+        }
+    )
+    _write(
+        target,
+        dict(
+            latest,
+            status="FAIL_OR_INCOMPLETE",
+            summary_origin="host_after_supervisor_stop",
+            supervision=result,
+            retry_allowed=False,
+            failed_pair_additional_work="unknown if killed; bounded by remaining budget reserved for that pair",
+        ),
+    )
 
 
 def main(argv=None):

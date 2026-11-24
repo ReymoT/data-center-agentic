@@ -45,6 +45,8 @@ held-out finding or grant publication rights for private artifacts.
 
 | E21 | [Protocol freeze review](../rule_study/RULE04_FREEZE_REVIEW_NOV24.md), [record](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24.json), [assembly review](RULE04_ASSEMBLY_REVIEW_NOV24.md) | Software/design and retained development inputs/metrics frozen; final isolation untested, exact resource/run approval absent; no new execution |
 
+| E22 | [AI-assisted review fixes](../rule_study/RULE04_AI_REVIEW_FIXES_NOV24.md), [revised controller freeze](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json) | Failure/hash/monitoring fixes and ordinary native fixture measurements; no batch execution or full-batch capacity guarantee |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped

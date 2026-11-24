@@ -1,0 +1,33 @@
+{
+  "kind": "rule04_native_fixture_resource_sample_v1",
+  "status": "ORDINARY_FIXTURES_NOT_STUDY_RESULTS",
+  "focused_tests_passed": 52,
+  "host": "Windows Python 3.12",
+  "samples": [
+    {
+      "jobs": 2,
+      "elapsed_seconds": 4.359000000000151,
+      "output_bytes": 546842,
+      "scope": "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
+    },
+    {
+      "jobs": 3,
+      "elapsed_seconds": 3.875,
+      "output_bytes": 554236,
+      "scope": "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
+    },
+    {
+      "jobs": 4,
+      "elapsed_seconds": 3.9379999999998745,
+      "output_bytes": 561593,
+      "scope": "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
+    }
+  ],
+  "limitations": [
+    "Not the 120-case development batch",
+    "Does not include production bootstrap hash checks or later full-tree inventory costs",
+    "Small authored inputs do not bound all development-case oracle searches",
+    "No proof that 360 runs fit 900 seconds or 256 MiB",
+    "No real authorization ID consumed; fixture pins explicitly mocked clean/merged, not accepted scientific provenance"
+  ]
+}
