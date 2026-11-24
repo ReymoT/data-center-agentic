@@ -104,6 +104,8 @@ ResourceAdvisor; E1]
 
 ## 4. System architecture and algorithms
 
+The current focused-study method is documented in [Reimo’s RULE-05 methods](RULE05_FOCUSED_STUDY_METHODS.md), with [editable research/execution figures](RULE05_WORKFLOW_DIAGRAMS.md) and a [demo-owner handoff](../handoffs/RULE05_DEMO_HANDOFF.md). These cover accepted R01–R09 design, merged scheduler/control behavior, independent verification scope and prospective matched synthetic accounting. Historical architecture below remains context. Required bounded verification is now complete and independently received within scope (#270); partial authored metrics are available (#271), while independent accounting acceptance and full unseen evaluation remain pending.
+
 ![Final scheduling design; implementation/acceptance status is stated separately](../../architecture/architecture.png)
 
 ### 4.1 Facts, ontology and retrieval
@@ -324,7 +326,7 @@ separate when choosing final figures. [E3, E10]
 | --- | --- | --- |
 | Edison Perez Cash | Classical/learned policies and impact; public model/development-metric records | R03 methods/contribution handoff received (#230); P07 and final acceptance pending |
 | Matty Anderson and Nisha Mahadev Kolekar | Shared research comparison/evaluation; Matty adapter, graph workflow integration, checker/controller, CI and release preparation; Nisha Plain/explanation, independent evaluator and reliability/report assembly | Distinct detailed ownership retained; final R04/R05/R06 and held-out review remain pending |
-| Reimo Tamme | Data/scenario/simulator development and source evidence records | R01 reconstructed by Matty; personal attestation not invented; source limits retained |
+| Reimo Tamme | D01–D05 data/scenario/source documentation, S01 simulator and S02 accounting integration; RULE-05 focused methods and editable workflows | Historical R01 retained through #237; focused methods/diagrams/demo handoff supplied for #243; final report/demo integration remains pending |
 | Ved Patil | Contracts, graph/retrieval, reference methods and reproduction work | R02 methods reconstructed/received (#235); personal contribution attestation and O04/I03 pending |
 
 Nisha's [repository contribution statement](NISHA_CONTRIBUTIONS.md) is received
@@ -338,7 +340,7 @@ Ved's originally empty R02 file is now repaired through #235 and available for
 assembly. Its evidence-based responsibility summary is not an invented personal
 attestation. Matty reconstructed [R01 data/simulator methods](R01_MANAGER_RECONSTRUCTION_NOV18.md)
 from retained implementation and evidence without waiting for another Reimo handoff.
-This is not a personal contribution attestation. Reimo's November 18 source-status
+Reimo subsequently supplied the retained [R01 owner methods](R01_DATA_AND_SIMULATOR_METHODS.md) through #237 and the [RULE-05 adaptation](RULE05_FOCUSED_STUDY_METHODS.md) through #243. The reconstruction remains historical, separate from that owner contribution. Reimo's November 18 source-status
 reply is received; B1-B3 remain unresolved and B4 provisional. New source processing
 is discontinued for the active delivery; its limitations remain explicit. [E11]
 
