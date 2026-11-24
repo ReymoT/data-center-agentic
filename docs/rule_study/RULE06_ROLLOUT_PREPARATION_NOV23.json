@@ -181,9 +181,9 @@
   ],
   "gates": {
     "independent_accounting_metrics": "ACCEPTED_SCOPED_NISHA_COMMENT_7121894902",
-    "whole_protocol_input_isolation_freeze": "PENDING",
+    "whole_protocol_input_isolation_freeze": "PROTOCOL_FROZEN_FINAL_ISOLATION_NOT_RUN",
     "fixed_360_run_dispatch_backend": "IMPLEMENTED_OFFLINE_PREPARATION_PENDING_MERGED_SOURCE_AND_FRESH_APPROVAL",
-    "new_exact_resource_envelope": "NOT_APPROVED",
+    "new_exact_resource_envelope": "PROPOSED_PENDING_FRESH_EXACT_APPROVAL",
     "fresh_single_use_authorization": "ABSENT"
   },
   "authorization_id": null,
@@ -198,5 +198,9 @@
   "verification_scope": "Accepted RULE03 component baseline only; not whole-study freeze or rollout approval",
   "readiness_update_date_arizona": "2026-11-24",
   "dispatcher_preparation": "scripts/prepare_rule_study_rollout.py",
-  "dispatcher_scope": "120 existing development cases only; no final generation"
+  "dispatcher_scope": "120 existing development cases only; no final generation",
+  "protocol_freeze_record": {
+    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24.json",
+    "sha256_lf": "e54dbe75a6e69479d1a2542ad34afb901e185b5335ede909bde7b4e757aeec70"
+  }
 }

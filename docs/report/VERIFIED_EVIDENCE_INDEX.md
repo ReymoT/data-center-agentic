@@ -43,6 +43,8 @@ held-out finding or grant publication rights for private artifacts.
 | E19 | [Accepted accounting receiving](../handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md), [original Nisha reply](../evidence/rule04-nov24-receiving/nisha-source.txt), [receipt](../evidence/rule04-nov24-receiving/receiving-receipt.json) | Accepted retained development pair and ten authored metric illustrations; whole freeze/new-case evaluation/reproduction remain pending |
 | E20 | [Development dispatcher preparation](../rule_study/RULE04_DISPATCH_PREPARATION_NOV24.md) | Offline fixed-worker/containment tests and preparation only; exact limits, whole freeze and fresh authority remain absent |
 
+| E21 | [Protocol freeze review](../rule_study/RULE04_FREEZE_REVIEW_NOV24.md), [record](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24.json), [assembly review](RULE04_ASSEMBLY_REVIEW_NOV24.md) | Software/design and retained development inputs/metrics frozen; final isolation untested, exact resource/run approval absent; no new execution |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
