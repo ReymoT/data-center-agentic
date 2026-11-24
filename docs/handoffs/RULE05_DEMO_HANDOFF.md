@@ -8,7 +8,8 @@ and package; Ved owns executable wiring/replay. Reimo supplies methods/figures.
 Use [docs/report/RULE05_FOCUSED_STUDY_METHODS.md](../report/RULE05_FOCUSED_STUDY_METHODS.md)
 for narration, [docs/report/RULE05_WORKFLOW_DIAGRAMS.md](../report/RULE05_WORKFLOW_DIAGRAMS.md)
 Figure 1 for the research introduction and Figure 2 for the check/fallback/execution
-walkthrough. Both are editable Mermaid. Their captions and status labels travel
+walkthrough (rules-v1 candidate/fallback path; baseline routing is described in
+the caption). Both are editable Mermaid. Their captions and status labels travel
 with any export. Report links are in the working draft, README and evidence index.
 
 | Scene | Supported interpretation and caption limit |
@@ -63,3 +64,9 @@ supports the displayed point. No fake zero, trace, screenshot or frontier.
 
 Review handoff: @MattyAnd @nkolekar-nk @epez7 @vedp3705; use these exact paths. No teammate receipt or approval is implied
 by this prepared handoff. RULE-07 production remains with Edison and Ved.
+
+Manager review: resource ceilings are per exact approved attempt with cumulative
+charged-work reporting; the execution figure includes the post-recheck state and
+snapshot read and is explicitly scoped to rules-v1 fallback routing. HTML line
+breaks replace literal backslash-n labels. Mermaid source and local links are
+checked; final exported-figure layout remains report/demo assembly work.

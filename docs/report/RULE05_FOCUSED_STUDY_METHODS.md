@@ -92,8 +92,11 @@ The [common runner](../../dc_sustainability/rule_study/runner.py) applies the un
 Greedy A and Greedy B. A failed rules proposal or R08 forecast condition attempts
 unchanged [Greedy A](../../dc_sustainability/policies/greedy.py), which must also pass.
 The runner's trusted control path rereads state/snapshot, performs a latest-state
-recheck and mints `ApprovedActions` only for an actually passing plan. Only starts
-at the current slot execute in the [simulator](../../dc_sustainability/simulator/core.py).
+production recheck, then reads state/snapshot again. Only unchanged reads and a
+passing recheck allow it to mint `ApprovedActions`. A changed live state stops
+without stepping; a changed snapshot or failed recheck refuses new starts and
+drains. Only current-slot starts execute in the
+[simulator](../../dc_sustainability/simulator/core.py).
 Without approval, `step(None)` starts nothing and advances running work and time
 once. Changed live state or rejected rules input stops without another step;
 indeterminate effects require reconciliation, not automatic retry.
@@ -135,16 +138,22 @@ power {10,20}, deadline {1,2}, capacity/background 30/10 kW and four two-slot sc
 profiles from {100,300}. The optional 1,024-input domain adds arrival {0,1} and
 flexibility {false,true}. It includes the primary 64; never pool these as 1,088
 unique inputs. Primary coverage alone does not exhaustively cover delayed arrivals
-or nonflexibility. Primary runs first. The combined prospective allowance across
-methods/domains is 600 seconds, 10,000 states and 50,000 transitions; a ceiling hit
-is INCOMPLETE. Actual method/domain counts and overlap must accompany findings.
+or nonflexibility. Primary runs first. Within each exact authorized attempt,
+execution and replay share a combined allowance of 600 seconds, 10,000 states and
+50,000 transitions; a ceiling hit is INCOMPLETE. A continuation needs fresh exact
+authorization, preserves the original consumed ID/result and reports cumulative
+work instead of silently resetting counters. These are charged steps, not a
+count of unique physical states. Actual method/domain counts and overlap must
+accompany findings.
 
-The merged verifier documentation reports specification-oracle facts: 52 of 64
+The historical verifier documentation reports specification-oracle counts: 52 of 64
 primary inputs jointly feasible and 12 infeasible, with zero cross-check mismatches.
 Its optional-domain facts are 420 feasible/604 infeasible with zero mismatches;
 these are oracle facts, not rules-v1 coverage or progress results. The reported
 6,389 states/5,297 transitions cover all three oracle domains including authored
-cases, not a current-policy verification run. Deliberately broken fixture policies
+cases, not a current-policy verification run or new work in this methods handoff.
+These are attributed oracle/harness figures; accepted actual policy coverage is
+recorded separately below. Deliberately broken fixture policies
 exercise counterexample detection; they are not counterexamples to rules-v1.
 
 The [historical receipt](../handoffs/RULE02_EVIDENCE_RECEIVING_NOV22.md)

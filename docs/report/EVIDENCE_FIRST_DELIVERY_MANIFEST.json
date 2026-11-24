@@ -920,17 +920,17 @@
     },
     {
       "path": "docs/report/RULE05_FOCUSED_STUDY_METHODS.md",
-      "sha256": "57ee3d49627fbff6b98a5ebe4c933318223d2e473e07057d6031e0e68c10f96e",
+      "sha256": "e197f391e24a97534d4d65381b7d6367f7625a96fd17996e91853a32afba4f76",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/RULE05_WORKFLOW_DIAGRAMS.md",
-      "sha256": "a4fff7ce6ea226b402e0acd8ce61fb2a339e9473315453e980ac29f40c572d55",
+      "sha256": "1db849246f49c8e7574f68f0b84cdf1340f0cac568f28f40ccbd8fae87a7b771",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/handoffs/RULE05_DEMO_HANDOFF.md",
-      "sha256": "9ca1e80e2a3345b85bf54b5f01177c0ec9d1e308fb131cd23b8d19e64d3fe8ab",
+      "sha256": "b1516a0e7232feab31d0a9d22685adfbb3519487a8399a3e68ac2352122a5ca5",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

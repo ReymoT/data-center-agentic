@@ -11,15 +11,16 @@ is a measured result. Export/layout in the final report remains the assembly own
 
 ```mermaid
 flowchart LR
-    E["Permitted public illustration + authored assumptions\nHistorical cb85 motivation; new A/B inputs"]
-    S["R01–R09 rule specification\nDesign accepted: RULE-01"]
-    R["Executable rules-v1 + checked runner\nImplemented on main: RULE-02"]
-    V["Independent safety / progress verification\n202 required traces fully replayed\nIndependent receiving accepted within scope"]
-    T["Isolated synthetic comparison\nrules-v1 / Greedy A / Greedy B\nDevelopment pair + authored metrics available\nIndependent accounting / unseen evaluation pending"]
-    D["Report and two-scenario demo\nRULE-05 methods prepared\nFinal evidence / integrated demo pending"]
-    H["Original source-dependent Agent / Plain study\nHistorical evidence only; study unperformed"]
+    E["Permitted public illustration + authored assumptions<br/>Historical cb85 motivation; new A/B inputs"]
+    S["R01–R09 rule specification<br/>Design accepted: RULE-01"]
+    R["Executable rules-v1 + checked runner<br/>Implemented on main: RULE-02"]
+    V["Independent safety / progress verification<br/>202 required traces fully replayed<br/>Independent receiving accepted within scope"]
+    T["Isolated synthetic comparison<br/>rules-v1 / Greedy A / Greedy B<br/>Development pair + authored metrics available<br/>Independent accounting / unseen evaluation pending"]
+    D["Report and two-scenario demo<br/>RULE-05 methods prepared<br/>Final evidence / integrated demo pending"]
+    H["Original source-dependent Agent / Plain study<br/>Historical evidence only; study unperformed"]
     E --> S --> R --> V
-    V -->|"Freeze + exact authorization before final generation"| T
+    V -->|"Final comparison: whole-study freeze + exact authorization"| T
+    R -.->|"Development preparation / retained authored reporting"| T
     T -->|"Actual matched outputs only"| D
     R -->|"Methods and implementation evidence"| D
     H -.->|"Separate context; no matched new-study result"| D
@@ -31,27 +32,29 @@ required bounded verification is complete and independently received within scop
 unseen synthetic findings remain pending. Original INCOMPLETE and host FAIL records
 remain preserved. Primary S4 is NOT_RUN; all policies start zero jobs in the 12
 infeasible primary cases. Optional extended coverage was not run.
-The historical study is separate. Arrows describe dependencies, not completed gates.
+The historical study is separate. Development preparation and saved authored
+reporting can proceed before final evaluation; that arrow grants no execution
+authority. Arrows describe dependencies, not completed gates.
 RULE-04 generation/execution also requires the exact #244 freeze, receiving,
 containment and fresh bounded authorization. No such run is authorized by this figure.
 
-## Figure 2. Scheduling, execution and separate verification
+## Figure 2. Rules-v1 execution and separate verification
 
 ```mermaid
 flowchart TB
-    I["Visible arrived state + permitted forecasts / constraints\nImplemented input boundary"]
-    R["R01–R09 deterministic proposals\nImplemented: scheduler.py"]
-    C{"Production checker\nImplemented; unchanged"}
-    G["Greedy A fallback proposal\nImplemented; unchanged"]
+    I["Visible arrived state + permitted forecasts / constraints<br/>Implemented input boundary"]
+    R["R01–R09 deterministic proposals<br/>Implemented: scheduler.py"]
+    C{"Production checker<br/>Implemented; unchanged"}
+    G["Greedy A fallback proposal<br/>Implemented; unchanged"]
     GC{"Production check of fallback"}
-    L{"Trusted latest-state recheck\nState / snapshot stable?"}
-    A["Approved current-slot starts only\nFuture placements advisory; recompute later"]
-    N["No approved plan: refusal / drain\nNo new starts; time and running work advance"]
-    X["Malformed / out-of-scope rules input or changed live state\nStop without step; reconcile indeterminate effects"]
-    M["Simulator\nImplemented; no new starts in slots 24–29"]
-    T["Immutable trace publication\nStages, checks, state / snapshot, transitions, commitments"]
-    O["Independent oracle / checker\nSeparate standard-library predicates\nLegal-action graph for joint feasibility"]
-    P["Independent replay of actual policy path\nS1–S5 / eligible P1 / P2\nBounded replay complete; received within scope\nPrimary S4 NOT_RUN; 12 infeasible cases start zero"]
+    L{"Latest-state production recheck<br/>Read state + snapshot again<br/>Both reads stable?"}
+    A["Approved current-slot starts only<br/>Future placements advisory; recompute later"]
+    N["No approved plan: refusal / drain<br/>No new starts; time and running work advance"]
+    X["Malformed / out-of-scope rules input or changed live state<br/>Stop without step; reconcile indeterminate effects"]
+    M["Simulator<br/>Implemented; no new starts in slots 24–29"]
+    T["Immutable trace publication<br/>Stages, checks, state / snapshot, transitions, commitments"]
+    O["Independent oracle / checker<br/>Separate standard-library predicates<br/>Legal-action graph for joint feasibility"]
+    P["Independent replay of actual policy path<br/>S1–S5 / eligible P1 / P2<br/>Bounded replay complete; received within scope<br/>Primary S4 NOT_RUN; 12 infeasible cases start zero"]
     I --> R --> C
     R -->|"R08 forecast unavailable"| G
     R -->|"R01 / scope rejection"| X
@@ -69,8 +72,11 @@ flowchart TB
     T -.->|"Authenticated bindings required"| P
 ```
 
-Caption: the production checker gates execution and is not Nisha's independent
-oracle. The runner implements the trusted control path; approval applies only to
+Caption: this is the rules-v1 candidate/fallback path. The common runner also
+checks Greedy A/B proposals; it does not route every failed baseline check through
+another Greedy A attempt. Greedy B can choose Greedy A internally when its
+forecast is unusable. The production checker gates execution and is not Nisha's independent
+oracle. The runner rereads state/snapshot both before and after the recheck; approval applies only to
 current starts. Selected empty plans can pass as no-ops. Failed approval drains;
 out-of-scope rules input or changed live state instead stops without stepping.
 Records/hashes detect changes but do not authenticate their own source. The
