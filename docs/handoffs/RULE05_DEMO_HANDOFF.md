@@ -8,12 +8,13 @@ and package; Ved owns executable wiring/replay. Reimo supplies methods/figures.
 Use [docs/report/RULE05_FOCUSED_STUDY_METHODS.md](../report/RULE05_FOCUSED_STUDY_METHODS.md)
 for narration, [docs/report/RULE05_WORKFLOW_DIAGRAMS.md](../report/RULE05_WORKFLOW_DIAGRAMS.md)
 Figure 1 for the research introduction and Figure 2 for the check/fallback/execution
-walkthrough. Both are editable Mermaid. Their captions and status labels travel
+walkthrough (rules-v1 candidate/fallback path; baseline routing is described in
+the caption). Both are editable Mermaid. Their captions and status labels travel
 with any export. Report links are in the working draft, README and evidence index.
 
 | Scene | Supported interpretation and caption limit |
 | --- | --- |
-| A | Authored feasible case: expected J2 now, J1 at lower-score slot 1. A future selection is advisory; show actual current-slot execution and recorded turnaround/score separately. No measured trade-off or savings number is supplied by RULE-05. |
+| A | Authored feasible case: rules-v1 and Greedy B start J2 now and defer J1 to lower-score slot 1; Greedy A starts both at slot 0 in the received records. Future selections are advisory; show actual current-slot execution and recorded turnaround/score separately. RULE-05 supplies no new measured trade-off or savings result. |
 | B | Two rigid jobs jointly require 80 kW including 20 background against 60 kW. Each alone fits. Current main's unchanged abstention gate rejects the partial plan and fallback; retain blocked/no-start and eventual missed outcomes. Do not label a proposed single-job 50 kW load as an executed 80 kW violation, or claim successful fallback/progress. |
 | B-fault | Explicitly injected simultaneous invalid starts, not a natural rules-v1 output. Show proposal/check/fallback/execution separately; invalid starts must not execute. A blocked outcome is not completion. |
 | B-progress | Separate feasible subcase: J2 flexible, deadline 2; expected sequential J1 at 0/J2 at 1. Use actual replay evidence for a completion claim; it does not make impossible B a progress success. |
@@ -63,3 +64,9 @@ supports the displayed point. No fake zero, trace, screenshot or frontier.
 
 Review handoff: @MattyAnd @nkolekar-nk @epez7 @vedp3705; use these exact paths. No teammate receipt or approval is implied
 by this prepared handoff. RULE-07 production remains with Edison and Ved.
+
+Manager review: resource ceilings are per exact approved attempt with cumulative
+charged-work reporting; the execution figure includes the post-recheck state and
+snapshot read and is explicitly scoped to rules-v1 fallback routing. HTML line
+breaks replace literal backslash-n labels. Mermaid source and local links are
+checked; final exported-figure layout remains report/demo assembly work.
