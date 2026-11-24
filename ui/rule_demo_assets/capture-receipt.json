@@ -1,0 +1,14 @@
+{
+  "kind": "rule07_saved_html_capture_record_v1",
+  "date_arizona": "2026-11-24",
+  "method": "Chrome headless rendering of individual saved demo HTML sections; details expanded for capture; screenshot fragments in headless Chrome were blank and refused",
+  "scope": "Screenshot walkthrough, not live execution, policy replay or new scientific results",
+  "page_sha256_lf": "a7b1feb4d312e3fd77c0d22b8e6f47edc0a26cd96d3b16ebec47df6439563cbc",
+  "artifacts": {
+    "case-A.png": "43516fb1c1382f7bf8d4afa14b0cd4ced1c16c2d90f384fb965dfc7bcb29c78f",
+    "case-B-fault.png": "fcee7eb036510f5905bcedf2ba6a14ecea76b0e39775dc81f3d130572d3410eb",
+    "metrics.png": "a5ddaad42a8643336a486d4c4dd507c08537e4e949a7de68308cd94567746d2c",
+    "saved-evidence-walkthrough.gif": "a7c449f82ec083f6ad0e61973c1ba74db8226a4b8b37b356338d813e4844d8b9",
+    "verification.png": "4ad0b4fa38f2ce840fc4a61786fa262b42d73c0f32d5bc8dced2df3cca423a93"
+  }
+}

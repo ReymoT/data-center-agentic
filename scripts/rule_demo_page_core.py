@@ -36,7 +36,10 @@ DEFAULTS = {
     "spec_json": ROOT / "docs/rule_study/specification.json",
     "feedback": ROOT / "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
     "workflow": ROOT / "docs/report/RULE05_WORKFLOW_DIAGRAMS.md",
+    "accounting_receipt": ROOT / "docs/evidence/rule04-nov24-receiving/receiving-receipt.json",
+    "accounting_source": ROOT / "docs/evidence/rule04-nov24-receiving/nisha-source.txt",
 }
+ACCOUNTING_SOURCE_SHA = "a465045f7f6c5bd99cac16bb39147e8aa84e9ece2f6c12654c514b78d21d9113"
 DEFAULT_METRICS = ROOT / "docs/evidence/rule04-dev-nov23/authored-metrics-reviewed.json"
 WORKFLOW_FIGURE = "## Figure 2."
 CASES = ("A", "B", "B-fault", "B-progress")
@@ -205,9 +208,19 @@ def load_inputs(paths: Mapping[str, Path], metrics: Path | None = None) -> dict:
         "feedback": feedback_table(paths["feedback"]),
         "workflow": workflow_figure(paths["workflow"]),
         "metrics": None,
+        "metrics_accepted": False,
         "provenance": [],
     }
     used = list(DEFAULTS)
+    accepted = json.loads(paths["accounting_receipt"].read_text(encoding="utf-8"))
+    if (
+        sha256_file(paths["accounting_source"]) != ACCOUNTING_SOURCE_SHA
+        or accepted["source_sha256"] != ACCOUNTING_SOURCE_SHA
+        or accepted["source_actor"] != "nkolekar-nk"
+        or accepted["source_comment_id"] != 7121894902
+        or accepted["status"] != "ACCEPTED_WITHIN_RECORDED_SCOPE"
+    ):
+        raise ValueError("independent accounting receiving source/binding changed")
     if metrics is not None:
         metrics = Path(metrics)
         receipt = metrics.parent / "manager-review-receipt.json"
@@ -230,6 +243,12 @@ def load_inputs(paths: Mapping[str, Path], metrics: Path | None = None) -> dict:
         paths["metrics_review_receipt"] = receipt
         paths["metrics_checksums"] = checksums
         used.extend(("metrics_review_receipt", "metrics_checksums"))
+        inputs["metrics_accepted"] = (
+            sha256_file(metrics)
+            == accepted["accepted_artifact_sha256"][
+                "docs/evidence/rule04-dev-nov23/authored-metrics-reviewed.json"
+            ]
+        )
     for key in used:
         path = paths[key]
         try:
@@ -412,7 +431,7 @@ def metrics_panel(inputs: Mapping) -> str:
         )
     rows = "".join(
         f"<tr><td>{e(r['case_id'])}</td><td>{e(r['policy_id'])}</td><td>{r['completed']}</td>"
-        f"<td>{r['missed']}</td><td>{r['execution_violations']}</td>"
+        f"<td>{r['missed']}</td><td>{r['unfinished']}</td><td>{r['execution_violations']}</td>"
         f"<td>{r['synthetic_impact']['producer_total']}</td></tr>"
         for r in metrics["runs"]
     )
@@ -426,15 +445,46 @@ def metrics_panel(inputs: Mapping) -> str:
         + "</td></tr>"
         for c in metrics["equal_work_vs_greedy_a"]
     )
+    accepted = inputs.get("metrics_accepted", False)
+    receiving = (
+        badge("CHECKED", "Nisha accounting/metrics, comment 7121894902")
+        if accepted
+        else badge("PENDING", "independent metric receiving")
+    )
+    tradeoff = []
+    reductions = {
+        c["policy_id"]: c["reduction"]
+        for c in metrics["equal_work_vs_greedy_a"]
+        if c["case_id"] == "A" and c.get("available")
+    }
+    for row in metrics["runs"]:
+        if row["case_id"] != "A":
+            continue
+        turns = row["turnaround_slots"]["values"]
+        reduction = 0 if row["policy_id"] == "greedy_a" else reductions.get(row["policy_id"])
+        tradeoff.append(
+            f"<tr><td>{e(row['policy_id'])}</td><td>{len(turns)}</td>"
+            f"<td>{sum(turns) / len(turns):g}</td><td>{row['synthetic_impact']['producer_total']:g}</td>"
+            f"<td>{'unavailable' if reduction is None else f'{100 * reduction:.1f}%'}</td></tr>"
+        )
     return (
         '<section id="metrics"><h2>Metrics on the authored runs</h2>'
-        f"<p>{badge('OBSERVED', metrics['label'])} {badge('PENDING', 'independent metric receiving')}</p>"
+        f"<p>{badge('OBSERVED', 'reviewed authored metrics' if accepted else metrics['label'])} {receiving}</p>"
         "<p>Artificial score-kWh (power × 1 h × PUE 1.0 × score weight): not g/kWh, not emissions. "
         "Four authored cases are illustrations, not unseen-case performance.</p>"
         "<table><tr><th>Case</th><th>Policy</th><th>Completed</th><th>Missed</th>"
-        f"<th>Execution violations</th><th>Impact</th></tr>{rows}</table>"
+        f"<th>Unfinished</th><th>Execution violations</th><th>Impact</th></tr>{rows}</table>"
+        "<p>Missed and unfinished overlap: unfinished means every job that did not complete. "
+        "Do not add those counts together.</p>"
         "<h3>Equal-work comparison against Greedy A</h3>"
         f"<table><tr><th>Case</th><th>Policy</th><th>Result</th></tr>{comparisons}</table>"
+        "<h3>Authored case A: impact and turnaround together</h3>"
+        "<p>Ten retained authored runs, not unseen evaluation. Turnaround is completion minus arrival; "
+        "it includes processing time. In A, delaying J1 by one slot changes mean turnaround from "
+        "1 to 1.5 slots while reducing artificial job impact by one third. This is an illustration, "
+        "not a six-system Pareto frontier or a general advantage.</p>"
+        "<table><tr><th>Policy</th><th>Completed jobs</th><th>Mean turnaround (slots)</th>"
+        f"<th>Artificial job impact (score-kWh)</th><th>Reduction vs Greedy A</th></tr>{''.join(tradeoff)}</table>"
         "</section>"
     )
 

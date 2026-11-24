@@ -1,5 +1,7 @@
 # Explicit Rules for Safe Simulated Scheduling — Working Report
 
+November 24 current: Nisha's independent accounting/metric receiving is accepted within its recorded scope: the retained 120-case development pair and ten authored metric illustrations. The original reply and hashes are preserved in [the receiving record](../handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md). The first demo package is merged through #275. No policy has run on the 120 development cases; final isolation, whole-study freeze, fresh exact run approval, comparative evaluation and reproduction remain pending. Earlier dated pending-receiving statements below are historical where superseded.
+
 November 23 latest: [accepted independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) records complete replay coverage of all 202 required primary/authored case-policy traces across preserved attempts. Checked safety/progress properties pass within the declared finite scope; rules-v1 authored S4 has three checks, with primary/baseline exclusions explicit. The verification source baseline is recorded. This does not answer unseen-case generalization or the original Agent-versus-Plain question. Actual accounting, whole-study freeze, final evaluation, reproduction and delivery remain pending; earlier dated partial-status text is historical where superseded.
 
 November 23 separate-person receiving is now supplied by Nisha for the retained evidence. Integrity/pins and recorded coverage are confirmed; overall remains INCOMPLETE. In all12 jointly infeasible primary cases no policy starts any job, so the system does not salvage a feasible subset. See [received evidence and correction](../handoffs/RULE03_INDEPENDENT_RECEIVING_NOV23.md). No new policy/replay or freeze is claimed. [E14]
@@ -373,7 +375,7 @@ November 22 focused-study disposition (#231):
 | Grouped ten-fold C/D cross-validation | Future work outside the new critical path. Historical three-fold measurements remain historical; no new refit is claimed. |
 | Explicit violation arithmetic / repair deltas | The rule scheduler emits exact rule/state arithmetic and preserves failed proposals/checks/fallback. The old LLM repair-feedback ablation is not run or claimed. |
 | ML warm-start / expert ranking | Future work; no new ranker, Agent variant or model experiment is added. |
-| Turnaround versus impact | Pending actual matched RULE04 accounting. Use artificial score-kWh, completed/missed/unfinished denominators and equal-work gates; unavailable comparisons remain unavailable, never zero. |
+| Turnaround versus impact | Nisha received the authored arithmetic. Case A: Greedy A mean turnaround 1 slot / 12,000 artificial score-kWh; rules-v1 and Greedy B 1.5 slots / 8,000, one-third lower impact with one-slot extra wait for J1. This is an authored illustration, not an unseen comparison or Pareto frontier. Missed and unfinished overlap; never add them together. Full new-case evaluation remains pending. |
 
 Reimo and Nisha carry these dispositions into the report; Edison and Ved carry them into the demo. This table records implemented mechanisms versus pending/future experiments, not unseen-case findings. The earlier proposal history below is retained, not reactivated.
 

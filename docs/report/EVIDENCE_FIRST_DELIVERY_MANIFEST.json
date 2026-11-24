@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "ffe85ea2427b001dfd159f21477775cbfdd1f87387e659ff43a3169d42a4fd5e",
+      "sha256": "66de354c4cc55ae82278f28452fd3f1eeb37e4fae2081fe71eaf5b2d4ee7d5d3",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "c573d1c54bf14eb2ac0218ba952422a303356f0a900c482263ababae8b909812",
+      "sha256": "cb48fc1cc002a60349ef2181d04127c365687a71966fd268ea408806b8b76837",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "425f9dac422de0ffc84c52b54f7e8b34705a1023d54279f688f5a93bde722e24",
+      "sha256": "f71f36f8c62225ca36285b2085a449f6f1cc931fa6db6429fb2fd437939418ab",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "338e17b70e2526250cfcbde4c16465ebd970ccc30347b8cd8da33229349fbcd4",
+      "sha256": "40b9dfb93207960bf3c3a731e666054d6e3398c2c109fdb76b61e6a5bd49ca82",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "586275c521cdc0e7e6691617fe365e70268dc898273d00f19b92829e5f4ad2c0",
+      "sha256": "b1c3ce664bf5dc52f7bad1b4a65ca3e82348cb3d67e1d7ff6018ec85885ebd1b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "ca5ae05595908f8d563b940e335e2d675354429a1e51a68751d6b4ba01e6bb10",
+      "sha256": "0339672e4c5d40de868c86bffa0a2cc694ff7b501d4d0ada7c660cb0c1e871aa",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "2524faa891761dd84c9b1094acbe52fee09722ff3dc904a256c07b3ca194d77e",
+      "sha256": "f998bc5e30d7641ca0797026ab0dd5912cc3beb76d1b583370a92231b4a577c5",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -935,7 +935,7 @@
     },
     {
       "path": "docs/demo/RULE07_STORYBOARD.md",
-      "sha256": "170d8b73b6a4d8a7da977df9970d926b34dcaf071c7793a14774da88c7547a44",
+      "sha256": "029c6261805e4fac88d0fe545c5f1ee80fbf39422940491e7af315e534c2be0a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -945,23 +945,93 @@
     },
     {
       "path": "scripts/rule_demo_page_core.py",
-      "sha256": "83c353ada2d0e54f2ff2c01ce657f6efb17e015bd3d0ecfbd60751bbcb54fa4e",
+      "sha256": "05e454a18ce2fee0a6ff3bac5b1e32d9e1145a27594540ba9bac49d2bdfd5b45",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "tests/rule_study/test_rule07_demo_page.py",
-      "sha256": "896e604130718916c12b5e962c9942afd3f282998269d7446cb473719d944c32",
+      "sha256": "3ea4a51377cb958203bc9bd8ef47b5846fc6e092b74f682832f04db2c4e7f4c4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "ui/rule_demo.html",
-      "sha256": "f3406a499902ff374f4fb8fba83d62d420acf1ddca2e910cd038aa768609a821",
+      "sha256": "a7b1feb4d312e3fd77c0d22b8e6f47edc0a26cd96d3b16ebec47df6439563cbc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/handoffs/RULE07_PACKAGE_REVIEW_NOV24.md",
       "sha256": "b549bd39828b923272e81b140274c832a801fbca4079dd39fa7ea7e7f9e5fea3",
       "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-receiving/nisha-source.txt",
+      "sha256": "a465045f7f6c5bd99cac16bb39147e8aa84e9ece2f6c12654c514b78d21d9113",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-receiving/receiving-receipt.json",
+      "sha256": "e8fe0e657e27ad528d21fcc8e2ba03bd5e9f4d843ab5c738b14f55f463e34748",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md",
+      "sha256": "8c90d42d78e7ca461be7899a5dc51127a5c161bcd882ddd8d7cc7c06d6b821bc",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_DISPATCH_PREPARATION_NOV24.md",
+      "sha256": "e639ddab8f5cc0ad69abd8733d00feabe1a423cb4ae9534fc15d9f9c64108a47",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/prepare_rule_study_rollout.py",
+      "sha256": "dcce60beb9c169165a40c33e0d7d37e8daef7efec7b6c9e30a73b927318b5a07",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/rule_rollout_supervisor.py",
+      "sha256": "10540f4caccd568c6c4cf845aac8760b541c283497866ca77a86b90ab012a88c",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/runtime/test_rule04_rollout_preparation.py",
+      "sha256": "d440bf07d3b7425c23cad51c11af4a4c9baf8c3050bb2e73d8ec9e5d8ff0099e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "ui/rule_demo_assets/README.md",
+      "sha256": "5326c0ff9f0b5383c51f53aee9143ab1ca0df8f6929e4beda46abd34423b2df3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "ui/rule_demo_assets/capture-receipt.json",
+      "sha256": "45cb28826c15174a9aba80ccd61d71e38bd8fe4e59b15cbe561f2a7d642a7537",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "ui/rule_demo_assets/case-A.png",
+      "sha256": "43516fb1c1382f7bf8d4afa14b0cd4ced1c16c2d90f384fb965dfc7bcb29c78f",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "ui/rule_demo_assets/case-B-fault.png",
+      "sha256": "fcee7eb036510f5905bcedf2ba6a14ecea76b0e39775dc81f3d130572d3410eb",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "ui/rule_demo_assets/metrics.png",
+      "sha256": "a5ddaad42a8643336a486d4c4dd507c08537e4e949a7de68308cd94567746d2c",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "ui/rule_demo_assets/saved-evidence-walkthrough.gif",
+      "sha256": "a7c449f82ec083f6ad0e61973c1ba74db8226a4b8b37b356338d813e4844d8b9",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "ui/rule_demo_assets/verification.png",
+      "sha256": "4ad0b4fa38f2ce840fc4a61786fa262b42d73c0f32d5bc8dced2df3cca423a93",
+      "hash_convention": "raw_bytes"
     }
   ],
   "self_hash_excluded": true,

@@ -50,13 +50,13 @@ Every panel on the page carries one label. Keep them when presenting:
    history; the Nov 23 continuation is PASS within its scope. S4 is NOT_RUN in the
    primary domain and PASS only for authored rules-v1 (B-fault). In the 12 jointly
    infeasible primary cases every policy starts no jobs.
-8. **Metrics** (Observed, receiving Pending). The reviewed metric records for the 10
+8. **Metrics** (Observed, scoped receiving accepted in Nisha comment 7121894902). The reviewed metric records for the 10
    authored runs: A 8,000 vs 12,000 artificial score-kWh, B-progress equal, B
-   unavailable on a zero baseline (never zero savings). Artificial units; not emissions.
+   unavailable on a zero baseline (never zero savings). A's mean turnaround is 1.5 slots versus Greedy A's 1 slot, with two completed jobs each. Missed and unfinished overlap; do not add them together. Artificial units; not emissions.
 9. **Professor feedback** ([#231](https://github.com/ReymoT/data-center-agentic/issues/231)).
    The four dispositions, read from the working report: ten-fold refits and ML
    warm-start are future work; rule arithmetic is implemented without an LLM repair
-   ablation; turnaround versus impact waits on accepted matched accounting.
+   ablation; the authored turnaround/impact illustration is received, while new-case comparison remains pending.
 
 Close with: finite bounded verification is not a universal proof; historical Agent/Plain
 runs are not a matched comparison; missing-forecast cases are fallback/accounting
@@ -101,9 +101,19 @@ no saved scientific replay was dispatched to rebuild or inspect this static page
 His older saved archive (`rule07-traces-a7a71d0`) is historical evidence bound to an
 older producer; the page uses the Nov 23 authored traces (`dbb8e6f`) instead.
 
-## Still to do
+## November 24 completed fallback package
+
+The [asset index](../../ui/rule_demo_assets/README.md) supplies inspected screenshots
+of A, B-fault, finite verification and received metrics, plus a silent four-frame GIF
+walkthrough. It is compiled from saved-HTML captures, not live scheduling or replay.
+Open `ui/rule_demo.html` for the full offline two-scenario package and all feedback
+dispositions. Screenshot hashes and page identity are in the asset capture receipt.
+The native browser helper was unavailable; headless Chrome rendering was used and
+blank fragment captures were refused before publishing the actual section captures.
+
+## Remaining study work (separate from the saved demo)
 
 - Matty visually inspected the rebuilt page in Chrome on November 24, including
   scenario A and the expanded B-fault arithmetic/refusal table. The page displays correctly.
-  Dedicated report screenshots and a fallback recording are not bundled yet.
+  The later asset index above supplies report screenshots and a fallback walkthrough.
 - No development-set or final-set results exist; they need separate authorization.

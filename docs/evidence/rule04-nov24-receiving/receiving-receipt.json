@@ -1,0 +1,33 @@
+{
+  "kind": "rule04_independent_accounting_receiving_record_v1",
+  "status": "ACCEPTED_WITHIN_RECORDED_SCOPE",
+  "integration_date_arizona": "2026-11-24",
+  "source_actor": "nkolekar-nk",
+  "source_comment_id": 7121894902,
+  "source_url": "https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7121894902",
+  "source_created_at": "2026-11-24T04:18:14Z",
+  "source_updated_at": "2026-11-24T04:18:14Z",
+  "source_sha256": "a465045f7f6c5bd99cac16bb39147e8aa84e9ece2f6c12654c514b78d21d9113",
+  "source_preserved_verbatim": true,
+  "development_case_count": 120,
+  "hidden_accounting_cases": 40,
+  "authored_runs": 10,
+  "authored_comparisons": 7,
+  "scope": "Retained development pair and ten authored metric illustrations; not rollout, final isolation, full freeze or generalization",
+  "remaining": [
+    "120-case policy rollout",
+    "hidden-accounting rollout path",
+    "whole protocol freeze",
+    "final generation and no-overlap checks",
+    "independent reproduction"
+  ],
+  "missed_and_unfinished_overlap": true,
+  "reported_independent_script": "Nisha reports own script; script not supplied in the comment; do not claim manager executed it",
+  "new_manager_scientific_runs": 0,
+  "accepted_artifact_sha256": {
+    "docs/evidence/rule04-dev-nov23/development.cases.json": "08942727f68a995e386a37f23ab0e651fa905ba911ea487bc917c7ebf58bd716",
+    "docs/evidence/rule04-dev-nov23/development.accounting.json": "c35c8dd98f7aaf66ba4e5549626a02551141cb418d5d4ca0b42fb9b4593b8599",
+    "docs/evidence/rule04-dev-nov23/authored-metrics-reviewed.json": "6d6b5630d425986ab34c3ed6e5f527388926bd0b8e902b59ea1c5339b8810dd8",
+    "scripts/rule_study_metrics_core.py": "12f974b22ab748809a253827ecad9db7be73e27fb1b77d9dc7e6d72c155b93b7"
+  }
+}

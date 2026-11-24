@@ -172,12 +172,17 @@
       "path": "docs/rule_study/RULE01_SPECIFICATION.md",
       "sha256": "b19c542639b72f78ac8d7106362be359cf9d7d2b03daab3e9df672feeecaab79",
       "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-receiving/receiving-receipt.json",
+      "sha256": "e8fe0e657e27ad528d21fcc8e2ba03bd5e9f4d843ab5c738b14f55f463e34748",
+      "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
   "gates": {
-    "independent_accounting_metrics": "PENDING_NISHA_242",
+    "independent_accounting_metrics": "ACCEPTED_SCOPED_NISHA_COMMENT_7121894902",
     "whole_protocol_input_isolation_freeze": "PENDING",
-    "fixed_360_run_dispatch_backend": "NOT_ESTABLISHED",
+    "fixed_360_run_dispatch_backend": "IMPLEMENTED_OFFLINE_PREPARATION_PENDING_MERGED_SOURCE_AND_FRESH_APPROVAL",
     "new_exact_resource_envelope": "NOT_APPROVED",
     "fresh_single_use_authorization": "ABSENT"
   },
@@ -190,5 +195,8 @@
     "output_bytes": 268435456,
     "maximum_assignments_per_decision": 2401
   },
-  "verification_scope": "Accepted RULE03 component baseline only; not whole-study freeze or rollout approval"
+  "verification_scope": "Accepted RULE03 component baseline only; not whole-study freeze or rollout approval",
+  "readiness_update_date_arizona": "2026-11-24",
+  "dispatcher_preparation": "scripts/prepare_rule_study_rollout.py",
+  "dispatcher_scope": "120 existing development cases only; no final generation"
 }

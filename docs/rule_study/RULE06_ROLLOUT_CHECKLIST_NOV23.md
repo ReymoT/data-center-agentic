@@ -6,6 +6,15 @@ The [bound manifest](RULE06_ROLLOUT_PREPARATION_NOV23.json) identifies the actua
 RULE03 component baseline. Hashes normalize CRLF to LF as explicitly recorded.
 No policy, generator, scientific replay, model or final-case operation ran to prepare it.
 
+## November 24 preparation update
+
+Nisha's actual scoped accounting PASS is accepted in comment 7121894902.
+The development-only dispatcher now exists in `scripts/prepare_rule_study_rollout.py`
+with fixture-tested nested containment, time/output stops, shared counters, original-input
+locks, hidden-weight isolation and fail-closed replay. Public CLI drafts/inspects only.
+See [the current dispatcher handoff](RULE04_DISPATCH_PREPARATION_NOV24.md).
+The old proposals below remain historical/unapproved; no ID or exact run limits are filled.
+
 ## Ready and pending work
 
 - RULE03 bounded verification is accepted through #241/PR #270: 202 required traces
@@ -14,15 +23,16 @@ No policy, generator, scientific replay, model or final-case operation ran to pr
   Producer checks and Matty's corrections do not replace Nisha's independent accounting receiving.
 - RULE05 methods and diagrams are delivered through #272/#273; close #243 for that component.
   Nisha's final report assembly remains #223; Edison/Ved's demo remains #246.
-- Wait for actual scoped accounting/metric PASS, or fix reported defects directly and obtain
+- The scoped accounting/metric PASS is received. Fix any later defects directly and obtain
   the affected independent recheck. Never infer acceptance from silence.
 - Confirm development/final isolation and freeze the complete protocol, inputs, code and metrics.
   The RULE03 component baseline alone does not satisfy this gate.
 
 ## Before requesting fresh execution approval
 
-1. Review a fixed dispatcher for this exact scope. Existing narrow ten-authored/51-replay
-   continuation is not a backend for 360 case-policy runs. No working dispatch command is claimed.
+1. The new fixed development dispatcher is implemented and offline-tested; refresh its
+   exact source/environment plan from clean merged main. The earlier narrow continuation
+   is not reused. No final-case dispatcher or public execution command is provided.
 2. Bind exact source/environment hashes, case/accounting identity, policy mapping and metric version.
    Resolve any baseline drift before reusing the component verification evidence.
 3. Agree an exact prospective resource envelope. At most 360 runs times 30 steps means
