@@ -930,7 +930,7 @@
     },
     {
       "path": "docs/handoffs/RULE05_DEMO_HANDOFF.md",
-      "sha256": "b1516a0e7232feab31d0a9d22685adfbb3519487a8399a3e68ac2352122a5ca5",
+      "sha256": "1d8c023fc38478a69ae72785fb8ddfa8f93d72f83914518bbb8ba1ac06db73b5",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

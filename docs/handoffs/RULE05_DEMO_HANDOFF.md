@@ -14,7 +14,7 @@ with any export. Report links are in the working draft, README and evidence inde
 
 | Scene | Supported interpretation and caption limit |
 | --- | --- |
-| A | Authored feasible case: expected J2 now, J1 at lower-score slot 1. A future selection is advisory; show actual current-slot execution and recorded turnaround/score separately. No measured trade-off or savings number is supplied by RULE-05. |
+| A | Authored feasible case: rules-v1 and Greedy B start J2 now and defer J1 to lower-score slot 1; Greedy A starts both at slot 0 in the received records. Future selections are advisory; show actual current-slot execution and recorded turnaround/score separately. RULE-05 supplies no new measured trade-off or savings result. |
 | B | Two rigid jobs jointly require 80 kW including 20 background against 60 kW. Each alone fits. Current main's unchanged abstention gate rejects the partial plan and fallback; retain blocked/no-start and eventual missed outcomes. Do not label a proposed single-job 50 kW load as an executed 80 kW violation, or claim successful fallback/progress. |
 | B-fault | Explicitly injected simultaneous invalid starts, not a natural rules-v1 output. Show proposal/check/fallback/execution separately; invalid starts must not execute. A blocked outcome is not completion. |
 | B-progress | Separate feasible subcase: J2 flexible, deadline 2; expected sequential J1 at 0/J2 at 1. Use actual replay evidence for a completion claim; it does not make impossible B a progress success. |
