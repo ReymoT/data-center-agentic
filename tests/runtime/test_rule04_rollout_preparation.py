@@ -277,6 +277,16 @@ def test_inherited_pair_selector_refused(tmp_path, monkeypatch):
     assert not ledger.exists()
 
 
+def test_result_marker_alone_also_refuses_id_reuse(tmp_path, monkeypatch):
+    path, ledger, req = dispatch_fixture(tmp_path, monkeypatch)
+    ledger.mkdir()
+    name = w.pf.sha(req["plan"]["proposed_authorization_id"].encode()) + ".result.json"
+    w._write(ledger / name, {"status": "historical fixture result"})
+    with pytest.raises(FileExistsError, match="result marker"):
+        w.dispatch_once(path, ledger=ledger, trusted_authorize=fixture_authority)
+    assert len(list(ledger.iterdir())) == 1
+
+
 def test_batch_stops_on_first_failed_pair_and_preserves_failure(tmp_path, monkeypatch):
     out = tmp_path / "out"
     request = {"plan": {"output_directory": str(out)}, "limits": limits()}

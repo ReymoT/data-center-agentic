@@ -443,6 +443,8 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         raise ValueError("inherited pair selector refused")
     ledger.mkdir(exist_ok=True)
     entry = ledger / (pf.sha(subject["authorization_id"].encode()) + ".json")
+    if entry.with_suffix(".result.json").exists():
+        raise FileExistsError("authorization ID already has a result marker")
     with entry.open("x", encoding="utf-8") as f:
         json.dump({"receipt": expected, "environment": environment}, f, allow_nan=False)
         f.flush()
