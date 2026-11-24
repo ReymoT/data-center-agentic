@@ -200,7 +200,7 @@
     },
     {
       "path": "docs/report/README.md",
-      "sha256": "afd654ce9b14ad77870902b99e458e8a01c372deb8a5776e7e5879fcc92c14f1",
+      "sha256": "47fd977ab1fedab7161660c1bfa3a1c73e34a15c7a40b0ca65651634445d10f1",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "2234fd4c01f3b011f076b1d97bf9a2d134479557d546d8568fbf204c2eb4d1fb",
+      "sha256": "126c39e1df9d93d3364dc5fc2c1d6828c1041e8b1a8726e7c31dd9326e70846b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "4f2836d2cc3f16d94525b43e8537e8cc2a4312ce56cadf0afc794e83a2e93818",
+      "sha256": "338e17b70e2526250cfcbde4c16465ebd970ccc30347b8cd8da33229349fbcd4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -916,6 +916,21 @@
     {
       "path": "docs/evidence/rule04-dev-nov23/SHA256SUMS.txt",
       "sha256": "c6f8d5a96d6551694a81b68497ba2a4ca161b2eb1fdc552c26274a499a96fc7f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/RULE05_FOCUSED_STUDY_METHODS.md",
+      "sha256": "57ee3d49627fbff6b98a5ebe4c933318223d2e473e07057d6031e0e68c10f96e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/report/RULE05_WORKFLOW_DIAGRAMS.md",
+      "sha256": "a4fff7ce6ea226b402e0acd8ce61fb2a339e9473315453e980ac29f40c572d55",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE05_DEMO_HANDOFF.md",
+      "sha256": "9ca1e80e2a3345b85bf54b5f01177c0ec9d1e308fb131cd23b8d19e64d3fe8ab",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
