@@ -370,7 +370,7 @@ def test_pair_exception_message_survives_devnull(tmp_path, monkeypatch):
     monkeypatch.setattr(w, "pair", lambda: ({}, {}, {"A": object()}))
     monkeypatch.setattr(w, "assess_after_run", lambda req: False)
 
-    def fail(*args):
+    def fail(*args, **kwargs):
         raise ValueError("specific metric mismatch fixture")
 
     monkeypatch.setattr(w, "_one_pair", fail)
@@ -379,6 +379,86 @@ def test_pair_exception_message_survives_devnull(tmp_path, monkeypatch):
     failure = w.read_json(tmp_path / "A-rules-v1/pair-failure.json")
     assert failure["message"] == "specific metric mismatch fixture"
     assert failure["reserved_remaining_budget"] == {"states": 100, "transitions": 100}
+
+
+def test_inventory_deadline_checked_during_traversal(tmp_path, monkeypatch):
+    (tmp_path / "one").write_text("a")
+    ticks = iter([0, 2])
+    monkeypatch.setattr(sup, "monotonic", lambda: next(ticks))
+    with pytest.raises(TimeoutError, match="inventory deadline"):
+        sup.output_bytes(tmp_path, deadline=1)
+
+
+def test_original_and_pair_request_hashes_are_distinguished(tmp_path):
+    command = w._command(tmp_path / "missing", "b" * 64, original_hash="a" * 64)
+    assert "'" + "a" * 64 + "'" in command[5]
+    assert "'" + "b" * 64 + "'" in command[5]
+    assert command[-1] == "b" * 64
+
+
+def test_partial_coverage_preserves_unexecuted_control_stratum():
+    strata = {"a": "normal_feasible", "b": "overloaded_impossible", "c": "missing_forecast"}
+    result = w.coverage([{"case_id": "a", "policy_id": "rules-v1"}], strata)
+    assert result["normal_feasible"]["completed_runs"] == 1
+    assert result["missing_forecast"] == {
+        "expected_runs": 3,
+        "completed_runs": 0,
+        "completed_by_policy": dict.fromkeys(w.POLICIES, 0),
+    }
+
+
+def test_child_accounting_pair_is_loaded_once(tmp_path, monkeypatch):
+    calls = []
+
+    def load():
+        calls.append(True)
+        return ({}, {}, {"A": object()})
+
+    monkeypatch.setattr(w, "pair", load)
+    monkeypatch.setattr(w, "assess_after_run", lambda r: False)
+    monkeypatch.setenv("RULE04_WORKER_PAIR", json.dumps(["A", "rules-v1", 100, 100]))
+
+    def checked(*a, loaded=None):
+        assert loaded[2]["A"] is not None
+
+    monkeypatch.setattr(w, "_one_pair", checked)
+    w.execute_prepared(
+        {
+            "kind": w.KIND,
+            "plan": {"output_directory": str(tmp_path)},
+            "limits": limits(),
+            "freeze_reference": "fixture",
+        }
+    )
+    assert len(calls) == 1
+
+
+def test_full_nested_path_layout_on_native_short_parent():
+    if os.name != "nt":
+        pytest.skip("Windows MAX_PATH layout fixture")
+    import tempfile
+
+    home = Path.home().resolve()
+    with tempfile.TemporaryDirectory(prefix="R4T_", dir=home) as temporary:
+        base = Path(temporary).resolve()
+        assert base.is_relative_to(home) and base.name.startswith("R4T_")
+        case_id = "development-overloaded_impossible-39"
+        assert w.artifact_path_length(base, [case_id]) < 260
+        for policy in w.POLICIES:
+            p = (
+                base
+                / f"{case_id}-{policy}"
+                / "trace"
+                / policy
+                / f"{case_id}-{policy}"
+                / "snapshots"
+                / ("f" * 64 + ".json")
+            )
+            p.parent.mkdir(parents=True)
+            p.write_text("{}")
+            assert p.read_text() == "{}"
+        # The review-2 workspace output really is too long, even with a short name.
+        assert w.artifact_path_length(w.ROOT.parent / "R4_ff9cab9d_r2", [case_id]) >= 260
 
 
 def test_batch_reserves_cleanup_margin_before_starting_pair(tmp_path, monkeypatch):

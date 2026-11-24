@@ -1,0 +1,16 @@
+{
+  "kind": "rule04_review2_ai_integration_v1",
+  "source_kind": "User-supplied AI review; not independent-person scientific receiving",
+  "source_sha256_raw": "d476e56e57115cc5421a1f585725dbc751ecef6f553f60dd09828888900f9476",
+  "superseded_request_sha256": "d39deb5ff938ff766d77c3282d6f0ae0829b288e2a5564a52dafaae7046e5382",
+  "no_dispatch_authorized": true,
+  "actual_development_runs": 0,
+  "dispositions": {
+    "F-A": "Confirmed own path-selection error. Short user-home output proposed; all full nested artifact paths checked before ID reservation, native file-layout fixture PASS",
+    "F-B": "Not a code defect. Retain frozen order/caps; fresh approval must explicitly acknowledge likely/possible incomplete control coverage; no precise completion count is established by three fixtures",
+    "F-C": "Deadline checked inside inventory before/after file operations, including initial inventory within total wall clock; individual blocking filesystem calls still cannot be given a hard real-time guarantee by Python",
+    "F-D": "Original authenticated hash and per-pair copy hash retained separately in pair success/failure records, root failure/checkpoints and host result",
+    "F-E": "Reuse one validated accounting pair in the child; no duplicate 120-case accounting check",
+    "F-F": "Coverage by stratum and policy persisted in normal failure summaries and atomic checkpoints for host recovery"
+  }
+}

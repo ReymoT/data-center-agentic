@@ -156,7 +156,17 @@ def assess(request):
         for p, digest in pins.items()
     ):
         problems.append("accepted verification component drift")
-    pair()
+    case_file, _, _ = pair()
+    if isinstance(plan["output_directory"], str):
+        if (
+            artifact_path_length(
+                plan["output_directory"], [c["case_id"] for c in case_file["cases"]]
+            )
+            >= 260
+        ):
+            problems.append(
+                "output artifact path reaches Windows MAX_PATH; choose a shorter output"
+            )
     return {
         "status": "BLOCKED" if problems else "PREPARED_NOT_AUTHORIZED",
         "problems": problems,
@@ -174,10 +184,16 @@ def _write(path, value):
         os.fsync(f.fileno())
 
 
-def _command(path, expected_hash, *, deadline=None):
-    prefix = ""
+def _command(path, expected_hash, *, deadline=None, original_hash=None):
+    prefix = (
+        "import os; os.environ['RULE04_AUTHENTICATED_REQUEST_SHA256']="
+        + repr(original_hash or expected_hash)
+        + "; os.environ['RULE04_WORKER_REQUEST_SHA256']="
+        + repr(expected_hash)
+        + ";\n"
+    )
     if deadline is not None:
-        prefix = "import os; os.environ['RULE04_WORKER_DEADLINE']=" + repr(str(deadline)) + ";\n"
+        prefix += "import os; os.environ['RULE04_WORKER_DEADLINE']=" + repr(str(deadline)) + ";\n"
     return [
         sys.executable,
         "-B",
@@ -211,12 +227,12 @@ def _metric(folder, weights):
     return metric
 
 
-def _one_pair(request, case_id, policy, directory, remaining):
+def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None):
     from dc_sustainability.evaluation import rule_study_receiving as rv
     from dc_sustainability.evaluation import rule_study_verifier as v
     from dc_sustainability.rule_study import runner, scheduler
 
-    _, sidecar, parsed = pair()
+    _, sidecar, parsed = pair() if loaded is None else loaded
     visible = parsed[case_id]
     weights = next(e["weights"] for e in sidecar["cases"] if e["case_id"] == case_id)
     case = replace(rv.case_spec_for(visible), first_scores=tuple(weights))
@@ -268,6 +284,8 @@ def _one_pair(request, case_id, policy, directory, remaining):
             "status": "PASS",
             "case_id": case_id,
             "policy_id": policy,
+            "authenticated_request_sha256": os.environ.get("RULE04_AUTHENTICATED_REQUEST_SHA256"),
+            "pair_request_sha256": os.environ.get("RULE04_WORKER_REQUEST_SHA256"),
             "trace_directory": folder.relative_to(directory).as_posix(),
             "execution_signature": execution_signature,
             "metric": metric,
@@ -285,7 +303,8 @@ def execute_prepared(request):
     if mode is not None:
         validate_limits(request["limits"])
         case_id, policy, states, transitions = json.loads(mode)
-        if case_id not in pair()[2] or policy not in POLICIES:
+        loaded = pair()
+        if case_id not in loaded[2] or policy not in POLICIES:
             raise ValueError("unknown pair")
         if any(
             type(n) is not int or not 0 < n <= request["limits"][k]
@@ -298,7 +317,12 @@ def execute_prepared(request):
             if set(request) != FIELDS or request["kind"] != KIND or assess_after_run(request):
                 raise ValueError("pair source/input request refused")
             _one_pair(
-                request, case_id, policy, directory, {"states": states, "transitions": transitions}
+                request,
+                case_id,
+                policy,
+                directory,
+                {"states": states, "transitions": transitions},
+                loaded=loaded,
             )
         except BaseException as exc:
             _write(
@@ -307,6 +331,10 @@ def execute_prepared(request):
                     "status": "FAIL_OR_INCOMPLETE",
                     "case_id": case_id,
                     "policy_id": policy,
+                    "authenticated_request_sha256": os.environ.get(
+                        "RULE04_AUTHENTICATED_REQUEST_SHA256"
+                    ),
+                    "pair_request_sha256": os.environ.get("RULE04_WORKER_REQUEST_SHA256"),
                     "exception": type(exc).__name__,
                     "message": str(exc)[:2000],
                     "reserved_remaining_budget": {"states": states, "transitions": transitions},
@@ -336,6 +364,7 @@ def _batch(request, out):
     write_margin = 1
     used = {"states": 0, "transitions": 0}
     metrics, reports, control_signatures = [], [], {}
+    strata = {}
     try:
         case_file, _, parsed = pair()
         strata = {c["case_id"]: c["stratum"] for c in case_file["cases"]}
@@ -355,7 +384,11 @@ def _batch(request, out):
                 selector = json.dumps(
                     [case_id, policy, remaining["states"], remaining["transitions"]]
                 )
-                command = _command(task, pf.sha(pf.bounded_bytes(task)))
+                command = _command(
+                    task,
+                    pf.sha(pf.bounded_bytes(task)),
+                    original_hash=os.environ.get("RULE04_AUTHENTICATED_REQUEST_SHA256"),
+                )
                 # Fixed selector bound in the child command, never inherited from the host.
                 command[5] = (
                     "import os; os.environ['RULE04_WORKER_PAIR']="
@@ -396,6 +429,10 @@ def _batch(request, out):
                         "charged_steps_completed_pairs_only": dict(used),
                         "last_completed_pair": {"case_id": case_id, "policy_id": policy},
                         "last_supervision": result,
+                        "coverage": coverage(metrics, strata),
+                        "authenticated_request_sha256": os.environ.get(
+                            "RULE04_AUTHENTICATED_REQUEST_SHA256"
+                        ),
                     },
                 )
                 pending.replace(checkpoint)
@@ -429,6 +466,11 @@ def _batch(request, out):
                 "exception": type(exc).__name__,
                 "message": str(exc)[:2000],
                 "completed_runs": len(metrics),
+                "coverage": coverage(metrics, strata),
+                "coverage_scope": "completed validated pairs only; active/failed pair may have uncounted partial work",
+                "authenticated_request_sha256": os.environ.get(
+                    "RULE04_AUTHENTICATED_REQUEST_SHA256"
+                ),
                 "charged_steps_completed_pairs_only": used,
                 "failed_pair_additional_work": "unknown if killed; bounded by remaining budget reserved for that pair",
                 "supervision": reports,
@@ -462,6 +504,39 @@ def comparison_rows(rows, strata):
         )
         for row in rows
     ]
+
+
+def artifact_path_length(output, case_ids):
+    """Include BOTH pair and runner nesting, hashed names and longest directory."""
+    return max(
+        len(
+            str(
+                Path(output)
+                / f"{case_id}-{policy}"
+                / "trace"
+                / policy
+                / f"{case_id}-{policy}"
+                / "snapshots"
+                / ("f" * 64 + ".json")
+            )
+        )
+        for case_id in case_ids
+        for policy in POLICIES
+    )
+
+
+def coverage(metrics, strata):
+    return {
+        s: {
+            "expected_runs": sum(value == s for value in strata.values()) * len(POLICIES),
+            "completed_runs": sum(strata[m["case_id"]] == s for m in metrics),
+            "completed_by_policy": {
+                p: sum(strata[m["case_id"]] == s and m["policy_id"] == p for m in metrics)
+                for p in POLICIES
+            },
+        }
+        for s in sorted(set(strata.values()))
+    }
 
 
 def dispatch_once(path, *, ledger, trusted_authorize=None):
@@ -498,7 +573,15 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         or ledger.is_relative_to(out)
     ):
         raise ValueError("canonical external one-use ledger and separate output required")
-    if any(k in os.environ for k in ("RULE04_WORKER_PAIR", "RULE04_WORKER_DEADLINE")):
+    if any(
+        k in os.environ
+        for k in (
+            "RULE04_WORKER_PAIR",
+            "RULE04_WORKER_DEADLINE",
+            "RULE04_AUTHENTICATED_REQUEST_SHA256",
+            "RULE04_WORKER_REQUEST_SHA256",
+        )
+    ):
         raise ValueError("inherited pair selector or deadline refused")
     ledger.mkdir(exist_ok=True)
     entry = ledger / (pf.sha(subject["authorization_id"].encode()) + ".json")
@@ -527,6 +610,7 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
             deadline=deadline,
         )
         result["retry_allowed"] = False
+        result["authenticated_request_sha256"] = subject["request_sha256"]
         if not result["cleanup_verified"]:
             result["status"] = "failed_cleanup"
         if result["status"] == "succeeded" and result["cleanup_verified"]:
@@ -569,6 +653,14 @@ def _supervisor_failure(out, result):
         else {
             "completed_runs": 0,
             "charged_steps_completed_pairs_only": {"states": 0, "transitions": 0},
+            "coverage": {
+                s: {
+                    "expected_runs": 120,
+                    "completed_runs": 0,
+                    "completed_by_policy": dict.fromkeys(POLICIES, 0),
+                }
+                for s in ("normal_feasible", "overloaded_impossible", "missing_forecast")
+            },
         }
     )
     _write(
@@ -578,6 +670,7 @@ def _supervisor_failure(out, result):
             status="FAIL_OR_INCOMPLETE",
             summary_origin="host_after_supervisor_stop",
             supervision=result,
+            authenticated_request_sha256=result.get("authenticated_request_sha256"),
             retry_allowed=False,
             failed_pair_additional_work="unknown if killed; bounded by remaining budget reserved for that pair",
         ),

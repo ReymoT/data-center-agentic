@@ -1,6 +1,6 @@
 # Architecture for the final scheduling study
 
-November 24 follow-up: [direct review fixes](rule_study/RULE04_AI_REVIEW_FIXES_NOV24.md) improve failure evidence, request-hash handoff and output monitoring. Revised controller pins replace the old pending request; no study ran. Full-batch timing/size remain uncertain and fresh exact approval is still required.
+November 24 follow-up: [review 3 fixes](rule_study/RULE04_REVIEW3_FIXES_NOV24.md) check full nested Windows paths, retain original request provenance and report partial coverage. Earlier requests are superseded; no study ran. Fresh approval must accept potentially unexercised missing-forecast controls under the unchanged limits.
 
 November 24 freeze review: [the protocol record](rule_study/RULE04_FREEZE_REVIEW_NOV24.md) fixes the accepted software/design and retained development inputs/metrics. Final-set isolation remains untested, and no run is authorized. Exact proposed limits and a fresh single-use request still require Matty's approval. Earlier dated pending-freeze notes below are historical where superseded.
 

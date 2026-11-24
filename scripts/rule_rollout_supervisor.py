@@ -13,7 +13,12 @@ from time import monotonic
 from dc_sustainability.runtime.windows_job import WindowsJob
 
 
-def output_bytes(root):
+def output_bytes(root, *, deadline=None):
+    def check_time():
+        if deadline is not None and monotonic() >= deadline:
+            raise TimeoutError("output inventory deadline reached")
+
+    check_time()
     root = Path(root)
     if any(p.is_symlink() or p.is_junction() for p in (root, *root.parents)):
         raise ValueError("linked output refused")
@@ -21,11 +26,13 @@ def output_bytes(root):
     if not root.exists():
         return 0
     for item in root.rglob("*"):
+        check_time()
         count += 1
         if count > 100000 or item.is_symlink() or item.is_junction():
             raise ValueError("unsafe or excessive output inventory")
         if item.is_file():
             total += item.stat().st_size
+        check_time()
     return total
 
 
@@ -34,7 +41,6 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
         raise ValueError("positive deadline up to 900 seconds required")
     if type(limit_bytes) is not int or not 0 < limit_bytes <= 256 * 1024 * 1024:
         raise ValueError("positive output stop threshold up to 256 MiB required")
-    output_bytes(output)
     started, job, child = monotonic(), None, None
     deadline = min(started + limit_s, deadline) if deadline is not None else started + limit_s
     if not math.isfinite(deadline) or deadline <= started:
@@ -42,6 +48,7 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
     next_scan = started
     result = {"status": "failed", "released": False, "cleanup_verified": False}
     try:
+        output_bytes(output, deadline=deadline)
         job = WindowsJob()
         child = subprocess.Popen(
             command,
@@ -64,7 +71,7 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                     result["status"] = "timed_out"
                     break
                 if monotonic() >= next_scan or child.poll() is not None:
-                    size = output_bytes(output)
+                    size = output_bytes(output, deadline=deadline)
                     result["observed_output_bytes"] = size
                     next_scan = monotonic() + 1
                     if size > limit_bytes:
@@ -80,6 +87,9 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                     child.wait(timeout=min(0.1, max(0.001, deadline - monotonic())))
                 except subprocess.TimeoutExpired:
                     pass
+    except TimeoutError as exc:
+        result["status"] = "timed_out"
+        result["message"] = str(exc)
     except BaseException as exc:
         result["status"] = "supervision_failed"
         result["exception"] = type(exc).__name__
