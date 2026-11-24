@@ -1,0 +1,270 @@
+RULE04 AI-ASSISTED REVIEW RESULT
+Reviewer/tool and date: 
+Request SHA-256 checked: f797691d0bf62a157976f490903fb78aca6d372c3fbe9c8e7f2a93758daec706 (raw bytes of
+  request.json; equals REVIEW_INFO.json.request_sha256 and the value in REVIEW_GUIDE.txt)
+Commit checked: 3b04dbbf5eaf5786bb1135489a550bfd34d88a61 (string match only; no Git ancestry in the snapshot)
+Integrity command and complete output:
+  $ python3 -I -B verify_review.py        (Python 3.13.18 on Linux; the operator host uses Windows 3.12.14)
+  PASS: packet and controlled source integrity only. No approval or execution.
+  exit=0
+  Extra check: PACKAGE_SHA256SUMS.txt lists 391 of 392 files; the only unlisted file is the sums file
+  itself. Every file under review_source/ (169) is pinned, and nothing is pinned that's missing.
+
+Evidence classes used below: [V] = verified by me from bytes or code in this packet;
+[A] = attributed evidence (someone else's record, which I read but did not reproduce);
+[S] = static code reading (not executed); [L] = live-host check I cannot perform.
+
+----------------------------------------------------------------------------------------------------
+1. Request identity and 169 controlled hashes: PASS [V]
+   - request.json raw SHA-256 = f797691d...c706, matching REVIEW_INFO.json.
+   - request.plan.code_sha256 has 169 entries (103 dc_sustainability, 64 scripts, the Windows py312
+     lock file and docs/rule_study/specification.json). LF-normalized hashes of all 169 review_source files match.
+   - RULE04_PROTOCOL_FREEZE_NOV24.json.controlled_source_sha256_lf equals request.plan.code_sha256
+     exactly (169/169, no differences).
+   - Freeze file LF SHA-256 = e54dbe75...ec70, matching request.freeze_reference and
+     plan.receiving_references.verifier_freeze.
+   - Note: freeze.source_commit = a3615e6..., while the request commit is 3b04dbbf.... freeze.source_reuse_rule
+     allows a documentation-only descendant if every controlled hash is identical. The hashes are
+     identical [V]. Whether 3b04dbbf descends from a3615e6 and is merged to origin/main is a live
+     check [L].
+   - plan.specification_sha256 9597931f... equals SUPPORTED_SPEC_SHA256 in
+     rule_study_generator.py:47 and rule_study_cases.py:35. It is a canonical-JSON hash of
+     specification.json, not a raw file hash.
+
+2. Protocol/request/input bindings and scope: PASS [V]
+   - request.limits = states 21600, transitions 21600, wall 900 s, 60 s per case-policy pair,
+     268,435,456 bytes. These equal freeze.execution_proposal, REVIEW_INFO.limits and plan.proposed_limit_seconds.
+   - Input raw hashes: development.cases.json = 08942727...d716 and development.accounting.json =
+     c35c8dd9...8599. Both match the request, the freeze (development_inputs.*.sha256_raw), the hard-coded
+     INPUTS in prepare_rule_study_rollout.py:23-32, and SHA256SUMS.txt.
+   - The metrics core LF hash 12f974b2...93b7 matches freeze.metrics.sha256_lf. The RULE03 baseline LF
+     hash 1e9662...c61 and the receiving receipt LF hash e8fe0e...748 match the freeze.
+   - Scope is development only. inspection.json reports final_generation_supported=false. The freeze's
+     not_authorized list covers final generation and evaluation, model calls, training and old private
+     access. The dispatcher has no generator, model, arbitrary-command or retry path [S]
+     (prepare_rule_study_rollout.py:1-5, 64-81, 303-392).
+   - The request's input paths are absolute paths under C:\Users\Ander\.codex\visualizations\...\
+     data-center-agentic. assess() requires path == str(ROOT/...) (rollout.py:139-143), so dispatch
+     must run from exactly that checkout. See finding F6.
+
+3. 120-case/three-stratum/three-policy coverage: PASS [V]
+   - 120 cases with 120 unique IDs. Strata are 40 normal_feasible, 40 overloaded_impossible and
+     40 missing_forecast. The case order in the file equals freeze.case_order, and the sidecar order
+     matches it.
+   - metadata.seed = 2026111901 with seed_domain "development", generator ab795084..., spec 9597931f...
+     metadata.authorization = null, preserved and not rewritten.
+   - Policies (rollout.py:22) are rules-v1, greedy_a and greedy_b. The serial loop at rollout.py:313-314
+     gives at most 360 runs, and dispatch_once requires runs == 360 for success (rollout.py:473).
+   - All jobs fit the rules-v1 scope envelope (at most 4 jobs, latest start <= 4, all values integral),
+     so no rules-v1 "rejected input" stop is expected from scope [V, S].
+
+4. Hidden-weight isolation and missing-forecast control: PASS [V, S]
+   - In the files: all 40 missing_forecast cases have scores = null, and exactly those 40 sidecar
+     entries have weights_visible_to_policy = false. For all 80 visible cases, the visible scores equal
+     the sidecar weights. All 120 profiles have length 30 [V].
+   - In the code: hidden weights enter CaseSpec.first_scores (rollout.py:217). They reach only
+     PrivateEpisode.realized_carbon (cases.py:174). Forecasts are None when forecast_present is false
+     (cases.py:132-134), case_json writes scores null (cases.py:195), and the simulator refuses forecasts
+     for "withheld" episodes (simulator/core.py:88-89). rollout.py:218-221 adds an explicit leak check.
+     Evaluator recomputation uses the sidecar only after the run (rollout.py:189-198) [S].
+   - Control: with no forecast coverage, rules-v1 returns fallback_required and routes to Greedy A
+     (scheduler.py:383-427, runner.py:719-726). greedy_b also falls back to Greedy A (greedy.py:88-93).
+     So identical starts across policies are the expected control. A signature mismatch stops the
+     batch (rollout.py:349-355) [S]. P1 is excluded for missing-forecast cases (verifier.py:626).
+   - Observation (INFO, F8): 4 of the 40 hidden profiles coincidentally equal a visible profile of a
+     different case (missing_forecast-14/20/22/38 match overloaded-06, overloaded-09/26, overloaded-20
+     and normal-17). Weights come from a small {100,200,300} domain. Because each case-policy runs in a
+     fresh process, this is not a leakage path. But Nisha's wording "none of their hidden profiles
+     appears in the visible file" is only true per case.
+
+5. Metric arithmetic, units, denominators and unavailable comparisons: PASS [V, S]
+   - Impact = power_kW x 1 h x PUE 1 x weight, in score-kWh (metrics_core _impact). Job, background
+     and site impact are reported separately (rollout.py:199-202). Background = background_kW x
+     sum(30 weights), the same for every policy within a case.
+   - Outcome sets: completed must be disjoint from missed ∪ unfinished, and the union must equal all
+     jobs. Missed and unfinished may overlap and are never added together.
+   - Turnaround (end minus arrival) and start delay are reported with an explicit count denominator.
+   - equal_work: a comparison is unavailable with a stated reason when there is no baseline, the hash
+     or bindings differ, a run is incomplete, there's a violation, impact is unverified, outcome sets
+     differ, or the Greedy A impact is not positive. Unavailable is never reported as zero.
+   - I reproduced the authored illustration from authored-metrics-reviewed.json [V]: in case A,
+     Greedy A = 12000 with turnarounds [1,1] (mean 1.0), and rules-v1 and Greedy B = 8000 with [1,2]
+     (mean 1.5), a 1/3 reduction. B has a zero baseline (unavailable). B-fault has no Greedy A run
+     (unavailable). B-progress shows reduction 0. In B, missed=2 and unfinished=2 are the same jobs.
+     Nisha's accounting PASS is [A].
+   - Minor (F10): equal_work_vs_greedy_a rows (rollout.py:372) carry no stratum label. Missing-forecast
+     rows will show "available, reduction 0.0" because of the control design. The report should label
+     those rows as control rows so they aren't read as a ranking.
+
+6. Trusted exact authority, one-use ID and output guards: PASS with one LOW-MEDIUM defect [S]
+   - The public CLI only drafts or inspects (rollout.py:484-493). dispatch_once requires a callable
+     in-memory trusted_authorize and an exact dict equality on the request hash, commit, ID, limits,
+     output, freeze reference, operation, actor MattyAnd, approved, and freeze authenticated
+     (rollout.py:408-431). Authority never comes from JSON or a URL.
+   - The ledger is the canonical ROOT.parent/RuleStudy_Run_Ledger. Output must be outside both the
+     checkout and the ledger (432-441). Reservation is an exclusive "x" create plus fsync before release
+     (448-451). An existing .result.json marker refuses reuse (446-447). Drift and the environment are
+     rechecked after reservation (454-460). A result marker is always written in finally (481).
+     Output must be absent, with an existing parent outside the checkout (dispatch.py assess).
+   - F4 (LOW-MEDIUM): rollout.py:462 calls _command(path), which re-reads the request file and passes its
+     new hash to the child (175-186). The authorized hash from line 419 is not passed. If the file is
+     swapped after the line-455 check, the child would verify against the swapped file's hash.
+   - The trusted_authorize adapter itself is not in the packet: NOT_CHECKED [L].
+
+7. Containment, time/output/counter bounds and failure retention: PASS for containment and
+   bounds; FAIL for complete failure retention (F2, F3) [S]
+   - The child is gated on stdin "G". It is assigned to a Job Object before release
+     (supervisor.py:41-57, worker BOOTSTRAP:28). The bootstrap re-hashes all 169 pins (BOOTSTRAP:37-45).
+     There are a whole-batch job, nested per-pair jobs, a 3 s cleanup, cleanup verification, and
+     descendant detection (supervisor.py:70-93).
+   - Counters: execution charges 1 state + 1 transition per decision (rule_study_receiving.py:431-432),
+     and replay charges 1 + 1 per decision (rule_study_trace.py:513, 597). That is exactly 60 + 60 per
+     pair, so 360 x 60 = 21,600: sufficient with zero headroom. Eligibility enumeration
+     (completion_witness) checks only time [S]. Exhaustion leads to INCOMPLETE, which stops the batch
+     (receiving.py:514; rollout.py:248-250).
+   - Output: an observed stop threshold, not a quota, as documented.
+   - F2 (MEDIUM): if the outer 900 s supervisor times out, it kills the batch child
+     (supervisor.py:59-61, 84-88), so rollout-failure.json (rollout.py:379-392) is never written. Partial
+     pair folders and the ledger marker survive, but the structured summary (completed runs, counters,
+     per-pair supervision) is lost. The batch child computes its pair deadlines from its own start time
+     (rollout.py:308, 316-318), not the outer deadline, so it cannot stop cooperatively first.
+   - F3 (MEDIUM): pair children run with stdout and stderr sent to DEVNULL (supervisor.py:46-47). Only
+     replay failures write replay.json (rollout.py:248-250). For any other pair failure (control leak,
+     metric mismatch, incomplete or unsafe execution, drift), the reason is lost. The parent records
+     only "ValueError".
+
+8. Budget feasibility / expected incomplete-run risk: FAIL (feasibility not shown; INCOMPLETE likely) [S + measured proxy]
+   - Steps: exactly sufficient, as above.
+   - Wall time: 900 s for 360 serial pairs is 2.5 s per pair, including everything. Each pair spawns a
+     new Python process, which re-hashes 169 files in the bootstrap. pf.snapshot() in assess_after_run
+     runs 3 git calls and re-hashes 169 files (rollout.py:281). pair() runs twice per child, and each run
+     re-hashes and re-checks the full 120-case accounting (rollout.py:285, 214). reconstruct_pin runs
+     3 more git calls (receiving.py:73-115). The parent also calls pair() once per pair (rollout.py:349).
+   - Output scanning grows as the run goes on. Both the outer and the inner supervisor walk the entire
+     output tree about every 0.1 s (supervisor.py:62, 74). Measured from the retained archive
+     rule03-nov23-native/authored-artifacts.tar.gz (member listing only, no extraction), each run writes
+     154 files (30 decisions, 30 .intents, 30 .completed, 31 states, 30 transitions, ...). A full batch
+     is therefore about 59,000 entries. On a synthetic tree of that shape, the copied output_bytes()
+     logic took 2 ms (1 pair), 206 ms (180 pairs) and 442 ms (360 pairs) per scan on this Linux
+     container. NTFS with antivirus is typically several times slower, and the inner loop pays at least
+     one full scan per pair. My estimate: roughly 80 s of scanning on this container, and several hundred
+     seconds on Windows, before counting process, git and hash overhead. I could not measure the native
+     host, so this is an estimate, not a result.
+   - Output bytes: the retained 2-job traces average 393 KB (Greedy) and 524 KB (rules-v1). At 2-job
+     size, 360 runs would be about 157 MB plus per-pair request copies and replay reports, against the
+     268 MB threshold. The development cases have 32/49/39 cases with 2/3/4 jobs, so real traces are
+     larger. That leaves an estimated 1.2–1.6x headroom: moderate risk.
+   - Order effect (F7, INFO): cases run in frozen order with missing_forecast last (cases 81–120). If
+     the budget runs out, the control stratum is lost first.
+   - Conclusion: there's no evidence the 900 s cap fits, and I estimate a material probability of
+     timed_out before run 360. That outcome is safe (it fails closed), but it consumes the single-use ID
+     and, because of F2, produces no failure summary.
+
+9. Prior evidence attribution and scientific limitations: PASS [V for hashes, A for content]
+   - nisha-source.txt SHA-256 = a465045f...113, matching receiving-receipt.json.source_sha256. The
+     receipt records actor nkolekar-nk, comment 7121894902, and 2026-11-24T04:18:14Z. Its scope is
+     limited to the retained pair plus 10 authored runs and 7 comparisons.
+   - dev-nov23 SHA256SUMS.txt and REVIEWED_SHA256SUMS.txt verify for every file present. F9 (INFO):
+     authored-first-metrics.json (fd0e901e...) is listed in SHA256SUMS.txt but not included in the
+     packet, so it is NOT_CHECKED.
+   - The producer checker reports (case-check and accounting-check) are attributed producer runs, and
+     both say study_acceptance NOT_ESTABLISHED and unseen isolation INCOMPLETE [A].
+   - Limitations are stated correctly throughout: 202-trace finite verification only, no universal
+     safety or progress claim, artificial units not emissions, development rather than unseen data,
+     final isolation NOT_RUN, and historical authorization fields left null. Edison's earlier set
+     equality remains unverified. This AI review does not change any of that.
+
+10. Remaining live-host checks [L] (cannot be certified offline):
+   a. The checkout at the exact ROOT path in the request is clean (git status --porcelain empty, with
+      no untracked request or __pycache__ files), HEAD == 3b04dbbf..., HEAD is an ancestor of a
+      fetched origin/main, and it descends from a3615e6 with identical controlled hashes. Pair replay
+      requires merged_main True (receiving.py:497), so an unmerged HEAD fails pair 1.
+   b. Windows with Python 3.12, and all 74 locked distributions match (environment_evidence).
+   c. The ID rule04-dev-3b04dbbf5eaf-20261124 has no entry or .result.json in
+      ...\RuleStudy_Run_Ledger, and C:\Users\Ander\AppData\Local\Temp\R04D_3b04dbbf_20261124 is absent
+      with an existing parent.
+   d. The request file is outside the checkout and is not modified between approval and launch.
+   e. The trusted_authorize adapter authenticates Matty's fresh, exact approval of this hash, ID,
+      limits and output. The adapter code was not supplied for review.
+   f. Matty's separate, explicit approval. A PASS here grants nothing.
+
+----------------------------------------------------------------------------------------------------
+Findings (severity, file/line, problem, smallest proposed fix)
+
+F1  HIGH (feasibility, not safety). Request limits.wall_seconds=900 with scripts/rule_rollout_supervisor.py:62,74
+    and scripts/prepare_rule_study_rollout.py:214,281,285,349.
+    Problem: no measured evidence that 360 serial contained pairs fit in 900 s. Per-pair overhead
+    (process start, 2 full 169-file re-hashes, 6 git calls, 3 full accounting re-checks) plus O(n)
+    output scans run about every 0.1 s by two supervisors make timed_out likely (see item 8).
+    Smallest fix, without changing source: before approval, time a short native-host rehearsal under
+    the real supervisor on the existing authored fixtures (dummy ID, scratch output) and extrapolate
+    per-pair cost. Smallest source fix: have the inner supervisor scan only the current pair directory,
+    and throttle the outer scan to around 1 s. A source fix changes pins and needs a refreshed request
+    and a new review. Any change to the 900 s cap is Matty's explicit decision. I'm not proposing one.
+
+F2  MEDIUM. prepare_rule_study_rollout.py:308,316-318 with rule_rollout_supervisor.py:59-61,84-88.
+    Problem: if the outer timeout kills the batch, rollout-failure.json is never written.
+    Fix: pass an absolute deadline (outer start + wall_seconds - margin) to the batch child. Stop
+    starting new pairs when the remaining time is less than case_policy_seconds + 3 s cleanup + write
+    margin, then write rollout-failure.json cooperatively.
+
+F3  MEDIUM. rule_rollout_supervisor.py:46-47; prepare_rule_study_rollout.py:209-272.
+    Problem: pair failure reasons other than replay failures are discarded.
+    Fix: wrap _one_pair so it writes <pair>/pair-failure.json (exception type and message, budget
+    summary) before re-raising, or redirect the pair child's stderr to an exclusively created file in the
+    pair directory. This counts toward observed output, which is fine.
+
+F4  LOW-MEDIUM. prepare_rule_study_rollout.py:175-186, 455-462.
+    Problem: the request hash is recomputed when building the child command, instead of passing the
+    authorized hash.
+    Fix: give _command an expected-hash parameter and call _command(path, subject["request_sha256"]).
+
+F5  MEDIUM (risk). limits.output_bytes=268,435,456.
+    Problem: estimated output of about 160–220 MB (extrapolated from measured 2-job traces) leaves
+    limited headroom. Fold this into the F1 rehearsal: measure bytes per pair for 3- and 4-job cases.
+
+F6  LOW. dispatch_once ledger = ROOT.parent/RuleStudy_Run_Ledger (rollout.py:433), and output under %TEMP%.
+    Problem: one-use durability depends on a Codex-managed workspace folder, and IDs are unique only
+    per ledger. The output folder is subject to Temp cleanup such as Storage Sense.
+    Fix (operational): back up the ledger entry after reservation, and copy the output folder to
+    durable storage right after the run. Optionally, choose a non-Temp output parent in the refreshed
+    request.
+
+F7  INFO. Frozen order puts missing_forecast last. A budget stop loses the control stratum first.
+    No change proposed (the order is frozen). Report it if the run stops early.
+
+F8  INFO. 4/40 hidden profiles coincide with other cases' visible profiles (item 4). Not a leak.
+    Scope the receiving wording to "per case."
+
+F9  INFO. authored-first-metrics.json is listed in SHA256SUMS.txt but missing from the packet. Include
+    it in the next packet, or note that it was omitted on purpose.
+
+F10 INFO. equal_work rows lack a stratum label, and missing-forecast rows show reduction 0.
+    Label them as control rows, or exclude them in report tables.
+
+No defect was found in hidden-weight isolation, the scientific bindings, coverage, metric
+definitions, the authority gate design, or containment.
+
+Recommendation: NEEDS_FIX
+Reason: The packet's integrity, bindings, scope, coverage, hidden-weight isolation and metrics
+  pass. But the guide asks whether the 900 s budget is feasible, and nothing shows that it is. My
+  static and proxy estimate makes an INCOMPLETE stop likely, and that would consume the single-use
+  ID. With F2 and F3, a stop would also leave no failure summary and no per-pair failure reasons.
+  Minimum to reach READY_FOR_MATTY_APPROVAL: (1) native-host per-pair timing and bytes evidence that
+  supports 900 s and 256 MiB, or Matty's explicit acceptance of a likely-incomplete run; and
+  (2) F2 + F3 (+ F4) fixed, with a refreshed request hash and pins and a re-review of only the
+  changed lines. If Matty prefers no code change, the run is still fail-closed safe. He would be
+  approving a run likely to stop early, with weaker failure evidence.
+Unperformed checks and remaining uncertainties:
+  - No Windows execution; all timing and size figures are estimates (Linux proxy plus retained-archive
+    sizes). I did not run the reference test suite, the windows_job module, or the trusted adapter.
+  - Git ancestry, the clean tree, merged_main, the unused ID, absent output and the environment are
+    live checks (item 10).
+  - I did not run greedy policies on development cases (that would be unauthorized execution).
+    Exposure to a P1 stop is small: only 3 normal_feasible cases are closed at slot 0, and prior saved
+    greedy runs passed P1 on 43+ eligible traces [A].
+  - authored-first-metrics.json was absent.
+Files changed by reviewer: none in the packet. This result is a separate file. Two scratch helpers
+  (a scan-timing proxy and read-only JSON/tar listings) were run outside the packet. No archive was
+  extracted.
+No research execution or authorization is implied by this review.

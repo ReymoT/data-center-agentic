@@ -1,0 +1,22 @@
+{
+  "kind": "rule04_ai_review_integration_v1",
+  "source_kind": "User-supplied AI-assisted review, not independent-person scientific receiving",
+  "source_raw_sha256": "24b0b0171790d0fb8f6234ef043d4fe5671b30c462d1a3550023929debd42e24",
+  "original_request_sha256": "f797691d0bf62a157976f490903fb78aca6d372c3fbe9c8e7f2a93758daec706",
+  "old_request_status": "SUPERSEDED_DO_NOT_DISPATCH_WITH_CHANGED_CODE",
+  "reviewer_identity": "Not supplied in original result",
+  "actual_development_runs": 0,
+  "new_run_authority": false,
+  "findings": {
+    "F1": "Reduced repeated scans and parent pair loads; native fixture measurements retained; full-batch feasibility remains unproven, not silently PASS",
+    "F2": "Absolute outer deadline, cooperative pair-start reserve, fsynced atomic checkpoints and host fallback summary after hard stop",
+    "F3": "Pair-specific exception type/message and reserved budget retained before re-raise; root failure retains message",
+    "F4": "Child command receives originally authenticated raw request hash, not a later re-read hash",
+    "F5": "Fixture bytes measured; unchanged 256 MiB stop threshold, full-batch size remains uncertain",
+    "F6": "Replacement request to propose non-Temp evidence output; canonical ledger remains one-use; preserve receipt/output export after actual execution",
+    "F7": "Frozen order preserved; early stop must disclose missing control coverage, no stratum reordering",
+    "F8": "Original receiving unchanged; clarify no per-case hidden-profile disclosure, cross-case numeric collisions are not ruled out",
+    "F9": "Original authored-first-metrics.json to be included in replacement packet unchanged",
+    "F10": "Comparison rows now include stratum and explicit control_not_ranking label"
+  }
+}

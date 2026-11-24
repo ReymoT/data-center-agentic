@@ -1,5 +1,8 @@
 # RULE04 scoped independent accounting receiving — November 24 integration
 
+November 24 clarification: hidden-weight isolation is per case. Four hidden profiles numerically coincide with visible profiles of other cases in the small artificial domain; no cross-case uniqueness or leak is established. Nisha's original supplied text remains unchanged.
+
+
 Nisha's [original reply](https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7121894902)
 was posted November 23 at 21:18 Arizona (November 24 04:18 UTC). Matty accepts
 PASS for its recorded scope. Her completed receiving is no longer a missing handoff.

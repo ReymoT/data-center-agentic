@@ -1,5 +1,10 @@
 # RULE04 protocol freeze review — November 24
 
+Later review: [direct controller fixes](RULE04_AI_REVIEW_FIXES_NOV24.md) supersede
+the original controller pins with [revision 2](RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json).
+Scientific bindings and inputs are unchanged. The old request is not usable with
+changed code; a fresh merged-source request and exact approval remain necessary.
+
 Matty authorized completing this review and recording the freeze. This does not
 authorize an actual batch. The [machine-readable freeze](RULE04_PROTOCOL_FREEZE_NOV24.json)
 pins the accepted rule/verifier/generator/controller/metric software, protocol and

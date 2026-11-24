@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "4a757d9420f50e694ee0801706fa6772d5363fc6d326b214c22d4a3bc504a436",
+      "sha256": "c184fd6858ddb5c00fcd531be46c2db951da34e0ff6a69ef5a297ae313fd642b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "6f61d3ba81d87115b2c64e6256d5158a59ada0effc532c900625353119091ff1",
+      "sha256": "224e687c56d9a14408be79345a14357ea34338af9cc882b91a8ce5e55b147a01",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "b465daa06deb21501cfac8ad95c2a3d13b6ea8254d434e978eb099d97b4541fd",
+      "sha256": "82989dda4d9a5969766f12619eeb9a0e53df4b92f539a0c67629f0cc6f731d84",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "84a54e0ae7d2827cb16b641ca02abd4898903a123f5724113d099d55f20d4fe0",
+      "sha256": "2bd08af70fe8bb9b2c9329338055b672f7b6a57bef00ef5c6f554808646a60ac",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "8521ccfecae8e2993bee70478c9cf8a41ca767496b6d0759c94b640b2a4cbee9",
+      "sha256": "0a4eba494eb318484a7421c526d017518cba03f8519beb2a0372ff82860ac50a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -975,27 +975,27 @@
     },
     {
       "path": "docs/handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md",
-      "sha256": "8c90d42d78e7ca461be7899a5dc51127a5c161bcd882ddd8d7cc7c06d6b821bc",
+      "sha256": "0672c2b1313dc40413b258a3371a1bc4735d7cfcb65b100f9b14a6987d8da01e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE04_DISPATCH_PREPARATION_NOV24.md",
-      "sha256": "7498385740e5e34c8ebcb33083a1663b7c24da512aaf605bc174f1c8b2d2bed2",
+      "sha256": "64ee4cb289025d418bc8f3f020472040fa236cad90c45807d304c18c162e616e",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "5e3efd878224e37b6662ce8cd2c89fa1d13016e8f461771f4deffae9252fa8c1",
+      "sha256": "f2bbc335e84b311a32419b1a98892675beb1f40290ebe5f36db61c19fe5c2c7c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "scripts/rule_rollout_supervisor.py",
-      "sha256": "10540f4caccd568c6c4cf845aac8760b541c283497866ca77a86b90ab012a88c",
+      "sha256": "1bbdbb6e045e871ae60332e2f7543832e702144b86c4d61db2e0f4d8b7d13885",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "tests/runtime/test_rule04_rollout_preparation.py",
-      "sha256": "b824a10d8ac36de22fcae31108b4c78b0540fa193459e2950047afaaed760133",
+      "sha256": "7088b3469b3fff9beae4b1487c21a37ca375effdf7175f749e50a0ae424b814f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1005,7 +1005,7 @@
     },
     {
       "path": "ui/rule_demo_assets/capture-receipt.json",
-      "sha256": "a5f55748a73eabd3e2ba11e6538deddf964350efebd0c4bd9440cae6fbd0c353",
+      "sha256": "7756baa95f024d486b648867989d46d312ee8e79a0c22568bf02a09088b5f623",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1040,12 +1040,37 @@
     },
     {
       "path": "docs/rule_study/RULE04_FREEZE_REVIEW_NOV24.md",
-      "sha256": "5e29a43bde7c03226d7c28a6fab4fbc155fe63777f18b9855d8f436aeb31b9e0",
+      "sha256": "f0b24d5d2d367a8506fa8d577ef60c4ecb2260d478b93ef5bac0f63ba9c3c964",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/RULE04_ASSEMBLY_REVIEW_NOV24.md",
       "sha256": "66b3f074613234a5e6d023209620f54813f4ffa740f67803654ef193d422e3a4",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-ai-review-nov24/integration-receipt.json",
+      "sha256": "c647ba35c20747c45180b4cf32cecd5d10e2a44f61d4348eb5549f53adcb0732",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-ai-review-nov24/native-fixture-samples.json",
+      "sha256": "90e4c670b25c1179b6ccc09d08188e1bf950bedc05a5d0727f815b68f3326de2",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-ai-review-nov24/source.txt",
+      "sha256": "24b0b0171790d0fb8f6234ef043d4fe5671b30c462d1a3550023929debd42e24",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "docs/rule_study/RULE04_AI_REVIEW_FIXES_NOV24.md",
+      "sha256": "5bcdd8679f58bbf65e4aa30bb8ae3f00041c17028fc113999e1ce38669cbb586",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW2.json",
+      "sha256": "1eeaa43b9de520e15ac6ed1370a871596f6a8e0eabd9d720a8466548bcf7df39",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

@@ -65,9 +65,15 @@ The canonical external ledger is `RuleStudy_Run_Ledger` beside the checkout.
 
 ## Checks and remaining gates
 
+Later November 24: [AI review corrections](RULE04_AI_REVIEW_FIXES_NOV24.md) add fixed
+authorized-hash handoff, shared absolute deadline, cooperative stop reserve, durable
+checkpoints, host/pair failure summaries and one-second outer/active-pair output scans.
+The proposed 900-second/256 MiB envelope is unchanged and full-batch feasibility is
+not proven. Refresh source pins/request under the revised freeze before approval.
+
 Offline tests cover request/closed-gate/source guards, resource bounds, one-use ID,
 drift after reservation, failed cleanup, actual dummy timeout/output/descendant stops,
-nested containment and fail-fast/no-retry behavior. Six small authored fixture runs across the three policies
+nested containment and fail-fast/no-retry behavior. Eighteen small authored fixture runs across the three policies
 exercise the real runner/replay and hidden-weight accounting path; they are unit
 fixtures, not scientific evidence or the 120-case batch.
 

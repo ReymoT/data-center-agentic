@@ -135,14 +135,22 @@ def test_nested_job_containment_for_dummy_pair(tmp_path):
 
 @pytest.mark.parametrize("hidden", [False, True])
 @pytest.mark.parametrize("policy", w.POLICIES)
+@pytest.mark.parametrize("job_count", [2, 3, 4])
 def test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(
-    tmp_path, monkeypatch, hidden, policy
+    tmp_path, monkeypatch, hidden, policy, job_count
 ):
     from dc_sustainability.evaluation import rule_study_receiving as rv
     from dc_sustainability.evaluation import rule_study_trace as tr
     from dc_sustainability.rule_study import cases, runner
 
     fixture = replace(cases.CASE_A, forecast_present=not hidden)
+    if job_count > 2:
+        fixture = replace(
+            fixture,
+            jobs=fixture.jobs
+            + tuple(cases._job(f"J{i}", 20, 3, True) for i in range(3, job_count + 1)),
+            capacity_kw=100,
+        )
     weights = list(fixture.score_profile)
     parsed = tr.case_from_dict(fixture.case_json())
     monkeypatch.setattr(
@@ -312,3 +320,120 @@ def test_batch_stops_on_first_failed_pair_and_preserves_failure(tmp_path, monkey
     # The fixed Python source remains at -c's argument, not in the ROOT argument.
     assert calls[0][4] == "-c" and "RULE04_WORKER_PAIR" in calls[0][5]
     assert calls[0][6] == str(w.ROOT)
+
+
+def test_command_keeps_authorized_hash_when_request_swapped(tmp_path):
+    path = tmp_path / "request.json"
+    path.write_text('{"changed":true}')
+    command = w._command(path, "a" * 64, deadline=123.5)
+    assert command[-1] == "a" * 64
+    assert "RULE04_WORKER_DEADLINE" in command[5] and "123.5" in command[5]
+    done = subprocess.run(command, input=b"G", capture_output=True)
+    assert done.returncode == 91  # refuses swapped bytes before project import
+
+
+def test_host_summary_after_kill_retains_last_complete_checkpoint(tmp_path):
+    out = tmp_path / "output"
+    out.mkdir()
+    w._write(
+        out / "checkpoint-0001.json",
+        {
+            "completed_runs": 1,
+            "charged_steps_completed_pairs_only": {"states": 60, "transitions": 60},
+        },
+    )
+    (out / "checkpoint-0002.pending").write_text('{"incomplete":')
+    w._supervisor_failure(out, {"status": "timed_out", "cleanup_verified": True})
+    result = w.read_json(out / "rollout-failure.json")
+    assert (
+        result["completed_runs"] == 1
+        and result["charged_steps_completed_pairs_only"]["states"] == 60
+    )
+    assert result["supervision"]["status"] == "timed_out" and not result["retry_allowed"]
+    original = (out / "rollout-failure.json").read_bytes()
+    w._supervisor_failure(out, {"status": "failed"})
+    assert (out / "rollout-failure.json").read_bytes() == original
+    (out / "rollout-failure.json").write_text('{"cut_off":')
+    w._supervisor_failure(out, {"status": "timed_out"})
+    assert w.read_json(out / "rollout-supervisor-failure.json")["completed_runs"] == 1
+    assert (out / "rollout-failure.json").read_text() == '{"cut_off":'
+
+
+def test_pair_exception_message_survives_devnull(tmp_path, monkeypatch):
+    request = {
+        "kind": w.KIND,
+        "plan": {"output_directory": str(tmp_path)},
+        "limits": limits(),
+        "freeze_reference": "fixture",
+    }
+    monkeypatch.setenv("RULE04_WORKER_PAIR", json.dumps(["A", "rules-v1", 100, 100]))
+    monkeypatch.setattr(w, "pair", lambda: ({}, {}, {"A": object()}))
+    monkeypatch.setattr(w, "assess_after_run", lambda req: False)
+
+    def fail(*args):
+        raise ValueError("specific metric mismatch fixture")
+
+    monkeypatch.setattr(w, "_one_pair", fail)
+    with pytest.raises(ValueError, match="specific metric"):
+        w.execute_prepared(request)
+    failure = w.read_json(tmp_path / "A-rules-v1/pair-failure.json")
+    assert failure["message"] == "specific metric mismatch fixture"
+    assert failure["reserved_remaining_budget"] == {"states": 100, "transitions": 100}
+
+
+def test_batch_reserves_cleanup_margin_before_starting_pair(tmp_path, monkeypatch):
+    monkeypatch.setattr(w, "monotonic", lambda: 10.0)
+    monkeypatch.setenv("RULE04_WORKER_DEADLINE", "20.0")
+    monkeypatch.setattr(
+        w,
+        "pair",
+        lambda: ({"cases": [{"case_id": "A", "stratum": "fixture"}]}, {}, {"A": object()}),
+    )
+    monkeypatch.setattr(w.supervisor, "supervise", lambda *a, **k: pytest.fail("no pair may start"))
+    with pytest.raises(ValueError, match="budget exhausted"):
+        w._batch({"limits": limits()}, tmp_path / "out")
+    assert w.read_json(tmp_path / "out/rollout-failure.json")["completed_runs"] == 0
+
+
+def test_missing_forecast_comparisons_explicitly_labeled_control():
+    rows = w.comparison_rows(
+        [{"case_id": "hidden", "reduction": 0.0}, {"case_id": "normal", "reduction": 0.2}],
+        {"hidden": "missing_forecast", "normal": "normal_feasible"},
+    )
+    assert rows[0]["comparison_role"] == "control_not_ranking"
+    assert rows[1]["comparison_role"] == "development_comparison"
+
+
+def test_expired_supervisor_deadline_never_starts_process(tmp_path, monkeypatch):
+    monkeypatch.setattr(sup.subprocess, "Popen", lambda *a, **k: pytest.fail("expired launch"))
+    with pytest.raises(ValueError, match="expired"):
+        sup.supervise([], 1, output=tmp_path, limit_bytes=1024, cwd=w.ROOT, deadline=0)
+
+
+@pytest.mark.parametrize("job_count", [2, 3, 4])
+def test_contained_authored_fixture_resource_sample(tmp_path, job_count, record_property):
+    """Native-host ordinary fixture only, not a study or capacity guarantee."""
+    if os.name != "nt":
+        pytest.skip("Windows Job Object resource sample")
+    code = (
+        "import sys,importlib.util,pathlib,pytest; assert sys.stdin.buffer.read(1)==b'G'; "
+        f"s=importlib.util.spec_from_file_location('fixture_test',{__file__!r}); "
+        "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
+        "mp=pytest.MonkeyPatch(); "
+        f"m.test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(pathlib.Path({str(tmp_path)!r}),mp,False,'rules-v1',{job_count}); "
+        "mp.undo()"
+    )
+    result = sup.supervise(
+        [sys.executable, "-B", "-c", code],
+        30,
+        output=tmp_path,
+        limit_bytes=8 * 1024 * 1024,
+        cwd=w.ROOT,
+    )
+    assert result["status"] == "succeeded" and result["cleanup_verified"]
+    record_property(
+        "scope", "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
+    )
+    record_property("jobs", job_count)
+    record_property("native_contained_elapsed_s", result["elapsed_total_s"])
+    record_property("fixture_output_bytes", sup.output_bytes(tmp_path))
