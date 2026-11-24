@@ -220,7 +220,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "40b9dfb93207960bf3c3a731e666054d6e3398c2c109fdb76b61e6a5bd49ca82",
+      "sha256": "3506ac9ceeb6428a5e253ac34f631b356de131ce111b070997385488e19e31b7",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -955,7 +955,7 @@
     },
     {
       "path": "ui/rule_demo.html",
-      "sha256": "a7b1feb4d312e3fd77c0d22b8e6f47edc0a26cd96d3b16ebec47df6439563cbc",
+      "sha256": "520a433ba0471d6826d15f82f9875482d469da4637b2dacd0f3eb7b075d2d25b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1005,7 +1005,7 @@
     },
     {
       "path": "ui/rule_demo_assets/capture-receipt.json",
-      "sha256": "45cb28826c15174a9aba80ccd61d71e38bd8fe4e59b15cbe561f2a7d642a7537",
+      "sha256": "6dc2274d44dc0c1c800d317108abbd429902f81d84be2cc4873562d10b7e4f44",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
