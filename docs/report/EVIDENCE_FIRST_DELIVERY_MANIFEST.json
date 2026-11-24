@@ -995,7 +995,7 @@
     },
     {
       "path": "tests/runtime/test_rule04_rollout_preparation.py",
-      "sha256": "251ce2200ddfc48314edbd915f93c7a2b2f0264586bdfeea67843e9258b6552f",
+      "sha256": "5f62a8fa15f2768fce9a2a02e5adf096d27a1561e101ec995acb12733216e024",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
