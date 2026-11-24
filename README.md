@@ -9,6 +9,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 24 freeze review: [the protocol record](docs/rule_study/RULE04_FREEZE_REVIEW_NOV24.md) fixes the accepted software/design and retained development inputs/metrics. Final-set isolation remains untested, and no run is authorized. Exact proposed limits and a fresh single-use request still require Matty's approval. Earlier dated pending-freeze notes below are historical where superseded.
+
 November 24 current: Nisha's independent accounting/metric receiving is accepted within its recorded scope: the retained 120-case development pair and ten authored metric illustrations. The original reply and hashes are preserved in [the receiving record](docs/handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md). The first demo package is merged through #275. No policy has run on the 120 development cases; final isolation, whole-study freeze, fresh exact run approval, comparative evaluation and reproduction remain pending. Earlier dated pending-receiving statements below are historical where superseded.
 
 November 23 accounting handoff: [Edison supplied the actual partial development pair and first metrics](docs/handoffs/RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md). Original files are preserved; post-processing was directly corrected outside the frozen scientific package. Independent accounting/metric receiving, whole-study freeze and authorized development/final rollouts remain pending. The 10 authored metric examples are saved-record illustrations, not unseen performance. Earlier missing-file status below is historical where superseded.

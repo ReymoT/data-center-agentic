@@ -11,9 +11,10 @@ November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_
 | Bounded verification and new-scope receiving | PASS within declared primary/authored scope | Nisha actual reply and 202 completely replayed traces; optional extended domain excluded |
 | Verified implementation/verifier baseline | PASS for result reuse only | Exact 163 source/lock/specification hashes; a scientific change invalidates reuse |
 | Actual accounting/metric acceptance | PASS within retained-input/authored scope | Nisha original comment 7121894902; no 120-case rollout or final-isolation acceptance |
-| Whole-study protocol/input/metric freeze | BLOCKED | Scoped accounting received; exact new dispatcher/source/resource envelope and final-isolation gates remain |
+| Software/design/development-input metric freeze | RECORDED, not execution authority | RULE04_PROTOCOL_FREEZE_NOV24.json; controlled source unchanged, exact run limits still proposed |
+| Final-set isolation | NOT_RUN | Final set absent; separate authorization and no-overlap/stratum checks required before final evaluation |
 | Final evaluation and clean reproduction | BLOCKED | No final run; separate exact authorization after freeze, then reproduction evidence |
-| Report/demo/release | PARTIAL | Methods/diagrams and first demo package merged; final integration, layout, release and submission remain |
+| Report/demo/release | PARTIAL | Saved demo complete (#246 closed); final report/PDF, release and submission remain |
 
 This table does not overwrite original attempt statuses or assert blanket study completion.
 
