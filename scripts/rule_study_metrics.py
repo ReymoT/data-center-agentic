@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from dc_sustainability.evaluation import rule_study_metrics as m  # noqa: E402
+from scripts import rule_study_metrics_core as m  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:

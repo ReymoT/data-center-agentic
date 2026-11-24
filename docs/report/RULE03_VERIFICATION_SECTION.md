@@ -159,3 +159,13 @@ primary replays and 9 + 43 = 52 eligible P1 cases. Authored rules-v1 S4 has thre
 checks and no violations; authored arithmetic has eight checks and no mismatches.
 The accepted source baseline freezes this bounded verification result only, not
 the final metric/input protocol. Optional extended coverage was not executed. [E16]
+
+## Authored metric illustration (not unseen evaluation)
+
+The [partial RULE04 handoff](../handoffs/RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md)
+now supplies files and a corrected read-only projection of the 10 saved authored
+runs. Scenario A totals are 8000 artificial score-kWh for rules-v1/Greedy B versus
+12000 for Greedy A; B-progress totals are equal. B has no positive baseline, so its
+comparison is unavailable. These are authored illustrations, with independent
+metric receiving pending, not evidence of unseen generalization, real emissions
+savings or policy superiority. No policy has run on the 120 development cases. [E17]

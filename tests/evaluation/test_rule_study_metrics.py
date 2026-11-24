@@ -1,10 +1,13 @@
 """RULE-04 metric records: hand-built run records, no policy or simulator runs."""
 
+import hashlib
 import json
+import tarfile
+from pathlib import Path
 
 import pytest
 
-from dc_sustainability.evaluation import rule_study_metrics as m
+from scripts import rule_study_metrics_core as m
 
 SCORES = [300, 100] + [200] * 28
 
@@ -37,6 +40,7 @@ def case(case_id="A", scores=SCORES):
 
 
 def result(policy, starts, *, case_id="A", case_sha="c" * 64, missed=()):
+    missed = missed or tuple(sorted({"J1", "J2"} - starts.keys()))
     per_job = [
         {
             "job_id": j,
@@ -175,8 +179,94 @@ def test_load_run_and_report_from_folders(tmp_path):
     (folder / "case.json").write_text(json.dumps(case()), "utf-8")
     (folder / "result.json").write_text(json.dumps(result("rules-v1", {"J2": 0})), "utf-8")
     (folder / "decisions" / "decision-00.json").write_text(json.dumps(decision(0, ["J2"])), "utf-8")
-    report = m.metrics_report([folder], label="fixture")
-    assert report["record_kind"] == m.RECORD_KIND and len(report["runs"]) == 1
+    with pytest.raises(ValueError, match="incomplete"):
+        m.metrics_report([folder], label="fixture")
     (folder / "decisions" / "decision-02.json").write_text(json.dumps(decision(2, [])), "utf-8")
     with pytest.raises(ValueError, match="contiguous"):
         m.load_run(folder)
+
+
+def test_equal_work_refuses_impact_mismatch():
+    a = _rec("greedy_a", {"J1": 0, "J2": 0})
+    other = _rec("rules-v1", {"J1": 1, "J2": 0})
+    other["synthetic_impact"]["matches_producer"] = False
+    assert m.equal_work([a, other])[0]["available"] is False
+
+
+def test_equal_work_refuses_unchecked_impact_and_violations():
+    a = _rec("greedy_a", {"J1": 0, "J2": 0})
+    other = _rec("rules-v1", {"J1": 1, "J2": 0})
+    a["synthetic_impact"]["matches_producer"] = None
+    assert m.equal_work([a, other])[0]["available"] is False
+    a["synthetic_impact"]["matches_producer"] = True
+    other["execution_violations"] = 1
+    assert m.equal_work([a, other])[0]["available"] is False
+
+
+def test_duplicate_policy_cannot_silently_replace_baseline():
+    a = _rec("greedy_a", {"J1": 0, "J2": 0})
+    with pytest.raises(ValueError, match="duplicate"):
+        m.equal_work([a, a, _rec("rules-v1", {"J1": 1, "J2": 0})])
+
+
+def test_different_producer_and_incomplete_run_are_not_comparable():
+    a = _rec("greedy_a", {"J1": 0, "J2": 0})
+    other = _rec("rules-v1", {"J1": 1, "J2": 0})
+    other["code_commit"] = "another producer"
+    assert m.equal_work([a, other])[0]["available"] is False
+    other["code_commit"] = a["code_commit"]
+    other["status"] = "partial"
+    assert m.equal_work([a, other])[0]["available"] is False
+
+
+def test_selected_current_starts_must_match_execution():
+    d = decision(0, ["J1"])
+    d["proposal_stages"][0]["plan"] = {"starts": [{"job_id": "J2", "start_slot": 0}]}
+    rec = m.run_metrics(case(), result("rules-v1", {"J1": 0}), [d])
+    assert rec["execution_violations"] == 1
+
+
+def test_accounting_cannot_drop_or_change_completed_work():
+    r = result("rules-v1", {"J1": 0, "J2": 0})
+    r["accounting"]["per_job"].pop()
+    with pytest.raises(ValueError, match="coverage"):
+        m.run_metrics(case(), r, [])
+    r = result("rules-v1", {"J1": 0})
+    r["accounting"]["per_job"][0]["power_kw"] = 1
+    with pytest.raises(ValueError, match="power"):
+        m.run_metrics(case(), r, [])
+
+
+@pytest.mark.parametrize("text", ['{"x":1,"x":2}', '{"x":NaN}', "[]"])
+def test_metric_json_is_strict(tmp_path, text):
+    path = tmp_path / "input.json"
+    path.write_text(text, encoding="utf-8")
+    with pytest.raises(ValueError):
+        m._load(path)
+
+
+def test_saved_authored_metrics_and_corruption_refusal(tmp_path):
+    evidence = Path(__file__).resolve().parents[2] / "docs/evidence/rule03-nov23-native"
+    raw = (evidence / "authored-artifacts.tar.gz").read_bytes()
+    receipt = json.loads((evidence / "attempt-receipt.json").read_bytes())
+    assert hashlib.sha256(raw).hexdigest() == receipt["authored_archive_sha256"]
+    with tarfile.open(evidence / "authored-artifacts.tar.gz", "r:gz") as archive:
+        for member in archive:
+            parts = Path(member.name).parts
+            if len(parts) >= 3 and parts[2] in ("A-greedy_a", "A-rules-v1"):
+                assert member.isfile() and not member.name.startswith("/") and ".." not in parts
+                target = tmp_path.joinpath(*parts)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(archive.extractfile(member).read())
+    a = tmp_path / "authored/greedy_a/A-greedy_a"
+    r = tmp_path / "authored/rules-v1/A-rules-v1"
+    report = m.metrics_report([a, r], label="retained-file read only")
+    assert len(report["runs"]) == 2
+    assert all(row["execution_violations"] == 0 for row in report["runs"])
+    assert report["equal_work_vs_greedy_a"][0]["reduction"] == pytest.approx(1 / 3)
+    result_path = r / "result.json"
+    data = json.loads(result_path.read_bytes())
+    data["decision_sha256s"][0] = "0" * 64
+    result_path.write_text(json.dumps(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="integrity"):
+        m.metrics_report([a, r], label="corrupt retained fixture")

@@ -2,7 +2,8 @@
 
 Retained development-seed files and first metric records for Nisha's independent
 accounting receiving. Development only: no final seed was drawn, and no policy,
-checker, simulator or model ran to produce these files.
+production checker, simulator or model ran to produce these files. The supplied
+independent-checker reports are Edison's local invocations, not Nisha's separate-person receiving.
 
 | File | What it is |
 |---|---|
@@ -44,3 +45,14 @@ violations; in A, rules-v1 and Greedy B report 8,000 versus Greedy A's 12,000 sc
 (reduction 1/3, artificial units; an observed authored example, not a measured advantage); B-progress is equal (0); B has no starts for any policy,
 so its comparison is unavailable (Greedy A total 0), never zero. Scores are artificial
 weights, not g/kWh or emissions. Independent accounting receiving is Nisha's, still pending.
+
+## Direct manager review
+
+[Review findings and scope](../../handoffs/RULE04_DEVELOPMENT_HANDOFF_REVIEW_NOV23.md)
+preserve the five original evidence files and their hashes. Reporting now lives
+outside the frozen scientific package in `scripts/rule_study_metrics_core.py`;
+the CLI is unchanged. `authored-metrics-reviewed.json` is a separate corrected
+read-only projection, with `manager-review-receipt.json` and
+`REVIEWED_SHA256SUMS.txt`. Neither report establishes unseen performance or
+independent metric acceptance. New actual generation/rollout needs the recorded
+bounded authorization; the commands above document reproduction, not permission.
