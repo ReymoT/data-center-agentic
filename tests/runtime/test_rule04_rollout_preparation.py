@@ -457,8 +457,9 @@ def test_full_nested_path_layout_on_native_short_parent():
             p.parent.mkdir(parents=True)
             p.write_text("{}")
             assert p.read_text() == "{}"
-        # The review-2 workspace output really is too long, even with a short name.
-        assert w.artifact_path_length(w.ROOT.parent / "R4_ff9cab9d_r2", [case_id]) >= 260
+        # A deliberately deep root reproduces the defect independent of CI's
+        # shorter checkout location. This path is calculated, never created.
+        assert w.artifact_path_length(home / ("x" * 85), [case_id]) >= 260
 
 
 def test_batch_reserves_cleanup_margin_before_starting_pair(tmp_path, monkeypatch):
