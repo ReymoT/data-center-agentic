@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "8967d0bde911a8276905be2e66d0569f313f9e6a9c18338405b75cf2c63f7339",
+      "sha256": "c2c6e8e960be3a6e3b25c1c50533e67ff2934bbdf6d2f682d8572bc3390deed5",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "59e44e28c3419c261a62d4f3d0243f6bd498286a61aa65fcd1d2f9b602088ab6",
+      "sha256": "eff4891e267ab213b5f6673863366187ba5f7295df1429c6c50c0cc95b712925",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "8aab79386e1c17f5cad69c2a9a6cc966ca831e35e054fc8a8608f685c2d64695",
+      "sha256": "a4cf67562154e2ae5149dded69f5c5a6b80de34182fb7c7ff249669e3de5adc4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "e1ec2894c4c2fd136be2427c398be12a6f79539fcc7b75941971bbbf283a0ef2",
+      "sha256": "039168d2761ee23244dd388d2a5a917c2a7bf803253296a7b820fc247bd2f7d0",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1040,7 +1040,7 @@
     },
     {
       "path": "docs/rule_study/RULE04_FREEZE_REVIEW_NOV24.md",
-      "sha256": "a4361b0bcb448f7d8338bff293f627813097aa8e8afed9b3a466314c5684916b",
+      "sha256": "ec9c2771c0af29b7bc2f9cc8ee152fefa31867aec111e48cc1ef898b0508b36c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1096,6 +1096,31 @@
     {
       "path": "docs/rule_study/RULE04_REVIEW3_FIXES_NOV24.md",
       "sha256": "2565c40384d19ee9538d0b86d7a1b8a930650f62a70646aecbcffd9511a9079d",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/build_rule04_summary.py",
+      "sha256": "04e25e1e955855c8bdeef0b7de7cf15048b566c7325cbaa828987114481921d7",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/rule04_summary_core.py",
+      "sha256": "f353f3e7506952d6ad4c27137c97d3172225abdfbecfcc2bdf76294ebaad9154",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/rule_study/test_rule04_summary.py",
+      "sha256": "ec5d0220e2df4b0b69525afd8afb0fe9d9edda1673be94e0b7a657e26c50e7a0",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE04_SUMMARY_REVIEW_NOV24.md",
+      "sha256": "cd4af2638a96bab4cd853f146f0e6e49f7ce15efd9189a749a6a8a3c7765194e",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json",
+      "sha256": "eb2b8900ce604218ed8ed2bac57de3aa11bc25a5842768b32e2a74c012217903",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

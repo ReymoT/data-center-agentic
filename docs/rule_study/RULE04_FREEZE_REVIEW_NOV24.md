@@ -1,5 +1,8 @@
 # RULE04 protocol freeze review — November 24
 
+Latest source inventory: [reporting revision 4](RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json) adds two read-only summary scripts (171 total), preserving all earlier hashes. Request 3166a21c…4ef05 is superseded; fresh merged-source preparation is required.
+
+
 Current controller revision: [review 3 fixes](RULE04_REVIEW3_FIXES_NOV24.md) and
 [revision 3 pins](RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json). Both earlier requests
 are superseded. Full nested Windows paths are now checked before ID reservation.

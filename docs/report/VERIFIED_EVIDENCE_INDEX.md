@@ -49,6 +49,8 @@ held-out finding or grant publication rights for private artifacts.
 
 | E23 | [Second AI review fixes](../rule_study/RULE04_REVIEW3_FIXES_NOV24.md), [revision 3 freeze](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json) | Native path-layout tests, guarded short output proposal, deadline/provenance/partial-coverage fixes; no study execution |
 
+| E24 | [Reviewed retained-output summary](../handoffs/RULE04_SUMMARY_REVIEW_NOV24.md) | Read-only source/metric checks, partial coverage tables and matched-subset plot utility; no new study results |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
