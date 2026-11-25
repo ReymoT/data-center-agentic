@@ -9,6 +9,8 @@ All teammates contribute their technical sections, interface coordination and re
 
 # Data Center Sustainability Agent
 
+November 25 preparation: [selective continuation support](docs/rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md) can authenticate a preserved development-attempt prefix and prepare only its unexecuted suffix. It cannot retry failed pairs or reuse an authorization. The public CLI inspects only; another execution requires new merged pins and fresh exact approval. Current evidence handoff is separate from this offline implementation, and earlier dated entries remain historical records.
+
 November 24 actual attempt: [the approved development attempt failed](docs/rule_study/RULE04_ID_FIX_NOV24.md) on episode-ID schema validation after3.719seconds, with verified cleanup and zero completed case-policy runs. Its ID is consumed. The controller correction is prepared; another attempt requires corrected merged pins and fresh exact authorization. New comparison results remain pending. Earlier same-day pre-run statements below describe their historical state.
 
 November 24 reporting update: [the reviewed summary utility](docs/handoffs/RULE04_SUMMARY_REVIEW_NOV24.md) checks retained artifacts and produces descriptive tables/plots without running policies. Its two new scripts require refreshed source pins and a new request; no study result or run approval is implied.

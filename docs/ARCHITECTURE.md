@@ -1,5 +1,7 @@
 # Architecture for the final scheduling study
 
+November 25 controller preparation: [selective continuation](rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md) authenticates an original development-attempt prefix before selecting its unexecuted suffix. It preserves the parent output, checks raw inventory and consumed authority, carries control signatures across attempt boundaries and requires a separate output and fresh approval. Scheduler, verifier and metric definitions are unchanged. A scoped suffix PASS never automatically becomes a full-study or generalization claim. Earlier dated records below remain historical.
+
 November 24 actual attempt: [the approved development attempt failed](rule_study/RULE04_ID_FIX_NOV24.md) on episode-ID schema validation after3.719seconds, with verified cleanup and zero completed case-policy runs. Its ID is consumed. The controller correction is prepared; another attempt requires corrected merged pins and fresh exact authorization. New comparison results remain pending. Earlier same-day pre-run statements below describe their historical state.
 
 

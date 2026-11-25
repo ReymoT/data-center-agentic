@@ -272,6 +272,7 @@ def dispatch_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(w, "ROOT", repo)
     monkeypatch.setattr(w, "assess", lambda r: {"problems": []})
     monkeypatch.setattr(w, "assess_after_run", lambda r: False)
+    monkeypatch.setattr(w, "selection", lambda *a, **k: [(str(i), "fixture") for i in range(360)])
     monkeypatch.setattr(w.worker, "environment_evidence", lambda: {"fixture": True})
     request = {
         "kind": w.KIND,
@@ -362,6 +363,7 @@ def test_result_marker_alone_also_refuses_id_reuse(tmp_path, monkeypatch):
 
 
 def test_batch_stops_on_first_failed_pair_and_preserves_failure(tmp_path, monkeypatch):
+    monkeypatch.setattr(w, "selection", lambda *a, **k: [("A", "rules-v1")])
     out = tmp_path / "out"
     request = {"plan": {"output_directory": str(out)}, "limits": limits()}
     monkeypatch.setattr(
@@ -529,6 +531,7 @@ def test_full_nested_path_layout_on_native_short_parent():
 
 
 def test_batch_reserves_cleanup_margin_before_starting_pair(tmp_path, monkeypatch):
+    monkeypatch.setattr(w, "selection", lambda *a, **k: [("A", "rules-v1")])
     monkeypatch.setattr(w, "monotonic", lambda: 10.0)
     monkeypatch.setenv("RULE04_WORKER_DEADLINE", "20.0")
     monkeypatch.setattr(

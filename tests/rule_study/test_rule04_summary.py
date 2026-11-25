@@ -22,6 +22,35 @@ ORIGINAL_INPUTS = core._inputs
 ORIGINAL_VALIDATE = core._validate_metric
 
 
+@pytest.mark.parametrize("tamper", [False, True])
+def test_suffix_pass_is_partial_global_coverage_and_bound_to_request(tmp_path, monkeypatch, tamper):
+    metrics = [metric("n1", "rules-v1", 100)]
+    run, cases = make_run(tmp_path, metrics)
+    request = {"kind": rollout.SUFFIX_KIND, "parent": {"sha256": "fixture"}}
+    path = run / "request-n1-rules-v1.json"
+    path.write_text(json.dumps(request))
+    result_path = run / "n1-rules-v1/pair-result.json"
+    result = core._json(result_path)
+    result["pair_request_sha256"] = core._sha(path)
+    result_path.write_text(json.dumps(result))
+    status_path = run / "rollout-report.json"
+    status = core._json(status_path)
+    status.update(
+        scope_complete_only=True, selected_pairs=[["n1", "rules-v1"]], parent=request["parent"]
+    )
+    if tamper:
+        status["selected_pairs"] = [["n2", "rules-v1"]]
+    status_path.write_text(json.dumps(status))
+    monkeypatch.setattr(rollout, "selection", lambda *a, **k: [("n1", "rules-v1")])
+    if tamper:
+        with pytest.raises(ValueError, match="authenticated suffix"):
+            core.load_run(run, cases)
+    else:
+        data = core.load_run(run, cases)
+        assert not data["complete"]
+        assert core.summarize(data)["coverage_status"] == "PARTIAL"
+
+
 @pytest.fixture(autouse=True)
 def synthetic_reader(monkeypatch):
     """Only summary-math fixtures bypass trace/input validation, never CLI subprocesses."""
