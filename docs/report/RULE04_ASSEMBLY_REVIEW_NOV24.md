@@ -1,5 +1,8 @@
 # Report and saved-demo assembly review — November 24
 
+Actual attempt update, November24: the exact approved development attempt failed on adapter episode-ID validation; cleanup passed and zero case-policy runs completed. The ID is consumed. A direct controller correction and fresh exact authorization are needed before another attempt. This produces no comparative finding and does not change accepted finite verification/authored evidence. Earlier pre-run wording is historical; the comparison stays pending.
+
+
 Review by Matty. This reviews the current working report and saved demo; it does
 not claim Matty personally rehearsed or that the final PDF has been delivered.
 

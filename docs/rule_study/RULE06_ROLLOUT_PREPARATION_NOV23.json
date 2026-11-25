@@ -200,7 +200,8 @@
   "dispatcher_preparation": "scripts/prepare_rule_study_rollout.py",
   "dispatcher_scope": "120 existing development cases only; no final generation",
   "protocol_freeze_record": {
-    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json",
-    "sha256_lf": "eb2b8900ce604218ed8ed2bac57de3aa11bc25a5842768b32e2a74c012217903"
-  }
+    "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_ID_FIX.json",
+    "sha256_lf": "f24e8450688ac59cb1a80fb5c95c0b47c7c4ccc4faddd54d80cb746175833cbd"
+  },
+  "latest_attempt": "e887b995: actual FAIL_OR_INCOMPLETE, zero completed pairs, ID consumed; corrected pending request requires fresh exact approval."
 }

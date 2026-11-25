@@ -1,0 +1,35 @@
+{
+  "kind": "rule04_actual_failed_development_attempt_v1",
+  "date_arizona": "2026-11-24",
+  "authorization_id": "rule04-dev-reporting-ed819a31a5ad-20261124",
+  "request_sha256": "e887b995db9575f22da1bfb02ee695acf0071218448f88f249aa638e633305bc",
+  "code_commit": "ed819a31a5adef8f7e7e3eed6984ffb523ee8052",
+  "limits": {
+    "states": 21600,
+    "transitions": 21600,
+    "wall_seconds": 900,
+    "case_policy_seconds": 60,
+    "output_bytes": 268435456
+  },
+  "result": {
+    "status": "failed",
+    "released": true,
+    "cleanup_verified": true,
+    "observed_output_bytes": 24159,
+    "returncode": 1,
+    "elapsed_before_cleanup_s": 3.7190000000009604,
+    "elapsed_total_s": 3.7190000000009604,
+    "retry_allowed": false,
+    "authenticated_request_sha256": "e887b995db9575f22da1bfb02ee695acf0071218448f88f249aa638e633305bc"
+  },
+  "completed_validated_pairs": 0,
+  "authorization_state": "CONSUMED_NO_RETRY",
+  "raw_failure_sha256": {
+    "pair-failure.json": "4ecd58ba07d6a5538d12dac8f8f3916e4dba5d159e630af8ecddb7f20c99775d",
+    "rollout-failure.json": "147a9adf00f4204dc5b80d567c397802d8319805d646096eca8026b129aaa8a7"
+  },
+  "original_approval_raw_sha256": "c0a7873fcd157e88944930c6e1761e9e8556852faabf22797bb67e3df867a01a",
+  "original_attempt_raw_sha256": "d74d8629552d572552d789e3dc9dc831676d6ee9d5458d5cd2bbea5e9697cdc2",
+  "custody": "Original approval, canonical ledger, request and raw output preserved outside Git; local archive RULE04_ACTUAL_FAILURE_e887b995_20261124.zip",
+  "interpretation": "Adapter schema failure before any completed case-policy run; no safety or generalization finding."
+}

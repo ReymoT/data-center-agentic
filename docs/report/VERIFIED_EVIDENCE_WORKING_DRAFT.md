@@ -1,5 +1,8 @@
 # Explicit Rules for Safe Simulated Scheduling — Working Report
 
+Actual attempt update, November24: the exact approved development attempt failed on adapter episode-ID validation; cleanup passed and zero case-policy runs completed. The ID is consumed. A direct controller correction and fresh exact authorization are needed before another attempt. This produces no comparative finding and does not change accepted finite verification/authored evidence. Earlier pre-run wording is historical; the comparison stays pending.
+
+
 November 24 freeze review: [the protocol record](../rule_study/RULE04_FREEZE_REVIEW_NOV24.md) fixes the accepted software/design and retained development inputs/metrics. Final-set isolation remains untested, and no run is authorized. Exact proposed limits and a fresh single-use request still require Matty's approval. Earlier dated pending-freeze notes below are historical where superseded.
 
 November 24 current: Nisha's independent accounting/metric receiving is accepted within its recorded scope: the retained 120-case development pair and ten authored metric illustrations. The original reply and hashes are preserved in [the receiving record](../handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md). The first demo package is merged through #275. No policy has run on the 120 development cases; final isolation, whole-study freeze, fresh exact run approval, comparative evaluation and reproduction remain pending. Earlier dated pending-receiving statements below are historical where superseded.

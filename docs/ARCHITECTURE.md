@@ -1,5 +1,8 @@
 # Architecture for the final scheduling study
 
+November 24 actual attempt: [the approved development attempt failed](rule_study/RULE04_ID_FIX_NOV24.md) on episode-ID schema validation after3.719seconds, with verified cleanup and zero completed case-policy runs. Its ID is consumed. The controller correction is prepared; another attempt requires corrected merged pins and fresh exact authorization. New comparison results remain pending. Earlier same-day pre-run statements below describe their historical state.
+
+
 November 24 reporting update: [the reviewed summary utility](handoffs/RULE04_SUMMARY_REVIEW_NOV24.md) checks retained artifacts and produces descriptive tables/plots without running policies. Its two new scripts require refreshed source pins and a new request; no study result or run approval is implied.
 
 November 24 follow-up: [review 3 fixes](rule_study/RULE04_REVIEW3_FIXES_NOV24.md) check full nested Windows paths, retain original request provenance and report partial coverage. Earlier requests are superseded; no study ran. Fresh approval must accept potentially unexercised missing-forecast controls under the unchanged limits.

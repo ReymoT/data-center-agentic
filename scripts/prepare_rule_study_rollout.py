@@ -5,6 +5,7 @@ No final generator, model, arbitrary command or alternate input set is supported
 """
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -78,7 +79,28 @@ def pair():
     parsed = {c["case_id"]: cc._case_from_dict(c) for c in cases["cases"]}
     if len(parsed) != 120:
         raise ValueError("duplicate development case")
+    episode_ids = set()
+    for visible in parsed.values():
+        mapped = development_case_spec(visible)
+        mapped.episode()  # Schema construction only; no runner, search or simulator.
+        if mapped.episode_id in episode_ids:
+            raise ValueError("development episode identity collision")
+        episode_ids.add(mapped.episode_id)
     return cases, sidecar, parsed
+
+
+def development_case_spec(visible):
+    """Map retained cases without putting descriptive split labels into episode IDs.
+
+    Keep the accepted receiving implementation and case facts unchanged. Only its
+    temporary identity input is opaque; restore the exact retained case ID before
+    computing bindings or constructing the episode. Hex contains no split tokens.
+    """
+    from dc_sustainability.evaluation import rule_study_receiving as rv
+
+    neutral_id = "Q" + hashlib.sha256(visible.case_id.encode("utf-8")).hexdigest()[:24]
+    mapped = rv.case_spec_for(replace(visible, case_id=neutral_id))
+    return replace(mapped, case_id=visible.case_id)
 
 
 def validate_limits(limits):
@@ -235,7 +257,7 @@ def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None):
     _, sidecar, parsed = pair() if loaded is None else loaded
     visible = parsed[case_id]
     weights = next(e["weights"] for e in sidecar["cases"] if e["case_id"] == case_id)
-    case = replace(rv.case_spec_for(visible), first_scores=tuple(weights))
+    case = replace(development_case_spec(visible), first_scores=tuple(weights))
     if visible.scores is None and (
         case.case_json()["scores"] is not None or case.forecasts_by_slot()
     ):

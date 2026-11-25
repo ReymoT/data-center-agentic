@@ -1,0 +1,58 @@
+{
+  "authenticated_request_sha256": "e887b995db9575f22da1bfb02ee695acf0071218448f88f249aa638e633305bc",
+  "charged_steps_completed_pairs_only": {
+    "states": 0,
+    "transitions": 0
+  },
+  "completed_runs": 0,
+  "coverage": {
+    "missing_forecast": {
+      "completed_by_policy": {
+        "greedy_a": 0,
+        "greedy_b": 0,
+        "rules-v1": 0
+      },
+      "completed_runs": 0,
+      "expected_runs": 120
+    },
+    "normal_feasible": {
+      "completed_by_policy": {
+        "greedy_a": 0,
+        "greedy_b": 0,
+        "rules-v1": 0
+      },
+      "completed_runs": 0,
+      "expected_runs": 120
+    },
+    "overloaded_impossible": {
+      "completed_by_policy": {
+        "greedy_a": 0,
+        "greedy_b": 0,
+        "rules-v1": 0
+      },
+      "completed_runs": 0,
+      "expected_runs": 120
+    }
+  },
+  "coverage_scope": "completed validated pairs only; active/failed pair may have uncounted partial work",
+  "exception": "ValueError",
+  "failed_pair_additional_work": "unknown if killed; bounded by remaining budget reserved for that pair",
+  "message": "pair timeout/output/cleanup/failure; no retry",
+  "retry_allowed": false,
+  "status": "FAIL_OR_INCOMPLETE",
+  "supervision": [
+    {
+      "case_id": "development-normal_feasible-00",
+      "policy_id": "rules-v1",
+      "supervision": {
+        "cleanup_verified": true,
+        "elapsed_before_cleanup_s": 2.5780000000013388,
+        "elapsed_total_s": 2.5780000000013388,
+        "observed_output_bytes": 853,
+        "released": true,
+        "returncode": 1,
+        "status": "failed"
+      }
+    }
+  ]
+}
