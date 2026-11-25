@@ -171,6 +171,12 @@ def load_run(run_dir: Path, cases_path: Path = CASES) -> dict:
         raise ValueError("mixed authenticated requests refused")
     if len({m["code_commit"] for m in metrics}) > 1:
         raise ValueError("mixed producer commits refused")
+    shared_bindings = {
+        json.dumps({k: v for k, v in m["bindings"].items() if k != "case_sha256"}, sort_keys=True)
+        for m in metrics
+    }
+    if len(shared_bindings) > 1:
+        raise ValueError("mixed producer source bindings refused")
     ordered = {(c, p): i for i, (c, p) in enumerate((c, p) for c in strata for p in POLICIES)}
     acknowledged = sorted(metrics, key=lambda m: ordered[(m["case_id"], m["policy_id"])])[:recorded]
     if status.get("coverage") is not None and status["coverage"] != rollout.coverage(

@@ -201,6 +201,6 @@
   "dispatcher_scope": "120 existing development cases only; no final generation",
   "protocol_freeze_record": {
     "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json",
-    "sha256_lf": "bf7929cac3b1e31ddef6ad2282bbeba2da823c3bb983398fb5d536d5044f29f5"
+    "sha256_lf": "9018dd8ff4d1541df7c8362dc0e413a5407b5eeff2f203242ed8dcf640d38ec2"
   }
 }

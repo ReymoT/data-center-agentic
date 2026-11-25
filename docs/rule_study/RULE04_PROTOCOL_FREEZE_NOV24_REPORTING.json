@@ -161,7 +161,7 @@
     "scripts/render_irr_report.py": "1f7c9de6b2a5b1e9b1884758a19ede3d72073eda42981a73032e2f93c660e552",
     "scripts/render_study_tables.py": "039f26cb5537f300da3e72156f29e88e627bb05405765a4fafee9f79bf3f9fcf",
     "scripts/review_e01_capacity.py": "d8103d8fb514e0567f365b4a13bf6daa8722db6013a3424ddbac0cf6822c4ee0",
-    "scripts/rule04_summary_core.py": "fbfcfd012b5d4bf4a5b8798a460fc077428e76895ddb448093d932e497432bd2",
+    "scripts/rule04_summary_core.py": "2ffd1a67ff4ff32c30c665ea53700793383efb0a991103437a04ecd71bd4e8c0",
     "scripts/rule_demo_page_core.py": "05e454a18ce2fee0a6ff3bac5b1e32d9e1145a27594540ba9bac49d2bdfd5b45",
     "scripts/rule_rollout_supervisor.py": "0760513a358d730f94e26c1d9293d04c4dbe3854bfb3cc0216f2e5343cacca63",
     "scripts/rule_study_metrics.py": "a84f97570a95c18ee1b5e3950618cd5b20a3fbc5ddd4d68636f69617f49947f3",

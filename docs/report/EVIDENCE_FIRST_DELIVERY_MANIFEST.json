@@ -1105,7 +1105,7 @@
     },
     {
       "path": "scripts/rule04_summary_core.py",
-      "sha256": "fbfcfd012b5d4bf4a5b8798a460fc077428e76895ddb448093d932e497432bd2",
+      "sha256": "2ffd1a67ff4ff32c30c665ea53700793383efb0a991103437a04ecd71bd4e8c0",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1120,7 +1120,7 @@
     },
     {
       "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json",
-      "sha256": "bf7929cac3b1e31ddef6ad2282bbeba2da823c3bb983398fb5d536d5044f29f5",
+      "sha256": "9018dd8ff4d1541df7c8362dc0e413a5407b5eeff2f203242ed8dcf640d38ec2",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
