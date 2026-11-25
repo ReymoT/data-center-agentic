@@ -18,6 +18,15 @@ STRATA = {
     "o1": "overloaded_impossible",
     "m1": "missing_forecast",
 }
+ORIGINAL_INPUTS = core._inputs
+ORIGINAL_VALIDATE = core._validate_metric
+
+
+@pytest.fixture(autouse=True)
+def synthetic_reader(monkeypatch):
+    """Only summary-math fixtures bypass trace/input validation, never CLI subprocesses."""
+    monkeypatch.setattr(core, "_inputs", lambda path: (core._json(path), {}, {}))
+    monkeypatch.setattr(core, "_validate_metric", lambda pair, record, inputs: record["metric"])
 
 
 def metric(
@@ -106,6 +115,7 @@ def make_run(tmp_path, metrics, *, complete=True, failed=(), coverage=True, runs
                     "status": "PASS",
                     "case_id": m["case_id"],
                     "policy_id": m["policy_id"],
+                    "authenticated_request_sha256": "a" * 64,
                     "metric": m,
                 }
             ),
@@ -170,7 +180,7 @@ def test_comparisons_use_frozen_equal_work_and_never_show_zero_for_unavailable(t
     assert o["available"] == 0 and o["reduction_median"] is None
     assert o["unavailable_reasons"] == {"greedy_a_impact_not_positive": 1}
     tables = core.tables_markdown(s)
-    assert "| overloaded_impossible | rules-v1 | 0/1 | unavailable |" in tables
+    assert "| overloaded_impossible | rules-v1 | 0/1 (0) | unavailable |" in tables
     assert "0.0 [" not in tables.split("overloaded_impossible | rules-v1")[1].splitlines()[0]
 
 
@@ -191,7 +201,7 @@ def test_stopped_run_is_partial_with_failed_pair_listed(tmp_path):
     assert s["coverage_status"] == "PARTIAL" and s["stop_message"]
     assert row(s["policy_rows"], "normal_feasible", "greedy_a")["runs_completed"] == 1
     assert s["failed_or_unfinished_pairs"] == [
-        {"case_id": "n2", "policy_id": "greedy_a", "exception": "TimeoutError"}
+        {"case_id": "n2", "policy_id": "greedy_a", "exception": "TimeoutError", "message": None}
     ]
     tables = core.tables_markdown(s)
     assert "Coverage: **PARTIAL**" in tables and "TimeoutError" in tables
@@ -200,7 +210,7 @@ def test_stopped_run_is_partial_with_failed_pair_listed(tmp_path):
 
 def test_count_or_coverage_mismatch_with_the_run_record_is_refused(tmp_path):
     (tmp_path / "a").mkdir()
-    with pytest.raises(ValueError, match="count"):
+    with pytest.raises(ValueError, match="count|PASS requires|coverage"):
         summary_for(tmp_path / "a", runs=5)
     (tmp_path / "b").mkdir()
     run, cases = make_run(tmp_path / "b", default_metrics())
@@ -220,7 +230,7 @@ def test_non_pass_pair_and_ambiguous_status_are_refused(tmp_path):
     with pytest.raises(ValueError, match="complete PASS"):
         core.load_run(run, cases)
     (run / "rollout-failure.json").write_text("{}")
-    with pytest.raises(ValueError, match="exactly one"):
+    with pytest.raises(ValueError, match="failure status"):
         core.load_run(run, cases)
 
 
@@ -236,6 +246,8 @@ def test_summary_is_deterministic_and_outputs_never_overwrite(tmp_path):
 
 
 def test_cli_builds_and_refuses_an_existing_output(tmp_path):
+    from scripts import build_rule04_summary as cli
+
     run, cases = make_run(tmp_path, default_metrics())
     out = tmp_path / "summary"
     args = [
@@ -248,8 +260,121 @@ def test_cli_builds_and_refuses_an_existing_output(tmp_path):
         "--out",
         str(out),
     ]
-    done = subprocess.run(args, capture_output=True, text=True, cwd=ROOT)
-    assert done.returncode == 0, done.stderr
-    assert "coverage: COMPLETE" in done.stdout and (out / "RULE04_TABLES.md").is_file()
+    # The real CLI must reject these synthetic math fixtures as scientific inputs.
+    refused = subprocess.run(args, capture_output=True, text=True, cwd=ROOT)
+    assert refused.returncode == 1 and not out.exists()
+    assert cli.main(args[2:]) == 0  # fixture-only helpers are explicitly patched in-process
+    assert (out / "RULE04_TABLES.md").is_file()
     again = subprocess.run(args, capture_output=True, text=True, cwd=ROOT)
     assert again.returncode != 0 and "already exists" in again.stderr
+
+
+def test_empty_pass_is_never_complete(tmp_path):
+    with pytest.raises(ValueError, match="PASS requires"):
+        summary_for(tmp_path, metrics=[])
+
+
+def test_unverified_pair_metrics_refused_by_real_validator(tmp_path, monkeypatch):
+    run, cases = make_run(tmp_path, default_metrics())
+    monkeypatch.setattr(core, "_validate_metric", ORIGINAL_VALIDATE)
+    with pytest.raises((KeyError, ValueError)):
+        core.load_run(run, cases)  # no actual retained trace exists
+
+
+def test_custom_or_altered_cases_refused_by_real_input_gate(tmp_path, monkeypatch):
+    run, cases = make_run(tmp_path, default_metrics())
+    monkeypatch.setattr(core, "_inputs", ORIGINAL_INPUTS)
+    with pytest.raises(ValueError, match="frozen retained"):
+        core.load_run(run, cases)
+
+
+def test_supervisor_failure_wins_over_truncated_or_pass_report(tmp_path):
+    run, cases = make_run(tmp_path, default_metrics())
+    (run / "rollout-failure.json").write_text('{"cut_off":')
+    (run / "rollout-supervisor-failure.json").write_text(
+        json.dumps(
+            {"status": "FAIL_OR_INCOMPLETE", "completed_runs": 12, "message": "cleanup failed"}
+        )
+    )
+    report = core.summarize(core.load_run(run, cases))
+    assert report["coverage_status"] == "PARTIAL" and report["stop_message"] == "cleanup failed"
+
+
+def test_checkpoint_lag_is_explicit_in_partial_recovery(tmp_path):
+    run, cases = make_run(tmp_path, default_metrics(), complete=False, coverage=False)
+    path = run / "rollout-failure.json"
+    status = json.loads(path.read_text())
+    status["completed_runs"] = 10
+    path.write_text(json.dumps(status))
+    s = core.summarize(core.load_run(run, cases))
+    assert s["recovered_unacknowledged_pairs"] == 2 and s["coverage_status"] == "PARTIAL"
+
+
+def test_plot_uses_the_same_matched_case_subset_for_both_axes():
+    a = metric("n1", "greedy_a", 100, completed=(), turnaround=(), delay=())
+    b = metric("n1", "rules-v1", 10, completed=(), turnaround=(), delay=())
+    a2 = metric("n2", "greedy_a", 100)
+    b2 = metric("n2", "rules-v1", 80, turnaround=(2, 2))
+    summary = core.comparison_rows([a, b, a2, b2], STRATA)
+    r = row(summary, "normal_feasible", "rules-v1")
+    assert r["available"] == 2 and r["turnaround_shift_count"] == 1
+    assert r["matched_turnaround_reduction_median"] == 0.2
+
+
+def test_mixed_request_and_duplicate_json_refused(tmp_path):
+    run, cases = make_run(tmp_path, default_metrics())
+    p = run / "n1-rules-v1/pair-result.json"
+    value = json.loads(p.read_text())
+    value["authenticated_request_sha256"] = "b" * 64
+    p.write_text(json.dumps(value))
+    with pytest.raises(ValueError, match="mixed authenticated"):
+        core.load_run(run, cases)
+    p.write_text('{"status":"PASS","status":"FAIL"}')
+    with pytest.raises(ValueError, match="duplicate"):
+        core.load_run(run, cases)
+
+
+def test_real_retained_artifacts_recomputed_and_tampering_refused(tmp_path):
+    """Read saved authored A only; no new policy, replay, checker or simulator call."""
+    import hashlib
+    import tarfile
+    from pathlib import PurePosixPath
+
+    from dc_sustainability.evaluation import rule_study_trace as tr
+
+    pair = tmp_path / "A-greedy_a"
+    trace = pair / "trace"
+    prefix = "authored/greedy_a/A-greedy_a/"
+    with tarfile.open(
+        ROOT / "docs/evidence/rule03-nov23-native/authored-artifacts.tar.gz", "r:gz"
+    ) as archive:
+        for member in archive:
+            if not member.name.startswith(prefix):
+                continue
+            relative = PurePosixPath(member.name[len("authored/") :])
+            assert not relative.is_absolute() and ".." not in relative.parts and member.isfile()
+            assert member.size < 1024 * 1024
+            target = trace / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(archive.extractfile(member).read())
+    folder = trace / "greedy_a/A-greedy_a"
+    case, _, decisions = core.mc.load_run(folder)
+    weights = case["scores"]
+    expected = rollout._metric(folder, weights)
+    record = {
+        "case_id": "A",
+        "policy_id": "greedy_a",
+        "metric": expected,
+        "trace_directory": "trace/greedy_a/A-greedy_a",
+        "replay": {"overall": "PASS"},
+        "execution_signature": hashlib.sha256(
+            json.dumps(
+                [d["execution"]["current_starts"] for d in decisions], sort_keys=True
+            ).encode()
+        ).hexdigest(),
+    }
+    inputs = ({}, {"cases": [{"case_id": "A", "weights": weights}]}, {"A": tr.case_from_dict(case)})
+    assert ORIGINAL_VALIDATE(pair, record, inputs) == expected
+    record["metric"]["synthetic_impact"]["producer_total"] += 1
+    with pytest.raises(ValueError, match="differs from retained"):
+        ORIGINAL_VALIDATE(pair, record, inputs)

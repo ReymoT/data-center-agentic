@@ -25,12 +25,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.out.exists():
         parser.error(f"{args.out} already exists; outputs are never overwritten")
+    if args.out.resolve().is_relative_to(args.run_dir.resolve()):
+        parser.error("summary output must be outside the retained run")
     try:
         summary = core.summarize(core.load_run(args.run_dir, args.cases))
+        paths = core.write_outputs(summary, args.out)
     except (OSError, ValueError, KeyError) as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 1
-    for path in core.write_outputs(summary, args.out):
+    for path in paths:
         print(f"wrote {path}")
     print(f"coverage: {summary['coverage_status']}")
     return 0

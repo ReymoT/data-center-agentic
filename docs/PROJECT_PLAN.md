@@ -1,5 +1,7 @@
 # Project plan
 
+November 24 reporting update: [the reviewed summary utility](handoffs/RULE04_SUMMARY_REVIEW_NOV24.md) checks retained artifacts and produces descriptive tables/plots without running policies. Its two new scripts require refreshed source pins and a new request; no study result or run approval is implied.
+
 November 24 follow-up: [review 3 fixes](rule_study/RULE04_REVIEW3_FIXES_NOV24.md) check full nested Windows paths, retain original request provenance and report partial coverage. Earlier requests are superseded; no study ran. Fresh approval must accept potentially unexercised missing-forecast controls under the unchanged limits.
 
 November 24 freeze review: [the protocol record](rule_study/RULE04_FREEZE_REVIEW_NOV24.md) fixes the accepted software/design and retained development inputs/metrics. Final-set isolation remains untested, and no run is authorized. Exact proposed limits and a fresh single-use request still require Matty's approval. Earlier dated pending-freeze notes below are historical where superseded.
