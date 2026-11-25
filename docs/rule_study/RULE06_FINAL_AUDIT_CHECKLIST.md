@@ -1,5 +1,7 @@
 # RULE-06 final audit checklist (#244)
 
+November 24 actual attempt: [the approved development attempt](RULE04_ID_FIX_NOV24.md) failed on episode-ID schema validation after 3.719 seconds; cleanup passed and zero case-policy runs completed. The exact ID is consumed and cannot be retried. The prospective controller correction preserves the accepted scientific baseline; a clean merged corrected freeze and new exact informed authorization are required before another attempt. Earlier same-day no-dispatch wording is historical. Comparative results, final isolation, independent receiving/reproduction and release audit remain pending.
+
 November 24 current: Nisha's independent accounting/metric receiving is accepted within its recorded scope: the retained 120-case development pair and ten authored metric illustrations. The original reply and hashes are preserved in [the receiving record](../handoffs/RULE04_ACCOUNTING_RECEIVING_NOV24.md). The first demo package is merged through #275. No policy has run on the 120 development cases; final isolation, whole-study freeze, fresh exact run approval, comparative evaluation and reproduction remain pending. Earlier dated pending-receiving statements below are historical where superseded.
 
 November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_INDEPENDENT_RECEIVING_NOV23.md) is received and accepted for the bounded verification component. All 202 planned traces are fully replayed across retained attempts; checked properties pass with explicit NOT_RUN exclusions. The exact verification baseline is recorded, while actual accounting, whole-study freeze, final evaluation, reproduction and release remain separate pending gates. Do not request Nisha's completed receiving again. Earlier dated entries below are historical where superseded.
@@ -11,7 +13,8 @@ November 23 latest: [new-scope independent receiving](../handoffs/RULE03_NATIVE_
 | Bounded verification and new-scope receiving | PASS within declared primary/authored scope | Nisha actual reply and 202 completely replayed traces; optional extended domain excluded |
 | Verified implementation/verifier baseline | PASS for result reuse only | Exact 163 source/lock/specification hashes; a scientific change invalidates reuse |
 | Actual accounting/metric acceptance | PASS within retained-input/authored scope | Nisha original comment 7121894902; no 120-case rollout or final-isolation acceptance |
-| Software/design/development-input metric freeze | RECORDED, not execution authority | RULE04_PROTOCOL_FREEZE_NOV24.json; controlled source unchanged, exact run limits still proposed |
+| Software/design/development-input metric freeze | CORRECTED RECORD, not execution authority | RULE04_PROTOCOL_FREEZE_NOV24_ID_FIX.json; controller mapping/schema preflight corrected, accepted163 scientific bindings unchanged; new exact approval required |
+| Development execution | FAIL_OR_INCOMPLETE; zero completed pairs | Consumed e887b995 attempt preserved; correction is not permission to retry |
 | Final-set isolation | NOT_RUN | Final set absent; separate authorization and no-overlap/stratum checks required before final evaluation |
 | Final evaluation and clean reproduction | BLOCKED | No final run; separate exact authorization after freeze, then reproduction evidence |
 | Report/demo/release | PARTIAL | Saved demo complete (#246 closed); final report/PDF, release and submission remain |

@@ -1,0 +1,15 @@
+{
+  "authenticated_request_sha256": "e887b995db9575f22da1bfb02ee695acf0071218448f88f249aa638e633305bc",
+  "case_id": "development-normal_feasible-00",
+  "charged_steps": "unknown if execution did not return; bounded by reserved remaining budget",
+  "exception": "ValidationError",
+  "message": "1 validation error for PrivateEpisode\nepisode_id\n  Value error, episode id must be opaque; contains split-like token 'dev' [type=value_error, input_value='EP-RCVdevelopmentnormalfeasible00', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error",
+  "pair_request_sha256": "d9343f87ced2b8fb8c5f38d524eda42121754b734daf89c7b4f796055cd8da98",
+  "policy_id": "rules-v1",
+  "reserved_remaining_budget": {
+    "states": 21600,
+    "transitions": 21600
+  },
+  "retry_allowed": false,
+  "status": "FAIL_OR_INCOMPLETE"
+}

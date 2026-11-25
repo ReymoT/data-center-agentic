@@ -13,6 +13,59 @@ from scripts import prepare_rule_study_rollout as w
 from scripts import rule_rollout_supervisor as sup
 
 
+def test_all_retained_development_cases_construct_opaque_episodes_without_execution(monkeypatch):
+    from dc_sustainability.evaluation import rule_study_receiving as rv
+    from dc_sustainability.rule_study import runner
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("static mapping must not execute a policy or simulator")
+
+    monkeypatch.setattr(rv, "_run_bounded_case", forbidden)
+    monkeypatch.setattr(runner, "make_bindings", forbidden)
+    cases, _, parsed = w.pair()
+    identities = []
+    for original in cases["cases"]:
+        visible = parsed[original["case_id"]]
+        mapped = w.development_case_spec(visible)
+        assert mapped.case_id == visible.case_id
+        assert mapped.case_json() == {key: original[key] for key in mapped.case_json()}
+        assert mapped.episode().episode_id == mapped.episode_id
+        assert mapped.episode_id == w.development_case_spec(visible).episode_id
+        assert all(token not in mapped.episode_id.lower() for token in ("dev", "test", "held"))
+        assert mapped.forecast_present == (visible.scores is not None)
+        if visible.scores is None:
+            assert mapped.case_json()["scores"] is None
+            assert mapped.forecasts_by_slot() is None
+        identities.append(mapped.episode_id)
+    assert len(set(identities)) == len(identities) == 120
+
+
+def test_mapping_does_not_collapse_truncated_or_sanitized_case_names():
+    from dc_sustainability.evaluation import rule_study_verifier as v
+
+    template = v.authored_cases(w.read_json(w.ROOT / "docs/rule_study/specification.json"))[0]
+    ids = ["development-normal_feasible-00", "development-normal-feasible-00"]
+    ids += ["development-" + "a" * 40 + suffix for suffix in ("1", "2")]
+    mapped = [w.development_case_spec(replace(template, case_id=name)) for name in ids]
+    assert len({case.episode_id for case in mapped}) == len(ids)
+    assert [case.case_id for case in mapped] == ids
+
+
+@pytest.mark.parametrize("mode", ["invalid_id", "collision"])
+def test_retained_preflight_rejects_mapping_errors_without_dispatch(monkeypatch, mode):
+    original = w.development_case_spec
+
+    def broken(visible):
+        return replace(
+            original(visible),
+            episode_id="EP-development" if mode == "invalid_id" else "EP-Q123",
+        )
+
+    monkeypatch.setattr(w, "development_case_spec", broken)
+    with pytest.raises(ValueError, match="opaque|collision"):
+        w.pair()
+
+
 def limits():
     # Dummy test envelope, not a proposed/approved scientific budget.
     return {

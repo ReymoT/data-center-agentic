@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "c2c6e8e960be3a6e3b25c1c50533e67ff2934bbdf6d2f682d8572bc3390deed5",
+      "sha256": "506239890ae159dfc44cde6c604d84cab50f0fb826dda0dd8df1a821b9b8b3fe",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "eff4891e267ab213b5f6673863366187ba5f7295df1429c6c50c0cc95b712925",
+      "sha256": "4ff492e869de3e3fb6b9cc70aa0fe99f099a4482387f14415c9347a0bebefbc4",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "a4cf67562154e2ae5149dded69f5c5a6b80de34182fb7c7ff249669e3de5adc4",
+      "sha256": "86affbe0101b0b94456d3da1e7c0dfbbc1cc8435ad0dd75b6c5a5acf434542df",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "1b95b981c374a12483f1c23c271c0a6784f93b293a00f064c54d2cb36e28235a",
+      "sha256": "a0bcef7c1b60d233934e41af1d1308ab849d81d8dd0f6a18e6bd551568f471dc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "039168d2761ee23244dd388d2a5a917c2a7bf803253296a7b820fc247bd2f7d0",
+      "sha256": "2a12bf2dc525e5077723f4b6d77dde81522781a405e27c28310f1c7bfb816d70",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "a0021eff2f657086a69a03b8fbc3939fb9b536682068aee1c207d3a7e8cfcc71",
+      "sha256": "a8c5ce0adbf18ca496e5106a28bddc44768bbb281c07d66ca1eccc80e9383227",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "8a2cb12c9636031e435bf2b07cf507fde4e10a65075df3ea455787a6f1387a2d",
+      "sha256": "3a8af7563dc16da2963f8d9ad7872e6ee46d21984c99fd16bd08721e76271b13",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -985,7 +985,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "21d6faace6b21dde5d0cee39145bc6f1197494a4746c85f6c2027cc756c42bc3",
+      "sha256": "24d18e8e0576d05b1c6ba154c50ea5539184e59c945c8ef7c967e2a55b383833",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -995,7 +995,7 @@
     },
     {
       "path": "tests/runtime/test_rule04_rollout_preparation.py",
-      "sha256": "bee9971292f1d73e26540ccf864d9c657e332f16eb6b0f3c8b695e8cb4911932",
+      "sha256": "781b58e047997bc0c1e74430e9177697ec15c5641ac10bc74375c268e143850a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1045,7 +1045,7 @@
     },
     {
       "path": "docs/report/RULE04_ASSEMBLY_REVIEW_NOV24.md",
-      "sha256": "66b3f074613234a5e6d023209620f54813f4ffa740f67803654ef193d422e3a4",
+      "sha256": "17977fdc54d74be0d09a31aa0c0945488b2d2a424a5e9c9615bfd995c9316e5b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1121,6 +1121,31 @@
     {
       "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REPORTING.json",
       "sha256": "eb2b8900ce604218ed8ed2bac57de3aa11bc25a5842768b32e2a74c012217903",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-failed-development/attempt-receipt.json",
+      "sha256": "1ce8974f14bf4deb6f13473d62f5f32e952e6c44c8cfbc4abe8ef85f70780c70",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-failed-development/pair-failure.json",
+      "sha256": "4ecd58ba07d6a5538d12dac8f8f3916e4dba5d159e630af8ecddb7f20c99775d",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "docs/evidence/rule04-nov24-failed-development/rollout-failure.json",
+      "sha256": "147a9adf00f4204dc5b80d567c397802d8319805d646096eca8026b129aaa8a7",
+      "hash_convention": "raw_bytes"
+    },
+    {
+      "path": "docs/rule_study/RULE04_ID_FIX_NOV24.md",
+      "sha256": "8f67bd4a288946add8b718f2e615a34c381bbaa4f89a2c2cb3d181d725b8fe3f",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_FREEZE_NOV24_ID_FIX.json",
+      "sha256": "f24e8450688ac59cb1a80fb5c95c0b47c7c4ccc4faddd54d80cb746175833cbd",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
