@@ -50,3 +50,13 @@ not a new scientific finding or independent-person receiving. Final source/envir
 ancestry, ID and absent-output gates remain live checks before any future dispatch.
 For evidence export, keep relative archive paths and recheck the complete extraction
 destination length; do not assume an arbitrarily deep delivery folder is safe.
+
+Later CI follow-up: PR #279 passed all 3090 tests and 19 subtests, but its first
+merged-main run failed two runner/replay fixtures (3088 passed). The failure log
+retained only the generic replay failure, not its diagnostic JSON; the cause cannot
+be certified from that log. All six corresponding 2-job fixtures passed locally.
+Those semantic fixtures used a 10-second allowance on a variable-speed hosted runner.
+They now use the existing supported 60-second pair ceiling and emit the actual replay
+JSON on failure. Short dummy timeout/containment tests are unchanged. This changes
+test tolerance only, not production/scientific limits, and preserves the failed CI
+record rather than claiming it passed or silently retrying an actual study.
