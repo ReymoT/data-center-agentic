@@ -215,7 +215,7 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "a4cf67562154e2ae5149dded69f5c5a6b80de34182fb7c7ff249669e3de5adc4",
+      "sha256": "86affbe0101b0b94456d3da1e7c0dfbbc1cc8435ad0dd75b6c5a5acf434542df",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "a0021eff2f657086a69a03b8fbc3939fb9b536682068aee1c207d3a7e8cfcc71",
+      "sha256": "a8c5ce0adbf18ca496e5106a28bddc44768bbb281c07d66ca1eccc80e9383227",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
