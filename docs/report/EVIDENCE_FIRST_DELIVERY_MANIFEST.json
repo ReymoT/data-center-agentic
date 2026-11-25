@@ -995,7 +995,7 @@
     },
     {
       "path": "tests/runtime/test_rule04_rollout_preparation.py",
-      "sha256": "5f62a8fa15f2768fce9a2a02e5adf096d27a1561e101ec995acb12733216e024",
+      "sha256": "bee9971292f1d73e26540ccf864d9c657e332f16eb6b0f3c8b695e8cb4911932",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1095,7 +1095,7 @@
     },
     {
       "path": "docs/rule_study/RULE04_REVIEW3_FIXES_NOV24.md",
-      "sha256": "a5a546c427ffcb4a317e6b56bb984a743301b411404c246d88b2e3fc384f208a",
+      "sha256": "2565c40384d19ee9538d0b86d7a1b8a930650f62a70646aecbcffd9511a9079d",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

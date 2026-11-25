@@ -177,9 +177,22 @@ def test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(
     )
     directory = tmp_path / "fixture"
     directory.mkdir()
-    w._one_pair(
-        {"limits": limits()}, "A", policy, directory, {"states": 50000, "transitions": 50000}
-    )
+    # These verify runner/replay semantics, not a 10-second CI speed target.
+    # Use the already supported production pair ceiling; stop-control tests
+    # retain their separate short dummy bounds.
+    try:
+        w._one_pair(
+            {"limits": dict(limits(), case_policy_seconds=60)},
+            "A",
+            policy,
+            directory,
+            {"states": 50000, "transitions": 50000},
+        )
+    except ValueError:
+        replay = directory / "replay.json"
+        if replay.is_file():
+            pytest.fail("Fixture independent replay detail: " + replay.read_text(encoding="utf-8"))
+        raise
     result = w.read_json(directory / "pair-result.json")
     assert result["status"] == "PASS"
     assert result["budget"]["states_used"] >= 60 and result["budget"]["transitions_used"] >= 60
