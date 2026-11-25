@@ -65,7 +65,9 @@ def _validate_metric(pair, record, inputs):
     if not folder.resolve().is_relative_to(pair.resolve()):
         raise ValueError("trace escapes pair")
     case, result, decisions = mc.load_run(folder)
-    if case != rv.case_spec_for(parsed[record["case_id"]]).case_json():
+    if json.dumps(case, sort_keys=True) != json.dumps(
+        rv.case_spec_for(parsed[record["case_id"]]).case_json(), sort_keys=True
+    ):
         raise ValueError("trace differs from frozen case")
     if (
         result["policy_id"] != record["policy_id"]
@@ -74,7 +76,11 @@ def _validate_metric(pair, record, inputs):
         raise ValueError("saved policy/replay evidence refused")
     weights = next(e["weights"] for e in sidecar["cases"] if e["case_id"] == record["case_id"])
     recomputed = rollout._metric(folder, weights)
-    if record["metric"] != recomputed or recomputed["execution_violations"]:
+    if (
+        json.dumps(record["metric"], sort_keys=True, allow_nan=False)
+        != json.dumps(recomputed, sort_keys=True, allow_nan=False)
+        or recomputed["execution_violations"]
+    ):
         raise ValueError("saved metric differs from retained trace accounting")
     signature = hashlib.sha256(
         json.dumps([d["execution"]["current_starts"] for d in decisions], sort_keys=True).encode()
