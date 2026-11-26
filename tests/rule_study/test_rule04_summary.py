@@ -199,6 +199,48 @@ def test_complete_run_policy_rows(tmp_path):
     assert o["turnaround_mean_slots"] is None and o["turnaround_count"] == 0
 
 
+def test_unexecuted_rows_are_unavailable_not_observed_zero(tmp_path):
+    metrics = [m for m in default_metrics() if m["case_id"] != "m1"]
+    s = summary_for(tmp_path, metrics, complete=False)
+    r = row(s["policy_rows"], "missing_forecast", "rules-v1")
+    assert r["runs_completed"] == 0 and r["runs_expected"] == 1
+    for key in (
+        "jobs",
+        "completed",
+        "missed",
+        "unfinished",
+        "execution_violations",
+        "executed_starts",
+        "checked_decisions",
+        "runs_with_fallback_selected",
+        "runs_with_blocked_decision",
+        "turnaround_count",
+        "job_impact_total",
+    ):
+        assert r[key] is None
+    line = next(
+        entry
+        for entry in core.tables_markdown(s).splitlines()
+        if entry.startswith("| missing_forecast (control) | rules-v1 |")
+    )
+    assert "| 0/1 | — / — | — |" in line and "None" not in line
+
+
+def test_zero_medians_have_separate_labels_and_meaningful_scale(tmp_path):
+    import re
+
+    metrics = default_metrics()
+    for m in metrics:
+        if m["case_id"] == "n1":
+            m["synthetic_impact"]["recomputed_total"] = 1200
+            m["synthetic_impact"]["producer_total"] = 1200
+    svg = core.plot_svg(summary_for(tmp_path, metrics))
+    assert "100%" in svg and "Median equal-work reduction (%)" in svg
+    ys = re.findall(r'<text x="20" y="([0-9]+)">(?:rules-v1|greedy_b) ·', svg)
+    assert len(ys) >= 2 and len(ys) == len(set(ys))
+    assert "-0.1%" not in svg
+
+
 def test_comparisons_use_frozen_equal_work_and_never_show_zero_for_unavailable(tmp_path):
     s = summary_for(tmp_path)
     c = row(s["comparison_rows"], "normal_feasible", "rules-v1")
