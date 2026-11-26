@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
@@ -773,7 +774,14 @@ def main(argv=None):
         parser.error("--parent-receipt is only a draft binding, never an execution option")
     try:
         value = draft() if args.draft else assess(read_json(args.inspect))
-    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+    except (
+        OSError,
+        ValueError,
+        KeyError,
+        TypeError,
+        AttributeError,
+        subprocess.SubprocessError,
+    ) as exc:
         if not args.inspect:
             raise
         value = {

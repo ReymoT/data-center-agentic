@@ -149,7 +149,7 @@
     "scripts/prepare_rule_study_continuation.py": "867d9057984e16740bd9fb38f6272f30365bb743e031ba8b62e43c9fa38b3366",
     "scripts/prepare_rule_study_dispatch.py": "cfe7c363a0f96e0531735f88d5d5d4e9cd7ddcdd3d280ff07019e3d019fb0054",
     "scripts/prepare_rule_study_receiving.py": "34ff54ab1dabc017ef6dfa2089097e5caf84784818a3e37e2146d6efaa1bebe3",
-    "scripts/prepare_rule_study_rollout.py": "43c10488c4b04908f27ecaaeeae26d7675c55cb4f4503e659275314f659f2a1d",
+    "scripts/prepare_rule_study_rollout.py": "3468e9fb2a89ebfce4bd0a0322e6dd95747332a14a0b95265b7176da223feda9",
     "scripts/prepare_rule_study_worker.py": "a1869189225e73e9d3c00437a8860a0926928dbd7f9b9b22827a8764265752a8",
     "scripts/probe_a01_claim_grammar.py": "307054eafc08f2fba005cb147b8079f0062bc4ee68c9e3fc0b24fdc6a0554017",
     "scripts/receive_rule_study_system.py": "5070c4a636fe8d2457e413e135ecdae7bf069598d3e8229fc3ad6e81e7138360",

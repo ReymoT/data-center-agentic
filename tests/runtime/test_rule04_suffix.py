@@ -390,6 +390,21 @@ def test_inspect_missing_parent_writes_blocked_without_dispatch(prefix, monkeypa
     assert not Path(request["plan"]["output_directory"]).exists()
 
 
+def test_inspect_git_preflight_failure_writes_blocked(tmp_path, monkeypatch):
+    import subprocess
+
+    request = tmp_path / "request.json"
+    request.write_text("{}")
+
+    def fail_assessment(_):
+        raise subprocess.CalledProcessError(1, ["git", "merge-base"])
+
+    monkeypatch.setattr(w, "assess", fail_assessment)
+    report = tmp_path / "inspection.json"
+    assert w.main(["--inspect", str(request), "--out", str(report)]) == 2
+    assert w.read_json(report)["status"] == "BLOCKED"
+
+
 @pytest.mark.parametrize("drift", ["commit", "pins", "input"])
 def test_suffix_child_rejects_source_or_input_drift_before_policy(prefix, monkeypatch, drift):
     request, _, _, _, _ = prefix

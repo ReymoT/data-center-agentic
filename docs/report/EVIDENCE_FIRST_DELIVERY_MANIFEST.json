@@ -985,7 +985,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "43c10488c4b04908f27ecaaeeae26d7675c55cb4f4503e659275314f659f2a1d",
+      "sha256": "3468e9fb2a89ebfce4bd0a0322e6dd95747332a14a0b95265b7176da223feda9",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1175,7 +1175,7 @@
     },
     {
       "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV25_REVIEW.json",
-      "sha256": "4619f506d9a16c2dbcfe6c3c0078c0e307a6714e341b44655865aa37b9e30c23",
+      "sha256": "d0c5f54a2dc8fc6f1a6ec3359b1657e2e1c8c56460736d8055a5f391680c93af",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
