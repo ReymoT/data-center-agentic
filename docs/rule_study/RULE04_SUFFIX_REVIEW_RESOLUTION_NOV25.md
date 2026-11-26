@@ -24,6 +24,18 @@ replace the required native Windows/Python3.12 and exact merged-main checks.
   rehashed control reads, one-read race behavior, and BLOCKED inspection. Shared
   containment, source, one-use ID and environment tests continue to apply.
 
+The first full CI found a generic supervision failure in an existing authored
+fixture, with the detailed exception omitted by its assertion. That failure is
+preserved; no research run was involved. Review reproduced an output-inventory
+race: the runner publishes via a completed temporary file, hard link and temporary
+unlink, so a temporary entry can vanish between enumeration and stat. The monitor
+now takes one non-following metadata snapshot and tolerates only a vanished entry;
+permission errors, links/reparse points and other errors still fail closed. Scan
+frequency, exit scan, inventory/output caps, wall limits and cleanup are unchanged.
+The assertion now includes the full supervisor result for any future failure.
+This is a reproduced race fix, not a claim that the abbreviated CI log proved its
+exact exception. Targeted regression and real contained-fixture checks are required.
+
 ## Time risk: explicitly retained
 
 The parent took837.625seconds for182 pairs (about4.6seconds/pair). Scaling that

@@ -183,7 +183,7 @@ def test_nested_job_containment_for_dummy_pair(tmp_path):
     result = sup.supervise(
         [sys.executable, "-c", code], 8, output=tmp_path, limit_bytes=1024, cwd=w.ROOT
     )
-    assert result["status"] == "succeeded" and result["cleanup_verified"]
+    assert result["status"] == "succeeded" and result["cleanup_verified"], result
 
 
 @pytest.mark.parametrize("hidden", [False, True])
@@ -580,10 +580,72 @@ def test_contained_authored_fixture_resource_sample(tmp_path, job_count, record_
         limit_bytes=8 * 1024 * 1024,
         cwd=w.ROOT,
     )
-    assert result["status"] == "succeeded" and result["cleanup_verified"]
+    assert result["status"] == "succeeded" and result["cleanup_verified"], result
     record_property(
         "scope", "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
     )
     record_property("jobs", job_count)
     record_property("native_contained_elapsed_s", result["elapsed_total_s"])
     record_property("fixture_output_bytes", sup.output_bytes(tmp_path))
+
+
+def test_output_inventory_survives_vanished_publish_temp(tmp_path, monkeypatch):
+    stable = tmp_path / "published.json"
+    stable.write_bytes(b"abc")
+
+    class VanishedTemporary:
+        def is_symlink(self):
+            return False
+
+        def is_junction(self):
+            return False
+
+        def is_file(self):
+            return True
+
+        def stat(self, *a, **k):
+            raise FileNotFoundError("temporary publication entry disappeared")
+
+        lstat = stat
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([VanishedTemporary(), stable]))
+    assert sup.output_bytes(tmp_path) == 3
+
+
+def test_output_inventory_other_stat_errors_remain_fail_closed(tmp_path, monkeypatch):
+    class Unreadable:
+        def is_symlink(self):
+            return False
+
+        def is_junction(self):
+            return False
+
+        def is_file(self):
+            return True
+
+        def stat(self, *a, **k):
+            raise PermissionError("unreadable output")
+
+        lstat = stat
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([Unreadable()]))
+    with pytest.raises(PermissionError):
+        sup.output_bytes(tmp_path)
+
+
+@pytest.mark.parametrize("reparse", [False, True])
+def test_output_inventory_nonfollowing_snapshot_rejects_links(tmp_path, monkeypatch, reparse):
+    import stat
+    from types import SimpleNamespace
+
+    class Linked:
+        def lstat(self):
+            return SimpleNamespace(
+                st_mode=stat.S_IFDIR if reparse else stat.S_IFLNK,
+                st_file_attributes=0x400 if reparse else 0,
+                st_size=0,
+            )
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([Linked()]))
+    with pytest.raises(ValueError, match="unsafe"):
+        sup.output_bytes(tmp_path)
