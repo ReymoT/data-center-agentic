@@ -4,7 +4,7 @@ Prepared by Matty, November 26. This is a proposal/checklist, not a dispatchable
 request, scientific approval, new input draw or completed reproduction. Nisha's
 [new-output receiving is accepted](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md).
 The current development cases, policies, metric definitions and 163 scientific
-bindings remain unchanged. No final seed or contents were opened in this work.
+bindings remain unchanged. No final cases were drawn, generated or opened during this preparation.
 
 ## First priority: clean numerical reproduction of saved findings
 
@@ -41,6 +41,8 @@ operational check would use these already observed cases, all three policies:
 | development-overloaded_impossible-20 | Original split-source case |
 | development-overloaded_impossible-22 | Recorded zero-start overloaded outcome |
 | development-missing_forecast-05 | Known shared missed job in the control |
+
+Proposed order: the five table rows in order, each under rules-v1, greedy_a, then greedy_b.
 
 Candidate scope: 15 serial case-policy pairs, 30 decisions each, at most 900 charged
 states AND 900 transitions including full replay; 300 seconds total, 60 seconds per

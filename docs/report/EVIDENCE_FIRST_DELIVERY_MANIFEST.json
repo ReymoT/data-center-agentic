@@ -565,7 +565,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "36b37b9a034db2af431fab5579f99ed12da2af86b5505f8b297301b69e9b5cdb",
+      "sha256": "9ed061513c883ca61a94ffc1c62f45e6a42ea2514e345acf5dac00e5683dd794",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1230,7 +1230,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_NEXT_SCOPE_OFFLINE_NOV26.md",
-      "sha256": "2c1d57523f17ecbb768b3b3e1fdd4dcb04f9b2a1d7e1fc9b6f240c824ff881ff",
+      "sha256": "0030218f612730e1f6f639226fcfe8331146bbed2111e0315b9bbb435064f631",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
