@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "86affbe0101b0b94456d3da1e7c0dfbbc1cc8435ad0dd75b6c5a5acf434542df",
+      "sha256": "8f786f8eca2cac38eb49a5814c98eadc77b1006c60ee7a5be23c74a41afab5fe",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "a0bcef7c1b60d233934e41af1d1308ab849d81d8dd0f6a18e6bd551568f471dc",
+      "sha256": "f743535206f5737172e2cb1283ec5367506a8ebfb66130ddaee33a525f4b43e3",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "a8c5ce0adbf18ca496e5106a28bddc44768bbb281c07d66ca1eccc80e9383227",
+      "sha256": "0226bc1371066a247e47dd55bf0bd6bfd093c20be7e84fbdb96ca8ed3e77438c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1010,27 +1010,27 @@
     },
     {
       "path": "ui/rule_demo_assets/case-A.png",
-      "sha256": "43516fb1c1382f7bf8d4afa14b0cd4ced1c16c2d90f384fb965dfc7bcb29c78f",
+      "sha256": "7c5adab6c59c88b704cd4da825993a7de1fc222a7947fc74e08b94fb0e6f6317",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/case-B-fault.png",
-      "sha256": "fcee7eb036510f5905bcedf2ba6a14ecea76b0e39775dc81f3d130572d3410eb",
+      "sha256": "408558370e8a45e97f4c88d1b6184a942a2e8db3d5608e1ee1ad04ccefafdda4",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/metrics.png",
-      "sha256": "a5ddaad42a8643336a486d4c4dd507c08537e4e949a7de68308cd94567746d2c",
+      "sha256": "50518e01d799df055bc50c13595e999fcc40cbc3c0f2faaf3329b935221091f2",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/saved-evidence-walkthrough.gif",
-      "sha256": "a7c449f82ec083f6ad0e61973c1ba74db8226a4b8b37b356338d813e4844d8b9",
+      "sha256": "731ecdb1d84360a1b127893efb25ecde7ad21e4e8edfc701798d07c463be89b3",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/verification.png",
-      "sha256": "4ad0b4fa38f2ce840fc4a61786fa262b42d73c0f32d5bc8dced2df3cca423a93",
+      "sha256": "27fc1d5471a9418bebd3a890ff9c34e9ccb866a5081dca8fd61b896eb73608e3",
       "hash_convention": "raw_bytes"
     },
     {
@@ -1125,7 +1125,7 @@
     },
     {
       "path": "docs/evidence/rule04-nov24-failed-development/attempt-receipt.json",
-      "sha256": "1ce8974f14bf4deb6f13473d62f5f32e952e6c44c8cfbc4abe8ef85f70780c70",
+      "sha256": "ff71f8b93a62ca4fd6977c3b48c97b2ef34b297a7f0733931931485853aa926b",
       "hash_convention": "raw_bytes"
     },
     {
@@ -1155,7 +1155,7 @@
     },
     {
       "path": "docs/rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md",
-      "sha256": "1828b1555acd2b15daefa28d051b884b23e77d19ac919d87f33ac587e594b642",
+      "sha256": "8b613a64f82cb83c5b4b9b9fc177a30e038c2e50855be7a0880265d2dff6a496",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1181,6 +1181,26 @@
     {
       "path": "docs/rule_study/RULE04_SUFFIX_REVIEW_RESOLUTION_NOV25.md",
       "sha256": "c03ede402fa7d8d605155f3e39c237d3d66b1e66d0e0ebb78fae687d9ec65a87",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/build_rule04_union.py",
+      "sha256": "0b34abb1a58ded652e8c2cf3598e58543fb8ef7c44d5c86b12c57ba001c8d1ab",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/rule_study/test_rule04_union.py",
+      "sha256": "96ed8350eb2ef59efd51e74cb9d144cb72e9ae1bb5b93104e5f36aab88df7374",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_UNION_AND_REPRODUCTION_NOV26.md",
+      "sha256": "abb1848c3f9cc118ac5504fb9f61ce25cab152f245699caea2a3feb0c4baaad3",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV26_UNION.json",
+      "sha256": "85bbf825a50ba2027d73c6858d6cf07bae0c07776cf897d4053c70d6f8837926",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
