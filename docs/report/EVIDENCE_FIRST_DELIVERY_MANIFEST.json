@@ -1197,6 +1197,11 @@
       "path": "docs/rule_study/RULE04_UNION_AND_REPRODUCTION_NOV26.md",
       "sha256": "abb1848c3f9cc118ac5504fb9f61ce25cab152f245699caea2a3feb0c4baaad3",
       "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV26_UNION.json",
+      "sha256": "85bbf825a50ba2027d73c6858d6cf07bae0c07776cf897d4053c70d6f8837926",
+      "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
   "self_hash_excluded": true,
