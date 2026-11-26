@@ -6,6 +6,7 @@ overshoot between observations. Cleanup has a separate three-second allowance.
 """
 
 import math
+import stat
 import subprocess
 from pathlib import Path
 from time import monotonic
@@ -28,10 +29,20 @@ def output_bytes(root, *, deadline=None):
     for item in root.rglob("*"):
         check_time()
         count += 1
-        if count > 100000 or item.is_symlink() or item.is_junction():
+        if count > 100000:
             raise ValueError("unsafe or excessive output inventory")
-        if item.is_file():
-            total += item.stat().st_size
+        try:
+            info = item.lstat()
+        except FileNotFoundError:
+            # Exclusive publication links a completed temp then unlinks its temp
+            # name. A disappearing entry is not a supervision failure. The next
+            # periodic scan and the mandatory exit scan observe retained names.
+            check_time()
+            continue
+        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
+            raise ValueError("unsafe or excessive output inventory")
+        if stat.S_ISREG(info.st_mode):
+            total += info.st_size
         check_time()
     return total
 
@@ -70,7 +81,8 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                 if monotonic() >= deadline:
                     result["status"] = "timed_out"
                     break
-                if monotonic() >= next_scan or child.poll() is not None:
+                exited_before_scan = child.poll() is not None
+                if monotonic() >= next_scan or exited_before_scan:
                     size = output_bytes(output, deadline=deadline)
                     result["observed_output_bytes"] = size
                     next_scan = monotonic() + 1
@@ -78,6 +90,14 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                         result["status"] = "output_limit"
                         break
                 if child.poll() is not None:
+                    if not exited_before_scan:
+                        # A periodic scan can race the worker's last publication.
+                        # Always observe a fresh inventory after exit before PASS.
+                        size = output_bytes(output, deadline=deadline)
+                        result["observed_output_bytes"] = size
+                        if size > limit_bytes:
+                            result["status"] = "output_limit"
+                            break
                     result["returncode"] = child.returncode
                     result["status"] = "succeeded" if child.returncode == 0 else "failed"
                     if not job.wait_empty(min(deadline, monotonic() + 0.2)):

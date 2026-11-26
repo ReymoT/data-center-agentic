@@ -3,6 +3,11 @@
 Owner Matty; November 25. This implements preparation only. No additional study
 run, scientific replay, model, training or final generation is authorized here.
 
+[Matty's package-review resolution](RULE04_SUFFIX_REVIEW_RESOLUTION_NOV25.md)
+adds single-read hash verification, fail-closed inspection reports, explicit stop
+reasons and native suffix regressions. A further incomplete stop remains a material
+risk. Split-case union accounting is a separately named pending gate, not a result.
+
 The original full-batch request and guard remain supported unchanged. A distinct
 `rule04_development_suffix_preparation_v1` request adds one exact `parent` receipt
 path/hash. It selects only the unexecuted suffix of the original frozen case/policy

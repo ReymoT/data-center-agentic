@@ -985,17 +985,17 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "e3d6b1f70a68b82d4f03afb133aaf0470fdba327e8e5f7d73e1e73eb1ad48b30",
+      "sha256": "3468e9fb2a89ebfce4bd0a0322e6dd95747332a14a0b95265b7176da223feda9",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "scripts/rule_rollout_supervisor.py",
-      "sha256": "0760513a358d730f94e26c1d9293d04c4dbe3854bfb3cc0216f2e5343cacca63",
+      "sha256": "a33ed6d93f17d84a565c3d209b914065b77a6ac058bad0022185a8b2015bfef6",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "tests/runtime/test_rule04_rollout_preparation.py",
-      "sha256": "796ccbd4587bd5628eef2507aae0df5c4e5093e90e015c42b271d5cb65c1b2a9",
+      "sha256": "41109d4effb3c95c609ddae46289d7d19609935b331d63443281df3c0b6a8042",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1150,12 +1150,12 @@
     },
     {
       "path": "scripts/rule04_suffix.py",
-      "sha256": "604f14075ce0137f4204ae67bb79c65704113b68f3cca130791a5bea1ce44be9",
+      "sha256": "2ac81111296c142e14aed0dda82dfae61b8497a6c4098c5dacf50fc2ee818a6b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md",
-      "sha256": "0b2577422e425fa74d90675384d4aa72dd6c38542a6adaacaa670e44ae6d0b82",
+      "sha256": "1828b1555acd2b15daefa28d051b884b23e77d19ac919d87f33ac587e594b642",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1171,6 +1171,16 @@
     {
       "path": "docs/handoffs/RULE04_NISHA_RECEIVING_NOV25.md",
       "sha256": "4a7aae2dc55bdb21154d1969f5b9206ea081c7231cf912d05eb85fece74a5cc6",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV25_REVIEW.json",
+      "sha256": "ff60aac450dee665678886392d299969d09be6842ed1e104b5bdcfe7e26c2043",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_SUFFIX_REVIEW_RESOLUTION_NOV25.md",
+      "sha256": "c03ede402fa7d8d605155f3e39c237d3d66b1e66d0e0ebb78fae687d9ec65a87",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

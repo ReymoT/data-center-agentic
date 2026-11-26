@@ -183,7 +183,7 @@ def test_nested_job_containment_for_dummy_pair(tmp_path):
     result = sup.supervise(
         [sys.executable, "-c", code], 8, output=tmp_path, limit_bytes=1024, cwd=w.ROOT
     )
-    assert result["status"] == "succeeded" and result["cleanup_verified"]
+    assert result["status"] == "succeeded" and result["cleanup_verified"], result
 
 
 @pytest.mark.parametrize("hidden", [False, True])
@@ -580,10 +580,121 @@ def test_contained_authored_fixture_resource_sample(tmp_path, job_count, record_
         limit_bytes=8 * 1024 * 1024,
         cwd=w.ROOT,
     )
-    assert result["status"] == "succeeded" and result["cleanup_verified"]
+    assert result["status"] == "succeeded" and result["cleanup_verified"], result
     record_property(
         "scope", "ordinary authored fixture; no bootstrap/development-batch feasibility claim"
     )
     record_property("jobs", job_count)
     record_property("native_contained_elapsed_s", result["elapsed_total_s"])
     record_property("fixture_output_bytes", sup.output_bytes(tmp_path))
+
+
+def test_output_inventory_survives_vanished_publish_temp(tmp_path, monkeypatch):
+    stable = tmp_path / "published.json"
+    stable.write_bytes(b"abc")
+
+    class VanishedTemporary:
+        def is_symlink(self):
+            return False
+
+        def is_junction(self):
+            return False
+
+        def is_file(self):
+            return True
+
+        def stat(self, *a, **k):
+            raise FileNotFoundError("temporary publication entry disappeared")
+
+        lstat = stat
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([VanishedTemporary(), stable]))
+    assert sup.output_bytes(tmp_path) == 3
+
+
+def test_output_inventory_other_stat_errors_remain_fail_closed(tmp_path, monkeypatch):
+    class Unreadable:
+        def is_symlink(self):
+            return False
+
+        def is_junction(self):
+            return False
+
+        def is_file(self):
+            return True
+
+        def stat(self, *a, **k):
+            raise PermissionError("unreadable output")
+
+        lstat = stat
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([Unreadable()]))
+    with pytest.raises(PermissionError):
+        sup.output_bytes(tmp_path)
+
+
+@pytest.mark.parametrize("reparse", [False, True])
+def test_output_inventory_nonfollowing_snapshot_rejects_links(tmp_path, monkeypatch, reparse):
+    import stat
+    from types import SimpleNamespace
+
+    class Linked:
+        def lstat(self):
+            return SimpleNamespace(
+                st_mode=stat.S_IFDIR if reparse else stat.S_IFLNK,
+                st_file_attributes=0x400 if reparse else 0,
+                st_size=0,
+            )
+
+    monkeypatch.setattr(Path, "rglob", lambda *a: iter([Linked()]))
+    with pytest.raises(ValueError, match="unsafe"):
+        sup.output_bytes(tmp_path)
+
+
+def test_process_finishing_during_scan_gets_fresh_exit_inventory(tmp_path, monkeypatch):
+    import io
+
+    class Job:
+        def assign(self, pid):
+            pass
+
+        def wait_empty(self, deadline):
+            return True
+
+        def stop(self):
+            pass
+
+        def close(self):
+            pass
+
+    class Child:
+        pid = 1
+        returncode = 0
+        stdin = io.BytesIO()
+
+        def poll(self):
+            return 0 if len(calls) >= 2 else None
+
+        def wait(self, timeout):
+            return 0
+
+    sizes = iter([0, 0, 2048])  # preflight, active scan, stable post-exit scan
+    calls = []
+
+    def inventory(*a, **k):
+        calls.append(True)
+        return next(sizes)
+
+    monkeypatch.setattr(sup, "monotonic", lambda: 0)
+    monkeypatch.setattr(sup, "WindowsJob", Job)
+    monkeypatch.setattr(
+        sup.subprocess,
+        "CREATE_NO_WINDOW",
+        getattr(sup.subprocess, "CREATE_NO_WINDOW", 0),
+        raising=False,
+    )
+    monkeypatch.setattr(sup.subprocess, "Popen", lambda *a, **k: Child())
+    monkeypatch.setattr(sup, "output_bytes", inventory)
+    result = sup.supervise([], 5, output=tmp_path, limit_bytes=1024, cwd=w.ROOT)
+    assert result["status"] == "output_limit", result
+    assert result["cleanup_verified"] and len(calls) == 3

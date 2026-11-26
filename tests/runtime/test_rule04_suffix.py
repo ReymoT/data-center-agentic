@@ -326,3 +326,187 @@ def test_suffix_dispatch_requires_new_operation_and_exact_scope(prefix, monkeypa
         w.dispatch_once(
             request_path, ledger=path.parent / "RuleStudy_Run_Ledger", trusted_authorize=authority
         )
+
+
+def test_controls_rechecks_receipt_even_when_no_hidden_pairs(prefix):
+    request, _, path, _, _ = prefix
+    w.selection(request)
+    path.write_text("{}")
+    with pytest.raises(ValueError, match="parent receipt changed"):
+        w.suffix_controls(request, ({}, {}, {"A": object()}))
+
+
+def test_controls_reads_and_authenticates_hidden_pair_bytes(prefix):
+    from types import SimpleNamespace
+
+    request, receipt, path, output, _ = prefix
+    parsed = {"A": SimpleNamespace(scores=None), "B": SimpleNamespace(scores=[1])}
+    for row in receipt["pairs"]:
+        p = output / f"A-{row['policy_id']}" / "pair-result.json"
+        value = w.read_json(p)
+        value["execution_signature"] = "a" * 64
+        p.write_text(json.dumps(value))
+        row["sha256"] = w.pf.sha(p.read_bytes())
+    rebind(request, receipt, path)
+    assert w.suffix_controls(request, ({}, {}, parsed)) == {"A": "a" * 64}
+    (output / "A-greedy_a/pair-result.json").write_text("{}")
+    with pytest.raises(ValueError, match="parent control pair changed"):
+        w.suffix_controls(request, ({}, {}, parsed))
+
+
+def test_bound_json_uses_single_verified_read(tmp_path, monkeypatch):
+    from scripts import rule04_suffix as suffix
+
+    path = tmp_path / "data.json"
+    path.write_text('{"value":1}')
+    raw = path.read_bytes()
+    real_read = w.pf.bounded_bytes
+    calls = []
+
+    def replace_after_read(p):
+        calls.append(p)
+        value = real_read(p)
+        path.write_text('{"value":2}')
+        return value
+
+    monkeypatch.setattr(w.pf, "bounded_bytes", replace_after_read)
+    assert suffix.bound_json(path, w.pf.sha(raw), "fixture") == {"value": 1}
+    assert len(calls) == 1
+    with pytest.raises(ValueError, match="fixture changed"):
+        suffix.bound_json(path, w.pf.sha(raw), "fixture")
+
+
+def test_inspect_missing_parent_writes_blocked_without_dispatch(prefix, monkeypatch):
+    request, _, receipt, _, _ = prefix
+    req = receipt.parent / "inspect-request.json"
+    w._write(req, request)
+    receipt.unlink()
+    output = receipt.parent / "inspection.json"
+    monkeypatch.setattr(w.supervisor, "supervise", lambda *a, **k: pytest.fail("no dispatch"))
+    assert w.main(["--inspect", str(req), "--out", str(output)]) == 2
+    report = w.read_json(output)
+    assert report["status"] == "BLOCKED" and report["execution_authorized"] is False
+    assert "FileNotFoundError" in report["problems"][0]
+    assert not Path(request["plan"]["output_directory"]).exists()
+
+
+def test_inspect_git_preflight_failure_writes_blocked(tmp_path, monkeypatch):
+    import subprocess
+
+    request = tmp_path / "request.json"
+    request.write_text("{}")
+
+    def fail_assessment(_):
+        raise subprocess.CalledProcessError(1, ["git", "merge-base"])
+
+    monkeypatch.setattr(w, "assess", fail_assessment)
+    report = tmp_path / "inspection.json"
+    assert w.main(["--inspect", str(request), "--out", str(report)]) == 2
+    assert w.read_json(report)["status"] == "BLOCKED"
+
+
+@pytest.mark.parametrize("drift", ["commit", "pins", "input"])
+def test_suffix_child_rejects_source_or_input_drift_before_policy(prefix, monkeypatch, drift):
+    request, _, _, _, _ = prefix
+    request["plan"].update(
+        code_commit="fixture",
+        code_sha256={"fixture": "unchanged"},
+        inputs={
+            r: {"path": str(Path(w.__file__).parents[1] / "docs/evidence/rule04-dev-nov23" / name)}
+            for r, (name, _) in w.INPUTS.items()
+        },
+    )
+    request["limits"] = {
+        "states": 21600,
+        "transitions": 21600,
+        "wall_seconds": 900,
+        "case_policy_seconds": 60,
+        "output_bytes": 268435456,
+    }
+    monkeypatch.setattr(
+        w.pf,
+        "snapshot",
+        lambda: (
+            "changed" if drift == "commit" else "fixture",
+            {"fixture": "changed" if drift == "pins" else "unchanged"},
+        ),
+    )
+    if drift == "input":
+        original = w.pf.bounded_bytes
+        case_path = request["plan"]["inputs"]["development_cases"]["path"]
+        monkeypatch.setattr(
+            w.pf, "bounded_bytes", lambda p: b"changed" if str(p) == case_path else original(p)
+        )
+    monkeypatch.setenv("RULE04_WORKER_PAIR", json.dumps(["B", "rules-v1", 180, 180]))
+    monkeypatch.setattr(w, "_one_pair", lambda *a, **k: pytest.fail("drift released policy"))
+    new_output = Path(request["plan"]["output_directory"])
+    new_output.mkdir()
+    with pytest.raises(ValueError, match="source/input"):
+        w.execute_prepared(request)
+    failure = w.read_json(new_output / "B-rules-v1/pair-failure.json")
+    assert failure["retry_allowed"] is False
+
+
+@pytest.mark.parametrize("stop", ["failed", "timed_out", "cleanup"])
+def test_suffix_failure_after_one_pair_preserves_counts_and_stops(tmp_path, monkeypatch, stop):
+    from types import SimpleNamespace
+
+    loaded = (
+        {"cases": [{"case_id": "B", "stratum": "fixture"}]},
+        {},
+        {"B": SimpleNamespace(scores=[1])},
+    )
+    monkeypatch.setattr(w, "pair", lambda: loaded)
+    monkeypatch.setattr(w, "selection", lambda *a, **k: [("B", p) for p in w.POLICIES])
+    monkeypatch.setattr(w, "suffix_controls", lambda *a: {})
+    monkeypatch.setattr(w, "monotonic", lambda: 0)
+    calls = []
+
+    def dummy(*args, output, **kwargs):
+        calls.append(output.name)
+        output.mkdir()
+        if len(calls) == 1:
+            w._write(
+                output / "pair-result.json",
+                {
+                    "budget": {"states_used": 60, "transitions_used": 60},
+                    "metric": {"case_id": "B", "policy_id": "rules-v1"},
+                },
+            )
+            return {"status": "succeeded", "cleanup_verified": True}
+        return {
+            "status": "succeeded" if stop == "cleanup" else stop,
+            "cleanup_verified": stop != "cleanup",
+        }
+
+    monkeypatch.setattr(w.supervisor, "supervise", dummy)
+    request = {
+        "kind": w.SUFFIX_KIND,
+        "limits": {
+            "states": 180,
+            "transitions": 180,
+            "wall_seconds": 900,
+            "case_policy_seconds": 60,
+            "output_bytes": 1024,
+        },
+    }
+    out = tmp_path / "output"
+    with pytest.raises(ValueError, match="no retry"):
+        w._batch(request, out)
+    report = w.read_json(out / "rollout-failure.json")
+    assert report["completed_runs"] == 1
+    assert report["charged_steps_completed_pairs_only"] == {"states": 60, "transitions": 60}
+    assert report["retry_allowed"] is False and len(calls) == 2
+    assert not (out / "B-greedy_b").exists()
+
+
+def test_explicit_and_legacy_resource_stop_semantics():
+    from scripts import rule04_suffix as suffix
+
+    assert suffix.resource_stop({"message": "combined resource budget exhausted"})
+    for reason in ("wall_time_reserve", "state_transition_budget"):
+        error = w.ResourceStop(reason)
+        assert suffix.resource_stop({"stop_reason": reason, "message": str(error)})
+    assert not suffix.resource_stop(
+        {"stop_reason": "other_failure", "message": "combined resource budget exhausted"}
+    )

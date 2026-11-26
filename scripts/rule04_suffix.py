@@ -7,6 +7,16 @@ prepared from reviewed retained bytes; its hash is part of the fresh request.
 from pathlib import Path
 
 
+def bound_json(path, digest, label):
+    """Hash and parse one read, avoiding a second, unverified read."""
+    from scripts import prepare_rule_study_rollout as w
+
+    raw = w.pf.bounded_bytes(w.safe_path(path))
+    if w.pf.sha(raw) != digest:
+        raise ValueError(f"{label} changed")
+    return w.decode_json(raw)
+
+
 def selection(request, *, full=False, loaded=None):
     from scripts import prepare_rule_study_rollout as w
 
@@ -24,9 +34,7 @@ def selection(request, *, full=False, loaded=None):
     if not isinstance(parent["path"], str) or not Path(parent["path"]).is_absolute():
         raise ValueError("absolute parent receipt path required")
     path = w.safe_path(parent["path"])
-    if not path.is_absolute() or w.pf.sha(w.pf.bounded_bytes(path)) != parent["sha256"]:
-        raise ValueError("parent receipt changed")
-    receipt = w.read_json(path)
+    receipt = bound_json(path, parent["sha256"], "parent receipt")
     if set(receipt) != {"kind", "output", "request", "status_sha256", "pairs", "artifacts"}:
         raise ValueError("exact parent receipt fields required")
     if receipt["kind"] != "rule04_retained_prefix_v1":
@@ -35,9 +43,7 @@ def selection(request, *, full=False, loaded=None):
     if not isinstance(prior, dict) or set(prior) != {"path", "sha256"}:
         raise ValueError("parent request binding required")
     old_path = w.safe_path(prior["path"])
-    if w.pf.sha(w.pf.bounded_bytes(old_path)) != prior["sha256"]:
-        raise ValueError("parent request changed")
-    old = w.read_json(old_path)
+    old = bound_json(old_path, prior["sha256"], "parent request")
     if old["kind"] != w.KIND or set(old) != w.FIELDS:
         raise ValueError("only an original full development attempt may be continued")
     for role, (name, digest) in w.INPUTS.items():
@@ -76,17 +82,15 @@ def selection(request, *, full=False, loaded=None):
     ):
         raise ValueError("parent consumed authority/cleanup not established")
     status_path = folder / "rollout-failure.json"
-    if w.pf.sha(w.pf.bounded_bytes(status_path)) != receipt["status_sha256"]:
-        raise ValueError("parent status changed")
+    status = bound_json(status_path, receipt["status_sha256"], "parent status")
     if (folder / "rollout-supervisor-failure.json").exists() or (
         folder / "rollout-report.json"
     ).exists():
         raise ValueError("ambiguous parent status")
-    status = w.read_json(status_path)
     rows = receipt["pairs"]
     if (
         status.get("status") != "FAIL_OR_INCOMPLETE"
-        or status.get("message") != "combined resource budget exhausted"
+        or not resource_stop(status)
         or status.get("authenticated_request_sha256") != prior["sha256"]
         or type(status.get("completed_runs")) is not int
         or not 0 < status["completed_runs"] < len(expected)
@@ -104,9 +108,7 @@ def selection(request, *, full=False, loaded=None):
             raise ValueError("parent must be the original ordered prefix")
         pair = folder / f"{key[0]}-{key[1]}"
         record = pair / "pair-result.json"
-        if w.pf.sha(w.pf.bounded_bytes(w.safe_path(record))) != row["sha256"]:
-            raise ValueError("parent pair changed")
-        value = w.read_json(record)
+        value = bound_json(record, row["sha256"], "parent pair")
         if (
             value.get("status") != "PASS"
             or value.get("replay", {}).get("overall") != "PASS"
@@ -157,12 +159,26 @@ def controls(request, loaded):
 
     if request["kind"] == w.KIND:
         return {}
-    receipt = w.read_json(request["parent"]["path"])
+    receipt = bound_json(request["parent"]["path"], request["parent"]["sha256"], "parent receipt")
     out = w.safe_path(receipt["output"])
     return {
-        r["case_id"]: w.read_json(out / f"{r['case_id']}-{r['policy_id']}" / "pair-result.json")[
-            "execution_signature"
-        ]
+        r["case_id"]: bound_json(
+            out / f"{r['case_id']}-{r['policy_id']}" / "pair-result.json",
+            r["sha256"],
+            "parent control pair",
+        )["execution_signature"]
         for r in receipt["pairs"]
         if loaded[2][r["case_id"]].scores is None
     }
+
+
+def resource_stop(status):
+    """Keep historical bytes valid; new failures distinguish time from counters."""
+    reason = status.get("stop_reason")
+    if reason is None:
+        return status.get("message") == "combined resource budget exhausted"
+    messages = {
+        "wall_time_reserve": "wall-time reserve budget exhausted before next pair and cleanup",
+        "state_transition_budget": "combined state/transition budget exhausted",
+    }
+    return reason in messages and status.get("message") == messages[reason]
