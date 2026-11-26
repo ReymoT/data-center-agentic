@@ -281,6 +281,17 @@ def policy_rows(metrics: Sequence[Mapping], strata: Mapping[str, str]) -> list[d
                     else None,
                 }
             )
+            if not runs:
+                # Coverage is known; performance was never observed.
+                for key in rows[-1]:
+                    if key not in {
+                        "stratum",
+                        "policy_id",
+                        "role",
+                        "runs_completed",
+                        "runs_expected",
+                    }:
+                        rows[-1][key] = None
     return rows
 
 
@@ -362,6 +373,10 @@ def _cell(value):
     return "—" if value is None else str(value)
 
 
+def _mean_count(value, count):
+    return "—" if count is None else f"{_cell(value)} ({count})"
+
+
 def tables_markdown(summary: Mapping) -> str:
     lines = [
         "# RULE-04 development comparison tables",
@@ -381,11 +396,10 @@ def tables_markdown(summary: Mapping) -> str:
         label = f"{r['stratum']} (control)" if r["role"] == "control_not_ranking" else r["stratum"]
         lines.append(
             f"| {label} | {r['policy_id']} | {r['runs_completed']}/{r['runs_expected']} | "
-            f"{r['execution_violations']} / {r['executed_starts']} | {r['jobs']} | {r['completed']} | "
-            f"{r['missed']} | {r['unfinished']} | {_cell(r['turnaround_mean_slots'])} "
-            f"({r['turnaround_count']}) | {_cell(r['start_delay_mean_slots'])} "
-            f"({r['start_delay_count']}) | {r['runs_with_fallback_selected']} | "
-            f"{r['runs_with_blocked_decision']} | {_cell(r['job_impact_total'])} |"
+            f"{_cell(r['execution_violations'])} / {_cell(r['executed_starts'])} | {_cell(r['jobs'])} | {_cell(r['completed'])} | "
+            f"{_cell(r['missed'])} | {_cell(r['unfinished'])} | {_mean_count(r['turnaround_mean_slots'], r['turnaround_count'])} | "
+            f"{_mean_count(r['start_delay_mean_slots'], r['start_delay_count'])} | {_cell(r['runs_with_fallback_selected'])} | "
+            f"{_cell(r['runs_with_blocked_decision'])} | {_cell(r['job_impact_total'])} |"
         )
     lines += [
         "",
@@ -418,7 +432,7 @@ def tables_markdown(summary: Mapping) -> str:
 
 
 def plot_svg(summary: Mapping) -> str:
-    """Matched turnaround shift (x, slots) vs median equal-work reduction (y); controls excluded."""
+    """Separate labeled rows preserve equal values without jitter or overlapping labels."""
     points = [
         r
         for r in summary["comparison_rows"]
@@ -426,40 +440,45 @@ def plot_svg(summary: Mapping) -> str:
         and r["matched_turnaround_reduction_median"] is not None
         and r["turnaround_shift_mean_slots"] is not None
     ]
-    w, h, pad = 520, 340, 56
+    w, h = 1040, max(300, 175 + 58 * len(points))
     xs = [p["turnaround_shift_mean_slots"] for p in points] + [0.0]
     ys = [100 * p["matched_turnaround_reduction_median"] for p in points] + [0.0]
-    x0, x1 = min(xs) - 0.5, max(xs) + 0.5
-    y0, y1 = min(ys) - 0.1, max(ys) + 0.1
+    x0, x1 = min(-0.05, min(xs) - 0.05), max(0.5, max(xs) + 0.05)
+    y0, y1 = min(0.0, min(ys)), max(100.0, max(ys))
 
     def px(x):
-        return pad + (x - x0) / (x1 - x0) * (w - 2 * pad)
+        return 350 + (x - x0) / (x1 - x0) * 230
 
     def py(y):
-        return h - pad - (y - y0) / (y1 - y0) * (h - 2 * pad)
+        return 700 + (y - y0) / (y1 - y0) * 230
 
     e = html.escape
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" font-family="sans-serif" '
-        f'font-size="11"><title>Turnaround shift vs equal-work reduction</title>',
+        f'font-size="12"><title>Turnaround shift and equal-work reduction, matched cases</title>',
         f'<rect width="{w}" height="{h}" fill="white"/>',
-        f'<line x1="{pad}" y1="{py(0)}" x2="{w - pad}" y2="{py(0)}" stroke="#999"/>',
-        f'<line x1="{px(0)}" y1="{pad}" x2="{px(0)}" y2="{h - pad}" stroke="#999"/>',
-        f'<text x="{w / 2}" y="{h - 16}" text-anchor="middle">Mean turnaround shift vs Greedy A '
-        "(slots, matched cases)</text>",
-        f'<text x="14" y="{h / 2}" transform="rotate(-90 14 {h / 2})" text-anchor="middle">'
-        "Median equal-work reduction (%)</text>",
-        f'<text x="{pad}" y="20">{e(summary["coverage_status"])} coverage; development cases only; '
+        '<text x="20" y="25" font-size="16">Matched-case development comparisons against Greedy A</text>',
+        f'<text x="20" y="48">{e(summary["coverage_status"])} coverage; development cases only; '
         "missing-forecast control excluded</text>",
+        '<text x="350" y="80">Mean turnaround shift (slots)</text>',
+        '<text x="700" y="80">Median equal-work reduction (%)</text>',
+        f'<line x1="350" y1="{h - 75}" x2="580" y2="{h - 75}" stroke="#999"/>',
+        f'<line x1="700" y1="{h - 75}" x2="930" y2="{h - 75}" stroke="#999"/>',
+        f'<line x1="{px(0):.1f}" y1="95" x2="{px(0):.1f}" y2="{h - 75}" stroke="#ccc"/>',
+        f'<line x1="{py(0):.1f}" y1="95" x2="{py(0):.1f}" y2="{h - 75}" stroke="#ccc"/>',
     ]
-    for p in points:
-        cx, cy = (
-            px(p["turnaround_shift_mean_slots"]),
-            py(100 * p["matched_turnaround_reduction_median"]),
-        )
+    for index, p in enumerate(points):
+        cy = 115 + index * 58
+        delay = p["turnaround_shift_mean_slots"]
+        reduction = 100 * p["matched_turnaround_reduction_median"]
         label = f"{p['policy_id']} · {p['stratum']} (n={p['turnaround_shift_count']})"
-        parts.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="5" fill="#3b6fb6"/>')
-        parts.append(f'<text x="{cx + 8:.1f}" y="{cy - 6:.1f}">{e(label)}</text>')
+        parts.append(f'<text x="20" y="{cy + 4}">{e(label)}</text>')
+        parts.append(f'<circle cx="{px(delay):.1f}" cy="{cy}" r="5" fill="#3b6fb6"/>')
+        parts.append(
+            f'<text x="{px(delay):.1f}" y="{cy + 21}" text-anchor="middle">{delay:.4g}</text>'
+        )
+        parts.append(f'<circle cx="{py(reduction):.1f}" cy="{cy}" r="5" fill="#16857b"/>')
+        parts.append(f'<text x="{py(reduction) + 10:.1f}" y="{cy + 4}">{reduction:.3g}%</text>')
     if not points:
         parts.append(
             f'<text x="{w / 2}" y="{h / 2}" text-anchor="middle">No available matched comparison'
@@ -468,10 +487,11 @@ def plot_svg(summary: Mapping) -> str:
     for i in range(5):
         x = x0 + (x1 - x0) * i / 4
         y = y0 + (y1 - y0) * i / 4
-        parts.append(
-            f'<text x="{px(x):.1f}" y="{h - pad + 16}" text-anchor="middle">{x:.2g}</text>'
-        )
-        parts.append(f'<text x="{pad - 6}" y="{py(y):.1f}" text-anchor="end">{y:.2g}</text>')
+        parts.append(f'<text x="{px(x):.1f}" y="{h - 55}" text-anchor="middle">{x:.2g}</text>')
+        parts.append(f'<text x="{py(y):.1f}" y="{h - 55}" text-anchor="middle">{y:g}%</text>')
+    parts.append(
+        f'<text x="20" y="{h - 22}">Rows use the same matched cases on both axes; separate rows are not a policy ranking. See tables for ranges and exclusions.</text>'
+    )
     parts.append("</svg>")
     return "".join(parts) + "\n"
 
