@@ -1010,27 +1010,27 @@
     },
     {
       "path": "ui/rule_demo_assets/case-A.png",
-      "sha256": "7c5adab6c59c88b704cd4da825993a7de1fc222a7947fc74e08b94fb0e6f6317",
+      "sha256": "43516fb1c1382f7bf8d4afa14b0cd4ced1c16c2d90f384fb965dfc7bcb29c78f",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/case-B-fault.png",
-      "sha256": "408558370e8a45e97f4c88d1b6184a942a2e8db3d5608e1ee1ad04ccefafdda4",
+      "sha256": "fcee7eb036510f5905bcedf2ba6a14ecea76b0e39775dc81f3d130572d3410eb",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/metrics.png",
-      "sha256": "50518e01d799df055bc50c13595e999fcc40cbc3c0f2faaf3329b935221091f2",
+      "sha256": "a5ddaad42a8643336a486d4c4dd507c08537e4e949a7de68308cd94567746d2c",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/saved-evidence-walkthrough.gif",
-      "sha256": "731ecdb1d84360a1b127893efb25ecde7ad21e4e8edfc701798d07c463be89b3",
+      "sha256": "a7c449f82ec083f6ad0e61973c1ba74db8226a4b8b37b356338d813e4844d8b9",
       "hash_convention": "raw_bytes"
     },
     {
       "path": "ui/rule_demo_assets/verification.png",
-      "sha256": "27fc1d5471a9418bebd3a890ff9c34e9ccb866a5081dca8fd61b896eb73608e3",
+      "sha256": "4ad0b4fa38f2ce840fc4a61786fa262b42d73c0f32d5bc8dced2df3cca423a93",
       "hash_convention": "raw_bytes"
     },
     {
@@ -1125,7 +1125,7 @@
     },
     {
       "path": "docs/evidence/rule04-nov24-failed-development/attempt-receipt.json",
-      "sha256": "ff71f8b93a62ca4fd6977c3b48c97b2ef34b297a7f0733931931485853aa926b",
+      "sha256": "1ce8974f14bf4deb6f13473d62f5f32e952e6c44c8cfbc4abe8ef85f70780c70",
       "hash_convention": "raw_bytes"
     },
     {
