@@ -40,7 +40,9 @@ BOOTSTRAP = worker.BOOTSTRAP.replace(
 )
 
 
-def read_json(path):
+def decode_json(raw):
+    """Strictly parse the same bounded bytes a caller has just authenticated."""
+
     def pairs(items):
         value = {}
         for k, v in items:
@@ -52,8 +54,23 @@ def read_json(path):
     def nonfinite(_):
         raise ValueError("nonfinite JSON")
 
-    path = safe_path(path)
-    return json.loads(pf.bounded_bytes(path), object_pairs_hook=pairs, parse_constant=nonfinite)
+    if not isinstance(raw, bytes) or len(raw) > 8 * 1024 * 1024:
+        raise ValueError("bounded JSON bytes required")
+    return json.loads(raw, object_pairs_hook=pairs, parse_constant=nonfinite)
+
+
+def read_json(path):
+    return decode_json(pf.bounded_bytes(safe_path(path)))
+
+
+class ResourceStop(ValueError):
+    def __init__(self, reason):
+        self.stop_reason = reason
+        message = {
+            "wall_time_reserve": "wall-time reserve budget exhausted before next pair and cleanup",
+            "state_transition_budget": "combined state/transition budget exhausted",
+        }[reason]
+        super().__init__(message)
 
 
 def safe_path(path):
@@ -416,11 +433,10 @@ def _batch(request, out):
                     continue
                 remaining = {k: limits[k] - used[k] for k in used}
                 seconds = limits["case_policy_seconds"]
-                if (
-                    min(remaining.values()) <= 0
-                    or deadline - monotonic() < seconds + 3 + write_margin
-                ):
-                    raise ValueError("combined resource budget exhausted")
+                if min(remaining.values()) <= 0:
+                    raise ResourceStop("state_transition_budget")
+                if deadline - monotonic() < seconds + 3 + write_margin:
+                    raise ResourceStop("wall_time_reserve")
                 task = out / "pair-request.json"
                 # One immutable request per pair; no overwrites or retries.
                 task = task.with_name(f"request-{case_id}-{policy}.json")
@@ -515,6 +531,7 @@ def _batch(request, out):
                 "status": "FAIL_OR_INCOMPLETE",
                 "exception": type(exc).__name__,
                 "message": str(exc)[:2000],
+                "stop_reason": getattr(exc, "stop_reason", "other_failure"),
                 "completed_runs": len(metrics),
                 "coverage": coverage(metrics, strata),
                 "coverage_scope": "completed validated pairs only; active/failed pair may have uncounted partial work",
@@ -754,7 +771,19 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.parent_receipt and not args.draft:
         parser.error("--parent-receipt is only a draft binding, never an execution option")
-    value = draft() if args.draft else assess(read_json(args.inspect))
+    try:
+        value = draft() if args.draft else assess(read_json(args.inspect))
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        if not args.inspect:
+            raise
+        value = {
+            "status": "BLOCKED",
+            "problems": [f"{type(exc).__name__}: {str(exc)[:2000]}"],
+            "execution_authorized": False,
+            "final_generation_supported": False,
+        }
+        _write(args.out, value)
+        return 2
     if args.parent_receipt:
         parent = safe_path(args.parent_receipt)
         value.update(

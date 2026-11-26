@@ -985,7 +985,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "e3d6b1f70a68b82d4f03afb133aaf0470fdba327e8e5f7d73e1e73eb1ad48b30",
+      "sha256": "43c10488c4b04908f27ecaaeeae26d7675c55cb4f4503e659275314f659f2a1d",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1150,12 +1150,12 @@
     },
     {
       "path": "scripts/rule04_suffix.py",
-      "sha256": "604f14075ce0137f4204ae67bb79c65704113b68f3cca130791a5bea1ce44be9",
+      "sha256": "2ac81111296c142e14aed0dda82dfae61b8497a6c4098c5dacf50fc2ee818a6b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md",
-      "sha256": "0b2577422e425fa74d90675384d4aa72dd6c38542a6adaacaa670e44ae6d0b82",
+      "sha256": "1828b1555acd2b15daefa28d051b884b23e77d19ac919d87f33ac587e594b642",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1171,6 +1171,16 @@
     {
       "path": "docs/handoffs/RULE04_NISHA_RECEIVING_NOV25.md",
       "sha256": "4a7aae2dc55bdb21154d1969f5b9206ea081c7231cf912d05eb85fece74a5cc6",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV25_REVIEW.json",
+      "sha256": "4619f506d9a16c2dbcfe6c3c0078c0e307a6714e341b44655865aa37b9e30c23",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/rule_study/RULE04_SUFFIX_REVIEW_RESOLUTION_NOV25.md",
+      "sha256": "2e2edfceecab636bf0090b90238f5bb6de4bc7d90e9cf07d2018035957b13286",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
