@@ -100,8 +100,13 @@ def load_run(run_dir: Path, cases_path: Path = CASES) -> dict:
     if status_path is None:
         raise ValueError("no retained run status record")
     status = _json(status_path)
-    complete = status_path == report and status.get("status") == "PASS"
-    if not complete and status.get("status") != "FAIL_OR_INCOMPLETE":
+    scoped = status_path == report and status.get("scope_complete_only") is True
+    complete = status_path == report and status.get("status") == "PASS" and not scoped
+    if (
+        not complete
+        and not (scoped and status.get("status") == "PASS")
+        and status.get("status") != "FAIL_OR_INCOMPLETE"
+    ):
         raise ValueError("unsupported failure status")
     inputs = _inputs(cases_path)
     case_set = inputs[0]
@@ -191,6 +196,26 @@ def load_run(run_dir: Path, cases_path: Path = CASES) -> dict:
         raise ValueError("coverage differs from the run's own record")
     if complete and (set(keys) != expected or recorded != len(expected) or failed):
         raise ValueError("PASS requires every expected case/policy pair and no failures")
+    if scoped:
+        if not metrics:
+            raise ValueError("empty suffix cannot pass")
+        first = metrics[0]
+        request_path = run_dir / f"request-{first['case_id']}-{first['policy_id']}.json"
+        request = rollout.read_json(request_path)
+        selected = rollout.selection(request, full=True)
+        if (
+            request["kind"] != rollout.SUFFIX_KIND
+            or _sha(request_path)
+            != _json(run_dir / f"{first['case_id']}-{first['policy_id']}" / "pair-result.json").get(
+                "pair_request_sha256"
+            )
+            or status.get("parent") != request["parent"]
+            or status.get("selected_pairs") != [list(k) for k in selected]
+            or set(keys) != set(selected)
+            or recorded != len(selected)
+            or failed
+        ):
+            raise ValueError("scoped PASS differs from authenticated suffix")
     if _json(status_path) != status:
         raise ValueError("status changed during validation")
     return {
@@ -199,7 +224,9 @@ def load_run(run_dir: Path, cases_path: Path = CASES) -> dict:
         "strata": strata,
         "complete": complete,
         "run_status": status.get("status"),
-        "stop_message": None if complete else status.get("message"),
+        "stop_message": "selected suffix complete; parent evidence remains separate"
+        if scoped
+        else (None if complete else status.get("message")),
         "recovered_unacknowledged_pairs": len(metrics) - recorded,
         "authenticated_request_sha256": next(iter(authorities), None),
         "inputs": [

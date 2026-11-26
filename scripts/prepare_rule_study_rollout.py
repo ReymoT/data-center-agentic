@@ -20,6 +20,7 @@ from scripts import prepare_rule_study_worker as worker  # noqa: E402
 from scripts import rule_rollout_supervisor as supervisor  # noqa: E402
 
 KIND = "rule04_development_rollout_preparation_v1"
+SUFFIX_KIND = "rule04_development_suffix_preparation_v1"
 POLICIES = ("rules-v1", "greedy_a", "greedy_b")
 INPUTS = {
     "development_cases": (
@@ -103,7 +104,7 @@ def development_case_spec(visible):
     return replace(mapped, case_id=visible.case_id)
 
 
-def validate_limits(limits):
+def validate_limits(limits, runs=360):
     if not isinstance(limits, dict) or set(limits) != LIMIT_KEYS:
         raise ValueError("exact explicit rollout limits required")
     ceilings = {
@@ -116,9 +117,11 @@ def validate_limits(limits):
     for k, cap in ceilings.items():
         if type(limits[k]) is not int or not 0 < limits[k] <= cap:
             raise ValueError(f"unsupported or absent limit: {k}")
-    if min(limits["states"], limits["transitions"]) < 21600:
+    if type(runs) is not int or not 1 <= runs <= 360:
+        raise ValueError("bounded fixed pair count required")
+    if min(limits["states"], limits["transitions"]) < runs * 60:
         raise ValueError(
-            "full execution plus replay needs at least 21600 charged steps; eligibility also uses wall time"
+            f"execution plus replay needs at least {runs * 60} charged steps; eligibility also uses wall time"
         )
     if limits["case_policy_seconds"] > limits["wall_seconds"]:
         raise ValueError("per-pair time exceeds combined wall bound")
@@ -145,12 +148,13 @@ def draft():
 
 
 def assess(request):
-    if not isinstance(request, dict) or set(request) != FIELDS or request["kind"] != KIND:
+    if not isinstance(request, dict):
         raise ValueError("fixed development rollout request required")
+    selected = selection(request)
     report = pf.assess(request["plan"])
     problems = list(report["problems"])
     try:
-        validate_limits(request["limits"])
+        validate_limits(request["limits"], len(selected))
     except ValueError as exc:
         problems.append(str(exc))
     if not isinstance(request["freeze_reference"], str) or not request["freeze_reference"].strip():
@@ -193,9 +197,21 @@ def assess(request):
         "status": "BLOCKED" if problems else "PREPARED_NOT_AUTHORIZED",
         "problems": problems,
         "execution_authorized": False,
-        "runs": 360,
+        "runs": len(selected),
         "final_generation_supported": False,
     }
+
+
+def selection(request, *, full=False, loaded=None):
+    from scripts.rule04_suffix import selection as fixed_selection
+
+    return fixed_selection(request, full=full, loaded=loaded)
+
+
+def suffix_controls(request, loaded):
+    from scripts.rule04_suffix import controls
+
+    return controls(request, loaded) if request.get("kind") == SUFFIX_KIND else {}
 
 
 def _write(path, value):
@@ -323,10 +339,11 @@ def execute_prepared(request):
     mode = os.environ.get("RULE04_WORKER_PAIR")
     # Pair selection is supplied by fixed parent code, never an arbitrary command.
     if mode is not None:
-        validate_limits(request["limits"])
         case_id, policy, states, transitions = json.loads(mode)
         loaded = pair()
-        if case_id not in loaded[2] or policy not in POLICIES:
+        selected = selection(request, loaded=loaded)
+        validate_limits(request["limits"], len(selected))
+        if (case_id, policy) not in selected:
             raise ValueError("unknown pair")
         if any(
             type(n) is not int or not 0 < n <= request["limits"][k]
@@ -336,7 +353,7 @@ def execute_prepared(request):
         directory = out / f"{case_id}-{policy}"
         directory.mkdir(exist_ok=False)
         try:
-            if set(request) != FIELDS or request["kind"] != KIND or assess_after_run(request):
+            if assess_after_run(request):
                 raise ValueError("pair source/input request refused")
             _one_pair(
                 request,
@@ -388,10 +405,15 @@ def _batch(request, out):
     metrics, reports, control_signatures = [], [], {}
     strata = {}
     try:
-        case_file, _, parsed = pair()
+        loaded = pair()
+        case_file, _, parsed = loaded
         strata = {c["case_id"]: c["stratum"] for c in case_file["cases"]}
+        selected = selection(request, loaded=loaded)
+        control_signatures = suffix_controls(request, loaded)
         for case_id in parsed:
             for policy in POLICIES:
+                if (case_id, policy) not in selected:
+                    continue
                 remaining = {k: limits[k] - used[k] for k in used}
                 seconds = limits["case_policy_seconds"]
                 if (
@@ -469,6 +491,12 @@ def _batch(request, out):
             {
                 "status": "PASS",
                 "scope": "development only; not unseen generalization",
+                "selected_pairs": [list(p) for p in selected],
+                "parent": request.get("parent"),
+                "scope_complete_only": request["kind"] == SUFFIX_KIND,
+                "authenticated_request_sha256": os.environ.get(
+                    "RULE04_AUTHENTICATED_REQUEST_SHA256"
+                ),
                 "runs": len(metrics),
                 "charged_steps": used,
                 "eligibility_budget_semantics": "existing kernel checks wall time; eligibility assignments are not charged as states/transitions",
@@ -569,6 +597,7 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
     request = read_json(path)
     if assess(request)["problems"]:
         raise ValueError("rollout preflight blocked")
+    selected = selection(request, full=True)
     environment = worker.environment_evidence()
     plan = request["plan"]
     subject = {
@@ -578,7 +607,9 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         "limits": request["limits"],
         "output_directory": plan["output_directory"],
         "freeze_reference": request["freeze_reference"],
-        "operation": "120_development_cases_three_policies_execution_and_replay",
+        "operation": "120_development_cases_three_policies_execution_and_replay"
+        if request["kind"] == KIND
+        else "retained_development_unexecuted_suffix_execution_and_replay",
     }
     expected = dict(
         subject, actor="MattyAnd", decision="approved", protocol_freeze_authenticated=True
@@ -618,6 +649,7 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         if (
             pf.sha(pf.bounded_bytes(path)) != subject["request_sha256"]
             or assess(request)["problems"]
+            or selection(request, full=True) != selected
         ):
             raise ValueError("request/source/input drift after ID reservation")
         if worker.environment_evidence() != environment:
@@ -637,7 +669,20 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
             result["status"] = "failed_cleanup"
         if result["status"] == "succeeded" and result["cleanup_verified"]:
             report = read_json(out / "rollout-report.json")
-            if report["status"] != "PASS" or report["runs"] != 360 or assess_after_run(request):
+            if (
+                report["status"] != "PASS"
+                or report["runs"] != len(selected)
+                or selection(request, full=True) != selected
+                or assess_after_run(request)
+                or (
+                    request["kind"] == SUFFIX_KIND
+                    and (
+                        report.get("scope_complete_only") is not True
+                        or report.get("selected_pairs") != [list(p) for p in selected]
+                        or report.get("parent") != request["parent"]
+                    )
+                )
+            ):
                 result["status"] = "failed_result_or_drift"
         if result["status"] != "succeeded":
             _supervisor_failure(out, result)
@@ -704,9 +749,18 @@ def main(argv=None):
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--draft", action="store_true")
     group.add_argument("--inspect", type=Path)
+    parser.add_argument("--parent-receipt", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
+    if args.parent_receipt and not args.draft:
+        parser.error("--parent-receipt is only a draft binding, never an execution option")
     value = draft() if args.draft else assess(read_json(args.inspect))
+    if args.parent_receipt:
+        parent = safe_path(args.parent_receipt)
+        value.update(
+            kind=SUFFIX_KIND,
+            parent={"path": str(parent), "sha256": pf.sha(pf.bounded_bytes(parent))},
+        )
     _write(args.out, value)
     return 0
 
