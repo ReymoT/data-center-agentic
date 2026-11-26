@@ -1,5 +1,8 @@
 # Verified-evidence assembly index
 
+November 26 current: Nisha's new-output and combined-accounting receiving is accepted within scope. All 360 development case-policy pairs are accounted for: 120 retained artificial cases, three policies, and 120 runs per stratum. The original 182-pair incomplete attempt is preserved; the separately approved 178-pair continuation succeeded with verified cleanup. Rules-v1 and Greedy B have identical recorded outcomes, impact and turnaround on these 120 cases. Four normal-feasible cases lose 10 jobs under those policies, and matched reduction medians are zero. These are artificial-score development findings, not unseen generalization or real-site emissions savings. Clean scientific reproduction, final/unseen evaluation and final report/demo/release acceptance remain pending. [Accepted receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) supplies the exact source, original reply and limits. Earlier dated records below are historical where superseded.
+
+
 November26 current: the accepted development attempt is PARTIAL:182/360 case-policy runs completed (normal120, overloaded/impossible62, missing-forecast0), then stopped at the wall-time reserve with verified cleanup. Nisha independently received the retained integrity/accounting within scope. Rules-v1 and GreedyB have identical starts on60 jointly run cases; four normal-feasible cases leave10 jobs missed/unfinished under those policies while GreedyA completes them. Missed and unfinished overlap. Median matched reduction is0; this does not demonstrate superiority or unseen generalization. Original failures and producer bindings are preserved. [Actual receiving](../handoffs/RULE04_NISHA_RECEIVING_NOV25.md) and [combined reporting/reproduction preparation](../rule_study/RULE04_UNION_AND_REPRODUCTION_NOV26.md) govern this checkpoint. The remaining178-pair continuation needs fresh exact authorization; no new run, receiving, clean reproduction or final audit is claimed. Earlier dated status below is historical where superseded.
 
 
@@ -55,6 +58,8 @@ held-out finding or grant publication rights for private artifacts.
 | E23 | [Second AI review fixes](../rule_study/RULE04_REVIEW3_FIXES_NOV24.md), [revision 3 freeze](../rule_study/RULE04_PROTOCOL_FREEZE_NOV24_REVIEW3.json) | Native path-layout tests, guarded short output proposal, deadline/provenance/partial-coverage fixes; no study execution |
 
 | E24 | [Reviewed retained-output summary](../handoffs/RULE04_SUMMARY_REVIEW_NOV24.md) | Read-only source/metric checks, partial coverage tables and matched-subset plot utility; no new study results |
+
+| E25 | [Accepted combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md), [public aggregate snapshot](../evidence/rule04-nov26-receiving/results-snapshot.json), [tables](../evidence/rule04-nov26-receiving/RULE04_TABLES.md) | Independent receipt/source/authority/union/accounting acceptance for 360 retained development pairs; no new replay by Nisha, unseen evaluation, clean scientific reproduction or generalization |
 
 ## Ready now versus pending
 

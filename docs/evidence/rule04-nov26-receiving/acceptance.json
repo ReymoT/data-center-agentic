@@ -1,0 +1,27 @@
+{
+  "kind": "rule04_new_output_receiving_acceptance_v1",
+  "date_arizona": "2026-11-26",
+  "manager": "MattyAnd",
+  "source_comment": "https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7203212660",
+  "source_comment_id": 7203212660,
+  "source_updated_at": "2026-11-26T20:55:39Z",
+  "original_utf8_sha256": "f505e4da96b9e091e1c36b6193e7b66ac876b4df3a8ccd0c4e3ce6223eb136db",
+  "original_file": "docs/evidence/rule04-nov26-receiving/nisha-original.txt",
+  "decision": "ACCEPTED_WITHIN_REPORTED_SCOPE",
+  "accepted": [
+    "new-output receipt integrity",
+    "continuation authority and source binding",
+    "182-parent plus 178-suffix union join",
+    "combined accounting, tables and plot"
+  ],
+  "scope": "120 retained development cases; three policies;360 unique case-policy pairs",
+  "independent_method": "Nisha reports her own read-only python -I scripts; scripts not supplied or rerun by Matty",
+  "not_established": [
+    "final/unseen evaluation",
+    "generalization",
+    "separate clean scientific reproduction",
+    "final PDF/release audit"
+  ],
+  "original_parent_status": "FAIL_OR_INCOMPLETE preserved",
+  "authorization_confirmation": "Actual exact continuation was approved by Matty in this chat by reference to the sole pending request; existing approval record and consumed ledger remain unchanged. Public confirmation: issue242 comment7201453417. This acceptance does not authorize another run."
+}
