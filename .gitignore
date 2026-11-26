@@ -35,3 +35,9 @@ results/private/
 *.pkl
 *.parquet
 tmp/
+
+# Private receiving packages belong outside the checkout, not in source history.
+/RULE06_VED_REPRODUCTION_PACKAGE_*/
+/RULE06_VED_REPRODUCTION_PACKAGE_*.zip
+/RULE04_NISHA_NEW_RECEIVING_*/
+/RULE04_NISHA_NEW_RECEIVING_*.zip

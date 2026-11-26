@@ -1,0 +1,20 @@
+{
+  "original_branch": "ved-temp-repro",
+  "original_head": "ac262126a4647d5836800e1ec569d451df2b7279",
+  "files_submitted": 17295,
+  "expected_expanded_package_files": 27975,
+  "modified_or_new_files": [],
+  "missing_files": 10680,
+  "new_reproduction_result_supplied": false,
+  "scope": "Exact byte comparison to original private handoff only; no scientific operation or independent reproduction performed.",
+  "kind": "rule06_temporary_package_review_v1",
+  "reviewer": "MattyAnd",
+  "date_arizona": "2026-11-26",
+  "missing_marker_counts": {
+    ".completed": 5340,
+    ".intents": 5340
+  },
+  "backup_bundle_sha256": "0eab5152876af805225362a646711f351484198777575d5c63ecd7debc987706",
+  "integration": "sanitized review receipt and archive integrity tooling; original package history excluded",
+  "independent_reproduction": "NOT_ESTABLISHED"
+}
