@@ -6,7 +6,7 @@ run, scientific replay, model, training or final generation is authorized here.
 [Matty's package-review resolution](RULE04_SUFFIX_REVIEW_RESOLUTION_NOV25.md)
 adds single-read hash verification, fail-closed inspection reports, explicit stop
 reasons and native suffix regressions. A further incomplete stop remains a material
-risk. Split-case union accounting is a separately named pending gate, not a result.
+risk. The read-only union reporter is now implemented and fixture-tested; actual new-output/union receiving remains pending. See [the November26 contract and reproduction handoff](RULE04_UNION_AND_REPRODUCTION_NOV26.md).
 
 The original full-batch request and guard remain supported unchanged. A distinct
 `rule04_development_suffix_preparation_v1` request adds one exact `parent` receipt
