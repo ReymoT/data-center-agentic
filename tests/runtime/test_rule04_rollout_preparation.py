@@ -649,3 +649,52 @@ def test_output_inventory_nonfollowing_snapshot_rejects_links(tmp_path, monkeypa
     monkeypatch.setattr(Path, "rglob", lambda *a: iter([Linked()]))
     with pytest.raises(ValueError, match="unsafe"):
         sup.output_bytes(tmp_path)
+
+
+def test_process_finishing_during_scan_gets_fresh_exit_inventory(tmp_path, monkeypatch):
+    import io
+
+    class Job:
+        def assign(self, pid):
+            pass
+
+        def wait_empty(self, deadline):
+            return True
+
+        def stop(self):
+            pass
+
+        def close(self):
+            pass
+
+    class Child:
+        pid = 1
+        returncode = 0
+        stdin = io.BytesIO()
+
+        def poll(self):
+            return 0 if len(calls) >= 2 else None
+
+        def wait(self, timeout):
+            return 0
+
+    sizes = iter([0, 0, 2048])  # preflight, active scan, stable post-exit scan
+    calls = []
+
+    def inventory(*a, **k):
+        calls.append(True)
+        return next(sizes)
+
+    monkeypatch.setattr(sup, "monotonic", lambda: 0)
+    monkeypatch.setattr(sup, "WindowsJob", Job)
+    monkeypatch.setattr(
+        sup.subprocess,
+        "CREATE_NO_WINDOW",
+        getattr(sup.subprocess, "CREATE_NO_WINDOW", 0),
+        raising=False,
+    )
+    monkeypatch.setattr(sup.subprocess, "Popen", lambda *a, **k: Child())
+    monkeypatch.setattr(sup, "output_bytes", inventory)
+    result = sup.supervise([], 5, output=tmp_path, limit_bytes=1024, cwd=w.ROOT)
+    assert result["status"] == "output_limit", result
+    assert result["cleanup_verified"] and len(calls) == 3

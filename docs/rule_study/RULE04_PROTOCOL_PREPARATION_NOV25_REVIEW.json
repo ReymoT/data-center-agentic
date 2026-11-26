@@ -161,7 +161,7 @@
     "scripts/rule04_suffix.py": "2ac81111296c142e14aed0dda82dfae61b8497a6c4098c5dacf50fc2ee818a6b",
     "scripts/rule04_summary_core.py": "b683293b23ad1e7a77aecde259a15571879698844f37da2182694a523e22203b",
     "scripts/rule_demo_page_core.py": "05e454a18ce2fee0a6ff3bac5b1e32d9e1145a27594540ba9bac49d2bdfd5b45",
-    "scripts/rule_rollout_supervisor.py": "5457bdcfc5c4b6f5bb117545e9c83e69bbdcf9489223305dbd289613a6e94f80",
+    "scripts/rule_rollout_supervisor.py": "a33ed6d93f17d84a565c3d209b914065b77a6ac058bad0022185a8b2015bfef6",
     "scripts/rule_study_metrics.py": "a84f97570a95c18ee1b5e3950618cd5b20a3fbc5ddd4d68636f69617f49947f3",
     "scripts/rule_study_metrics_core.py": "12f974b22ab748809a253827ecad9db7be73e27fb1b77d9dc7e6d72c155b93b7",
     "scripts/run_i01_public_receiving.py": "14f3a914fff9410431063ee38451ed4c4e002a756c6dac90e1f88a67cfb5d07c",
@@ -214,6 +214,6 @@
     "CLI inspection returns an exclusive BLOCKED report for unreadable/malformed inputs",
     "New resource stops explicitly distinguish wall-time reserve from state/transition caps; preserve old failure bytes",
     "Native suffix-specific source/input/partial failure/cleanup regressions",
-    "Output inventory uses one nonfollowing metadata snapshot; vanished publication entries are tolerated, other errors/links remain fail-closed; all caps unchanged"
+    "Output inventory uses one nonfollowing metadata snapshot; vanished publication entries are tolerated, other errors/links remain fail-closed; fresh post-exit scan before PASS on an exit-during-scan race; all caps unchanged"
   ]
 }

@@ -81,7 +81,8 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                 if monotonic() >= deadline:
                     result["status"] = "timed_out"
                     break
-                if monotonic() >= next_scan or child.poll() is not None:
+                exited_before_scan = child.poll() is not None
+                if monotonic() >= next_scan or exited_before_scan:
                     size = output_bytes(output, deadline=deadline)
                     result["observed_output_bytes"] = size
                     next_scan = monotonic() + 1
@@ -89,6 +90,14 @@ def supervise(command, limit_s, *, output, limit_bytes, cwd, deadline=None):
                         result["status"] = "output_limit"
                         break
                 if child.poll() is not None:
+                    if not exited_before_scan:
+                        # A periodic scan can race the worker's last publication.
+                        # Always observe a fresh inventory after exit before PASS.
+                        size = output_bytes(output, deadline=deadline)
+                        result["observed_output_bytes"] = size
+                        if size > limit_bytes:
+                            result["status"] = "output_limit"
+                            break
                     result["returncode"] = child.returncode
                     result["status"] = "succeeded" if child.returncode == 0 else "failed"
                     if not job.wait_empty(min(deadline, monotonic() + 0.2)):
