@@ -26,6 +26,9 @@ docs/evidence/cf60-nisha-2026-11-08/* -text
 
 # Preserve Nisha's supplied cb85 receiving files byte for byte.
 docs/evidence/rule04-nov24-receiving/* -text whitespace=cr-at-eol,-blank-at-eof
+
+# Preserve the public receiving comment exactly as supplied by GitHub.
+docs/evidence/rule04-nov26-receiving/nisha-original.txt -text whitespace=cr-at-eol,-blank-at-eof
 docs/evidence/rule04-ai-review-nov24/source.txt -text whitespace=cr-at-eol,-blank-at-eof
 docs/evidence/rule04-review2-ai-nov24/source.txt -text whitespace=cr-at-eol,-blank-at-eof
 docs/evidence/A01_CB85_NISHA_REPORT_2026-11-10.txt -text

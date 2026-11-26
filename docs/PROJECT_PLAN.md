@@ -1,5 +1,9 @@
 # Project plan
 
+November 26 current: Nisha's new-output and combined-accounting receiving is accepted within scope. All 360 development case-policy pairs are accounted for: 120 retained artificial cases, three policies, and 120 runs per stratum. The original 182-pair incomplete attempt is preserved; the separately approved 178-pair continuation succeeded with verified cleanup. Rules-v1 and Greedy B have identical recorded outcomes, impact and turnaround on these 120 cases. Four normal-feasible cases lose 10 jobs under those policies, and matched reduction medians are zero. These are artificial-score development findings, not unseen generalization or real-site emissions savings. Clean scientific reproduction, final/unseen evaluation and final report/demo/release acceptance remain pending.
+
+Read the [accepted receiving and results](handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) and [offline next-scope preparation](rule_study/RULE06_NEXT_SCOPE_OFFLINE_NOV26.md). Nisha may integrate the accepted findings now; Ved supplies his actual clean-environment/static report. No repeat receiving or new execution approval is requested for completed work. Earlier dated entries below are historical where superseded.
+
 November 24 actual attempt: [the approved development attempt failed](rule_study/RULE04_ID_FIX_NOV24.md) on episode-ID schema validation after3.719seconds, with verified cleanup and zero completed case-policy runs. Its ID is consumed. The controller correction is prepared; another attempt requires corrected merged pins and fresh exact authorization. New comparison results remain pending. Earlier same-day pre-run statements below describe their historical state.
 
 
@@ -168,6 +172,16 @@ the approved prospective clarifications are retained. Held-out reliability #95
 and official course requirements #16 remain open.
 
 ## Current next sequence
+
+1. Nisha integrates accepted 360-pair findings into #223/#231; Matty fixes stale documentation directly. New-output receiving is complete within its reported scope and must not be requested again.
+2. Ved prepares the clean environment and supplies actual offline/static reproduction commands, hashes, numerical checks and a scoped report in #244. The temporary package-copy branch was not a reproduction result.
+3. Matty receives those findings and fixes defects directly. Prepare any additional scientific reproduction/evaluation scope offline; no new policy/replay run or final seed is authorized by a status update.
+4. Use the offline next-scope record to assess actual implementation, isolation, resource and permission gates before an exact new authorization request. The existing dispatcher cannot run arbitrary subsets or final inputs.
+5. After accepted-results integration, Matty reviews the updated PDF/demo, all four feedback dispositions and the final release/submission evidence. Keep #242/#244/#223/#231 open until their remaining scopes are actually complete.
+
+Repairs/reproduction: November 26-27. Audited candidate: November 28 at 18:00 America/Phoenix. These are latest completion times; ready report and static work proceeds now.
+
+## Historical original-study next sequence — superseded
 
 The [saved-trace explorer and offline readiness](handoffs/I01_UNIFIED_READINESS_AND_EXPLORER.md)
 are implemented. The current candidate includes measured artifact bindings and

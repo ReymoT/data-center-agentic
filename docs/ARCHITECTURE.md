@@ -1,4 +1,8 @@
-# Architecture for the final scheduling study
+# Architecture: explicit rules and checked scheduling
+
+November 26 current: Nisha's new-output and combined-accounting receiving is accepted within scope. All 360 development case-policy pairs are accounted for: 120 retained artificial cases, three policies, and 120 runs per stratum. The original 182-pair incomplete attempt is preserved; the separately approved 178-pair continuation succeeded with verified cleanup. Rules-v1 and Greedy B have identical recorded outcomes, impact and turnaround on these 120 cases. Four normal-feasible cases lose 10 jobs under those policies, and matched reduction medians are zero. These are artificial-score development findings, not unseen generalization or real-site emissions savings. Clean scientific reproduction, final/unseen evaluation and final report/demo/release acceptance remain pending.
+
+Read the [accepted receiving and results](handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) and [offline next-scope preparation](rule_study/RULE06_NEXT_SCOPE_OFFLINE_NOV26.md). Nisha may integrate the accepted findings now; Ved supplies his actual clean-environment/static report. No repeat receiving or new execution approval is requested for completed work. Earlier dated entries below are historical where superseded.
 
 November 25 controller preparation: [selective continuation](rule_study/RULE04_SELECTIVE_CONTINUATION_NOV25.md) authenticates an original development-attempt prefix before selecting its unexecuted suffix. It preserves the parent output, checks raw inventory and consumed authority, carries control signatures across attempt boundaries and requires a separate output and fresh approval. Scheduler, verifier and metric definitions are unchanged. A scoped suffix PASS never automatically becomes a full-study or generalization claim. Earlier dated records below remain historical.
 
@@ -146,11 +150,11 @@ evidence and remaining acceptance. [Interfaces](INTERFACES.md) remain unchanged.
 The architecture below describes implemented boundaries and the intended study;
 it does not claim final scientific acceptance.
 
-## Research question
+## Original research question and historical implementation
 
 Does an ontology-grounded, tool-verified agent improve the accuracy, faithfulness and safety of data-center sustainability recommendations compared with a plain LLM?
 
-The main comparison is `agent` versus `plain_llm`, using equivalent visible information. Workload scheduling at one simulated data center is the experimental setting for this question. Greedy A/B and trained decision tree C/random forest D are four additional scheduling references, not four additional research questions. Conclusions apply to the evaluated scenarios.
+In the original proposal, the main comparison is `agent` versus `plain_llm`, using equivalent visible information. Workload scheduling at one simulated data center is the experimental setting for this question. Greedy A/B and trained decision tree C/random forest D are four additional scheduling references, not four additional research questions. Conclusions apply to the evaluated scenarios.
 
 ## What the system does
 
@@ -243,13 +247,13 @@ The [October 20 handoff](handoffs/OCT20_SIX_PRIORITIES.md) records Q09 agreement
 
 An actual model-driven development episode with repair or fallback is required for E4 acceptance. Mocks suffice for ordinary offline CI, not final integration evidence. Matty owns early and final end-to-end acceptance, Nisha independently verifies results, Ved reproduces on another machine, and each module owner fixes defects. The [demo plan](DEMO.md) and [project plan](PROJECT_PLAN.md) record the remaining evidence.
 
-## Focused rule-system architecture (planned November 19)
+## Focused rule-system architecture — implemented scope
 
 Permitted illustrative examples and stated assumptions -> explicit rule table -> deterministic executable scheduler -> independent safety/progress verifier -> frozen synthetic evaluation -> evidence-linked report and two-scenario demo.
 
 The scheduler reads only the agreed visible state, filters illegal starts, selects among valid starts using a declared carbon-score and tie rule, and emits rule IDs with arithmetic reasons. A failed candidate goes through checked fallback or explicit rejection; invalid actions do not bypass the execution gate. Independent verification recomputes properties with a separate implementation and explicit finite bounds, rather than trusting the scheduler's success flag. Progress assumptions must exclude impossible completion promises and expose starvation/deadlock counterexamples.
 
-New artificial profiles are authored independently of the restricted source data. Evaluation cases are generated only after the rule/verifier freeze and compared on identical inputs with compatible Greedy A/B references. This describes the implementation target; no new scheduler, proof, generalized result or operational savings is claimed by this documentation update.
+Retained development profiles were authored independently of restricted source data and compared on identical inputs with Greedy A/B. Final/unseen cases may be generated only after the reviewed rule/verifier/generator freeze and exact authorization; the final gate remains disabled. Development coverage is not renamed as unseen evaluation. The rule table, executable scheduler and independent bounded verifier are implemented. Accepted verification covers 202 primary/authored traces within its declared bounds; accepted development accounting covers the 360 retained case-policy pairs. Final/unseen generation and evaluation are still disabled or unperformed. This does not establish generalization or operational savings.
 
 November 20 preparation: [offline dispatch preflight](rule_study/DISPATCH_PREFLIGHT_PREPARATION.md) binds clean source/input hashes and new output paths, then tests only the contained dummy worker with one-use rehearsal IDs. It grants no human approval and does not enable final generation. The [accepted specification](decisions/NOV20_RULE01_SPECIFICATION_ACCEPTANCE.md) is separate from pending executable and scientific freezes.
 

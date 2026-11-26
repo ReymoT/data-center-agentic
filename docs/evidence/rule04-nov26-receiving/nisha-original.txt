@@ -1,0 +1,85 @@
+@MattyAnd Nisha: independent receiving of the RULE-04 continuation output and the combined 360-pair results (packet 9b14b587…aad).
+
+**Verdict by scope**
+- Receipt integrity (new output): **PASS**
+- Authority and source binding (continuation): **PASS**
+- Union join (182 parent + 178 suffix): **PASS**
+- Combined accounting, tables and plot: **PASS**. Every value matches my recomputation, and the corrected plot is readable.
+- This covers development cases only. It is not final/unseen evaluation, generalization or a clean scientific reproduction. The original 182-pair attempt stays FAIL_OR_INCOMPLETE.
+
+**Receiving record (template fields)**
+- **Reviewer/date:** Nisha, November 26 (Arizona).
+- **Archive SHA-256 checked:**
+  - The ZIP is 9b14b587…aad, matching your #242 comment.
+  - All 27,969 manifest entries match their raw SHA-256 values; the only unlisted file is the manifest itself.
+  - The package's verify_package.py also passes, including the nested-ZIP CRC checks.
+  - The nested parent archive is byte-identical to the one I received on Nov 25 (ff9a4e2d…).
+  - All 27,947 artifact hashes in union/receipt.json match the continuation/run files, with none missing or unlisted.
+  - All 28,575 artifact hashes in parent/receipt.json match my accepted Nov 25 copy of the parent run.
+- **Request/source identity:**
+  - The request is 7ff7441a…31e9. The approval, attempt record and ledger receipt name the same request, commit e7707799, authorization ID, limits (10,680 states and transitions, 900 s, 60 s per pair, 256 MiB) and freeze reference. The freeze file's LF SHA-256 is 85bbf825…7926.
+  - All 173 code pins match commit e7707799 (on main), and the specification pin matches (canonical JSON).
+  - Against the parent's 7c21d48 pins, 168 are unchanged. That includes every pin under dc_sustainability/ (scheduler, policies, simulator, verifier, metrics).
+  - Changed: three orchestration/reporting scripts (prepare_rule_study_rollout.py, rule_rollout_supervisor.py, rule04_summary_core.py). Added: build_rule04_union.py and rule04_suffix.py.
+- **Consumed authorization/cleanup:**
+  - The run is single-use, with no retries and retry_allowed false.
+  - The host status is succeeded with return code 0, and it took 814.1 s.
+  - All 178 supervised pairs succeeded with cleanup verified (longest pair 5.7 s).
+  - The parent ID stays consumed and separate.
+- **New completed pairs and strata:** 178 pair records, 178 checkpoints and 178 pair request files:
+  - missing-forecast: 120 (40 per policy);
+  - overloaded-impossible: 58 (rules-v1 19, Greedy A 19, Greedy B 20).
+- **Original parent receiving reused:** yes. It was not repeated; I joined against my accepted Nov 25 copy.
+- **No pair overlap or gap:**
+  - The union has 360 of 360 case-policy pairs, with 0 duplicates and 0 missing.
+  - The parent is exactly the first 182 pairs in original order. The suffix equals the 178 approved selected pairs, in order.
+  - The parent receipt hash matches the request's parent reference (cd6117f2…).
+- **Known counters / unknown partial work:**
+  - Completed-pair states: parent 10,920 + suffix 10,680 = 21,600, and the same for transitions. This matches the union summary.
+  - The parent's in-flight work and eligibility costs stay unmeasured and are not treated as zero.
+- **Cross-source case 20:**
+  - Overloaded-impossible-20 is the only split case: rules-v1 and Greedy A ran in the parent, Greedy B in the suffix.
+  - Its Greedy B vs A row stays unavailable as source_bindings_differ. Apart from code_commit, its bindings are identical to the parent's. No bindings were rewritten.
+- **Missing-forecast control and coverage:**
+  - All three policies give identical outcomes on all 40 cases (117 of 118 jobs; missing-forecast-05 J4 is missed by all three).
+  - Rules-v1 and Greedy B select fallback in 40 of 40 runs, so the reductions are 0.
+  - This is a control, not a ranking.
+- **Saved metric/value/unit/outcome checks:** these use my own scripts, not the package's summary or union code. For all 360 pairs I checked:
+  - each pair's request hash, commit and case binding;
+  - each saved replay (overall PASS, binding check PASS, no ceiling hit);
+  - per-job, total and site impact in artificial score-kWh, recomputed from the retained cases, the evaluator weights and the recorded starts;
+  - turnaround and delay;
+  - outcome sets against the trace;
+  - per-slot capacity.
+
+  I found 0 mismatches.
+- **Tables/plot and matched denominators:**
+  - All 9 per-stratum rows and all 6 equal-work rows in union/summary.json and RULE04_TABLES.md match my recomputation exactly.
+  - That includes the unavailable reasons:
+    - normal-feasible: job_outcome_sets_differ in cases 09, 18, 34 and 35;
+    - overloaded-impossible: greedy_a_impact_not_positive in cases 22, 23, 30 and 32, where Greedy A starts nothing;
+    - case 20 for Greedy B, as above.
+  - The plot now has separate labeled rows and a readable scale.
+- **Actual scripts/commands used:** my read-only Python scripts, run with `python -I`:
+  - a manifest check;
+  - a binding check against git show of e7707799 and 7c21d48;
+  - a union recompute over parent/run and continuation/run;
+  - a receipt artifact check.
+
+  No policy, replay, simulator, generator or model was run.
+- **Discrepancies and limitations:**
+  - No discrepancies.
+  - Context for the report:
+    - **Rules-v1 and Greedy B are identical** on all 120 cases (outcomes, impact and turnaround), so there is no evidence that rules-v1 does better than Greedy B.
+    - **The feasible-input progress limitation** remains: 10 jobs are lost in 4 normal-feasible cases.
+    - The medians are 0. Cases with a positive reduction:
+      - normal-feasible: 14 of 36 (max 54.5%);
+      - overloaded-impossible: 7 of 36 for rules-v1 and 7 of 35 for Greedy B (max 66.7%);
+      - no case is negative.
+  - The saved replays are attributed to the run; I checked them but did not re-execute them.
+  - Hashes are local, not signatures. The environment was checked by interpreter and versions only.
+  - The approval record stores your instruction by reference ("approve the exact bounded continuation request"). Your #242 update confirms this was the approved continuation; please keep that confirmation with the audit record.
+- **Integrity/accounting verdict by scope:** PASS for new-output receipt integrity, continuation authority and source binding, the union join, and combined accounting and reporting.
+- **Not established:** final/unseen evaluation, generalization, separate clean scientific reproduction (Ved's step) and the final audit.
+
+Once you accept this, I'll integrate the accepted findings into the shared report (#223/#231).

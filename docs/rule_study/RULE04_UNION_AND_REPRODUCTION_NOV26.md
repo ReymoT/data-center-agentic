@@ -1,5 +1,8 @@
 # Combined evidence and clean reproduction — November 26
 
+November 26 accepted update: [Nisha's new-output and combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) is accepted within scope. Development coverage is 360/360; the 178-pair approved continuation succeeded with verified cleanup. Do not repeat receiving or seek authorization for that consumed run again. Actual clean scientific reproduction, final/unseen evaluation and final PDF/demo/release acceptance remain pending. [Offline next-scope preparation](RULE06_NEXT_SCOPE_OFFLINE_NOV26.md) is not execution approval. Earlier dated preparation statements remain historical.
+
+
 Matty implemented `scripts/build_rule04_union.py` as read-only reporting preparation
 for #242/#244. It executes no scheduler, simulator, verifier replay, generator or
 model. Tests use declared artificial file fixtures. No new actual continuation,

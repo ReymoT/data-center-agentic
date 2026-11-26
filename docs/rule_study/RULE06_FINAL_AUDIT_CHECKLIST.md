@@ -1,5 +1,8 @@
 # RULE-06 final audit checklist (#244)
 
+November 26 accepted update: [Nisha's new-output and combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) is accepted within scope. Development coverage is 360/360; the 178-pair approved continuation succeeded with verified cleanup. Do not repeat receiving or seek authorization for that consumed run again. Actual clean scientific reproduction, final/unseen evaluation and final PDF/demo/release acceptance remain pending. [Offline next-scope preparation](RULE06_NEXT_SCOPE_OFFLINE_NOV26.md) is not execution approval. Earlier dated preparation statements remain historical.
+
+
 November26 actual handoff review: [Ved's temporary package branch review](../handoffs/RULE06_VED_TEMP_REPRO_REVIEW_NOV26.md) confirms an unchanged but incomplete expanded copy, not new reproduction evidence. The original ZIPs and branch are preserved, and archive-only integrity checks are supplied. Actual authorized continuation completed178/178 with verified cleanup; read-only combined coverage is360/360 development pairs. New independent receiving, actual reproduction, final/unseen evaluation and final PDF/release acceptance remain pending. Earlier preparation-only status below is historical where superseded.
 
 
