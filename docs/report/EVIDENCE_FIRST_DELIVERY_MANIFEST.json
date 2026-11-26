@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "0226bc1371066a247e47dd55bf0bd6bfd093c20be7e84fbdb96ca8ed3e77438c",
+      "sha256": "3b9623b38231f5c6ea625ac715153313775259849877155ec93ac28feb83b4df",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1201,6 +1201,26 @@
     {
       "path": "docs/rule_study/RULE04_PROTOCOL_PREPARATION_NOV26_UNION.json",
       "sha256": "85bbf825a50ba2027d73c6858d6cf07bae0c07776cf897d4053c70d6f8837926",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/verify_rule06_handoff_archive.py",
+      "sha256": "2b7d23b10797d479fd6ed349aaf5095c81ac5bb2e0a8142445b658d4396f5a05",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/rule_study/test_rule06_archive.py",
+      "sha256": "7e473b21442fbb2d20b655fddc66e0f6c7577e8fff49c5225c5b01d878b0cb50",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE06_VED_TEMP_REPRO_REVIEW_NOV26.md",
+      "sha256": "9df1aca2e455e5c2a6d35d7274960aec3c3071fdf5b59c4ba19deac54e9fee3b",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE06_VED_TEMP_REPRO_REVIEW_NOV26.json",
+      "sha256": "8c0082e003fbe005710fbbf0a12278e89bff3f9c97f629c98b7b4dade1159191",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],
