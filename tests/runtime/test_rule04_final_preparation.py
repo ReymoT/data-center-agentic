@@ -1,4 +1,4 @@
-"""Offline authored fixtures only. No final RNG, generator batch or real release."""
+"""Authored/development-seed equivalence fixtures; no final RNG or real release."""
 
 import hashlib
 import json
@@ -114,8 +114,10 @@ def test_generation_reserves_feasibility_before_search(monkeypatch):
 
 
 def fixture_loaded():
-    parsed = {f"fixture-{i:03d}": SimpleNamespace() for i in range(120)}
-    return ({}, {}, parsed)
+    strata = ("normal_feasible", "overloaded_impossible", "missing_forecast")
+    rows = [{"case_id": f"fixture-{s}-{i:02d}", "stratum": s} for s in strata for i in range(40)]
+    parsed = {c["case_id"]: SimpleNamespace() for c in rows}
+    return ({"cases": rows}, {}, parsed)
 
 
 def test_fixed_two_stages_have_no_overlap_and_same_total():
@@ -123,8 +125,10 @@ def test_fixed_two_stages_have_no_overlap_and_same_total():
     request = {"stage": 0, "parent": None}
     first = f.selection(request, loaded)
     assert len(first) == 180 and len(set(first)) == 180
-    assert first[0] == ("fixture-000", "rules-v1")
-    assert first[-1] == ("fixture-059", "greedy_b")
+    assert first[0] == ("fixture-normal_feasible-00", "rules-v1")
+    assert first[-1] == ("fixture-missing_forecast-19", "greedy_b")
+    for stratum in ("normal_feasible", "overloaded_impossible", "missing_forecast"):
+        assert sum(c.startswith(f"fixture-{stratum}-") for c, p in first) == 60
 
 
 @pytest.mark.parametrize("stage", [True, -1, 2, "0", None])
@@ -153,6 +157,8 @@ def test_second_stage_requires_exact_same_parent_and_cleanup(tmp_path):
     request["parent"] = binding(tmp_path / "parent.json", parent)
     second = f.selection(request, loaded)
     assert len(second) == 180 and not set(first) & set(second)
+    assert all(20 <= int(c.rsplit("-", 1)[1]) <= 39 for c, p in second)
+    assert len(set(first + second)) == 360
     for key, value in [
         ("status", "FAIL_OR_INCOMPLETE"),
         ("charged_steps", {}),
@@ -388,11 +394,10 @@ def test_saved_stage_join_refuses_missing_pairs_and_source_changes(tmp_path, mon
     from scripts import rule_study_metrics_core as mc
 
     loaded = fixture_loaded()
-    loaded[0]["cases"] = [{"case_id": c, "stratum": "fixture"} for c in loaded[2]]
     monkeypatch.setattr(f, "pair", lambda request: loaded)
     monkeypatch.setattr(mc, "equal_work", lambda metrics: [])
     request = dict(final_inputs={}, receiving={}, plan=dict(code_commit="fixture", code_sha256={}))
-    pairs = [(c, p) for c in loaded[2] for p in w.POLICIES]
+    pairs = f.stage_pairs(loaded)
     reports = []
     for stage in (0, 1):
         selected = pairs[stage * 180 : (stage + 1) * 180]
@@ -425,3 +430,58 @@ def test_saved_stage_join_refuses_missing_pairs_and_source_changes(tmp_path, mon
     second = binding(tmp_path / "second.json", reports[1])
     with pytest.raises(ValueError, match="same-freeze"):
         f.join_stages(request, first, second)
+
+
+def test_final_orchestrator_reproduces_accepted_development_stream_without_final_seed(monkeypatch):
+    from dc_sustainability.evaluation import rule_study_accounting as ac
+    from dc_sustainability.evaluation import rule_study_generator as g
+
+    original_rng = g.random.Random
+    constructed = []
+
+    def development_only(seed):
+        assert seed == 2026111901, "final or unspecified RNG refused in equivalence fixture"
+        constructed.append(seed)
+        return original_rng(seed)
+
+    monkeypatch.setattr(g.random, "Random", development_only)
+    expected, expected_weights = g.generate("development")
+    actual, actual_weights, counters = gen.build(
+        g.random.Random(2026111901),
+        {"cases": []},
+        dict(wall_seconds=30, proposals=30000, feasibility_assignments=2430000),
+        authorization_id="offline-fixture-only",
+    )
+    fields = ("jobs", "scores", "stratum", "feasibility_label", "generator_attempt")
+    assert [{k: c[k] for k in fields} for c in actual["cases"]] == [
+        {k: c[k] for k in fields} for c in expected["cases"]
+    ]
+    assert actual["metadata"]["report"] == expected["metadata"]["report"]
+    fields = ("weights", "weights_visible_to_policy", "full_case_sha256", "workload_sha256")
+    assert [{k: c[k] for k in fields} for c in actual_weights["cases"]] == [
+        {k: c[k] for k in fields} for c in expected_weights["cases"]
+    ]
+    assert counters["proposals"] == sum(
+        row["attempts"] for row in expected["metadata"]["report"].values()
+    )
+    assert constructed == [2026111901, 2026111901]
+    assert actual["metadata"]["authorization"] == "offline-fixture-only"
+    assert actual["metadata"]["max_attempts_per_stratum"] == 10000
+    assert (
+        actual["metadata"]["orchestrator_source_sha256_lf"]
+        == hashlib.sha256(Path(gen.__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    )
+    assert ac.check_accounting(actual, actual_weights)["overall"] == "PASS"
+
+
+@pytest.mark.parametrize("mode", ["missing", "wrong_stratum", "duplicate"])
+def test_balanced_stage_partition_rejects_malformed_inventory(mode):
+    loaded = fixture_loaded()
+    if mode == "missing":
+        loaded[0]["cases"].pop()
+    elif mode == "wrong_stratum":
+        loaded[0]["cases"][0]["stratum"] = "missing_forecast"
+    else:
+        loaded[0]["cases"][0]["case_id"] = loaded[0]["cases"][1]["case_id"]
+    with pytest.raises(ValueError, match="balanced stages"):
+        f.stage_pairs(loaded)
