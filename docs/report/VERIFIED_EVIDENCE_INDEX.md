@@ -1,5 +1,7 @@
 # Verified-evidence assembly index
 
+November 26 later: [Ved's scoped static receiving and Matty's native compatibility](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md) are accepted within their stated scopes. Ved reports124PASS/0FAIL/12INFO for retained360-pair accounting; Matty's fresh Windows hashed-lock, setup and74 ordinary fixture checks pass. These do not establish independent policy reproduction or final evaluation. Original failures and scoped attribution remain preserved. The pending generation request stays pinned to executable sourcebc7cd6c5; this documentation update changes no request bytes or controlled runtime hashes.
+
 November 26 current: Nisha's new-output and combined-accounting receiving is accepted within scope. All 360 development case-policy pairs are accounted for: 120 retained artificial cases, three policies, and 120 runs per stratum. The original 182-pair incomplete attempt is preserved; the separately approved 178-pair continuation succeeded with verified cleanup. Rules-v1 and Greedy B have identical recorded outcomes, impact and turnaround on these 120 cases. Four normal-feasible cases lose 10 jobs under those policies, and matched reduction medians are zero. These are artificial-score development findings, not unseen generalization or real-site emissions savings. Clean scientific reproduction, final/unseen evaluation and final report/demo/release acceptance remain pending. [Accepted receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) supplies the exact source, original reply and limits. Earlier dated records below are historical where superseded.
 
 
@@ -61,6 +63,8 @@ held-out finding or grant publication rights for private artifacts.
 
 | E25 | [Accepted combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md), [public aggregate snapshot](../evidence/rule04-nov26-receiving/results-snapshot.json), [tables](../evidence/rule04-nov26-receiving/RULE04_TABLES.md) | Independent receipt/source/authority/union/accounting acceptance for 360 retained development pairs; no new replay by Nisha, unseen evaluation, clean scientific reproduction or generalization |
 
+| E26 | [Ved static receiving and Matty native compatibility](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md), [scope/hashes](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.json) | Accepted Ved-reported AI-assisted retained accounting/source checks and separate Matty Windows fixture compatibility; no independent policy re-execution or final evaluation |
+
 ## Ready now versus pending
 
 The [RULE-03 report section](RULE03_VERIFICATION_SECTION.md) supplies the scoped
@@ -75,7 +79,7 @@ public evidence links, saved UI figure, reliability method/limitations, Matty's
 contribution statement and the assembled report source. Owners can correct or
 confirm their existing section material without waiting for final study results.
 
-Pending final artifacts: accepted source/input/custody evidence, compatibility and
+Historical original-study pending artifacts (superseded for the active rule-study delivery): accepted source/input/custody evidence, compatibility and
 I02 freeze, frozen outputs, O04/P07, held-out E06/E07 and human ratings, I03/I04,
 final author confirmations, IEEE layout/PDF and authenticated submission receipt.
 None is given a fabricated filename, zero score or completion mark.
