@@ -1,5 +1,7 @@
 # Release audit preparation — November 26
 
+November 27 current: [scoped boundary replies and direct resolution](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.md) record Edison/Nisha agreement, precise development/authored exclusion and report captions. Ved response, actual freeze and exact generation approval remain pending. Static accounting/native compatibility are accepted; independent policy re-execution remains NOT_PERFORMED. Its exact evidence criterion is recorded without approving the optional15-pair proposal. Updated PDF and actual final feedback/release checks remain pending. No new scientific execution.
+
 Matty's prepared checklist for #244. This is not final release acceptance. The
 internal candidate remains November 28 at 18:00 America/Phoenix. Ready work
 proceeds now. Preserve all original evidence and teammate contributions.
@@ -9,7 +11,7 @@ proceeds now. Preserve all original evidence and teammate contributions.
 | Development accounting | Accepted Nisha receiving: #242 comment7203212660 and manager acceptance7205444512; 360 unique pairs, 120 cases, three policies. Do not repeat receiving. |
 | Finite verification | Accepted 202 required primary/authored traces; report exact bounds and preserve original incomplete/failed attempts and excluded properties. Not a universal safety/progress proof. |
 | Scientific source | 163 accepted bindings unchanged. Each new request must pin current controller source separately without rewriting old producer records. |
-| Evidence integrity | Current report inventory has259 source entries bound using their declared conventions. PR289's six raw-byte commitment fixes and original files remain preserved. Recheck after any report/source change. |
+| Evidence integrity | Current report inventory has261 source entries bound using their declared conventions. PR289's six raw-byte commitment fixes and original files remain preserved. Recheck after any report/source change. |
 | Reproduction | Ved's actual AI-assisted Linux static/accounting report is received and scoped acceptance is recorded; Matty's separate fresh native Windows hashed-lock/pip/setup/74fixture compatibility passes. [Evidence and scope](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md). Independent policy reproduction remains NOTPERFORMED; no repeat static receipt is needed. |
 | Final/unseen scope | Separate dispatcher is offline preparation only. The final seed is public/fixed; this workflow has not invoked final generation. Prior computation elsewhere is not established, so isolation is procedural. Follow the final-dispatch preparation; actual freeze, generation, independent isolation receiving and fresh exact execution authority remain gates. |
 | Results interpretation | Rules-v1 and Greedy B have equal recorded outcomes/impact/turnaround on all 120 development cases. Matched medians are zero. Four normal-feasible cases lose ten jobs; missing-forecast is a control. No positive original Agent/Plain conclusion or unseen claim. |

@@ -1,5 +1,7 @@
 # Explicit Rules for Safe Simulated Scheduling — Working Report
 
+November 27: Edison and Nisha agree within their published-code/value review scopes to the revised generation proposal; Ved's response, actual freeze and exact approval remain pending. [Review resolution](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.md) confirms development/authored full-case exclusion, not exclusion from all earlier verification inputs. No generation or evaluation is authorized. Edison also supplied scoped presentation PASS; the caption notes below resolve his suggestions without changing saved results or executable source. [E27]
+
 November 26 later: [Ved's scoped static receiving and Matty's native compatibility](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md) are accepted within their stated scopes. Ved reports124PASS/0FAIL/12INFO for retained360-pair accounting; Matty's fresh Windows hashed-lock, setup and74 ordinary fixture checks pass. These do not establish independent policy reproduction or final evaluation. Original failures and scoped attribution remain preserved. The pending generation request stays pinned to executable sourcebc7cd6c5; this documentation update changes no request bytes or controlled runtime hashes.
 
 November 26 current: Nisha's new-output and combined-accounting receiving is accepted within scope. All 360 development case-policy pairs are accounted for: 120 retained artificial cases, three policies, and 120 runs per stratum. The original 182-pair incomplete attempt is preserved; the separately approved 178-pair continuation succeeded with verified cleanup. Rules-v1 and Greedy B have identical recorded outcomes, impact and turnaround on these 120 cases. Four normal-feasible cases lose 10 jobs under those policies, and matched reduction medians are zero. These are artificial-score development findings, not unseen generalization or real-site emissions savings. Clean scientific reproduction, final/unseen evaluation and final report/demo/release acceptance remain pending. [Accepted receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) supplies the exact source, original reply and limits. Earlier dated records below are historical where superseded.
@@ -35,6 +37,26 @@ Members: Edison Perez Cash; Matty Anderson and Nisha Mahadev Kolekar; Reimo Tamm
 Ved Patil. R05 assembler: Nisha. R04/R06 preparation: Matty.
 
 This is the working report for the focused rule-system study, not the final IEEE PDF. The November18 development-evidence-only path is retained as backup, not the primary research scope. Existing implementation and measured development observations remain historical evidence. The scheduler and receiving/demo tooling are implemented. All 202 required finite-domain traces are replayed and independently received, and retained-input/authored accounting is received. Isolated new-case evaluation remains unfinished. Original owner drafts, ratings and source limitations remain preserved. Evidence keys refer to the [index](VERIFIED_EVIDENCE_INDEX.md); final layout, citations, attribution, release checks and submission remain unfinished. [E11,E12]
+
+## Current development table and plot captions — November 27
+
+Use with the accepted [development tables](../evidence/rule04-nov26-receiving/RULE04_TABLES.md)
+and [plot](../evidence/rule04-nov26-receiving/turnaround_vs_impact.svg).
+Job-impact totals cover completed jobs, so totals with different completed sets
+are not comparable as savings. Normal-feasible rules-v1/Greedy B complete 96 jobs
+with 436,000 artificial score-kWh, versus Greedy A's 106 jobs and 545,000: ten
+missing completions prevent interpreting the lower total as a placement benefit.
+Use the equal-work table and preserve all unavailable reasons. Turnaround shift
+is policy minus Greedy A in slots; positive means later completion. Reductions in
+the table are fractions (0.5455 represents approximately 54.55%); the plot uses
+percent. Missing forecast is a control; missed and unfinished counts overlap.
+
+All matched reduction medians are zero. Edison's presentation review reports
+positive reductions on 14/36 normal cases and 7/36 rules-v1 / 7/35 Greedy B overload
+cases; displayed maxima are approximately 54.5% and 66.7%. These are descriptive
+development observations, not policy superiority or real emissions savings.
+Rules-v1 and Greedy B still have identical recorded outcomes across all 120 cases.
+The saved plot/snapshot and producer implementation are preserved unchanged. [E27]
 
 ## Abstract — working text
 
