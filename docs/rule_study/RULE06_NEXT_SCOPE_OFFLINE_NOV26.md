@@ -1,5 +1,7 @@
 # Next reproduction and evaluation scope — offline preparation
 
+Later implementation: [separate final-input preparation](RULE04_FINAL_DISPATCH_PREPARATION_NOV26.md) now supplies the contained final backend with authored-fixture tests. It is not a scientific release. The earlier prospective statements below describe the prior preparation state; actual generation, receiving, freeze and evaluation remain unpassed. The optional five-case subset remains unimplemented and is not the critical path.
+
 Prepared by Matty, November 26. This is a proposal/checklist, not a dispatchable
 request, scientific approval, new input draw or completed reproduction. Nisha's
 [new-output receiving is accepted](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md).

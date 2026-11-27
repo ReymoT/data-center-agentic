@@ -189,8 +189,9 @@ def test_nested_job_containment_for_dummy_pair(tmp_path):
 @pytest.mark.parametrize("hidden", [False, True])
 @pytest.mark.parametrize("policy", w.POLICIES)
 @pytest.mark.parametrize("job_count", [2, 3, 4])
+@pytest.mark.parametrize("scope", ["development", "final"])
 def test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(
-    tmp_path, monkeypatch, hidden, policy, job_count
+    tmp_path, monkeypatch, hidden, policy, job_count, scope
 ):
     from dc_sustainability.evaluation import rule_study_receiving as rv
     from dc_sustainability.evaluation import rule_study_trace as tr
@@ -240,6 +241,7 @@ def test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(
             policy,
             directory,
             {"states": 50000, "transitions": 50000},
+            scope=scope,
         )
     except ValueError:
         replay = directory / "replay.json"
@@ -570,7 +572,7 @@ def test_contained_authored_fixture_resource_sample(tmp_path, job_count, record_
         f"s=importlib.util.spec_from_file_location('fixture_test',{__file__!r}); "
         "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
         "mp=pytest.MonkeyPatch(); "
-        f"m.test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(pathlib.Path({str(tmp_path)!r}),mp,False,'rules-v1',{job_count}); "
+        f"m.test_one_authored_fixture_pair_uses_real_runner_and_independent_replay(pathlib.Path({str(tmp_path)!r}),mp,False,'rules-v1',{job_count},'development'); "
         "mp.undo()"
     )
     result = sup.supervise(
