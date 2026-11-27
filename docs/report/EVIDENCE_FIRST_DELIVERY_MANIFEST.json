@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "5a0f20617db95b8e92c7c13f01f78a9629b48236635389321a626dbab997495d",
+      "sha256": "04ac27f5949830b1257337f3e4b16e87b44b396d7cf72e47aba4642b9a17562d",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "f7c2f1cb42ae31aea50103543c86c085bb36407c4a026c987349a5db436516c4",
+      "sha256": "268e9d258b4c5ca9e4ad98b4016ce24adbd250e0aa70f15c15088e6328e073ad",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1280,7 +1280,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_RELEASE_AUDIT_PREPARATION_NOV26.md",
-      "sha256": "aa07bea398507e3b5522f9fc22a7bfd1f56c78248bdb753c755b799576dbe0c5",
+      "sha256": "e9769f49d119055cdf4b14de586ef8a5f25e30109ccba70afb1eba90c0948a0b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
