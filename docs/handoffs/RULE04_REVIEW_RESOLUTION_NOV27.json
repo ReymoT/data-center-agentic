@@ -1,0 +1,53 @@
+{
+  "kind": "rule04_nov27_boundary_and_reporting_resolution_v1",
+  "date_arizona": "2026-11-27",
+  "manager": "MattyAnd",
+  "original_comments": [
+    {
+      "id": 7222519603,
+      "author": "epez7",
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7222519603",
+      "created_at": "2026-11-27T15:49:10Z",
+      "body_sha256": "5b4d634be1086ec850ca2f2ed8c60cabfde77de5d242d05573069b3497fb12d6"
+    },
+    {
+      "id": 7222694612,
+      "author": "epez7",
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7222694612",
+      "created_at": "2026-11-27T15:57:58Z",
+      "body_sha256": "9bfcc8a3ee0309b577ea3f39a246791345bf70b4a2390305ae8a4a354d29ee38"
+    },
+    {
+      "id": 7225502663,
+      "author": "nkolekar-nk",
+      "url": "https://github.com/ReymoT/data-center-agentic/issues/242#issuecomment-7225502663",
+      "created_at": "2026-11-27T18:27:11Z",
+      "body_sha256": "d99e7d57d600e9c6f0507f35432a85ef858012f69bf453de06c4f3ba82e0ae8d"
+    }
+  ],
+  "source_commit": "bc7cd6c54d1b9312101a4e160c1cec27543f5bb8",
+  "request_sha256": "803e96dd0deda59caffee4106e83f0153a094f3a025844838989187431052cd2",
+  "candidate_sha256": "ffce03955900cb8a3a4c943fa41fca6fdc9213a0c43d44e592503fe41c47f5a9",
+  "affected_reviews": {
+    "Edison": "AGREE_WITHIN_PUBLISHED_CODE_AND_VALUE_SCOPE",
+    "Nisha": "AGREE_WITHIN_PUBLISHED_CODE_AND_VALUE_SCOPE",
+    "Ved": "PENDING_ACTUAL_RESPONSE"
+  },
+  "reviewers_opened_private_zip": false,
+  "exclusion_scope": "Full-case identity against retained development and authored inputs; not all prior verification inputs; workload repeats separately reported",
+  "primary_verification_domain_excluded": false,
+  "procedural_isolation": true,
+  "global_non_exposure_established": false,
+  "generator_bound_interpretation": "2430000 is a worst-case reservation bound, not measured exploration or a separately binding stop before the proposal ceiling",
+  "reproduction": {
+    "static_accounting": "ACCEPTED_SCOPED",
+    "native_fixture_compatibility": "ACCEPTED_SCOPED",
+    "independent_policy_reexecution": "NOT_PERFORMED",
+    "optional_15_pair_proposal": "UNAPPROVED_OFF_CRITICAL_PATH"
+  },
+  "actual_freeze": "PENDING",
+  "exact_generation_approval": "PENDING",
+  "new_scientific_execution": false,
+  "updated_pdf": "NOT_SUPPLIED",
+  "final_feedback_check": "PENDING_ACTUAL_FINAL_ARTIFACTS"
+}

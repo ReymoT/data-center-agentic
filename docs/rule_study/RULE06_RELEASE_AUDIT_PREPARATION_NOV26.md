@@ -1,5 +1,7 @@
 # Release audit preparation — November 26
 
+November 27 current: [scoped boundary replies and direct resolution](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.md) record Edison/Nisha agreement, precise development/authored exclusion and report captions. Ved response, actual freeze and exact generation approval remain pending. Static accounting/native compatibility are accepted; independent policy re-execution remains NOT_PERFORMED. Its exact evidence criterion is recorded without approving the optional15-pair proposal. Updated PDF and actual final feedback/release checks remain pending. No new scientific execution.
+
 Matty's prepared checklist for #244. This is not final release acceptance. The
 internal candidate remains November 28 at 18:00 America/Phoenix. Ready work
 proceeds now. Preserve all original evidence and teammate contributions.

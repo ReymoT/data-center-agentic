@@ -64,6 +64,7 @@ held-out finding or grant publication rights for private artifacts.
 | E25 | [Accepted combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md), [public aggregate snapshot](../evidence/rule04-nov26-receiving/results-snapshot.json), [tables](../evidence/rule04-nov26-receiving/RULE04_TABLES.md) | Independent receipt/source/authority/union/accounting acceptance for 360 retained development pairs; no new replay by Nisha, unseen evaluation, clean scientific reproduction or generalization |
 
 | E26 | [Ved static receiving and Matty native compatibility](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md), [scope/hashes](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.json) | Accepted Ved-reported AI-assisted retained accounting/source checks and separate Matty Windows fixture compatibility; no independent policy re-execution or final evaluation |
+| E27 | [November27 scoped replies and direct resolution](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.md), [source identities and pending gates](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.json) | Actual Edison/Nisha scope agreement and presentation review, precise isolation/caption/reproduction requirements; Ved reply, freeze, exact authorization, final receiving/evaluation and updated PDF remain pending |
 
 ## Ready now versus pending
 
