@@ -23,6 +23,12 @@ def test_no_authority_touches_no_request_or_output(tmp_path):
     assert list(tmp_path.iterdir()) == []
 
 
+def test_retained_pair_parses_verified_bytes_without_second_read(monkeypatch):
+    monkeypatch.setattr(w, "read_json", lambda *a: pytest.fail("unverified second read"))
+    cases, weights, parsed = w.pair()
+    assert len(cases["cases"]) == len(weights["cases"]) == len(parsed) == 120
+
+
 @pytest.mark.parametrize("phase", ["generate", "evaluate"])
 def test_draft_does_not_draw_or_release(monkeypatch, phase):
     def forbidden(*a, **kw):

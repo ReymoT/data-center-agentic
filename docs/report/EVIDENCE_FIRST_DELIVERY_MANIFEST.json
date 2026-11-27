@@ -985,7 +985,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "a5144d0879eb3018a788a614187f6d8fa6411010dee541d0b19410f4e8ef8cd8",
+      "sha256": "b15d44ad0bb65b5798f558b49ea59bba87a060673bcb59e23bb73ae9ea681f32",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1270,12 +1270,12 @@
     },
     {
       "path": "tests/runtime/test_rule04_final_preparation.py",
-      "sha256": "9b9504093918c59dcc03cee82c07d6c38ade2e1e9e4d1671966e2410c37305c6",
+      "sha256": "1990116073a4862a14a8c38584bcef6acb47c32e44b010aaf6f25d3c1166127b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE04_FINAL_DISPATCH_PREPARATION_NOV26.md",
-      "sha256": "0006cd757e065e44f5e52aabf64fdd804fd7acce841501c7c51171daa5fc9034",
+      "sha256": "ecf07e4be325340f578203db56e65a4984d6375b92927f4796ee4c25212fd501",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {

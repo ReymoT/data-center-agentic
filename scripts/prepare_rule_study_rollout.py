@@ -89,9 +89,10 @@ def pair():
     loaded = {}
     for role, (name, digest) in INPUTS.items():
         path = ROOT / "docs/evidence/rule04-dev-nov23" / name
-        if pf.sha(pf.bounded_bytes(safe_path(path))) != digest:
+        raw = pf.bounded_bytes(safe_path(path))
+        if pf.sha(raw) != digest:
             raise ValueError("retained development input hash changed")
-        loaded[role] = read_json(path)
+        loaded[role] = decode_json(raw)
     cases, sidecar = loaded["development_cases"], loaded["development_accounting"]
     if len(cases["cases"]) != 120 or ac.check_accounting(cases, sidecar)["overall"] != "PASS":
         raise ValueError("accepted 120-case accounting pair required")

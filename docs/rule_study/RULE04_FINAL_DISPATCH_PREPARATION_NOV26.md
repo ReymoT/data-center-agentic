@@ -17,6 +17,11 @@ changed. `scripts/rule04_final_generation.py` is an explicitly separate final
 orchestrator using the existing draw order/predicates and actual retained-case
 exclusion, not an unlock of the historical development generator.
 
+Review also reproduced a retained-input double-read defect: hashing a file and
+then reopening it for parsing did not bind the parsed object to the verified
+bytes. Both paths now parse the single verified read. The new regression fails
+before the fix and passes afterward; accepted input bytes/hashes are unchanged.
+
 ## Three separate releases
 
 1. **Generate only.** A clean merged code/lock/specification snapshot, unchanged
