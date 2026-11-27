@@ -1,17 +1,19 @@
 """Contained final-generation backend; imported only after exact host release.
 
-No CLI. Tests use authored fixture proposals and an injected RNG, never the final
-seed. Existing development generator and its accepted scientific pins stay intact.
+No CLI. Tests use authored proposals and the known development RNG for equivalence,
+never the final seed. Existing development generator and its accepted scientific pins stay intact.
 """
 
+import hashlib
 import math
 from collections import Counter
+from pathlib import Path
 from time import monotonic
 
 from dc_sustainability.evaluation import rule_study_generator as g
 
 
-def build(rng, development, limits, *, draw=g.draw_proposal):
+def build(rng, development, limits, *, draw=g.draw_proposal, authorization_id=None):
     """Use the accepted draw/predicate order with actual retained-set exclusion.
 
     Feasibility assignments are conservatively charged as the complete Cartesian
@@ -34,6 +36,7 @@ def build(rng, development, limits, *, draw=g.draw_proposal):
     seen, cases, weights, report = set(), [], [], {}
     for stratum in g.STRATA:
         rejected, accepted, attempts = Counter(), 0, 0
+        stratum_full, stratum_workloads = set(), set()
         while accepted < 40:
             if (
                 attempts >= g.MAX_ATTEMPTS_PER_STRATUM
@@ -67,6 +70,11 @@ def build(rng, development, limits, *, draw=g.draw_proposal):
                 rejected[reason] += 1
                 continue
             seen.add(full)
+            workload = g.canonical_sha256(
+                g.workload_identity(proposal.jobs, g.CAPACITY_KW, g.BACKGROUND_KW)
+            )
+            stratum_full.add(full)
+            stratum_workloads.add(workload)
             ident = f"final-{stratum}-{accepted:02d}"
             cases.append(
                 {
@@ -86,15 +94,19 @@ def build(rng, development, limits, *, draw=g.draw_proposal):
                 {
                     "case_id": ident,
                     "full_case_sha256": full,
-                    "workload_sha256": g.canonical_sha256(
-                        g.workload_identity(proposal.jobs, g.CAPACITY_KW, g.BACKGROUND_KW)
-                    ),
+                    "workload_sha256": workload,
                     "weights": list(proposal.weights),
                     "weights_visible_to_policy": scores is not None,
                 }
             )
             accepted += 1
-        report[stratum] = {"accepted": accepted, "attempts": attempts, "rejected": dict(rejected)}
+        report[stratum] = {
+            "accepted": accepted,
+            "attempts": attempts,
+            "rejected": dict(rejected),
+            "distinct_full_case_hashes": len(stratum_full),
+            "distinct_workload_hashes": len(stratum_workloads),
+        }
     case_set = {
         "set_id": f"{g.STUDY_ID}-final",
         "cases": cases,
@@ -105,6 +117,12 @@ def build(rng, development, limits, *, draw=g.draw_proposal):
             "per_stratum": 40,
             "spec_sha256": g.SUPPORTED_SPEC_SHA256,
             "generator_version": "rule04-final-contained-v1",
+            "orchestrator_source_sha256_lf": hashlib.sha256(
+                Path(__file__).read_bytes().replace(b"\r\n", b"\n")
+            ).hexdigest(),
+            "authorization": authorization_id,
+            "labels": "generator claims; independent check is RULE-03's case checker",
+            "max_attempts_per_stratum": g.MAX_ATTEMPTS_PER_STRATUM,
             "report": report,
             "units": "artificial score weights; not g/kWh, not emissions",
         },

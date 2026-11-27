@@ -163,9 +163,31 @@ def pair(request):
     return cases, weights, parsed
 
 
+def stage_pairs(loaded):
+    """Fixed balanced halves: indices00-19 then20-39 in each stratum, no RNG."""
+    from dc_sustainability.evaluation.rule_study_generator import STRATA
+
+    rows, _, parsed = loaded
+    groups = {s: [c["case_id"] for c in rows["cases"] if c["stratum"] == s] for s in STRATA}
+    if (
+        len(rows["cases"]) != 120
+        or any(len(ids) != 40 for ids in groups.values())
+        or len({c for ids in groups.values() for c in ids}) != 120
+        or set(parsed) != {c for ids in groups.values() for c in ids}
+    ):
+        raise ValueError("balanced stages require exactly40 distinct cases per stratum")
+    return [
+        (case_id, policy)
+        for half in (0, 1)
+        for stratum in STRATA
+        for case_id in groups[stratum][half * 20 : (half + 1) * 20]
+        for policy in w.POLICIES
+    ]
+
+
 def selection(request, loaded=None):
     loaded = pair(request) if loaded is None else loaded
-    all_pairs = [(c, p) for c in loaded[2] for p in w.POLICIES]
+    all_pairs = stage_pairs(loaded)
     if type(request["stage"]) is not int or request["stage"] not in (0, 1):
         raise ValueError("fixed stage required")
     stage = request["stage"]
@@ -195,7 +217,7 @@ def join_stages(request, first, second):
     from scripts import rule_study_metrics_core as mc
 
     loaded = pair(request)
-    all_pairs = [(c, p) for c in loaded[2] for p in w.POLICIES]
+    all_pairs = stage_pairs(loaded)
     reports = [bound(first), bound(second)]
     metrics = []
     for stage, report in enumerate(reports):
@@ -339,9 +361,13 @@ def execute_prepared(request):
         from scripts.rule04_final_generation import build
 
         out.mkdir(exist_ok=False)
-        # First and only final RNG construction: after host reservation and containment.
+        # This authorized invocation constructs the public fixed-seed stream here.
+        # It cannot prove that nobody else computed the deterministic cases earlier.
         cases, weights, counters = build(
-            random.Random(2026111902), retained()[0], request["limits"]
+            random.Random(2026111902),
+            retained()[0],
+            request["limits"],
+            authorization_id=request["plan"]["proposed_authorization_id"],
         )
         for name, value in (("cases.json", cases), ("accounting.json", weights)):
             w._write(out / name, value)

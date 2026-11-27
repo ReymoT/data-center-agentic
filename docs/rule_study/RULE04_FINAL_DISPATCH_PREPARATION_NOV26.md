@@ -28,7 +28,9 @@ before the fix and passes afterward; accepted input bytes/hashes are unchanged.
    scientific baseline, actual retained development files, whole-protocol freeze,
    absent external output and new single-use ID are mandatory. Fresh exact host
    approval precedes ledger reservation and stdin-gated Windows containment. Only
-   then is the final RNG constructed. The output is 120 synthetic cases, 40 per
+   then does this dispatcher construct its fixed-seed RNG. This is a local workflow
+   guard, not proof that nobody computed the public deterministic stream elsewhere.
+   The output is 120 synthetic cases, 40 per
    stratum, plus a separate evaluator-only sidecar and receipt. No policy runs.
 2. **Independent isolation receiving.** Nisha checks actual predicates/labels,
    counts, actual development/authored full-case overlap and accounting/visibility.
@@ -37,8 +39,9 @@ before the fix and passes afterward; accepted input bytes/hashes are unchanged.
    the generation receipt are hash-bound. A JSON PASS or URL cannot authenticate
    the person or source of that record; the trusted host must do that explicitly.
 3. **Evaluate in two fixed stages, each freshly authorized.** The accepted
-   120-case order and three-policy order are retained. Stage 0 uses the first 60
-   cases (180 pairs); stage 1 the remaining 60 (180 pairs). Each stage has exactly
+   original per-stratum case order and three-policy order are retained. The revised
+   proposal uses indices00-19 of each stratum in stage0 and20-39 in stage1: each
+   half is20/20/20 cases (180 pairs). Each stage has exactly
    10,800 states AND transitions for execution plus replay, for 21,600 combined.
    Stage 1 requires the authentic complete first-stage receipt, exact same code,
    inputs and receiving, and verified cleanup. A failed/incomplete stage is not
@@ -85,7 +88,8 @@ preflight as permission to run. Existing scientific commands remain unchanged.
 
 ## Tests and remaining work
 
-Offline tests use authored A fixtures, manually enumerated fixture profiles,
+Offline tests use authored A fixtures, the known development seed for draw-stream
+equivalence, manually enumerated fixture profiles,
 malicious relabelled development copies and mocked authorities/supervisors. They
 never draw either final study input from its seed or create actual scientific
 authority. They exercise hash/key drift, hidden-weight accounting, no-authority
@@ -99,3 +103,25 @@ authorized evaluation stages and receiving. Ved's saved-result numerical
 reproduction and Nisha's current report integration proceed in parallel; no repeat
 of the already accepted 360-pair development receiving is needed. Matty fixes
 defects directly and performs final PDF/demo/release review.
+
+## Review correction: fixed seed and procedural isolation
+
+The final seed2026111902 was fixed publicly by the November19 specification. It is
+not newly drawn or secret at release. Final content is deterministic from pinned
+code and retained inputs. This workflow has not invoked final generation; prior
+computation elsewhere is not known and cannot be excluded by hashes or artifacts.
+Held-out status is procedural, not cryptographic. No fresh seed or specification
+change is adopted. Earlier seed-not-drawn statements describe the recorded local
+workflow only, not global non-exposure.
+
+The revised stage layout remains a proposal pending affected-boundary review and
+actual freeze, not accepted evaluation settings. Generation counts and budgets
+are unchanged. A single global duplicate set is equivalent to per-stratum sets:
+missing-forecast identities have null scores, and feasible versus infeasible
+strata cannot share an identical full case. The development-seed equivalence test
+checks this behavior without constructing the final RNG.
+
+Generated metadata now reports full-case/workload diversity per stratum, attempt
+ceilings, label provenance, request authorization ID and a distinct orchestrator
+source hash. Independent receiving must still recompute diversity/overlap and
+accounting; metadata alone does not establish acceptance.

@@ -1,0 +1,33 @@
+{
+  "kind": "rule04_ai_assisted_generation_review_resolution_v1",
+  "date_arizona": "2026-11-26",
+  "review_supplied_by": "MattyAnd",
+  "original_review_sha256": "76292590770db4da5f67e13ae78f2019330b1e96767a3068821f489a9e4b2b56",
+  "reviewed_request_sha256": "0a92e08bdc6988a7c559b39e05b026294e082d4cebb8f4f648a3b83a721d5ccc",
+  "reviewed_candidate_sha256": "fd6130c0ea5e418f8ed3ec91d4fe30ac9e52f01bd5b4fb137501f0ce71b4c9d9",
+  "original_report_preserved_privately": true,
+  "status": "OFFLINE_DIRECT_FIXES_IMPLEMENTED_NOT_SCIENTIFIC_ACCEPTANCE",
+  "fixes": [
+    "fixed-public-seed/procedural-isolation wording",
+    "balanced20/20/20 stage proposal",
+    "development-seed stream/predicate equivalence test",
+    "actual checkout/environment to be independently rechecked at revised candidate preparation",
+    "global duplicate-set equivalence documented",
+    "diversity/attempt/label/authorization metadata restored",
+    "orchestrator provenance hash separate from primitive generator hash"
+  ],
+  "unchanged": [
+    "accepted specification and final seed",
+    "original generator/scientific source",
+    "case counts, policies, metrics and resource bounds",
+    "all original receiving and run artifacts"
+  ],
+  "remaining": [
+    "new candidate pins/hash on merged corrected source",
+    "affected-owner review of balanced layout and interpretation",
+    "actual manager freeze and fresh exact generation approval",
+    "later independent final isolation receiving and separately authorized evaluation"
+  ],
+  "independent_teammate_agreement_established": false,
+  "research_execution_authorized": false
+}
