@@ -1,5 +1,7 @@
 # RULE-06 final audit checklist (#244)
 
+Later preparation: [the concrete release-audit checklist](RULE06_RELEASE_AUDIT_PREPARATION_NOV26.md) and [separate final-input backend](RULE04_FINAL_DISPATCH_PREPARATION_NOV26.md) are prepared. No final seed has been drawn or evaluated; receiving/freeze/authority and actual reproduction/PDF/release gates are still separate.
+
 November 26 accepted update: [Nisha's new-output and combined receiving](../handoffs/RULE04_COMBINED_RECEIVING_ACCEPTED_NOV26.md) is accepted within scope. Development coverage is 360/360; the 178-pair approved continuation succeeded with verified cleanup. Do not repeat receiving or seek authorization for that consumed run again. Actual clean scientific reproduction, final/unseen evaluation and final PDF/demo/release acceptance remain pending. [Offline next-scope preparation](RULE06_NEXT_SCOPE_OFFLINE_NOV26.md) is not execution approval. Earlier dated preparation statements remain historical.
 
 

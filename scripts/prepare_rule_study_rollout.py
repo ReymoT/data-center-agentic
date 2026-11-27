@@ -283,7 +283,7 @@ def _metric(folder, weights):
     return metric
 
 
-def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None):
+def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None, scope="development"):
     from dc_sustainability.evaluation import rule_study_receiving as rv
     from dc_sustainability.evaluation import rule_study_verifier as v
     from dc_sustainability.rule_study import runner, scheduler
@@ -304,7 +304,7 @@ def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None):
     bindings = runner.make_bindings(case, ROOT)
     folder = rv._run_bounded_case(
         budget,
-        "development",
+        scope,
         directory / "trace",
         case,
         policy,
@@ -314,7 +314,7 @@ def _one_pair(request, case_id, policy, directory, remaining, *, loaded=None):
     )
     spec = read_json(ROOT / "docs/rule_study/specification.json")
     received = rv._receive_folders(
-        "development",
+        scope,
         1,
         [(case_id, policy, folder)],
         [],
@@ -406,7 +406,7 @@ def execute_prepared(request):
     return _batch(request, out)
 
 
-def _batch(request, out):
+def _batch(request, out, *, backend=None):
     """Serial contained pair workers, shared resource counters, no retries."""
     from scripts import rule_study_metrics_core as mc
 
@@ -423,11 +423,15 @@ def _batch(request, out):
     metrics, reports, control_signatures = [], [], {}
     strata = {}
     try:
-        loaded = pair()
+        loaded = pair() if backend is None else backend.pair(request)
         case_file, _, parsed = loaded
         strata = {c["case_id"]: c["stratum"] for c in case_file["cases"]}
-        selected = selection(request, loaded=loaded)
-        control_signatures = suffix_controls(request, loaded)
+        selected = (
+            selection(request, loaded=loaded)
+            if backend is None
+            else backend.selection(request, loaded)
+        )
+        control_signatures = suffix_controls(request, loaded) if backend is None else {}
         for case_id in parsed:
             for policy in POLICIES:
                 if (case_id, policy) not in selected:
@@ -445,7 +449,8 @@ def _batch(request, out):
                 selector = json.dumps(
                     [case_id, policy, remaining["states"], remaining["transitions"]]
                 )
-                command = _command(
+                command_builder = _command if backend is None else backend.command
+                command = command_builder(
                     task,
                     pf.sha(pf.bounded_bytes(task)),
                     original_hash=os.environ.get("RULE04_AUTHENTICATED_REQUEST_SHA256"),
@@ -497,7 +502,7 @@ def _batch(request, out):
                     },
                 )
                 pending.replace(checkpoint)
-        if assess_after_run(request):
+        if assess_after_run(request) if backend is None else backend.drift(request):
             raise ValueError("source/input drift after batch")
         grouped = {
             s: [dict(m, stratum=s) for m in metrics if strata[m["case_id"]] == s]
@@ -507,10 +512,12 @@ def _batch(request, out):
             out / "rollout-report.json",
             {
                 "status": "PASS",
-                "scope": "development only; not unseen generalization",
+                "scope": "development only; not unseen generalization"
+                if backend is None
+                else "final synthetic stage only; independent receiving and whole-set join still required",
                 "selected_pairs": [list(p) for p in selected],
                 "parent": request.get("parent"),
-                "scope_complete_only": request["kind"] == SUFFIX_KIND,
+                "scope_complete_only": request["kind"] == SUFFIX_KIND or backend is not None,
                 "authenticated_request_sha256": os.environ.get(
                     "RULE04_AUTHENTICATED_REQUEST_SHA256"
                 ),
