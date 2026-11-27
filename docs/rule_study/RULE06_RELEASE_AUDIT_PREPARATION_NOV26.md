@@ -9,8 +9,8 @@ proceeds now. Preserve all original evidence and teammate contributions.
 | Development accounting | Accepted Nisha receiving: #242 comment7203212660 and manager acceptance7205444512; 360 unique pairs, 120 cases, three policies. Do not repeat receiving. |
 | Finite verification | Accepted 202 required primary/authored traces; report exact bounds and preserve original incomplete/failed attempts and excluded properties. Not a universal safety/progress proof. |
 | Scientific source | 163 accepted bindings unchanged. Each new request must pin current controller source separately without rewriting old producer records. |
-| Evidence integrity | All 250 public source entries verified using declared conventions after PR289's six raw-byte commitment fixes. Recheck after any report/source change. Original files unchanged. |
-| Reproduction | Ved's actual clean environment, commands, hashes, recomputed values, differences and scoped verdict are still required. A copied ZIP or archive PASS is insufficient. |
+| Evidence integrity | Current report inventory has259 source entries bound using their declared conventions. PR289's six raw-byte commitment fixes and original files remain preserved. Recheck after any report/source change. |
+| Reproduction | Ved's actual AI-assisted Linux static/accounting report is received and scoped acceptance is recorded; Matty's separate fresh native Windows hashed-lock/pip/setup/74fixture compatibility passes. [Evidence and scope](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md). Independent policy reproduction remains NOTPERFORMED; no repeat static receipt is needed. |
 | Final/unseen scope | Separate dispatcher is offline preparation only. The final seed is public/fixed; this workflow has not invoked final generation. Prior computation elsewhere is not established, so isolation is procedural. Follow the final-dispatch preparation; actual freeze, generation, independent isolation receiving and fresh exact execution authority remain gates. |
 | Results interpretation | Rules-v1 and Greedy B have equal recorded outcomes/impact/turnaround on all 120 development cases. Matched medians are zero. Four normal-feasible cases lose ten jobs; missing-forecast is a control. No positive original Agent/Plain conclusion or unseen claim. |
 | Comparability | Retain equal-work exclusions and denominators, including split-source overloaded case20; artificial score-kWh are not real emissions. Missed and unfinished counts overlap. |
@@ -25,6 +25,7 @@ The current report can advance with accepted development findings while final
 evaluation feasibility is resolved. If the unseen path cannot be completed in
 time, Matty records the explicit scoped decision and limitation; do not quietly
 rename development results or remove the focused question's generalization gap.
-No final PDF has been supplied since the accepted-results release. No fresh
-reproduction report has been supplied since the corrected temporary-package
-review. Recheck actual issue replies before accepting either gate.
+No final PDF has been supplied since the accepted-results release. Ved's static
+receiving report and Matty's native compatibility checks are now received within
+scope; independent policy reproduction is still unperformed. Recheck actual issue
+replies before accepting final PDF, scientific reproduction or release gates.

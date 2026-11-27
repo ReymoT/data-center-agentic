@@ -1,0 +1,70 @@
+{
+  "kind": "rule06_ved_static_and_native_compatibility_receiving_v1",
+  "date_arizona": "2026-11-26",
+  "manager": "MattyAnd",
+  "source_comment": "https://github.com/ReymoT/data-center-agentic/issues/244#issuecomment-7208503711",
+  "manager_acceptance": "https://github.com/ReymoT/data-center-agentic/issues/244#issuecomment-7208828807",
+  "status": "ACCEPTED_WITHIN_REPORTED_STATIC_AND_NATIVE_FIXTURE_SCOPES",
+  "originals_preserved_privately": true,
+  "original_receiving_report_sha256": "09c582622996c1d5a9bda5933eda7bb1c7afa119e816d8412b0314361b673718",
+  "original_receipt_sha256": "15a82cccdf3ce4cf038a4b13ae45a2a4d219e4b62e4a9f05e561b9fce70f1124",
+  "ved_scope": {
+    "actor": "Ved, AI-assisted",
+    "platform": "Linux",
+    "producer_commit": "e77077997bb8ffde18f5b6d8d053c10a3b92f7b2",
+    "saved_pairs": 360,
+    "reported_checks": {
+      "PASS": 124,
+      "FAIL": 0,
+      "INFO": 12
+    },
+    "verified_script_report_and_prior_failure_hashes": true,
+    "verifier_rerun_by_matty": false,
+    "unassisted_human_check_claimed": false,
+    "first_formatter_failure_preserved": true
+  },
+  "native_scope": {
+    "actor": "MattyAnd",
+    "platform": "Windows",
+    "python": "3.12.14",
+    "source_commit": "e77077997bb8ffde18f5b6d8d053c10a3b92f7b2",
+    "clean_full_history_checkout": true,
+    "locked_distributions": 74,
+    "unmodified_hashed_lock_install": "PASS",
+    "pip_check": "PASS",
+    "setup": "PASS",
+    "ordinary_fixture_tests": 74,
+    "source_pins": 173,
+    "clean_before_and_after": true,
+    "receipt_raw_sha256": "fccc60ec519754242cbc96add6bf5ecd42051cd59b7f43c49dde93de1465e26f",
+    "log_raw_sha256": "1cb8d5c66a1abca5cb17bd9b200ae993a7ac4e6c78013345798f712639e95c11",
+    "confirming_log_raw_sha256": "12a9b83a19459736f23b59acb73d5cec5b44c114ecb27ebd8a278d20b7a8ccf7",
+    "initial_checkout_failure_preserved": true,
+    "missing_tracked_files_restored_from_exact_git_blobs": 134,
+    "trace_generation": false,
+    "binary_attestation": false
+  },
+  "historical_authority": {
+    "request_sha256": "7ff7441a0d22258fcf131f71e9db662e92c7bc74add95931adf18186e6c031e9",
+    "actual_consumed_id": "rule04-dev-suffix-union-e77077997bb8-20261126",
+    "retired_never_executed_task_text_alias": "rule04-dev-suffix-union-e7707799bb8-20261126",
+    "original_approval_and_actual_subject_equal": true,
+    "original_wording_unchanged": true,
+    "new_or_backdated_grant": false
+  },
+  "remaining": {
+    "independent_policy_reproduction": "NOT_PERFORMED",
+    "final_isolation_receiving": "PENDING_ACTUAL_AUTHORIZED_INPUTS",
+    "final_evaluation": "NOT_PERFORMED",
+    "updated_pdf": "PENDING",
+    "release": "PENDING"
+  },
+  "current_generation_candidate": {
+    "source_commit": "bc7cd6c54d1b9312101a4e160c1cec27543f5bb8",
+    "request_sha256": "803e96dd0deda59caffee4106e83f0153a094f3a025844838989187431052cd2",
+    "candidate_sha256": "ffce03955900cb8a3a4c943fa41fca6fdc9213a0c43d44e592503fe41c47f5a9",
+    "status": "PENDING_AFFECTED_REVIEW_FREEZE_AND_EXACT_APPROVAL",
+    "unchanged_by_documentation_update": true
+  },
+  "new_scientific_execution": false
+}
