@@ -407,7 +407,7 @@ def execute_prepared(request):
     return _batch(request, out)
 
 
-def _batch(request, out, *, backend=None):
+def _batch(request, out, *, backend=None, prepared=None):
     """Serial contained pair workers, shared resource counters, no retries."""
     from scripts import rule_study_metrics_core as mc
 
@@ -424,13 +424,25 @@ def _batch(request, out, *, backend=None):
     metrics, reports, control_signatures = [], [], {}
     strata = {}
     try:
-        loaded = pair() if backend is None else backend.pair(request)
+        if prepared is not None and backend is None:
+            raise ValueError("prepared context belongs only to fixed final backend")
+        loaded = (
+            prepared[0]
+            if prepared is not None
+            else pair()
+            if backend is None
+            else backend.pair(request)
+        )
         case_file, _, parsed = loaded
         strata = {c["case_id"]: c["stratum"] for c in case_file["cases"]}
         selected = (
-            selection(request, loaded=loaded)
-            if backend is None
-            else backend.selection(request, loaded)
+            prepared[1]
+            if prepared is not None
+            else (
+                selection(request, loaded=loaded)
+                if backend is None
+                else backend.selection(request, loaded)
+            )
         )
         control_signatures = suffix_controls(request, loaded) if backend is None else {}
         for case_id in parsed:

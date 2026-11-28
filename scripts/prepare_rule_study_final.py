@@ -16,6 +16,7 @@ from time import monotonic
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts import prepare_rule_study_rollout as w  # noqa: E402
+from scripts import rule04_final_receipts as receipts  # noqa: E402
 
 KIND = "rule04_final_preparation_v1"
 FIELDS = {
@@ -125,6 +126,16 @@ def pair(request):
     ):
         raise ValueError("stratum/identity mismatch")
     parsed = {c["case_id"]: cc._case_from_dict(c) for c in cases["cases"]}
+    for row in cases["cases"]:
+        label = (
+            "jointly_infeasible"
+            if row["stratum"] == "overloaded_impossible"
+            else "jointly_feasible"
+        )
+        if row.get("feasibility_label") != label or cc.predicate_findings(
+            parsed[row["case_id"]], row["stratum"], label
+        ):
+            raise ValueError("final stratum predicate/label differs")
     dev_hashes = {g.canonical_sha256(cc.case_identity(cc._case_from_dict(c))) for c in dev["cases"]}
     authored = g.authored_full_identities(g.load_specification())
     identities = [g.canonical_sha256(cc.case_identity(c)) for c in parsed.values()]
@@ -132,6 +143,7 @@ def pair(request):
         raise ValueError("duplicate/development/authored full-case overlap")
     if ac.check_accounting(cases, weights)["overall"] != "PASS":
         raise ValueError("final accounting/visibility check failed")
+    validate_metadata(cases, weights, receipt, request, parsed)
     if receipt.get("status") != "GENERATED_PENDING_INDEPENDENT_RECEIVING":
         raise ValueError("successful generation receipt required")
     if receipt.get("artifacts") != {k: items[k]["sha256"] for k in ("cases", "accounting")}:
@@ -143,6 +155,11 @@ def pair(request):
         or receipt.get("code_sha256") != request["plan"]["code_sha256"]
     ):
         raise ValueError("generation/evaluation freeze must be identical")
+    if receipt.get("freeze_reference") != request["freeze_reference"]:
+        raise ValueError("generation/evaluation freeze reference differs")
+    receipts.authenticate_completed(
+        ROOT, items["generation_receipt"]["path"], receipt, "generate", None
+    )
     receiving = bound(request["receiving"])
     expected = {k: items[k]["sha256"] for k in INPUT_ROLES}
     if (
@@ -161,6 +178,81 @@ def pair(request):
         raise ValueError("actual independent isolation/accounting receiving required")
     # The host independently authenticates the person's actual record, not this JSON label.
     return cases, weights, parsed
+
+
+def validate_metadata(cases, weights, receipt, request, parsed):
+    """Static provenance/predicate checks only; oracle labels require receiving."""
+    from collections import Counter
+
+    from dc_sustainability.evaluation import rule_study_cases as cc
+    from dc_sustainability.evaluation import rule_study_generator as g
+
+    meta = cases["metadata"]
+    pins = request["plan"]["code_sha256"]
+    # Both source commitments explicitly normalize CRLF to LF.
+    primitive = g.source_sha256()
+    orchestrator = pins.get("scripts/rule04_final_generation.py")
+    if (
+        meta.get("generator_version") != "rule04-final-contained-v1"
+        or meta.get("record_kind") != g.RECORD_KIND
+        or meta.get("generator_source_sha256") != primitive
+        or pins.get("dc_sustainability/evaluation/rule_study_generator.py") != primitive
+        or weights.get("generator_source_sha256") != primitive
+        or meta.get("orchestrator_source_sha256_lf") != orchestrator
+        or meta.get("authorization") != receipt.get("authorization_id")
+        or not isinstance(receipt.get("authorization_id"), str)
+        or meta.get("max_attempts_per_stratum") != g.MAX_ATTEMPTS_PER_STRATUM
+        or receipt.get("metadata_sha256") != receipts.digest(meta)
+    ):
+        raise ValueError("final generator provenance metadata differs")
+    report = meta.get("report")
+    if not isinstance(report, dict) or set(report) != set(g.STRATA):
+        raise ValueError("complete generation metadata report required")
+    total_attempts = 0
+    for stratum in g.STRATA:
+        rows = [c for c in cases["cases"] if c["stratum"] == stratum]
+        stats = report[stratum]
+        if not isinstance(stats, dict) or set(stats) != {
+            "accepted",
+            "attempts",
+            "rejected",
+            "distinct_full_case_hashes",
+            "distinct_workload_hashes",
+        }:
+            raise ValueError("exact generation stratum statistics required")
+        attempts = [c.get("generator_attempt") for c in rows]
+        rejected = stats["rejected"]
+        if (
+            len(rows) != 40
+            or any(type(a) is not int or not 1 <= a <= 10000 for a in attempts)
+            or attempts != sorted(set(attempts))
+            or type(stats["attempts"]) is not int
+            or stats["attempts"] != attempts[-1]
+            or stats["accepted"] != 40
+            or not isinstance(rejected, dict)
+            or set(rejected)
+            - {
+                "duplicate_full_case",
+                "authored_overlap",
+                "development_overlap",
+                "jointly_feasible",
+                "jointly_infeasible",
+                "no_flexible_job",
+                "constant_profile",
+            }
+            or any(type(v) is not int or v < 0 for v in rejected.values())
+            or sum(rejected.values()) != stats["attempts"] - 40
+        ):
+            raise ValueError("generation attempts/rejections differ")
+        full = Counter(g.canonical_sha256(cc.case_identity(parsed[c["case_id"]])) for c in rows)
+        work = {g.canonical_sha256(cc.workload_identity(parsed[c["case_id"]])) for c in rows}
+        if stats["distinct_full_case_hashes"] != len(full) or stats[
+            "distinct_workload_hashes"
+        ] != len(work):
+            raise ValueError("generation diversity metadata differs")
+        total_attempts += stats["attempts"]
+    if receipt.get("counters", {}).get("proposals") != total_attempts:
+        raise ValueError("generation attempt total differs")
 
 
 def stage_pairs(loaded):
@@ -185,7 +277,7 @@ def stage_pairs(loaded):
     ]
 
 
-def selection(request, loaded=None):
+def selection(request, loaded=None, *, verify_parent_tree=True, deadline=None):
     loaded = pair(request) if loaded is None else loaded
     all_pairs = stage_pairs(loaded)
     if type(request["stage"]) is not int or request["stage"] not in (0, 1):
@@ -195,21 +287,62 @@ def selection(request, loaded=None):
         if request["parent"] is not None:
             raise ValueError("first stage has no parent")
     else:
-        parent = bound(request["parent"])
-        if (
-            parent.get("status") != "PASS"
-            or parent.get("runs") != 180
-            or parent.get("selected_pairs") != [list(p) for p in all_pairs[:180]]
-            or parent.get("charged_steps") != {"states": 10800, "transitions": 10800}
-            or parent.get("code_commit") != request["plan"]["code_commit"]
-            or parent.get("code_sha256") != request["plan"]["code_sha256"]
-            or parent.get("final_inputs") != request["final_inputs"]
-            or parent.get("receiving") != request["receiving"]
-            or parent.get("supervision", {}).get("status") != "succeeded"
-            or parent.get("supervision", {}).get("cleanup_verified") is not True
-        ):
-            raise ValueError("authenticated complete first stage with same freeze required")
+        validate_stage_receipt(
+            request, request["parent"], 0, loaded, verify_tree=verify_parent_tree, deadline=deadline
+        )
     return all_pairs[stage * 180 : (stage + 1) * 180]
+
+
+def validate_stage_receipt(
+    request, item, stage, loaded, *, first=None, verify_tree=True, deadline=None
+):
+    report = bound(item)
+    rows = validate_stage_content(request, report, stage, loaded, first=first)
+    receipts.verify_stage_tree(item["path"], report, verify_files=verify_tree, deadline=deadline)
+    receipts.authenticate_completed(ROOT, item["path"], report, "evaluate", stage)
+    return rows
+
+
+def validate_stage_content(request, report, stage, loaded, *, first=None):
+    expected = stage_pairs(loaded)[stage * 180 : (stage + 1) * 180]
+    if (
+        report.get("kind") != "rule04_complete_stage_receipt_v2"
+        or report.get("status") != "PASS"
+        or report.get("runs") != 180
+        or report.get("stage") != stage
+        or report.get("scope_complete_only") is not True
+        or not receipts.is_digest(report.get("authenticated_request_sha256"))
+        or report.get("selected_pairs") != [list(p) for p in expected]
+        or report.get("charged_steps") != dict(states=10800, transitions=10800)
+        or report.get("code_commit") != request["plan"]["code_commit"]
+        or report.get("code_sha256") != request["plan"]["code_sha256"]
+        or report.get("final_inputs") != request["final_inputs"]
+        or report.get("receiving") != request["receiving"]
+        or report.get("freeze_reference") != request["freeze_reference"]
+        or report.get("limits") != request["limits"]
+        or report.get("host_supervision", {}).get("status") != "succeeded"
+        or report.get("host_supervision", {}).get("cleanup_verified") is not True
+        or report.get("parent") != (None if stage == 0 else first)
+    ):
+        raise ValueError("authenticated complete same-freeze first stage/receipt required")
+    groups = report.get("strata")
+    if (
+        not isinstance(groups, dict)
+        or set(groups) != {"normal_feasible", "overloaded_impossible", "missing_forecast"}
+        or any(not isinstance(rows, list) for rows in groups.values())
+    ):
+        raise ValueError("stage metric coverage/strata differs")
+    rows = [m for group in groups.values() for m in group]
+    observed = [(m.get("case_id"), m.get("policy_id")) for m in rows if isinstance(m, dict)]
+    strata = {c["case_id"]: c["stratum"] for c in loaded[0]["cases"]}
+    if (
+        len(rows) != 180
+        or len(set(observed)) != 180
+        or set(observed) != set(expected)
+        or any(strata.get(m.get("case_id")) != s for s, group in groups.items() for m in group)
+    ):
+        raise ValueError("stage metric coverage/identity differs")
+    return rows
 
 
 def join_stages(request, first, second):
@@ -217,30 +350,9 @@ def join_stages(request, first, second):
     from scripts import rule_study_metrics_core as mc
 
     loaded = pair(request)
-    all_pairs = stage_pairs(loaded)
-    reports = [bound(first), bound(second)]
     metrics = []
-    for stage, report in enumerate(reports):
-        expected = all_pairs[stage * 180 : (stage + 1) * 180]
-        if (
-            report.get("status") != "PASS"
-            or report.get("runs") != 180
-            or report.get("selected_pairs") != [list(p) for p in expected]
-            or report.get("charged_steps") != dict(states=10800, transitions=10800)
-            or report.get("final_inputs") != request["final_inputs"]
-            or report.get("receiving") != request["receiving"]
-            or report.get("code_commit") != request["plan"]["code_commit"]
-            or report.get("code_sha256") != request["plan"]["code_sha256"]
-            or report.get("supervision", {}).get("status") != "succeeded"
-            or report.get("supervision", {}).get("cleanup_verified") is not True
-            or report.get("parent") != (None if stage == 0 else first)
-        ):
-            raise ValueError("complete same-freeze stage receipts required")
-        rows = [m for group in report.get("strata", {}).values() for m in group]
-        observed = [(m["case_id"], m["policy_id"]) for m in rows]
-        if len(observed) != 180 or len(set(observed)) != 180 or set(observed) != set(expected):
-            raise ValueError("stage metric coverage/identity differs")
-        metrics.extend(rows)
+    for stage, item in enumerate((first, second)):
+        metrics.extend(validate_stage_receipt(request, item, stage, loaded, first=first))
     strata = {c["case_id"]: c["stratum"] for c in loaded[0]["cases"]}
     return dict(
         status="COMPLETE_SAVED_STAGE_JOIN_PENDING_INDEPENDENT_RECEIVING",
@@ -253,7 +365,9 @@ def join_stages(request, first, second):
     )
 
 
-def assess(request, *, after=False):
+def _assess(request, *, after=False, context=None, verify_parent_tree=True, deadline=None):
+    if deadline is not None and monotonic() >= deadline:
+        raise TimeoutError("final preflight deadline")
     validate_shape(request)
     plan = json.loads(json.dumps(request["plan"]))
     out = (
@@ -269,7 +383,6 @@ def assess(request, *, after=False):
             "sha256": digest,
         }:
             raise ValueError("actual accepted retained development pair required")
-    retained()
     baseline = w.read_json(ROOT / "docs/rule_study/RULE03_VERIFICATION_BASELINE_NOV23.json")[
         "baseline_code_sha256"
     ]
@@ -282,10 +395,15 @@ def assess(request, *, after=False):
         problems.append("actual whole protocol freeze missing")
     try:
         if request["phase"] == "generate":
+            retained()
             generation_limits(request["limits"])
         else:
             loaded = pair(request)
-            selection(request, loaded)
+            selected = selection(
+                request, loaded, verify_parent_tree=verify_parent_tree, deadline=deadline
+            )
+            if context is not None:
+                context.update(loaded=loaded, selected=selected)
             w.validate_limits(request["limits"], 180)
             if any(request["limits"][k] != 10800 for k in ("states", "transitions")):
                 problems.append("each fixed stage requires exactly 10800 states AND transitions")
@@ -303,8 +421,29 @@ def assess(request, *, after=False):
     )
 
 
-def drift(request):
-    return bool(assess(request, after=True)["problems"])
+def assess(request, *, after=False, context=None, verify_parent_tree=True, deadline=None):
+    """Read-only preflight always returns BLOCKED for malformed requests."""
+    try:
+        return _assess(
+            request,
+            after=after,
+            context=context,
+            verify_parent_tree=verify_parent_tree,
+            deadline=deadline,
+        )
+    except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+        return dict(
+            status="BLOCKED",
+            problems=[str(exc)[:1000]],
+            execution_authorized=False,
+            phase=request.get("phase") if isinstance(request, dict) else None,
+        )
+
+
+def drift(request, *, deadline=None):
+    if deadline is None and "RULE04_WORKER_DEADLINE" in os.environ:
+        deadline = float(os.environ["RULE04_WORKER_DEADLINE"])
+    return bool(assess(request, after=True, deadline=deadline)["problems"])
 
 
 def command(path, digest, *, deadline=None, original_hash=None):
@@ -316,7 +455,19 @@ def command(path, digest, *, deadline=None, original_hash=None):
     return value
 
 
-def check_generation_output(out, request):
+def receipt_context(request, authenticated_hash):
+    return dict(
+        authenticated_request_sha256=authenticated_hash,
+        canonical_request_sha256=receipts.digest(request),
+        authorization_id=request["plan"]["proposed_authorization_id"],
+        freeze_reference=request["freeze_reference"],
+        phase=request["phase"],
+        stage=request["stage"],
+        limits=request["limits"],
+    )
+
+
+def check_generation_output(out, request, authenticated_hash):
     """Producer publication checks only; does not replace Nisha's receiving."""
     from dc_sustainability.evaluation import rule_study_accounting as ac
 
@@ -334,8 +485,14 @@ def check_generation_output(out, request):
         or receipt.get("code_sha256") != request["plan"]["code_sha256"]
         or len(cases.get("cases", [])) != 120
         or ac.check_accounting(cases, weights)["overall"] != "PASS"
+        or any(receipt.get(k) != v for k, v in receipt_context(request, authenticated_hash).items())
+        or receipt.get("metadata_sha256") != receipts.digest(cases.get("metadata"))
     ):
         raise ValueError("generation publication/result mismatch")
+    from dc_sustainability.evaluation import rule_study_cases as cc
+
+    parsed = {c["case_id"]: cc._case_from_dict(c) for c in cases["cases"]}
+    validate_metadata(cases, weights, receipt, request, parsed)
     counters = receipt.get("counters", {})
     for name, limit in (
         ("proposals", "proposals"),
@@ -350,7 +507,12 @@ def check_generation_output(out, request):
 
 
 def execute_prepared(request):
-    if drift(request):
+    authenticated = receipts.worker_authority(ROOT, request)
+    context = {}
+    # One preflight/load per contained worker. Parent's full evidence tree is
+    # checked by the host before release and after the batch; children retain
+    # receipt/manifest/ledger hashes without rehashing its entire tree 180 times.
+    if assess(request, after=True, context=context, verify_parent_tree=False)["problems"]:
         raise ValueError("final worker preflight refused")
     out = w.safe_path(request["plan"]["output_directory"])
     if request["phase"] == "generate":
@@ -358,13 +520,13 @@ def execute_prepared(request):
             raise ValueError("generation pair selector refused")
         import random
 
-        from scripts.rule04_final_generation import build
+        from scripts.rule04_final_generation import build, g
 
         out.mkdir(exist_ok=False)
         # This authorized invocation constructs the public fixed-seed stream here.
         # It cannot prove that nobody else computed the deterministic cases earlier.
         cases, weights, counters = build(
-            random.Random(2026111902),
+            random.Random(g.SEED_DOMAINS["final"]),
             retained()[0],
             request["limits"],
             authorization_id=request["plan"]["proposed_authorization_id"],
@@ -379,7 +541,8 @@ def execute_prepared(request):
                 code_commit=request["plan"]["code_commit"],
                 code_sha256=request["plan"]["code_sha256"],
                 development_inputs=request["plan"]["inputs"],
-                authenticated_request_sha256=os.environ.get("RULE04_AUTHENTICATED_REQUEST_SHA256"),
+                **receipt_context(request, authenticated),
+                metadata_sha256=receipts.digest(cases["metadata"]),
                 artifacts={
                     k: w.pf.sha(w.pf.bounded_bytes(out / n))
                     for k, n in (("cases", "cases.json"), ("accounting", "accounting.json"))
@@ -387,10 +550,10 @@ def execute_prepared(request):
             ),
         )
         return 0
-    loaded = pair(request)
+    loaded = context["loaded"]
     if "RULE04_WORKER_PAIR" in os.environ:
         case_id, policy, states, transitions = json.loads(os.environ["RULE04_WORKER_PAIR"])
-        if (case_id, policy) not in selection(request, loaded):
+        if (case_id, policy) not in context["selected"]:
             raise ValueError("pair not in fixed stage")
         remaining = dict(states=states, transitions=transitions)
         if any(
@@ -401,7 +564,9 @@ def execute_prepared(request):
         directory.mkdir(exist_ok=False)
         w._one_pair(request, case_id, policy, directory, remaining, loaded=loaded, scope="final")
         return 0
-    return w._batch(request, out, backend=sys.modules[__name__])
+    return w._batch(
+        request, out, backend=sys.modules[__name__], prepared=(loaded, context["selected"])
+    )
 
 
 def dispatch_once(path, *, ledger, trusted_authorize=None):
@@ -456,9 +621,31 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
     entry = ledger / (w.pf.sha(subject["authorization_id"].encode()) + ".json")
     if entry.with_suffix(".result.json").exists():
         raise FileExistsError("consumed authorization")
-    w._write(entry, {"receipt": expected, "environment": environment})
+    slot = receipts.slot_path(ROOT, request["phase"], request["stage"])
+    if entry.exists() or entry.with_suffix(".result.json").exists():
+        raise FileExistsError("consumed authorization")
+    # A new ID cannot retry a failed phase/stage. Reserve before release; even a
+    # crash between these two exclusive writes leaves the stage fail-closed.
+    w._write(
+        slot,
+        dict(
+            authorization_id=subject["authorization_id"],
+            request_sha256=subject["request_sha256"],
+            canonical_request_sha256=receipts.digest(request),
+        ),
+    )
     result = dict(status="failed_after_reservation", retry_allowed=False)
+    id_reserved = False
     try:
+        w._write(
+            entry,
+            {
+                "receipt": expected,
+                "environment": environment,
+                "canonical_request_sha256": receipts.digest(request),
+            },
+        )
+        id_reserved = True
         if (
             w.pf.sha(w.pf.bounded_bytes(path)) != subject["request_sha256"]
             or assess(request)["problems"]
@@ -475,28 +662,72 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
             deadline=deadline,
         )
         result.update(retry_allowed=False, authenticated_request_sha256=subject["request_sha256"])
-        if result["status"] == "succeeded" and result["cleanup_verified"] and not drift(request):
+        if (
+            result["status"] == "succeeded"
+            and result["cleanup_verified"]
+            and not drift(request, deadline=deadline)
+        ):
             if request["phase"] == "generate":
-                check_generation_output(out, request)
+                check_generation_output(out, request, subject["request_sha256"])
+                receipt_path = out / "generation-receipt.json"
             else:
                 report = w.read_json(out / "rollout-report.json")
                 if (
                     report.get("status") != "PASS"
                     or report.get("runs") != 180
-                    or report.get("selected_pairs") != [list(p) for p in selection(request)]
+                    or report.get("selected_pairs")
+                    != [list(p) for p in selection(request, deadline=deadline)]
+                    or report.get("authenticated_request_sha256") != subject["request_sha256"]
                 ):
                     raise ValueError("incomplete stage result")
+                inventory = receipts.inventory(out, deadline=deadline)
+                w._write(out / "stage-manifest.json", inventory)
+                receipt_path = out / "stage-receipt.json"
                 w._write(
-                    out / "stage-receipt.json",
+                    receipt_path,
                     dict(
                         report,
+                        kind="rule04_complete_stage_receipt_v2",
                         final_inputs=request["final_inputs"],
                         receiving=request["receiving"],
                         code_commit=plan["code_commit"],
                         code_sha256=plan["code_sha256"],
-                        supervision=result,
+                        host_supervision=dict(result),
+                        pair_supervision=report.get("supervision"),
+                        rollout_report_sha256=w.pf.sha(
+                            w.pf.bounded_bytes(out / "rollout-report.json")
+                        ),
+                        output_inventory=dict(
+                            path="stage-manifest.json",
+                            sha256=w.pf.sha(w.pf.bounded_bytes(out / "stage-manifest.json")),
+                        ),
+                        **{
+                            k: v
+                            for k, v in receipt_context(request, subject["request_sha256"]).items()
+                            if k not in report
+                        },
                     ),
                 )
+                # Apply the same completeness and tree guards before calling the
+                # host result successful (ledger authentication follows in finally).
+                validate_stage_content(
+                    request,
+                    w.read_json(receipt_path),
+                    request["stage"],
+                    pair(request),
+                    first=request["parent"],
+                )
+                receipts.verify_stage_tree(
+                    receipt_path, w.read_json(receipt_path), deadline=deadline
+                )
+            if monotonic() >= deadline:
+                raise TimeoutError("final publication validation exceeded total wall bound")
+            if (
+                w.supervisor.output_bytes(out, deadline=deadline)
+                > request["limits"]["output_bytes"]
+            ):
+                raise ValueError("final publication exceeds observed output threshold")
+            result["published_receipt_sha256"] = w.pf.sha(w.pf.bounded_bytes(receipt_path))
         else:
             result["status"] = "FAIL_OR_INCOMPLETE"
             result["additional_unmeasured_work"] = "unknown if killed; never assumed zero; no retry"
@@ -510,7 +741,9 @@ def dispatch_once(path, *, ledger, trusted_authorize=None):
         )
         raise
     finally:
-        w._write(entry.with_suffix(".result.json"), result)
+        if id_reserved:
+            w._write(entry.with_suffix(".result.json"), result)
+        w._write(slot.with_suffix(".result.json"), result)
 
 
 def main(argv=None):
@@ -519,7 +752,10 @@ def main(argv=None):
     sub.add_parser("draft").add_argument("--phase", choices=("generate", "evaluate"), required=True)
     sub.add_parser("inspect").add_argument("request", type=Path)
     args = parser.parse_args(argv)
-    value = draft(args.phase) if args.action == "draft" else assess(w.read_json(args.request))
+    try:
+        value = draft(args.phase) if args.action == "draft" else assess(w.read_json(args.request))
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        value = dict(status="BLOCKED", problems=[str(exc)[:1000]], execution_authorized=False)
     print(json.dumps(value, indent=2))
     return 0
 

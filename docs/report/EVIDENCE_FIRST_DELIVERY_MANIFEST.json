@@ -35,7 +35,7 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "600b5a8ae09eb06b785909fcf5bb8e4faed48fcc23149476605f8a29b227c45f",
+      "sha256": "d6ee120313905465913bf3e3a6652543803df63393a8ab501b4974a8b99a4038",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/PROJECT_PLAN.md",
-      "sha256": "04ac27f5949830b1257337f3e4b16e87b44b396d7cf72e47aba4642b9a17562d",
+      "sha256": "b8c14a235ea791a8f7beb458677168c8aff42769a1e32e67b3fa0b38a481fc1c",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -215,12 +215,12 @@
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_INDEX.md",
-      "sha256": "5096fccbc75108bdc09db2e3a4465e2b7889ff2afac1beb9dd1e16072615abd2",
+      "sha256": "d7cce228df52c615b66d037d1a81967af30ee6109e705977aea3605d12e05360",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/report/VERIFIED_EVIDENCE_WORKING_DRAFT.md",
-      "sha256": "83d14f438df4e90a8cc00646430020858599ffcd745054b4f04aa6e43523b68e",
+      "sha256": "5117bc512c6c963644ebbf8ec61748e5b7321d8fe14c99566ce4b5b6c7cee6af",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "268e9d258b4c5ca9e4ad98b4016ce24adbd250e0aa70f15c15088e6328e073ad",
+      "sha256": "e65b60b7a8735287d9822fc5d45a15f02c5f7cc3270fcef01b88b6bfd21f5465",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "path": "docs/rule_study/RULE06_FINAL_AUDIT_CHECKLIST.md",
-      "sha256": "feed0e4cdfbdc47b439b779e913c530d8b5f0d461319a38dc4eed1db2958b251",
+      "sha256": "1ae92b339b160128507ee18b97877eea0a30f599379bd8eb7902f8392935254f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -985,7 +985,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_rollout.py",
-      "sha256": "b15d44ad0bb65b5798f558b49ea59bba87a060673bcb59e23bb73ae9ea681f32",
+      "sha256": "722d88ed72befb4c1b2baa973461b74d957608a3c9514cab5ddbf756056b20bc",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1260,7 +1260,7 @@
     },
     {
       "path": "scripts/prepare_rule_study_final.py",
-      "sha256": "56d1be59d5bdcc79a5f32f818056e4101564385492fc2537ef9d3b0b7f9b34c0",
+      "sha256": "bf9a2cb9375ea5e9090f9e0b6f20fb1734b4cbb740a3c00d880602963141b770",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1270,17 +1270,17 @@
     },
     {
       "path": "tests/runtime/test_rule04_final_preparation.py",
-      "sha256": "781d819622124a1c16f884804bb87d72d2da157774f84e007a0453b3fafed26c",
+      "sha256": "7c7a2748120d5c3ed4f842e9bf57eb4e8067eea43c934640efb677f422a89a2a",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE04_FINAL_DISPATCH_PREPARATION_NOV26.md",
-      "sha256": "d9ce988d96a9d3040e39554c25b3fbd57b2c4957b5e1328fb5f9e0dc519f272a",
+      "sha256": "a09b882db3546b24949de89f52199b9e9b3f26ae30d33009a38a7f65a765399b",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
       "path": "docs/rule_study/RULE06_RELEASE_AUDIT_PREPARATION_NOV26.md",
-      "sha256": "e9769f49d119055cdf4b14de586ef8a5f25e30109ccba70afb1eba90c0948a0b",
+      "sha256": "67b969a2ce9d73b8506713048a51a9981cfa34f73b3965900129a599fd53675f",
       "hash_convention": "CRLF_normalized_to_LF"
     },
     {
@@ -1311,6 +1311,26 @@
     {
       "path": "docs/handoffs/RULE04_REVIEW_RESOLUTION_NOV27.json",
       "sha256": "d141a370bb891f6a55caa50e0c0bab9eaa368475cf82f98e0106d9cea4b3d732",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE04_FINAL_CONTROLLER_HARDENING_NOV27.md",
+      "sha256": "5ea0c0231e9ace63e061e035a4100012d53f68593d22db0e71835074fb4fb749",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "docs/handoffs/RULE04_FINAL_CONTROLLER_HARDENING_NOV27.json",
+      "sha256": "5441f8bbd1d7bf46b918dea03da356a9d1b6ff8c37a3083d13849eb821256a69",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "scripts/rule04_final_receipts.py",
+      "sha256": "42e359e743fa428505f06b0b7ba495595f54dc1611c0a0c0bbcc72f3e800b1a1",
+      "hash_convention": "CRLF_normalized_to_LF"
+    },
+    {
+      "path": "tests/runtime/test_rule04_final_hardening.py",
+      "sha256": "70942326ecff3af151cd47fa7e4995a96b751bb855949708bf5d9383d26bbb7e",
       "hash_convention": "CRLF_normalized_to_LF"
     }
   ],

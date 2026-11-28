@@ -65,6 +65,7 @@ held-out finding or grant publication rights for private artifacts.
 
 | E26 | [Ved static receiving and Matty native compatibility](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.md), [scope/hashes](../handoffs/RULE06_VED_STATIC_AND_NATIVE_RECEIVING_NOV26.json) | Accepted Ved-reported AI-assisted retained accounting/source checks and separate Matty Windows fixture compatibility; no independent policy re-execution or final evaluation |
 | E27 | [November27 scoped replies and direct resolution](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.md), [source identities and pending gates](../handoffs/RULE04_REVIEW_RESOLUTION_NOV27.json) | Actual Edison/Nisha scope agreement and presentation review, precise isolation/caption/reproduction requirements; Ved reply, freeze, exact authorization, final receiving/evaluation and updated PDF remain pending |
+| E28 | [Final-controller direct fixes and timing](../handoffs/RULE04_FINAL_CONTROLLER_HARDENING_NOV27.md), [original review hashes, tests and scope](../handoffs/RULE04_FINAL_CONTROLLER_HARDENING_NOV27.json) | Offline guard/receipt fixes and Windows component/saved-tree timing; no freeze, final generation, independent final receiving or unseen result. Four-stage proposal pending agreement. |
 
 ## Ready now versus pending
 

@@ -1,5 +1,7 @@
 # Final-input dispatcher preparation — November 26
 
+November 27 controller update: [Ved's findings and Matty's direct fixes](../handoffs/RULE04_FINAL_CONTROLLER_HARDENING_NOV27.md) replace the earlier missing-response status. Authorization, provenance, parent, output-tree, no-retry and freeze/limit guards are strengthened;163 scientific bindings remain unchanged. Windows component timing exposes insufficient demonstrated margin for the proposed two-stage layout. A four-stage timing proposal awaits affected agreement and is not implemented. Old request803e96dd is preserved but superseded for corrected code; actual freeze, fresh exact request/approval and final receiving/evaluation remain pending. No new scientific execution.
+
 Matty owns this direct implementation under #242/#244. This is offline code and
 authored-fixture validation, not generation, isolation acceptance, a protocol
 freeze, scientific execution or generalization evidence. Instruction 1.30 and all
