@@ -1,0 +1,159 @@
+{
+  "kind": "rule04_final_controller_hardening_review_v1",
+  "date_arizona": "2026-11-27",
+  "owner": "MattyAnd",
+  "instruction_version": "1.30",
+  "original_review": {
+    "source_comment": 7230849106,
+    "ai_assisted": true,
+    "originals": {
+      "ved_devseed_harness_output.json": "28bc17136e81c811443025bb4d930e1bd8445d55462890e26c3c249f80c2eb55",
+      "ved_devseed_harness.py": "018ab7161f04fa0d3a774e407e17d45581e4d95a3922b5d0a932e36ccf6ba3e9",
+      "ved_pytest_final_preparation.txt": "a74444a7fa4994d8844999d1dec1457110ecaec5a5d31537a60a1c4bb1232bda",
+      "VED_RULE04_FINAL_GENERATION_BOUNDARY_REVIEW.md": "7b9912588e7bb68da8f1678e6ac9479910a9ed7f62b79b7f5918b2bce826d077"
+    },
+    "downloaded_harness_executed": false
+  },
+  "acknowledgments": [
+    7231126659
+  ],
+  "timing_proposal_comment": 7231226147,
+  "fixes": {
+    "D1": "Canonical active host ID and phase/stage slot plus original/worker request hashes required before RNG/output",
+    "D2": "Pinned provenance, authorization, metadata digest, attempt/rejection/diversity validation, static RULE03 predicates/labels, authentic generation ledger result; no unbudgeted oracle",
+    "D3": "Shared complete180-pair metric/content validation before stage1 selection and at join; canonical successful host parent required",
+    "D4": "Raw full output-tree inventory, original rollout report, pair request/result/metric/counter/cleanup bindings; separate host and pair supervision",
+    "D5": "Exclusive global phase/stage slot prevents retry through a new authorization ID; reservation/failure retained",
+    "D6": "One preflight/input load per contained worker and prepared parent batch context; Windows component/proxy timing measured, stage adequacy NOT_ESTABLISHED",
+    "D7": "Freeze, stage, phase, ID, limits, authenticated and canonical request hashes in receipts; generation/stage freeze and stage limits compared",
+    "D8": "Use declared final seed constant instead of duplicate literal",
+    "D9": "File-backed negative and mocked-host publication regressions",
+    "D10": "Workload overlap remains explicit independent receiving scope, not an invented production result",
+    "D11": "Malformed inspect returns structured BLOCKED"
+  },
+  "scientific_bindings_unchanged": 163,
+  "development_results_changed": false,
+  "legacy_development_defaults_changed": false,
+  "tests": {
+    "native_broader_pre_final_minor_edits": {
+      "passed": 206,
+      "log_sha256": "b865cb5b67626232b9534f86c1618523429ed5443b3186f3d4890e5138afdede"
+    },
+    "final_target_log_sha256": "adc04d0c9f84bfec5c98dc5a1125f8fc7639b7597aec43f7389870715b99cdc1",
+    "initial_sandbox_run": "reported compatibility failures and stalled; terminated; native rerun passed; do not represent initial run as PASS",
+    "full_exact_ci": "PENDING",
+    "final_native_targeted": {
+      "passed": 77,
+      "elapsed_seconds": 19.41,
+      "log_sha256": "adc04d0c9f84bfec5c98dc5a1125f8fc7639b7597aec43f7389870715b99cdc1"
+    }
+  },
+  "timing": {
+    "kind": "rule04_native_windows_offline_component_timing_v1",
+    "date_arizona": "2026-11-27",
+    "platform": "win32",
+    "python": "3.12.14",
+    "inputs": "development-seed-only artificial fixtures; no final RNG, policy, simulator or oracle batch",
+    "prior_duplicate_input_load_pattern": {
+      "samples": 7,
+      "seconds": [
+        0.1619459000066854,
+        0.18370940000750124,
+        0.17215679999208078,
+        0.16640629997709766,
+        0.16701350000221282,
+        0.16770819999510422,
+        0.16069580003386363
+      ],
+      "median_seconds": 0.16701350000221282,
+      "maximum_seconds": 0.18370940000750124
+    },
+    "new_single_input_load_pattern": {
+      "samples": 7,
+      "seconds": [
+        0.06555969995679334,
+        0.06689040001947433,
+        0.06615079997573048,
+        0.061932100041303784,
+        0.06517819996224716,
+        0.06294630002230406,
+        0.06235729996114969
+      ],
+      "median_seconds": 0.06517819996224716,
+      "maximum_seconds": 0.06689040001947433
+    },
+    "child_parent_receipt_manifest_ledger_validation": {
+      "samples": 7,
+      "seconds": [
+        0.013707500009331852,
+        0.014534000016283244,
+        0.01393149996874854,
+        0.015555799996946007,
+        0.015351500012911856,
+        0.015160100010689348,
+        0.015445099968928844
+      ],
+      "median_seconds": 0.015160100010689348,
+      "maximum_seconds": 0.015555799996946007
+    },
+    "host_complete_180_pair_artificial_tree_validation": {
+      "samples": 3,
+      "seconds": [
+        0.9518349000136368,
+        0.9718715000199154,
+        0.9897070999722928
+      ],
+      "median_seconds": 0.9718715000199154,
+      "maximum_seconds": 0.9897070999722928
+    },
+    "source_file_and_git_io": {
+      "samples": 7,
+      "seconds": [
+        0.09010510001098737,
+        0.1773735000169836,
+        0.09572729998035356,
+        0.08795109996572137,
+        0.08136040001409128,
+        0.08634300000267103,
+        0.08631220000097528
+      ],
+      "median_seconds": 0.08795109996572137,
+      "maximum_seconds": 0.1773735000169836
+    },
+    "source_files": 177,
+    "saved_178_pair_development_tree_hash_proxy": {
+      "files": 27947,
+      "bytes": 58375708,
+      "seconds": 23.888474299979862,
+      "hashes_only": true
+    },
+    "qualification": "component timings only, not full final-stage dispatch or end-to-end inference; unmerged source; no 900-second completion guarantee; real final-tree and workload cost remain unknown",
+    "actual_study_ledger_unchanged": true,
+    "new_scientific_execution": false
+  },
+  "request_disposition": {
+    "old_request_sha256": "803e96dd0deda59caffee4106e83f0153a094f3a025844838989187431052cd2",
+    "old_zip_sha256": "06dc8edab31b381018ffbae39264d232b29f8e57e65d6f3b51982773b9ce74f1",
+    "status": "PRESERVED_UNEXECUTED_SUPERSEDED_FOR_CURRENT_CODE_NO_ID_RESERVED",
+    "new_request": "PENDING_CLEAN_MERGED_CORRECTED_SOURCE_AND_LAYOUT_RESOLUTION"
+  },
+  "stage_protocol": {
+    "implemented": "two balanced180-pair stages, not frozen or execution approved",
+    "proposed": "four balanced90-pair stages;10cases/stratum/stage;600s each,60s/pair,256MiB,+3s separate cleanup,zero retries/warmups",
+    "proposed_total": {
+      "pairs": 360,
+      "states": 21600,
+      "transitions": 21600,
+      "wall_seconds": 2400,
+      "separate_cleanup_seconds": 12
+    },
+    "status": "PENDING_AFFECTED_AGREEMENT_NOT_IMPLEMENTED",
+    "response_checkpoint": "2026-11-27T22:00:00-07:00"
+  },
+  "actual_freeze": "PENDING",
+  "fresh_exact_authorization": "NOT_GIVEN",
+  "new_scientific_execution": false,
+  "updated_pdf": "NOT_SUPPLIED",
+  "final_feedback_check": "PENDING_FINAL_ARTIFACTS",
+  "controlled_runtime_files": 177
+}

@@ -137,13 +137,25 @@ def test_bad_stage_refused(stage):
         f.selection({"stage": stage}, fixture_loaded())
 
 
-def test_second_stage_requires_exact_same_parent_and_cleanup(tmp_path):
+def test_second_stage_requires_exact_same_parent_and_cleanup(tmp_path, monkeypatch):
     loaded = fixture_loaded()
     first = f.selection({"stage": 0, "parent": None}, loaded)
     request = dict(
-        stage=1, plan=dict(code_commit="fixture", code_sha256={}), final_inputs={}, receiving={}
+        stage=1,
+        plan=dict(code_commit="fixture", code_sha256={}),
+        final_inputs={},
+        receiving={},
+        freeze_reference="fixture-freeze",
+        limits={},
     )
     parent = dict(
+        kind="rule04_complete_stage_receipt_v2",
+        stage=0,
+        parent=None,
+        scope_complete_only=True,
+        authenticated_request_sha256="a" * 64,
+        freeze_reference="fixture-freeze",
+        limits={},
         status="PASS",
         runs=180,
         selected_pairs=[list(p) for p in first],
@@ -152,8 +164,16 @@ def test_second_stage_requires_exact_same_parent_and_cleanup(tmp_path):
         code_sha256={},
         final_inputs={},
         receiving={},
-        supervision=dict(status="succeeded", cleanup_verified=True),
+        host_supervision=dict(status="succeeded", cleanup_verified=True),
+        strata={
+            s: [dict(case_id=c, policy_id=p) for c, p in first if c.startswith(f"fixture-{s}-")]
+            for s in ("normal_feasible", "overloaded_impossible", "missing_forecast")
+        },
     )
+    # Content/selection unit test; real inventory + ledger authentication has its
+    # own file-backed integration regression in test_rule04_final_hardening.py.
+    monkeypatch.setattr(f.receipts, "verify_stage_tree", lambda *a, **kw: None)
+    monkeypatch.setattr(f.receipts, "authenticate_completed", lambda *a, **kw: None)
     request["parent"] = binding(tmp_path / "parent.json", parent)
     second = f.selection(request, loaded)
     assert len(second) == 180 and not set(first) & set(second)
@@ -164,7 +184,7 @@ def test_second_stage_requires_exact_same_parent_and_cleanup(tmp_path):
         ("charged_steps", {}),
         ("code_commit", "drift"),
         ("selected_pairs", []),
-        ("supervision", {"status": "succeeded", "cleanup_verified": False}),
+        ("host_supervision", {"status": "succeeded", "cleanup_verified": False}),
     ]:
         changed = dict(parent, **{key: value})
         request["parent"] = binding(tmp_path / "parent.json", changed)
@@ -231,7 +251,7 @@ def host_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(f, "ROOT", tmp_path / "repo")
     f.ROOT.mkdir()
     monkeypatch.setattr(f, "assess", lambda *a, **kw: {"problems": []})
-    monkeypatch.setattr(f, "drift", lambda *a: False)
+    monkeypatch.setattr(f, "drift", lambda *a, **kw: False)
     monkeypatch.setattr(w.worker, "environment_evidence", lambda: {"fixture": True})
     request = dict(
         phase="generate",
@@ -280,7 +300,7 @@ def test_drift_after_reservation_consumes_id_and_preserves_failure(tmp_path, mon
     with pytest.raises(ValueError, match="drift"):
         f.dispatch_once(path, ledger=ledger, trusted_authorize=authority)
     records = [json.loads(p.read_bytes()) for p in ledger.glob("*.json")]
-    assert len(records) == 2
+    assert len(records) == 4  # original ID and once-per-stage slot, each with result
     assert any(
         r.get("status") == "failed_after_reservation" and r["retry_allowed"] is False
         for r in records
@@ -340,7 +360,7 @@ def test_supervisor_success_with_missing_generation_output_is_failure(tmp_path, 
     with pytest.raises(FileNotFoundError):
         f.dispatch_once(path, ledger=ledger, trusted_authorize=fixture_authority)
     records = [json.loads(p.read_bytes()) for p in ledger.glob("*.result.json")]
-    assert len(records) == 1 and records[0]["status"] == "failed_after_reservation"
+    assert len(records) == 2 and all(r["status"] == "failed_after_reservation" for r in records)
 
 
 def test_batch_uses_fixed_backend_without_development_selection(tmp_path, monkeypatch):
@@ -396,13 +416,28 @@ def test_saved_stage_join_refuses_missing_pairs_and_source_changes(tmp_path, mon
     loaded = fixture_loaded()
     monkeypatch.setattr(f, "pair", lambda request: loaded)
     monkeypatch.setattr(mc, "equal_work", lambda metrics: [])
-    request = dict(final_inputs={}, receiving={}, plan=dict(code_commit="fixture", code_sha256={}))
+    request = dict(
+        final_inputs={},
+        receiving={},
+        plan=dict(code_commit="fixture", code_sha256={}),
+        freeze_reference="fixture-freeze",
+        limits={},
+    )
+    monkeypatch.setattr(f.receipts, "verify_stage_tree", lambda *a, **kw: None)
+    monkeypatch.setattr(f.receipts, "authenticate_completed", lambda *a, **kw: None)
     pairs = f.stage_pairs(loaded)
     reports = []
     for stage in (0, 1):
         selected = pairs[stage * 180 : (stage + 1) * 180]
         reports.append(
             dict(
+                kind="rule04_complete_stage_receipt_v2",
+                stage=stage,
+                parent=None,
+                scope_complete_only=True,
+                authenticated_request_sha256="a" * 64,
+                freeze_reference="fixture-freeze",
+                limits={},
                 status="PASS",
                 runs=180,
                 selected_pairs=[list(p) for p in selected],
@@ -411,8 +446,15 @@ def test_saved_stage_join_refuses_missing_pairs_and_source_changes(tmp_path, mon
                 receiving={},
                 code_commit="fixture",
                 code_sha256={},
-                supervision=dict(status="succeeded", cleanup_verified=True),
-                strata={"fixture": [dict(case_id=c, policy_id=p) for c, p in selected]},
+                host_supervision=dict(status="succeeded", cleanup_verified=True),
+                strata={
+                    s: [
+                        dict(case_id=c, policy_id=p)
+                        for c, p in selected
+                        if c.startswith(f"fixture-{s}-")
+                    ]
+                    for s in ("normal_feasible", "overloaded_impossible", "missing_forecast")
+                },
             )
         )
     first = binding(tmp_path / "first.json", reports[0])
@@ -422,7 +464,7 @@ def test_saved_stage_join_refuses_missing_pairs_and_source_changes(tmp_path, mon
     assert result["pairs"] == 360 and len(result["metrics"]) == 360
     assert result["charged_steps"] == dict(states=21600, transitions=21600)
     assert "PENDING_INDEPENDENT_RECEIVING" in result["status"]
-    reports[1]["strata"]["fixture"].pop()
+    reports[1]["strata"]["normal_feasible"].pop()
     second = binding(tmp_path / "second.json", reports[1])
     with pytest.raises(ValueError, match="coverage"):
         f.join_stages(request, first, second)
